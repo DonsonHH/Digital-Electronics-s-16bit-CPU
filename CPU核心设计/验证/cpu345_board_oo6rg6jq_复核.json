@@ -1,0 +1,48 @@
+{
+  "scope": "routed implementation, physical EES-331 unverified",
+  "part": "xc7z020clg484-1",
+  "period_ns": 10,
+  "timing": {
+    "wns_ns": 2.086,
+    "tns_ns": 0.0,
+    "setup_failed": 0.0,
+    "setup_endpoints": 4279.0,
+    "whs_ns": 0.071,
+    "ths_ns": 0.0,
+    "hold_failed": 0.0,
+    "hold_endpoints": 4263.0,
+    "wpws_ns": 3.75,
+    "tpws_ns": 0.0,
+    "pulse_failed": 0.0,
+    "pulse_endpoints": 2878.0
+  },
+  "resources": {
+    "lut_total": 1118,
+    "lut_logic": 1094,
+    "lutram": 24,
+    "srl": 0,
+    "ff": 2826,
+    "bram36": 0,
+    "bram18": 2,
+    "dsp": 0,
+    "carry4": 80
+  },
+  "drc_warnings": {
+    "PDCN-1569": 3,
+    "RTSTAT-10": 1,
+    "ZPS7-1": 1
+  },
+  "warning_disposition": {
+    "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+    "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+    "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+  },
+  "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+  "build_id": "d3caa0a32b233e44",
+  "bitstream_sha256": "58545afa2bc6cab44399f395cc16e47fc57fdb1eeb7b2ae45759d16ffca5b45f",
+  "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+  "placed_and_routed": true,
+  "board_validated": false,
+  "new_native_execution": false,
+  "result_kind": "independent_post_route_revalidation"
+}

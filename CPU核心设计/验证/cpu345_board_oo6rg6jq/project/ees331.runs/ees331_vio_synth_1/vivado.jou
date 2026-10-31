@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Oct 31 23:58:05 2026
+# Process ID         : 74456
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu345_board_oo6rg6jq/project/ees331.runs/ees331_vio_synth_1
+# Command line       : vivado.exe -log ees331_vio.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ees331_vio.tcl
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu345_board_oo6rg6jq/project/ees331.runs/ees331_vio_synth_1/ees331_vio.vds
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/cpu345_board_oo6rg6jq/project/ees331.runs/ees331_vio_synth_1\vivado.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 26852 MB
+# Total Virtual      : 60373 MB
+# Available Virtual  : 6431 MB
+#-----------------------------------------------------------
+source ees331_vio.tcl -notrace
