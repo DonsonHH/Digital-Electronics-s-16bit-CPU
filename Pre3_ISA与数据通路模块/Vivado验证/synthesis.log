@@ -1,0 +1,899 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sun Sep 20 21:13:53 2026
+# Process ID         : 122348
+# Current directory  : C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920
+# Command line       : vivado.exe -mode batch -source synthesize.tcl -log synthesis.log -nojournal
+# Log file           : C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/synthesis.log
+# Journal file       : 
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 31920 MB
+# Total Virtual      : 65440 MB
+# Available Virtual  : 33081 MB
+#-----------------------------------------------------------
+source synthesize.tcl
+# set task_dir [file dirname [file normalize [info script]]]
+# cd $task_dir
+# file mkdir synthesis
+# set device xc7z010clg400-1
+# foreach top {regfile4x16 alu16 pc16 imm_ext16} {
+#  create_project -in_memory -part $device
+#  read_verilog [glob rtl/*.v]
+#  synth_design -top $top -part $device
+#  report_utilization -file synthesis/${top}_utilization.rpt
+#  write_checkpoint -force synthesis/${top}.dcp
+#  write_verilog -force -mode funcsim synthesis/${top}_netlist.v
+#  close_project
+# }
+create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:10 . Memory (MB): peak = 531.820 ; gain = 217.188
+Command: synth_design -top regfile4x16 -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 127844
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1074.695 ; gain = 535.938
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'regfile4x16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/rtl/regfile4x16.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'regfile4x16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/rtl/regfile4x16.v:2]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1192.723 ; gain = 653.965
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1192.723 ; gain = 653.965
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1192.723 ; gain = 653.965
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1192.723 ; gain = 653.965
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 4     
++---Muxes : 
+	   4 Input   16 Bit        Muxes := 2     
+	   2 Input   16 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 1403.480 ; gain = 864.723
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 1410.695 ; gain = 871.938
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 1410.695 ; gain = 871.938
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |BUFG |     1|
+|2     |LUT3 |    36|
+|3     |LUT6 |    34|
+|4     |FDRE |    64|
+|5     |IBUF |    25|
+|6     |OBUF |    32|
++------+-----+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |   192|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+Synthesis Optimization Complete : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1642.184 ; gain = 1103.426
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1657.223 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1773.816 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: e108f43b
+INFO: [Common 17-83] Releasing license: Synthesis
+12 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:32 ; elapsed = 00:00:39 . Memory (MB): peak = 1773.816 ; gain = 1241.996
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1773.816 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/synthesis/regfile4x16.dcp' has been generated.
+Command: synth_design -top alu16 -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/rtl/alu16.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/rtl/alu16.v:2]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   16 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
++---Muxes : 
+	   6 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |    10|
+|2     |LUT2   |    33|
+|3     |LUT3   |     1|
+|4     |LUT6   |    37|
+|5     |IBUF   |    35|
+|6     |OBUF   |    18|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 1773.816 ; gain = 0.000
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1773.816 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 10 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1783.551 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 74810d0f
+INFO: [Common 17-83] Releasing license: Synthesis
+11 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 1783.551 ; gain = 9.734
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1783.551 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/synthesis/alu16.dcp' has been generated.
+Command: synth_design -top pc16 -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'pc16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/rtl/pc16.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'pc16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/rtl/pc16.v:2]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     4|
+|3     |LUT2   |     1|
+|4     |LUT3   |    17|
+|5     |FDRE   |    16|
+|6     |IBUF   |    20|
+|7     |OBUF   |    16|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1783.551 ; gain = 0.000
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1783.551 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1805.762 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: efa28ca
+INFO: [Common 17-83] Releasing license: Synthesis
+11 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1805.762 ; gain = 22.211
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1805.762 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/synthesis/pc16.dcp' has been generated.
+Command: synth_design -top imm_ext16 -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'imm_ext16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/rtl/imm_ext16.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'imm_ext16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/rtl/imm_ext16.v:2]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT2 |     1|
+|2     |IBUF |     9|
+|3     |OBUF |    16|
++------+-----+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1805.762 ; gain = 0.000
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1805.762 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1814.109 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 166236b1
+INFO: [Common 17-83] Releasing license: Synthesis
+9 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:30 . Memory (MB): peak = 1814.109 ; gain = 8.348
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1814.109 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/synthesis/imm_ext16.dcp' has been generated.
+# puts "PRE3_SYNTH_PASS target=$device"
+PRE3_SYNTH_PASS target=xc7z010clg400-1
+write_schematic
+
+Description: 
+Export schematic 
+
+Syntax: 
+write_schematic  [-force] [-format <arg>] [-orientation <arg>] [-scope <arg>]
+                 [-name <arg>] [-quiet] [-verbose] <file>
+
+Returns: 
+name of the output file
+
+Usage: 
+  Name            Description
+  ---------------------------
+  [-force]        Overwrite existing file
+  [-format]       Values: native or pdf. read_schematic can be used to view 
+                  native format.
+                  Default: native
+  [-orientation]  Values: landscape or portrait
+  [-scope]        Values: current_page, visible or all
+                  Default: current_page
+  [-name]         Schematic window title
+  [-quiet]        Ignore command errors
+  [-verbose]      Suspend message limits during command execution
+  <file>          Output file
+
+Categories: 
+FileIO
+
+Description:
+
+  Output the currently opened, or specified Schematic window in the Vivado
+  IDE to a file.
+
+  The file can be written as a native ASCII file that can be read back into
+  the Vivado IDE using the read_schematic command, or can be written as a PDF
+  or SVG file for use outside of the Vivado Design Suite. This can be useful
+  when documenting IP cores from the IP packager flow, or from the Vivado IP
+  integrator.
+
+Arguments:
+
+  -force - (Optional) Overwrite the specified Schematic file if it already
+  exists.
+
+  -format [ native | pdf | svg ] - (Optional) Write the output file in the
+  specified format. The default file format is native to the Vivado Design
+  Suite, that can be read back into the tool using the read_schematic
+  command. SVG is scalable vector graphics format. PDF is portable document
+  format.
+
+  Note: The -format argument is case sensitive.
+
+  -orientation [ landscape | portrait ] - (Optional) Write the schematic in a
+  vertical (portrait) or horizontal (landscape) orientation. The default is
+  portrait.
+
+  -scope [ current_page | visible | all ] - (Optional) Write the current page
+  of the schematic, or the visible content displayed in the schematic window,
+  or all of the schematic. The default is current_page.
+
+  -name <arg> - (Optional) Specifies the name of the open Schematic window to
+  write. Use this option to write the specified schematic window when more
+  than one schematic window is opened.
+
+  Note: When multiple schematic windows are opened, the first opened window
+  is written if -name is not specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The path and filename of the Schematic file to write.
+  The path is optional, but if one is not provided the Schematic file will be
+  written to the current working directory, or the directory from which the
+  Vivado tool was launched.
+
+Example:
+
+  The following example writes the specified Schematic window, displayed in
+  the Vivado IDE, to a native format file that can later be read back into
+  the Vivado Design Suite, overwriting the specified file if it already
+  exists:
+
+    write_schematic -name Schematic C:/Data/mySchematic.txt -force 
+    
+
+  The following example writes a PDF file with a horizontal view of the
+  specified schematic window:
+
+    write_schematic -format pdf -name "Schematic (2)" C:/Data/mySchematic.pdf \  
+    -orientation landscape 
+    
+
+See Also:
+
+   *  read_schematic
+   *  write_bd_layout
+# puts [write_schematic -help]
+write_schematic
+
+Description: 
+Export schematic 
+
+Syntax: 
+write_schematic  [-force] [-format <arg>] [-orientation <arg>] [-scope <arg>]
+                 [-name <arg>] [-quiet] [-verbose] <file>
+
+Returns: 
+name of the output file
+
+Usage: 
+  Name            Description
+  ---------------------------
+  [-force]        Overwrite existing file
+  [-format]       Values: native or pdf. read_schematic can be used to view 
+                  native format.
+                  Default: native
+  [-orientation]  Values: landscape or portrait
+  [-scope]        Values: current_page, visible or all
+                  Default: current_page
+  [-name]         Schematic window title
+  [-quiet]        Ignore command errors
+  [-verbose]      Suspend message limits during command execution
+  <file>          Output file
+
+Categories: 
+FileIO
+
+Description:
+
+  Output the currently opened, or specified Schematic window in the Vivado
+  IDE to a file.
+
+  The file can be written as a native ASCII file that can be read back into
+  the Vivado IDE using the read_schematic command, or can be written as a PDF
+  or SVG file for use outside of the Vivado Design Suite. This can be useful
+  when documenting IP cores from the IP packager flow, or from the Vivado IP
+  integrator.
+
+Arguments:
+
+  -force - (Optional) Overwrite the specified Schematic file if it already
+  exists.
+
+  -format [ native | pdf | svg ] - (Optional) Write the output file in the
+  specified format. The default file format is native to the Vivado Design
+  Suite, that can be read back into the tool using the read_schematic
+  command. SVG is scalable vector graphics format. PDF is portable document
+  format.
+
+  Note: The -format argument is case sensitive.
+
+  -orientation [ landscape | portrait ] - (Optional) Write the schematic in a
+  vertical (portrait) or horizontal (landscape) orientation. The default is
+  portrait.
+
+  -scope [ current_page | visible | all ] - (Optional) Write the current page
+  of the schematic, or the visible content displayed in the schematic window,
+  or all of the schematic. The default is current_page.
+
+  -name <arg> - (Optional) Specifies the name of the open Schematic window to
+  write. Use this option to write the specified schematic window when more
+  than one schematic window is opened.
+
+  Note: When multiple schematic windows are opened, the first opened window
+  is written if -name is not specified.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <file> - (Required) The path and filename of the Schematic file to write.
+  The path is optional, but if one is not provided the Schematic file will be
+  written to the current working directory, or the directory from which the
+  Vivado tool was launched.
+
+Example:
+
+  The following example writes the specified Schematic window, displayed in
+  the Vivado IDE, to a native format file that can later be read back into
+  the Vivado Design Suite, overwriting the specified file if it already
+  exists:
+
+    write_schematic -name Schematic C:/Data/mySchematic.txt -force 
+    
+
+  The following example writes a PDF file with a horizontal view of the
+  specified schematic window:
+
+    write_schematic -format pdf -name "Schematic (2)" C:/Data/mySchematic.pdf \  
+    -orientation landscape 
+    
+
+See Also:
+
+   *  read_schematic
+   *  write_bd_layout
+
+# exit
+INFO: [Common 17-206] Exiting Vivado at Sun Sep 20 21:16:26 2026...

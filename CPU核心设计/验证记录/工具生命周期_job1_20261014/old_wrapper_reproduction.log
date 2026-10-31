@@ -1,0 +1,10 @@
+LIFECYCLE_CHECK_PASS exit_0
+LIFECYCLE_CHECK_PASS exit_7
+LIFECYCLE_CHECK_PASS launch_failure
+Traceback (most recent call last):
+  File "D:\OneDrive - University of Glasgow\同步文件夹\大三上\Courses\数电\CPU核心设计\Vivado\test_process_lifecycle.py", line 77, in <module>
+    checked_tree('forced_launcher_exit',True,unrelated,work)
+  File "D:\OneDrive - University of Glasgow\同步文件夹\大三上\Courses\数电\CPU核心设计\Vivado\test_process_lifecycle.py", line 57, in checked_tree
+    assert all(stopped),f'{label}: owned descendants remain alive: {stopped}'
+           ^^^^^^^^^^^^
+AssertionError: forced_launcher_exit: owned descendants remain alive: [False, False]

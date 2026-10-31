@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-31",
+  "scope": "two architecture figures, section2.1/table14 and necessary figure references; no RTL change",
+  "changes": [
+    {
+      "index": 1,
+      "before": "实现基线 v1.6-timing-AC1    ISA v1.5    文档修订 2026年10月29日",
+      "after": "实现基线 v1.6-timing-AC1    ISA v1.5    文档修订 2026年10月31日"
+    },
+    {
+      "index": 2,
+      "before": "本文规定16位、顺序单发射五级流水线CPU的指令行为、数据通路、硬连线控制和验证方法。实现基线为v1.6-timing-AC1，ISA与固定单周期同步IM/DM契约保持不变。本次文档修订合入Pre5已核对的CU逻辑模型、模式FSM输入输出及控制验证记录。",
+      "after": "本文规定16位、顺序单发射五级流水线CPU的指令行为、数据通路、硬连线控制和验证方法。实现基线为v1.6-timing-AC1，ISA与固定单周期同步IM/DM契约保持不变。本次补全整体控制架构与五级数据通路主图，保留已核对的CU逻辑模型、模式FSM及控制验证记录。"
+    },
+    {
+      "index": 106,
+      "before": "IF把PC_fetch送往IM。ID对IM返回的指令译码，同时读RF和扩展立即数。EX先转发实际源值，再经操作数MUX送入ALU，独立形成比较结果和分支目标。MEM按完整EA访问DM，WB选择普通结果或load数据写RF；eq/C/V候选值在合格WB写入flags_reg。",
+      "after": "图1用于辨认控制职责，图2用于追踪数据。IF把PC_fetch送往IM；ID译码、读RF并扩展立即数；EX先分别转发真实Rd/Rs，再经MUX送入ALU，并选择最新Z及形成分支目标；MEM按完整EA访问DM；WB选择结果写RF，并按资格写Z/C/V。图中同字母标记连接同一信号组：M为非load的m_exec_value，W为wb_data（RF旁路另带w_rd/rf_we），Z为M/W比较候选及保存Z，R为qualified_redirect与branch_target。"
+    },
+    {
+      "index": 107,
+      "before": "ALU结果与有效地址共用exec_value字段，因为同一条指令不会同时需要两者。STR数据由另一条store_data路径保留。普通ALU结果仍经过MEM传递槽，与LDR保持固定顺序，避免单写口发生冲突。",
+      "after": "ALU结果与有效地址共用exec_value，因为一条指令不会同时需要二者；STR独立保存已前递Rd为store_data，Rs用于基址。IM寄存输出就是D级指令数据，DM寄存输出就是W级加载数据；不再串接IR/MDR。load_use只保持PC/ID并向EX插入bubble，后端继续。分支在EX重定向但自身继续到WB；STR在MEM仅写一次，WB有效而不写入。HALT/fault标记排空至WB，Reset取消在途载荷并禁止当拍写入。"
+    },
+    {
+      "index": 185,
+      "before": "d_/x_/m_/w_分别绑定ID/EX/MEM/WB。操作数前递由operand_forward完成，Z候选选择、load-use检测、事件仲裁和mode更新位于datapath_core.sv内部；WB→ID旁路位于regfile4x16。M的寄存故障资格用于前递，新的MEM访问故障进入年龄仲裁和写入保护，保持AC1的组合路径边界。",
+      "after": "d_/x_/m_/w_分别绑定ID/EX/MEM/WB。d_ctrl及CTRL_X/M/W是表12、13、15中既有控制字段的图示集合，不是新增总线或寄存器；上层控制带与下层数据共用四个流水边界。图1的FB为反馈组，UPD为valid_next/取消/保持组。操作数前递由operand_forward完成，WB→ID旁路位于regfile4x16，Z来源选择、load-use检测、年龄仲裁和mode更新均位于core内部。M寄存m_fault用于前递，新m_access_fault只进入访问保护、故障载荷及年龄取消，不接回前递数据MUX。"
+    }
+  ],
+  "literal_figure_references_updated": [
+    {
+      "before": "图2",
+      "after": "图3",
+      "paragraph": "CU采用硬连线控制，由当前指令和流水状态共同决定本拍动作。正常RUN中，五级可同时处理不同指令；ALU为组合逻辑，IM/DM读延迟固定。图2用次态逻辑F、控制状态Q和输出逻辑G描述现有实现。"
+    }
+  ],
+  "new_bookmark": "fig_cpu_overall",
+  "original_datapath_bookmark": "fig_1"
+}

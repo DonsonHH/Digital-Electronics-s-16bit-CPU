@@ -1,0 +1,2119 @@
+{
+  "baseline": "v1.6-timing-AC1",
+  "isa": "v1.5",
+  "editable": "native SVG text, shapes and paths",
+  "width": 2400,
+  "height": 1500,
+  "minimum_font_px": 36,
+  "signal_groups": {
+    "CTRL_X": [
+      "x_use_rd",
+      "x_use_rs",
+      "x_alu_a_sel",
+      "x_alu_b_sel",
+      "x_alu_op",
+      "x_reg_write",
+      "x_mem_read",
+      "x_mem_write",
+      "x_z_write",
+      "x_cv_write",
+      "x_wb_sel",
+      "x_jump_abs",
+      "x_jump_z",
+      "x_halt"
+    ],
+    "CTRL_M": [
+      "m_reg_write",
+      "m_mem_read",
+      "m_mem_write",
+      "m_z_write",
+      "m_cv_write",
+      "m_wb_sel",
+      "m_halt"
+    ],
+    "CTRL_W": [
+      "w_reg_write",
+      "w_z_write",
+      "w_cv_write",
+      "w_wb_sel",
+      "w_halt"
+    ],
+    "FB": [
+      "d_rd",
+      "d_rs",
+      "d_use_rd",
+      "d_use_rs",
+      "x_rd",
+      "x_mem_read",
+      "d_valid",
+      "x_valid",
+      "m_valid",
+      "w_valid",
+      "d_fault",
+      "x_fault",
+      "m_fault",
+      "w_fault",
+      "m_rd",
+      "w_rd",
+      "alu_eq",
+      "alu_illegal",
+      "blocked_rd",
+      "blocked_rs",
+      "fetch_in_range",
+      "m_address_in_range",
+      "w_halt",
+      "w_store",
+      "branch_req",
+      "halt_req",
+      "m_fault_event",
+      "x_fault_event",
+      "z_effective",
+      "w_stop_token",
+      "pipeline_empty_next"
+    ],
+    "UPD": [
+      "d_valid_next",
+      "x_valid_next",
+      "m_valid_next",
+      "w_valid_next",
+      "d_kill",
+      "x_kill"
+    ],
+    "IM": [
+      "im_addr",
+      "im_en",
+      "im_dout"
+    ],
+    "DM": [
+      "dm_addr",
+      "dm_din",
+      "dm_dout",
+      "dm_en",
+      "dm_we"
+    ]
+  },
+  "figures": [
+    {
+      "file": "01_CPU整体架构.svg",
+      "nodes": [
+        {
+          "id": "core_boundary",
+          "x": 40,
+          "y": 135,
+          "width": 2320,
+          "height": 1075
+        },
+        {
+          "id": "pipeline_cu",
+          "x": 65,
+          "y": 200,
+          "width": 2270,
+          "height": 605
+        },
+        {
+          "id": "mode_fsm",
+          "x": 90,
+          "y": 270,
+          "width": 910,
+          "height": 175
+        },
+        {
+          "id": "cross_stage_arbiter",
+          "x": 1100,
+          "y": 270,
+          "width": 1205,
+          "height": 175
+        },
+        {
+          "id": "stage_control_0",
+          "x": 90,
+          "y": 535,
+          "width": 410,
+          "height": 175
+        },
+        {
+          "id": "stage_control_1",
+          "x": 535,
+          "y": 535,
+          "width": 410,
+          "height": 175
+        },
+        {
+          "id": "stage_control_2",
+          "x": 980,
+          "y": 535,
+          "width": 410,
+          "height": 175
+        },
+        {
+          "id": "stage_control_3",
+          "x": 1425,
+          "y": 535,
+          "width": 410,
+          "height": 175
+        },
+        {
+          "id": "stage_control_4",
+          "x": 1870,
+          "y": 535,
+          "width": 410,
+          "height": 175
+        },
+        {
+          "id": "ctrl_band_0",
+          "x": 535,
+          "y": 758,
+          "width": 410,
+          "height": 43
+        },
+        {
+          "id": "ctrl_band_1",
+          "x": 980,
+          "y": 758,
+          "width": 410,
+          "height": 43
+        },
+        {
+          "id": "ctrl_band_2",
+          "x": 1425,
+          "y": 758,
+          "width": 410,
+          "height": 43
+        },
+        {
+          "id": "ctrl_band_3",
+          "x": 1870,
+          "y": 758,
+          "width": 410,
+          "height": 43
+        },
+        {
+          "id": "datapath_stage_0",
+          "x": 90,
+          "y": 815,
+          "width": 410,
+          "height": 185
+        },
+        {
+          "id": "datapath_stage_1",
+          "x": 535,
+          "y": 815,
+          "width": 410,
+          "height": 185
+        },
+        {
+          "id": "datapath_stage_2",
+          "x": 980,
+          "y": 815,
+          "width": 410,
+          "height": 185
+        },
+        {
+          "id": "datapath_stage_3",
+          "x": 1425,
+          "y": 815,
+          "width": 410,
+          "height": 185
+        },
+        {
+          "id": "datapath_stage_4",
+          "x": 1870,
+          "y": 815,
+          "width": 410,
+          "height": 185
+        },
+        {
+          "id": "external_im",
+          "x": 90,
+          "y": 1250,
+          "width": 680,
+          "height": 175
+        },
+        {
+          "id": "external_dm",
+          "x": 1200,
+          "y": 1250,
+          "width": 760,
+          "height": 175
+        }
+      ],
+      "nets": [
+        {
+          "id": "legend_data",
+          "signals": [],
+          "points": [
+            [
+              60,
+              93
+            ],
+            [
+              135,
+              93
+            ]
+          ]
+        },
+        {
+          "id": "legend_ctrl",
+          "signals": [],
+          "points": [
+            [
+              485,
+              93
+            ],
+            [
+              560,
+              93
+            ]
+          ]
+        },
+        {
+          "id": "legend_fwd",
+          "signals": [],
+          "points": [
+            [
+              935,
+              93
+            ],
+            [
+              1010,
+              93
+            ]
+          ]
+        },
+        {
+          "id": "legend_kill",
+          "signals": [],
+          "points": [
+            [
+              1395,
+              93
+            ],
+            [
+              1470,
+              93
+            ]
+          ]
+        },
+        {
+          "id": "events_to_mode",
+          "signals": [
+            "m_fault_event",
+            "x_fault_event",
+            "qualified_halt",
+            "drain_done"
+          ],
+          "points": [
+            [
+              1100,
+              315
+            ],
+            [
+              1000,
+              315
+            ]
+          ]
+        },
+        {
+          "id": "mode_bus",
+          "signals": [
+            "mode",
+            "mode_active",
+            "stop_pending"
+          ],
+          "points": [
+            [
+              320,
+              445
+            ],
+            [
+              320,
+              472
+            ],
+            [
+              2240,
+              472
+            ]
+          ]
+        },
+        {
+          "id": "arbitration_bus",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill",
+            "load_use",
+            "frontend_kill",
+            "qualified_redirect"
+          ],
+          "points": [
+            [
+              1710,
+              445
+            ],
+            [
+              1710,
+              502
+            ],
+            [
+              150,
+              502
+            ]
+          ]
+        },
+        {
+          "id": "arbitration_bus_w",
+          "signals": [
+            "w_valid_next"
+          ],
+          "points": [
+            [
+              1710,
+              502
+            ],
+            [
+              2240,
+              502
+            ]
+          ]
+        },
+        {
+          "id": "mode_stage_0",
+          "signals": [
+            "mode_active",
+            "mode"
+          ],
+          "points": [
+            [
+              425,
+              472
+            ],
+            [
+              425,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "arb_stage_0",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              125,
+              502
+            ],
+            [
+              125,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "control_to_data_0",
+          "signals": [
+            "pc_hold",
+            "im_en"
+          ],
+          "points": [
+            [
+              300,
+              710
+            ],
+            [
+              300,
+              815
+            ]
+          ]
+        },
+        {
+          "id": "mode_stage_1",
+          "signals": [
+            "mode_active",
+            "mode"
+          ],
+          "points": [
+            [
+              870,
+              472
+            ],
+            [
+              870,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "arb_stage_1",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              570,
+              502
+            ],
+            [
+              570,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "control_to_data_1",
+          "signals": [
+            "d_alu_op",
+            "d_reg_write"
+          ],
+          "points": [
+            [
+              745,
+              710
+            ],
+            [
+              745,
+              815
+            ]
+          ]
+        },
+        {
+          "id": "mode_stage_2",
+          "signals": [
+            "mode_active",
+            "mode"
+          ],
+          "points": [
+            [
+              1315,
+              472
+            ],
+            [
+              1315,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "arb_stage_2",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              1015,
+              502
+            ],
+            [
+              1015,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "control_to_data_2",
+          "signals": [
+            "x_alu_a_sel",
+            "x_alu_b_sel"
+          ],
+          "points": [
+            [
+              1190,
+              710
+            ],
+            [
+              1190,
+              815
+            ]
+          ]
+        },
+        {
+          "id": "mode_stage_3",
+          "signals": [
+            "mode_active",
+            "mode"
+          ],
+          "points": [
+            [
+              1760,
+              472
+            ],
+            [
+              1760,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "arb_stage_3",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              1460,
+              502
+            ],
+            [
+              1460,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "control_to_data_3",
+          "signals": [
+            "dm_en",
+            "dm_we"
+          ],
+          "points": [
+            [
+              1635,
+              710
+            ],
+            [
+              1635,
+              815
+            ]
+          ]
+        },
+        {
+          "id": "mode_stage_4",
+          "signals": [
+            "mode_active",
+            "mode"
+          ],
+          "points": [
+            [
+              2205,
+              472
+            ],
+            [
+              2205,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "arb_stage_4",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              1905,
+              502
+            ],
+            [
+              1905,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "control_to_data_4",
+          "signals": [
+            "rf_we",
+            "z_we",
+            "cv_we"
+          ],
+          "points": [
+            [
+              2080,
+              710
+            ],
+            [
+              2080,
+              815
+            ]
+          ]
+        },
+        {
+          "id": "carried_ctrl_0",
+          "signals": [
+            "x_use_rd",
+            "x_use_rs",
+            "x_alu_a_sel",
+            "x_alu_b_sel",
+            "x_alu_op",
+            "x_reg_write",
+            "x_mem_read",
+            "x_mem_write",
+            "x_z_write",
+            "x_cv_write",
+            "x_wb_sel",
+            "x_jump_abs",
+            "x_jump_z",
+            "x_halt"
+          ],
+          "points": [
+            [
+              945,
+              780
+            ],
+            [
+              980,
+              780
+            ]
+          ]
+        },
+        {
+          "id": "carried_ctrl_1",
+          "signals": [
+            "m_reg_write",
+            "m_mem_read",
+            "m_mem_write",
+            "m_z_write",
+            "m_cv_write",
+            "m_wb_sel",
+            "m_halt"
+          ],
+          "points": [
+            [
+              1390,
+              780
+            ],
+            [
+              1425,
+              780
+            ]
+          ]
+        },
+        {
+          "id": "carried_ctrl_2",
+          "signals": [
+            "w_reg_write",
+            "w_z_write",
+            "w_cv_write",
+            "w_wb_sel",
+            "w_halt"
+          ],
+          "points": [
+            [
+              1835,
+              780
+            ],
+            [
+              1870,
+              780
+            ]
+          ]
+        },
+        {
+          "id": "stage_data_0",
+          "signals": [
+            "im_dout",
+            "d_pc",
+            "d_valid",
+            "d_fetch_fault"
+          ],
+          "points": [
+            [
+              500,
+              895
+            ],
+            [
+              535,
+              895
+            ]
+          ]
+        },
+        {
+          "id": "feedback_0",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              425,
+              1000
+            ],
+            [
+              425,
+              1100
+            ]
+          ]
+        },
+        {
+          "id": "stage_data_1",
+          "signals": [
+            "d_rd_value",
+            "d_rs_value",
+            "d_imm_ext",
+            "d_pc",
+            "d_rd",
+            "d_rs"
+          ],
+          "points": [
+            [
+              945,
+              895
+            ],
+            [
+              980,
+              895
+            ]
+          ]
+        },
+        {
+          "id": "feedback_1",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              870,
+              1000
+            ],
+            [
+              870,
+              1100
+            ]
+          ]
+        },
+        {
+          "id": "stage_data_2",
+          "signals": [
+            "alu_result",
+            "x_store_data",
+            "alu_eq",
+            "alu_c",
+            "alu_v",
+            "x_pc",
+            "x_rd"
+          ],
+          "points": [
+            [
+              1390,
+              895
+            ],
+            [
+              1425,
+              895
+            ]
+          ]
+        },
+        {
+          "id": "feedback_2",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              1315,
+              1000
+            ],
+            [
+              1315,
+              1100
+            ]
+          ]
+        },
+        {
+          "id": "stage_data_3",
+          "signals": [
+            "m_exec_value",
+            "m_cmp_z",
+            "m_c",
+            "m_v",
+            "m_pc",
+            "m_rd"
+          ],
+          "points": [
+            [
+              1835,
+              895
+            ],
+            [
+              1870,
+              895
+            ]
+          ]
+        },
+        {
+          "id": "feedback_3",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              1760,
+              1000
+            ],
+            [
+              1760,
+              1100
+            ]
+          ]
+        },
+        {
+          "id": "feedback_4",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              2205,
+              1000
+            ],
+            [
+              2205,
+              1100
+            ]
+          ]
+        },
+        {
+          "id": "feedback_bus",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              165,
+              1100
+            ],
+            [
+              2320,
+              1100
+            ],
+            [
+              2320,
+              510
+            ],
+            [
+              2305,
+              510
+            ],
+            [
+              2305,
+              445
+            ]
+          ]
+        },
+        {
+          "id": "im_ports_request",
+          "signals": [
+            "im_addr",
+            "im_en"
+          ],
+          "points": [
+            [
+              140,
+              1000
+            ],
+            [
+              140,
+              1225
+            ],
+            [
+              180,
+              1225
+            ],
+            [
+              180,
+              1250
+            ]
+          ]
+        },
+        {
+          "id": "im_ports_return",
+          "signals": [
+            "im_dout"
+          ],
+          "points": [
+            [
+              680,
+              1250
+            ],
+            [
+              680,
+              1217
+            ],
+            [
+              720,
+              1217
+            ],
+            [
+              720,
+              1000
+            ]
+          ]
+        },
+        {
+          "id": "dm_ports_request",
+          "signals": [
+            "dm_addr",
+            "dm_din",
+            "dm_en",
+            "dm_we"
+          ],
+          "points": [
+            [
+              1600,
+              1000
+            ],
+            [
+              1600,
+              1250
+            ]
+          ]
+        },
+        {
+          "id": "dm_ports_return",
+          "signals": [
+            "dm_dout"
+          ],
+          "points": [
+            [
+              1960,
+              1385
+            ],
+            [
+              2295,
+              1385
+            ],
+            [
+              2295,
+              1000
+            ]
+          ]
+        },
+        {
+          "id": "mode_status",
+          "signals": [
+            "halted",
+            "fault"
+          ],
+          "points": [
+            [
+              1000,
+              405
+            ],
+            [
+              1013,
+              405
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "02_五级Datapath.svg",
+      "nodes": [
+        {
+          "id": "stage_bg_IF",
+          "x": 65,
+          "y": 140,
+          "width": 430,
+          "height": 1085
+        },
+        {
+          "id": "stage_bg_ID",
+          "x": 525,
+          "y": 140,
+          "width": 430,
+          "height": 1085
+        },
+        {
+          "id": "stage_bg_EX",
+          "x": 985,
+          "y": 140,
+          "width": 430,
+          "height": 1085
+        },
+        {
+          "id": "stage_bg_MEM",
+          "x": 1445,
+          "y": 140,
+          "width": 430,
+          "height": 1085
+        },
+        {
+          "id": "stage_bg_WB",
+          "x": 1905,
+          "y": 140,
+          "width": 430,
+          "height": 1085
+        },
+        {
+          "id": "pc_select",
+          "x": 95,
+          "y": 295,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "pc_state",
+          "x": 95,
+          "y": 525,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "pc_plus_one",
+          "x": 95,
+          "y": 755,
+          "width": 360,
+          "height": 130
+        },
+        {
+          "id": "sync_im",
+          "x": 95,
+          "y": 965,
+          "width": 360,
+          "height": 210
+        },
+        {
+          "id": "decode_fields",
+          "x": 555,
+          "y": 295,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "rf_and_bypass",
+          "x": 555,
+          "y": 535,
+          "width": 360,
+          "height": 210
+        },
+        {
+          "id": "immediate_ext",
+          "x": 555,
+          "y": 930,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "operand_forward",
+          "x": 1015,
+          "y": 535,
+          "width": 360,
+          "height": 180
+        },
+        {
+          "id": "a_mux",
+          "x": 1015,
+          "y": 785,
+          "width": 170,
+          "height": 110
+        },
+        {
+          "id": "b_mux",
+          "x": 1205,
+          "y": 785,
+          "width": 170,
+          "height": 110
+        },
+        {
+          "id": "alu",
+          "x": 1015,
+          "y": 955,
+          "width": 360,
+          "height": 210
+        },
+        {
+          "id": "z_select_branch",
+          "x": 1015,
+          "y": 295,
+          "width": 360,
+          "height": 175
+        },
+        {
+          "id": "m_exec",
+          "x": 1475,
+          "y": 535,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "ea_guard",
+          "x": 1475,
+          "y": 745,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "sync_dm",
+          "x": 1475,
+          "y": 965,
+          "width": 360,
+          "height": 210
+        },
+        {
+          "id": "write_qualify",
+          "x": 1935,
+          "y": 535,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "flags",
+          "x": 1935,
+          "y": 745,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "wb_mux",
+          "x": 1935,
+          "y": 965,
+          "width": 360,
+          "height": 145
+        },
+        {
+          "id": "d_payload",
+          "x": 65,
+          "y": 1280,
+          "width": 515,
+          "height": 195
+        },
+        {
+          "id": "x_payload",
+          "x": 650,
+          "y": 1280,
+          "width": 515,
+          "height": 195
+        },
+        {
+          "id": "m_payload",
+          "x": 1235,
+          "y": 1280,
+          "width": 515,
+          "height": 195
+        },
+        {
+          "id": "w_payload",
+          "x": 1820,
+          "y": 1280,
+          "width": 515,
+          "height": 195
+        }
+      ],
+      "nets": [
+        {
+          "id": "legend_data",
+          "signals": [],
+          "points": [
+            [
+              60,
+              93
+            ],
+            [
+              135,
+              93
+            ]
+          ]
+        },
+        {
+          "id": "legend_ctrl",
+          "signals": [],
+          "points": [
+            [
+              485,
+              93
+            ],
+            [
+              560,
+              93
+            ]
+          ]
+        },
+        {
+          "id": "legend_fwd",
+          "signals": [],
+          "points": [
+            [
+              935,
+              93
+            ],
+            [
+              1010,
+              93
+            ]
+          ]
+        },
+        {
+          "id": "legend_kill",
+          "signals": [],
+          "points": [
+            [
+              1395,
+              93
+            ],
+            [
+              1470,
+              93
+            ]
+          ]
+        },
+        {
+          "id": "pc_select_to_pc",
+          "signals": [
+            "PC_fetch"
+          ],
+          "points": [
+            [
+              275,
+              440
+            ],
+            [
+              275,
+              525
+            ]
+          ]
+        },
+        {
+          "id": "pc_to_increment",
+          "signals": [
+            "PC_fetch"
+          ],
+          "points": [
+            [
+              275,
+              670
+            ],
+            [
+              275,
+              755
+            ]
+          ]
+        },
+        {
+          "id": "pc_increment_feedback",
+          "signals": [
+            "PC_fetch"
+          ],
+          "points": [
+            [
+              95,
+              815
+            ],
+            [
+              78,
+              815
+            ],
+            [
+              78,
+              365
+            ],
+            [
+              95,
+              365
+            ]
+          ]
+        },
+        {
+          "id": "pc_to_im",
+          "signals": [
+            "im_addr"
+          ],
+          "points": [
+            [
+              410,
+              670
+            ],
+            [
+              470,
+              670
+            ],
+            [
+              470,
+              945
+            ],
+            [
+              280,
+              945
+            ],
+            [
+              280,
+              965
+            ]
+          ]
+        },
+        {
+          "id": "im_dout_to_decode",
+          "signals": [
+            "im_dout",
+            "d_inst"
+          ],
+          "points": [
+            [
+              455,
+              1045
+            ],
+            [
+              490,
+              1045
+            ],
+            [
+              490,
+              360
+            ],
+            [
+              555,
+              360
+            ]
+          ]
+        },
+        {
+          "id": "decode_to_rf",
+          "signals": [
+            "d_rd",
+            "d_rs"
+          ],
+          "points": [
+            [
+              890,
+              440
+            ],
+            [
+              890,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "decode_imm_to_ext",
+          "signals": [
+            "d_imm"
+          ],
+          "points": [
+            [
+              915,
+              395
+            ],
+            [
+              940,
+              395
+            ],
+            [
+              940,
+              905
+            ],
+            [
+              730,
+              905
+            ],
+            [
+              730,
+              930
+            ]
+          ]
+        },
+        {
+          "id": "decode_mode_to_ext",
+          "signals": [
+            "d_imm_signed"
+          ],
+          "points": [
+            [
+              915,
+              425
+            ],
+            [
+              925,
+              425
+            ],
+            [
+              925,
+              990
+            ],
+            [
+              915,
+              990
+            ]
+          ]
+        },
+        {
+          "id": "saved_rd_rs_to_forward",
+          "signals": [
+            "x_rd_value",
+            "x_rs_value"
+          ],
+          "points": [
+            [
+              915,
+              630
+            ],
+            [
+              1015,
+              630
+            ]
+          ]
+        },
+        {
+          "id": "fwd_to_a",
+          "signals": [
+            "rd_fwd",
+            "rs_fwd"
+          ],
+          "points": [
+            [
+              1095,
+              715
+            ],
+            [
+              1095,
+              785
+            ]
+          ]
+        },
+        {
+          "id": "fwd_to_b",
+          "signals": [
+            "rs_fwd"
+          ],
+          "points": [
+            [
+              1295,
+              715
+            ],
+            [
+              1295,
+              785
+            ]
+          ]
+        },
+        {
+          "id": "imm_to_b",
+          "signals": [
+            "x_imm_ext"
+          ],
+          "points": [
+            [
+              915,
+              1010
+            ],
+            [
+              952,
+              1010
+            ],
+            [
+              952,
+              753
+            ],
+            [
+              1350,
+              753
+            ],
+            [
+              1350,
+              785
+            ]
+          ]
+        },
+        {
+          "id": "alu_a",
+          "signals": [
+            "alu_a"
+          ],
+          "points": [
+            [
+              1095,
+              895
+            ],
+            [
+              1095,
+              955
+            ]
+          ]
+        },
+        {
+          "id": "alu_b",
+          "signals": [
+            "alu_b"
+          ],
+          "points": [
+            [
+              1295,
+              895
+            ],
+            [
+              1295,
+              955
+            ]
+          ]
+        },
+        {
+          "id": "branch_target_net",
+          "signals": [
+            "branch_target",
+            "qualified_redirect"
+          ],
+          "points": [
+            [
+              1035,
+              470
+            ],
+            [
+              1035,
+              473
+            ]
+          ]
+        },
+        {
+          "id": "x_pc_imm_to_target",
+          "signals": [
+            "x_pc",
+            "x_imm_ext"
+          ],
+          "points": [
+            [
+              970,
+              475
+            ],
+            [
+              995,
+              475
+            ],
+            [
+              995,
+              440
+            ],
+            [
+              1015,
+              440
+            ]
+          ]
+        },
+        {
+          "id": "redirect_to_pc",
+          "signals": [
+            "qualified_redirect",
+            "branch_target"
+          ],
+          "points": [
+            [
+              300,
+              287
+            ],
+            [
+              300,
+              295
+            ]
+          ]
+        },
+        {
+          "id": "alu_to_m",
+          "signals": [
+            "alu_result",
+            "m_exec_value",
+            "alu_eq",
+            "alu_c",
+            "alu_v"
+          ],
+          "points": [
+            [
+              1375,
+              1050
+            ],
+            [
+              1405,
+              1050
+            ],
+            [
+              1405,
+              575
+            ],
+            [
+              1475,
+              575
+            ]
+          ]
+        },
+        {
+          "id": "ea_to_guard",
+          "signals": [
+            "m_exec_value"
+          ],
+          "points": [
+            [
+              1660,
+              680
+            ],
+            [
+              1660,
+              745
+            ]
+          ]
+        },
+        {
+          "id": "ea_to_dm",
+          "signals": [
+            "dm_addr"
+          ],
+          "points": [
+            [
+              1475,
+              575
+            ],
+            [
+              1458,
+              575
+            ],
+            [
+              1458,
+              940
+            ],
+            [
+              1530,
+              940
+            ],
+            [
+              1530,
+              965
+            ]
+          ]
+        },
+        {
+          "id": "guard_to_enable",
+          "signals": [
+            "dm_en",
+            "dm_we"
+          ],
+          "points": [
+            [
+              1810,
+              890
+            ],
+            [
+              1810,
+              965
+            ]
+          ]
+        },
+        {
+          "id": "store_data_to_mem",
+          "signals": [
+            "x_store_data",
+            "m_store_data",
+            "dm_din"
+          ],
+          "points": [
+            [
+              1335,
+              715
+            ],
+            [
+              1390,
+              715
+            ],
+            [
+              1390,
+              1190
+            ],
+            [
+              1565,
+              1190
+            ],
+            [
+              1565,
+              1175
+            ]
+          ]
+        },
+        {
+          "id": "exec_to_w",
+          "signals": [
+            "m_exec_value",
+            "w_exec_value"
+          ],
+          "points": [
+            [
+              1835,
+              575
+            ],
+            [
+              1862,
+              575
+            ],
+            [
+              1862,
+              945
+            ],
+            [
+              2015,
+              945
+            ],
+            [
+              2015,
+              965
+            ]
+          ]
+        },
+        {
+          "id": "load_to_w",
+          "signals": [
+            "dm_dout",
+            "w_load_data"
+          ],
+          "points": [
+            [
+              1835,
+              1045
+            ],
+            [
+              1935,
+              1045
+            ]
+          ]
+        },
+        {
+          "id": "wb_write_to_rf_net",
+          "signals": [
+            "wb_data"
+          ],
+          "points": [
+            [
+              2115,
+              1110
+            ],
+            [
+              2115,
+              1155
+            ]
+          ]
+        },
+        {
+          "id": "wb_to_id",
+          "signals": [
+            "wb_data",
+            "w_rd",
+            "rf_we"
+          ],
+          "points": [
+            [
+              735,
+              783
+            ],
+            [
+              735,
+              745
+            ]
+          ]
+        },
+        {
+          "id": "w_controls_flags",
+          "signals": [
+            "z_we",
+            "cv_we"
+          ],
+          "points": [
+            [
+              2115,
+              680
+            ],
+            [
+              2115,
+              745
+            ]
+          ]
+        },
+        {
+          "id": "flags_to_w",
+          "signals": [
+            "m_cmp_z",
+            "m_c",
+            "m_v",
+            "w_cmp_z",
+            "w_c",
+            "w_v"
+          ],
+          "points": [
+            [
+              1835,
+              645
+            ],
+            [
+              1850,
+              645
+            ],
+            [
+              1850,
+              815
+            ],
+            [
+              1935,
+              815
+            ]
+          ]
+        },
+        {
+          "id": "m_value_fwd_source",
+          "signals": [
+            "m_exec_value"
+          ],
+          "points": [
+            [
+              1640,
+              535
+            ],
+            [
+              1640,
+              517
+            ]
+          ]
+        },
+        {
+          "id": "m_to_ex",
+          "signals": [
+            "m_exec_value"
+          ],
+          "points": [
+            [
+              1125,
+              517
+            ],
+            [
+              1125,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "w_to_ex",
+          "signals": [
+            "wb_data"
+          ],
+          "points": [
+            [
+              1235,
+              517
+            ],
+            [
+              1235,
+              535
+            ]
+          ]
+        },
+        {
+          "id": "z_to_branch",
+          "signals": [
+            "m_cmp_z",
+            "w_cmp_z",
+            "Z",
+            "z_effective"
+          ],
+          "points": [
+            [
+              1335,
+              287
+            ],
+            [
+              1335,
+              295
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

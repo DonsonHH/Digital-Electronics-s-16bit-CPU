@@ -1,0 +1,41 @@
+{
+  "scope": "five requested diagram clarifications only; RTL/ISA/timing unchanged",
+  "changes": [
+    {
+      "index": 2,
+      "before": "本文规定16位、顺序单发射五级流水线CPU的指令行为、数据通路、硬连线控制和验证方法。实现基线为v1.6-timing-AC1，ISA与固定单周期同步IM/DM契约保持不变。本次补全整体控制架构与五级数据通路主图，保留已核对的CU逻辑模型、模式FSM及控制验证记录。",
+      "after": "本文规定16位、顺序单发射五级流水线CPU的指令行为、数据通路、硬连线控制和验证方法。实现基线为v1.6-timing-AC1，ISA与固定单周期同步IM/DM契约保持不变。本次精修整体控制及五级数据通路主图，明确随行控制输入、实际前递与写回连线，以及目标计算和分支判定的独立职责。"
+    },
+    {
+      "index": 108,
+      "before": "图1 整体控制与数据通路架构。上层负责运行模式、本条指令动作及跨级协调，下层为对应数据通路。IFCU至WBCU是现有控制职责分区，实体与信号对应见表14；CTRL为同一流水边界内的随行控制。",
+      "after": "same SEQ/bookmark; 整体控制与数据通路架构。随行控制先输入各级控制逻辑，再与运行模式、有效资格及跨级仲裁共同产生使能。浅蓝边界同时关联数据、标签与控制；IFCU至WBCU为现有职责划分，对应见表14。"
+    },
+    {
+      "index": 111,
+      "before": "图2 五级Datapath详细连接。M/W/Z/R为同网连接标记；结果16位与eq/C/V三位合计19位。四个虚线边界不新增寄存器；I为扩展立即数，完整载荷见表15；无点交叉不连接。",
+      "after": "same SEQ/bookmark; 五级Datapath详细连接。目标计算与分支判定分开；M/W前递、RF写回及Z反馈均标出源端。浅蓝带为既有流水边界，完整字段见表15；同步存储输出承担相应数据边界。"
+    },
+    {
+      "index": 113,
+      "before": "图1用于辨认控制职责，图2用于追踪数据。IF把PC_fetch送往IM；ID译码、读RF并扩展立即数；EX先分别转发真实Rd/Rs，再经MUX送入ALU，并选择最新Z及形成分支目标；MEM按完整EA访问DM；WB选择结果写RF，并按资格写Z/C/V。图中同字母标记连接同一信号组：M为非load的m_exec_value，W为wb_data（RF旁路另带w_rd/rf_we），Z为M/W比较候选及保存Z，R为qualified_redirect与branch_target。",
+      "after": "图1展示控制意图经各级逻辑形成合格使能的过程；图2按实际连线追踪数据。相邻ADD→ADD相关由M非load结果前递到EX，最终仍在WB写RF；LDR→STR相关保持前端一拍，再从W前递，STR由Rd提供写数据、Rs加立即数形成地址；CMP→JZ由最近合格比较候选提供Z，Z只参与分支条件，取分支才取消年轻槽，u_target独立计算目标。rd_fwd/rs_fwd的默认源是ID/EX保存值；WB数据与RF写地址/使能分别返回，RF内部完成同址读旁路。"
+    }
+  ],
+  "table_cells_changed": [
+    [
+      14,
+      7,
+      2
+    ],
+    [
+      14,
+      9,
+      2
+    ]
+  ],
+  "figures_replaced": [
+    1,
+    2
+  ]
+}

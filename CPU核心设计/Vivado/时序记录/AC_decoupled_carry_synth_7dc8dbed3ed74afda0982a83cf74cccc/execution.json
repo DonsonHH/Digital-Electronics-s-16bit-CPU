@@ -1,0 +1,37 @@
+{
+  "attempt_id": "AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc",
+  "started_at_utc": "2026-10-13T17:05:36.223874+00:00",
+  "argv": [
+    "C:\\Users\\Donson\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\cpu_v16_timing_20261014_01a13444\\runs\\AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc\\desktop_launch.py",
+    "C:\\Windows\\System32\\cmd.exe",
+    "/d",
+    "/c",
+    "run.cmd"
+  ],
+  "cwd": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\cpu_v16_timing_20261014_01a13444\\runs\\AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc",
+  "input_sha256": {
+    "constraints/core_ooc.xdc": "12009f946992f4d6cb89ed6e47e49d2cdf7c5619bc8e1fdb44fedae6c13ee7a0",
+    "desktop_launch.py": "b26dec3371de2cf4de5da28f2957189ed4ca7bdbb01c3d58c636750455b746c9",
+    "rtl/addsub16_cla.v": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+    "rtl/alu16.v": "ac1e94a66ee28698f906da1927b50c96b80f3b04989b3c75b9cf6df5dde509e9",
+    "rtl/branch_target16.v": "7c48a5e0e8af99cccf66c6111b78f99e0fc8f096802e2d1c122fb7a04cb2739e",
+    "rtl/cla16.v": "8d3221021088d0362faf8cb4e39128d0bc2e8b6e145dfe30a5f11d1e44218d42",
+    "rtl/cla4_pg.v": "31434ab4794c155a4ad2f439b85bfbc0cf6216e86e1921f771d7b168d4e0fab7",
+    "rtl/datapath_core.sv": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
+    "rtl/flags_reg.v": "fe0abc775c5a99ec4a77ad2bf45a750c1fe9d9cf0fd9bfe65ceab96d46eb50ac",
+    "rtl/imm_ext16.v": "9d0c17270462f619dff7a9f19cb618b7a6f482d8d2ddce76d9bd77fbca139844",
+    "rtl/isa_decode.v": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2",
+    "rtl/operand_forward.v": "30513341d5b60a4393a1784dcc0cb756fd251206655a458f2e2c17e01d1faa65",
+    "rtl/pc16.v": "969f0729a1f09740bc9627294ba7f0d8e39f3eaa9f0071504455b42b45405a38",
+    "rtl/regfile4x16.v": "06a3cb9622b766909a141c6dce572ea8d41e62fd91c7a44214dfa284e45a1029",
+    "rtl/sync_memories.v": "b78149d273015378da20c1d501a565451092f75740f44b4c792b48d444e9da94",
+    "run.cmd": "d2fe3d04342bd255746bef1055788893acb308d6ff8797e0a33658652c231a63",
+    "timing.tcl": "74a4fb0099276f65f3e60ab7cca940613ab02b7c4740e5f18c0631ed8341b4a6"
+  },
+  "status": "PROCESS_COMPLETED",
+  "launcher_pid": 88076,
+  "exit_code": 0,
+  "ended_at_utc": "2026-10-13T17:06:58.747220+00:00",
+  "console_sha256": "99e05364cb95504f1100029e42de51e037ee12aca2b6ff292d953c4b545efddb"
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PUBLICATION_READBACK_PASS",
+  "files": {
+    "16位流水线CPU核心设计文档_AC1候选版.docx": "969dcd666b950d1e5be7d3379804b1c35cb9e56095c00a7959f45ea28a607b23",
+    "架构图/01_CPU整体架构.png": "f3d4ee758356804b86198f3e49eca2430286ba5106e8af6f128365d3eb67695d",
+    "架构图/01_CPU整体架构.svg": "6fe8f164af08082736dfad5a24225813b789a90440ca0a0cc99c88225038deb1",
+    "架构图/02_五级Datapath.png": "18ba0ebcede482957dbd816233b1c009d1d2ff0645091ebd7d0d4047427819f4",
+    "架构图/02_五级Datapath.svg": "4be1156beff450bc9e29f1082ae18ea87370b50a571e53b2e6a3ceb66864334f",
+    "README.md": "99fc3ea6333ecf9fccb5c6cf872b21e274070c3ea879325a2843e6dbecaa0cfb",
+    "证据索引.json": "ab6fe46c6f59b4dfe6ab5fabb20da2601d3b5a364618883569781b22de063fe8",
+    "文件SHA256.json": "a0751887cf23e30393a94e746c21fd746458fd38b072d4fc291ead41dc7d50b9"
+  },
+  "all_other_snapshot_files_unchanged": true,
+  "source_snapshot_files": 2573,
+  "RTL_TB_XDC_changed": false,
+  "Pre5_evidence_unchanged": true,
+  "preexisting_missing_retained": [
+    "验证记录/AC1已验收负向原始证据.zip"
+  ],
+  "backup": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261031_架构图更新_01a0c80f"
+}

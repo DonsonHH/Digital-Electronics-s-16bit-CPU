@@ -1,0 +1,73 @@
+{
+  "snapshot_date": "2026-10-14",
+  "isa_version": "1.5",
+  "cpu_candidate": "v1.6-timing-AC1",
+  "sources": [
+    {
+      "name": "Vivado/rtl/addsub16_cla.v",
+      "sha256": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743"
+    },
+    {
+      "name": "Vivado/rtl/alu16.v",
+      "sha256": "ac1e94a66ee28698f906da1927b50c96b80f3b04989b3c75b9cf6df5dde509e9"
+    },
+    {
+      "name": "Vivado/rtl/branch_target16.v",
+      "sha256": "7c48a5e0e8af99cccf66c6111b78f99e0fc8f096802e2d1c122fb7a04cb2739e"
+    },
+    {
+      "name": "Vivado/rtl/cla16.v",
+      "sha256": "8d3221021088d0362faf8cb4e39128d0bc2e8b6e145dfe30a5f11d1e44218d42"
+    },
+    {
+      "name": "Vivado/rtl/cla4_pg.v",
+      "sha256": "31434ab4794c155a4ad2f439b85bfbc0cf6216e86e1921f771d7b168d4e0fab7"
+    },
+    {
+      "name": "Vivado/rtl/datapath_core.sv",
+      "sha256": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7"
+    },
+    {
+      "name": "Vivado/rtl/flags_reg.v",
+      "sha256": "fe0abc775c5a99ec4a77ad2bf45a750c1fe9d9cf0fd9bfe65ceab96d46eb50ac"
+    },
+    {
+      "name": "Vivado/rtl/imm_ext16.v",
+      "sha256": "9d0c17270462f619dff7a9f19cb618b7a6f482d8d2ddce76d9bd77fbca139844"
+    },
+    {
+      "name": "Vivado/rtl/isa_decode.v",
+      "sha256": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2"
+    },
+    {
+      "name": "Vivado/rtl/operand_forward.v",
+      "sha256": "30513341d5b60a4393a1784dcc0cb756fd251206655a458f2e2c17e01d1faa65"
+    },
+    {
+      "name": "Vivado/rtl/pc16.v",
+      "sha256": "969f0729a1f09740bc9627294ba7f0d8e39f3eaa9f0071504455b42b45405a38"
+    },
+    {
+      "name": "Vivado/rtl/regfile4x16.v",
+      "sha256": "06a3cb9622b766909a141c6dce572ea8d41e62fd91c7a44214dfa284e45a1029"
+    },
+    {
+      "name": "Vivado/rtl/sync_memories.v",
+      "sha256": "b78149d273015378da20c1d501a565451092f75740f44b4c792b48d444e9da94"
+    },
+    {
+      "name": "16位流水线CPU核心设计文档_AC1候选版.docx",
+      "sha256": "408ebb5e7903f64f9e01170db79a243e9174bf94505c49bcdf9ab0446f410bcc"
+    },
+    {
+      "name": "CPU流水线冒险与Buffer_Interlock完整设计方案.docx",
+      "sha256": "b7575986b67393812042b6c7204cae025e636d5b77fe98a4256dd476ea2bf19e"
+    }
+  ],
+  "migration": [
+    "Remove obsolete MEM fault OR; operand_forward takes m_fault directly",
+    "Successful STR retains valid WB slot; add qualified w_store observer",
+    "Update current 17-bit AC1 arithmetic and guide words"
+  ],
+  "scope": "Website source and topology migration; no new CPU simulation"
+}

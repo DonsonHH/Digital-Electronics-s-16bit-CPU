@@ -1,0 +1,101 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Tue Sep 15 11:00:38 2026
+# Process ID         : 186116
+# Current directory  : C:/Users/Donson/Documents/ChatGPT/Shudian/pre2_exhaustive_20260915
+# Command line       : xsim.exe -log full.log -mode tcl -source {xsim.dir/exhaustive_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/Documents/ChatGPT/Shudian/pre2_exhaustive_20260915/full.log
+# Journal file       : C:/Users/Donson/Documents/ChatGPT/Shudian/pre2_exhaustive_20260915\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 28991 MB
+# Total Virtual      : 62511 MB
+# Available Virtual  : 11274 MB
+#-----------------------------------------------------------
+source xsim.dir/exhaustive_sim/xsim_script.tcl
+# xsim {exhaustive_sim} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## run all
+BEGIN start=0 end_exclusive=8589934592 expected_per_module=8589934592
+PROGRESS completed_per_module=16777216 next_index=16777216
+PROGRESS completed_per_module=33554432 next_index=33554432
+PROGRESS completed_per_module=50331648 next_index=50331648
+PROGRESS completed_per_module=67108864 next_index=67108864
+PROGRESS completed_per_module=83886080 next_index=83886080
+PROGRESS completed_per_module=100663296 next_index=100663296
+PROGRESS completed_per_module=117440512 next_index=117440512
+PROGRESS completed_per_module=134217728 next_index=134217728
+PROGRESS completed_per_module=150994944 next_index=150994944
+PROGRESS completed_per_module=167772160 next_index=167772160
+PROGRESS completed_per_module=184549376 next_index=184549376
+PROGRESS completed_per_module=201326592 next_index=201326592
+PROGRESS completed_per_module=218103808 next_index=218103808
+PROGRESS completed_per_module=234881024 next_index=234881024
+PROGRESS completed_per_module=251658240 next_index=251658240
+PROGRESS completed_per_module=268435456 next_index=268435456
+PROGRESS completed_per_module=285212672 next_index=285212672
+PROGRESS completed_per_module=301989888 next_index=301989888
+PROGRESS completed_per_module=318767104 next_index=318767104
+PROGRESS completed_per_module=335544320 next_index=335544320
+PROGRESS completed_per_module=352321536 next_index=352321536
+PROGRESS completed_per_module=369098752 next_index=369098752
+PROGRESS completed_per_module=385875968 next_index=385875968
+PROGRESS completed_per_module=402653184 next_index=402653184
+PROGRESS completed_per_module=419430400 next_index=419430400
+PROGRESS completed_per_module=436207616 next_index=436207616
+PROGRESS completed_per_module=452984832 next_index=452984832
+PROGRESS completed_per_module=469762048 next_index=469762048
+PROGRESS completed_per_module=486539264 next_index=486539264
+PROGRESS completed_per_module=503316480 next_index=503316480
+PROGRESS completed_per_module=520093696 next_index=520093696
+PROGRESS completed_per_module=536870912 next_index=536870912
+PROGRESS completed_per_module=553648128 next_index=553648128
+PROGRESS completed_per_module=570425344 next_index=570425344
+PROGRESS completed_per_module=587202560 next_index=587202560
+PROGRESS completed_per_module=603979776 next_index=603979776
+PROGRESS completed_per_module=620756992 next_index=620756992
+PROGRESS completed_per_module=637534208 next_index=637534208
+PROGRESS completed_per_module=654311424 next_index=654311424
+PROGRESS completed_per_module=671088640 next_index=671088640
+PROGRESS completed_per_module=687865856 next_index=687865856
+PROGRESS completed_per_module=704643072 next_index=704643072
+PROGRESS completed_per_module=721420288 next_index=721420288
+PROGRESS completed_per_module=738197504 next_index=738197504
+PROGRESS completed_per_module=754974720 next_index=754974720
+PROGRESS completed_per_module=771751936 next_index=771751936
+PROGRESS completed_per_module=788529152 next_index=788529152
+PROGRESS completed_per_module=805306368 next_index=805306368
+PROGRESS completed_per_module=822083584 next_index=822083584
+PROGRESS completed_per_module=838860800 next_index=838860800
+PROGRESS completed_per_module=855638016 next_index=855638016
+PROGRESS completed_per_module=872415232 next_index=872415232
+PROGRESS completed_per_module=889192448 next_index=889192448
+PROGRESS completed_per_module=905969664 next_index=905969664
+PROGRESS completed_per_module=922746880 next_index=922746880
+PROGRESS completed_per_module=939524096 next_index=939524096
+PROGRESS completed_per_module=956301312 next_index=956301312
+PROGRESS completed_per_module=973078528 next_index=973078528
+PROGRESS completed_per_module=989855744 next_index=989855744
+PROGRESS completed_per_module=1006632960 next_index=1006632960
+PROGRESS completed_per_module=1023410176 next_index=1023410176
+PROGRESS completed_per_module=1040187392 next_index=1040187392
+PROGRESS completed_per_module=1056964608 next_index=1056964608
+PROGRESS completed_per_module=1073741824 next_index=1073741824
+PROGRESS completed_per_module=1090519040 next_index=1090519040
+PROGRESS completed_per_module=1107296256 next_index=1107296256
+PROGRESS completed_per_module=1124073472 next_index=1124073472
+PROGRESS completed_per_module=1140850688 next_index=1140850688
+PROGRESS completed_per_module=1157627904 next_index=1157627904
+PROGRESS completed_per_module=1174405120 next_index=1174405120
+PROGRESS completed_per_module=1191182336 next_index=1191182336
+PROGRESS completed_per_module=1207959552 next_index=1207959552

@@ -1,0 +1,79 @@
+DESKTOP_WRAPPER_PID 118228
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/cla4_pg.v" into library work
+INFO: [VRFC 10-311] analyzing module cla4_pg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/cla16.v" into library work
+INFO: [VRFC 10-311] analyzing module cla16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/addsub16_cla.v" into library work
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/alu16.v" into library work
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/flags_reg.v" into library work
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/isa_decode.v" into library work
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/regfile4x16.v" into library work
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/pc16.v" into library work
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/imm_ext16.v" into library work
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/branch_target16.v" into library work
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/operand_forward.v" into library work
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/datapath_core.sv" into library work
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/rtl/sync_memories.v" into library work
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/tb/tb_datapath.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_datapath
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/tb/tb_units.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_units
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/tb/tb_stress.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stress
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe tb_units -s units_sim -debug typical 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.cla4_pg
+Compiling module work.cla16
+Compiling module work.addsub16_cla
+Compiling module work.alu16
+Compiling module work.isa_decode
+Compiling module work.imm_ext16
+Compiling module work.branch_target16
+Compiling module work.flags_reg
+Compiling module work.regfile4x16
+Compiling module work.pc16
+Compiling module work.tb_units
+Built simulation snapshot units_sim
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Fri Oct  9 01:03:31 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/units_sim/xsim_script.tcl
+# xsim {units_sim} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## run all
+UNITS_PASS CLA4=512 CLA16=564300 ADD_SUB=564300 ALU=2257200 DECODE=65536 IMM=512 FLAGS=512 RF=262161 PC=65539 TARGET=3584
+$finish called at time : 4402081 ns : File "C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review_20261009/unit_standalone/tb/tb_units.sv" Line 308
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:11 . Memory (MB): peak = 228.250 ; gain = 0.000
+## quit
+INFO: xsimkernel Simulation Memory Usage: 14012 KB (Peak: 14012 KB), Simulation CPU Usage: 11233 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 01:03:44 2026...
+DESKTOP_EXIT 0

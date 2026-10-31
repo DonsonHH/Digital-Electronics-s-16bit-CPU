@@ -1,0 +1,434 @@
+[
+  {
+    "label": "THREE_WRITERS_R0",
+    "words": 6,
+    "tokens": 6,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 10,
+    "reset": 0
+  },
+  {
+    "label": "LATEST_LOAD_MANY_CONSUMERS",
+    "words": 9,
+    "tokens": 9,
+    "stores": 1,
+    "stalls": 1,
+    "cycles": 14,
+    "reset": 0
+  },
+  {
+    "label": "STR_DATA_LOAD_W_BASE_M",
+    "words": 9,
+    "tokens": 8,
+    "stores": 1,
+    "stalls": 1,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "STR_DATA_M_BASE_W",
+    "words": 5,
+    "tokens": 5,
+    "stores": 1,
+    "stalls": 0,
+    "cycles": 9,
+    "reset": 0
+  },
+  {
+    "label": "LOAD_R0_RD_RS_SAME",
+    "words": 7,
+    "tokens": 7,
+    "stores": 1,
+    "stalls": 2,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "FALSE_IMMEDIATE_RS",
+    "words": 6,
+    "tokens": 6,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 10,
+    "reset": 0
+  },
+  {
+    "label": "WB_ID_AND_OVERWRITES",
+    "words": 7,
+    "tokens": 7,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 11,
+    "reset": 0
+  },
+  {
+    "label": "CMP_101_JZ",
+    "words": 7,
+    "tokens": 6,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "CMP_010_JZ",
+    "words": 7,
+    "tokens": 7,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 11,
+    "reset": 0
+  },
+  {
+    "label": "CMP_ACROSS_ALU_STORE_LOAD",
+    "words": 10,
+    "tokens": 9,
+    "stores": 1,
+    "stalls": 1,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "CMP_LOAD_JZ_W_FALLBACK",
+    "words": 6,
+    "tokens": 5,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "REFETCH_CANCELLED_HALT",
+    "words": 6,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 9,
+    "reset": 0
+  },
+  {
+    "label": "REFETCH_CANCELLED_STR",
+    "words": 7,
+    "tokens": 5,
+    "stores": 1,
+    "stalls": 0,
+    "cycles": 11,
+    "reset": 0
+  },
+  {
+    "label": "REFETCH_CANCELLED_RESERVED",
+    "words": 4,
+    "tokens": 2,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 8,
+    "reset": 0
+  },
+  {
+    "label": "LOAD_BEFORE_HALT",
+    "words": 4,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 7,
+    "reset": 0
+  },
+  {
+    "label": "LEGAL_STR_BEFORE_HALT",
+    "words": 5,
+    "tokens": 4,
+    "stores": 1,
+    "stalls": 0,
+    "cycles": 8,
+    "reset": 0
+  },
+  {
+    "label": "MEM_FAULT_OVER_BRANCH",
+    "words": 6,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "MEM_FAULT_OVER_JZ",
+    "words": 6,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "MEM_FAULT_WITH_LOAD_USE",
+    "words": 6,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "STR_BEFORE_MEM_FAULT",
+    "words": 7,
+    "tokens": 4,
+    "stores": 1,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "STR_BEFORE_RESERVED",
+    "words": 5,
+    "tokens": 4,
+    "stores": 1,
+    "stalls": 0,
+    "cycles": 8,
+    "reset": 0
+  },
+  {
+    "label": "CONSECUTIVE_RESERVED",
+    "words": 3,
+    "tokens": 2,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 6,
+    "reset": 0
+  },
+  {
+    "label": "EA_UPPER_FAULT_NO_ALIAS",
+    "words": 4,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "EA_NEGATIVE_FAULT_NO_ALIAS",
+    "words": 3,
+    "tokens": 2,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "EA_MODULO_WRAP",
+    "words": 6,
+    "tokens": 6,
+    "stores": 1,
+    "stalls": 0,
+    "cycles": 10,
+    "reset": 0
+  },
+  {
+    "label": "JZ_S8_LOW_PC_WRAP",
+    "words": 2,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "FETCH_256_CORRECT_PATH",
+    "words": 2,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 9,
+    "reset": 0
+  },
+  {
+    "label": "FETCH_256_SQUASH",
+    "words": 3,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 11,
+    "reset": 0
+  },
+  {
+    "label": "LONG_ALTERNATING_18_ROUNDS",
+    "words": 201,
+    "tokens": 183,
+    "stores": 18,
+    "stalls": 18,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "LONG_LOOP_MEMORY_CONSUMERS",
+    "words": 15,
+    "tokens": 153,
+    "stores": 15,
+    "stalls": 15,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "FLAGS_CV_Z_LONG_LIFETIMES",
+    "words": 13,
+    "tokens": 12,
+    "stores": 1,
+    "stalls": 2,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "IGNORED_FIELDS_BOTH_SIGNS",
+    "words": 11,
+    "tokens": 10,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": -1,
+    "reset": 0
+  },
+  {
+    "label": "SUPP_MOV_ALU_TO_CMP",
+    "words": 6,
+    "tokens": 5,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 11,
+    "reset": 0
+  },
+  {
+    "label": "SUPP_G1_INTERVENING_LOAD_STALL",
+    "words": 5,
+    "tokens": 5,
+    "stores": 0,
+    "stalls": 1,
+    "cycles": 10,
+    "reset": 0
+  },
+  {
+    "label": "DOC_ADD_ADD",
+    "words": 3,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 7,
+    "reset": 0
+  },
+  {
+    "label": "DOC_LOAD_STR",
+    "words": 3,
+    "tokens": 3,
+    "stores": 1,
+    "stalls": 1,
+    "cycles": 8,
+    "reset": 0
+  },
+  {
+    "label": "DOC_CMP_JZ",
+    "words": 4,
+    "tokens": 3,
+    "stores": 0,
+    "stalls": 0,
+    "cycles": 9,
+    "reset": 0
+  },
+  {
+    "label": "DOC_STR_HALT",
+    "words": 3,
+    "tokens": 2,
+    "stores": 1,
+    "stalls": 0,
+    "cycles": 6,
+    "reset": 0
+  },
+  {
+    "label": "RESET_LOAD_USE",
+    "words": 11,
+    "tokens": 10,
+    "stores": 1,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 1
+  },
+  {
+    "label": "RESET_REDIRECT",
+    "words": 11,
+    "tokens": 10,
+    "stores": 1,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 2
+  },
+  {
+    "label": "RESET_DRAIN_HALT",
+    "words": 11,
+    "tokens": 10,
+    "stores": 1,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 3
+  },
+  {
+    "label": "RESET_BEFORE_STORE",
+    "words": 11,
+    "tokens": 10,
+    "stores": 1,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 4
+  },
+  {
+    "label": "RESET_AFTER_STORE",
+    "words": 11,
+    "tokens": 10,
+    "stores": 1,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 5
+  },
+  {
+    "label": "RESET_HALT_WB",
+    "words": 11,
+    "tokens": 10,
+    "stores": 1,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 6
+  },
+  {
+    "label": "RESET_DRAIN_FAULT",
+    "words": 2,
+    "tokens": 2,
+    "stores": 0,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 7
+  },
+  {
+    "label": "RESET_FAULT_WB",
+    "words": 2,
+    "tokens": 2,
+    "stores": 0,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 8
+  },
+  {
+    "label": "RESET_HALTED",
+    "words": 3,
+    "tokens": 2,
+    "stores": 0,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 9
+  },
+  {
+    "label": "RESET_FAULTED",
+    "words": 2,
+    "tokens": 2,
+    "stores": 0,
+    "stalls": -1,
+    "cycles": -1,
+    "reset": 10
+  }
+]

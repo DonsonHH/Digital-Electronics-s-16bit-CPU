@@ -1,0 +1,37 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sun Sep 20 22:24:27 2026
+# Process ID         : 125160
+# Current directory  : C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920
+# Command line       : xsim.exe -log modules.log -mode tcl -source {xsim.dir/pre3_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/modules.log
+# Journal file       : C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 31920 MB
+# Total Virtual      : 65440 MB
+# Available Virtual  : 33362 MB
+#-----------------------------------------------------------
+source xsim.dir/pre3_sim/xsim_script.tcl
+# xsim {pre3_sim} -autoloadwcfg -tclbatch {sim.tcl}
+Time resolution is 1 ps
+source sim.tcl
+## open_vcd modules.vcd
+## log_vcd /tb_modules/*
+INFO: HDL object /tb_modules/model is an unpacked array. VCD does not support unpacked array type according to IEEE LRM 1800-2009, section21.7.5.
+## run 300 ns
+## close_vcd
+## run all
+PRE3_PASS imm=512 alu=2177160 rf_transactions=263405 pc_transitions=1048582 targets=1792
+$finish called at time : 15299458 ns : File "C:/Users/Donson/Documents/ChatGPT/Shudian/pre3_20260920/tb/tb_modules.sv" Line 128
+## quit
+INFO: [Common 17-206] Exiting xsim at Sun Sep 20 22:24:32 2026...

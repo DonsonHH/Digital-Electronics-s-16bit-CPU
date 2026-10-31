@@ -1,0 +1,9 @@
+{
+  "name": "cpu-datapath-lab",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": { "build": "node build.mjs", "test": "node tests/model.test.mjs && node tests/web.test.mjs && node tests/readability.test.mjs && node tests/focus.test.mjs" },
+  "dependencies": { "react": "19.2.0", "react-dom": "19.2.0", "sonner": "2.0.7" },
+  "devDependencies": { "esbuild": "0.25.11", "typescript": "5.9.3", "@types/react": "19.2.2", "@types/react-dom": "19.2.2" }
+}

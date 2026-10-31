@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#165A83"/></marker><marker id="p" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#A45028"/></marker><style>text{font-family:Arial,sans-serif;fill:#153348} .title{font-size:30px;font-weight:700} .stage{font-size:23px;font-weight:700} .head{font-size:20px;font-weight:700} .body{font-size:17px} .small{font-size:15px} .box{fill:#FFF;stroke:#95AFBF;stroke-width:1.5} .path{fill:none;stroke:#165A83;stroke-width:2;marker-end:url(#a)} .feed{fill:none;stroke:#A45028;stroke-width:2;stroke-dasharray:7 4;marker-end:url(#p)}</style></defs>
+<rect width="1500" height="900" fill="#F7FAFC"/>
+<text x="45" y="44" class="title">Five-stage datapath · ISA v1.4</text>
+<text x="45" y="72" class="body">Logical module diagram • 16-bit words • one synchronous-read cycle • no extra IR/MDR register</text>
+<rect x="35" y="180" width="1420" height="620" rx="16" fill="none" stroke="#5B7D91" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="55" y="205" class="small">CPU core: 87 logical interface bits; IM and DM are external to the core</text>
+<rect x="55" y="225" width="245" height="450" rx="12" fill="#E5EFF6"/>
+<rect x="325" y="225" width="260" height="450" rx="12" fill="#EAF3EF"/>
+<rect x="610" y="225" width="260" height="450" rx="12" fill="#F8F0DF"/>
+<rect x="895" y="225" width="260" height="450" rx="12" fill="#EDF0F9"/>
+<rect x="1180" y="225" width="250" height="450" rx="12" fill="#F5EAF0"/>
+<text x="75" y="258" class="stage">IF</text><text x="345" y="258" class="stage">ID</text><text x="630" y="258" class="stage">EX</text><text x="915" y="258" class="stage">MEM</text><text x="1200" y="258" class="stage">WB</text>
+<!-- Routes are behind the boxes. Solid=data; dashed=bypass/control. -->
+<path class="path" d="M110 310V149"/><text x="48" y="295" class="small">addr16, en1</text>
+<path class="path" d="M240 115H400V300"/><text x="290" y="105" class="small">im_dout16</text>
+<path class="path" d="M170 388V452"/>
+<path class="path" d="M565 400H575V585H565"/>
+<path class="path" d="M455 508V548"/>
+<path class="path" d="M565 590H596V310H630"/>
+<path class="path" d="M565 630H605V399H630"/>
+<path class="path" d="M740 344V367"/><path class="path" d="M740 428V453"/>
+<path class="path" d="M850 497H882V345H915"/><text x="795" y="439" class="small">exec_value16</text>
+<path class="path" d="M850 310H878V520H915"/>
+<path class="path" d="M1015 310V149"/><text x="1062" y="296" class="small">EA16, en, we</text>
+<path class="path" d="M1100 115H1320V301"/><text x="1195" y="104" class="small">dm_dout16</text>
+<path class="path" d="M1125 393H1143V597H1125"/>
+<path class="path" d="M1125 510H1149V167H1078V149"/><text x="1157" y="171" class="small">dm_din16</text>
+<path class="path" d="M1125 617H1167V345H1195"/>
+<path class="path" d="M1300 390V478"/>
+<path class="feed" d="M915 362H895V690H760V344"/><text x="795" y="686" class="small">M: registered m_exec_value16 (ready non-load)</text>
+<path class="feed" d="M1260 390V722H654V344"/><text x="1015" y="717" class="small">W: selected wb_data16</text>
+<path class="feed" d="M1195 535H1170V760H440V433"/><text x="550" y="756" class="small">WB → ID explicit same-address bypass: w_rd2 / wdata16 / rf_we</text>
+<path class="feed" d="M1300 593V783H740V634"/><text x="940" y="781" class="small">Z: M CMP → W CMP → architectural Z</text>
+<path class="feed" d="M630 594H595V810H95V388"/><text x="430" y="829" class="small">Qualified EX redirect; PC/ID hold for load-use; age-priority kill / stop</text>
+<!-- External memories -->
+<rect x="80" y="87" width="160" height="62" rx="7" fill="#D6E8F2" stroke="#165A83"/>
+<text x="101" y="112" class="head">IM · 256×16</text><text x="101" y="136" class="small">sync read; en=0 hold</text>
+<rect x="940" y="87" width="160" height="62" rx="7" fill="#D6E8F2" stroke="#165A83"/>
+<text x="960" y="112" class="head">DM · 256×16</text><text x="960" y="136" class="small">sync read / write</text>
+<!-- IF -->
+<rect x="80" y="310" width="195" height="78" rx="7" class="box"/><text x="98" y="337" class="head">pc16</text><text x="98" y="361" class="body">PC_fetch16</text><text x="98" y="381" class="small">reset &gt; redirect &gt; hold</text>
+<rect x="80" y="452" width="195" height="110" rx="7" class="box"/><text x="98" y="480" class="head">IF/ID tags</text><text x="98" y="505" class="body">d_pc16 · d_valid1</text><text x="98" y="530" class="body">d_fetch_fault1</text><text x="98" y="550" class="small">instruction = IM dout</text>
+<text x="80" y="603" class="small">Full-address check before</text><text x="80" y="625" class="small">physical IM request.</text>
+<!-- ID -->
+<rect x="345" y="300" width="220" height="64" rx="7" class="box"/><text x="360" y="326" class="head">isa_decode</text><text x="360" y="350" class="small">rd2 / rs2 / imm8 / control</text>
+<rect x="345" y="373" width="220" height="60" rx="7" class="box"/><text x="360" y="398" class="head">regfile4x16</text><text x="360" y="421" class="small">2 read ×16; 1 write ×16</text>
+<rect x="345" y="448" width="220" height="60" rx="7" class="box"/><text x="360" y="474" class="head">imm_ext16</text><text x="360" y="496" class="small">zero / sign extension</text>
+<rect x="345" y="548" width="220" height="105" rx="7" class="box"/><text x="360" y="575" class="head">ID/EX payload</text><text x="360" y="599" class="small">pc, rd/rs, values, imm16</text><text x="360" y="621" class="small">use masks + selection</text><text x="360" y="643" class="small">valid, fault, side effects</text>
+<!-- EX -->
+<rect x="630" y="280" width="220" height="64" rx="7" class="box"/><text x="647" y="305" class="head">operand_forward</text><text x="647" y="329" class="small">M &gt; W &gt; saved sources</text>
+<rect x="630" y="367" width="220" height="61" rx="7" class="box"/><text x="647" y="392" class="head">A / B operand MUX</text><text x="647" y="416" class="small">0 / Rd / Rs / immediate</text>
+<rect x="630" y="453" width="220" height="84" rx="7" class="box"/><text x="647" y="480" class="head">alu16 + CLA16</text><text x="647" y="504" class="small">result16; eq / C / V</text><text x="647" y="526" class="small">ADD / SUB / logic / pass</text>
+<rect x="630" y="559" width="220" height="75" rx="7" class="box"/><text x="647" y="586" class="head">branch_target16</text><text x="647" y="610" class="small">own x_pc + 1 + s8</text><text x="647" y="630" class="small">JUMP u8 / JZ effective Z</text>
+<text x="630" y="670" class="small">EX/MEM: value + store data + flags</text>
+<!-- MEM -->
+<rect x="915" y="310" width="210" height="108" rx="7" class="box"/><text x="931" y="337" class="head">MEM access guard</text><text x="931" y="362" class="body">m_exec_value16</text><text x="931" y="385" class="small">valid / fault / full EA</text><text x="931" y="407" class="small">MR, MW → dm_en/we</text>
+<rect x="915" y="472" width="210" height="76" rx="7" class="box"/><text x="931" y="499" class="head">STR data16</text><text x="931" y="522" class="small">m_store_data → dm_din</text><text x="931" y="542" class="small">write only at MEM edge</text>
+<rect x="915" y="575" width="210" height="78" rx="7" class="box"/><text x="931" y="601" class="head">MEM/WB tags</text><text x="931" y="624" class="small">pc, rd, value, flags</text><text x="931" y="646" class="small">load data = DM dout</text>
+<!-- WB -->
+<rect x="1195" y="301" width="210" height="89" rx="7" class="box"/><text x="1211" y="328" class="head">Writeback MUX</text><text x="1211" y="352" class="small">exec_value / load_data</text><text x="1211" y="376" class="body">wb_data16</text>
+<rect x="1195" y="478" width="210" height="115" rx="7" class="box"/><text x="1211" y="505" class="head">Qualified state write</text><text x="1211" y="530" class="small">RF: rf_we + w_rd2</text><text x="1211" y="553" class="small">flags_reg: z_we / cv_we</text><text x="1211" y="577" class="small">saved Z / C / V</text>
+<text x="1195" y="635" class="small">HALT / fault token consumed</text><text x="1195" y="657" class="small">at WB end; pipeline drains.</text>
+<text x="45" y="875" class="small">Solid arrows: data. Dashed arrows: feedback/control. Logical diagram, not a Vivado RTL Analysis capture. Successful STR has an empty WB slot.</text>
+</svg>

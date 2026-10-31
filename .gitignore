@@ -1,0 +1,4 @@
+# Only transient OS/editor files; evidence logs and waveforms are intentionally tracked.
+.DS_Store
+Thumbs.db
+~$*

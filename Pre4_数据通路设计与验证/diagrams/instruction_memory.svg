@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="850" viewBox="0 0 1500 850">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#16618A"/></marker><marker id="s" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#A45028"/></marker><style>text{font-family:Arial,sans-serif;fill:#153348}.h{font-size:29px;font-weight:bold}.t{font-size:22px;font-weight:bold}.b{font-size:20px}.s{font-size:17px}.box{fill:white;stroke:#95AFBF;stroke-width:1.5}.p{fill:none;stroke:#16618A;stroke-width:3;marker-end:url(#a)}.sp{fill:none;stroke:#A45028;stroke-width:3;marker-end:url(#s)}</style></defs>
+<rect width="1500" height="850" fill="#F7FAFC"/>
+<text x="50" y="55" class="h">LDR / STR · address path and store-data path are independent</text>
+<text x="50" y="95" class="b">LDR example: 2BFF · R3=0020, DM[001F]=BEEF → EA=001F, R2=BEEF</text>
+<path class="p" d="M285 255H342"/><path class="p" d="M595 255H652"/><path class="p" d="M890 255H947"/><path class="p" d="M1185 255H1237"/>
+<rect x="50" y="180" width="235" height="150" rx="10" class="box"/><text x="70" y="216" class="t">ID: decode + RF</text><text x="70" y="254" class="b">Rs=R3 → 0020</text><text x="70" y="291" class="b">SExt(FF) → FFFF</text><text x="70" y="319" class="s">signed displacement −1</text>
+<rect x="345" y="180" width="250" height="150" rx="10" class="box"/><text x="365" y="216" class="t">EX: address ADD</text><text x="365" y="254" class="b">a=rs_fwd; b=imm16</text><text x="365" y="291" class="b">0020+FFFF → 001F</text><text x="365" y="319" class="s">CVW=0; flags preserved</text>
+<rect x="655" y="180" width="235" height="150" rx="10" class="box"/><text x="675" y="216" class="t">MEM: full EA guard</text><text x="675" y="254" class="b">0000 ≤ EA ≤ 00FF</text><text x="675" y="291" class="b">check before indexing</text><text x="675" y="319" class="s">LDR: dm_en=1, we=0</text>
+<rect x="950" y="180" width="235" height="150" rx="10" class="box"/><text x="970" y="216" class="t">Synchronous DM</text><text x="970" y="254" class="b">read at MEM edge</text><text x="970" y="291" class="b">dout=BEEF in WB</text><text x="970" y="319" class="s">aligned with w_rd=R2</text>
+<rect x="1240" y="180" width="210" height="150" rx="10" class="box"/><text x="1260" y="216" class="t">WB: load MUX</text><text x="1260" y="254" class="b">wb_sel=1</text><text x="1260" y="291" class="b">R2 ← dm_dout</text><text x="1260" y="319" class="s">EA never writes RF</text>
+<text x="50" y="405" class="t">STR example: 3900 · STR R2,[R1+0] · write DM[R1] with R2</text>
+<path class="sp" d="M285 505H342"/><path class="sp" d="M595 505H652"/><path class="sp" d="M890 505H947"/><path class="sp" d="M1185 505H1237"/>
+<rect x="50" y="440" width="235" height="140" rx="10" class="box"/><text x="70" y="475" class="t">Rd is store data</text><text x="70" y="512" class="b">read R2 separately</text><text x="70" y="549" class="s">use_rd=use_rs=1</text>
+<rect x="345" y="440" width="250" height="140" rx="10" class="box"/><text x="365" y="475" class="t">EX: forward Rd</text><text x="365" y="512" class="b">store_data=rd_fwd</text><text x="365" y="549" class="s">not the address ALU a</text>
+<rect x="655" y="440" width="235" height="140" rx="10" class="box"/><text x="675" y="475" class="t">EX/MEM storage</text><text x="675" y="512" class="b">m_store_data16</text><text x="675" y="549" class="s">preserve with pc / valid</text>
+<rect x="950" y="440" width="235" height="140" rx="10" class="box"/><text x="970" y="475" class="t">MEM: qualified write</text><text x="970" y="512" class="b">dm_en=dm_we=1</text><text x="970" y="549" class="s">DM[EA] ← dm_din at edge</text>
+<rect x="1240" y="440" width="210" height="140" rx="10" class="box"/><text x="1260" y="475" class="t">Success: WB bubble</text><text x="1260" y="512" class="b">no RF / flags write</text><text x="1260" y="549" class="s">fault: retain WB token</text>
+<rect x="50" y="640" width="1400" height="117" rx="10" fill="#E6EFF5"/>
+<text x="70" y="678" class="t">Read the trace at the sampling edge</text>
+<text x="70" y="713" class="b">LDR → consumer: one load-use bubble, then W forwards dm_dout. STR → same-address LDR sees the new stored value.</text>
+<text x="70" y="742" class="s">EA=0100 or FFFF: dm_en=dm_we=0; no low-byte alias access. Older WB completes, younger EX is cancelled.</text>
+<text x="50" y="810" class="s">Logical instruction flow. Fixed 1-cycle memory contract; flags remain unchanged by address calculation and memory instructions.</text>
+</svg>

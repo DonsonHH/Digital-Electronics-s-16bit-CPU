@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "result_kind": "execution_lifecycle_patch_validation",
+  "revision": "job1",
+  "completed_at_utc": "2026-10-14T08:26:22.965009+00:00",
+  "CPU_version": "v1.6-timing-AC1",
+  "ISA_version": "v1.5",
+  "verification_protocol": "1.6-vtools-r1",
+  "production_RTL_TB_XDC_and_Word_unchanged": true,
+  "lifecycle_checks": 6,
+  "old_cleanup_failure_reproduced": true,
+  "unrelated_sentinel_preserved": true,
+  "fresh_nine_attempt": "eae32d52-1b00-4d6d-a524-cd3902d502d0",
+  "native_steps": 19,
+  "csv_exact_match": 9,
+  "independent_cases": 48,
+  "independent_cycle_rows": 952,
+  "RTL_mutations_rejected": 5,
+  "control_XZ_variants_rejected": 10,
+  "unused_payload_positive": true,
+  "evidence_boundary_cases": 9,
+  "forced_timeout": "expected FAIL with partial evidence saved; no new XSim PASS",
+  "OOC": {
+    "LUT": 287,
+    "FF": 260,
+    "WNS_ns": 2.62,
+    "TNS_ns": 0,
+    "scope": "post-synthesis only; not board timing"
+  },
+  "corrections_during_validation": [
+    "New lifecycle self-test initially embedded a Chinese path in an ASCII batch fixture; fixed by copying the fixture to a relative ASCII name, then rerun successfully."
+  ],
+  "changed_files": {
+    "README.md": {
+      "before_sha256": "8b2fb6f503dec44d5b04c54d67d48a18244b90263abeb0bd45294f99d48fb658",
+      "after_sha256": "0b0d993c373e4300340503ecd2db9aa31b2c43c7d871a0be4c9cba0b0a181e37"
+    },
+    "Vivado/desktop_launch.py": {
+      "before_sha256": "b26dec3371de2cf4de5da28f2957189ed4ca7bdbb01c3d58c636750455b746c9",
+      "after_sha256": "4fbfe6a0bd6691c12cc4a47f45dc72fbef9147d880b08f9d7dee5e3bb09067b2"
+    },
+    "Vivado/negative_test_support.py": {
+      "before_sha256": "0a82b9b3701575f2a6f3d9768e01df3a960998652bee6fd34ce2c3c10ed90116",
+      "after_sha256": "df0a88713bbf285ba2523d43f35d9fec2eebfda91ae0531d35fd89dfc75e9f43"
+    },
+    "Vivado/run_independent.py": {
+      "before_sha256": "2f965658ea00361019e5b3b54990a53f0865bbc8abc50e108a215e3d6c88c5a0",
+      "after_sha256": "51f3c92c5ae5182816c352e5a8e205c683e3b3b6b0d74d745c94a6ace1f61e79"
+    },
+    "最近运行.json": {
+      "before_sha256": "2612349ccf234e1dbb813ce9bef6a8524d7181d8668f0c79f12ae81565ce92b5",
+      "after_sha256": "007f9ea54c8a3c8011734132110b246a0792072c8abd52872efc13352a7a7275"
+    },
+    "证据索引.json": {
+      "before_sha256": "1f420ebf50766f9fc1cbe732e8e441e1bff88ebaa2c26d354ff236205915c285",
+      "after_sha256": "6538dfada94ca1c58660507430f6f3d9aeb624e6ebf7bf478cacc229bdf0d8f1"
+    },
+    "验证结果.json": {
+      "before_sha256": "a249214713ac3acf6313b112e477e7f2df9484f99ef5d1a8a401cf67bba354bc",
+      "after_sha256": "88e1f0514c2fd9edd3a06d4e44bad3496f0bbbad45022f506d2c01e622b52042"
+    },
+    "Vivado/test_process_lifecycle.py": {
+      "before_sha256": null,
+      "after_sha256": "96b69f6fb9a8d42a415f50bd76531b1f5d81a0ab4bd8726a8e7a883058468c2e"
+    }
+  },
+  "rollback_root": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261014_进程清理补丁_job1\\修改前",
+  "raw_archive": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261014_进程清理补丁_job1\\补丁验证原始证据.zip",
+  "raw_archive_sha256": "afc802095fdf1683facc4bcb945ee19fe8bcd40e7a15ac758679bbc8240ff296",
+  "raw_archive_files": 1669,
+  "limitations": [
+    "No new CPU architecture or Pre5 work.",
+    "No full arithmetic/CPU-state exhaustive or formal proof.",
+    "No placed/routed board design, complete I/O constraints, actual setup/hold or board validation."
+  ]
+}

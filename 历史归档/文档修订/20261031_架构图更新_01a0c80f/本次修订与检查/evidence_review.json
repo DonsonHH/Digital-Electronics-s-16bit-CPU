@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-31",
+  "status": "HISTORICAL_TRACE_RECHECK_PASS",
+  "new_xsim_execution": false,
+  "new_synthesis": false,
+  "RTL_changed": false,
+  "raw_vcd_edges": {
+    "datapath.vcd": 4806,
+    "interlock.vcd": 18
+  },
+  "trace_cases_checked": 11,
+  "trace_JSON_and_CSV_match_original_VCD": true,
+  "checks": [
+    "LDR->STR: C3 front holds and X bubble",
+    "LDR->STR: C5 W forwarding, C6 one MEM write",
+    "STR C7 valid WB no write",
+    "CMP->JZ C7 M candidate/redirect kills young only",
+    "HALT C12 WB token + empty-next",
+    "T07 accepts HALT C4, old load writes C5, stops C6",
+    "T16 older MEM fault cancels HALT and blocks DM C4",
+    "T05 older WB may complete alongside MEM fault",
+    "T02 C5 JZ uses latest M zero, not older W CMP",
+    "T02 C6 W candidate zero overrides saved Z one",
+    "Reset witnesses from all five modes",
+    "Independent 48 cases / 58 result rows / 952 cycle rows",
+    "DOC_ADD_ADD M forwarding schedule requires no stall",
+    "LEGAL_STR_BEFORE_HALT exactly one old store, normal halt"
+  ],
+  "run": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\Pre5_控制单元设计\\Vivado\\验证记录\\cpu_v16_440e0d7a12444333a4f85adf612f9833",
+  "independent_run": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\Pre5_控制单元设计\\Vivado\\验证记录\\cpu_ac1_independent_glok75my"
+}

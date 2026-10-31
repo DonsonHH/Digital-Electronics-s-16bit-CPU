@@ -1,0 +1,26 @@
+fileset	name	type
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/cla16.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/cla4_pg.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/sync_memories.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/addsub16_cla.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/alu16.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/branch_target16.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/flags_reg.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/imm_ext16.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/isa_decode.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/operand_forward.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/pc16.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/regfile4x16.v	Verilog
+sources_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/rtl/datapath_core.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_audit3.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_forward_contract.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_hazards.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_isa_contract.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_stress.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_trace.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_uniform_smoke.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_units.sv	SystemVerilog
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/hazard_cases.svh	Verilog Header
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_control_checks.svh	Verilog Header
+sim_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/tb/tb_datapath.sv	SystemVerilog
+constrs_1	D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/constraints/core_ooc.xdc	XDC

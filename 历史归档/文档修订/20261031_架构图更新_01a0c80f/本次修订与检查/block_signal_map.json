@@ -1,0 +1,71 @@
+{
+  "baseline": "v1.6-timing-AC1 / ISA v1.5",
+  "rows": [
+    {
+      "block": "全局运行模式FSM",
+      "implementation": "core内部状态与组合逻辑",
+      "inputs": "mode/mode_next；m_fault_event、x_fault_event、qualified_halt、drain_done、rst",
+      "outputs": "mode_active、stop_pending、halted、fault；不直接产生所有级使能"
+    },
+    {
+      "block": "IFCU 取指控制",
+      "implementation": "core内部组合逻辑＋pc16 u_pc",
+      "inputs": "mode、frontend_kill、load_use、fetch_in_range、qualified_redirect、branch_target",
+      "outputs": "fetch_accept、pc_hold、im_en；pc16执行reset > redirect > hold > +1"
+    },
+    {
+      "block": "IDCU 译码与发射",
+      "implementation": "isa_decode u_decode＋core资格逻辑",
+      "inputs": "d_inst16、d_valid、d_fetch_fault、load_use、frontend_kill",
+      "outputs": "d_rd/rs各2、d_imm8、d_use_rd/rs、d_alu_*、副作用意图、d_fault、x_valid_next"
+    },
+    {
+      "block": "EXCU 运算与决策",
+      "implementation": "core内部组合逻辑",
+      "inputs": "x_*控制、ALU非法标记、blocked_rd/rs、z_effective、较老MEM故障",
+      "outputs": "ALU选择、branch_req、halt_req、x_fault_event、qualified_redirect/qualified_halt"
+    },
+    {
+      "block": "MEMCU 访存保护",
+      "implementation": "core内部组合逻辑",
+      "inputs": "m_valid/fault、m_mem_read/write、完整m_exec_value16、rst、mode_active",
+      "outputs": "m_address_in_range、m_access_fault、m_fault_event、dm_en、dm_we"
+    },
+    {
+      "block": "WBCU 架构写入",
+      "implementation": "core内部组合逻辑",
+      "inputs": "w_valid/fault、w_reg_write/z_write/cv_write、mode_active、rst",
+      "outputs": "wb_ok、rf_we、z_we、cv_we；STR有效WB不写入"
+    },
+    {
+      "block": "操作数前递",
+      "implementation": "operand_forward u_forward",
+      "inputs": "x实际源/use与保存值；M/W目标、RW、valid/fault、M就绪状态",
+      "outputs": "rd_fwd/rs_fwd各16、rd_fwd_sel/rs_fwd_sel各2、blocked_rd/rs；M匹配load阻断旧W"
+    },
+    {
+      "block": "WB至ID旁路",
+      "implementation": "regfile4x16 u_rf 内部组合逻辑",
+      "inputs": "rf_we、w_rd2、wb_data16与d_rd/d_rs",
+      "outputs": "d_rd_value/d_rs_value各16；同地址返回当前WB值"
+    },
+    {
+      "block": "Z来源选择",
+      "implementation": "core内部组合逻辑",
+      "inputs": "有效无故障M/W的ZW与cmp_z，已保存Z",
+      "outputs": "z_effective、z_fwd_sel；M > W > Z，候选0同样覆盖"
+    },
+    {
+      "block": "跨级冒险与事件仲裁",
+      "implementation": "core内部组合逻辑",
+      "inputs": "D真实源、X的MR/rd、MEM/EX事件、rst、mode、各级valid_next",
+      "outputs": "load_use、frontend_kill、d_kill、x_kill、各级valid_next；年龄优先级见3.5节"
+    },
+    {
+      "block": "四个流水边界",
+      "implementation": "core内寄存器＋外部同步RAM输出",
+      "inputs": "本条指令的数据、pc、索引、valid/fault与剩余控制",
+      "outputs": "D/X/M/W载荷见表15；IM dout是D指令、DM dout是W加载数据，不另加IR/MDR"
+    }
+  ]
+}

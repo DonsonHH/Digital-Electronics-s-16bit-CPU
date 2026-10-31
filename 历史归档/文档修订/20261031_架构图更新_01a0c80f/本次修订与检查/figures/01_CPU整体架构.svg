@@ -1,0 +1,307 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1500" viewBox="0 0 2400 1500" role="img">
+<title>CPU整体控制与数据通路架构</title><desc>AC1现有硬连线Pipeline CU与五级数据通路，逻辑功能分区不等于新增RTL模块。</desc>
+<defs><marker id="a_data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#24384B"/></marker><marker id="a_ctrl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2B68A6"/></marker><marker id="a_fwd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087C7C"/></marker><marker id="a_kill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#BD4E26"/></marker><marker id="a_muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#536477"/></marker><marker id="a_line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#BCC8D2"/></marker><marker id="a_pale" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F1F5F8"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;fill:#162B3E;font-size:36px} .title{font-size:48px;font-weight:700}.head{font-size:40px;font-weight:700}.label{font-size:36px}.small{font-size:36px}.mono{font-family:Consolas,"Microsoft YaHei",monospace;font-size:36px}</style>
+<rect width="2400" height="1500" fill="white"/>
+<text x="60" y="58" class="title" text-anchor="start">
+<tspan x="60" dy="0">CPU整体控制与数据通路架构</tspan>
+</text>
+<path id="legend_data_clearance" d="M 60,93 L 135,93" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_data" d="M 60,93 L 135,93" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<text x="155" y="105" class="label" text-anchor="start">
+<tspan x="155" dy="0">数据 / 载荷</tspan>
+</text>
+<path id="legend_ctrl_clearance" d="M 485,93 L 560,93" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_ctrl" d="M 485,93 L 560,93" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<text x="580" y="105" class="label" text-anchor="start">
+<tspan x="580" dy="0">控制 / 资格</tspan>
+</text>
+<path id="legend_fwd_clearance" d="M 935,93 L 1010,93" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_fwd" d="M 935,93 L 1010,93" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<text x="1030" y="105" class="label" text-anchor="start">
+<tspan x="1030" dy="0">前递 / 反馈</tspan>
+</text>
+<path id="legend_kill_clearance" d="M 1395,93 L 1470,93" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_kill" d="M 1395,93 L 1470,93" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<text x="1490" y="105" class="label" text-anchor="start">
+<tspan x="1490" dy="0">取消 / 停止</tspan>
+</text>
+<text x="1875" y="78" class="label" text-anchor="start">
+<tspan x="1875" dy="0">●连接；无点交叉不连</tspan>
+<tspan x="1875" dy="46">同字母为同网连接</tspan>
+</text>
+<rect id="core_boundary" x="40" y="135" width="2320" height="1075" rx="18" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="65" y="180" class="head" text-anchor="start">
+<tspan x="65" dy="0">datapath_core  ·  同一clk  ·  rst同步高有效</tspan>
+</text>
+<rect id="pipeline_cu" x="65" y="200" width="2270" height="605" rx="12" fill="#F6F9FC" stroke="#2B68A6" stroke-width="3"/>
+<text x="85" y="248" class="head" text-anchor="start">
+<tspan x="85" dy="0">Pipeline CU  硬连线控制区域</tspan>
+</text>
+<rect id="mode_fsm" x="90" y="270" width="910" height="175" rx="12" fill="white" stroke="#2B68A6" stroke-width="3"/>
+<text x="108" y="316" class="head" text-anchor="start">
+<tspan x="108" dy="0">全局运行模式FSM</tspan>
+</text>
+<text x="108" y="358" class="label" text-anchor="start">
+<tspan x="108" dy="0">RUN / DRAIN_HALT / DRAIN_FAULT</tspan>
+<tspan x="108" dy="46">HALTED / FAULTED  ·  标记到WB且排空才停止</tspan>
+</text>
+<rect id="cross_stage_arbiter" x="1100" y="270" width="1205" height="175" rx="12" fill="white" stroke="#BD4E26" stroke-width="3"/>
+<text x="1118" y="316" class="head" text-anchor="start">
+<tspan x="1118" dy="0">跨级冒险与事件仲裁</tspan>
+</text>
+<text x="1118" y="358" class="label" text-anchor="start">
+<tspan x="1118" dy="0">load_use；较老MEM故障优先；EX停止/分支</tspan>
+<tspan x="1118" dy="46">UPD：各级valid_next与kill；Reset最高优先</tspan>
+</text>
+<path id="events_to_mode_clearance" d="M 1100,315 L 1000,315" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="events_to_mode" d="M 1100,315 L 1000,315" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<text x="1038" y="292" class="label" text-anchor="middle" style="fill:#BD4E26">
+<tspan x="1038" dy="0">事件</tspan>
+</text>
+<path id="mode_bus_clearance" d="M 320,445 L 320,472 L 2240,472" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_bus" d="M 320,445 L 320,472 L 2240,472" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<text x="110" y="466" class="label" text-anchor="start" style="fill:#2B68A6">
+<tspan x="110" dy="0">mode</tspan>
+</text>
+<path id="arbitration_bus_clearance" d="M 1710,445 L 1710,502 L 150,502" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="arbitration_bus" d="M 1710,445 L 1710,502 L 150,502" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round"/>
+<path id="arbitration_bus_w_clearance" d="M 1710,502 L 2240,502" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="arbitration_bus_w" d="M 1710,502 L 2240,502" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="1710" cy="502" r="7" fill="#BD4E26"/>
+<rect id="stage_control_0" x="90" y="535" width="410" height="175" rx="12" fill="white" stroke="#2B68A6" stroke-width="3"/>
+<text x="108" y="581" class="head" text-anchor="start">
+<tspan x="108" dy="0">IFCU 取指</tspan>
+</text>
+<text x="108" y="623" class="label" text-anchor="start">
+<tspan x="108" dy="0">fetch_accept</tspan>
+<tspan x="108" dy="46">pc_hold / im_en</tspan>
+</text>
+<path id="mode_stage_0_clearance" d="M 425,472 L 425,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_stage_0" d="M 425,472 L 425,535" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<circle cx="425" cy="472" r="7" fill="#2B68A6"/>
+<path id="arb_stage_0_clearance" d="M 125,502 L 125,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="arb_stage_0" d="M 125,502 L 125,535" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<circle cx="125" cy="502" r="7" fill="#BD4E26"/>
+<path id="control_to_data_0_clearance" d="M 300,710 L 300,815" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="control_to_data_0" d="M 300,710 L 300,815" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="stage_control_1" x="535" y="535" width="410" height="175" rx="12" fill="white" stroke="#2B68A6" stroke-width="3"/>
+<text x="553" y="581" class="head" text-anchor="start">
+<tspan x="553" dy="0">IDCU 译码</tspan>
+</text>
+<text x="553" y="623" class="label" text-anchor="start">
+<tspan x="553" dy="0">u_decode: d_inst</tspan>
+<tspan x="553" dy="46">真实源 + 控制意图</tspan>
+</text>
+<path id="mode_stage_1_clearance" d="M 870,472 L 870,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_stage_1" d="M 870,472 L 870,535" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<circle cx="870" cy="472" r="7" fill="#2B68A6"/>
+<path id="arb_stage_1_clearance" d="M 570,502 L 570,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="arb_stage_1" d="M 570,502 L 570,535" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<circle cx="570" cy="502" r="7" fill="#BD4E26"/>
+<path id="control_to_data_1_clearance" d="M 745,710 L 745,815" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="control_to_data_1" d="M 745,710 L 745,815" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="stage_control_2" x="980" y="535" width="410" height="175" rx="12" fill="white" stroke="#2B68A6" stroke-width="3"/>
+<text x="998" y="581" class="head" text-anchor="start">
+<tspan x="998" dy="0">EXCU 执行</tspan>
+</text>
+<text x="998" y="623" class="label" text-anchor="start">
+<tspan x="998" dy="0">x_ctrl / 运算选择</tspan>
+<tspan x="998" dy="46">redirect / halt请求</tspan>
+</text>
+<path id="mode_stage_2_clearance" d="M 1315,472 L 1315,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_stage_2" d="M 1315,472 L 1315,535" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<circle cx="1315" cy="472" r="7" fill="#2B68A6"/>
+<path id="arb_stage_2_clearance" d="M 1015,502 L 1015,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="arb_stage_2" d="M 1015,502 L 1015,535" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<circle cx="1015" cy="502" r="7" fill="#BD4E26"/>
+<path id="control_to_data_2_clearance" d="M 1190,710 L 1190,815" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="control_to_data_2" d="M 1190,710 L 1190,815" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="stage_control_3" x="1425" y="535" width="410" height="175" rx="12" fill="white" stroke="#2B68A6" stroke-width="3"/>
+<text x="1443" y="581" class="head" text-anchor="start">
+<tspan x="1443" dy="0">MEMCU 访问</tspan>
+</text>
+<text x="1443" y="623" class="label" text-anchor="start">
+<tspan x="1443" dy="0">全16位EA检查</tspan>
+<tspan x="1443" dy="46">dm_en / dm_we</tspan>
+</text>
+<path id="mode_stage_3_clearance" d="M 1760,472 L 1760,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_stage_3" d="M 1760,472 L 1760,535" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<circle cx="1760" cy="472" r="7" fill="#2B68A6"/>
+<path id="arb_stage_3_clearance" d="M 1460,502 L 1460,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="arb_stage_3" d="M 1460,502 L 1460,535" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<circle cx="1460" cy="502" r="7" fill="#BD4E26"/>
+<path id="control_to_data_3_clearance" d="M 1635,710 L 1635,815" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="control_to_data_3" d="M 1635,710 L 1635,815" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="stage_control_4" x="1870" y="535" width="410" height="175" rx="12" fill="white" stroke="#2B68A6" stroke-width="3"/>
+<text x="1888" y="581" class="head" text-anchor="start">
+<tspan x="1888" dy="0">WBCU 写入</tspan>
+</text>
+<text x="1888" y="623" class="label" text-anchor="start">
+<tspan x="1888" dy="0">有效W槽资格</tspan>
+<tspan x="1888" dy="46">rf_we / z_we / cv_we</tspan>
+</text>
+<path id="mode_stage_4_clearance" d="M 2205,472 L 2205,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_stage_4" d="M 2205,472 L 2205,535" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<circle cx="2205" cy="472" r="7" fill="#2B68A6"/>
+<path id="arb_stage_4_clearance" d="M 1905,502 L 1905,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="arb_stage_4" d="M 1905,502 L 1905,535" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<circle cx="1905" cy="502" r="7" fill="#BD4E26"/>
+<path id="control_to_data_4_clearance" d="M 2080,710 L 2080,815" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="control_to_data_4" d="M 2080,710 L 2080,815" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="ctrl_band_0" x="535" y="758" width="410" height="43" rx="0" fill="#EAF2FA" stroke="#2B68A6" stroke-width="3"/>
+<text x="735" y="791" class="label" text-anchor="middle" style="fill:#2B68A6">
+<tspan x="735" dy="0">d_ctrl</tspan>
+</text>
+<path id="carried_ctrl_0_clearance" d="M 945,780 L 980,780" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="carried_ctrl_0" d="M 945,780 L 980,780" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="ctrl_band_1" x="980" y="758" width="410" height="43" rx="0" fill="#EAF2FA" stroke="#2B68A6" stroke-width="3"/>
+<text x="1180" y="791" class="label" text-anchor="middle" style="fill:#2B68A6">
+<tspan x="1180" dy="0">CTRL_X</tspan>
+</text>
+<path id="carried_ctrl_1_clearance" d="M 1390,780 L 1425,780" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="carried_ctrl_1" d="M 1390,780 L 1425,780" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="ctrl_band_2" x="1425" y="758" width="410" height="43" rx="0" fill="#EAF2FA" stroke="#2B68A6" stroke-width="3"/>
+<text x="1625" y="791" class="label" text-anchor="middle" style="fill:#2B68A6">
+<tspan x="1625" dy="0">CTRL_M</tspan>
+</text>
+<path id="carried_ctrl_2_clearance" d="M 1835,780 L 1870,780" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="carried_ctrl_2" d="M 1835,780 L 1870,780" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="ctrl_band_3" x="1870" y="758" width="410" height="43" rx="0" fill="#EAF2FA" stroke="#2B68A6" stroke-width="3"/>
+<text x="2070" y="791" class="label" text-anchor="middle" style="fill:#2B68A6">
+<tspan x="2070" dy="0">CTRL_W</tspan>
+</text>
+<rect id="datapath_stage_0" x="90" y="815" width="410" height="185" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="108" y="861" class="head" text-anchor="start">
+<tspan x="108" dy="0">IF  唯一PC</tspan>
+</text>
+<text x="108" y="903" class="label" text-anchor="start">
+<tspan x="108" dy="0">u_pc / PC_fetch16</tspan>
+<tspan x="108" dy="46">+1 / hold / redirect</tspan>
+</text>
+<path id="stage_data_0_clearance" d="M 500,895 L 535,895" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="stage_data_0" d="M 500,895 L 535,895" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M521,807 V1005" stroke="#BCC8D2" stroke-width="7"/>
+<text x="521" y="1053" class="label" text-anchor="middle">
+<tspan x="521" dy="0">IF/ID</tspan>
+</text>
+<path id="feedback_0_clearance" d="M 425,1000 L 425,1100" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="feedback_0" d="M 425,1000 L 425,1100" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="425" cy="1100" r="7" fill="#087C7C"/>
+<rect id="datapath_stage_1" x="535" y="815" width="410" height="185" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="553" y="861" class="head" text-anchor="start">
+<tspan x="553" dy="0">ID  读源与扩展</tspan>
+</text>
+<text x="553" y="903" class="label" text-anchor="start">
+<tspan x="553" dy="0">u_rf: 4×16, 2R1W</tspan>
+<tspan x="553" dy="46">u_ext: imm8 → 16</tspan>
+</text>
+<path id="stage_data_1_clearance" d="M 945,895 L 980,895" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="stage_data_1" d="M 945,895 L 980,895" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M966,807 V1005" stroke="#BCC8D2" stroke-width="7"/>
+<text x="966" y="1053" class="label" text-anchor="middle">
+<tspan x="966" dy="0">ID/EX</tspan>
+</text>
+<path id="feedback_1_clearance" d="M 870,1000 L 870,1100" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="feedback_1" d="M 870,1000 L 870,1100" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="870" cy="1100" r="7" fill="#087C7C"/>
+<rect id="datapath_stage_2" x="980" y="815" width="410" height="185" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="998" y="861" class="head" text-anchor="start">
+<tspan x="998" dy="0">EX  计算与比较</tspan>
+</text>
+<text x="998" y="903" class="label" text-anchor="start">
+<tspan x="998" dy="0">u_forward / u_alu</tspan>
+<tspan x="998" dy="46">u_target / 最新Z</tspan>
+</text>
+<path id="stage_data_2_clearance" d="M 1390,895 L 1425,895" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="stage_data_2" d="M 1390,895 L 1425,895" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M1411,807 V1005" stroke="#BCC8D2" stroke-width="7"/>
+<text x="1411" y="1053" class="label" text-anchor="middle">
+<tspan x="1411" dy="0">EX/MEM</tspan>
+</text>
+<path id="feedback_2_clearance" d="M 1315,1000 L 1315,1100" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="feedback_2" d="M 1315,1000 L 1315,1100" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="1315" cy="1100" r="7" fill="#087C7C"/>
+<rect id="datapath_stage_3" x="1425" y="815" width="410" height="185" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1443" y="861" class="head" text-anchor="start">
+<tspan x="1443" dy="0">MEM  存储访问</tspan>
+</text>
+<text x="1443" y="903" class="label" text-anchor="start">
+<tspan x="1443" dy="0">EA16 / store_data16</tspan>
+<tspan x="1443" dy="46">外部同步DM接口</tspan>
+</text>
+<path id="stage_data_3_clearance" d="M 1835,895 L 1870,895" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="stage_data_3" d="M 1835,895 L 1870,895" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M1856,807 V1005" stroke="#BCC8D2" stroke-width="7"/>
+<text x="1856" y="1053" class="label" text-anchor="middle">
+<tspan x="1856" dy="0">MEM/WB</tspan>
+</text>
+<path id="feedback_3_clearance" d="M 1760,1000 L 1760,1100" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="feedback_3" d="M 1760,1000 L 1760,1100" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="1760" cy="1100" r="7" fill="#087C7C"/>
+<rect id="datapath_stage_4" x="1870" y="815" width="410" height="185" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1888" y="861" class="head" text-anchor="start">
+<tspan x="1888" dy="0">WB  架构写入</tspan>
+</text>
+<text x="1888" y="903" class="label" text-anchor="start">
+<tspan x="1888" dy="0">wb_data16选择</tspan>
+<tspan x="1888" dy="46">RF与Z/C/V写入</tspan>
+</text>
+<path id="feedback_4_clearance" d="M 2205,1000 L 2205,1100" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="feedback_4" d="M 2205,1000 L 2205,1100" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="2205" cy="1100" r="7" fill="#087C7C"/>
+<path id="feedback_bus_clearance" d="M 165,1100 L 2320,1100 L 2320,510 L 2305,510 L 2305,445" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="feedback_bus" d="M 165,1100 L 2320,1100 L 2320,510 L 2305,510 L 2305,445" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<circle cx="425" cy="1100" r="7" fill="#087C7C"/>
+<circle cx="870" cy="1100" r="7" fill="#087C7C"/>
+<circle cx="1315" cy="1100" r="7" fill="#087C7C"/>
+<circle cx="1760" cy="1100" r="7" fill="#087C7C"/>
+<circle cx="2205" cy="1100" r="7" fill="#087C7C"/>
+<text x="90" y="1150" class="label" text-anchor="start">
+<tspan x="90" dy="0">反馈FB：真实源/目的与use、valid/fault、eq/Z候选、地址范围、停止标记/请求及valid_next → 事件与排空判断</tspan>
+</text>
+<text x="90" y="1193" class="label" text-anchor="start" style="fill:#2B68A6">
+<tspan x="90" dy="0">上方控制带与下方数据线共用四个流水边界：数据、pc、valid/fault与剩余控制属于同一条指令。</tspan>
+</text>
+<rect id="external_im" x="90" y="1250" width="680" height="175" rx="12" fill="white" stroke="#24384B" stroke-width="3" stroke-dasharray="12 8"/>
+<text x="108" y="1296" class="head" text-anchor="start">
+<tspan x="108" dy="0">外部同步IM · 256×16</tspan>
+</text>
+<text x="108" y="1338" class="label" text-anchor="start">
+<tspan x="108" dy="0">im_addr16 / im_en → IM</tspan>
+<tspan x="108" dy="46">IM → im_dout16 (= d_inst)</tspan>
+</text>
+<rect id="external_dm" x="1200" y="1250" width="760" height="175" rx="12" fill="white" stroke="#24384B" stroke-width="3" stroke-dasharray="12 8"/>
+<text x="1218" y="1296" class="head" text-anchor="start">
+<tspan x="1218" dy="0">外部同步DM · 256×16</tspan>
+</text>
+<text x="1218" y="1338" class="label" text-anchor="start">
+<tspan x="1218" dy="0">dm_addr16 / dm_din16 / dm_en / dm_we</tspan>
+<tspan x="1218" dy="46">DM → dm_dout16 (= w_load_data)</tspan>
+</text>
+<path id="im_ports_request_clearance" d="M 140,1000 L 140,1225 L 180,1225 L 180,1250" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="im_ports_request" d="M 140,1000 L 140,1225 L 180,1225 L 180,1250" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="im_ports_return_clearance" d="M 680,1250 L 680,1217 L 720,1217 L 720,1000" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="im_ports_return" d="M 680,1250 L 680,1217 L 720,1217 L 720,1000" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="dm_ports_request_clearance" d="M 1600,1000 L 1600,1250" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="dm_ports_request" d="M 1600,1000 L 1600,1250" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="dm_ports_return_clearance" d="M 1960,1385 L 2295,1385 L 2295,1000" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="dm_ports_return" d="M 1960,1385 L 2295,1385 L 2295,1000" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<circle cx="1040" cy="405" r="27" fill="white" stroke="#BD4E26" stroke-width="3"/>
+<text x="1040" y="417" class="label" text-anchor="middle" style="fill:#BD4E26">
+<tspan x="1040" dy="0">S</tspan>
+</text>
+<path id="mode_status_clearance" d="M 1000,405 L 1013,405" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_status" d="M 1000,405 L 1013,405" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="2040" cy="1263" r="27" fill="white" stroke="#BD4E26" stroke-width="3"/>
+<text x="2040" y="1275" class="label" text-anchor="middle" style="fill:#BD4E26">
+<tspan x="2040" dy="0">S</tspan>
+</text>
+<text x="2000" y="1330" class="label" text-anchor="start" style="fill:#BD4E26">
+<tspan x="2000" dy="0">halted / fault</tspan>
+<tspan x="2000" dy="46">全局模式输出</tspan>
+</text>
+<text x="90" y="1475" class="label" text-anchor="start" style="fill:#536477">
+<tspan x="90" dy="0">逻辑分区≠新增模块；CTRL/FB/UPD是信号组，S为同网标记。同步IM/DM输出承担数据边界，不加IR/MDR。</tspan>
+</text>
+</svg>

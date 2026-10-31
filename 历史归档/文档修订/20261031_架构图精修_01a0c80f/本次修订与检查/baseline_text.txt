@@ -1,0 +1,911 @@
+P0 [Title] 16位流水线CPU核心设计文档
+P1 [Normal] 实现基线 v1.6-timing-AC1    ISA v1.5    文档修订 2026年10月31日
+P2 [Normal] 本文规定16位、顺序单发射五级流水线CPU的指令行为、数据通路、硬连线控制和验证方法。实现基线为v1.6-timing-AC1，ISA与固定单周期同步IM/DM契约保持不变。本次补全整体控制架构与五级数据通路主图，保留已核对的CU逻辑模型、模式FSM及控制验证记录。
+P3 [Normal] 正文先规定程序可观察的指令行为，再据此定义模块连接和控制字，随后解释指令的逐拍执行，最后将这些规则转为源码连接与验证判据。每条指令的操作数来源、计算路径、写入时刻和预期结果必须形成一致的逻辑链。
+P4 [Normal] AC1以显式17位加减表达式推断FPGA进位链；减法C仍表示无借位，ADD/SUB更新C/V，CMP更新Z。控制单元及五级并行组织不变。两层CLA设计与单元测试保留为冻结v1.6或独立模块事实，不再描述AC1的ALU实际运算路径。
+P5 [Normal] 本版ISA以2026年10月11日确认的七组指令编码表为准，AND/OR使用Opcode 2/3，LDR/STR使用8/9。五级组织、模块接口、标志语义和地址规则保持不变；所有本文机器字及译码表统一采用本版编码。
+P6 [Normal] 当前源码位于CPU核心设计，验证协议为1.6-vtools-r1，执行包装采用job1生命周期修复。核心既有回归和Pre5同源复跑均已有有限功能通过记录；核心OOC估算为287 LUT、260 FF、WNS=+2.620ns、TNS=0。本版控制说明引用同一实现，文档修订不增加仿真、物理时序或板级验收结论。
+P7 [Normal] 文中RF表示寄存器组，IM和DM分别表示指令存储器和数据存储器，CU表示控制单元，TB表示测试平台。机器字、地址和寄存器内容默认用十六进制；汇编立即数字面量无前缀为十进制，带0x为十六进制。控制选择码按所在表解释；pc标签属于本条指令，PC_fetch属于取指前端。Z/C/V是架构状态，eq/carry/overflow是本拍组合候选值。
+P8 [FrontHeading] 目录
+P9 [toc 1] 1 指令集	4
+P10 [toc 2] 1.1 架构规格	4
+P11 [toc 2] 1.2 指令长度与字段划分	4
+P12 [toc 2] 1.3 指令编码与完整语义	5
+P13 [toc 2] 1.4 立即数与地址规则	7
+P14 [toc 2] 1.5 编码示例	7
+P15 [toc 1] 2 数据通路结构	8
+P16 [toc 2] 2.1 总体连接	9
+P17 [toc 3] 2.1.1 整体控制与数据通路架构	9
+P18 [toc 3] 2.1.2 五级数据通路详细连接	10
+P19 [toc 2] 2.2 外部接口	11
+P20 [toc 2] 2.3 同步存储边沿契约	12
+P21 [toc 2] 2.4 主要模块与接口	12
+P22 [toc 3] 2.4.1 寄存器组与立即数扩展	13
+P23 [toc 3] 2.4.2 多路选择器	13
+P24 [toc 3] 2.4.3 ALU与FPGA进位链加减核心	14
+P25 [toc 3] 2.4.4 进位溢出与标志寄存器	15
+P26 [toc 2] 2.5 译码控制表	16
+P27 [toc 2] 2.6 控制单元组成与接口	17
+P28 [toc 3] 2.6.1 控制逻辑模型	17
+P29 [toc 3] 2.6.2 内部功能与信号归属	18
+P30 [toc 3] 2.6.3 本拍控制与时钟边沿	19
+P31 [toc 2] 2.7 流水寄存器字段	19
+P32 [toc 2] 2.8 统一五级执行契约	20
+P33 [toc 2] 2.9 Buffer与冒险处理体系	21
+P34 [toc 1] 3 典型指令执行流程	22
+P35 [toc 2] 3.1 周期编号与PC更新	22
+P36 [toc 2] 3.2 典型指令的数据流与逐拍操作	22
+P37 [toc 3] 3.2.1 ADD立即数	23
+P38 [toc 3] 3.2.2 LDR与STR	23
+P39 [toc 3] 3.2.3 CMP与JZ	24
+P40 [toc 2] 3.3 数据相关与load use停顿	25
+P41 [toc 2] 3.4 冒险分类与解决矩阵	26
+P42 [toc 2] 3.5 写入资格与事件优先级	27
+P43 [toc 2] 3.6 HALT 故障与复位	28
+P44 [toc 2] 3.7 CU状态图与状态转移	29
+P45 [toc 3] 3.7.1 运行模式与事件定义	29
+P46 [toc 3] 3.7.2 状态转移与当前输出	29
+P47 [toc 3] 3.7.3 排空完成与复位返回	30
+P48 [toc 1] 4 源代码与仿真验证	31
+P49 [toc 2] 4.1 源码边界与连接约定	31
+P50 [toc 2] 4.2 目标数据通路的连接片段	33
+P51 [toc 2] 4.3 自检查测试方法	34
+P52 [toc 2] 4.4 既有实现与验证证据	35
+P53 [toc 3] 4.4.1 核心既有验证记录	35
+P54 [toc 3] 4.4.2 Pre5控制验证记录	36
+P55 [toc 2] 4.5 统一五级与冒险验证结果	37
+P56 [toc 2] 4.6 覆盖范围与集成验收	38
+P57 [toc 3] 4.6.1 单元输入与状态覆盖	38
+P58 [toc 3] 4.6.2 流水相关与停止测试	39
+P59 [toc 3] 4.6.3 全部指令的执行覆盖	41
+P60 [toc 2] 4.7 CPU功能验证程序	43
+P61 [toc 2] 4.8 CPU性能验证	44
+P62 [toc 2] 4.9 设计与集成顺序	44
+P63 [toc 2] 4.10 实现验收条件	44
+P64 [toc 2] 4.11 参考资料	46
+P65 [Normal] 
+P66 [Heading 1] 指令集
+BOOKMARK [('_Toc244357991', '0')]
+P67 [Normal] 本章定义寄存器、指令字段、运算语义和地址规则。第二章的译码及数据通路必须实现这些行为，第三章规定行为何时生效，第四章据此给出可检查的预期结果。
+P68 [Heading 2] 架构规格
+BOOKMARK [('_Toc244357992', '1')]
+P69 [Caption] 表1 架构规格
+BOOKMARK [('tbl_arch', '2')]
+P70 [Normal] 
+P71 [Normal] 程序可观察的行为由寄存器、标志、控制流和DM内容决定。PC_fetch是前端将要取指的地址，不等于最后执行或完成指令的地址；每条流水指令携带自己的pc标签，分支与错误定位使用该标签。
+P72 [Normal] DM不随核心复位逐字清空，初值由初始化镜像或程序确定。核心没有缓存、动态调度、ROB、中断返回或软件可恢复异常；停止保护仍须确保错误路径不写入状态。
+P73 [Heading 2] 指令长度与字段划分
+BOOKMARK [('_Toc244357993', '3')]
+P74 [Caption] 表2 指令字段
+BOOKMARK [('tbl_fields', '4')]
+P75 [Normal] 
+P76 [Code] word = (Opcode << 12) | (Rd << 10) | (Rs << 8) | imm8
+P77 [Normal] 寄存器形式的imm8、立即数形式中未使用的Rs，以及分支/HALT未使用的寄存器字段，在程序镜像中置0；硬件忽略未使用字段。编码工具须检查字段范围，负位移先编码为8位补码。bubble用valid=0表示，不能用MOV R0,#0代替，因为该指令会改写R0。
+P78 [Normal] 编码表中的x须按字段解释：imm8中的x表示由程序填写的有效数据位；未使用Rs或分支/HALT寄存器字段中的x表示该字段不影响执行。横线也表示未使用位。它们都不是要求写入HDL未知值X；程序生成器统一把未使用字段置0，硬件则接受这些字段的其他确定二进制取值。
+P79 [Caption] 表3 各类指令的字段使用规则
+BOOKMARK [('tbl_forms', '5')]
+P80 [Normal] 
+P81 [Normal] 保留编码B/F无数据操作数，产生非法指令标记。该4+2+2+8格式采用当前小组ISA；课程资料中的5位Opcode扩展示例是另一种格式，不与本表拼接。
+P82 [Heading 2] 指令编码与完整语义
+BOOKMARK [('_Toc244357994', '6')]
+P83 [Normal] 下面d、s分别是Rd和Rs索引；u8范围为0至255，s8范围为−128至127；pc指本条指令的pc标签。标志列中的“保持”表示不写对应架构状态。
+P84 [Caption] 表4 指令编码与架构语义
+BOOKMARK [('tbl_isa', '7')]
+P85 [Normal] 
+P86 [Normal] ADD/SUB不更新Z，因此JZ始终使用最近一次有效CMP的结果。SUB立即数为无符号8位常数，与ADD立即数一致。ISA目前没有ADDC、SUBB、JC或JO；保存的C/V可供测试或调试观察，尚无软件读取指令。
+P87 [Normal] 七组分类按控制副作用组织：Group 1为0至3，写RF但保持Z/C/V；Group 2为4至7，写RF与C/V但保持Z；Group 3为8/9，仅LDR写RF，STR写DM，二者均保持标志；Group 4为A，仅写Z；Group 5为C/D，控制PC而不写RF/DM/标志；Group 6为E，发出停止请求；Group 7为B/F，产生非法指令标记而不产生数据写入。分组用于解释控制，不替代逐条指令译码。各组写入信号是意图，仍须按valid、故障、取消与复位资格在规定流水级生效。
+P88 [Caption] 表5 当前ISA与Pre4已验证映射的对应关系
+BOOKMARK [('tbl_isa_migration', '8')]
+P89 [Normal] 
+P90 [Normal] 其余12个Opcode的含义不变，包括B/F保留编码。新旧机器字不能混用：v1.4的3300是STR，本版则是OR；v1.4的2B00是LDR，本版则是AND。迁移时重编译指令镜像，并检查译码、参考模型和逐拍观测属于同一版本。
+P91 [Normal] MOV及普通ALU指令在WB写RF；LDR在MEM读DM、在WB写RF；成功STR在MEM写DM一次，随后有效标签经过WB但不再写入；CMP在WB写Z。故障STR不写DM，仍保留有效故障标记到WB。JUMP/JZ在EX重定向；HALT在EX确认停止请求，在WB消费停止标记后完成停止。
+P92 [Heading 2] 立即数与地址规则
+BOOKMARK [('_Toc244357995', '9')]
+P93 [Code] ZExt(imm8) = {8'h00, imm8}
+P94 [Code] SExt(imm8) = {{8{imm8[7]}}, imm8}
+P95 [Normal] MOV/ADD/SUB立即数及JUMP使用零扩展；LDR/STR/JZ使用符号扩展。以imm8=FF为例，零扩展是00FF，符号扩展是FFFF。JZ偏移以本条pc+1为基准，不以已经超前的PC_fetch计算。
+P96 [Normal] 有效地址先截为16位，再检查物理容量。256字存储的合法地址为0000至00FF；EA=0100和FFFF均越界，访问被阻断。不能把0100只接低8位而访问0000。0020+FFFF得到001F，表示基址0020加−1；该运算的carry不代表地址出错。
+P97 [Normal] FFFF+1回绕0000符合本规格的模地址语义。若改为禁止16位回绕，需要另定义扩宽地址规则与对应测试。指令取址越界携带fetch_fault，数据越界在物理DM使能前检测；两者都按第三部分的年龄规则终止。
+P98 [Heading 2] 编码示例
+BOOKMARK [('_Toc244357996', '10')]
+P99 [Caption] 表6 机器字编码示例
+BOOKMARK [('tbl_encoding', '11')]
+P100 [Normal] 
+P101 [Normal] 机器字按字段计算并独立校核。确认的编码表右侧有八项示例与字段不符：MOV/AND/OR/ADD/SUB的R0,R1形式以及CMP R0,R1都须令Rs=01，分别为0100/2100/3100/4100/6100/A100；LDR R0,[R1+2]为8102，STR R0,[R1+2]为9102。这些修正不改变其Opcode或汇编语义。原表的8802/9802实际选择Rd=R2、Rs=R0，不能解释成R0与R1。
+P102 [Normal] JZ −2的DFFE不是功能错误：其未使用Rd/Rs均为11，按本规格仍忽略这些字段，offset=FE。程序生成器采用未使用字段为0的规范形式D0FE。最终PPT第5页STR R1,[R2+4]的3604属于旧映射，本版应为9604。保存的原PPT、源码和波形保留历史身份，后续程序镜像仅使用本版统一编码。
+P103 [Heading 1] 数据通路结构
+BOOKMARK [('_Toc244357997', '12')]
+P104 [Normal] 本章将第一章的指令语义映射到模块、数据路径和随行控制。先确定总体连接与同步存储边沿，再定义模块接口、译码控制和流水载荷，作为HDL连接的统一依据。
+P105 [Heading 2] 总体连接
+BOOKMARK [('_Toc244357998', '13')]
+P106 [Heading 3] 整体控制与数据通路架构
+BOOKMARK [('_Toc244357999', '14')]
+P107 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="02D432BB" w14:textId="77777777" w:rsidR="0044405C" w:rsidRDefault="00FE2E40"><w:pPr><w:keepNext/><w:spacing w:after="60" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:noProof/><w:sz w:val="20"/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="5FAD8AA2" wp14:editId="1FAC4D2F"><wp:extent cx="8503920" cy="5314950"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="10" name="Picture 10"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="01_CPU整体架构.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId9"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="8503920" cy="5314950"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P108 [Caption] 图1 整体控制与数据通路架构。上层负责运行模式、本条指令动作及跨级协调，下层为对应数据通路。IFCU至WBCU是现有控制职责分区，实体与信号对应见表14；CTRL为同一流水边界内的随行控制。
+BOOKMARK [('fig_cpu_overall', '15')]
+P109 [Heading 3] 五级数据通路详细连接
+BOOKMARK [('_Toc244358000', '16')]
+P110 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="7D98697A" w14:textId="77777777" w:rsidR="00B40180" w:rsidRDefault="001535D9"><w:pPr><w:keepNext/><w:spacing w:after="60" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:noProof/><w:sz w:val="20"/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="3019BFDE" wp14:editId="66E27F8A"><wp:extent cx="8503920" cy="5314950"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="11" name="Picture 11"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="02_五级Datapath.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId10"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="8503920" cy="5314950"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P111 [Caption] 图2 五级Datapath详细连接。M/W/Z/R为同网连接标记；结果16位与eq/C/V三位合计19位。四个虚线边界不新增寄存器；I为扩展立即数，完整载荷见表15；无点交叉不连接。
+BOOKMARK [('fig_1', '17')]
+P112 [Normal] 
+P113 [Normal] 图1用于辨认控制职责，图2用于追踪数据。IF把PC_fetch送往IM；ID译码、读RF并扩展立即数；EX先分别转发真实Rd/Rs，再经MUX送入ALU，并选择最新Z及形成分支目标；MEM按完整EA访问DM；WB选择结果写RF，并按资格写Z/C/V。图中同字母标记连接同一信号组：M为非load的m_exec_value，W为wb_data（RF旁路另带w_rd/rf_we），Z为M/W比较候选及保存Z，R为qualified_redirect与branch_target。
+P114 [Normal] ALU结果与有效地址共用exec_value，因为一条指令不会同时需要二者；STR独立保存已前递Rd为store_data，Rs用于基址。IM寄存输出就是D级指令数据，DM寄存输出就是W级加载数据；不再串接IR/MDR。load_use只保持PC/ID并向EX插入bubble，后端继续。分支在EX重定向但自身继续到WB；STR在MEM仅写一次，WB有效而不写入。HALT/fault标记排空至WB，Reset取消在途载荷并禁止当拍写入。
+P115 [Heading 2] 外部接口
+BOOKMARK [('_Toc244358001', '18')]
+P116 [Normal] 方向以CPU核心为参考。clk/rst是控制输入；各存储接口在同一时钟域工作，不含ready或可变等待协议。
+P117 [Caption] 表7 CPU核心外部接口
+BOOKMARK [('tbl_ports', '19')]
+P118 [Normal] 
+P119 [Normal] 接口合计87个逻辑信号位，不等于FPGA外部引脚数。实际片上IM/DM由顶层连接，核心不需要无协议转换职责的Adapter。
+P120 [Normal] 正常取指接受条件为未复位、处于RUN、没有load use保持且没有本拍更高优先级的取消事件。im_en还须满足im_addr在物理范围内。取址越界时禁止实际IM访问，同时把该pc与fetch_fault=1送入有效IF/ID槽；译码器仍可组合译码所保持的IM输出，但故障资格阻止其作为有效指令执行。该错误可被更老分支取消，否则传到EX确认停止。
+P121 [Heading 2] 同步存储边沿契约
+BOOKMARK [('_Toc244358002', '20')]
+P122 [Caption] 表8 同步存储读时序
+BOOKMARK [('tbl_memory', '21')]
+P123 [Normal] 
+P124 [Normal] IM在en=0时保持已返回指令，使load use停顿中的ID载荷稳定。同步存储的输出寄存器可以承担相应逻辑流水边界；同一边界不要无意再串接同沿IR/MDR而增加一拍。实际IP的读延迟、输出寄存器、en保持行为和写模式须与该契约对应。
+P125 [Normal] DM写入在MEM结束上升沿发生。背靠背STR后同地址LDR必须读到已写的新值；本基线不会在同一个单端口周期同时请求读和写。IM与DM独立，允许IF取指与MEM访存同周期发生。
+P126 [Heading 2] 主要模块与接口
+BOOKMARK [('_Toc244358003', '22')]
+P127 [Caption] 表9 主要模块接口与职责
+BOOKMARK [('tbl_modules', '23')]
+P128 [Normal] 
+P129 [Normal] 当前AC1包含原carry/overflow接口、flags_reg及流水控制，复用ISA v1.5译码、镜像和TB。加减核心的物理映射与冻结CLA不同，但算术、标志和流水契约不变。表中的hazard_control和pipe_regs是datapath_core.sv内的逻辑职责，未新增同名模块；实体仍按原命名端口及位宽连接。
+P130 [Heading 3] 寄存器组与立即数扩展
+BOOKMARK [('_Toc244358004', '24')]
+P131 [Normal] RF写端在上升沿更新；rst清空四个寄存器，否则we选择唯一写地址，其他寄存器保持。两读端为组合读，读地址分别接Rd和Rs；we有效且未复位时，同地址读端旁路当前WB的wdata，保证ID捕获本拍写回值。该旁路不依赖仿真进程先后，也不采用R0常量零特例。
+P132 [Normal] use_rd/use_rs只描述实际源读取。MOV立即数不读旧Rd，LDR只读Rs，STR同时读Rd数据和Rs基址。ID仍可让两个读口输出值，但未使用源不能触发相关停顿。
+P133 [Normal] 扩展器无状态。sign_mode=0时高8位为0，sign_mode=1时复制imm8[7]。扩展结果与本条译码控制一起进入ID/EX，之后不使用当前ID指令的模式控制较老EX载荷。
+P134 [Heading 3] 多路选择器
+BOOKMARK [('_Toc244358005', '25')]
+P135 [Caption] 表10 数据通路选择编码
+BOOKMARK [('tbl_mux', '26')]
+P136 [Normal] 
+P137 [Normal] MUX是组合选择逻辑，不保存数据。先对Rd/Rs完成转发，再选择ALU输入。STR将rd_fwd直接保存为store_data，不把它误接为地址加法a输入。
+P138 [Normal] 人工设计的单比特2选1关系为y=(NOT s AND d0) OR (s AND d1)，16位选择器对每一位重复该关系。行为HDL可用条件运算符或完整case实现，结构HDL可用门电路或小MUX实例化；二者必须具有相同选择编码。保留选择码使用安全默认值，并由有效控制检查报告非法情况。
+P139 [Heading 3] ALU与FPGA进位链加减核心
+BOOKMARK [('_Toc244358006', '27')]
+P140 [Normal] ALU内部op不是CPU Opcode。0=PASS_B，1=ADD，2=SUB，3=AND，4=OR；5至7返回result=0、illegal=1、carry=0、overflow=0。eq始终等于a==b，独立于op；只有CMP的ZW允许其最终更新Z。
+P141 [Normal] ADD/SUB仍共用addsub16_cla接口，sub=0执行加法，sub=1以a加b逐位取反再加1实现减法。AC1在无符号17位表达式中保留第16位进位，低16位为结果；saved C不作为输入，未新增算术周期。
+P142 [Code] b_mod = b ^ {16{sub}}
+P143 [Code] wide_sum = {1'b0,a} + {1'b0,b_mod} + {16'b0,sub}
+P144 [Code] {carry, result} = wide_sum;  // carry=wide_sum[16], result=wide_sum[15:0]
+P145 [Normal] AC1运算层级为datapath_core/u_alu → alu16/u_addsub → addsub16_cla内17位表达式；该路径不实例化cla16或cla4_pg。以下P/G与K公式仅说明冻结v1.6两层CLA及保留的独立CLA单元：cla16包含四个cla4_pg及组间超前网络，p=a XOR b、g=a AND b、c0=cin。
+P146 [Normal] 历史CLA说明采用XOR传播；课件也用p=a OR b，配合g=a AND b可得到等价进位函数，但不能将OR传播量代入sum=p XOR c。以下CLA4公式保留供独立单元核对，不是AC1的综合算术实现。
+P147 [Code] sum[i] = p[i] ^ c[i]
+P148 [Code] c1 = g0 | (p0 & c0)
+P149 [Code] c2 = g1 | (p1 & g0) | (p1 & p0 & c0)
+P150 [Code] c3 = g2 | (p2 & g1) | (p2 & p1 & g0) | (p2 & p1 & p0 & c0)
+P151 [Code] P = p3 & p2 & p1 & p0
+P152 [Code] G = g3 | (p3 & g2) | (p3 & p2 & g1) | (p3 & p2 & p1 & g0)
+P153 [Code] c4 = G | (P & c0)
+P154 [Normal] 四组P/G记为P0至P3、G0至G3。K0=cin，K1至K4分别为c4/c8/c12/c16；每组入口由顶层同时求得：
+P155 [Code] K1 = G0 | (P0 & K0)
+P156 [Code] K2 = G1 | (P1 & G0) | (P1 & P0 & K0)
+P157 [Code] K3 = G2 | (P2 & G1) | (P2 & P1 & G0) | (P2 & P1 & P0 & K0)
+P158 [Code] K4 = G3 | (P3 & G2) | (P3 & P2 & G1)
+P159 [Code]    | (P3 & P2 & P1 & G0) | (P3 & P2 & P1 & P0 & K0)
+P160 [Normal] 上列组P/G不依赖cin、K1至K4采用组间超前，这是冻结v1.6及独立cla16单元的结构要求。AC1加减路径由17位表达式推断CARRY4，旧模块名不能证明内部仍是CLA；速度与资源依据相同条件的实际OOC报告，不能只凭CARRY4数量判断。
+P161 [Heading 3] 进位溢出与标志寄存器
+BOOKMARK [('_Toc244358007', '28')]
+P162 [Normal] AC1的carry取wide_sum[16]，等价于16位算术的c16。ADD时表示无符号精确和大于65535；SUB时定义为无借位，unsigned(a)≥unsigned(b)则为1。若调试borrow，SUB下borrow=NOT carry；overflow与Z写入规则不变。
+P163 [Normal] 教材加减器还将unsigned_overflow定义为carry XOR sub：ADD时检测进位，SUB时检测借位。它与本规格保存的原始C不是同一个信号；如展示该诊断量，应另命名u_overflow并注明解释。V始终表示有符号溢出，不能将借位或最高位进位直接称为V。
+P164 [Normal] overflow表示精确有符号运算超出−32768至32767，公式使用原始b的符号位：
+P165 [Code] ADD_V = ~(a[15] ^ b[15]) & (result[15] ^ a[15])
+P166 [Code] SUB_V =  (a[15] ^ b[15]) & (result[15] ^ a[15])
+P167 [Normal] 非算术操作的组合C/V输出为0，但只在CVW=1时才更新保存的C/V。CMP更新Z并保持C/V；LDR/STR尽管用ADD算地址，也保持所有架构标志。flags_reg的同步rst最高优先级，z_we和cv_we分别写各自字段，同时有效时分别更新。
+P168 [Caption] 表11 算术结果与进位溢出验收向量
+BOOKMARK [('tbl_cv', '29')]
+P169 [Normal] 
+P170 [Normal] 以上为验收预期值。result[15]表示结果位串的最高位，不能直接当overflow；carry与overflow分别检查。
+P171 [Heading 2] 译码控制表
+BOOKMARK [('_Toc244358008', '30')]
+P172 [Normal] 表12定义操作数路径。0/Rd/Rs/Imm分别表示常数0、已转发Rd、已转发Rs和扩展立即数；imm_signed对应ID扩展器sign_mode。未使用选择项仍给安全的确定值。
+P173 [Caption] 表12 指令译码操作数控制
+BOOKMARK [('tbl_decode_operands', '31')]
+P174 [Normal] 
+P175 [Normal] CMP用合法PASS_B默认op，但不使用result；eq比较选入的Rd与Rs。JUMP/JZ目标由branch_target16单独计算，输入为本条pc和imm8，不能使用上表已置0的ALU结果。
+P176 [Normal] 表13定义写入及控制意图。RW/MR/MW/ZW/CVW分别是reg_write/mem_read/mem_write/z_write/cv_write；最终使能还需所属级valid、故障和复位资格。
+P177 [Caption] 表13 指令译码写入与控制掩码
+BOOKMARK [('tbl_decode_writes', '32')]
+P178 [Normal] 
+P179 [Normal] 各行未列出的jump_abs/jump_z/halt/illegal均为0。组合译码先给默认值再case覆盖，不用casex掩盖未知Opcode。CPU保留Opcode与ALU非法op是两种错误来源，均须按有效指令检测。
+P180 [Normal] Group 3的MemEn=1只表示访存意图：LDR的MR/RW为1、MW为0；STR的MW为1、MR/RW为0。物理dm_en/dm_we须在MEM结合完整地址与有效资格产生。Group 7的1?11只匹配1011/1111，即B/F；不能只检测低两位11，否则会把合法OR和SUB立即数误判为非法指令。
+P181 [Heading 2] 控制单元组成与接口
+BOOKMARK [('_Toc244358009', '33')]
+P182 [Heading 3] 控制逻辑模型
+BOOKMARK [('_Toc244358010', '34')]
+P183 [Normal] CU采用硬连线控制，由当前指令和流水状态共同决定本拍动作。正常RUN中，五级可同时处理不同指令；ALU为组合逻辑，IM/DM读延迟固定。图3用次态逻辑F、控制状态Q和输出逻辑G描述现有实现。
+P184 [Normal]     
+P185 [Normal] F根据当前状态与输入计算下一控制状态，Q在时钟上升沿锁存，G在当前周期产生控制输出。I包括d_inst、取指故障、ALU非法标记、保存的Z与M/W比较候选、PC_fetch、MEM有效地址和rst；这些是逻辑输入集合，不是新增外部端口。
+P186 [Normal] Q包含mode、各级valid/fault、X/M/W随行控制和寄存器标签；操作数、立即数、地址和结果数值由数据通路保存。G产生操作数及前递选择、PC/IM控制、DM访问资格、RF与标志写入资格，以及halted/fault。F和G可共享组合判定，逻辑划分不要求复制硬件。
+P187 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="414A7341" w14:textId="77777777" w:rsidR="00B40180" w:rsidRDefault="001535D9"><w:pPr><w:keepNext/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="7A6B15A0" wp14:editId="79298E70"><wp:extent cx="6126480" cy="2374011"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="2" name="Picture 2" descr="CU F/Q/G逻辑模型"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="cu_structure.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId11"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="6126480" cy="2374011"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P188 [Caption] 图3 硬连线CU的F/Q/G逻辑模型。Q反馈至F，当前输入同时参与F和G；图中方框表示现有控制职责。
+BOOKMARK [('fig_2', '35')]
+P189 [Heading 3] 内部功能与信号归属
+BOOKMARK [('_Toc244358011', '36')]
+P190 [Caption] 表14 图中方框与RTL输入输出对应。core指datapath_core.sv内部逻辑，IFCU至WBCU不表示新增五个独立控制器。
+BOOKMARK [('tbl_cu', '37')]
+P191 [Normal] 
+P192 [Normal] d_/x_/m_/w_分别绑定ID/EX/MEM/WB。d_ctrl及CTRL_X/M/W是表12、13、15中既有控制字段的图示集合，不是新增总线或寄存器；上层控制带与下层数据共用四个流水边界。图1的FB为反馈组，UPD为valid_next/取消/保持组。操作数前递由operand_forward完成，WB→ID旁路位于regfile4x16，Z来源选择、load-use检测、年龄仲裁和mode更新均位于core内部。M寄存m_fault用于前递，新m_access_fault只进入访问保护、故障载荷及年龄取消，不接回前递数据MUX。
+P193 [Heading 3] 本拍控制与时钟边沿
+BOOKMARK [('_Toc244358012', '38')]
+P194 [Normal] 周期内先译码与判断资格，在结束上升沿更新相应流水载荷及架构状态。D级译码只形成意图；RW/ZW/CVW在有效、无故障的W槽才获准写RF或标志，MR/MW在完整地址合法的M槽才获准访问DM。mode的RUN/DRAIN允许合格老指令继续，最终停止态关闭新访问与写入。具体使能表达式与年龄优先级见3.5节。
+P195 [Normal] PC由唯一的pc16状态寄存器保存。JUMP目标为ZExt(imm8)，JZ目标为low16(x_pc+1+SExt(imm8))，二者在EX由branch_target16生成；WB不再增加PC。完整CU的输出还依赖当前输入，不能由halted/fault的状态型输出推断整个CU都是纯Moore逻辑。
+P196 [Heading 2] 流水寄存器字段
+BOOKMARK [('_Toc244358013', '39')]
+P197 [Normal] 数据、控制、pc和valid属于同一条指令。下面列的是逻辑字段；同步RAM的输出寄存器可承担对应数据存储，不能据此额外增加延迟。
+P198 [Caption] 表15 四级流水边界载荷
+BOOKMARK [('tbl_pipe', '40')]
+P199 [Normal] 
+P200 [Normal] imm_signed在ID消费后无需继续保存；rs和实际源掩码保留至EX完成转发，之后删除。STR的store_data只保留到MEM；新增w_store类型与pc/valid保留至WB，RW/ZW/CVW均为0。HALT及已确认的故障必须保留有效停止标记到WB；没有RF/标志写入不等于该槽可以提前丢弃。无效数据载荷可不复位，valid与架构状态必须复位。kill可用清valid实现，不强制每级另设killed寄存器。
+P201 [Heading 2] 统一五级执行契约
+BOOKMARK [('_Toc244358014', '41')]
+P202 [Normal] IF统一取指并登记标签。所有接受且未取消的指令按ID EX MEM WB传递；无副作用的有效阶段与valid=0的bubble不同。停顿延长驻留时间，flush取消年轻载荷，reset取消全部在途载荷；五级组织不等于每条指令固定五拍。
+P203 [Caption] 表16 各指令的有效阶段职责
+BOOKMARK [('tbl_uniform_contract', '42')]
+P204 [Normal] 
+P205 [Normal] STR的副作用边沿保持MEM，WB只消费完成标签；同拍的另一个M指令可以合法访存，不能因为W是STR就全局禁止DM。复位不回滚已完成的DM写入，本设计无ROB或异常返回。
+P206 [Heading 2] Buffer与冒险处理体系
+BOOKMARK [('_Toc244358015', '43')]
+P207 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="0E76ABBE" w14:textId="77777777" w:rsidR="00DA3ECD" w:rsidRDefault="001E5B05"><w:pPr><w:keepNext/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="14FCB0E2" wp14:editId="3D1A84BA"><wp:extent cx="6353999" cy="3335849"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="8" name="Picture 8"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="hazard_network.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId12"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="6353999" cy="3335849"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P208 [Caption] 图4 AC1流水Buffer与Interlock。M寄存数据、valid/RW/就绪与m_fault用于源选择；完整EA检查用于DM保护及MEM fault取消，独立于前递数据MUX。停顿、Flag forwarding和年轻取消不变，不增加FIFO/cache。
+BOOKMARK [('fig_hazard_network', '44')]
+P209 [Caption] 表17 八项机制的实体与信号归属
+BOOKMARK [('tbl_hazard_mechanisms', '45')]
+P210 [Normal] 
+P211 [Heading 1] 典型指令执行流程
+BOOKMARK [('_Toc244358016', '46')]
+P212 [Normal] 本章结合第二章的数据路径与控制字，规定指令逐拍推进、转发、停顿和取消的行为。架构写入必须同时满足所属指令的控制意图与有效资格；停止和故障不能取消已经合格的较老操作。
+P213 [Heading 2] 周期编号与PC更新
+BOOKMARK [('_Toc244358017', '47')]
+P214 [Normal] 以下C1至C5表示一条无额外停顿指令依次占据IF、ID、EX、MEM、WB的周期。每周期内组合计算，结束上升沿捕获结果。CPU中的其他指令同时占据不同级，不能用一个全局IF至WB循环状态机每次只执行一条指令。
+P215 [Normal] 正常IF每拍推进PC_fetch；EX合格分支改为目标；load use或停止保持前端。各指令的pc标签始终保留自身地址。RF和标志的写回不负责再增加PC，STR完成也不负责更新PC。
+P216 [Heading 2] 典型指令的数据流与逐拍操作
+BOOKMARK [('_Toc244358018', '48')]
+P217 [Normal] 以下算术、访存和比较分支用例分别说明RF写回、DM访问以及Z与控制流的关系。相同规则也适用于其他采用同一路径的指令。
+P218 [Heading 3] ADD立即数
+BOOKMARK [('_Toc244358019', '49')]
+P219 [Normal] 例：pc=0000，机器字5001，初始R0=7FFF、Z=1。目标是R0=8000、C=0、V=1、Z保持1。
+P220 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="19CBA351" w14:textId="77777777" w:rsidR="00B40180" w:rsidRDefault="001535D9"><w:pPr><w:keepNext/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="4A4A646F" wp14:editId="22FBD902"><wp:extent cx="6353999" cy="1174146"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="3" name="Picture 3"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="flow_add.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId13"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="6353999" cy="1174146"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P221 [Caption] 图5 AC1 ADD的数据流编号。①读取Rd并转发；②零扩展立即数经B MUX；③17位表达式映射FPGA进位链，生成低16位结果及C/V；④候选值随流水传递；⑤WB按原资格写RF和C/V。
+BOOKMARK [('fig_3', '50')]
+P222 [Caption] 表18 ADD立即数逐拍操作
+BOOKMARK [('tbl_add_cycles', '51')]
+P223 [Normal] 
+P224 [Normal] SUB令op=2，经同一17位补码加减表达式。MOV选择PASS_B；AND/OR选择相应逻辑结果且CVW=ZW=0，仍沿原普通写回路径。
+P225 [Heading 3] LDR与STR
+BOOKMARK [('_Toc244358020', '52')]
+P226 [Normal] LDR例：8BFF表示LDR R2,[R3−1]。设R3=0020、DM[001F]=BEEF，地址流为Rs → 转发 → A MUX，加SExt(FF)=FFFF，得到EA=001F；load数据流为DM → WB MUX → R2。
+P227 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="31D1063E" w14:textId="77777777" w:rsidR="00B40180" w:rsidRDefault="001535D9"><w:pPr><w:keepNext/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="32C0DDAC" wp14:editId="2C04CEF3"><wp:extent cx="6353999" cy="1174146"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="4" name="Picture 4"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="flow_memory.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId14"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="6353999" cy="1174146"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P228 [Caption] 图6 访存数据流。①转发Rs提供基址；②符号位移参与ADD；③完整EA范围检查；④LDR读取DM并选入WB；⑤STR另将转发Rd保存至store_data并在MEM写入。
+BOOKMARK [('fig_4', '53')]
+P229 [Caption] 表19 LDR与STR逐拍操作
+BOOKMARK [('tbl_memory_cycles', '54')]
+P230 [Normal] 
+P231 [Normal] 以9900为例，STR R2,[R1+0]将R2数据写入R1指定的DM地址。基址与数据各自转发，不能只转发地址而留下旧store_data。load数据在MEM结束后就绪，因此紧邻消费者须按下文停1拍。
+P232 [Heading 3] CMP与JZ
+BOOKMARK [('_Toc244358021', '55')]
+P233 [Normal] 例：pc0装A100，pc1装D001，pc2装1C55，pc3装E000；初始R0=R1=0001。CMP产生1，JZ目标=0001+1+0001=0003，跳过pc2的MOV R3,#0x55。
+P234 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="40A2471B" w14:textId="77777777" w:rsidR="00B40180" w:rsidRDefault="001535D9"><w:pPr><w:keepNext/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="4F841459" wp14:editId="190D6C88"><wp:extent cx="6353999" cy="1174146"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="5" name="Picture 5"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="flow_branch.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId15"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="6353999" cy="1174146"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P235 [Caption] 图7 比较与分支数据流。①两个实际源转发至eq；②CMP结果随ZW进入M/W；③JZ选择最近较老Z；④用分支自身pc计算目标；⑤EX重定向PC并取消年轻槽。
+BOOKMARK [('fig_5', '56')]
+P236 [Caption] 表20 CMP与紧邻JZ逐拍操作
+BOOKMARK [('tbl_cmp_cycles', '57')]
+P237 [Normal] 
+P238 [Normal] JZ无需等待CMP写回，但只从有效、无故障、未取消且ZW=1的生产者取Z。M优先W再架构Z。若M是ADD而W是CMP，仍须取W的Z。候选0也必须覆盖旧1。条件不满足时不冲刷，继续顺序取指。
+P239 [Normal] JUMP不读标志，目标为ZExt(imm8)，仍在EX执行同样的重定向与年轻槽取消。没有delay slot。
+P240 [Heading 2] 数据相关与load use停顿
+BOOKMARK [('_Toc244358022', '58')]
+P241 [Normal] 每个实际源优先取最近的M级RF生产者，再取W级写回值，最后取ID/EX保存值。只有M级非load结果已就绪；M级load的exec_value是地址，禁止把它当数据转发，也禁止越过未就绪的最近load使用更老同名值。
+P242 [Code] load_use = x_valid && !x_fault && x_mem_read && d_valid && !d_fault
+P243 [Code]         && ((d_use_rd && d_rd == x_rd) || (d_use_rs && d_rs == x_rd))
+P244 [Normal] 条件满足且没有更高优先级事件时，PC和IF/ID保持，im_en=0，ID/EX插入bubble；当前EX的load继续推进，老MEM/WB照常完成。R0参加相关比较。
+P245 [Caption] 表21 load use停顿与转发
+BOOKMARK [('tbl_load_cycles', '59')]
+P246 [Normal] 
+P247 [Normal] LDR到CMP、STR基址或STR数据的紧邻相关同样停1拍。LDR后紧邻MOV同目的立即数不读取旧目的，无相关停顿。WB到ID同址旁路同时保留，处理ID采样与WB写回在同拍的情形。
+P248 [Heading 2] 冒险分类与解决矩阵
+BOOKMARK [('_Toc244358023', '60')]
+P249 [Normal] 下表完整列出当前ISA的实际冲突类别，精确展开的2,376个RAW实例位于CPU核心设计/说明/Hazard_Matrix_2376.csv。每例包含生产者/消费者、源角色、寄存器、g间距、检测级、就绪级、选择机制、停顿数、周期模板、预期及实际结果。g表示中间独立指令数。
+P250 [Caption] 表22 当前ISA冒险类别与真实用例
+BOOKMARK [('tbl_hazard_summary', '61')]
+P251 [Normal] 
+P252 [Normal] 以下间距速查限于正常推进且无额外停顿或取消改变时间关系：0至7生产者在EX末就绪，g=0用M、g=1用W、g=2经WB→ID保存值；LDR在MEM末就绪，g=0停1拍后用W，g=1/2不增加停顿。实际按消费者到EX时最近合格生产者所在级、就绪与valid选值；C/V无读取RAW，WAW/WAR仍由顺序阶段排除。
+P253 [Normal] 合法branch_req与load_use不会同拍成立：它们都要求同一X载荷，但C/D和8的译码互斥；这一点由译码合约和运行断言检查。真正的交叉事件是老MEM fault与年轻X load导致的load_use、branch或HALT；老故障优先。原始load_use计数可为1，但故障同拍取消年轻X，不能把它描述成正常完成的一拍等待。
+P254 [Heading 2] 写入资格与事件优先级
+BOOKMARK [('_Toc244358024', '62')]
+P255 [Normal] 以下表达式对应当前RTL。w_fault是WB载荷自身故障，m_fault是MEM载荷自身故障；取消通过清valid实现，不另设killed寄存器。mode_active允许RUN和两种DRAIN状态的老流水继续完成，不允许最终停止状态产生写入。
+P256 [Code] mode_active = (mode == RUN || mode == DRAIN_HALT || mode == DRAIN_FAULT)
+P257 [Code] wb_ok = mode_active && w_valid && !w_fault
+P258 [Code] rf_we = !rst && wb_ok && w_reg_write
+P259 [Code] z_we  = !rst && wb_ok && w_z_write
+P260 [Code] cv_we = !rst && wb_ok && w_cv_write
+P261 [Code] mem_ok = !rst && mode_active && m_valid && !m_fault && m_address_in_range
+P262 [Code] dm_en = mem_ok && (m_mem_read || m_mem_write)
+P263 [Code] dm_we = mem_ok && m_mem_write
+P264 [Normal] 停止前端不能屏蔽较老WB。wb_ok表示WB槽资格；STR的DM副作用发生于MEM，但指令完成统一在WB消费有效标签。当前版本在非复位的合格WB每拍至多数一条完成，包含STR、分支、CMP与HALT；故障token不计合法完成，不再把MEM store额外加到WB计数。
+P265 [Normal] MEM错误仍只针对有效访存指令，自身故障或EA越界触发m_access_fault/m_fault_event；普通ALU值超出DM容量不报访存错。AC1把u_forward.m_fault从m_fault OR m_access_fault改接寄存m_fault：合法M非Load RF生产者不访问DM，M Load仍not-ready并阻断旧W。新MEM fault仍禁止DM、取消年轻X/D/IF并保留老WB，故不消费年轻组合结果；redirect优先级不变。
+P266 [Caption] 表23 流水事件的年龄与优先级
+BOOKMARK [('tbl_priority', '63')]
+P267 [Normal] 
+P268 [Normal] 保留Opcode在ID标记故障，EX确认；它可能被更老分支取消，不能一译码就不可逆停机。MEM越界比EX分支更老，故障优先于该分支redirect。valid=0时禁止RF/DM/标志写入、redirect、HALT和故障激活。
+P269 [Heading 2] HALT 故障与复位
+BOOKMARK [('_Toc244358025', '64')]
+P270 [Normal] 合格HALT要求处于RUN、未复位、X有效且没有自身故障，同时不存在更老MEM故障。EX自身故障优先于本条HALT意图。HALT在EX结束边沿使mode进入DRAIN_HALT，随后stop_pending为1；本边沿禁止新的取指请求，并取消年轻槽及对应IF响应。HALT标记保留valid，依次通过MEM和WB，在WB结束边沿被消费。该边沿确认更新后的流水线为空后进入HALTED，halted置1。HALT前的load仍须写回，HALT后的STR不得进入合格MEM；不能仅因较老指令已经完成，就在HALT的MEM周期提前停止。
+P271 [Normal] 故障使用同样的WB结束规则。MEM检测到越界时，立即阻断故障自身的DM访问，取消年轻EX，把故障标记随valid送到WB；本拍老WB仍可写RF或标志。故障STR保留WB的valid和fault；成功STR同样保留有效WB，只是无故障且不再产生写入。EX故障只取消自身副作用和年轻指令，故障标记经MEM送到WB，老MEM合法STR仍可写DM。故障标记不允许写RF、DM或Z/C/V；在WB消费标记并确认下一拍为空后进入FAULTED，fault置1直到复位。故障原因和fault_pc属于可选诊断，不实现异常返回或重试。
+P272 [Normal] 同步rst跨越有效上升沿，清RF、Z/C/V、PC、全部valid及停止状态。每级复位优先于保持和推进。复位前已经完成的DM写入保留；复位当拍dm_we为0。外部按钮同步与去抖在板级顶层完成，核心不用门控组合时钟。
+P273 [Heading 2] CU状态图与状态转移
+BOOKMARK [('_Toc244358026', '65')]
+P274 [Heading 3] 运行模式与事件定义
+BOOKMARK [('_Toc244358027', '66')]
+P275 [Normal] 模式FSM只展开控制状态Q中的mode字段。其五个合法编码为RUN=000、DRAIN_HALT=001、DRAIN_FAULT=010、HALTED=011、FAULTED=100。正常推进、load-use保持和分支取消均可发生在RUN内；它们不构成全局串行的取指至写回状态循环。
+P276 [Normal] 输入事件采用已获资格的内部判定：E=m_fault_event||x_fault_event，H=qualified_halt，D=drain_done。E包含有效MEM/EX故障；H已经排除复位、自身故障及更老MEM故障；D表示WB有效停止标记在本边沿被消费后，所有valid_next均为0。rst为同步高有效复位，优先于其他转移。
+P277 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="399A502F" w14:textId="77777777" w:rsidR="00B40180" w:rsidRDefault="001535D9"><w:pPr><w:keepNext/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="33095AD9" wp14:editId="08EF0E94"><wp:extent cx="6126480" cy="2680335"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="6" name="Picture 6" descr="CU五种运行模式、输入条件和Moore输出"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="cu_states.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId16"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="6126480" cy="2680335"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P278 [Caption] 图8 运行模式状态转移图。圆内O=(halted,fault)为当前状态输出；箭头标转移条件。所有状态在clk上升沿更新，rst优先。
+BOOKMARK [('fig_6', '67')]
+P279 [Heading 3] 状态转移与当前输出
+BOOKMARK [('_Toc244358028', '68')]
+P280 [Normal] halted=(mode==HALTED)，fault=(mode==FAULTED)，这两个输出满足Moore定义。表24输出列为边沿前的当前值；进入目标状态后再按新mode解释输出。RUN不保证im_en恒为1，取指仍受互锁、事件与地址资格控制。
+P281 [Caption] 表24 CU运行模式的完整转移与输出。除复位行外均取rst=0。
+BOOKMARK [('tbl_modes', '69')]
+P282 [Normal] 
+P283 [Heading 3] 排空完成与复位返回
+BOOKMARK [('_Toc244358029', '70')]
+P284 [Normal] HALT/故障被接受时，E/H事件只启动排空，halted/fault仍为0。有效停止标记到WB且D=1的结束边沿，才分别进入HALTED或FAULTED。停止态在rst=0时保持，只有同步复位返回RUN；当前接口没有start/resume。若把当前输出重复写在状态转移边上，DRAIN到停止态的边仍标0,0，边沿后才变为1,0或0,1。
+P285 [Normal] T07的实际记录：C4末接受EX中的HALT并取消年轻STR；C5末较老LDR仍可写R1=1234；C6末在WB消费HALT后才halted=1。T16中较老LDR的EA=0100，C4即阻断DM访问并取消年轻HALT，C5末消费故障标记后fault=1。两例独立起算周期；较老WB可写回指的是MEM故障检测当拍，T05另提供该同拍见证。
+P286 [Normal] 本基线的故障均在EX或MEM当拍确认，没有延迟错误响应。较老MEM故障与EX的HALT同拍时，RUN直接进入DRAIN_FAULT，HALT被取消；一旦HALT被接受并进入DRAIN_HALT，就不会再出现新的较老故障，因此不设置DRAIN_HALT到DRAIN_FAULT的转移。若后续引入可变延迟或延迟错误响应，必须先修订存储接口、年龄仲裁和状态图。
+P287 [Normal] mode为3位状态量；逻辑状态编码在RTL中统一声明。stop_pending等于当前处于任一DRAIN状态。以下是组合判定关系，valid_next来自本拍按复位、取消、保持和推进规则计算的下一状态。停止请求被接受时取指已关闭，未被接受的IF响应已作废。
+P288 [Code] w_stop_token = w_valid && (w_halt || w_fault);
+P289 [Code] pipeline_empty_next = !(d_valid_next || x_valid_next ||
+P290 [Code]                         m_valid_next || w_valid_next);
+P291 [Code] drain_done = !rst && stop_pending && w_stop_token && pipeline_empty_next;
+P292 [Normal] WB停止标记在本边沿消费，w_valid_next清0；若其余valid_next也为0，同一边沿将mode更新为HALTED或FAULTED，无需额外等待一拍。同步复位优先于此判定。没有有效WB停止标记时，即使当前没有RF/DM写入，也不得自行进入最终停止状态。
+P293 [Normal] 非法mode的RTL默认分支进入FAULTED，不得自行回到RUN重新取指；mode_active同时阻断非法状态下的访问及写入。当前回归检查可达状态、停止边沿和复位，未包含人为破坏mode编码的故障注入。状态机的当前状态寄存器用非阻塞赋值，next-state及输出组合逻辑完整覆盖。
+P294 [Heading 1] 源代码与仿真验证
+BOOKMARK [('_Toc244358030', '71')]
+P295 [Normal] 本章将第一至第三章的规则落实为源码接入、自检查方法、执行用例和实现验收条件。当前限定功能回归、历史记录与未完成的实现验收分别说明，不能用其中一类结果替代另一类。
+P296 [Heading 2] 源码边界与连接约定
+BOOKMARK [('_Toc244358031', '72')]
+P297 [Normal] AC1实现入口为课程目录CPU核心设计/Vivado，保留13份RTL、9个TB入口及2份共享.svh。core集成流水控制、前递、保护和停止，sync_memories.v提供固定单周期同步封装。Pre5的CU结构与FSM说明对应这些既有逻辑；其13份生产RTL和全部TB与本核心包一致。
+P298 [Normal] AC1架构优化相对冻结v1.6仅改addsub16_cla.v与datapath_core.sv；其余11RTL、ISA译码、镜像、TB及XDC不变。原r1九套记录为72d99981-0aef-4b1d-8c13-e8d7bc624cf9，118原始文件保留。后续job1仅修补执行脚本，最新九套记录为eae32d52-1b00-4d6d-a524-cd3902d502d0，不改变CPU或验证协议。CLA4/CLA16仍为独立单元，不能据其PASS称AC1运算路径使用旧CLA。
+P299 [Normal] 从课程目录运行run_verify.ps1会新建私有目录。验证工具修订为1.6-vtools-r1：运行前绑定attempt与输入指纹，记录实际native工具执行及原始证据后才发布新PASS。独立verify_results.py只核验历史receipt/hash，标记历史再校验或待验证，不宣称本次运行XSim。最近运行记录当前尝试；新失败时旧成功仅属历史。综合记录与功能记录分开，OOC不代替布局布线及下板。
+P300 [Code] .\CPU核心设计\Vivado\run_verify.ps1
+P301 [Code] .\CPU核心设计\Vivado\run_synthesis.ps1
+P302 [Caption] 表25 当前源码与连接约定
+BOOKMARK [('tbl_sources', '73')]
+P303 [Normal] 
+P304 [Normal] 下面源代码片段摘自现有RF和PC，说明时序写入、读旁路和PC优先级。它们是单元代码，外围连接须满足第三部分的控制资格。
+P305 [Code] // regfile4x16.v  synchronous write and explicit WB-to-ID bypass
+P306 [Code] always @(posedge clk) begin
+P307 [Code]   if (rst) for (i=0; i<4; i=i+1) regs[i] <= 16'h0000;
+P308 [Code]   else if (we) regs[waddr] <= wdata;
+P309 [Code] end
+P310 [Code] always @* begin
+P311 [Code]   rdata_a = regs[raddr_a]; rdata_b = regs[raddr_b];
+P312 [Code]   if (we && !rst && waddr == raddr_a) rdata_a = wdata;
+P313 [Code]   if (we && !rst && waddr == raddr_b) rdata_b = wdata;
+P314 [Code] end
+P315 [Code] // pc16.v  redirect is already qualified by the control unit
+P316 [Code] always @(posedge clk) begin
+P317 [Code]   if (rst) pc <= 16'h0000;
+P318 [Code]   else if (redirect) pc <= target;
+P319 [Code]   else if (!hold) pc <= pc + 16'd1;
+P320 [Code] end
+P321 [Heading 2] 目标数据通路的连接片段
+BOOKMARK [('_Toc244358032', '74')]
+P322 [Normal] 下列连接用于对照第二章接口，完整顶层见AC1 datapath_core.sv。片段省略载荷和仲裁；alu16接口不变，内部u_addsub为17位求和实现。原flags_reg与写资格沿用，全部有限回归已绑定AC1源码。
+P323 [Code] always @* begin
+P324 [Code]   alu_a = 16'h0000; alu_b = 16'h0000;
+P325 [Code]   case (x_alu_a_sel)
+P326 [Code]     2'd1: alu_a = rd_fwd;
+P327 [Code]     2'd2: alu_a = rs_fwd;
+P328 [Code]   endcase
+P329 [Code]   case (x_alu_b_sel)
+P330 [Code]     2'd1: alu_b = rs_fwd;
+P331 [Code]     2'd2: alu_b = x_imm_ext;
+P332 [Code]   endcase
+P333 [Code] end
+P334 [Code] alu16 u_alu(.a(alu_a), .b(alu_b), .op(x_alu_op),
+P335 [Code]   .result(alu_result), .eq(alu_eq), .illegal(alu_illegal),
+P336 [Code]   .carry(alu_c), .overflow(alu_v));
+P337 [Code] assign x_store_data = rd_fwd;
+P338 [Code] branch_target16 u_target(.branch_pc(x_pc), .imm(x_imm_ext[7:0]),
+P339 [Code]   .relative(x_jump_z), .target(branch_target));
+P340 [Code] assign wb_data = w_wb_sel ? dm_dout : w_exec_value;
+P341 [Code] regfile4x16 u_rf(.clk(clk), .rst(rst), .we(rf_we),
+P342 [Code]   .waddr(w_rd), .wdata(wb_data), .raddr_a(d_rd), .raddr_b(d_rs),
+P343 [Code]   .rdata_a(d_rd_value), .rdata_b(d_rs_value));
+P344 [Code] flags_reg u_flags(.clk(clk), .rst(rst), .z_we(z_we), .cv_we(cv_we),
+P345 [Code]   .z_in(w_cmp_z), .c_in(w_c), .v_in(w_v), .Z(Z), .C(C), .V(V));
+P346 [Code] assign dm_addr = m_exec_value;
+P347 [Code] assign dm_din = m_store_data;
+P348 [Normal] wb_sel随load标签进入W；dm_dout须遵守固定同步读契约并与w_rd/w_valid对齐。ALU的eq/C/V和ZW/CVW由EX/MEM、MEM/WB保存后再接flags_reg，不能直接把当前EX输出写入架构标志。操作数选择码3须由有效EX非法控制检测捕获；默认0赋值避免推断锁存器，不能取代错误检测。
+P349 [Normal] 流水always块使用非阻塞赋值；组合块覆盖全部情况并使用阻塞赋值。每个状态只由一个时序块驱动，load use只保持前端，不用一个全局enable冻结全部级。
+P350 [Heading 2] 自检查测试方法
+BOOKMARK [('_Toc244358033', '75')]
+P351 [Normal] TB在边沿前采样使能，NBA更新后检查状态。关键控制用$isunknown检查X/Z；停止与复位的禁止使能必须确定为0，无效或未消费的数据载荷不强制已知。tb_units.sv用独立精确整数arithmetic_oracle计算低16位、无借位C和补码范围V，比较result/C/V/illegal/eq，使用!==使未知输出失败。下面是内部ALU检查节选：
+P352 [Code] expected_c=0; expected_v=0; expected_bad=0;
+P353 [Code] case (f)
+P354 [Code]   0: expected_result=y;
+P355 [Code]   1: arithmetic_oracle(x,y,0,expected_result,expected_c,expected_v);
+P356 [Code]   2: arithmetic_oracle(x,y,1,expected_result,expected_c,expected_v);
+P357 [Code]   3: expected_result=x&y;
+P358 [Code]   4: expected_result=x|y;
+P359 [Code]   default: begin expected_result=0; expected_bad=1; end
+P360 [Code] endcase
+P361 [Code] #1;
+P362 [Code] if ({illegal,alu_c,alu_v,alu_result} !==
+P363 [Code]     {expected_bad,expected_c,expected_v,expected_result} || eq !== (x==y))
+P364 [Code]   $fatal(1, "ALU mismatch");
+P365 [Normal] #1是测试等待，不是硬件传播延迟。算术检查同时包含C/V预期：ADD用至少17位精确和判断C；SUB直接用无符号a≥b判断无借位。V的参考计算先按16位补码解释a/b，再符号扩展到32位整数，计算精确结果并判断是否超出−32768至32767；不能直接把原无符号输入零扩展后用于V判断。先用第二部分手算向量检查参考模型，再做批量回归。
+P366 [Normal] 保留的CLA4单元仍检查sum/cout、P/G数值及cin独立性；独立cla16检查组间超前K1至K4和无组合环。这些结构检查不等于AC1运算路径检查。AC1 addsub/alu按精确整数参考检查result、无借位C、V与eq，并按新源码指纹引用本次单元结果。
+P367 [Heading 2] 既有实现与验证证据
+BOOKMARK [('_Toc244358034', '76')]
+P368 [Heading 3] 核心既有验证记录
+BOOKMARK [('_Toc244358035', '77')]
+P369 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="19BFF8C2" w14:textId="77777777" w:rsidR="00B40180" w:rsidRDefault="001535D9"><w:pPr><w:keepNext/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="560EEBC7" wp14:editId="15780AFC"><wp:extent cx="6353999" cy="2649208"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="7" name="Picture 7"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="基准load_use.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId17"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="6353999" cy="2649208"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P370 [Caption] 图9 冻结v1.6历史基准load-use VCD窗口，保留原来源身份。AC1对应逐拍CSV与冻结记录一致，可用于理解不变的周期契约；此图不是AC1新生成波形，也不是传播延迟测量。d_inst为ID机器字，EX按x_pc/x_valid定位。
+BOOKMARK [('fig_7', '78')]
+P371 [Caption] 表26 v1.6基准波形与逐拍记录的对应关系
+BOOKMARK [('tbl_wave', '79')]
+P372 [Normal] 
+P373 [Normal] AC1在2026年10月14日用XSim2025.2实际完成九套回归。合约检查65,536字和14项ALU边界；主回归128程序、16次复位、3,380次有效完成及14种合法Opcode；stress为4,696例、33,134次完成；audit为12定向加4重启，均零失败。基准仍17周期、10动态指令、1次load-use、1次取分支。
+P374 [Normal] AC1单位记录：独立CLA4=512、独立CLA16=564,300、当前addsub=564,300、当前ALU=2,257,200，译码65,536、扩展512、flags512、RF262,161、PC65,539、目标3,584。CLA单元PASS不表示其参与AC1 CPU路径。9份结果/逐拍CSV与冻结v1.6的r1运行75620c56逐字节一致；仍非完整算术或CPU状态穷举。
+P375 [Normal] 迁移前的独立检查发现旧译码器有16,384字与新ISA不相容，差异位于2/3/8/9。该诊断和原Pre4源码、日志作为历史记录保留；当前新译码器已通过另一次完整二进制指令字检查。合约TB另有14项ALU定向边界及非法选择检查通过，仍不代表完整ALU输入穷举。
+P376 [Normal] 完整VCD继续保留各级pc/valid、操作数与转发选择、exec_value、store_data、dm_en/we/dout、WB地址/数据/资格、候选与保存的Z/C/V，以及stall/redirect/kill。图9只选取基准中的load相关窗口；故障及其他指令按case_timings.csv定位到完整波形，并配合对应日志核验。
+P377 [Normal] 集成波形分别标出“输入已确定”“组合结果产生”“边沿锁存”“架构写入”，不要把总线有值当作有效指令完成。CU检查增加mode、branch_req与qualified_redirect、HALT/fault请求和drain_done，确认请求因年龄冲突被拒绝时没有副作用。波形截图须注明对应源码、TB和程序镜像，配合零失败日志。
+P378 [Heading 3] Pre5控制验证记录
+BOOKMARK [('_Toc244358036', '80')]
+P379 [Normal] Pre5工程于2026年10月17日完成同源九套回归，attempt为440e0d7a-1244-4333-a4f8-5adf612f9833，绑定19次原生工具调用；记录保存在课程目录Pre5_控制单元设计/Vivado/验证记录下。覆盖65,536个二进制指令字、128个主回归程序与16次复位、2,550个冒险案例，以及131,072个前递控制组合（4个数据哨兵）。这些计数与核心既有覆盖口径一致。
+P380 [Normal] 同工程独立记录cpu_ac1_independent_glok75my包含48个案例、10次复位后重启见证和952行逐拍记录。结果CSV的58行包括复位重启后的第二轮，案例数仍为48。control_traces保存BASELINE、T01至T05、T07、T16、T17a、T18b及TRACE_LOAD_STR共11份逐边沿记录；pre_为边沿前值，post_为同时间戳更新稳定后的值。
+P381 [Normal] 2026年10月29日合入前，已按当前输入重新核验上述历史日志及指纹，重新解析两份原始VCD的4,824个上升沿，并核对全部11份CSV/JSON与关键FSM、复位和写入资格。该步骤是历史证据复核，没有产生新的XSim、综合或下板运行；现有功能通过范围仍是有限输入与程序集合。核心包和Pre5包的执行日期、入口及结果分别保留。
+P382 [Heading 2] 统一五级与冒险验证结果
+BOOKMARK [('_Toc244358037', '81')]
+P383 [Caption] 表27 AC1已存实际运行范围
+BOOKMARK [('tbl_v16_results', '82')]
+P384 [Normal] 
+P385 [Normal] 主TB对D/X、X/M、M/W的有效位和pc推进、stall时PC/D/IM保持、X bubble及无效槽副作用逐边沿检查；统一WB完成模型独立于MEM架构写事件，防止成功STR丢失或重复统计。压力循环另逐边沿检查M/W标签与完成总数。相同生产者有多个候选时，未就绪load不得穿越取老同名值。
+P386 [Normal] 
+DRAWING <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" w14:paraId="7E20AC27" w14:textId="77777777" w:rsidR="00DA3ECD" w:rsidRDefault="001E5B05"><w:pPr><w:keepNext/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="3D629702" wp14:editId="0A47ED7D"><wp:extent cx="6353999" cy="2644852"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="9" name="Picture 9"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="Load_STR_统一WB.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId18"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="6353999" cy="2644852"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>
+P387 [Caption] 图10 冻结v1.6历史load→STR波形。AC1对应CSV保持相同：C3保持、C4 bubble、C5从W前递；STR之后保留有效WB。原图身份保留，不冒充本次文档同步的新仿真。
+BOOKMARK [('fig_interlock_trace', '83')]
+P388 [Normal] 样例机器字8300 9100 A000 D001 F000 E000；R1=0021，R3=0020，DM[0020]=0007。C3的load_use禁止取指并保持ID；C5的STR从WB load取得0007，C6在MEM写DM[0021]，C7仍有有效STR WB且无写入。JZ取消年轻F000，C12 HALT WB结束后停止。横轴为用例相对ns，Ck结束边沿在5+10×(k−1)ns；不要把同列D机器字和X pc当作同一条指令。
+P389 [Normal] 冻结v1.6初次记录6a4df640保留原身份。AC1原记录72d99981与核心包内job1记录eae32d52各自绑定13RTL、TB、脚本、镜像及19步执行；后者9份CSV与前者逐字节一致。两次均实际通过2,550冒险案例和131,072前递控制组合，后者仅使用4个数据哨兵，非全16位数据穷举。独立48例含952逐拍行、四个文档例及10复位见证，核心包内记录为验证记录/cpu_ac1_independent_dpgqkqum。完整UUID及路径见证据索引.json；功能PASS不代替板级时序。
+P390 [Heading 2] 覆盖范围与集成验收
+BOOKMARK [('_Toc244358038', '84')]
+P391 [Normal] 验收包括单元输入空间、流水时序和指令执行三个层面。单元回归确认模块功能，流水测试检查跨级行为，指令覆盖则确认当前ISA从译码到架构写入的完整路径。
+P392 [Heading 3] 单元输入与状态覆盖
+BOOKMARK [('_Toc244358039', '85')]
+P393 [Caption] 表28 单元模块的精确覆盖范围
+BOOKMARK [('tbl_unit_coverage', '86')]
+P394 [Normal] 
+P395 [Normal] 课堂要求全量的对象按精确输入空间执行，不能把单op的2^32、通用cin测试的2^33和全部ALU选择的2^35混称同一种全量。长回归按连续区间计数，记录失败反例和最终完成数，关闭逐向量波形/CSV；没有完成日志不写全量通过。
+P396 [Heading 3] 流水相关与停止测试
+BOOKMARK [('_Toc244358040', '87')]
+P397 [Normal] 下表每例独立复位，IM从0000装入机器字，IM/DM各256字。初始RF由TB在第一条取指前预置；这不是ISA增加16位立即数指令。未列寄存器、Z/C/V及DM默认0。下列定向用例已在本版RTL回归中执行；表中保留其验收预期，实际结果见对应CASE_PASS和时序见证。
+P398 [Caption] 表29 流水相关与停止定向用例
+BOOKMARK [('tbl_pipeline_cases', '88')]
+P399 [Normal] 
+P400 [Normal] T09对应tb_datapath.sv的reset_probe，共16次。正常序列为1020 1405 9400 8800 A200 E000，以phase=0至12调用；故障序列为1001 B000 E000，以phase=4至6调用。TB在下降沿断言rst并跨越下一上升沿，检查RF、Z/C/V、PC、valid和停止状态清0，DM全部保持。正常序列phase=5使待写STR遇到复位而禁止写入，phase=6确认已经完成的STR不被清除；故障序列覆盖DRAIN_FAULT和FAULTED复位。随后另一次用例准备再撤销rst；独立audit3另有4次停止边沿或停止后复位并重启的测试。T09是时序测试，不能用顺序指令模型替代。
+P401 [Normal] 集成测试同时检查最终状态和逐拍动作。T01检查CMP后ADD保持Z；T05检查年轻MEM故障同拍老WB仍更新；T08检查前端stall同拍老WB仍完成。本次主回归检查必需时序见证是否实际出现，缺少见证即失败；文档级顺序指令模型仍只用于核对机器字与架构预期，不代替这些RTL记录。
+P402 [Normal] flags_reg的512组覆盖采用“建立旧状态，再执行一次计数转移”的方法，建立状态的时钟不计入512。CU测试覆盖图8的可达转移、RUN下停顿/重定向、DRAIN期间较老写入、停止保持和各状态复位。T07断言HALT在MEM时halted仍为0，在有效HALT的WB结束边沿置1，随后所有valid为0且停止期间没有新访问。T16检查MEM故障与HALT同拍时直接进入DRAIN_FAULT，不应经过DRAIN_HALT或HALTED。DRAIN_HALT中不得出现新的已确认故障，否则TB报告时序契约被违反。故障测试对FAULTED采用相同的WB标记断言。测试设超时退出，避免错误控制导致无限等待。
+P403 [Normal] T17a/T17b在故障STR的MEM周期检查完整EA、dm_en=0和dm_we=0；逐字比较DM，确认没有按低8位误写0000或00FF，同时检查老WB完成及年轻操作取消。该故障STR在下一拍保留有效WB故障标记，结束边沿进入FAULTED。T18a对越界取指检查im_en=0、IF/ID的pc=0100和fetch_fault=1；故障沿有效载荷传到EX确认，再于WB完成停止。T18b检查更老分支取消年轻取指故障，目标HALT正常结束。状态断言在采样边沿的非阻塞赋值更新完成后执行；DM/IM使能在边沿前采样。
+P404 [Heading 3] 全部指令的执行覆盖
+BOOKMARK [('_Toc244358041', '89')]
+P405 [Normal] 以下用例验证MOV寄存器形式、SUB寄存器形式、AND和OR，并检查正确路径上的保留编码以及JZ负位移。每个子例独立复位，沿用前述256字IM/DM和RF预置规则；未列状态为0。正常程序未使用的IM字填B000。表中列出验收预期，本次对应CASE_PASS与时序检查均已完成；后续修改仍须复跑。
+P406 [Caption] 表30 指令执行与故障定向用例
+BOOKMARK [('tbl_instruction_cases', '90')]
+P407 [Normal] 
+P408 [Normal] T18a/T18b按列明的字地址装入稀疏IM镜像，不把机器字依次放在0000起的连续地址；两例均从正常同步复位状态开始。T18b已通过年轻0100取指故障取消及不得进入有效EX的见证检查。其余连续序列按前述从0000装入。本次结论来自迁移后的真实RTL复跑；顺序指令模型只校对编码与架构预期，不代替硬件时序检查。
+P409 [Normal] 下表把14种合法Opcode映射到CPU级执行用例。它检查每种编码是否实际执行、使用正确的数据源并写入正确目标；单元ALU运算覆盖和65,536字译码覆盖不能代替这张表。基本用例通过后，再系统改变Rd/Rs索引、立即数边界、RAW距离及初始标志，执行指令级差分回归。
+P410 [Caption] 表31 全部合法指令的CPU执行覆盖
+BOOKMARK [('tbl_opcode_coverage', '91')]
+P411 [Normal] 
+P412 [Normal] B/F不是合法指令，分别由T14a/T14b检查正确路径故障；功能程序另检查HALT取消年轻保留编码。覆盖计数只在有效指令完成其规定动作时更新，取到或译码到一条最终被取消的指令不算该指令已执行。除目标RF/DM/标志外，TB还要检查未指定写入的寄存器、标志及DM保持不变，并对每次实际副作用核对pc标签、目的和数据。
+P413 [Heading 2] CPU功能验证程序
+BOOKMARK [('_Toc244358042', '92')]
+P414 [Normal] 下面程序从正常复位状态运行，使用MOV建立输入，不依赖TB修改RF内部状态。它覆盖相邻算术相关、存储与加载、load到CMP、Z转发、错误路径取消及HALT结束。
+P415 [Caption] 表32 CPU功能与性能基准程序
+BOOKMARK [('tbl_program', '93')]
+P416 [Normal] 
+P417 [Normal] 最终应为R0=0008、R1=0002、R2=0008、R3=0020、DM[0020]=0008、Z=1、C=1、V=0、fault=0。11个静态机器字中有10条有效动态指令。程序同时验证STR后同地址LDR读取新值，不能只检查RF结果而遗漏DM副作用。
+P418 [Normal] 本测试的其余IM字填B000，DM初始填0。HALT到EX确认前可能已取到其后的保留编码；这些年轻故障标记应被HALT取消，不能一到ID就设置全局fault。停止程序的正确结果仍为halted=1、fault=0。
+P419 [Heading 2] CPU性能验证
+BOOKMARK [('_Toc244358043', '94')]
+P420 [Normal] 功能通过后，在相同程序、初值、存储配置和工具约束下测量性能。C从第一个有效IF周期开始，计至HALT的WB停止标记消费边沿，包含填充、停顿和冲刷，排除复位准备；N统计有效动态指令，包含STR、CMP、分支和HALT，不包括bubble或错误路径。同拍可观察老WB完成与年轻STR在MEM写入，但STR的统一完成计数在后一拍WB。原架构副作用模型仍检查WB后MEM的年龄次序；新增WB完成模型单独检查每条标签，禁止重复计数。
+P421 [Code] CPI = C / N
+P422 [Code] IPC = N / C
+P423 [Code] T_program = C / f
+P424 [Code] MIPS = f / (CPI * 1000000.0)     // f in Hz
+P425 [Normal] AC1基准已存记录仍为17周期、10有效动态指令、1次load-use与1次取分支，逐拍CSV与冻结v1.6一致。17周期由10指令、4拍填充/排空、1拍load-use和2槽分支损失组成；HALT在C15/C16/C17占EX/MEM/WB，C17末停止。局部组合优化未改变周期或副作用时刻；不把OOC估算直接换算为已实现时钟。
+P426 [Normal] TB统计C/N时保留足够位宽的整数计数器，计算CPI、IPC和程序时间时转为实数，避免整数除法截断。上述是度量关系，不是需要在CPU中综合的除法电路。
+P427 [Normal] 报告分别给出C/N、load use停顿数、取分支次数、实际工作时钟以及LUT/FF/BRAM/CARRY资源。程序时间T是比较结果，CPI和f应一起说明；综合资源或理想IPC=1不等于CPU性能验证完成。Fmax只在约束、布局布线和完整setup/hold检查范围内讨论，行为仿真的#1延迟不用于推导Fmax。
+P428 [Heading 2] 设计与集成顺序
+BOOKMARK [('_Toc244358044', '95')]
+P429 [Normal] ISA、位宽、同步存储边沿、模块接口及原随行控制保持。AC1只做两项局部组合实现调整，完成规定的有限功能及OOC证据。Pre4/v1.4、v1.5和冻结v1.6各自保留原记录；本候选不重写CU、ISA或流水线契约。
+P430 [Normal] Pre5已完成控制结构、典型指令、运行模式FSM与有限验证的说明及复核，实现仍保持AC1。后续FPGA集成应在独立副本中固定真实板、顶层、时钟复位、程序装载与同步RAM，再绑定布局布线、DRC和setup/hold证据。控制协议或存储延迟若发生变化，须先修订相应契约并重新验证。
+P431 [Heading 2] 实现验收条件
+BOOKMARK [('_Toc244358045', '96')]
+P432 [Normal] AC1核心OOC真实综合使用Vivado2025.2、xc7z020clg484-1、10.000ns，综合前加载同一XDC，top=datapath_core、out_of_context、flatten_hierarchy none。结果287 LUT、260 FF、整核15 CARRY4，不含端口外IM/DM。RTL指纹与对应功能记录一致；各次执行包装脚本按其原始快照分别保留，旧SHA不要求与job1相同。资源数不是含RAM及板级接口的系统总量。
+P433 [Normal] AC1同条件OOC估算WNS=+2.620ns、TNS=0、零失败端点；冻结v1.6为301 LUT/260 FF、WNS=-1.580ns、TNS=-5.277ns、7端点，原记录不改。AC1最差x_rs[1]→前递→进位链→overflow→m_v，11层、7.373ns，其中4.481ns为未布局布线估计。33输入/53输出缺I/O延迟，HD.CLK_SRC未绑定；仅内部OOC setup目标满足，实际板级100MHz仍未验收。
+P434 [Normal] 课程EES-331用户手册给出的板卡器件是xc7z020clg484-1，PL晶振100 MHz接M19，PL按键S1接L18。此前Vivado截图中的xc7z020clg400-1和旧单元报告的xc7z010clg400-1均不同；最终part、引脚和IO电平必须绑定实际板卡版本，不能跨封装复制XDC。100 MHz是板卡时钟来源，不是本CPU已达到的运行频率；核心可在Zynq的PL中独立实现，无需因器件带PS而自动加入PS/AXI系统。本次OOC DRC另报ZPS7-1缺少PS7配置块的Warning，实际板级顶层须核对启动配置；不能将核心OOC检查当作整板DRC通过。
+P435 [Normal] 综合检查锁存器、组合环和未连接端口；布局布线后检查setup/hold、适用的脉宽/复位要求、DRC及未约束路径。单周期EX路径不能靠false path或multicycle例外隐藏失败。ALU速度比较采用相同器件、相同寄存器边界和约束，手工CLA结构不自动保证FPGA实现更快。
+P436 [Normal] AC1限定功能接受覆盖原合法/故障Opcode、访存及取指保护、年轻取消、停顿/前递、WB停止边沿与同步复位。尚无完整算术穷举、CPU全状态形式证明、完整布局布线、实际setup/hold或下板验收；可变延迟存储未实现。OOC通过不能把这些项目升级为PASS；后续源码变化必须真实复跑并绑定新结果。
+P437 [Normal] AC1指纹与报告见证据索引.json及对应原始归档，本候选文档另有SHA256清单。验证协议1.6-vtools-r1区分真实新执行与历史再校验；job1执行层补丁对应新的脚本指纹，原记录不追改。CLI不发布新XSim PASS，失败尝试和旧成功各保留原身份。本说明引用已存AC1及job1执行记录，不把本次文档核对当作新仿真或新综合。
+P438 [Heading 2] 参考资料
+BOOKMARK [('_Toc244358046', '97')]
+P439 [Normal] 技术参考采用AMD UG474的进位资源说明和AMD UG903的时序约束规则。文档组织参考Ibex Reference Guide与CORE-V Core Integration中的模块、接口和流水描述方法；这些参考不改变本CPU的自定义ISA及五级实现。
+P440 [Normal] 课程方法依据包括CHA Lec 01-B的ISA到数据通路/CU流程、CHA Lec07-Sequential circuits analysis and design的F/Q/G及状态转移方法，以及第7次课.zip中的Lec18 RISC CPU Design-CU design。加减器、HDL、Testbench、性能与ISA/数据通路内容继续参考课程对应资料及《数字系统设计》第二版第4章、第7至8章。课程串行实验FSM用于理解方法，本CPU采用本文规定的五级并行、有效位与模式状态机。
+P441 [Normal] 当前ISA依据为2026年10月11日确认的Group 1至Group 7编码表，与最终Pre4汇报第3页的Opcode分组一致。使用其字段划分与控制副作用规则；机器字示例以第一章按位校核后的结果为准。
+TABLE 1
+项目 | 规定
+数据与指令 | 数据16位 指令定长16位
+通用寄存器 | R0至R3 共4个16位寄存器；R0普通可写
+标志状态 | Z为等值比较结果；C为算术进位或无借位；V为有符号溢出
+执行组织 | IF ID EX MEM WB；顺序单发射 单时钟域
+地址单位 | 一个地址对应一个16位字；顺序PC加1
+存储组织 | Harvard结构；IM与DM独立；基线各256字
+算术结果 | 保留低16位；按模65536计算
+复位 | 高有效同步复位；PC RF Z/C/V 流水valid 停止状态清0
+TABLE 2
+字段 | 位范围 | 位宽 | 用途
+Opcode | [15:12] | 4 | 选择CPU指令
+Rd | [11:10] | 2 | 目的寄存器或第一源；STR的数据源
+Rs | [9:8] | 2 | 第二源或访存基址
+imm8 | [7:0] | 8 | 无符号常数或有符号位移
+TABLE 3
+指令形式 | Opcode | Rd字段 | Rs字段 | imm8字段
+寄存器形式 | 0 2 3 4 6 A | 目的或第一源 | 第二源 | 未使用 置0
+立即数形式 | 1 5 7 | 目的及需要时的旧值源 | 未使用 置0 | 无符号常数
+内存形式 | 8 9 | LDR目的或STR数据源 | 地址基址 | 有符号位移
+分支形式 | C D | 未使用 置0 | 未使用 置0 | C绝对u8 D相对s8
+停止形式 | E | 未使用 置0 | 未使用 置0 | 未使用 置0
+TABLE 4
+Opcode | 指令 | 操作数来源与结果去向 | 标志
+0000 0 | MOV Rd,Rs | R[d] ← R[s] | 保持
+0001 1 | MOV Rd,#u8 | R[d] ← ZExt(imm8) | 保持
+0010 2 | AND Rd,Rs | R[d] ← R[d] AND R[s] | 保持
+0011 3 | OR Rd,Rs | R[d] ← R[d] OR R[s] | 保持
+0100 4 | ADD Rd,Rs | R[d] ← low16(R[d]+R[s]) | 更新C/V
+0101 5 | ADD Rd,#u8 | R[d] ← low16(R[d]+ZExt(imm8)) | 更新C/V
+0110 6 | SUB Rd,Rs | R[d] ← low16(R[d]−R[s]) | 更新C/V
+0111 7 | SUB Rd,#u8 | R[d] ← low16(R[d]−ZExt(imm8)) | 更新C/V
+1000 8 | LDR Rd,[Rs+s8] | EA=low16(R[s]+SExt(imm8))；R[d] ← DM[EA] | 保持
+1001 9 | STR Rd,[Rs+s8] | 同上生成EA；DM[EA] ← R[d] | 保持
+1010 A | CMP Rs1,Rs2 | Rs1占Rd字段，Rs2占Rs字段；Z ← (R[d]==R[s])；不写RF | 更新Z
+1011 B | Reserved | 非法指令；不产生数据写入 | 保持
+1100 C | JUMP #u8 | 下一执行目标=ZExt(imm8) | 保持
+1101 D | JZ #s8 | Z=1时目标=low16(pc+1+SExt(imm8)) | 保持
+1110 E | HALT | 取消年轻指令；老指令完成后停止 | 保持
+1111 F | Reserved | 非法指令；不产生数据写入 | 保持
+TABLE 5
+指令 | 本版v1.5 Opcode | Pre4 v1.4 Opcode | 迁移要求
+AND | 2 | 8 | 两实际寄存器源，alu_op=3；只写RF
+OR | 3 | 9 | 两实际寄存器源，alu_op=4；只写RF
+LDR | 8 | 2 | Rs加符号位移；MR/RW=1，wb_sel=1
+STR | 9 | 3 | 独立基址与数据源；MW=1，RW=0
+TABLE 6
+汇编 | Opcode | Rd | Rs | imm8 | 机器字
+MOV R0,R1 | 0000 | 00 | 01 | 00000000 | 0100
+MOV R0,#0x22 | 0001 | 00 | 00 | 00100010 | 1022
+AND R0,R1 | 0010 | 00 | 01 | 00000000 | 2100
+OR R0,R1 | 0011 | 00 | 01 | 00000000 | 3100
+ADD R0,R1 | 0100 | 00 | 01 | 00000000 | 4100
+ADD R0,#0x22 | 0101 | 00 | 00 | 00100010 | 5022
+SUB R0,R1 | 0110 | 00 | 01 | 00000000 | 6100
+SUB R0,#3 | 0111 | 00 | 00 | 00000011 | 7003
+LDR R0,[R1+2] | 1000 | 00 | 01 | 00000010 | 8102
+STR R0,[R1+2] | 1001 | 00 | 01 | 00000010 | 9102
+CMP R0,R1 | 1010 | 00 | 01 | 00000000 | A100
+JUMP #0x20 | 1100 | 00 | 00 | 00100000 | C020
+JZ −2 | 1101 | 00 | 00 | 11111110 | D0FE
+HALT | 1110 | 00 | 00 | 00000000 | E000
+STR R1,[R2+4] | 1001 | 01 | 10 | 00000100 | 9604
+TABLE 7
+信号 | 方向 | 位宽 | 功能与时序
+clk | 输入 | 1 | 唯一核心时钟 上升沿更新状态
+rst | 输入 | 1 | 高有效同步复位 优先级最高
+im_addr | 输出 | 16 | 取指字地址 来自PC_fetch
+im_en | 输出 | 1 | 合格取指请求；stall/停止/取消时阻止错误取指
+im_dout | 输入 | 16 | 同步IM输出；配合IF/ID的pc/valid供ID使用
+dm_addr | 输出 | 16 | MEM的完整16位EA；物理截位前检查范围
+dm_en | 输出 | 1 | 合格MR或MW访问使能
+dm_we | 输出 | 1 | 合格STR写使能；仅MEM有效访问时为1
+dm_din | 输出 | 16 | EX/MEM保存的已转发STR数据
+dm_dout | 输入 | 16 | 同步DM读结果；供WB的load选择
+halted | 输出 | 1 | HALT完成排空后的停止状态 直到复位
+fault | 输出 | 1 | 故障完成排空后的停止状态 直到复位
+TABLE 8
+周期位置 | IM路径 | DM读路径
+周期k内 | 地址与im_en稳定 | MEM的EA与读使能稳定
+k结束上升沿 | 采样地址 同步登记pc/valid | 采样地址 同步登记rd/写回控制
+周期k+1内 | dout供ID译码 与IF/ID标签一致 | dout供WB选择 与MEM/WB标签一致
+k+1结束上升沿 | ID/EX捕获译码及源值 | RF捕获当前WB的load数据
+TABLE 9
+模块 | 输入 | 输出 | 职责
+isa_decode | inst[15:0] | rd/rs imm 控制字 illegal | 将4位Opcode映射为内部选择及副作用意图
+regfile4x16 | clk rst we 两读地址及写地址各2位 wdata16 | 两路读值各16位 | 4×16双读单写 含WB到ID旁路
+imm_ext16 | imm[7:0] sign_mode | value[15:0] | 明确零扩展或符号扩展
+operand_forward | 实际源索引/use 保存值 M/W生产者 | rd_fwd16 rs_fwd16 | 为EX选择最新已就绪操作数
+alu16 | a16 b16 op3 | result16 eq illegal carry overflow | 组合运算 独立等值比较 产生C/V候选
+pc16 | clk rst hold redirect target16 | pc16 | 复位 重定向 保持 顺序加1
+branch_target16 | branch_pc16 imm8 relative | target16 | JUMP绝对目标或JZ相对目标
+flags_reg | clk rst z_we cv_we z_in c_in v_in | Z C V | 按掩码保存标志
+hazard_control | 各级valid 实际源/use load目标 停止及重定向事件 | hold kill 取指资格 | 仲裁停顿 冲刷和排空
+pipe_regs | clk rst 各级控制及载荷 | 四组流水载荷 | 保存数据 控制和有效性
+TABLE 10
+选择点 | 编码 | 输出用途
+EX转发选择 | M结果优先 W结果次之 最后保存值 | 分别形成rd_fwd和rs_fwd
+alu_a_sel[1:0] | 0=常数0 1=rd_fwd 2=rs_fwd 3=保留 | ALU a
+alu_b_sel[1:0] | 0=常数0 1=rs_fwd 2=imm_ext 3=保留 | ALU b
+ALU result选择 | PASS_B ADD SUB AND OR | result16
+wb_sel | 0=exec_value 1=load_data | RF写回wdata
+Z有效值选择 | M级ZW候选 W级ZW候选 架构Z | JZ条件
+PC下一值 | 合格redirect目标 否则hold或pc+1 | PC_fetch
+TABLE 11
+运算 | result | C | V | 原因
+FFFF+0001 | 0000 | 1 | 0 | 无符号越界 有符号−1+1正常
+7FFF+0001 | 8000 | 0 | 1 | 有符号正数越界
+8000+8000 | 0000 | 1 | 1 | 两类越界同时发生
+0005−0003 | 0002 | 1 | 0 | 无借位 无符号及有符号均正常
+0000−0001 | FFFF | 0 | 0 | 借位 有符号结果−1正常
+8000−0001 | 7FFF | 1 | 1 | 无借位 有符号负数越界
+7FFF−FFFF | 8000 | 0 | 1 | 借位 32767−(−1)越界
+1234−1234 | 0000 | 1 | 0 | 无借位 等值减法
+TABLE 12
+Opcode | use_rd | use_rs | ALU a | ALU b | alu_op | imm_signed
+0 MOV寄存器 | 0 | 1 | 0 | Rs | 0 | 0
+1 MOV立即数 | 0 | 0 | 0 | Imm | 0 | 0
+2 AND | 1 | 1 | Rd | Rs | 3 | 0
+3 OR | 1 | 1 | Rd | Rs | 4 | 0
+4 ADD寄存器 | 1 | 1 | Rd | Rs | 1 | 0
+5 ADD立即数 | 1 | 0 | Rd | Imm | 1 | 0
+6 SUB寄存器 | 1 | 1 | Rd | Rs | 2 | 0
+7 SUB立即数 | 1 | 0 | Rd | Imm | 2 | 0
+8 LDR | 0 | 1 | Rs | Imm | 1 | 1
+9 STR | 1 | 1 | Rs | Imm | 1 | 1
+A CMP | 1 | 1 | Rd | Rs | 0 | 0
+B 保留 | 0 | 0 | 0 | 0 | 0 | 0
+C JUMP | 0 | 0 | 0 | 0 | 0 | 0
+D JZ | 0 | 0 | 0 | 0 | 0 | 1
+E HALT | 0 | 0 | 0 | 0 | 0 | 0
+F 保留 | 0 | 0 | 0 | 0 | 0 | 0
+TABLE 13
+Opcode | RW | MR | MW | ZW | CVW | 其他控制
+0 1 | 1 | 0 | 0 | 0 | 0 | wb_sel=0
+8 | 1 | 1 | 0 | 0 | 0 | wb_sel=1
+9 | 0 | 0 | 1 | 0 | 0 | wb_sel=0
+4 5 6 7 | 1 | 0 | 0 | 0 | 1 | wb_sel=0
+2 3 | 1 | 0 | 0 | 0 | 0 | wb_sel=0
+A | 0 | 0 | 0 | 1 | 0 | wb_sel=0
+B F | 0 | 0 | 0 | 0 | 0 | illegal=1
+C | 0 | 0 | 0 | 0 | 0 | jump_abs=1
+D | 0 | 0 | 0 | 0 | 0 | jump_z=1
+E | 0 | 0 | 0 | 0 | 0 | halt=1
+TABLE 14
+图中方框与实际实现 | 输入与反馈 | 输出与动作
+全局运行模式FSM
+core内部状态与组合逻辑 | mode/mode_next；m_fault_event、x_fault_event、qualified_halt、drain_done、rst | mode_active、stop_pending、halted、fault；不直接产生所有级使能
+IFCU 取指控制
+core组合逻辑＋pc16 | mode、frontend_kill、load_use、fetch_in_range、qualified_redirect、branch_target | fetch_accept、pc_hold、im_en；pc16执行reset > redirect > hold > +1
+IDCU 译码与发射
+isa_decode＋core资格 | d_inst16、d_valid、d_fetch_fault、load_use、frontend_kill | d_rd/rs各2、d_imm8、d_use_rd/rs、d_alu_*、副作用意图、d_fault、x_valid_next
+EXCU 运算与决策
+core组合逻辑 | x_*控制、ALU非法标记、blocked_rd/rs、z_effective、较老MEM故障 | ALU选择、branch_req、halt_req、x_fault_event、qualified_redirect/qualified_halt
+MEMCU 访存保护
+core组合逻辑 | m_valid/fault、m_mem_read/write、完整m_exec_value16、rst、mode_active | m_address_in_range、m_access_fault、m_fault_event、dm_en、dm_we
+WBCU 架构写入
+core组合逻辑 | w_valid/fault、w_reg_write/z_write/cv_write、mode_active、rst | wb_ok、rf_we、z_we、cv_we；STR有效WB不写入
+操作数前递
+operand_forward | x实际源/use与保存值；M/W目标、RW、valid/fault、M就绪状态 | rd_fwd/rs_fwd各16、rd_fwd_sel/rs_fwd_sel各2、blocked_rd/rs；M匹配load阻断旧W
+WB至ID旁路
+regfile4x16内部旁路 | rf_we、w_rd2、wb_data16与d_rd/d_rs | d_rd_value/d_rs_value各16；同地址返回当前WB值
+Z来源选择
+core组合逻辑 | 有效无故障M/W的ZW与cmp_z，已保存Z | z_effective、z_fwd_sel；M > W > Z，候选0同样覆盖
+跨级冒险与事件仲裁
+core组合逻辑 | D真实源、X的MR/rd、MEM/EX事件、rst、mode、各级valid_next | load_use、frontend_kill、d_kill、x_kill、各级valid_next；年龄优先级见3.5节
+四个流水边界
+core寄存器＋外部同步RAM输出 | 本条指令的数据、pc、索引、valid/fault与剩余控制 | D/X/M/W载荷见表15；IM dout是D指令、DM dout是W加载数据，不另加IR/MDR
+TABLE 15
+边界 | 数据及标签 | 控制
+IF/ID | inst16 pc16 | valid fetch_fault各1
+ID/EX | pc16 rd2 rs2 rd_value16 rs_value16 imm_ext16 | valid fault各1；use_rd/use_rs各1；alu_a_sel/alu_b_sel各2；alu_op3；RW/MR/MW/ZW/CVW各1；wb_sel jump_abs jump_z halt各1
+EX/MEM | pc16 rd2 exec_value16 store_data16 cmp_z/c/v各1 | valid fault各1；RW/MR/MW/ZW/CVW各1；wb_sel halt各1
+MEM/WB | pc16 rd2 exec_value16 load_data16 cmp_z/c/v各1 | valid fault各1；RW/ZW/CVW各1；wb_sel halt store各1
+TABLE 16
+编码 | ID | EX | MEM | WB
+0 MOV reg | 读Rs | PASS_B Rs | 有效传递，无DM | 写Rd，无flags
+1 MOV imm | 无实际RF源；ZExt | PASS_B imm | 有效传递，无DM | 写Rd，无flags
+2 AND / 3 OR | 读Rd/Rs | 两源前递，位逻辑 | 有效传递，无DM | 写Rd，保持flags
+4 ADD / 6 SUB reg | 读Rd/Rs | 加减result/C/V | 有效传递，无DM | 写Rd/C/V，Z保持
+5 ADD / 7 SUB imm | 读Rd；ZExt | 加减以imm为b | 有效传递，无DM | 同上
+8 LDR | 只读Rs；SExt | 基址前递，EA | 合法DM同步读 | load写Rd，flags保持
+9 STR | Rd数据/Rs基址；SExt | 两源分别前递 | 合法DM写一次；valid继续 | store/pc/valid保留，无写入
+A CMP | 读Rd/Rs | eq产生cmp_z | cmp_z/ZW有效传递 | 只写Z
+C JUMP / D JZ | 无RF源；目标扩展 | EX合格redirect；JZ取最新Z | 分支自身有效传递，无DM | 有效完成，无写入
+E HALT | 停止意图 | 按年龄确认DRAIN | 停止token有效传递 | 消费token且下一拍空才停止
+B/F与fetch fault | 故障标签 | 未被取消则确认fault | 无副作用token传递 | 消费token，FAULTED
+TABLE 17
+机制 | 实现位置 | 主要接口与动作
+HDU | core内逻辑；未新增实体 | X load/rd2与D源/use/valid/fault；load_use1
+操作数前递 | operand_forward原样复用 | M/W目标及资格；每路sel2、fwd16、blocked1
+WB到ID旁路 | RF原样复用 | rf_we、w_rd2、wb_data16，同址组合返回
+Load-use interlock | core内逻辑复用 | PC/D hold，IM en=0，X bubble，M/W推进
+Flag forwarding | core内Z选择复用 | M/W ZW候选及保存Z；z_effective1
+Redirect / Flush | core仲裁复用 | target16；取消D/IF，MEM fault另取消X
+Buffer / valid | 现有流水载荷，core最小修改 | w_valid_next=m_valid；w_store1；无FIFO/额外IR/MDR
+Stop / Reset | 原RUN/DRAIN/HALTED/FAULTED | 停止token+valid_next；按年龄仲裁，rst最高
+TABLE 18
+周期 | 阶段 | 数据与控制 | 结束边沿
+C1 | IF | im_addr=0000 合格im_en=1 | IM返回5001 登记pc/valid
+C2 | ID | Opcode=5；use_rd=1 use_rs=0；imm_ext=0001；RW=1 CVW=1 | 保存R0旧值 源索引及控制
+C3 | EX | a=rd_fwd=7FFF b=0001 op=1；result=8000 C=0 V=1 | EX/MEM锁存result和C/V候选
+C4 | MEM | MR=MW=0；DM不访问 | 载荷传入MEM/WB
+C5 | WB | wb_sel=0；合格RW/CVW为1；ZW=0 | R0写8000 C/V写0/1 Z保持
+TABLE 19
+周期 | 阶段 | LDR数据与控制 | STR数据与控制
+C1 | IF | 取指并保存pc | 取指并保存pc
+C2 | ID | use_rs=1；MR=RW=1 wb_sel=1；ZW=CVW=0 | use_rd=use_rs=1；MW=1 RW=0；ZW=CVW=0
+C3 | EX | 转发Rs加符号位移；EA进exec_value | 同样生成EA；rd_fwd另锁入store_data
+C4 | MEM | 范围合法后dm_en=1 dm_we=0；读结果随rd/valid供WB | 范围合法后dm_en=dm_we=1；边沿写DM
+C5 | WB | 选load_data，合格RF写入；EA不写RF | 有效STR标签到WB；不写RF或标志，不再次访问DM
+TABLE 20
+周期 | CMP | JZ | 前端与架构动作
+C1 | IF | 未进入 | 取pc0
+C2 | ID | IF | 译码CMP并取pc1
+C3 | EX产生cmp_z=1 | ID | 取pc2 默认顺序推进
+C4 | MEM携带ZW与cmp_z | EX | JZ由M级转发取得Z=1；周期末PC改0003，取消ID的pc2和当拍IF
+C5 | WB更新架构Z=1 | MEM无数据写入 | 目标pc3进入IF
+TABLE 21
+周期 | LDR R0,[R1] | ADD R2,R0 | 关键动作
+C1 | IF | 未进入 | 正常
+C2 | ID | IF | 正常
+C3 | EX | ID保持 | 检测load use；阻止覆盖IF/ID；下周期EX插bubble
+C4 | MEM | ID | DM在结束边沿返回数据 消费者进入EX
+C5 | WB | EX | 从W的load_data转发a/b对应实际源
+C6 | 已完成 | MEM | 普通结果传递
+C7 | 已完成 | WB | 写R2及本条C/V
+TABLE 22
+类别 | 解决机制 | 停顿或验证实例
+ALU/MOV到ALU、MOV寄存器或CMP | M非load优先；中隔1条用W，中隔2条WB到ID | 0；RAW_P0至7_C0/2/3/4/5/6/7/a_R*_S*_G*
+ALU/MOV到LDR/STR基址 | Rs前递后接ALU a，符号位移接b | 0；RAW_P0至7_C8/9_R*_S1_G*
+ALU/MOV到STR数据 | Rd前递独立保存store_data | 0；RAW_P0至7_C9_R*_S0_G*
+LDR到MOV reg/ALU/CMP | 相邻load-use；用W load数据，禁止M地址 | 相邻1，其余0；RAW_P8_C0/2/3/4/5/6/7/a
+LDR到LDR/STR基址 | 同一load-use规则应用真实Rs | 相邻1，其余0；RAW_P8_C8/9_S1
+LDR到STR数据 | 真实Rd参与检测，W前递到store_data | 相邻1，其余0；RAW_P8_C9_S0
+Rd与Rs相同 | 两路独立选择同一最新值；R0亦同 | 0或1；RAW_*_S2覆盖648例
+多生产者同名 | M匹配先于W；M load未就绪阻止穿越旧W | NEWEST与NEW_LOAD_AFTER_TWO_WRITERS
+WB与ID同址 | RF内显式旁路，ID捕获本拍wb_data | 0；全部G2例
+假相关 | 只比较use掩码允许的源 | 0；FALSE_MOV 64例、FALSE_LDR_DEST 4例
+CMP到JZ | M ZW优先W再saved；0覆盖旧1 | 0数据停顿；FLAG 84例与原连续CMP
+taken / not-taken | taken清D和IF，自身M/W有效；not-taken继续 | taken 2槽；FLUSH_CLASS_0至f
+MEM fault与EX事件 | 老MEM故障优先于redirect/HALT/load-use | T16、MEM_FAULT_OVER_REDIRECT、MEM_FAULT_WITH_LOAD_USE
+HALT / EX fault | 老M/W推进，年轻取消，WB消费停止token | T07、STR_THEN_HALT、LEGAL_STR_BEFORE_EX_FAULT
+同步存储/结构 | Harvard分离；DM每拍一个M请求；RF 2读1写 | 0结构停顿；MEM_BACK_TO_BACK、TRACE_LOAD_STR
+WAW / WAR / C/V读取 | 固定WB顺序、老EX消费先于年轻WB；无C/V读指令 | 架构排除，无额外scoreboard
+TABLE 23
+优先级 | 事件 | 前端与年轻指令 | 较老级
+1 | 同步复位 | PC/valid/停止状态清0 | RF和Z/C/V清0 复位边沿禁止DM写
+2 | MEM自身故障 | 停取指 取消当前EX及更年轻动作 | 故障MEM不访问 老WB仍完成
+3 | EX故障或HALT | 停取指 取消两个年轻槽 | 老MEM/WB继续 完成后停止
+4 | EX合格重定向 | PC取目标 清年轻槽并取消错误路径IF | 老MEM/WB完成
+5 | load use | PC/IF/ID保持 ID/EX插bubble | load及老MEM/WB推进
+6 | 正常推进 | 逐拍接收载荷 | 逐拍完成
+TABLE 24
+当前mode | 输入条件 | 下一mode | 当前O | 边沿动作与结果
+任意状态 | rst=1 | RUN | 依当前态 | 清PC/RF/标志/valid，禁本拍写入；已写DM保留
+RUN 000 | E=1 | DRAIN_FAULT | 0,0 | 禁止故障副作用，按年龄取消年轻槽
+RUN 000 | E=0,H=1 | DRAIN_HALT | 0,0 | 停取指；老合格指令与停止标记继续
+RUN 000 | E=0,H=0 | RUN | 0,0 | 正常推进、互锁或分支取消
+DRAIN_HALT 001 | D=0 | DRAIN_HALT | 0,0 | 老合格指令与HALT标记继续
+DRAIN_HALT 001 | D=1 | HALTED | 0,0 | 消费WB标记；边沿后O=1,0
+DRAIN_FAULT 010 | D=0 | DRAIN_FAULT | 0,0 | 老合格指令与故障标记继续
+DRAIN_FAULT 010 | D=1 | FAULTED | 0,0 | 消费WB标记；边沿后O=0,1
+HALTED 011 | 任意E/H/D | HALTED | 1,0 | 保持停止，禁止访问与写入
+FAULTED 100 | 任意E/H/D | FAULTED | 0,1 | 保持停止，禁止访问与写入
+101/110/111 | 任意E/H/D | FAULTED | 0,0 | 非法模式禁访问/写入；本沿转故障停止
+TABLE 25
+源文件或模块 | 与本规格关系 | 接入要求
+rtl/regfile4x16.v | 已有4×16 RF 含WB到ID旁路 | we接合格rf_we；两读口接Rd/Rs
+rtl/pc16.v | 已有reset > redirect > hold > increment | redirect/hold由资格与优先级控制生成
+rtl/imm_ext16.v | 已有零/符号扩展 | sign_mode来自本条新译码
+rtl/branch_target16.v | 已有绝对/相对目标计算 | branch_pc来自EX随行标签
+rtl/alu16.v、addsub16_cla.v | AC1用17位求和推断进位链；C/V接口不变 | core→alu16→addsub；cla16/cla4仅独立单元
+rtl/isa_decode.v | 已采用AND/OR=2/3、LDR/STR=8/9 | 控制表与独立合约均已遍历65,536字
+rtl/flags_reg.v | 已实现独立Z/CV写入和同步复位 | 继续核对保存字段及指令写掩码
+rtl/datapath_core.sv | 原流水、仲裁、停止不变；M前递接寄存m_fault | MEM故障年龄取消仍保留；AC1有限回归已绑定
+rtl/sync_memories.v | 已实现固定单周期同步IM/DM | 保持en保持及标签对齐；DM不随复位清空
+九个TB入口及两份.svh | 合约、单元、主回归、压力、手写事件检查 | 独立ISA预期与手算边界、真值表前递及逐拍检查；绑定当前源码和日志
+TABLE 26
+周期位置 | 有效载荷或条件 | 观测结果 | 检查的行为
+C9边沿前 | X的LDR pc6，D的CMP pc7 | stall=1，im_en=0；M的STR pc5有效 | 只保持前端，老STR在本边沿写DM[0020]=0008
+C10边沿前 | M的LDR pc6，X为bubble | dm_en=1 dm_we=0；DM读在结束边沿返回 | load与WB标签同边沿对齐；老STR为有效WB，无架构写入
+C11边沿前 | W的LDR pc6，X的CMP pc7 | W返回0008并转发至CMP实际源 | 不将M级load地址当作数据
+C12边沿前 | X的JZ pc8，M的CMP pc7 | redirect=1；目标000A；候选Z=1 | 最近CMP前递，取消年轻pc9及IF响应
+C15至C17 | HALT pcA依次占EX MEM WB | C17结束边沿halted=1，fault=0 | WB消费停止标记；10条动态指令17周期
+TABLE 27
+对象 | 实际检查数量 | 结果与边界
+译码/边界 | 65,536字及14手算ALU例 | PASS；ISA v1.5不变
+原主回归 | 128程序+16复位，3,380有效完成 | PASS；128最终状态和周期相同
+原单元 | 独立CLA16及AC1 addsub各564,300，ALU2,257,200 | PASS；限定输入范围
+原压力 | 4,696案例，33,134有效完成，1,408 fault tokens | PASS；加统一WB数量与M/W标签检查
+原独立手写 | 12定向+4重启 | PASS；旧架构状态预期保留
+RAW矩阵 | 1,728单源+648同源双读=2,376 | PASS；9生产者、10消费者、4寄存器、3距离
+假相关/Z/交叉 | 68 / 84 / 22；另复跑16复位 | PASS；新hazards总计2,550
+前递控制空间 | 2^17=131,072；4个不同数据哨兵 | PASS；非完整16位数据穷举
+统一WB smoke | 5完成；1 DM写；1 STR WB；1 branch WB | PASS；v1.5同测试失败属历史
+短时序样例 | 12周期，5完成，1stall，1redirect | PASS；原生interlock.vcd保留
+TABLE 28
+对象 | 输入或状态范围 | 验收重点
+CLA4 | a4 b4 cin1 共512组 | sum cout P/G及cin独立性
+CLA16 独立单元 | a16 b16 cin1 全量为2^33 | 结果与进位 长进位 组间超前结构
+AC1 ADD/SUB核心 | a16 b16 sub1 全量为2^33 | 每种运算2^32；result/C/V均检查
+ALU | a16 b16 op3 全二进制空间2^35 | 5合法及3非法op eq独立 非算术C/V=0
+新译码器 | 全部65,536指令字 | 两张控制表 源/use 选择 扩展与副作用
+扩展器 | imm8 mode1 共512组 | 零扩展 符号扩展
+flags_reg | 8旧状态×2rst×4使能×8输入 共512组 | 复位 保持 独立字段及同时写
+TABLE 29
+用例 | 初始条件与机器字序列 | 预期状态与时序
+T01 CMP后算术 | R0=0001 R1=0001 R2=FFFF；A100 5801 D001 1C55 E000 | ADD后R2=0000 C=1 V=0；Z仍1；JZ跳过MOV R3
+T02 连续CMP | R0=0001 R1=0002；A000 A100 D001 1855 E000 | 最近CMP输出0覆盖旧1；JZ不跳；R2=0055
+T03 地址运算保持标志 | R0=7FFF R1=0020 DM[001F]=BEEF；5001 89FF 9900 E000 | R0=8000 C=0 V=1；R2及DM[0020]=BEEF；访存保持C/V；load到STR数据停1拍
+T04 错误路径写入 | R0=FFFF；C003 5001 A000 E000 | ADD/CMP均被取消；RF和Z/C/V保持
+T05 老WB与年轻故障 | R0=7FFF R1=00FF；5001 8901 5801 E000 | ADD在WB与LDR在MEM越界同拍；R0=8000 C=0 V=1；故障load和年轻ADD无写入
+T06 load use与CMP | R1=0020 R2=0001 DM[0020]=0001；8100 A200 D001 1C55 E000 | load到CMP停1拍；R0=1 Z=1；JZ跳过MOV R3
+T07 HALT排空 | R0=0020 DM[0020]=1234；8400 E000 9401 | 老LDR写R1=1234；HALT后STR取消，DM[0021]保持0
+T08 停顿不冻结WB | R0=7FFF R1=0020 DM[0020]=0001；5001 1C00 8900 4A00 E000 | load到ADD R2,R2停1拍；同拍老ADD写C=0 V=1；末尾R2=2 C=0 V=0
+TABLE 30
+用例 | 初始条件与机器字序列 | 预期状态与时序
+T10 MOV寄存器 | R0=55AA；Z=C=V=1；140F 0100 E000 | R1及R0=000F；Z/C/V保持1；紧邻MOV使用Rs转发，不读取旧Rd
+T11a SUB无借位及溢出 | R0=8000 R1=0001 Z=1；6100 E000 | R0=7FFF C=1 V=1 Z=1；R1保持0001
+T11b SUB借位 | R0=0000 R1=0001 Z=1；6100 E000 | R0=FFFF C=0 V=0 Z=1；不能把borrow直接当作C
+T12 AND | R0=A5A5 R1=0F0F；Z=C=V=1；2100 E000 | R0=0505 R1=0F0F；Z/C/V保持1，不被非算术C/V候选0覆盖
+T13 OR | R0=A500 R1=00A5；Z=C=V=1；3100 E000 | R0=A5A5 R1=00A5；Z/C/V保持1
+T14a 保留B编码 | 1001 B000 1402 E000 | 老MOV完成，R0=0001；年轻MOV/HALT取消；R1=0 fault=1 halted=0
+T14b 保留F编码 | 1001 F000 1402 E000 | 与T14a相同；故障标记在WB消费前fault仍为0
+T15 JZ负位移 | 1002 1401 7001 A100 D0FD E000 | pc=0004的目标为0002；第一次跳，第二次不跳；末尾R0=0 R1=1 Z=0 C=1 V=0
+T16 MEM故障优先于HALT | R1=00FF R2=55AA；8901 E000 1001 | LDR越界同拍取消EX的HALT；R2保持55AA R0=0；fault=1 halted=0
+T17a STR上界越界 | R0=7FFF R1=00FF Z=1 DM[0000]=CAFE DM[00FF]=BEEF；5001 9101 1C55 E000 | EA=0100；DM全部保持；老ADD写R0=8000 C=0 V=1 Z=1；年轻MOV取消；fault=1 halted=0
+T17b STR负位移越界 | R1=0000 DM[00FF]=BEEF；1001 91FF E000 | EA=FFFF；DM全部保持；老MOV写R0=0001；HALT取消；fault=1 halted=0
+T18a 正确路径取指越界 | IM[0000]=C0FF IM[00FF]=1001；其余IM填B000 | 跳至00FF，MOV写R0=0001；下一取指0100产生故障；fault=1 halted=0；DM保持
+T18b 分支取消取指故障 | IM[0000]=C0FF IM[00FF]=C002 IM[0002]=E000；其余IM填B000 | 00FF的JUMP取消年轻0100取指故障，转至0002；HALT正常结束；RF/DM保持0，fault=0 halted=1
+TABLE 31
+指令编码 | 指令形式 | CPU执行用例 | 必须检查
+0 | MOV Rd,Rs | T10 | PASS_B与Rs选择；Rd写回；标志保持
+1 | MOV Rd,#u8 | T10及功能程序 | 零扩展；不使用旧Rd；标志保持
+2 | AND | T12 | 按位结果；只写RF；Z/C/V保持
+3 | OR | T13 | 按位结果；只写RF；Z/C/V保持
+4 | ADD Rd,Rs | T08及功能程序 | 两源转发；RF与C/V写回；Z保持
+5 | ADD Rd,#u8 | T01 T03 T08 | 零扩展；C/V边界及Z保持
+6 | SUB Rd,Rs | T11a T11b | C为无借位；V独立；Z保持
+7 | SUB Rd,#u8 | T15及功能程序 | 零扩展；低16位结果与C/V
+8 | LDR | T03 T05 T06 T07 | 符号位移；DM读及WB；越界禁止写回
+9 | STR | T03及功能程序；T17a/T17b | 合法写入；越界禁止DM访问；故障标记保留
+A | CMP | T01 T02 T06 | 只写Z；最近CMP优先；不写RF/C/V
+C | JUMP #u8 | T04 T18a T18b | 绝对目标；取指边界；年轻副作用取消
+D | JZ #s8 | T01 T02 T15 | 跳与不跳；负位移；使用指令pc标签
+E | HALT | T07及功能程序 | 老操作完成；年轻操作取消；WB结束标记
+TABLE 32
+字地址 | 机器字 | 指令 | 预期动作
+0000 | 1005 | MOV R0,#5 | R0=0005
+0001 | 1403 | MOV R1,#3 | R1=0003
+0002 | 4100 | ADD R0,R1 | 转发源值；R0=0008 C=0 V=0
+0003 | 7401 | SUB R1,#1 | R1=0002 C=1 V=0
+0004 | 1C20 | MOV R3,#32 | R3=0020
+0005 | 9300 | STR R0,[R3+0] | DM[0020]=0008
+0006 | 8B00 | LDR R2,[R3+0] | R2=0008
+0007 | A200 | CMP R0,R2 | load use停1拍；Z=1
+0008 | D001 | JZ +1 | 目标000A；使用CMP候选Z
+0009 | 14FF | MOV R1,#255 | 错误路径；不得执行
+000A | E000 | HALT | 排空后halted=1

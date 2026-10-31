@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="850" viewBox="0 0 1500 850">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#16618A"/></marker><style>text{font-family:Arial,sans-serif;fill:#153348} .h{font-size:29px;font-weight:bold} .t{font-size:22px;font-weight:bold} .b{font-size:20px} .s{font-size:17px} .box{fill:#FFF;stroke:#7895A6;stroke-width:1.5} .arrow{fill:none;stroke:#16618A;stroke-width:3;marker-end:url(#arrow)}</style></defs>
+<rect width="1500" height="850" fill="#F7FAFC"/>
+<text x="50" y="55" class="h">ADD immediate · 5001 · ADD R0,#1</text><text x="50" y="93" class="b">Example: R0=7FFF, Z=1 → R0=8000, C=0, V=1, Z remains 1</text>
+<path class="arrow" d="M290 246H347"/><path class="arrow" d="M610 246H667"/><path class="arrow" d="M930 246H987"/><path class="arrow" d="M1210 246H1265"/>
+<rect x="50" y="170" width="240" height="150" rx="10" class="box"/><text x="70" y="205" class="t">① Actual operands</text><text x="70" y="244" class="b">Rd forwarding → 7FFF</text><text x="70" y="279" class="b">ZExt(01) → 0001</text><text x="70" y="308" class="s">use_rd=1; use_rs=0</text>
+<rect x="350" y="170" width="260" height="150" rx="10" class="box"/><text x="370" y="205" class="t">② Operand MUXes</text><text x="370" y="244" class="b">a = rd_fwd</text><text x="370" y="279" class="b">b = imm_ext</text><text x="370" y="308" class="s">a_sel=1; b_sel=2</text>
+<rect x="670" y="170" width="260" height="150" rx="10" class="box"/><text x="690" y="205" class="t">③ Two-level CLA16</text><text x="690" y="244" class="b">op=1 (ADD); sub=0</text><text x="690" y="279" class="b">result=8000</text><text x="690" y="308" class="s">candidate C=0; V=1</text>
+<rect x="990" y="170" width="220" height="150" rx="10" class="box"/><text x="1010" y="205" class="t">④ Payload travel</text><text x="1010" y="244" class="b">EX/MEM → MEM/WB</text><text x="1010" y="279" class="s">exec_value + C/V</text><text x="1010" y="308" class="s">same pc / valid / masks</text>
+<rect x="1270" y="170" width="180" height="150" rx="10" class="box"/><text x="1287" y="205" class="t">⑤ WB edge</text><text x="1287" y="244" class="b">R0 ← 8000</text><text x="1287" y="279" class="b">C/V ← 0/1</text><text x="1287" y="308" class="s">ZW=0: keep Z</text>
+<text x="50" y="390" class="t">One instruction, five overlapping pipeline cycles</text>
+<rect x="50" y="430" width="1400" height="56" fill="#16618A"/>
+<g fill="white" font-family="Arial" font-size="21" font-weight="bold"><text x="70" y="467" style="fill:white">Cycle / stage</text><text x="310" y="467" style="fill:white">Combinational work during cycle</text><text x="1030" y="467" style="fill:white">End rising edge</text></g>
+<g class="b"><text x="70" y="520">C1 / IF</text><text x="310" y="520">im_addr=0000; im_en=1</text><text x="1030" y="520">IM dout + pc/valid align</text>
+<text x="70" y="572">C2 / ID</text><text x="310" y="572">Decode 5001; read R0; zero-extend immediate</text><text x="1030" y="572">Capture ID/EX payload</text>
+<text x="70" y="624">C3 / EX</text><text x="310" y="624">Forward operands; 7FFF+0001=8000; C=0 V=1</text><text x="1030" y="624">Capture result and flags</text>
+<text x="70" y="676">C4 / MEM</text><text x="310" y="676">No memory request: MR=0, MW=0</text><text x="1030" y="676">Pass payload into WB</text>
+<text x="70" y="728">C5 / WB</text><text x="310" y="728">wb_sel=0; valid &amp; !fault; RW=1 CVW=1 ZW=0</text><text x="1030" y="728">Write RF and C/V</text></g>
+<path d="M50 538H1450M50 590H1450M50 642H1450M50 694H1450M50 746H1450" stroke="#CBDAE3"/>
+<text x="50" y="810" class="s">Logical instruction flow. SUB uses the same path with sub=1; memory address ADD has CVW=0. Candidate flags are not architectural writes.</text>
+</svg>

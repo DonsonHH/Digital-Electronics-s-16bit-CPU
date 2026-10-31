@@ -1,0 +1,609 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Fri Oct  9 09:27:20 2026
+# Process ID         : 154124
+# Current directory  : C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final
+# Command line       : vivado.exe -mode batch -source eda.tcl -log eda.log -nojournal
+# Log file           : C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/eda.log
+# Journal file       : 
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 28470 MB
+# Total Virtual      : 61990 MB
+# Available Virtual  : 22537 MB
+#-----------------------------------------------------------
+source eda.tcl
+# set root [file dirname [file normalize [info script]]]
+# cd $root
+# set part xc7z020clg484-1
+# if {[llength [get_parts $part]] != 1} {error "Required part unavailable: $part"}
+# file mkdir eda
+# set sources [concat [glob rtl/*.v] [glob rtl/*.sv]]
+# start_gui
+# foreach {top stem} {datapath_core rtl_core alu16 rtl_alu cla16 rtl_cla16 cla4_pg rtl_cla4 operand_forward rtl_forward flags_reg rtl_flags} {
+#  create_project -in_memory -part $part
+#  read_verilog -sv $sources
+#  synth_design -rtl -top $top -part $part
+#  show_schematic -name $stem [get_nets]
+#  write_schematic -force -format pdf -name $stem -orientation landscape eda/${stem}.pdf
+#  close_project
+# }
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:ac701:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\ac701\1.4\board.xml as part xc7a200tfbg676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:emb-plus-vpr-4616:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\emb-plus-vpr-4616\1.0\board.xml as part xcve2302-sfva784-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:emb-plus-vpr-4616:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\emb-plus-vpr-4616\1.1\board.xml as part xcve2302-sfva784-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kc705:part0:1.6 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kc705\1.6\board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kc705:part0:1.7 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kc705\1.7\board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu105:part0:1.6 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu105\1.6\board.xml as part xcku040-ffva1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu105:part0:1.7 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu105\1.7\board.xml as part xcku040-ffva1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu116:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu116\1.4\board.xml as part xcku5p-ffvb676-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu116:part0:1.5 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu116\1.5\board.xml as part xcku5p-ffvb676-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu1500:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu1500\1.2\board.xml as part xcku115-flvb2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:scu35:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\scu35\1.0\board.xml as part xcsu35p-sbvb625-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:sp701:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\sp701\1.0\board.xml as part xc7s100fgga676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:sp701:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\sp701\1.1\board.xml as part xc7s100fgga676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:v80:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\v80\1.0\board.xml as part xcv80-lsva4737-2mhp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc707:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc707\1.4\board.xml as part xc7vx485tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc707:part0:1.5 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc707\1.5\board.xml as part xc7vx485tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc709:part0:1.8 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc709\1.8\board.xml as part xc7vx690tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:2.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\2.2\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.0\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.1\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.2\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.3\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.4\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190_newl:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190_newl\production\1.0\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190_newl:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190_newl\production\1.1\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190_newl:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190_newl\production\1.2\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190_newl:part0:1.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190_newl\production\1.3\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu108:part0:1.6 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu108\1.6\board.xml as part xcvu095-ffva2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu108:part0:1.7 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu108\1.7\board.xml as part xcvu095-ffva2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu110:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu110\1.4\board.xml as part xcvu190-flgc2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu118:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu118\2.0\board.xml as part xcvu9p-flga2104-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu118:part0:2.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu118\2.3\board.xml as part xcvu9p-flga2104-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu118:part0:2.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu118\2.4\board.xml as part xcvu9p-flga2104-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu128:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu128\production\1.0\board.xml as part xcvu37p-fsvh2892-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu129:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu129\production\1.0\board.xml as part xcvu29p-fsga2577-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu1525:part0:1.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu1525\1.3\board.xml as part xcvu9p-fsgd2104-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek280\production\1.0\board.xml as part xcve2802-vsvh1760-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek280\production\1.1\board.xml as part xcve2802-vsvh1760-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek280\production\1.2\board.xml as part xcve2802-vsvh1760-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek385:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek385\1.0\board.xml as part xc2ve3858-ssva2112-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek385:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek385\1.1\board.xml as part xc2ve3858-ssva2112-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek385_1:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek385_2\1.0\board.xml as part xc2ve3858-ssva2112-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vermeo_t1_mpsoc:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vermeo_t1_mpsoc\1.0\board.xml as part xczu19eg-ffvd1760-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vermeo_t1_rfsoc:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vermeo_t1_rfsoc\1.0\board.xml as part xczu21dr-ffvd1156-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vhk158\production\1.0\board.xml as part xcvh1582-vsva3697-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vhk158\production\1.1\board.xml as part xcvh1582-vsva3697-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vhk158\production\1.2\board.xml as part xcvh1582-vsva3697-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:2.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\2.2\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:3.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\3.0\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:3.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\3.1\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:3.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\3.2\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:3.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\3.3\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180_newl:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180_newl\production\1.0\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180_newl:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180_newl\production\1.1\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk120\production\1.0\board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk120\production\1.1\board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk120\production\1.2\board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk180:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk180\production\1.0\board.xml as part xcvp1802-lsvc4072-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk180:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk180\production\1.1\board.xml as part xcvp1802-lsvc4072-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk180:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk180\production\1.2\board.xml as part xcvp1802-lsvc4072-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vrk160:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vrk160\1.0\board.xml as part xcvr1602-vsva2488-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vrk160:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vrk160\1.1\board.xml as part xcvr1602-vsva2488-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zc706:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zc706\1.4\board.xml as part xc7z045ffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zc706:part0:1.5 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zc706\1.5\board.xml as part xc7z045ffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu102:part0:3.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu102\3.3\board.xml as part xczu9eg-ffvb1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu102:part0:3.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu102\3.4\board.xml as part xczu9eg-ffvb1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu111\1.2\board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu111\1.3\board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu111\1.4\board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu1275:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu1275\1.0\board.xml as part xczu29dr-ffvf1760-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu1285:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu1285\1.0\board.xml as part xczu39dr-ffvf1760-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu208:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu208\production\2.0\board.xml as part xczu48dr-fsvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu208ld:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu208ld\production\2.0\board.xml as part xczu58dr-fsvg1517-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu216\production\2.0\board.xml as part xczu49dr-ffvf1760-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216ld:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu216ld\production\2.0\board.xml as part xczu59dr-ffvf1760-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu670\2.0\board.xml as part xczu67dr-fsve1156-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu670ld\1.0\board.xml as part xczu57dr-fsve1156-2-i specified in board_part file is either invalid or not available
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/AMDDesignTools/2025.2/Vivado/data/ip'.
+create_project: Time (s): cpu = 00:00:19 ; elapsed = 00:00:10 . Memory (MB): peak = 1652.512 ; gain = 182.410
+Command: synth_design -rtl -top datapath_core -part xc7z020clg484-1
+Starting synth_design
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 150868
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2398.961 ; gain = 532.129
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'datapath_core' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'pc16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/pc16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/pc16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'isa_decode' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/isa_decode.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'isa_decode' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/isa_decode.v:4]
+INFO: [Synth 8-6157] synthesizing module 'imm_ext16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'imm_ext16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regfile4x16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'regfile4x16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'flags_reg' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/flags_reg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'flags_reg' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/flags_reg.v:4]
+INFO: [Synth 8-6157] synthesizing module 'operand_forward' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/operand_forward.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'operand_forward' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/operand_forward.v:6]
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'addsub16_cla' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/addsub16_cla.v:4]
+INFO: [Synth 8-6157] synthesizing module 'cla16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'cla4_pg' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla4_pg' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'addsub16_cla' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/addsub16_cla.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'branch_target16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'branch_target16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'datapath_core' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/datapath_core.sv:8]
+WARNING: [Synth 8-6014] Unused sequential element m_pc_reg was removed.  [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/datapath_core.sv:278]
+WARNING: [Synth 8-6014] Unused sequential element w_pc_reg was removed.  [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/datapath_core.sv:283]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2523.098 ; gain = 656.266
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2523.098 ; gain = 656.266
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2523.098 ; gain = 656.266
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.025 . Memory (MB): peak = 2523.098 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2589.117 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+RTL Elaboration Complete:  : Time (s): cpu = 00:00:28 ; elapsed = 00:00:23 . Memory (MB): peak = 2717.133 ; gain = 850.301
+34 Infos, 79 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:29 . Memory (MB): peak = 2717.133 ; gain = 1064.621
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/AMDDesignTools/2025.2/Vivado/data/ip'.
+Command: synth_design -rtl -top alu16 -part xc7z020clg484-1
+Starting synth_design
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2783.828 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'addsub16_cla' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/addsub16_cla.v:4]
+INFO: [Synth 8-6157] synthesizing module 'cla16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'cla4_pg' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla4_pg' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'addsub16_cla' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/addsub16_cla.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/alu16.v:4]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2867.969 ; gain = 84.141
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2867.969 ; gain = 84.141
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2867.969 ; gain = 84.141
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2867.969 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2967.051 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+RTL Elaboration Complete:  : Time (s): cpu = 00:00:17 ; elapsed = 00:00:15 . Memory (MB): peak = 3597.395 ; gain = 813.566
+15 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:16 . Memory (MB): peak = 3597.395 ; gain = 813.566
+close_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:12 . Memory (MB): peak = 3610.863 ; gain = 12.129
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/AMDDesignTools/2025.2/Vivado/data/ip'.
+Command: synth_design -rtl -top cla16 -part xc7z020clg484-1
+Starting synth_design
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 3610.863 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'cla16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'cla4_pg' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla4_pg' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla16.v:4]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 3610.863 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 3610.863 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 3610.863 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 3610.863 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3610.863 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+RTL Elaboration Complete:  : Time (s): cpu = 00:00:17 ; elapsed = 00:00:16 . Memory (MB): peak = 3610.863 ; gain = 0.000
+11 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 3610.863 ; gain = 0.000
+close_project: Time (s): cpu = 00:00:03 ; elapsed = 00:00:10 . Memory (MB): peak = 3610.863 ; gain = 0.000
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/AMDDesignTools/2025.2/Vivado/data/ip'.
+Command: synth_design -rtl -top cla4_pg -part xc7z020clg484-1
+Starting synth_design
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 3610.863 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'cla4_pg' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla4_pg' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 3610.863 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 3610.863 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 3610.863 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3610.863 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3610.863 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+RTL Elaboration Complete:  : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 3610.863 ; gain = 0.000
+9 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 3610.863 ; gain = 0.000
+close_project: Time (s): cpu = 00:00:03 ; elapsed = 00:00:10 . Memory (MB): peak = 3610.863 ; gain = 0.000
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/AMDDesignTools/2025.2/Vivado/data/ip'.
+Command: synth_design -rtl -top operand_forward -part xc7z020clg484-1
+Starting synth_design
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 3746.711 ; gain = 31.676
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'operand_forward' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/operand_forward.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'operand_forward' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/operand_forward.v:6]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 3749.434 ; gain = 34.398
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 3757.598 ; gain = 42.562
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 3757.598 ; gain = 42.562
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 3757.598 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 3845.457 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+RTL Elaboration Complete:  : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 3845.457 ; gain = 130.422
+9 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 3845.457 ; gain = 130.508
+close_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:12 . Memory (MB): peak = 3845.457 ; gain = 0.000
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/AMDDesignTools/2025.2/Vivado/data/ip'.
+Command: synth_design -rtl -top flags_reg -part xc7z020clg484-1
+Starting synth_design
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'flags_reg' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/flags_reg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'flags_reg' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/flags_reg.v:4]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3845.457 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3845.457 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+RTL Elaboration Complete:  : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 3845.457 ; gain = 0.000
+9 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 3845.457 ; gain = 0.000
+close_project: Time (s): cpu = 00:00:02 ; elapsed = 00:00:11 . Memory (MB): peak = 3845.457 ; gain = 0.000
+# create_project -in_memory -part $part
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/AMDDesignTools/2025.2/Vivado/data/ip'.
+# read_verilog -sv $sources
+# synth_design -top datapath_core -part $part -mode out_of_context -flatten_hierarchy none
+Command: synth_design -top datapath_core -part xc7z020clg484-1 -mode out_of_context -flatten_hierarchy none
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'datapath_core' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'pc16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/pc16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/pc16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'isa_decode' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/isa_decode.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'isa_decode' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/isa_decode.v:4]
+INFO: [Synth 8-6157] synthesizing module 'imm_ext16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'imm_ext16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regfile4x16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'regfile4x16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'flags_reg' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/flags_reg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'flags_reg' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/flags_reg.v:4]
+INFO: [Synth 8-6157] synthesizing module 'operand_forward' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/operand_forward.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'operand_forward' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/operand_forward.v:6]
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'addsub16_cla' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/addsub16_cla.v:4]
+INFO: [Synth 8-6157] synthesizing module 'cla16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'cla4_pg' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla4_pg' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla4_pg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cla16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/cla16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'addsub16_cla' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/addsub16_cla.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'branch_target16' [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'branch_target16' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'datapath_core' (0#1) [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/datapath_core.sv:8]
+WARNING: [Synth 8-6014] Unused sequential element m_pc_reg was removed.  [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/datapath_core.sv:278]
+WARNING: [Synth 8-6014] Unused sequential element w_pc_reg was removed.  [C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/rtl/datapath_core.sv:283]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'mode_reg' in module 'datapath_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                     RUN |                              100 |                              000
+             DRAIN_FAULT |                              010 |                              010
+                 FAULTED |                              000 |                              100
+              DRAIN_HALT |                              011 |                              001
+                  HALTED |                              001 |                              011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'mode_reg' using encoding 'sequential' in module 'datapath_core'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   16 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 1     
+	   2 Input      4 Bit         XORs := 8     
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	               16 Bit    Registers := 13    
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 40    
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 14    
+	   4 Input   16 Bit        Muxes := 2     
+	   3 Input   16 Bit        Muxes := 2     
+	  15 Input    3 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 1     
+	  15 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 2     
+	   3 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 12    
+	  15 Input    1 Bit        Muxes := 12    
+	   5 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |    10|
+|2     |LUT1   |     3|
+|3     |LUT2   |    49|
+|4     |LUT3   |   115|
+|5     |LUT4   |    74|
+|6     |LUT5   |    32|
+|7     |LUT6   |   127|
+|8     |FDRE   |   258|
+|9     |FDSE   |     1|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 3845.457 ; gain = 0.000
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 3845.457 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 3845.457 ; gain = 0.000
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 3845.457 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 10 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3845.457 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: a039fc66
+INFO: [Common 17-83] Releasing license: Synthesis
+35 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:42 ; elapsed = 00:00:46 . Memory (MB): peak = 3845.457 ; gain = 0.000
+# create_clock -period 10.000 -name core_clk [get_ports clk]
+# report_utilization -hierarchical -file eda/utilization.rpt
+# report_timing_summary -report_unconstrained -file eda/post_synth_timing.rpt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "clk" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+report_timing_summary: Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 3845.457 ; gain = 0.000
+# write_checkpoint -force eda/core_synth.dcp
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 3845.457 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/Documents/ChatGPT/Shudian/pre4_review3_20261009/eda_final/eda/core_synth.dcp' has been generated.
+# write_verilog -force -mode funcsim eda/core_netlist.v
+# show_schematic -name mapped_core [get_nets]
+# write_schematic -force -format pdf -name mapped_core -orientation landscape eda/mapped_core.pdf
+# puts "PRE4_EDA_PASS tool=[version -short] part=$part clock_constraint_ns=10.000 mode=OOC"
+PRE4_EDA_PASS tool=2025.2 part=xc7z020clg484-1 clock_constraint_ns=10.000 mode=OOC
+# exit
+INFO: [Common 17-206] Exiting Vivado at Fri Oct  9 09:31:51 2026...

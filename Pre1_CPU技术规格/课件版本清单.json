@@ -1,0 +1,206 @@
+[
+  {
+    "id": "L01",
+    "file": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CHA Lec 01-A.pptx",
+    "hash": "4D5E99D48458FB6257C69BED05144949CCBAFB0F37D694B11A2A17382DD10BBB",
+    "bytes": 4390284
+  },
+  {
+    "id": "L02",
+    "file": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CHA Lec 01-B.pptx",
+    "hash": "26DC5BB8EF973AF5915D6DDAA1C5200145022D5DF13FD7CEDB08F4C7AE577C54",
+    "bytes": 2180802
+  },
+  {
+    "id": "L03",
+    "file": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CHA Lec00-Cource Introduction.ppt",
+    "hash": "F7FA072F790E0AB580F29759E0D21127071731CB2F7F23761E2F85345ED1AF12",
+    "bytes": 1905664
+  },
+  {
+    "id": "L04",
+    "file": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CHA Lec02- Introduction to HDL.ppt",
+    "hash": "8F8AF1CB5072A5782B2E91E742CBAAFBC42B9D7EE3E3F35F6CF399D2E50EEAEE",
+    "bytes": 1555456
+  },
+  {
+    "id": "L05",
+    "file": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CHA Lec05- Other Issues in Combinatorial Logic Design.ppt",
+    "hash": "E22EE830A7E36A1E60D9D26FDABC22650270EA5874A289AFA97082C383ED72D6",
+    "bytes": 1767936
+  },
+  {
+    "id": "L06",
+    "file": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CHA Lec07-Sequential circuits analysis and design.ppt",
+    "hash": "7CA8C24EAE2F383B5161E77E28A773FE7598433F93E79A972266A731806915A9",
+    "bytes": 7804416
+  },
+  {
+    "id": "L07",
+    "file": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CHA Lec09- Other Issues in Sequential Logic Design.ppt",
+    "hash": "DEAA2F3E0DD28D870E7FBCE18A265EAED514AE06E07C826A4F47FCF49FA6E3F9",
+    "bytes": 3351552
+  },
+  {
+    "id": "L08",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第7次课\\Lec11--Sequential circuits analysis and design.ppt",
+    "hash": "41D184FB63C0BAF30A354760C18A0705E396BD85862EEE838E5EF0AF432C72CA",
+    "bytes": 7692288
+  },
+  {
+    "id": "L09",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第7次课\\Lec12- Verilog for sequiential circuits.ppt",
+    "hash": "CC518DC6172D6784E82ED1119573C3BC801B7A5E9BC7EA97942B46524D0D489D",
+    "bytes": 3685888
+  },
+  {
+    "id": "L10",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第7次课\\Lec18 RISC CPU Design-CU design.ppt",
+    "hash": "6D3DA82E62AC657E6F0E4B730D7C9DA7898B95BD8926D9B43ECB331F48D55600",
+    "bytes": 1721856
+  },
+  {
+    "id": "L11",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第7次课\\Lec19-chap 8 sequential design-2.ppt",
+    "hash": "8A4AA1E8B5D0D4DCF56E450031FF538720BEE9D22BC4F109289A4C6BE37756AD",
+    "bytes": 2105856
+  },
+  {
+    "id": "L12",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第7次课\\Lec10-Sequential circuits basis(begin of topic 2-2) .ppt",
+    "hash": "48AAD28FEC9B718C66DA143BDE4E9D8181C4329C54B9B00B4751DD85AD697981",
+    "bytes": 7728128
+  },
+  {
+    "id": "L13",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第二次课\\Lec17 RISC CPU Design-ISA & Datapath.ppt",
+    "hash": "F47D0B1D96D507E2678294BC3D216D1C61D7415CB89E9607C7545280851D3540",
+    "bytes": 7614464
+  },
+  {
+    "id": "L14",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第二次课\\Lec09-Verilog for combinational circuits.pptx",
+    "hash": "2D5B1007B6108DFC987E2D9E3EE67B8F3E4A2B3CFDC4063F02CC6C92E62D3085",
+    "bytes": 2960322
+  },
+  {
+    "id": "L09",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第二次课\\Lec12- Verilog for sequiential circuits.ppt",
+    "hash": "CC518DC6172D6784E82ED1119573C3BC801B7A5E9BC7EA97942B46524D0D489D",
+    "bytes": 3685888
+  },
+  {
+    "id": "L15",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第二次课\\Lec14- Verilog testbench(topic 3).ppt",
+    "hash": "829940A56CBC56BD795A6D7247190E64636075DC40F19A2DDE0161B62C12B5C8",
+    "bytes": 6163456
+  },
+  {
+    "id": "L16",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第三次-第四次课\\Lec08-Stadard Combinational componets(2).ppt",
+    "hash": "CF96272715E00CC97CD8E42A8C0113DD4754CFC964FF3D2038A147BB3FE6740A",
+    "bytes": 2765824
+  },
+  {
+    "id": "L12",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第三次-第四次课\\Lec10-Sequential circuits basis(begin of topic 2-2) .ppt",
+    "hash": "48AAD28FEC9B718C66DA143BDE4E9D8181C4329C54B9B00B4751DD85AD697981",
+    "bytes": 7728128
+  },
+  {
+    "id": "L17",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第三次-第四次课\\Lec17 RISC CPU Design-ISA & Datapath.ppt",
+    "hash": "6123A8BB4DC7CFA0A2309F632D1A0A96E45BBDE8717B32670A71CD8429B4367B",
+    "bytes": 7612928
+  },
+  {
+    "id": "L18",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第三次-第四次课\\Lec07-Stadard Combinational componets .ppt",
+    "hash": "8FD90D89E0FF11FB77DB708B8DDCE79BD42F39AC8C3CD0F31539F283CF38131D",
+    "bytes": 2739712
+  },
+  {
+    "id": "L19",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第五次课\\Lec05-Logic function simplification.ppt",
+    "hash": "F61649B792B040EB4C4EEE9169BB7B5C643A920AE1A322FCA01A3A8A6D580934",
+    "bytes": 1906688
+  },
+  {
+    "id": "L18",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第五次课\\Lec07-Stadard Combinational componets .ppt",
+    "hash": "8FD90D89E0FF11FB77DB708B8DDCE79BD42F39AC8C3CD0F31539F283CF38131D",
+    "bytes": 2739712
+  },
+  {
+    "id": "L20",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第五次课\\Lec08-Stadard Combinational componets(2).ppt",
+    "hash": "41E7982BE42F9252E8746E3DD04994B2706ECC98BFE83673DF2DD2B487E75BE1",
+    "bytes": 3049472
+  },
+  {
+    "id": "L21",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第五次课\\Lec13-Chap 6 Parity checker & comparator.ppt",
+    "hash": "C51A172385CC49E4B75BE45686FBEE0781FE99D63D43957E2F0EE855232E58A3",
+    "bytes": 902656
+  },
+  {
+    "id": "L22",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第五次课\\Lec13-Timing analysis.(topic 2-3).ppt",
+    "hash": "20D1E991DC86C96DEAEF33EC66E6CB93AE0B47AEBAD5DA5F14046A24ACAA6FC5",
+    "bytes": 7677952
+  },
+  {
+    "id": "L23",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第五次课\\Lec03-Logic Gates and Switching Algebra(begin of topic 2-1).pptx",
+    "hash": "EF89C0AE7B661BDE5AFFBD13037DA229C10C2F434057AF2F91B73AC01F41BBA3",
+    "bytes": 1646870
+  },
+  {
+    "id": "L24",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第一次课 Ref\\Lec01-Introduction (topic 1-1).ppt",
+    "hash": "18BC3B8CD3855C07BDC29F22F1F1ED07554EFC45BC5F86F26A6FEE440CD0B253",
+    "bytes": 5563904
+  },
+  {
+    "id": "L25",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第一次课 Ref\\Lec02 Number systems and Codes (topic 1-2).ppt",
+    "hash": "818E1EB19F7CBA4AF3637A82D40E39C92BB949A96D10D7662AB21B597C59171A",
+    "bytes": 5437440
+  },
+  {
+    "id": "L26",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第一次课 Ref\\Lec04-Standard Representation of Logic Functions.ppt",
+    "hash": "37FD61294EF8F0E5819FD166941DD42732F9D23EE2D4FA30042CBA40DD3DBCD4",
+    "bytes": 1449984
+  },
+  {
+    "id": "L27",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第一次课 Ref\\Lec05-Logic function simplification.ppt",
+    "hash": "6AA626141658FC64806BD5B7E4D33CCD40777ECACA3B610086F96FD70F6C1D61",
+    "bytes": 1909248
+  },
+  {
+    "id": "L28",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第一次课 Ref\\Lec06-combinational circuit analysis and desgin.ppt",
+    "hash": "727351441EE9E08EF141705A3D6DC185E91E2109366AB5E2EB1EC87A9E6CD284",
+    "bytes": 1536000
+  },
+  {
+    "id": "L12",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第一次课 Ref\\Lec10-Sequential circuits basis(begin of topic 2-2) .ppt",
+    "hash": "48AAD28FEC9B718C66DA143BDE4E9D8181C4329C54B9B00B4751DD85AD697981",
+    "bytes": 7728128
+  },
+  {
+    "id": "L29",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第一次课 Ref\\Lec15 Dedicated Microprocessors (topic 4).ppt",
+    "hash": "1351B62AA799345A67A1C7B7C02E38229C954BD3FE3019DCA636BEBC9E0BF55B",
+    "bytes": 1403392
+  },
+  {
+    "id": "L30",
+    "file": "C:\\Users\\Donson\\Documents\\ChatGPT\\Shudian\\course_audit_20260909\\第一次课 Ref\\Lec16 Computer Overview (topic 4).ppt",
+    "hash": "E2838562B441190D4954BB45EC09D29F046440A3FC8D15000DD25152D4E248DF",
+    "bytes": 2708480
+  }
+]

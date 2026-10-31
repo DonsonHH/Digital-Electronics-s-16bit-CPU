@@ -1,0 +1,27 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Fri Oct  9 17:10:58 2026
+# Process ID         : 169144
+# Current directory  : D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/Pre4_数据通路设计与验证/Vivado
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent168200 D:\OneDrive - University of Glasgow\同步文件夹\大三上\Courses\数电\Pre4_数据通路设计与验证\Vivado\datapath.wdb
+# Log file           : D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/Pre4_数据通路设计与验证/Vivado/vivado.log
+# Journal file       : D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/Pre4_数据通路设计与验证/Vivado\vivado.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 28470 MB
+# Total Virtual      : 61990 MB
+# Available Virtual  : 11931 MB
+#-----------------------------------------------------------
+start_gui
+open_wave_database {D:\OneDrive - University of Glasgow\同步文件夹\大三上\Courses\数电\Pre4_数据通路设计与验证\Vivado\datapath.wdb}
+create_wave_config; add_wave /; set_property needs_save false [current_wave_config]
+close_sim

@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import {build} from 'esbuild';
+const model=fs.readFileSync('data/model.json','utf8');
+const svg=fs.readFileSync('data/schematic.svg','utf8');
+const result=await build({entryPoints:['src/App.tsx'],bundle:true,write:false,outdir:'dist',format:'iife',minify:true,legalComments:'inline',target:'es2022',define:{'process.env.NODE_ENV':'"production"'},loader:{'.css':'css'}});
+const js=result.outputFiles.find(f=>f.path.endsWith('.js')).text,css=result.outputFiles.find(f=>f.path.endsWith('.css')).text;
+const json=s=>s.replaceAll('<','\\u003c');
+const html=`<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Explore every module and continuous signal path in a source-grounded 16-bit CPU datapath."><title>Datapath Lab · 16-bit CPU</title><style>${css}</style></head><body><div id="root"></div><script>window.CPU_MODEL=${json(model)};window.CPU_SVG=${json(JSON.stringify(svg))};</script><script>${js.replaceAll('</script','<\\/script')}</script></body></html>`;
+fs.mkdirSync('dist',{recursive:true});fs.writeFileSync('dist/index.html',html);fs.copyFileSync('data/schematic.svg','dist/Datapath_Continuous.svg');
+console.log(JSON.stringify({bytes:Buffer.byteLength(html),offline:true,react:true,sonner:true}));

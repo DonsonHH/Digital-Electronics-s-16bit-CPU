@@ -1,0 +1,141 @@
+{
+  "CPU_base": "v1.6",
+  "candidate": "v1.6-timing-AC1",
+  "ISA": "v1.5",
+  "vtools": "1.6-vtools-r1",
+  "functional_attempt": "72d99981-0aef-4b1d-8c13-e8d7bc624cf9",
+  "functional_record_relative": "验证记录/cpu_v16_72d999810aef4b1d8c13e8d7bc624cf9",
+  "timing_record_relative": "Vivado/时序记录/AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc",
+  "independent_48_relative": "验证记录/independent_48_saved",
+  "result_semantics": "saved real execution; relocation creates no new XSim PASS",
+  "original_execution_absolute_paths_preserved_in_raw_records": true,
+  "archive_root": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261014_会话清理_01a13444",
+  "frozen_original_core_sha256": "e7d1d4af741117bab268faab69c2767fb1a160f7f91c0adf615c7c0b3ef5f171",
+  "execution_lifecycle_patch": {
+    "revision": "job1",
+    "date": "2026-10-14",
+    "CPU_RTL_ISA_TB_XDC_changed": false,
+    "verification_protocol_changed": false,
+    "latest_fresh_functional_attempt": "eae32d52-1b00-4d6d-a524-cd3902d502d0",
+    "latest_fresh_functional_record_relative": "验证记录/cpu_v16_eae32d521b004d6da524cd3902d502d0",
+    "independent_48_record_relative": "验证记录/cpu_ac1_independent_dpgqkqum",
+    "lifecycle_evidence_relative": "验证记录/工具生命周期_job1_20261014",
+    "rollback_root": "C:/Users/Donson/Documents/ChatGPT_CPU_归档/20261014_进程清理补丁_job1",
+    "original_functional_record_role": "unchanged historical execution referenced by the core Word; the latest execution is recorded separately above"
+  },
+  "word_content_review": {
+    "date": "2026-10-14",
+    "core_pages": 42,
+    "guide_pages": 5,
+    "core_tables": 32,
+    "core_figures": 9,
+    "toc_entries_checked": 46,
+    "reference_targets_checked": 50,
+    "control_opcode_rows_checked": 16,
+    "machine_word_examples_recalculated": 15,
+    "carry_overflow_vectors_recalculated": 8,
+    "render_engine": "Microsoft Word 16.0",
+    "CPU_ISA_RTL_TB_XDC_changed": false,
+    "new_simulation_or_synthesis_claim": false,
+    "backup_and_internal_QA": "C:/Users/Donson/Documents/ChatGPT_CPU_归档/20261014_Word内容核对_01a894"
+  },
+  "current_document": {
+    "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
+    "revision_date": "2026-10-31",
+    "CPU": "v1.6-timing-AC1",
+    "ISA": "v1.5",
+    "sha256": "969dcd666b950d1e5be7d3379804b1c35cb9e56095c00a7959f45ea28a607b23",
+    "pages": 46,
+    "toc_entries": 56,
+    "tables": 32,
+    "figures": 10,
+    "sections_updated": [
+      "2.1.1 overall control and datapath architecture",
+      "2.1.2 detailed five-stage datapath",
+      "2.6.2 table14 block/RTL/input/output map",
+      "figure sequence, live references and TOC"
+    ],
+    "RTL_TB_XDC_changed": false,
+    "new_simulation_or_synthesis": false,
+    "backup_and_QA": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261031_架构图更新_01a0c80f",
+    "landscape_pages": [
+      9,
+      10
+    ]
+  },
+  "Pre5_control_evidence": {
+    "relative_to_course_root": "Pre5_控制单元设计/Vivado",
+    "CPU_RTL_TB_identical": true,
+    "original_execution_date": "2026-10-17",
+    "regression_attempt": "440e0d7a-1244-4333-a4f8-5adf612f9833",
+    "regression_relative": "验证记录/cpu_v16_440e0d7a12444333a4f85adf612f9833",
+    "independent_relative": "验证记录/cpu_ac1_independent_glok75my",
+    "trace_relative": "control_traces",
+    "historical_rechecked_on": "2026-10-29",
+    "new_xsim_execution_on_document_revision": false,
+    "scope": "Historical input-bound functional/control results only; no new timing or board acceptance",
+    "nine_suites": 9,
+    "native_steps": 19,
+    "independent_cases": 48,
+    "reset_rerun_witnesses": 10,
+    "independent_result_rows": 58,
+    "independent_cycle_rows": 952,
+    "trace_cases": 11,
+    "original_VCD_rising_edges_reparsed": 4824
+  },
+  "document_revision_history": [
+    {
+      "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
+      "revision_date": "2026-10-29",
+      "CPU": "v1.6-timing-AC1",
+      "ISA": "v1.5",
+      "sha256": "c486205a7ba61609db9f76911a01cf3a9279801d1738ccd7b7b3e062be59332b",
+      "pages": 44,
+      "toc_entries": 54,
+      "tables": 32,
+      "figures": 9,
+      "sections_updated": [
+        "2.6 CU F/Q/G and signal ownership",
+        "3.7 mode FSM input/output and drain boundary",
+        "4.4.2 Pre5 source-bound evidence"
+      ],
+      "RTL_TB_XDC_changed": false,
+      "new_simulation_or_synthesis": false,
+      "backup_and_QA": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261029_Pre5文档合入_01a0c80f"
+    }
+  ],
+  "architecture_figures": {
+    "revision_date": "2026-10-31",
+    "baseline": "v1.6-timing-AC1",
+    "ISA": "v1.5",
+    "core_RTL_sha256": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
+    "block_signal_map": "Word 2.6.2 table14",
+    "source_format": "native editable SVG text and vector shapes",
+    "png_pixels": [
+      3600,
+      2250
+    ],
+    "files": {
+      "架构图/01_CPU整体架构.png": "f3d4ee758356804b86198f3e49eca2430286ba5106e8af6f128365d3eb67695d",
+      "架构图/01_CPU整体架构.svg": "6fe8f164af08082736dfad5a24225813b789a90440ca0a0cc99c88225038deb1",
+      "架构图/02_五级Datapath.png": "18ba0ebcede482957dbd816233b1c009d1d2ff0645091ebd7d0d4047427819f4",
+      "架构图/02_五级Datapath.svg": "4be1156beff450bc9e29f1082ae18ea87370b50a571e53b2e6a3ceb66864334f"
+    },
+    "implementation_changed": false,
+    "historical_evidence_rechecked_on": "2026-10-31",
+    "new_xsim_execution": false,
+    "trace_cases_checked": 11,
+    "raw_vcd_edges_reparsed": 4824,
+    "review_cases": [
+      "DOC_ADD_ADD",
+      "TRACE_LOAD_STR",
+      "T02",
+      "T07",
+      "LEGAL_STR_BEFORE_HALT",
+      "T16",
+      "T05",
+      "16 reset probes from 5 modes"
+    ],
+    "review_scope": "Source/diagram/document consistency and saved clock-edge evidence; no new simulation, synthesis, P&R or board claim"
+  }
+}

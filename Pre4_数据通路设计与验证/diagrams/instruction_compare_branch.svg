@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="880" viewBox="0 0 1500 880">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#16618A"/></marker><style>text{font-family:Arial,sans-serif;fill:#153348}.h{font-size:29px;font-weight:bold}.t{font-size:22px;font-weight:bold}.b{font-size:20px}.s{font-size:17px}.cell{fill:#E4EFF6;stroke:#BCCFDB}.p{fill:none;stroke:#16618A;stroke-width:3;marker-end:url(#arrow)}</style></defs>
+<rect width="1500" height="880" fill="#F7FAFC"/>
+<text x="50" y="55" class="h">CMP → JZ · candidate Z bypass and qualified redirection</text>
+<text x="50" y="95" class="b">pc0:A100 · pc1:D001 · pc2:1C55 · pc3:E000; initial R0=R1=0001</text>
+<path class="p" d="M350 235H407"/><path class="p" d="M700 235H757"/><path class="p" d="M1030 235H1087"/>
+<rect x="50" y="160" width="300" height="145" rx="10" class="cell"/><text x="70" y="197" class="t">CMP at MEM</text><text x="70" y="235" class="b">m_cmp_z=1; m_z_write=1</text><text x="70" y="269" class="s">valid, no fault; RF/C/V unchanged</text>
+<rect x="410" y="160" width="290" height="145" rx="10" class="cell"/><text x="430" y="197" class="t">Z bypass select</text><text x="430" y="235" class="b">M CMP &gt; W CMP &gt; Z</text><text x="430" y="269" class="s">effective Z=1 before CMP WB</text>
+<rect x="760" y="160" width="270" height="145" rx="10" class="cell"/><text x="780" y="197" class="t">JZ at EX</text><text x="780" y="235" class="b">own pc1 + 1 + s8(01)</text><text x="780" y="269" class="s">target=0003; taken</text>
+<rect x="1090" y="160" width="360" height="145" rx="10" class="cell"/><text x="1110" y="197" class="t">End of C4 rising edge</text><text x="1110" y="235" class="b">PC ← 0003; kill younger ID/IF</text><text x="1110" y="269" class="s">older CMP continues and writes Z at C5</text>
+<text x="50" y="370" class="t">Pipeline occupancy (rows are instructions; columns are cycles)</text>
+<rect x="50" y="401" width="1400" height="57" fill="#16618A"/>
+<text x="70" y="438" class="b" style="fill:#FFF">Instruction / pc</text>
+<g class="b" text-anchor="middle"><text x="480" y="438" style="fill:#FFF">C1</text><text x="590" y="438" style="fill:#FFF">C2</text><text x="700" y="438" style="fill:#FFF">C3</text><text x="810" y="438" style="fill:#FFF">C4</text><text x="920" y="438" style="fill:#FFF">C5</text><text x="1030" y="438" style="fill:#FFF">C6</text><text x="1140" y="438" style="fill:#FFF">C7</text><text x="1250" y="438" style="fill:#FFF">C8</text><text x="1360" y="438" style="fill:#FFF">C9</text></g>
+<g class="b"><text x="70" y="498">CMP R0,R1 / 0000</text><text x="70" y="558">JZ +1 / 0001</text><text x="70" y="618">MOV R3,#55 / 0002</text><text x="70" y="678">HALT / 0003</text></g>
+<g class="b" text-anchor="middle"><text x="480" y="498">IF</text><text x="590" y="498">ID</text><text x="700" y="498">EX</text><text x="810" y="498">MEM</text><text x="920" y="498">WB</text>
+<text x="590" y="558">IF</text><text x="700" y="558">ID</text><text x="810" y="558" font-weight="bold">EX: taken</text><text x="920" y="558">MEM</text><text x="1030" y="558">WB</text>
+<text x="700" y="618">IF</text><text x="810" y="618" fill="#AD342A">ID: killed</text>
+<text x="810" y="678" fill="#AD342A">IF: killed</text><text x="920" y="678">IF retry</text><text x="1030" y="678">ID</text><text x="1140" y="678">EX</text><text x="1250" y="678">MEM</text><text x="1360" y="678">WB stop</text></g>
+<path d="M50 518H1450M50 578H1450M50 638H1450M50 698H1450" stroke="#B9CCD7"/>
+<rect x="50" y="740" width="1400" height="90" rx="10" fill="#E7F1EC"/>
+<text x="70" y="776" class="b">Not taken: no kill. A newer CMP zero must override an older Z=1. ADD/SUB update C/V but preserve Z.</text>
+<text x="70" y="808" class="s">An older MEM fault rejects the EX branch. A younger fetch/illegal fault can be cancelled by this branch.</text>
+<text x="50" y="862" class="s">Logical cycle diagram; hardware waveforms separately establish sampled pc/valid, bypass selection and cancellation.</text>
+</svg>

@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "reviewed_at_utc": "2026-10-17T06:27:41.168836+00:00",
+  "attempt_id": "440e0d7a-1244-4333-a4f8-5adf612f9833",
+  "native_steps": 19,
+  "new_xsim_execution": true,
+  "nine_suites": "PASS",
+  "decoder_words": 65536,
+  "directed_programs": 128,
+  "reset_probes": 16,
+  "reset_from_modes": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "hazard_cases": 2550,
+  "forwarding_control_combinations": 131072,
+  "independent_cases": 48,
+  "trace_cases": [
+    "BASELINE",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T07",
+    "T16",
+    "T17a",
+    "T18b",
+    "TRACE_LOAD_STR"
+  ],
+  "trace_semantics": "Per-clock pre/post edge samples from current executed VCD",
+  "register_timing_unchanged": true,
+  "hardware_programmed": false,
+  "scope": "Finite functional/control tests; not CPU-state exhaustion or new board/timing acceptance",
+  "evidence": {
+    "regression": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\Pre5_控制单元设计\\Vivado\\验证记录\\cpu_v16_440e0d7a12444333a4f85adf612f9833",
+    "independent": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\Pre5_控制单元设计\\Vivado\\验证记录\\cpu_ac1_independent_glok75my"
+  },
+  "source_receipt_sha256": "515b1152db701f99e7e8e96fe19845e4288c7d12fdb3d6c46ae46f6525768637"
+}

@@ -1,0 +1,73 @@
+{
+  "output": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_doc_pre5_88565cf4a8c444259f471225477cad53\\candidate.docx",
+  "changes": [
+    {
+      "kind": "paragraph",
+      "original_index": 0,
+      "before": "16位流水线CPU核心设计 AC1候选版",
+      "after": "16位流水线CPU核心设计文档"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 1,
+      "before": "候选实现 v1.6-timing-AC1    2026年10月14日    ISA版本 1.5",
+      "after": "实现基线 v1.6-timing-AC1    ISA v1.5    文档修订 2026年10月29日"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 2,
+      "before": "本候选版基于冻结v1.6规格，说明AC1实际算术映射、MEM故障与前递资格连接及对应证据。16位、顺序单发射五级流水线、ISA v1.5和固定单周期同步IM/DM契约不变；冻结正式Word原件保留。",
+      "after": "本文规定16位、顺序单发射五级流水线CPU的指令行为、数据通路、硬连线控制和验证方法。实现基线为v1.6-timing-AC1，ISA与固定单周期同步IM/DM契约保持不变。本次文档修订合入Pre5已核对的CU逻辑模型、模式FSM输入输出及控制验证记录。"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 6,
+      "before": "本候选源码位于CPU核心设计，验证协议为1.6-vtools-r1，执行包装已加入job1生命周期修复。规定的有限功能回归已实际通过；核心OOC估算为287 LUT、260 FF、WNS=+2.620ns、TNS=0、零失败端点。尚未完成板级布局布线、实际setup/hold及100MHz验收；Pre4、v1.5和冻结v1.6不变。",
+      "after": "当前源码位于CPU核心设计，验证协议为1.6-vtools-r1，执行包装采用job1生命周期修复。核心既有回归和Pre5同源复跑均已有有限功能通过记录；核心OOC估算为287 LUT、260 FF、WNS=+2.620ns、TNS=0。本版控制说明引用同一实现，文档修订不增加仿真、物理时序或板级验收结论。"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 167,
+      "before": "CU采用硬连线控制。译码器产生本条指令的控制字，流水寄存器保存控制字所属的pc/valid；组合冒险与事件仲裁生成保持和取消；停止状态机管理RUN、排空和停止。正常运行时五级每拍同时工作，ALU没有额外done握手，当前固定存储接口也没有ready等待。",
+      "after": "CU采用硬连线控制，由当前指令和流水状态共同决定本拍动作。正常RUN中，五级可同时处理不同指令；ALU为组合逻辑，IM/DM读延迟固定。图2用次态逻辑F、控制状态Q和输出逻辑G描述现有实现。"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 172,
+      "before": "F/D/X/M/W依次表示IF、ID、EX、MEM、WB；d_/x_/m_/w_绑定所属级。源索引不匹配、无效或带已寄存故障的生产者不合格。AC1的新MEM访问故障由年龄取消阻断年轻副作用，具体连接见3.5。CU包含状态与合格组合反馈，不笼统称为纯Moore输出。",
+      "after": "d_/x_/m_/w_分别绑定ID/EX/MEM/WB。操作数前递由operand_forward完成，Z候选选择、load-use检测、事件仲裁和mode更新位于datapath_core.sv内部；WB→ID旁路位于regfile4x16。M的寄存故障资格用于前递，新的MEM访问故障进入年龄仲裁和写入保护，保持AC1的组合路径边界。"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 266,
+      "before": "AC1实现入口为课程目录CPU核心设计/Vivado，仍13份RTL、9个TB入口及2份.svh。core集成原流水、前递、保护和停止，sync_memories.v保留固定单周期同步封装。此候选只局部调整组合映射，不拆分CU、不启动Pre5；原冻结v1.6与Pre4/v1.5入口均保留历史身份。",
+      "after": "AC1实现入口为课程目录CPU核心设计/Vivado，保留13份RTL、9个TB入口及2份共享.svh。core集成流水控制、前递、保护和停止，sync_memories.v提供固定单周期同步封装。Pre5的CU结构与FSM说明对应这些既有逻辑；其13份生产RTL和全部TB与本核心包一致。"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 353,
+      "before": "冻结v1.6初次记录6a4df640保留原身份。AC1原记录72d99981与job1最新记录eae32d52各自绑定13RTL、TB、脚本、镜像及19步执行；后者9份CSV与前者逐字节一致。两次均实际通过2,550冒险案例和131,072前递控制组合，后者仅使用4个数据哨兵，非全16位数据穷举。独立48例含952逐拍行、四个文档例及10复位见证，最新记录为验证记录/cpu_ac1_independent_dpgqkqum。完整UUID及路径见证据索引.json；功能PASS不代替板级时序。",
+      "after": "冻结v1.6初次记录6a4df640保留原身份。AC1原记录72d99981与核心包内job1记录eae32d52各自绑定13RTL、TB、脚本、镜像及19步执行；后者9份CSV与前者逐字节一致。两次均实际通过2,550冒险案例和131,072前递控制组合，后者仅使用4个数据哨兵，非全16位数据穷举。独立48例含952逐拍行、四个文档例及10复位见证，核心包内记录为验证记录/cpu_ac1_independent_dpgqkqum。完整UUID及路径见证据索引.json；功能PASS不代替板级时序。"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 394,
+      "before": "后续FPGA集成应在独立副本中固定真实板、顶层、时钟复位、程序装载与同步RAM，补全XDC后再实施布局布线、DRC和setup/hold。AC1不自动升级冻结正式版本，不启动Pre5；以后若改控制或存储接口，须另行修订契约并绑定新的功能记录。",
+      "after": "Pre5已完成控制结构、典型指令、运行模式FSM与有限验证的说明及复核，实现仍保持AC1。后续FPGA集成应在独立副本中固定真实板、顶层、时钟复位、程序装载与同步RAM，再绑定布局布线、DRC和setup/hold证据。控制协议或存储延迟若发生变化，须先修订相应契约并重新验证。"
+    },
+    {
+      "kind": "paragraph",
+      "original_index": 404,
+      "before": "课程依据包括CHA Lec01-B的ISA到DP/CU流程、Lec07/08组合组件、Lec09组合HDL、Lec12时序HDL、Lec14 Testbench、Lec16性能指标、Lec17 ISA与数据通路、Lec18 CU，以及《数字系统设计》第二版第4章加减器和第7至8章微处理器设计。课件中的串行实验FSM及不同Opcode示例用于理解方法，具体实现以本文的流水有效位、控制字与状态图为准。",
+      "after": "课程方法依据包括CHA Lec 01-B的ISA到数据通路/CU流程、CHA Lec07-Sequential circuits analysis and design的F/Q/G及状态转移方法，以及第7次课.zip中的Lec18 RISC CPU Design-CU design。加减器、HDL、Testbench、性能与ISA/数据通路内容继续参考课程对应资料及《数字系统设计》第二版第4章、第7至8章。课程串行实验FSM用于理解方法，本CPU采用本文规定的五级并行、有效位与模式状态机。"
+    }
+  ],
+  "figures_replaced": [
+    2,
+    7
+  ],
+  "table_replaced": 24,
+  "ISA_changed": false,
+  "production_RTL_changed": false,
+  "new_native_simulation": false
+}

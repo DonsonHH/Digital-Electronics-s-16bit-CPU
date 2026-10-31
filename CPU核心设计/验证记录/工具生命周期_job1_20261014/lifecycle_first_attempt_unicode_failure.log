@@ -1,0 +1,12 @@
+LIFECYCLE_CHECK_PASS exit_0
+LIFECYCLE_CHECK_PASS exit_7
+LIFECYCLE_CHECK_PASS launch_failure
+LIFECYCLE_CHECK_PASS forced_launcher_exit
+LIFECYCLE_CHECK_PASS normal_exit_cleans_orphan
+Traceback (most recent call last):
+  File "D:\OneDrive - University of Glasgow\同步文件夹\大三上\Courses\数电\CPU核心设计\Vivado\test_process_lifecycle.py", line 83, in <module>
+    (timeout_run/'run.cmd').write_text('@echo off\n"'+sys.executable+'" -B "'+str(Path(__file__))+'" --worker leaf\n',encoding='ascii')
+  File "C:\Users\Donson\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1048, in write_text
+    return f.write(data)
+           ^^^^^^^^^^^^^
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 144-148: ordinal not in range(128)

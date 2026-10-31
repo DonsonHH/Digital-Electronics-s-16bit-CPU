@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "specification_hand_arithmetic_vectors": 8,
+  "manual_document_examples": 4,
+  "reference_method": "precise Python integers; no DUT candidate values"
+}

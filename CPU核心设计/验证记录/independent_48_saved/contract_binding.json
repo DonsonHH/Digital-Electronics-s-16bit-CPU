@@ -1,0 +1,6 @@
+{
+  "independent_contract_sha256": "89d95cde31a6115d7ae620636551b65629db4aff47a5c645993c49e957447779",
+  "oracle_sha256": "f70944f35bde73398dd8f64c94dd1e24e8d07050e30f47dfe26e9fa91389ef0a",
+  "case_count": 48,
+  "scope": "Sequential ISA, full state and ordered events; no forwarding/stall/mode logic in oracle"
+}

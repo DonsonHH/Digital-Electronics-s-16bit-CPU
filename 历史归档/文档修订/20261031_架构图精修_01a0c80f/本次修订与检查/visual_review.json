@@ -1,0 +1,18 @@
+{
+  "status": "VISUAL_REVIEW_PASS",
+  "Word_sha256": "a97e63a822c10263fd29e6c908235d9420a65abd40dabdbd04852a5054cd686c",
+  "PDF_sha256": "53e5358ae86fe3bdc5e654d6517f91dfd35f9fa491751f853789e555cae956b5",
+  "reviewed_pages": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46],
+  "method": "All 46 final pages rasterized at 120dpi; five changed pages individually opened; 41 other pages match the previously fully inspected page PNGs byte for byte. Page19 was also reopened.",
+  "visually_reopened_pages": [1,9,10,11,18,19],
+  "changed_pages": [1,9,10,11,18],
+  "unchanged_page_comparison": "page_comparison.json",
+  "landscape_pages": [9,10],
+  "page_checks": "New figures and captions occupy the intended pages; text remains readable; no clipping, unwanted blank pages or accidental portrait/landscape changes observed.",
+  "renderer": "Native Microsoft Word via private desktop job, followed by bundled Poppler; packaged renderer attempted but soffice.exe unavailable",
+  "independent_spec_review": "PASS after correcting the D-side signal map; no new technical issue in the three hazard examples",
+  "independent_standards_review": "PASS after fixing wire/text, label overlap, container-title and boundary-label issues",
+  "new_simulation": false,
+  "new_synthesis": false,
+  "RTL_TB_XDC_changed": false
+}

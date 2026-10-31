@@ -1,0 +1,35 @@
+{
+  "scope": "Python architecture/cycle/Boolean/edge-contract checks, not RTL or real IP",
+  "mixed_programs": 200,
+  "mixed_seed": 20260909,
+  "mixed_ops": "ALU/MOV/CMP/forward-only JZ/LDR/STR/HALT",
+  "comparison": {
+    "forwarded_cycles": 45,
+    "stall_only_cycles": 68,
+    "instructions": 31,
+    "same_clock_ideal_speedup": 1.511111111111111,
+    "forward_stalls": 0,
+    "stall_only_stalls": 23,
+    "qualification": "same fixed memory latency and nominal clock only; no measured frequency or area"
+  },
+  "boolean_checks": {
+    "exhaustive_4bit_add": 512,
+    "random_16bit_add_sub_pairs": 1000,
+    "sign_extension_inputs": 256
+  },
+  "memory_contract": {
+    "expected_dout": [
+      1025,
+      2054,
+      2054,
+      12544
+    ],
+    "incorrect_extra_register_output": [
+      0,
+      1025,
+      2054,
+      2054
+    ],
+    "incorrect_mapping_detected": true
+  }
+}

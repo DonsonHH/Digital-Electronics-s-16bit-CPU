@@ -1,0 +1,11 @@
+{
+  "stage": "independent",
+  "status": "NATIVE_COMPLETED",
+  "native_exit": 0,
+  "started_at_utc": "2026-10-17T06:15:30.474796+00:00",
+  "ended_at_utc": "2026-10-17T06:15:38.920515+00:00",
+  "console": "验证记录/independent_20261017T061530474796.console.log",
+  "console_sha256": "cff12c5f3caa296d9304840364d0270e86974f103398743487f81f5dad14d927",
+  "error": null,
+  "hardware_programmed": false
+}

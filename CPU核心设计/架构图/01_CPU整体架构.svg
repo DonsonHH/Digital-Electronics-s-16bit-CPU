@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1500" viewBox="0 0 2400 1500"><title>CPU整体控制与数据通路架构</title>
+<defs><marker id="a_data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#24384B"/></marker><marker id="a_ctrl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#2867A5"/></marker><marker id="a_fwd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#087C7C"/></marker><marker id="a_kill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#BD4E26"/></marker><marker id="a_muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#536477"/></marker><marker id="a_line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#BDCBD5"/></marker><marker id="a_pale" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#F2F6F9"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif}</style>
+<rect width="2400" height="1500" fill="white"/>
+<rect id="core" x="40" y="140" width="2320" height="1090" rx="10" fill="white" stroke="#24384B" stroke-width="3"/>
+<rect id="cu" x="65" y="205" width="2270" height="615" rx="10" fill="#F6F9FC" stroke="#2867A5" stroke-width="3"/>
+<rect id="boundary_0" x="509" y="535" width="22" height="285" rx="0" fill="#DBE9F5" stroke="#A2B7C9" stroke-width="3"/>
+<rect id="boundary_0_data" x="509" y="866" width="22" height="204" rx="0" fill="#DBE9F5" stroke="#A2B7C9" stroke-width="3"/>
+<rect id="boundary_1" x="954" y="535" width="22" height="285" rx="0" fill="#DBE9F5" stroke="#A2B7C9" stroke-width="3"/>
+<rect id="boundary_1_data" x="954" y="866" width="22" height="204" rx="0" fill="#DBE9F5" stroke="#A2B7C9" stroke-width="3"/>
+<rect id="boundary_2" x="1399" y="535" width="22" height="285" rx="0" fill="#DBE9F5" stroke="#A2B7C9" stroke-width="3"/>
+<rect id="boundary_2_data" x="1399" y="866" width="22" height="204" rx="0" fill="#DBE9F5" stroke="#A2B7C9" stroke-width="3"/>
+<rect id="boundary_3" x="1844" y="535" width="22" height="285" rx="0" fill="#DBE9F5" stroke="#A2B7C9" stroke-width="3"/>
+<rect id="boundary_3_data" x="1844" y="866" width="22" height="204" rx="0" fill="#DBE9F5" stroke="#A2B7C9" stroke-width="3"/>
+<path d="M 60,94 L 135,94" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_data" d="M 60,94 L 135,94" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 500,94 L 575,94" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_ctrl" d="M 500,94 L 575,94" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 950,94 L 1025,94" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_fwd" d="M 950,94 L 1025,94" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<path d="M 1410,94 L 1485,94" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_kill" d="M 1410,94 L 1485,94" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<path d="M 1100,320 L 1000,320" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="events_mode" d="M 1100,320 L 1000,320" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<path d="M 320,435 L 320,470 L 2300,470" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_bus" d="M 320,435 L 320,470 L 2300,470" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<path d="M 1710,435 L 1710,510 L 100,510" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="upd_bus" d="M 1710,435 L 1710,510 L 100,510" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 1710,510 L 2300,510" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="upd_bus_right" d="M 1710,510 L 2300,510" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 915,589 L 1010,589" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="carry_ctrl_0" d="M 915,589 L 1010,589" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 740,632 L 740,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="ctrl_to_stage_1" d="M 740,632 L 740,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 1360,589 L 1455,589" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="carry_ctrl_1" d="M 1360,589 L 1455,589" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 1185,632 L 1185,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="ctrl_to_stage_2" d="M 1185,632 L 1185,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 1805,589 L 1900,589" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="carry_ctrl_2" d="M 1805,589 L 1900,589" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 1630,632 L 1630,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="ctrl_to_stage_3" d="M 1630,632 L 1630,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 2075,632 L 2075,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="ctrl_to_stage_4" d="M 2075,632 L 2075,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 490,470 L 490,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_0_ctrl" d="M 490,470 L 490,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 100,510 L 100,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_0_kill" d="M 100,510 L 100,665" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<path d="M 295,810 L 295,880" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="enable_to_datapath_0" d="M 295,810 L 295,880" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 500,950 L 535,950" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="data_next_0" d="M 500,950 L 535,950" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 425,1065 L 425,1125" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="fb_0" d="M 425,1065 L 425,1125" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 935,470 L 935,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_1_ctrl" d="M 935,470 L 935,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 545,510 L 545,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_1_kill" d="M 545,510 L 545,665" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<path d="M 740,810 L 740,880" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="enable_to_datapath_1" d="M 740,810 L 740,880" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 945,950 L 980,950" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="data_next_1" d="M 945,950 L 980,950" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 870,1065 L 870,1125" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="fb_1" d="M 870,1065 L 870,1125" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 1380,470 L 1380,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_2_ctrl" d="M 1380,470 L 1380,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 990,510 L 990,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_2_kill" d="M 990,510 L 990,665" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<path d="M 1185,810 L 1185,880" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="enable_to_datapath_2" d="M 1185,810 L 1185,880" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 1390,950 L 1425,950" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="data_next_2" d="M 1390,950 L 1425,950" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 1315,1065 L 1315,1125" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="fb_2" d="M 1315,1065 L 1315,1125" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 1825,470 L 1825,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_3_ctrl" d="M 1825,470 L 1825,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 1435,510 L 1435,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_3_kill" d="M 1435,510 L 1435,665" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<path d="M 1630,810 L 1630,880" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="enable_to_datapath_3" d="M 1630,810 L 1630,880" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 1835,950 L 1870,950" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="data_next_3" d="M 1835,950 L 1870,950" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 1760,1065 L 1760,1125" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="fb_3" d="M 1760,1065 L 1760,1125" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 2270,470 L 2270,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_4_ctrl" d="M 2270,470 L 2270,665" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 1880,510 L 1880,665" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="qual_4_kill" d="M 1880,510 L 1880,665" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<path d="M 2075,810 L 2075,880" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="enable_to_datapath_4" d="M 2075,810 L 2075,880" fill="none" stroke="#2867A5" stroke-width="4" stroke-linejoin="round" stroke-dasharray="12 8" marker-end="url(#a_ctrl)"/>
+<path d="M 2205,1065 L 2205,1125" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="fb_4" d="M 2205,1065 L 2205,1125" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<path d="M 145,1125 L 2320,1125 L 2320,475 L 2305,475 L 2305,435" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="feedback_bus" d="M 145,1125 L 2320,1125 L 2320,475 L 2305,475 L 2305,435" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<path d="M 145,1065 L 145,1250 L 180,1250 L 180,1270" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="im_req" d="M 145,1065 L 145,1250 L 180,1250 L 180,1270" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 680,1270 L 680,1245 L 720,1245 L 720,1065" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="im_ret" d="M 680,1270 L 680,1245 L 720,1245 L 720,1065" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 1600,1065 L 1600,1270" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="dm_req" d="M 1600,1065 L 1600,1270" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 1960,1390 L 2290,1390 L 2290,1065" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="dm_ret" d="M 1960,1390 L 2290,1390 L 2290,1065" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path d="M 90,400 L 70,400 L 70,1438 L 2080,1438 L 2080,1370" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="mode_status_outputs" d="M 90,400 L 70,400 L 70,1438 L 2080,1438 L 2080,1370" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<rect id="mode_fsm" x="90" y="270" width="910" height="165" rx="10" fill="white" stroke="#2867A5" stroke-width="3"/>
+<rect id="arbiter" x="1100" y="270" width="1205" height="165" rx="10" fill="white" stroke="#BD4E26" stroke-width="3"/>
+<rect id="control_input_0" x="565" y="550" width="350" height="82" rx="10" fill="#EAF2FA" stroke="#2867A5" stroke-width="3"/>
+<rect id="control_input_1" x="1010" y="550" width="350" height="82" rx="10" fill="#EAF2FA" stroke="#2867A5" stroke-width="3"/>
+<rect id="control_input_2" x="1455" y="550" width="350" height="82" rx="10" fill="#EAF2FA" stroke="#2867A5" stroke-width="3"/>
+<rect id="control_input_3" x="1900" y="550" width="350" height="82" rx="10" fill="#EAF2FA" stroke="#2867A5" stroke-width="3"/>
+<rect id="stage_control_0" x="90" y="665" width="410" height="145" rx="10" fill="white" stroke="#2867A5" stroke-width="3"/>
+<rect id="data_stage_0" x="90" y="880" width="410" height="185" rx="10" fill="white" stroke="#24384B" stroke-width="3"/>
+<rect id="stage_control_1" x="535" y="665" width="410" height="145" rx="10" fill="white" stroke="#2867A5" stroke-width="3"/>
+<rect id="data_stage_1" x="535" y="880" width="410" height="185" rx="10" fill="white" stroke="#24384B" stroke-width="3"/>
+<rect id="stage_control_2" x="980" y="665" width="410" height="145" rx="10" fill="white" stroke="#2867A5" stroke-width="3"/>
+<rect id="data_stage_2" x="980" y="880" width="410" height="185" rx="10" fill="white" stroke="#24384B" stroke-width="3"/>
+<rect id="stage_control_3" x="1425" y="665" width="410" height="145" rx="10" fill="white" stroke="#2867A5" stroke-width="3"/>
+<rect id="data_stage_3" x="1425" y="880" width="410" height="185" rx="10" fill="white" stroke="#24384B" stroke-width="3"/>
+<rect id="stage_control_4" x="1870" y="665" width="410" height="145" rx="10" fill="white" stroke="#2867A5" stroke-width="3"/>
+<rect id="data_stage_4" x="1870" y="880" width="410" height="185" rx="10" fill="white" stroke="#24384B" stroke-width="3"/>
+<rect id="im" x="90" y="1270" width="680" height="155" rx="10" fill="white" stroke="#24384B" stroke-width="3" stroke-dasharray="12 8"/>
+<rect id="dm" x="1200" y="1270" width="760" height="155" rx="10" fill="white" stroke="#24384B" stroke-width="3" stroke-dasharray="12 8"/>
+<text x="60" y="57" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="60" dy="0">CPU整体控制与数据通路架构</tspan></text>
+<text x="155" y="107" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="155" dy="0">数据 / 载荷</tspan></text>
+<text x="595" y="107" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="595" dy="0">控制 / 资格</tspan></text>
+<text x="1045" y="107" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1045" dy="0">前递 / 反馈</tspan></text>
+<text x="1505" y="107" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1505" dy="0">取消 / 停止</tspan></text>
+<text x="1880" y="84" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1880" dy="0">●连接；无点交叉不连</tspan><tspan x="1880" dy="42">浅蓝带为现有流水边界</tspan></text>
+<text x="65" y="185" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="65" dy="0">datapath_core  ·  同一clk  ·  rst同步高有效</tspan></text>
+<text x="85" y="248" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="85" dy="0">Pipeline CU  ·  当前控制意图 + 流水资格 + 跨级协调</tspan></text>
+<text x="104" y="314" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">全局运行模式FSM</tspan></text>
+<text x="104" y="354" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">RUN / DRAIN_HALT / DRAIN_FAULT</tspan><tspan x="104" dy="42">HALTED / FAULTED：停止标记到WB且排空</tspan></text>
+<text x="1114" y="314" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1114" dy="0">跨级冒险与事件仲裁</tspan></text>
+<text x="1114" y="354" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1114" dy="0">Reset &gt; MEM fault &gt; EX停止 &gt; redirect &gt; load_use</tspan><tspan x="1114" dy="42">UPD：推进 / 保持 / bubble / 年轻取消</tspan></text>
+<text x="1040" y="304" font-size="36" font-weight="400" text-anchor="middle" fill="#BD4E26"><tspan x="1040" dy="0">事件</tspan></text>
+<text x="95" y="480" font-size="36" font-weight="400" text-anchor="start" fill="#2867A5"><tspan x="95" dy="0">模式资格</tspan></text>
+<text x="520" y="853" font-size="36" font-weight="400" text-anchor="middle" fill="#24384B"><tspan x="520" dy="0">IF/ID</tspan></text>
+<text x="965" y="853" font-size="36" font-weight="400" text-anchor="middle" fill="#24384B"><tspan x="965" dy="0">ID/EX</tspan></text>
+<text x="1410" y="853" font-size="36" font-weight="400" text-anchor="middle" fill="#24384B"><tspan x="1410" dy="0">EX/MEM</tspan></text>
+<text x="1855" y="853" font-size="36" font-weight="400" text-anchor="middle" fill="#24384B"><tspan x="1855" dy="0">MEM/WB</tspan></text>
+<text x="105" y="584" font-size="36" font-weight="400" text-anchor="start" fill="#536477"><tspan x="105" dy="0">PC_fetch / range</tspan><tspan x="105" dy="46">前端资格反馈</tspan></text>
+<text x="579" y="594" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="579" dy="0">译码 d_ctrl</tspan></text>
+<text x="1024" y="594" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1024" dy="0">CTRL_X</tspan></text>
+<text x="1469" y="594" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1469" dy="0">CTRL_M</tspan></text>
+<text x="1914" y="594" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1914" dy="0">CTRL_W</tspan></text>
+<text x="104" y="709" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">IFCU 取指资格</tspan></text>
+<text x="104" y="749" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">fetch_accept/pc_hold</tspan><tspan x="104" dy="42">im_en</tspan></text>
+<text x="104" y="924" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">IF  唯一PC</tspan></text>
+<text x="104" y="964" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">u_pc / PC_fetch16</tspan><tspan x="104" dy="42">+1 / hold / redirect</tspan></text>
+<text x="549" y="709" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="549" dy="0">IDCU 发射资格</tspan></text>
+<text x="549" y="749" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="549" dy="0">保持 / 取消 / 发射</tspan><tspan x="549" dy="42">x_valid_next</tspan></text>
+<text x="549" y="924" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="549" dy="0">ID  读源与扩展</tspan></text>
+<text x="549" y="964" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="549" dy="0">u_rf: 4×16, 2R1W</tspan><tspan x="549" dy="42">u_ext: imm8 → 16</tspan></text>
+<text x="994" y="709" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="994" dy="0">EXCU 执行资格</tspan></text>
+<text x="994" y="749" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="994" dy="0">ALU选择 / redirect</tspan><tspan x="994" dy="42">halt / fault请求</tspan></text>
+<text x="994" y="924" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="994" dy="0">EX  计算与决策</tspan></text>
+<text x="994" y="964" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="994" dy="0">u_forward / u_alu</tspan><tspan x="994" dy="42">Z选择 / u_target</tspan></text>
+<text x="1439" y="709" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1439" dy="0">MEMCU 访问资格</tspan></text>
+<text x="1439" y="749" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1439" dy="0">完整EA与有效槽</tspan><tspan x="1439" dy="42">dm_en / dm_we</tspan></text>
+<text x="1439" y="924" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1439" dy="0">MEM  访存或传递</tspan></text>
+<text x="1439" y="964" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1439" dy="0">EA16 / store_data16</tspan><tspan x="1439" dy="42">同步DM访问资格</tspan></text>
+<text x="1884" y="709" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1884" dy="0">WBCU 写入资格</tspan></text>
+<text x="1884" y="749" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1884" dy="0">有效W槽 + 写入意图</tspan><tspan x="1884" dy="42">rf_we / z_we / cv_we</tspan></text>
+<text x="1884" y="924" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1884" dy="0">WB  架构写入</tspan></text>
+<text x="1884" y="964" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1884" dy="0">wb_data16选择</tspan><tspan x="1884" dy="42">RF与Z/C/V写入</tspan></text>
+<text x="200" y="1095" font-size="36" font-weight="400" text-anchor="start" fill="#087C7C"><tspan x="200" dy="0">PC/range</tspan></text>
+<text x="540" y="1095" font-size="36" font-weight="400" text-anchor="start" fill="#087C7C"><tspan x="540" dy="0">源/use</tspan></text>
+<text x="985" y="1095" font-size="36" font-weight="400" text-anchor="start" fill="#087C7C"><tspan x="985" dy="0">eq/分支/停止</tspan></text>
+<text x="1430" y="1095" font-size="36" font-weight="400" text-anchor="start" fill="#087C7C"><tspan x="1430" dy="0">EA/fault</tspan></text>
+<text x="1875" y="1095" font-size="36" font-weight="400" text-anchor="start" fill="#087C7C"><tspan x="1875" dy="0">目标/valid/标记</tspan></text>
+<text x="200" y="1180" font-size="36" font-weight="400" text-anchor="start" fill="#087C7C"><tspan x="200" dy="0">FB → 事件/排空</tspan></text>
+<text x="104" y="1314" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">外部同步IM · 256×16</tspan></text>
+<text x="104" y="1354" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">im_addr16 / im_en → IM</tspan><tspan x="104" dy="42">IM → im_dout16 (= d_inst)</tspan></text>
+<text x="1214" y="1314" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1214" dy="0">外部同步DM · 256×16</tspan></text>
+<text x="1214" y="1354" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1214" dy="0">dm_addr16 / dm_din16 / dm_en / dm_we</tspan><tspan x="1214" dy="42">DM → dm_dout16 (= w_load_data)</tspan></text>
+<text x="2000" y="1300" font-size="36" font-weight="400" text-anchor="start" fill="#BD4E26"><tspan x="2000" dy="0">halted / fault</tspan><tspan x="2000" dy="46">由mode译出</tspan></text>
+<text x="90" y="1480" font-size="36" font-weight="400" text-anchor="start" fill="#536477"><tspan x="90" dy="0">IFCU至WBCU是core职责；u_*为RTL实例；浅蓝带是既有流水状态。IM/DM输出承担数据边界，不加IR/MDR。</tspan></text>
+<circle cx="1710" cy="510" r="7" fill="#BD4E26"/>
+<circle cx="490" cy="470" r="7" fill="#2867A5"/>
+<circle cx="100" cy="510" r="7" fill="#BD4E26"/>
+<circle cx="935" cy="470" r="7" fill="#2867A5"/>
+<circle cx="545" cy="510" r="7" fill="#BD4E26"/>
+<circle cx="1380" cy="470" r="7" fill="#2867A5"/>
+<circle cx="990" cy="510" r="7" fill="#BD4E26"/>
+<circle cx="1825" cy="470" r="7" fill="#2867A5"/>
+<circle cx="1435" cy="510" r="7" fill="#BD4E26"/>
+<circle cx="2270" cy="470" r="7" fill="#2867A5"/>
+<circle cx="1880" cy="510" r="7" fill="#BD4E26"/>
+<circle cx="425" cy="1125" r="7" fill="#087C7C"/>
+<circle cx="870" cy="1125" r="7" fill="#087C7C"/>
+<circle cx="1315" cy="1125" r="7" fill="#087C7C"/>
+<circle cx="1760" cy="1125" r="7" fill="#087C7C"/>
+<circle cx="2205" cy="1125" r="7" fill="#087C7C"/>
+</svg>

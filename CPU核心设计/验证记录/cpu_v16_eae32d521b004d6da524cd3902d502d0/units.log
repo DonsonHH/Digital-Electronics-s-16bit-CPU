@@ -1,0 +1,38 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Wed Oct 14 16:15:21 2026
+# Process ID         : 93556
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu_v16_eae32d521b004d6da524cd3902d502d0
+# Command line       : xsim.exe -log units.log -mode tcl -source {xsim.dir/units_v16_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu_v16_eae32d521b004d6da524cd3902d502d0/units.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/cpu_v16_eae32d521b004d6da524cd3902d502d0\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2396 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 26425 MB
+# Total Virtual      : 59945 MB
+# Available Virtual  : 24250 MB
+#-----------------------------------------------------------
+source xsim.dir/units_v16_sim/xsim_script.tcl
+# xsim {units_v16_sim} -wdb {units.wdb} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=eae32d52-1b00-4d6d-a524-cd3902d502d0 input_sha256=568aab3c5d71dbf43e48d50240c8b9f76090c46d3e86a24c03df416615584f55
+## run all
+UNITS_PASS CLA4=512 CLA16=564300 ADD_SUB=564300 ALU=2257200 DECODE=65536 IMM=512 FLAGS=512 RF=262161 PC=65539 TARGET=3584
+$finish called at time : 4402081 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_v16_eae32d521b004d6da524cd3902d502d0/tb/tb_units.sv" Line 308
+## quit
+INFO: [Common 17-206] Exiting xsim at Wed Oct 14 16:15:26 2026...

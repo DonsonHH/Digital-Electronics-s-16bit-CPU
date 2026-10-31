@@ -1,0 +1,27 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 115804
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 17 14:15:08 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/forward_v16_sim/xsim_script.tcl
+# xsim {forward_v16_sim} -wdb {forward.wdb} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=440e0d7a-1244-4333-a4f8-5adf612f9833 input_sha256=3afeec09dc69903fd4373781e6648c60e1d9e794154f9654b42c71334ab164d1
+## run all
+FORWARD_CONTRACT_PASS controls=131072 failures=0 scope=control_index_not_full_data
+$finish called at time : 131072 ns : File "C:/Users/Donson/AppData/Local/Temp/pre5_native/cpu_v16_440e0d7a12444333a4f85adf612f9833/tb/tb_forward_contract.sv" Line 42
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 17 14:15:10 2026...
+DESKTOP_EXIT 0

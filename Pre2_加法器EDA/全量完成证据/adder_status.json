@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "started": "2026-09-15T13:03:12.4122027+08:00",
+  "modules": [
+    "ripple_adder",
+    "adder_rtl"
+  ],
+  "prefix_recorded": 1207959552,
+  "suffix_start": 1207959552,
+  "total_per_adder": 8589934592,
+  "source_sha256": {
+    "previous_prefix.log": "3EF7591DEE3625AEADBF824EDDF3D11EE37977CE6DA92D6EEA465387AF88D95D",
+    "modules.v": "A6CC6E7F09A03F398DC170F0138AF096A8CD1111CFA531D0AAEE7024C1D185F9",
+    "tb_adder_only.sv": "CBF283B9F26EA0EE2050CCE00BC084FDD045A67AAE1B4901129462E896DBFD48"
+  },
+  "verified_segmented_pass": true,
+  "ended": "2026-09-15T15:03:13.4485491+08:00",
+  "elapsed_seconds": 7201.0369591
+}

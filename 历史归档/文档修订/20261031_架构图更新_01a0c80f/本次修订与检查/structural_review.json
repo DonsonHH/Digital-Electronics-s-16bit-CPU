@@ -1,0 +1,32 @@
+{
+  "status": "DOCUMENT_STRUCTURE_AND_SOURCE_REVIEW_PASS",
+  "pages": 46,
+  "landscape_pages": [
+    9,
+    10
+  ],
+  "headings": 56,
+  "toc_entries": 56,
+  "tables": 32,
+  "figures": 10,
+  "preserved_tables": 31,
+  "preserved_non_datapath_figures": 8,
+  "references_checked": 63,
+  "semantic_bookmarks": {
+    "fig_cpu_overall": 1,
+    "fig_1": 2,
+    "fig_2": 3,
+    "fig_hazard_network": 4,
+    "fig_3": 5,
+    "fig_4": 6,
+    "fig_5": 7,
+    "fig_6": 8,
+    "fig_7": 9,
+    "fig_interlock_trace": 10
+  },
+  "RTL_TB_XDC_changed": false,
+  "source_files_checked": 2573,
+  "Word_sha256": "969dcd666b950d1e5be7d3379804b1c35cb9e56095c00a7959f45ea28a607b23",
+  "PDF_sha256": "4118becd92c7399893cff050c19ef2b1339d16c4fbf3ffd5307e7a9abbdd2dc2",
+  "visual_review": "PASS all final 46 page PNGs inspected; see visual_review.json"
+}

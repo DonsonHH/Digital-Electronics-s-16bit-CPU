@@ -1,0 +1,350 @@
+{
+  "frozen_cpu_version": "1.6",
+  "isa_version": "1.5",
+  "verification_revision": "1.6-vtools-r1",
+  "recommended": "v1.6-timing-AC1",
+  "candidate": "AC_decoupled_carry",
+  "production_modified": false,
+  "candidates": {
+    "A_mem_qualifier": {
+      "metrics": {
+        "LUT": 308,
+        "FF": 260,
+        "WNS": 0.024,
+        "TNS": 0.0,
+        "failed_endpoints": 0
+      },
+      "rtl_changes": {
+        "datapath_core.sv": {
+          "frozen_sha256": "13c014eb6835ddc84baf2bb784d76e3190e668842f96943ccb83eec910a20e86",
+          "candidate_sha256": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
+          "diff_file": "diffs/A_mem_qualifier/datapath_core.sv.diff"
+        }
+      },
+      "timing_run": "A_mem_qualifier_synth_2a88d679dbfb4d16802ab4f37724e425",
+      "timing_level": "post_synthesis_OOC_estimate",
+      "regression": {
+        "attempt_id": "e00fe50e-44f9-4321-ba16-42b1c82ab0bc",
+        "native_steps": 19,
+        "source_match": true,
+        "CSV_equal_frozen": {
+          "baseline_trace.csv": "53a279407bd5a7bf01bd45e9e0c24f7610d12220410879835d2033e9499a9cbd",
+          "case_results.csv": "5913b4ac13224f1d0c2d26f3a89f21a4702b3edd27880e6086d72aee55016d50",
+          "case_timings.csv": "2b4497e9e75797d31cf918324c6fb62736d1287277af797f3db5ac1e1fe4a86c",
+          "hazard_baseline_trace.csv": "87941f29e144f45b5da378ca3479d431801e0b1847d2fd23d84b7784a1ccf690",
+          "hazard_case_results.csv": "ba44d46e2a061c93f33c40f36c10ba2e121791e7738a880a7347301c44784428",
+          "hazard_case_timings.csv": "3c2463a6c49a2498438744b607b7f44431fc21074ff3023d3d91c4c198817321",
+          "trace_baseline_trace.csv": "87941f29e144f45b5da378ca3479d431801e0b1847d2fd23d84b7784a1ccf690",
+          "trace_case_results.csv": "05a501ec273e2f25089eed0d3cf007a9dc4455c54e24af8305226e413d4a596e",
+          "trace_case_timings.csv": "32a2cc92b5aa371ac685b93590769ded19c661fa7473ae2d8cfa9cd2843a3ecb"
+        },
+        "historical_revalidation": "checks/A_mem_qualifier_historical_revalidation.json",
+        "original_RTL_negatives": "A_mem_qualifier_mutations_4c435040fd404541ba27c0331bc63b8a",
+        "XZ_negatives": "A_mem_qualifier_unknowns_0cac2ec803344decbf9710f578123a79",
+        "archive": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CPU实现_v1.6_timing\\candidates\\A_mem_qualifier\\验证记录\\cpu_v16_e00fe50e44f94321ba1642b1c82ab0bc"
+      },
+      "directed": "A_mem_qualifier_directed_9d2214461df849a888a60994822d8b65"
+    },
+    "B_parallel_mux": {
+      "metrics": {
+        "LUT": 298,
+        "FF": 260,
+        "WNS": -1.577,
+        "TNS": -5.256,
+        "failed_endpoints": 7
+      },
+      "rtl_changes": {
+        "operand_forward.v": {
+          "frozen_sha256": "30513341d5b60a4393a1784dcc0cb756fd251206655a458f2e2c17e01d1faa65",
+          "candidate_sha256": "c9ea8a69f7a2d56aafb9aadebe89fddda6901e243d57d87eb2fbf92514832733",
+          "diff_file": "diffs/B_parallel_mux/operand_forward.v.diff"
+        }
+      },
+      "timing_run": "B_parallel_mux_synth_72c81eb2d3f34367b65f604ba19695bf",
+      "timing_level": "post_synthesis_OOC_estimate",
+      "regression": null,
+      "directed": "B_parallel_mux_directed_1b5198b42f2a412c8c63a44f96737aeb",
+      "decision": "REJECTED for adoption: 0.003 ns estimated gain does not solve seven violations; exploratory tests only, no full-nine acceptance"
+    },
+    "C_carry": {
+      "metrics": {
+        "LUT": 280,
+        "FF": 260,
+        "WNS": 1.016,
+        "TNS": 0.0,
+        "failed_endpoints": 0
+      },
+      "rtl_changes": {
+        "addsub16_cla.v": {
+          "frozen_sha256": "5e11b2314ff55a995f41962ff337d31307642ef5bdf20df76f91fe8d10e30ee3",
+          "candidate_sha256": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+          "diff_file": "diffs/C_carry/addsub16_cla.v.diff"
+        }
+      },
+      "timing_run": "C_carry_synth_ad61a15f07354ab297bb8e0560133e30",
+      "timing_level": "post_synthesis_OOC_estimate",
+      "regression": {
+        "attempt_id": "086a8b4d-a574-4327-be11-4a37e67ae19c",
+        "native_steps": 19,
+        "source_match": true,
+        "CSV_equal_frozen": {
+          "baseline_trace.csv": "53a279407bd5a7bf01bd45e9e0c24f7610d12220410879835d2033e9499a9cbd",
+          "case_results.csv": "5913b4ac13224f1d0c2d26f3a89f21a4702b3edd27880e6086d72aee55016d50",
+          "case_timings.csv": "2b4497e9e75797d31cf918324c6fb62736d1287277af797f3db5ac1e1fe4a86c",
+          "hazard_baseline_trace.csv": "87941f29e144f45b5da378ca3479d431801e0b1847d2fd23d84b7784a1ccf690",
+          "hazard_case_results.csv": "ba44d46e2a061c93f33c40f36c10ba2e121791e7738a880a7347301c44784428",
+          "hazard_case_timings.csv": "3c2463a6c49a2498438744b607b7f44431fc21074ff3023d3d91c4c198817321",
+          "trace_baseline_trace.csv": "87941f29e144f45b5da378ca3479d431801e0b1847d2fd23d84b7784a1ccf690",
+          "trace_case_results.csv": "05a501ec273e2f25089eed0d3cf007a9dc4455c54e24af8305226e413d4a596e",
+          "trace_case_timings.csv": "32a2cc92b5aa371ac685b93590769ded19c661fa7473ae2d8cfa9cd2843a3ecb"
+        },
+        "historical_revalidation": "checks/C_carry_historical_revalidation.json",
+        "original_RTL_negatives": "C_carry_mutations_c6e430d4effb49fba9b9136540b8d3df",
+        "XZ_negatives": "C_carry_unknowns_555f7ecbd735409a98688e64ec27954a",
+        "archive": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CPU实现_v1.6_timing\\candidates\\C_carry\\验证记录\\cpu_v16_086a8b4da5744327be114a37e67ae19c"
+      },
+      "directed": "C_carry_directed_d4471567d2ed44c3b809a2a4ab9d3ae5"
+    },
+    "AC_decoupled_carry": {
+      "metrics": {
+        "LUT": 287,
+        "FF": 260,
+        "WNS": 2.62,
+        "TNS": 0.0,
+        "failed_endpoints": 0
+      },
+      "rtl_changes": {
+        "addsub16_cla.v": {
+          "frozen_sha256": "5e11b2314ff55a995f41962ff337d31307642ef5bdf20df76f91fe8d10e30ee3",
+          "candidate_sha256": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+          "diff_file": "diffs/AC_decoupled_carry/addsub16_cla.v.diff"
+        },
+        "datapath_core.sv": {
+          "frozen_sha256": "13c014eb6835ddc84baf2bb784d76e3190e668842f96943ccb83eec910a20e86",
+          "candidate_sha256": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
+          "diff_file": "diffs/AC_decoupled_carry/datapath_core.sv.diff"
+        }
+      },
+      "timing_run": "AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc",
+      "timing_level": "post_synthesis_OOC_estimate",
+      "regression": {
+        "attempt_id": "72d99981-0aef-4b1d-8c13-e8d7bc624cf9",
+        "native_steps": 19,
+        "source_match": true,
+        "CSV_equal_frozen": {
+          "baseline_trace.csv": "53a279407bd5a7bf01bd45e9e0c24f7610d12220410879835d2033e9499a9cbd",
+          "case_results.csv": "5913b4ac13224f1d0c2d26f3a89f21a4702b3edd27880e6086d72aee55016d50",
+          "case_timings.csv": "2b4497e9e75797d31cf918324c6fb62736d1287277af797f3db5ac1e1fe4a86c",
+          "hazard_baseline_trace.csv": "87941f29e144f45b5da378ca3479d431801e0b1847d2fd23d84b7784a1ccf690",
+          "hazard_case_results.csv": "ba44d46e2a061c93f33c40f36c10ba2e121791e7738a880a7347301c44784428",
+          "hazard_case_timings.csv": "3c2463a6c49a2498438744b607b7f44431fc21074ff3023d3d91c4c198817321",
+          "trace_baseline_trace.csv": "87941f29e144f45b5da378ca3479d431801e0b1847d2fd23d84b7784a1ccf690",
+          "trace_case_results.csv": "05a501ec273e2f25089eed0d3cf007a9dc4455c54e24af8305226e413d4a596e",
+          "trace_case_timings.csv": "32a2cc92b5aa371ac685b93590769ded19c661fa7473ae2d8cfa9cd2843a3ecb"
+        },
+        "historical_revalidation": "checks/AC_decoupled_carry_historical_revalidation.json",
+        "original_RTL_negatives": "AC_decoupled_carry_mutations_23d141a130a144d88222a7320b66c69b",
+        "XZ_negatives": "AC_decoupled_carry_unknowns_30779c4d0cf74fa5893349cc9d438df8",
+        "archive": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CPU实现_v1.6_timing\\candidates\\AC_decoupled_carry\\验证记录\\cpu_v16_72d999810aef4b1d8c13e8d7bc624cf9"
+      },
+      "directed": "AC_decoupled_carry_directed_53775cadfeb7440a8f9b9f51cdc7d973"
+    }
+  },
+  "checkpoint_review": {
+    "status": "PASS",
+    "candidate": "AC_decoupled_carry",
+    "kind": "independent_checkpoint_review",
+    "attempt_id": "AC_decoupled_carry_checkpoint_review_f3eca6b420fe47c9990d89dc3088f77d",
+    "new_native_vivado_execution": true,
+    "new_synthesis": false,
+    "source_dcp_sha256": "23e1065ce54ff59f00da2b93a10f64e531df143a2bd2e603c10bbe935c75233d",
+    "source_synthesis_attempt": "AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc",
+    "WNS": 2.62,
+    "TNS": 0.0,
+    "failed_endpoints": 0,
+    "forwarding_fault_timing_startpoint": [
+      "m_fault_reg/C"
+    ],
+    "forwarding_fault_data_driver": [
+      "m_fault_reg/Q"
+    ],
+    "level": "OOC synthesized checkpoint only; no place/route",
+    "report_sha256": {
+      "reopened_check_timing.rpt": "c930eb45af3f6fe7d365a5ec7fae0b422d96bad92fc0b189336fe778ed92df17",
+      "reopened_drc.rpt": "3dd624f0d53ea8b521c9a7d67e3209a82dbd8f3555679539447c9a598a274cb7",
+      "reopened_exceptions.rpt": "28e0e00236ddac02ca1aa5eb872776ec94ccc7194d2486106193f4d5e8e7ecc9",
+      "reopened_timing_summary.rpt": "2ca6c611ab54a2cbbc50e8f3ec6046ae1f247277f1acc7cb73103fd6682062b4",
+      "reopened_utilization.rpt": "4e75868cc59b821b4b194b6c45cb7b94790dcaf9979b0e412259e7d6b6da97a6",
+      "reopened_worst_paths.rpt": "b957b9dc58bdbb7c99cc0560c7eb55a2315ab562e06bb209ca66e2491c5c6877"
+    }
+  },
+  "M2_evidence_tests": {
+    "status": "PASS",
+    "candidate": "AC_decoupled_carry",
+    "kind": "evidence",
+    "attempt_id": "AC_decoupled_carry_evidence_12c2c7533852430aa3e0125a3af9ab01",
+    "actual_execution": true,
+    "rtl_sha256": {
+      "addsub16_cla.v": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+      "alu16.v": "ac1e94a66ee28698f906da1927b50c96b80f3b04989b3c75b9cf6df5dde509e9",
+      "branch_target16.v": "7c48a5e0e8af99cccf66c6111b78f99e0fc8f096802e2d1c122fb7a04cb2739e",
+      "cla16.v": "8d3221021088d0362faf8cb4e39128d0bc2e8b6e145dfe30a5f11d1e44218d42",
+      "cla4_pg.v": "31434ab4794c155a4ad2f439b85bfbc0cf6216e86e1921f771d7b168d4e0fab7",
+      "datapath_core.sv": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
+      "flags_reg.v": "fe0abc775c5a99ec4a77ad2bf45a750c1fe9d9cf0fd9bfe65ceab96d46eb50ac",
+      "imm_ext16.v": "9d0c17270462f619dff7a9f19cb618b7a6f482d8d2ddce76d9bd77fbca139844",
+      "isa_decode.v": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2",
+      "operand_forward.v": "30513341d5b60a4393a1784dcc0cb756fd251206655a458f2e2c17e01d1faa65",
+      "pc16.v": "969f0729a1f09740bc9627294ba7f0d8e39f3eaa9f0071504455b42b45405a38",
+      "regfile4x16.v": "06a3cb9622b766909a141c6dce572ea8d41e62fd91c7a44214dfa284e45a1029",
+      "sync_memories.v": "b78149d273015378da20c1d501a565451092f75740f44b4c792b48d444e9da94"
+    },
+    "archives": [
+      "审查/验证工具_r1/证据测试/cpu_v16_evidence_1d0fq_vq"
+    ],
+    "original_rtl_unchanged": true,
+    "summary": {
+      "status": "PASS",
+      "verification_revision": "1.6-vtools-r1",
+      "cases": 9,
+      "results": [
+        {
+          "case": "actual_fresh_execution",
+          "status": "PASS",
+          "attempt_id": "72d99981-0aef-4b1d-8c13-e8d7bc624cf9",
+          "native_commands": 19
+        },
+        {
+          "case": "new_record_historical_recheck",
+          "exit": 0,
+          "result": {
+            "status": "HISTORICAL_REVALIDATION_PASS",
+            "result_kind": "historical_revalidation",
+            "new_xsim_execution": false,
+            "new_execution_pass": false,
+            "verification_revision": "1.6-vtools-r1",
+            "revalidated_at_utc": "2026-10-13T17:11:41.749476+00:00",
+            "run": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CPU实现_v1.6_timing\\candidates\\AC_decoupled_carry\\验证记录\\cpu_v16_72d999810aef4b1d8c13e8d7bc624cf9",
+            "original_attempt_id": "72d99981-0aef-4b1d-8c13-e8d7bc624cf9",
+            "original_completed_at_utc": "2026-10-13T17:09:20.196527+00:00",
+            "original_receipt_sha256": "a249214713ac3acf6313b112e477e7f2df9484f99ef5d1a8a401cf67bba354bc",
+            "evidence_integrity_verified": true,
+            "current_package_compatible": false,
+            "scope": "uniform five-stage completion and bounded hazard regression; not exhaustive CPU state, timing closure or board validation",
+            "note": "Only the recorded evidence was revalidated; no xvlog/xelab/xsim was executed here"
+          },
+          "console_sha256": "0da42c2deb62367ca1dbf03d19961ff180b08e70f62f209ab8e37b74eb1d3ef9"
+        },
+        {
+          "case": "copied_no_receipt",
+          "exit": 2,
+          "result": {
+            "status": "PENDING_VERIFICATION",
+            "result_kind": "historical_revalidation",
+            "new_xsim_execution": false,
+            "new_execution_pass": false,
+            "verification_revision": "1.6-vtools-r1",
+            "revalidated_at_utc": "2026-10-13T17:11:42.339031+00:00",
+            "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_1d0fq_vq\\copied_logs_without_execution",
+            "reason": "Original receipt and evidence hashes missing; copied logs do not prove execution"
+          },
+          "console_sha256": "2784fc1b70323e3b88140d9f309ca76d296e74c27c6d41f88ef2265e6228253c"
+        },
+        {
+          "case": "reused_native_directory",
+          "rejected": true,
+          "old_ledger_unchanged": true
+        },
+        {
+          "case": "missing_csv",
+          "exit": 1,
+          "result": {
+            "status": "FAIL",
+            "result_kind": "historical_revalidation",
+            "new_xsim_execution": false,
+            "new_execution_pass": false,
+            "verification_revision": "1.6-vtools-r1",
+            "revalidated_at_utc": "2026-10-13T17:11:42.831311+00:00",
+            "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_1d0fq_vq\\missing_csv",
+            "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\Donson\\\\AppData\\\\Local\\\\Temp\\\\cpu_v16_evidence_1d0fq_vq\\\\missing_csv\\\\case_results.csv'"
+          },
+          "console_sha256": "a83dfc0ce51eaff7dc086040f6ffb7fceea115b5fe9cfd31c161c1ff261a8123"
+        },
+        {
+          "case": "missing_native_log",
+          "exit": 1,
+          "result": {
+            "status": "FAIL",
+            "result_kind": "historical_revalidation",
+            "new_xsim_execution": false,
+            "new_execution_pass": false,
+            "verification_revision": "1.6-vtools-r1",
+            "revalidated_at_utc": "2026-10-13T17:11:43.161545+00:00",
+            "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_1d0fq_vq\\missing_native_log",
+            "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\Donson\\\\AppData\\\\Local\\\\Temp\\\\cpu_v16_evidence_1d0fq_vq\\\\missing_native_log\\\\hazards.log'"
+          },
+          "console_sha256": "08fd9ea8afbde58e73d0ec79d9ae56501099071bea929535e0e62409b0d84b0e"
+        },
+        {
+          "case": "input_snapshot_drift",
+          "exit": 1,
+          "result": {
+            "status": "FAIL",
+            "result_kind": "historical_revalidation",
+            "new_xsim_execution": false,
+            "new_execution_pass": false,
+            "verification_revision": "1.6-vtools-r1",
+            "revalidated_at_utc": "2026-10-13T17:11:43.501757+00:00",
+            "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_1d0fq_vq\\input_snapshot_drift",
+            "error": "Historical input missing or changed: tb_datapath.sv"
+          },
+          "console_sha256": "978fbc52e47d1ee517267cdc29a4085f0515bd390aca688e8ca41d78d8623290"
+        },
+        {
+          "case": "current_package_mismatch",
+          "exit": 1,
+          "result": {
+            "status": "FAIL",
+            "result_kind": "historical_revalidation",
+            "new_xsim_execution": false,
+            "new_execution_pass": false,
+            "verification_revision": "1.6-vtools-r1",
+            "revalidated_at_utc": "2026-10-13T17:11:43.755789+00:00",
+            "run": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CPU实现_v1.6_timing\\candidates\\AC_decoupled_carry\\验证记录\\cpu_v16_72d999810aef4b1d8c13e8d7bc624cf9",
+            "error": "Source snapshot drift: tb_datapath.sv"
+          },
+          "console_sha256": "52628af1f62d9e551c1a9fa35fd9e0cd741490f8908570c8cbc270aeb248548f"
+        },
+        {
+          "case": "fresh_fatal_and_old_success",
+          "status": "failed",
+          "wrapper_exit": 1,
+          "old_success_preserved": true,
+          "failed_attempt_id": "36a7a404-bf99-4342-af41-b04e5b3a4ab2",
+          "successful_attempt_id": "72d99981-0aef-4b1d-8c13-e8d7bc624cf9",
+          "archive": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_1d0fq_vq\\fresh_fatal_package\\验证记录\\cpu_v16_36a7a404bf994342af41b04e5b3a4ab2",
+          "fatal": "Unready newest producer consumed BASELINE"
+        }
+      ]
+    }
+  },
+  "recommended_rtl_sha256": {
+    "addsub16_cla.v": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+    "alu16.v": "ac1e94a66ee28698f906da1927b50c96b80f3b04989b3c75b9cf6df5dde509e9",
+    "branch_target16.v": "7c48a5e0e8af99cccf66c6111b78f99e0fc8f096802e2d1c122fb7a04cb2739e",
+    "cla16.v": "8d3221021088d0362faf8cb4e39128d0bc2e8b6e145dfe30a5f11d1e44218d42",
+    "cla4_pg.v": "31434ab4794c155a4ad2f439b85bfbc0cf6216e86e1921f771d7b168d4e0fab7",
+    "datapath_core.sv": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
+    "flags_reg.v": "fe0abc775c5a99ec4a77ad2bf45a750c1fe9d9cf0fd9bfe65ceab96d46eb50ac",
+    "imm_ext16.v": "9d0c17270462f619dff7a9f19cb618b7a6f482d8d2ddce76d9bd77fbca139844",
+    "isa_decode.v": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2",
+    "operand_forward.v": "30513341d5b60a4393a1784dcc0cb756fd251206655a458f2e2c17e01d1faa65",
+    "pc16.v": "969f0729a1f09740bc9627294ba7f0d8e39f3eaa9f0071504455b42b45405a38",
+    "regfile4x16.v": "06a3cb9622b766909a141c6dce572ea8d41e62fd91c7a44214dfa284e45a1029",
+    "sync_memories.v": "b78149d273015378da20c1d501a565451092f75740f44b4c792b48d444e9da94"
+  },
+  "formal_versions_not_upgraded": true,
+  "timing_level": "post_synthesis_OOC_estimate",
+  "placed_and_routed": false,
+  "board_validated": false
+}

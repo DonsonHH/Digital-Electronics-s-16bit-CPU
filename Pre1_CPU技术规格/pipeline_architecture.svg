@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="590" viewBox="0 0 1280 590" font-family="Arial">
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#236B79"/></marker></defs>
+<rect width="1280" height="590" fill="#FFFFFF"/>
+<text x="24" y="42" font-size="29" font-weight="700" fill="#142F45">One instruction issued per cycle; several instructions in flight</text>
+<g fill="#E9F0F5" stroke="#557086" stroke-width="2">
+<rect x="24" y="104" width="194" height="183"/><rect x="282" y="104" width="194" height="183"/><rect x="540" y="104" width="194" height="183"/><rect x="798" y="104" width="194" height="183"/><rect x="1056" y="104" width="200" height="183"/>
+</g>
+<g fill="#173454" font-size="30" font-weight="700"><text x="92" y="146">IF</text><text x="349" y="146">ID</text><text x="604" y="146">EX</text><text x="856" y="146">MEM</text><text x="1122" y="146">WB</text></g>
+<g fill="#192B3B" font-size="24"><text x="41" y="190">PC_fetch</text><text x="41" y="227">IM sync read</text><text x="41" y="264">Fetch enable</text><text x="297" y="190">Decode</text><text x="297" y="227">RF 4 x 16</text><text x="297" y="264">Use masks</text><text x="555" y="190">ALU / EA</text><text x="555" y="227">CMP / branch</text><text x="555" y="264">Forward MUX</text><text x="813" y="190">DM read/write</text><text x="813" y="227">STR completes</text><text x="813" y="264">Other: pass</text><text x="1071" y="190">Register / Z</text><text x="1071" y="227">write-back</text><text x="1071" y="264">No valid STR</text></g>
+<g fill="#236B79"><rect x="242" y="91" width="14" height="210"/><rect x="500" y="91" width="14" height="210"/><rect x="758" y="91" width="14" height="210"/><rect x="1016" y="91" width="14" height="210"/></g>
+<g stroke="#236B79" stroke-width="3" marker-end="url(#arr)"><line x1="218" y1="198" x2="280" y2="198"/><line x1="476" y1="198" x2="538" y2="198"/><line x1="734" y1="198" x2="796" y2="198"/><line x1="992" y1="198" x2="1054" y2="198"/></g>
+<g fill="#173454" font-size="20" text-anchor="middle"><text x="249" y="77">IF/ID</text><text x="507" y="77">ID/EX</text><text x="765" y="77">EX/MEM</text><text x="1023" y="77">MEM/WB</text></g>
+<text x="24" y="335" font-size="23" fill="#192B3B">Each boundary carries valid + instruction PC + instruction-specific data and control.</text>
+<line x1="24" y1="357" x2="1256" y2="357" stroke="#CBD5E1"/>
+<text x="24" y="398" font-size="24" font-weight="700" fill="#236B79">Forwarding</text><text x="232" y="398" font-size="23" fill="#192B3B">EX/MEM and MEM/WB to EX; WB to ID; latest CMP result to JZ.</text>
+<text x="24" y="444" font-size="24" font-weight="700" fill="#995A16">Interlock</text><text x="232" y="444" font-size="23" fill="#192B3B">Hold fetch + IF/ID; inject one invalid ID/EX slot for load-use.</text>
+<text x="24" y="490" font-size="24" font-weight="700" fill="#995A16">Redirect</text><text x="232" y="490" font-size="23" fill="#192B3B">EX branch redirects PC_fetch and clears the two younger slots.</text>
+<text x="24" y="550" font-size="22" fill="#506474">IM / DM synchronous outputs form their boundary data. Do not add duplicate IR / MDR stages.</text>
+</svg>

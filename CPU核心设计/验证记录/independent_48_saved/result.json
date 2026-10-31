@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "candidate": "AC_decoupled_carry",
+  "attempt_id": "AC_decoupled_carry_directed_53775cadfeb7440a8f9b9f51cdc7d973",
+  "new_xsim_execution": true,
+  "cases": 48,
+  "reset_witnesses": 10,
+  "cycle_rows": 952,
+  "document_cases": 4,
+  "byte_identical_to_frozen_behavior": {
+    "independent_cycles.csv": true,
+    "independent_results.csv": true
+  },
+  "reference_csv_sha256": {
+    "independent_cycles.csv": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7",
+    "independent_results.csv": "1ce5b8d38e8439320d4bd193eee643b8e5fdc15a3b949ae873d7394cbd57919a"
+  },
+  "actual_csv_sha256": {
+    "independent_cycles.csv": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7",
+    "independent_results.csv": "1ce5b8d38e8439320d4bd193eee643b8e5fdc15a3b949ae873d7394cbd57919a"
+  },
+  "rtl_sha256": {
+    "addsub16_cla.v": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+    "alu16.v": "ac1e94a66ee28698f906da1927b50c96b80f3b04989b3c75b9cf6df5dde509e9",
+    "branch_target16.v": "7c48a5e0e8af99cccf66c6111b78f99e0fc8f096802e2d1c122fb7a04cb2739e",
+    "cla16.v": "8d3221021088d0362faf8cb4e39128d0bc2e8b6e145dfe30a5f11d1e44218d42",
+    "cla4_pg.v": "31434ab4794c155a4ad2f439b85bfbc0cf6216e86e1921f771d7b168d4e0fab7",
+    "datapath_core.sv": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
+    "flags_reg.v": "fe0abc775c5a99ec4a77ad2bf45a750c1fe9d9cf0fd9bfe65ceab96d46eb50ac",
+    "imm_ext16.v": "9d0c17270462f619dff7a9f19cb618b7a6f482d8d2ddce76d9bd77fbca139844",
+    "isa_decode.v": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2",
+    "operand_forward.v": "30513341d5b60a4393a1784dcc0cb756fd251206655a458f2e2c17e01d1faa65",
+    "pc16.v": "969f0729a1f09740bc9627294ba7f0d8e39f3eaa9f0071504455b42b45405a38",
+    "regfile4x16.v": "06a3cb9622b766909a141c6dce572ea8d41e62fd91c7a44214dfa284e45a1029",
+    "sync_memories.v": "b78149d273015378da20c1d501a565451092f75740f44b4c792b48d444e9da94"
+  },
+  "formal_proof": false
+}

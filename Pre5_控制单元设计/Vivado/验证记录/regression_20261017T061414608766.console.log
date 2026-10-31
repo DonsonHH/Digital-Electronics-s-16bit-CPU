@@ -1,0 +1,44 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 90144
+V16_FRESH_RUNTIME=C:\Users\Donson\AppData\Local\Temp\pre5_native\cpu_v16_440e0d7a12444333a4f85adf612f9833
+NATIVE_STEP_START 0 xvlog compile
+NATIVE_STEP_END 0 compile exit=0
+NATIVE_STEP_START 1 xelab elab_contract
+NATIVE_STEP_END 1 elab_contract exit=0
+NATIVE_STEP_START 2 xsim contract
+NATIVE_STEP_END 2 contract exit=0
+NATIVE_STEP_START 3 xelab elab_datapath
+NATIVE_STEP_END 3 elab_datapath exit=0
+NATIVE_STEP_START 4 xsim datapath
+NATIVE_STEP_END 4 datapath exit=0
+NATIVE_STEP_START 5 xelab elab_units
+NATIVE_STEP_END 5 elab_units exit=0
+NATIVE_STEP_START 6 xsim units
+NATIVE_STEP_END 6 units exit=0
+NATIVE_STEP_START 7 xelab elab_stress
+NATIVE_STEP_END 7 elab_stress exit=0
+NATIVE_STEP_START 8 xsim stress
+NATIVE_STEP_END 8 stress exit=0
+NATIVE_STEP_START 9 xelab elab_audit
+NATIVE_STEP_END 9 elab_audit exit=0
+NATIVE_STEP_START 10 xsim audit
+NATIVE_STEP_END 10 audit exit=0
+NATIVE_STEP_START 11 xelab elab_uniform
+NATIVE_STEP_END 11 elab_uniform exit=0
+NATIVE_STEP_START 12 xsim uniform
+NATIVE_STEP_END 12 uniform exit=0
+NATIVE_STEP_START 13 xelab elab_forward
+NATIVE_STEP_END 13 elab_forward exit=0
+NATIVE_STEP_START 14 xsim forward
+NATIVE_STEP_END 14 forward exit=0
+NATIVE_STEP_START 15 xelab elab_trace
+NATIVE_STEP_END 15 elab_trace exit=0
+NATIVE_STEP_START 16 xsim trace
+NATIVE_STEP_END 16 trace exit=0
+NATIVE_STEP_START 17 xelab elab_hazards
+NATIVE_STEP_END 17 elab_hazards exit=0
+NATIVE_STEP_START 18 xsim hazards
+NATIVE_STEP_END 18 hazards exit=0
+CPU_V16_FRESH_EXECUTION_PASS attempt_id=440e0d7a-1244-4333-a4f8-5adf612f9833 native_subprocesses=19 verification_revision=1.6-vtools-r1
+V16_VERIFIED_RESULTS=D:\OneDrive - University of Glasgow\同步文件夹\大三上\Courses\数电\Pre5_控制单元设计\Vivado\验证记录\cpu_v16_440e0d7a12444333a4f85adf612f9833
+DESKTOP_EXIT 0

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700">
+ <defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#17384d"/></marker></defs>
+ <rect width="1600" height="700" fill="white"/>
+ <g font-family="Microsoft YaHei,Arial,sans-serif" fill="#102a3c">
+  <g fill="#f3f7fa" stroke="#17384d" stroke-width="3"><circle cx="190" cy="345" r="106"/><circle cx="730" cy="175" r="111"/><circle cx="730" cy="505" r="111"/><circle cx="1285" cy="175" r="111"/><circle cx="1285" cy="505" r="111"/></g>
+  <g text-anchor="middle" font-size="30"><text x="190" y="315" font-weight="700">RUN</text><text x="190" y="355">000</text><text x="190" y="398">O = 0,0</text>
+   <text x="730" y="145" font-size="27" font-weight="700">DRAIN_HALT</text><text x="730" y="185">001</text><text x="730" y="228">O = 0,0</text>
+   <text x="730" y="475" font-size="27" font-weight="700">DRAIN_FAULT</text><text x="730" y="515">010</text><text x="730" y="558">O = 0,0</text>
+   <text x="1285" y="145" font-weight="700">HALTED</text><text x="1285" y="185">011</text><text x="1285" y="228">O = 1,0</text>
+   <text x="1285" y="475" font-weight="700">FAULTED</text><text x="1285" y="515">100</text><text x="1285" y="558">O = 0,1</text></g>
+  <g fill="none" stroke="#17384d" stroke-width="3" marker-end="url(#a)"><path d="M289 307Q438 175 619 175"/><path d="M289 385Q442 505 619 505"/><path d="M841 175H1174"/><path d="M841 505H1174"/><path d="M116 267C-2 142 -2 551 112 424"/><path d="M667 84C590 0 865 0 796 85"/><path d="M666 596C592 685 865 685 797 596"/><path d="M1224 84C1146 0 1423 0 1350 85"/><path d="M1224 596C1146 685 1423 685 1350 596"/>
+   <path d="M190 110V239" stroke-dasharray="10 7"/></g>
+  <g font-size="29" text-anchor="middle"><text x="438" y="190">E=0 且 H=1</text><text x="440" y="492">E=1</text><text x="1000" y="151">D=1</text><text x="1000" y="483">D=1</text><text x="105" y="480">E=0 且 H=0</text><text x="890" y="52">D=0</text><text x="890" y="655">D=0</text><text x="1450" y="52">保持</text><text x="1450" y="655">保持</text></g>
+  <text x="30" y="58" font-size="29">任意状态 rst=1</text><text x="30" y="96" font-size="29">↑clk 返回 RUN</text>
+  <text x="465" y="343" font-size="28">停止标记在 WB 消费，且下一拍 valid 全为 0，才令 D=1。</text>
+ </g>
+</svg>

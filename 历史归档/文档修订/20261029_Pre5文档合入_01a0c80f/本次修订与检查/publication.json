@@ -1,0 +1,22 @@
+{
+  "status": "DOCUMENT_PUBLISHED_AND_VERIFIED",
+  "changed_files": [
+    "16位流水线CPU核心设计文档_AC1候选版.docx",
+    "README.md",
+    "文件SHA256.json",
+    "证据索引.json"
+  ],
+  "new_files": [],
+  "removed_files": [],
+  "pages": 44,
+  "toc_entries": 54,
+  "tables": 32,
+  "figures": 9,
+  "unchanged_pre5_files": 971,
+  "new_native_simulation": false,
+  "core_document_sha256": "c486205a7ba61609db9f76911a01cf3a9279801d1738ccd7b7b3e062be59332b",
+  "backup": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261029_Pre5文档合入_01a0c80f",
+  "preexisting_missing_historical_entries": [
+    "验证记录/AC1已验收负向原始证据.zip"
+  ]
+}

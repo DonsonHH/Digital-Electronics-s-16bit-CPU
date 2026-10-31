@@ -1,0 +1,4693 @@
+{
+  "revision": "2026-10-31-refined",
+  "baseline": "v1.6-timing-AC1",
+  "ISA": "v1.5",
+  "signal_groups": {
+    "CTRL_X": [
+      "x_use_rd",
+      "x_use_rs",
+      "x_alu_a_sel",
+      "x_alu_b_sel",
+      "x_alu_op",
+      "x_reg_write",
+      "x_mem_read",
+      "x_mem_write",
+      "x_z_write",
+      "x_cv_write",
+      "x_wb_sel",
+      "x_jump_abs",
+      "x_jump_z",
+      "x_halt"
+    ],
+    "CTRL_M": [
+      "m_reg_write",
+      "m_mem_read",
+      "m_mem_write",
+      "m_z_write",
+      "m_cv_write",
+      "m_wb_sel",
+      "m_halt"
+    ],
+    "CTRL_W": [
+      "w_reg_write",
+      "w_z_write",
+      "w_cv_write",
+      "w_wb_sel",
+      "w_halt"
+    ],
+    "FB": [
+      "d_rd",
+      "d_rs",
+      "d_use_rd",
+      "d_use_rs",
+      "x_rd",
+      "x_mem_read",
+      "d_valid",
+      "x_valid",
+      "m_valid",
+      "w_valid",
+      "d_fault",
+      "x_fault",
+      "m_fault",
+      "w_fault",
+      "m_rd",
+      "w_rd",
+      "alu_eq",
+      "alu_illegal",
+      "blocked_rd",
+      "blocked_rs",
+      "fetch_in_range",
+      "m_address_in_range",
+      "w_halt",
+      "w_store",
+      "branch_req",
+      "halt_req",
+      "m_fault_event",
+      "x_fault_event",
+      "z_effective",
+      "w_stop_token",
+      "pipeline_empty_next"
+    ],
+    "UPD": [
+      "d_valid_next",
+      "x_valid_next",
+      "m_valid_next",
+      "w_valid_next",
+      "d_kill",
+      "x_kill"
+    ],
+    "IM": [
+      "im_addr",
+      "im_en",
+      "im_dout"
+    ],
+    "DM": [
+      "dm_addr",
+      "dm_din",
+      "dm_dout",
+      "dm_en",
+      "dm_we"
+    ]
+  },
+  "figures": [
+    {
+      "file": "01_CPU整体架构.svg",
+      "width": 2400,
+      "height": 1500,
+      "nodes": [
+        {
+          "id": "core",
+          "x": 40,
+          "y": 140,
+          "width": 2320,
+          "height": 1090,
+          "container": true,
+          "stroke": "data"
+        },
+        {
+          "id": "cu",
+          "x": 65,
+          "y": 205,
+          "width": 2270,
+          "height": 615,
+          "container": true,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "mode_fsm",
+          "x": 90,
+          "y": 270,
+          "width": 910,
+          "height": 165,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "arbiter",
+          "x": 1100,
+          "y": 270,
+          "width": 1205,
+          "height": 165,
+          "container": false,
+          "stroke": "kill"
+        },
+        {
+          "id": "boundary_0",
+          "x": 509,
+          "y": 535,
+          "width": 22,
+          "height": 285,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_0_data",
+          "x": 509,
+          "y": 866,
+          "width": 22,
+          "height": 204,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_1",
+          "x": 954,
+          "y": 535,
+          "width": 22,
+          "height": 285,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_1_data",
+          "x": 954,
+          "y": 866,
+          "width": 22,
+          "height": 204,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_2",
+          "x": 1399,
+          "y": 535,
+          "width": 22,
+          "height": 285,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_2_data",
+          "x": 1399,
+          "y": 866,
+          "width": 22,
+          "height": 204,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_3",
+          "x": 1844,
+          "y": 535,
+          "width": 22,
+          "height": 285,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_3_data",
+          "x": 1844,
+          "y": 866,
+          "width": 22,
+          "height": 204,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "control_input_0",
+          "x": 565,
+          "y": 550,
+          "width": 350,
+          "height": 82,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "control_input_1",
+          "x": 1010,
+          "y": 550,
+          "width": 350,
+          "height": 82,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "control_input_2",
+          "x": 1455,
+          "y": 550,
+          "width": 350,
+          "height": 82,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "control_input_3",
+          "x": 1900,
+          "y": 550,
+          "width": 350,
+          "height": 82,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "stage_control_0",
+          "x": 90,
+          "y": 665,
+          "width": 410,
+          "height": 145,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "data_stage_0",
+          "x": 90,
+          "y": 880,
+          "width": 410,
+          "height": 185,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "stage_control_1",
+          "x": 535,
+          "y": 665,
+          "width": 410,
+          "height": 145,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "data_stage_1",
+          "x": 535,
+          "y": 880,
+          "width": 410,
+          "height": 185,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "stage_control_2",
+          "x": 980,
+          "y": 665,
+          "width": 410,
+          "height": 145,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "data_stage_2",
+          "x": 980,
+          "y": 880,
+          "width": 410,
+          "height": 185,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "stage_control_3",
+          "x": 1425,
+          "y": 665,
+          "width": 410,
+          "height": 145,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "data_stage_3",
+          "x": 1425,
+          "y": 880,
+          "width": 410,
+          "height": 185,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "stage_control_4",
+          "x": 1870,
+          "y": 665,
+          "width": 410,
+          "height": 145,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "data_stage_4",
+          "x": 1870,
+          "y": 880,
+          "width": 410,
+          "height": 185,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "im",
+          "x": 90,
+          "y": 1270,
+          "width": 680,
+          "height": 155,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "dm",
+          "x": 1200,
+          "y": 1270,
+          "width": 760,
+          "height": 155,
+          "container": false,
+          "stroke": "data"
+        }
+      ],
+      "nets": [
+        {
+          "id": "legend_data",
+          "signals": [],
+          "points": [
+            [
+              60,
+              94
+            ],
+            [
+              135,
+              94
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "legend_ctrl",
+          "signals": [],
+          "points": [
+            [
+              500,
+              94
+            ],
+            [
+              575,
+              94
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "legend_fwd",
+          "signals": [],
+          "points": [
+            [
+              950,
+              94
+            ],
+            [
+              1025,
+              94
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "legend_kill",
+          "signals": [],
+          "points": [
+            [
+              1410,
+              94
+            ],
+            [
+              1485,
+              94
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "events_mode",
+          "signals": [
+            "m_fault_event",
+            "x_fault_event",
+            "qualified_halt",
+            "drain_done"
+          ],
+          "points": [
+            [
+              1100,
+              320
+            ],
+            [
+              1000,
+              320
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "mode_bus",
+          "signals": [
+            "mode",
+            "mode_active",
+            "stop_pending"
+          ],
+          "points": [
+            [
+              320,
+              435
+            ],
+            [
+              320,
+              470
+            ],
+            [
+              2300,
+              470
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "upd_bus",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              1710,
+              435
+            ],
+            [
+              1710,
+              510
+            ],
+            [
+              100,
+              510
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "upd_bus_right",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              1710,
+              510
+            ],
+            [
+              2300,
+              510
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "carry_ctrl_0",
+          "signals": [
+            "x_use_rd",
+            "x_use_rs",
+            "x_alu_a_sel",
+            "x_alu_b_sel",
+            "x_alu_op",
+            "x_reg_write",
+            "x_mem_read",
+            "x_mem_write",
+            "x_z_write",
+            "x_cv_write",
+            "x_wb_sel",
+            "x_jump_abs",
+            "x_jump_z",
+            "x_halt"
+          ],
+          "points": [
+            [
+              915,
+              589
+            ],
+            [
+              1010,
+              589
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "ctrl_to_stage_1",
+          "signals": [
+            "d_use_rd",
+            "d_use_rs",
+            "d_alu_a_sel",
+            "d_alu_b_sel",
+            "d_alu_op",
+            "d_reg_write",
+            "d_mem_read",
+            "d_mem_write",
+            "d_z_write",
+            "d_cv_write",
+            "d_wb_sel",
+            "d_jump_abs",
+            "d_jump_z",
+            "d_halt"
+          ],
+          "points": [
+            [
+              740,
+              632
+            ],
+            [
+              740,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "carry_ctrl_1",
+          "signals": [
+            "m_reg_write",
+            "m_mem_read",
+            "m_mem_write",
+            "m_z_write",
+            "m_cv_write",
+            "m_wb_sel",
+            "m_halt"
+          ],
+          "points": [
+            [
+              1360,
+              589
+            ],
+            [
+              1455,
+              589
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "ctrl_to_stage_2",
+          "signals": [
+            "x_use_rd",
+            "x_use_rs",
+            "x_alu_a_sel",
+            "x_alu_b_sel",
+            "x_alu_op",
+            "x_reg_write",
+            "x_mem_read",
+            "x_mem_write",
+            "x_z_write",
+            "x_cv_write",
+            "x_wb_sel",
+            "x_jump_abs",
+            "x_jump_z",
+            "x_halt"
+          ],
+          "points": [
+            [
+              1185,
+              632
+            ],
+            [
+              1185,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "carry_ctrl_2",
+          "signals": [
+            "w_reg_write",
+            "w_z_write",
+            "w_cv_write",
+            "w_wb_sel",
+            "w_halt"
+          ],
+          "points": [
+            [
+              1805,
+              589
+            ],
+            [
+              1900,
+              589
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "ctrl_to_stage_3",
+          "signals": [
+            "m_reg_write",
+            "m_mem_read",
+            "m_mem_write",
+            "m_z_write",
+            "m_cv_write",
+            "m_wb_sel",
+            "m_halt"
+          ],
+          "points": [
+            [
+              1630,
+              632
+            ],
+            [
+              1630,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "ctrl_to_stage_4",
+          "signals": [
+            "w_reg_write",
+            "w_z_write",
+            "w_cv_write",
+            "w_wb_sel",
+            "w_halt"
+          ],
+          "points": [
+            [
+              2075,
+              632
+            ],
+            [
+              2075,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "qual_0_ctrl",
+          "signals": [
+            "mode",
+            "mode_active"
+          ],
+          "points": [
+            [
+              490,
+              470
+            ],
+            [
+              490,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "qual_0_kill",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              100,
+              510
+            ],
+            [
+              100,
+              665
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "enable_to_datapath_0",
+          "signals": [
+            "pc_hold",
+            "im_en"
+          ],
+          "points": [
+            [
+              295,
+              810
+            ],
+            [
+              295,
+              880
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "data_next_0",
+          "signals": [
+            "im_dout",
+            "d_pc"
+          ],
+          "points": [
+            [
+              500,
+              950
+            ],
+            [
+              535,
+              950
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "fb_0",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              425,
+              1065
+            ],
+            [
+              425,
+              1125
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "qual_1_ctrl",
+          "signals": [
+            "mode",
+            "mode_active"
+          ],
+          "points": [
+            [
+              935,
+              470
+            ],
+            [
+              935,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "qual_1_kill",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              545,
+              510
+            ],
+            [
+              545,
+              665
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "enable_to_datapath_1",
+          "signals": [
+            "x_valid_next"
+          ],
+          "points": [
+            [
+              740,
+              810
+            ],
+            [
+              740,
+              880
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "data_next_1",
+          "signals": [
+            "d_rd_value",
+            "d_rs_value",
+            "d_imm_ext"
+          ],
+          "points": [
+            [
+              945,
+              950
+            ],
+            [
+              980,
+              950
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "fb_1",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              870,
+              1065
+            ],
+            [
+              870,
+              1125
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "qual_2_ctrl",
+          "signals": [
+            "mode",
+            "mode_active"
+          ],
+          "points": [
+            [
+              1380,
+              470
+            ],
+            [
+              1380,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "qual_2_kill",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              990,
+              510
+            ],
+            [
+              990,
+              665
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "enable_to_datapath_2",
+          "signals": [
+            "x_alu_a_sel",
+            "x_alu_b_sel",
+            "qualified_redirect"
+          ],
+          "points": [
+            [
+              1185,
+              810
+            ],
+            [
+              1185,
+              880
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "data_next_2",
+          "signals": [
+            "alu_result",
+            "x_store_data",
+            "alu_eq",
+            "alu_c",
+            "alu_v"
+          ],
+          "points": [
+            [
+              1390,
+              950
+            ],
+            [
+              1425,
+              950
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "fb_2",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              1315,
+              1065
+            ],
+            [
+              1315,
+              1125
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "qual_3_ctrl",
+          "signals": [
+            "mode",
+            "mode_active"
+          ],
+          "points": [
+            [
+              1825,
+              470
+            ],
+            [
+              1825,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "qual_3_kill",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              1435,
+              510
+            ],
+            [
+              1435,
+              665
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "enable_to_datapath_3",
+          "signals": [
+            "dm_en",
+            "dm_we"
+          ],
+          "points": [
+            [
+              1630,
+              810
+            ],
+            [
+              1630,
+              880
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "data_next_3",
+          "signals": [
+            "m_exec_value",
+            "m_cmp_z",
+            "m_c",
+            "m_v"
+          ],
+          "points": [
+            [
+              1835,
+              950
+            ],
+            [
+              1870,
+              950
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "fb_3",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              1760,
+              1065
+            ],
+            [
+              1760,
+              1125
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "qual_4_ctrl",
+          "signals": [
+            "mode",
+            "mode_active"
+          ],
+          "points": [
+            [
+              2270,
+              470
+            ],
+            [
+              2270,
+              665
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "qual_4_kill",
+          "signals": [
+            "d_valid_next",
+            "x_valid_next",
+            "m_valid_next",
+            "w_valid_next",
+            "d_kill",
+            "x_kill"
+          ],
+          "points": [
+            [
+              1880,
+              510
+            ],
+            [
+              1880,
+              665
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "enable_to_datapath_4",
+          "signals": [
+            "rf_we",
+            "z_we",
+            "cv_we"
+          ],
+          "points": [
+            [
+              2075,
+              810
+            ],
+            [
+              2075,
+              880
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "fb_4",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              2205,
+              1065
+            ],
+            [
+              2205,
+              1125
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "feedback_bus",
+          "signals": [
+            "d_rd",
+            "d_rs",
+            "d_use_rd",
+            "d_use_rs",
+            "x_rd",
+            "x_mem_read",
+            "d_valid",
+            "x_valid",
+            "m_valid",
+            "w_valid",
+            "d_fault",
+            "x_fault",
+            "m_fault",
+            "w_fault",
+            "m_rd",
+            "w_rd",
+            "alu_eq",
+            "alu_illegal",
+            "blocked_rd",
+            "blocked_rs",
+            "fetch_in_range",
+            "m_address_in_range",
+            "w_halt",
+            "w_store",
+            "branch_req",
+            "halt_req",
+            "m_fault_event",
+            "x_fault_event",
+            "z_effective",
+            "w_stop_token",
+            "pipeline_empty_next"
+          ],
+          "points": [
+            [
+              145,
+              1125
+            ],
+            [
+              2320,
+              1125
+            ],
+            [
+              2320,
+              475
+            ],
+            [
+              2305,
+              475
+            ],
+            [
+              2305,
+              435
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "im_req",
+          "signals": [
+            "im_addr",
+            "im_en"
+          ],
+          "points": [
+            [
+              145,
+              1065
+            ],
+            [
+              145,
+              1250
+            ],
+            [
+              180,
+              1250
+            ],
+            [
+              180,
+              1270
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "im_ret",
+          "signals": [
+            "im_dout"
+          ],
+          "points": [
+            [
+              680,
+              1270
+            ],
+            [
+              680,
+              1245
+            ],
+            [
+              720,
+              1245
+            ],
+            [
+              720,
+              1065
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "dm_req",
+          "signals": [
+            "dm_addr",
+            "dm_din",
+            "dm_en",
+            "dm_we"
+          ],
+          "points": [
+            [
+              1600,
+              1065
+            ],
+            [
+              1600,
+              1270
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "dm_ret",
+          "signals": [
+            "dm_dout"
+          ],
+          "points": [
+            [
+              1960,
+              1390
+            ],
+            [
+              2290,
+              1390
+            ],
+            [
+              2290,
+              1065
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "mode_status_outputs",
+          "signals": [
+            "halted",
+            "fault"
+          ],
+          "points": [
+            [
+              90,
+              400
+            ],
+            [
+              70,
+              400
+            ],
+            [
+              70,
+              1438
+            ],
+            [
+              2080,
+              1438
+            ],
+            [
+              2080,
+              1370
+            ]
+          ],
+          "kind": "kill"
+        }
+      ],
+      "text_fit_warnings": [],
+      "text_boxes": [
+        {
+          "text": "CPU整体控制与数据通路架构",
+          "bbox": [
+            60,
+            24,
+            584,
+            63
+          ]
+        },
+        {
+          "text": "数据 / 载荷",
+          "bbox": [
+            155,
+            77,
+            336,
+            112
+          ]
+        },
+        {
+          "text": "控制 / 资格",
+          "bbox": [
+            595,
+            76,
+            776,
+            112
+          ]
+        },
+        {
+          "text": "前递 / 反馈",
+          "bbox": [
+            1045,
+            76,
+            1226,
+            112
+          ]
+        },
+        {
+          "text": "取消 / 停止",
+          "bbox": [
+            1505,
+            77,
+            1686,
+            112
+          ]
+        },
+        {
+          "text": "●连接；无点交叉不连",
+          "bbox": [
+            1880,
+            53,
+            2227,
+            90
+          ]
+        },
+        {
+          "text": "浅蓝带为现有流水边界",
+          "bbox": [
+            1880,
+            95,
+            2240,
+            131
+          ]
+        },
+        {
+          "text": "datapath_core  ·  同一clk  ·  rst同步高有效",
+          "bbox": [
+            65,
+            152,
+            876,
+            195
+          ]
+        },
+        {
+          "text": "Pipeline CU  ·  当前控制意图 + 流水资格 + 跨级协调",
+          "bbox": [
+            85,
+            215,
+            1050,
+            258
+          ]
+        },
+        {
+          "text": "全局运行模式FSM",
+          "bbox": [
+            104,
+            281,
+            431,
+            320
+          ]
+        },
+        {
+          "text": "RUN / DRAIN_HALT / DRAIN_FAULT",
+          "bbox": [
+            104,
+            326,
+            724,
+            363
+          ]
+        },
+        {
+          "text": "HALTED / FAULTED：停止标记到WB且排空",
+          "bbox": [
+            104,
+            365,
+            821,
+            401
+          ]
+        },
+        {
+          "text": "跨级冒险与事件仲裁",
+          "bbox": [
+            1114,
+            281,
+            1474,
+            320
+          ]
+        },
+        {
+          "text": "Reset > MEM fault > EX停止 > redirect > load_use",
+          "bbox": [
+            1114,
+            324,
+            1980,
+            363
+          ]
+        },
+        {
+          "text": "UPD：推进 / 保持 / bubble / 年轻取消",
+          "bbox": [
+            1114,
+            365,
+            1746,
+            401
+          ]
+        },
+        {
+          "text": "事件",
+          "bbox": [
+            1004.0,
+            274,
+            1076.0,
+            309
+          ]
+        },
+        {
+          "text": "模式资格",
+          "bbox": [
+            95,
+            449,
+            239,
+            485
+          ]
+        },
+        {
+          "text": "IF/ID",
+          "bbox": [
+            478.5,
+            825,
+            561.5,
+            858
+          ]
+        },
+        {
+          "text": "ID/EX",
+          "bbox": [
+            917.0,
+            825,
+            1013.0,
+            858
+          ]
+        },
+        {
+          "text": "EX/MEM",
+          "bbox": [
+            1336.0,
+            825,
+            1484.0,
+            858
+          ]
+        },
+        {
+          "text": "MEM/WB",
+          "bbox": [
+            1772.5,
+            825,
+            1937.5,
+            858
+          ]
+        },
+        {
+          "text": "PC_fetch / range",
+          "bbox": [
+            105,
+            555,
+            388,
+            593
+          ]
+        },
+        {
+          "text": "前端资格反馈",
+          "bbox": [
+            105,
+            599,
+            321,
+            635
+          ]
+        },
+        {
+          "text": "译码 d_ctrl",
+          "bbox": [
+            579,
+            561,
+            783,
+            604
+          ]
+        },
+        {
+          "text": "CTRL_X",
+          "bbox": [
+            1024,
+            563,
+            1172,
+            604
+          ]
+        },
+        {
+          "text": "CTRL_M",
+          "bbox": [
+            1469,
+            563,
+            1630,
+            604
+          ]
+        },
+        {
+          "text": "CTRL_W",
+          "bbox": [
+            1914,
+            563,
+            2078,
+            604
+          ]
+        },
+        {
+          "text": "IFCU 取指资格",
+          "bbox": [
+            104,
+            676,
+            369,
+            715
+          ]
+        },
+        {
+          "text": "fetch_accept/pc_hold",
+          "bbox": [
+            104,
+            720,
+            467,
+            758
+          ]
+        },
+        {
+          "text": "im_en",
+          "bbox": [
+            104,
+            763,
+            206,
+            800
+          ]
+        },
+        {
+          "text": "IF  唯一PC",
+          "bbox": [
+            104,
+            891,
+            296,
+            929
+          ]
+        },
+        {
+          "text": "u_pc / PC_fetch16",
+          "bbox": [
+            104,
+            935,
+            409,
+            973
+          ]
+        },
+        {
+          "text": "+1 / hold / redirect",
+          "bbox": [
+            104,
+            977,
+            436,
+            1011
+          ]
+        },
+        {
+          "text": "IDCU 发射资格",
+          "bbox": [
+            549,
+            676,
+            824,
+            715
+          ]
+        },
+        {
+          "text": "保持 / 取消 / 发射",
+          "bbox": [
+            549,
+            719,
+            839,
+            754
+          ]
+        },
+        {
+          "text": "x_valid_next",
+          "bbox": [
+            549,
+            762,
+            754,
+            800
+          ]
+        },
+        {
+          "text": "ID  读源与扩展",
+          "bbox": [
+            549,
+            891,
+            818,
+            930
+          ]
+        },
+        {
+          "text": "u_rf: 4×16, 2R1W",
+          "bbox": [
+            549,
+            935,
+            846,
+            973
+          ]
+        },
+        {
+          "text": "u_ext: imm8 → 16",
+          "bbox": [
+            549,
+            978,
+            857,
+            1015
+          ]
+        },
+        {
+          "text": "EXCU 执行资格",
+          "bbox": [
+            994,
+            676,
+            1275,
+            715
+          ]
+        },
+        {
+          "text": "ALU选择 / redirect",
+          "bbox": [
+            994,
+            719,
+            1305,
+            754
+          ]
+        },
+        {
+          "text": "halt / fault请求",
+          "bbox": [
+            994,
+            761,
+            1245,
+            796
+          ]
+        },
+        {
+          "text": "EX  计算与决策",
+          "bbox": [
+            994,
+            891,
+            1269,
+            930
+          ]
+        },
+        {
+          "text": "u_forward / u_alu",
+          "bbox": [
+            994,
+            935,
+            1293,
+            973
+          ]
+        },
+        {
+          "text": "Z选择 / u_target",
+          "bbox": [
+            994,
+            976,
+            1266,
+            1015
+          ]
+        },
+        {
+          "text": "MEMCU 访问资格",
+          "bbox": [
+            1439,
+            676,
+            1774,
+            715
+          ]
+        },
+        {
+          "text": "完整EA与有效槽",
+          "bbox": [
+            1439,
+            718,
+            1700,
+            754
+          ]
+        },
+        {
+          "text": "dm_en / dm_we",
+          "bbox": [
+            1439,
+            762,
+            1712,
+            800
+          ]
+        },
+        {
+          "text": "MEM  访存或传递",
+          "bbox": [
+            1439,
+            891,
+            1768,
+            929
+          ]
+        },
+        {
+          "text": "EA16 / store_data16",
+          "bbox": [
+            1439,
+            935,
+            1784,
+            973
+          ]
+        },
+        {
+          "text": "同步DM访问资格",
+          "bbox": [
+            1439,
+            975,
+            1717,
+            1011
+          ]
+        },
+        {
+          "text": "WBCU 写入资格",
+          "bbox": [
+            1884,
+            676,
+            2184,
+            715
+          ]
+        },
+        {
+          "text": "有效W槽 + 写入意图",
+          "bbox": [
+            1884,
+            718,
+            2222,
+            754
+          ]
+        },
+        {
+          "text": "rf_we / z_we / cv_we",
+          "bbox": [
+            1884,
+            762,
+            2231,
+            800
+          ]
+        },
+        {
+          "text": "WB  架构写入",
+          "bbox": [
+            1884,
+            891,
+            2138,
+            930
+          ]
+        },
+        {
+          "text": "wb_data16选择",
+          "bbox": [
+            1884,
+            934,
+            2141,
+            973
+          ]
+        },
+        {
+          "text": "RF与Z/C/V写入",
+          "bbox": [
+            1884,
+            976,
+            2135,
+            1011
+          ]
+        },
+        {
+          "text": "PC/range",
+          "bbox": [
+            200,
+            1067,
+            360,
+            1104
+          ]
+        },
+        {
+          "text": "源/use",
+          "bbox": [
+            540,
+            1065,
+            650,
+            1100
+          ]
+        },
+        {
+          "text": "eq/分支/停止",
+          "bbox": [
+            985,
+            1065,
+            1202,
+            1104
+          ]
+        },
+        {
+          "text": "EA/fault",
+          "bbox": [
+            1430,
+            1066,
+            1567,
+            1100
+          ]
+        },
+        {
+          "text": "目标/valid/标记",
+          "bbox": [
+            1875,
+            1065,
+            2131,
+            1100
+          ]
+        },
+        {
+          "text": "FB → 事件/排空",
+          "bbox": [
+            200,
+            1149,
+            459,
+            1185
+          ]
+        },
+        {
+          "text": "外部同步IM · 256×16",
+          "bbox": [
+            104,
+            1281,
+            515,
+            1320
+          ]
+        },
+        {
+          "text": "im_addr16 / im_en → IM",
+          "bbox": [
+            104,
+            1325,
+            529,
+            1363
+          ]
+        },
+        {
+          "text": "IM → im_dout16 (= d_inst)",
+          "bbox": [
+            104,
+            1367,
+            565,
+            1405
+          ]
+        },
+        {
+          "text": "外部同步DM · 256×16",
+          "bbox": [
+            1214,
+            1281,
+            1644,
+            1320
+          ]
+        },
+        {
+          "text": "dm_addr16 / dm_din16 / dm_en / dm_we",
+          "bbox": [
+            1214,
+            1325,
+            1926,
+            1363
+          ]
+        },
+        {
+          "text": "DM → dm_dout16 (= w_load_data)",
+          "bbox": [
+            1214,
+            1367,
+            1815,
+            1405
+          ]
+        },
+        {
+          "text": "halted / fault",
+          "bbox": [
+            2000,
+            1271,
+            2222,
+            1305
+          ]
+        },
+        {
+          "text": "由mode译出",
+          "bbox": [
+            2000,
+            1316,
+            2208,
+            1351
+          ]
+        },
+        {
+          "text": "IFCU至WBCU是core职责；u_*为RTL实例；浅蓝带是既有流水状态。IM/DM输出承担数据边界，不加IR/MDR。",
+          "bbox": [
+            90,
+            1449,
+            1885,
+            1489
+          ]
+        }
+      ]
+    },
+    {
+      "file": "02_五级Datapath.svg",
+      "width": 2400,
+      "height": 1680,
+      "nodes": [
+        {
+          "id": "stage_IF",
+          "x": 60,
+          "y": 140,
+          "width": 340,
+          "height": 1265,
+          "container": true,
+          "stroke": "none"
+        },
+        {
+          "id": "stage_ID",
+          "x": 450,
+          "y": 140,
+          "width": 350,
+          "height": 1265,
+          "container": true,
+          "stroke": "none"
+        },
+        {
+          "id": "stage_EX",
+          "x": 870,
+          "y": 140,
+          "width": 640,
+          "height": 1265,
+          "container": true,
+          "stroke": "none"
+        },
+        {
+          "id": "stage_MEM",
+          "x": 1550,
+          "y": 140,
+          "width": 350,
+          "height": 1265,
+          "container": true,
+          "stroke": "none"
+        },
+        {
+          "id": "stage_WB",
+          "x": 1980,
+          "y": 140,
+          "width": 350,
+          "height": 1265,
+          "container": true,
+          "stroke": "none"
+        },
+        {
+          "id": "boundary_0",
+          "x": 402,
+          "y": 535,
+          "width": 36,
+          "height": 870,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_1",
+          "x": 822,
+          "y": 300,
+          "width": 36,
+          "height": 1105,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_2",
+          "x": 1492,
+          "y": 300,
+          "width": 36,
+          "height": 1105,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "boundary_3",
+          "x": 1922,
+          "y": 300,
+          "width": 36,
+          "height": 1105,
+          "container": true,
+          "stroke": "#A2B7C9"
+        },
+        {
+          "id": "pc16_scope",
+          "x": 80,
+          "y": 720,
+          "width": 300,
+          "height": 320,
+          "container": true,
+          "stroke": "data"
+        },
+        {
+          "id": "pc_next",
+          "x": 100,
+          "y": 795,
+          "width": 260,
+          "height": 150,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "pc_state",
+          "x": 100,
+          "y": 955,
+          "width": 260,
+          "height": 75,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "im",
+          "x": 80,
+          "y": 1140,
+          "width": 300,
+          "height": 175,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "decode",
+          "x": 470,
+          "y": 540,
+          "width": 310,
+          "height": 150,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "rf",
+          "x": 470,
+          "y": 820,
+          "width": 310,
+          "height": 230,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "ext",
+          "x": 470,
+          "y": 1150,
+          "width": 310,
+          "height": 140,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "target",
+          "x": 1060,
+          "y": 350,
+          "width": 420,
+          "height": 120,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "z_mux",
+          "x": 900,
+          "y": 590,
+          "width": 260,
+          "height": 150,
+          "container": false,
+          "stroke": "fwd"
+        },
+        {
+          "id": "branch_qual",
+          "x": 1220,
+          "y": 590,
+          "width": 260,
+          "height": 150,
+          "container": false,
+          "stroke": "kill"
+        },
+        {
+          "id": "forward_scope",
+          "x": 895,
+          "y": 760,
+          "width": 265,
+          "height": 420,
+          "container": true,
+          "stroke": "fwd"
+        },
+        {
+          "id": "rd_forward",
+          "x": 910,
+          "y": 820,
+          "width": 230,
+          "height": 100,
+          "container": false,
+          "stroke": "fwd"
+        },
+        {
+          "id": "rs_forward",
+          "x": 910,
+          "y": 1060,
+          "width": 230,
+          "height": 100,
+          "container": false,
+          "stroke": "fwd"
+        },
+        {
+          "id": "a_mux",
+          "x": 1190,
+          "y": 800,
+          "width": 90,
+          "height": 130,
+          "container": false
+        },
+        {
+          "id": "b_mux",
+          "x": 1190,
+          "y": 1040,
+          "width": 90,
+          "height": 130,
+          "container": false
+        },
+        {
+          "id": "alu",
+          "x": 1310,
+          "y": 900,
+          "width": 170,
+          "height": 230,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "ea_guard",
+          "x": 1570,
+          "y": 900,
+          "width": 310,
+          "height": 150,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "dm",
+          "x": 1570,
+          "y": 1130,
+          "width": 310,
+          "height": 180,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "wb_mux",
+          "x": 2000,
+          "y": 900,
+          "width": 300,
+          "height": 180,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "flags",
+          "x": 2000,
+          "y": 1190,
+          "width": 300,
+          "height": 145,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "wb_control",
+          "x": 2000,
+          "y": 620,
+          "width": 300,
+          "height": 190,
+          "container": false,
+          "stroke": "ctrl"
+        },
+        {
+          "id": "payload_0",
+          "x": 60,
+          "y": 1430,
+          "width": 515,
+          "height": 145,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "payload_1",
+          "x": 650,
+          "y": 1430,
+          "width": 515,
+          "height": 145,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "payload_2",
+          "x": 1235,
+          "y": 1430,
+          "width": 515,
+          "height": 145,
+          "container": false,
+          "stroke": "data"
+        },
+        {
+          "id": "payload_3",
+          "x": 1820,
+          "y": 1430,
+          "width": 515,
+          "height": 145,
+          "container": false,
+          "stroke": "data"
+        }
+      ],
+      "nets": [
+        {
+          "id": "legend_data",
+          "signals": [],
+          "points": [
+            [
+              60,
+              94
+            ],
+            [
+              135,
+              94
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "legend_ctrl",
+          "signals": [],
+          "points": [
+            [
+              500,
+              94
+            ],
+            [
+              575,
+              94
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "legend_fwd",
+          "signals": [],
+          "points": [
+            [
+              950,
+              94
+            ],
+            [
+              1025,
+              94
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "legend_kill",
+          "signals": [],
+          "points": [
+            [
+              1410,
+              94
+            ],
+            [
+              1485,
+              94
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "pc_next_state",
+          "signals": [
+            "PC_fetch"
+          ],
+          "points": [
+            [
+              230,
+              945
+            ],
+            [
+              230,
+              955
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "pc_hold_plus1",
+          "signals": [
+            "PC_fetch"
+          ],
+          "points": [
+            [
+              100,
+              990
+            ],
+            [
+              88,
+              990
+            ],
+            [
+              88,
+              850
+            ],
+            [
+              100,
+              850
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "pc_im",
+          "signals": [
+            "im_addr"
+          ],
+          "points": [
+            [
+              360,
+              990
+            ],
+            [
+              390,
+              990
+            ],
+            [
+              390,
+              1130
+            ],
+            [
+              280,
+              1130
+            ],
+            [
+              280,
+              1140
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "im_inst",
+          "signals": [
+            "im_dout",
+            "d_inst"
+          ],
+          "points": [
+            [
+              380,
+              1230
+            ],
+            [
+              430,
+              1230
+            ],
+            [
+              430,
+              610
+            ],
+            [
+              470,
+              610
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "decode_rf_addr",
+          "signals": [
+            "d_rd",
+            "d_rs"
+          ],
+          "points": [
+            [
+              740,
+              690
+            ],
+            [
+              740,
+              820
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "imm8_ext",
+          "signals": [
+            "d_imm"
+          ],
+          "points": [
+            [
+              780,
+              610
+            ],
+            [
+              795,
+              610
+            ],
+            [
+              795,
+              1120
+            ],
+            [
+              630,
+              1120
+            ],
+            [
+              630,
+              1150
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "sign_ext",
+          "signals": [
+            "d_imm_signed"
+          ],
+          "points": [
+            [
+              780,
+              655
+            ],
+            [
+              810,
+              655
+            ],
+            [
+              810,
+              1210
+            ],
+            [
+              780,
+              1210
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "target_pc_imm",
+          "signals": [
+            "x_pc",
+            "x_imm_ext"
+          ],
+          "points": [
+            [
+              858,
+              420
+            ],
+            [
+              1060,
+              420
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "target_relative_mode",
+          "signals": [
+            "x_jump_z"
+          ],
+          "points": [
+            [
+              858,
+              460
+            ],
+            [
+              1040,
+              460
+            ],
+            [
+              1040,
+              450
+            ],
+            [
+              1060,
+              450
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "z_to_request",
+          "signals": [
+            "z_effective"
+          ],
+          "points": [
+            [
+              1160,
+              665
+            ],
+            [
+              1220,
+              665
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "x_branch_controls",
+          "signals": [
+            "x_jump_abs",
+            "x_jump_z",
+            "x_valid",
+            "x_fault"
+          ],
+          "points": [
+            [
+              858,
+              755
+            ],
+            [
+              1200,
+              755
+            ],
+            [
+              1200,
+              710
+            ],
+            [
+              1220,
+              710
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "target_to_pc",
+          "signals": [
+            "branch_target"
+          ],
+          "points": [
+            [
+              1480,
+              420
+            ],
+            [
+              1500,
+              420
+            ],
+            [
+              1500,
+              340
+            ],
+            [
+              30,
+              340
+            ],
+            [
+              30,
+              835
+            ],
+            [
+              100,
+              835
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "redirect_to_pc",
+          "signals": [
+            "qualified_redirect"
+          ],
+          "points": [
+            [
+              1480,
+              665
+            ],
+            [
+              1500,
+              665
+            ],
+            [
+              1500,
+              515
+            ],
+            [
+              45,
+              515
+            ],
+            [
+              45,
+              870
+            ],
+            [
+              100,
+              870
+            ]
+          ],
+          "kind": "kill"
+        },
+        {
+          "id": "x_rd_saved",
+          "signals": [
+            "x_rd_value"
+          ],
+          "points": [
+            [
+              780,
+              880
+            ],
+            [
+              820,
+              880
+            ],
+            [
+              820,
+              900
+            ],
+            [
+              910,
+              900
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "x_rs_saved",
+          "signals": [
+            "x_rs_value"
+          ],
+          "points": [
+            [
+              780,
+              995
+            ],
+            [
+              820,
+              995
+            ],
+            [
+              820,
+              1140
+            ],
+            [
+              910,
+              1140
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "fwd_x_tags",
+          "signals": [
+            "x_use_rd",
+            "x_use_rs",
+            "x_rd",
+            "x_rs"
+          ],
+          "points": [
+            [
+              858,
+              780
+            ],
+            [
+              895,
+              780
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "W_return",
+          "signals": [
+            "wb_data"
+          ],
+          "points": [
+            [
+              2300,
+              980
+            ],
+            [
+              2345,
+              980
+            ],
+            [
+              2345,
+              245
+            ],
+            [
+              865,
+              245
+            ],
+            [
+              865,
+              1115
+            ],
+            [
+              910,
+              1115
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "W_to_rd",
+          "signals": [
+            "wb_data"
+          ],
+          "points": [
+            [
+              865,
+              875
+            ],
+            [
+              910,
+              875
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "M_return",
+          "signals": [
+            "m_exec_value"
+          ],
+          "points": [
+            [
+              1540,
+              980
+            ],
+            [
+              1540,
+              310
+            ],
+            [
+              885,
+              310
+            ],
+            [
+              885,
+              1090
+            ],
+            [
+              910,
+              1090
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "M_to_rd",
+          "signals": [
+            "m_exec_value"
+          ],
+          "points": [
+            [
+              885,
+              850
+            ],
+            [
+              910,
+              850
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "zero_a",
+          "signals": [],
+          "points": [
+            [
+              1235,
+              785
+            ],
+            [
+              1235,
+              800
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "zero_b",
+          "signals": [],
+          "points": [
+            [
+              1235,
+              1025
+            ],
+            [
+              1235,
+              1040
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "rd_to_a",
+          "signals": [
+            "rd_fwd"
+          ],
+          "points": [
+            [
+              1140,
+              875
+            ],
+            [
+              1190,
+              875
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "rd_store",
+          "signals": [
+            "x_store_data",
+            "m_store_data",
+            "dm_din"
+          ],
+          "points": [
+            [
+              1165,
+              875
+            ],
+            [
+              1165,
+              1260
+            ],
+            [
+              1570,
+              1260
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "rs_to_a",
+          "signals": [
+            "rs_fwd"
+          ],
+          "points": [
+            [
+              1140,
+              1115
+            ],
+            [
+              1180,
+              1115
+            ],
+            [
+              1180,
+              900
+            ],
+            [
+              1190,
+              900
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "rs_to_b",
+          "signals": [
+            "rs_fwd"
+          ],
+          "points": [
+            [
+              1180,
+              1115
+            ],
+            [
+              1190,
+              1115
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "imm_to_b",
+          "signals": [
+            "x_imm_ext"
+          ],
+          "points": [
+            [
+              780,
+              1230
+            ],
+            [
+              815,
+              1230
+            ],
+            [
+              815,
+              1325
+            ],
+            [
+              1235,
+              1325
+            ],
+            [
+              1235,
+              1170
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "a_to_alu",
+          "signals": [
+            "alu_a"
+          ],
+          "points": [
+            [
+              1280,
+              870
+            ],
+            [
+              1295,
+              870
+            ],
+            [
+              1295,
+              970
+            ],
+            [
+              1310,
+              970
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "b_to_alu",
+          "signals": [
+            "alu_b"
+          ],
+          "points": [
+            [
+              1280,
+              1115
+            ],
+            [
+              1295,
+              1115
+            ],
+            [
+              1295,
+              1060
+            ],
+            [
+              1310,
+              1060
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "result_to_m",
+          "signals": [
+            "alu_result",
+            "m_exec_value"
+          ],
+          "points": [
+            [
+              1480,
+              980
+            ],
+            [
+              1570,
+              980
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "M_control_input",
+          "signals": [
+            "m_valid",
+            "m_fault",
+            "m_mem_read",
+            "m_mem_write"
+          ],
+          "points": [
+            [
+              1528,
+              1020
+            ],
+            [
+              1570,
+              1020
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "ea_dm_addr",
+          "signals": [
+            "dm_addr"
+          ],
+          "points": [
+            [
+              1540,
+              980
+            ],
+            [
+              1540,
+              1185
+            ],
+            [
+              1570,
+              1185
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "ea_enable",
+          "signals": [
+            "dm_en",
+            "dm_we"
+          ],
+          "points": [
+            [
+              1725,
+              1050
+            ],
+            [
+              1725,
+              1130
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "exec_to_w",
+          "signals": [
+            "m_exec_value",
+            "w_exec_value"
+          ],
+          "points": [
+            [
+              1540,
+              980
+            ],
+            [
+              1540,
+              860
+            ],
+            [
+              1975,
+              860
+            ],
+            [
+              1975,
+              950
+            ],
+            [
+              2000,
+              950
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "dm_load_to_w",
+          "signals": [
+            "dm_dout",
+            "w_load_data"
+          ],
+          "points": [
+            [
+              1880,
+              1220
+            ],
+            [
+              1915,
+              1220
+            ],
+            [
+              1915,
+              1110
+            ],
+            [
+              2150,
+              1110
+            ],
+            [
+              2150,
+              1080
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "rf_writeback",
+          "signals": [
+            "wb_data"
+          ],
+          "points": [
+            [
+              2345,
+              980
+            ],
+            [
+              2345,
+              1410
+            ],
+            [
+              450,
+              1410
+            ],
+            [
+              450,
+              1080
+            ],
+            [
+              620,
+              1080
+            ],
+            [
+              620,
+              1050
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "cmp_cv_pipeline",
+          "signals": [
+            "alu_eq",
+            "alu_c",
+            "alu_v",
+            "m_cmp_z",
+            "m_c",
+            "m_v",
+            "w_cmp_z",
+            "w_c",
+            "w_v"
+          ],
+          "points": [
+            [
+              1400,
+              1130
+            ],
+            [
+              1400,
+              1370
+            ],
+            [
+              1970,
+              1370
+            ],
+            [
+              1970,
+              1250
+            ],
+            [
+              2000,
+              1250
+            ]
+          ],
+          "kind": "data"
+        },
+        {
+          "id": "M_Z_return",
+          "signals": [
+            "m_cmp_z"
+          ],
+          "points": [
+            [
+              1895,
+              1370
+            ],
+            [
+              1895,
+              500
+            ],
+            [
+              930,
+              500
+            ],
+            [
+              930,
+              590
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "W_Z_return",
+          "signals": [
+            "w_cmp_z"
+          ],
+          "points": [
+            [
+              1960,
+              1370
+            ],
+            [
+              1960,
+              530
+            ],
+            [
+              1010,
+              530
+            ],
+            [
+              1010,
+              590
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "saved_Z_return",
+          "signals": [
+            "Z"
+          ],
+          "points": [
+            [
+              2300,
+              1250
+            ],
+            [
+              2375,
+              1250
+            ],
+            [
+              2375,
+              560
+            ],
+            [
+              1090,
+              560
+            ],
+            [
+              1090,
+              590
+            ]
+          ],
+          "kind": "fwd"
+        },
+        {
+          "id": "W_control_input",
+          "signals": [
+            "w_reg_write",
+            "w_z_write",
+            "w_cv_write",
+            "w_wb_sel",
+            "w_halt",
+            "w_valid",
+            "w_fault",
+            "w_rd"
+          ],
+          "points": [
+            [
+              1958,
+              700
+            ],
+            [
+              2000,
+              700
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "W_control_trunk",
+          "signals": [
+            "rf_we",
+            "z_we",
+            "cv_we",
+            "w_rd"
+          ],
+          "points": [
+            [
+              2300,
+              750
+            ],
+            [
+              2320,
+              750
+            ],
+            [
+              2320,
+              1220
+            ],
+            [
+              2300,
+              1220
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "rf_write_control",
+          "signals": [
+            "w_rd",
+            "rf_we"
+          ],
+          "points": [
+            [
+              2320,
+              1220
+            ],
+            [
+              2320,
+              1390
+            ],
+            [
+              465,
+              1390
+            ],
+            [
+              465,
+              1100
+            ],
+            [
+              670,
+              1100
+            ],
+            [
+              670,
+              1050
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "payload_attach_0",
+          "signals": [],
+          "points": [
+            [
+              420,
+              1405
+            ],
+            [
+              420,
+              1420
+            ],
+            [
+              317,
+              1420
+            ],
+            [
+              317,
+              1430
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "payload_attach_1",
+          "signals": [],
+          "points": [
+            [
+              840,
+              1405
+            ],
+            [
+              840,
+              1420
+            ],
+            [
+              907,
+              1420
+            ],
+            [
+              907,
+              1430
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "payload_attach_2",
+          "signals": [],
+          "points": [
+            [
+              1510,
+              1405
+            ],
+            [
+              1510,
+              1420
+            ],
+            [
+              1492,
+              1420
+            ],
+            [
+              1492,
+              1430
+            ]
+          ],
+          "kind": "ctrl"
+        },
+        {
+          "id": "payload_attach_3",
+          "signals": [],
+          "points": [
+            [
+              1940,
+              1405
+            ],
+            [
+              1940,
+              1420
+            ],
+            [
+              2077,
+              1420
+            ],
+            [
+              2077,
+              1430
+            ]
+          ],
+          "kind": "ctrl"
+        }
+      ],
+      "text_fit_warnings": [],
+      "text_boxes": [
+        {
+          "text": "五级Datapath详细连接",
+          "bbox": [
+            60,
+            24,
+            488,
+            67
+          ]
+        },
+        {
+          "text": "数据 / 载荷",
+          "bbox": [
+            155,
+            77,
+            336,
+            112
+          ]
+        },
+        {
+          "text": "控制 / 资格",
+          "bbox": [
+            595,
+            76,
+            776,
+            112
+          ]
+        },
+        {
+          "text": "前递 / 反馈",
+          "bbox": [
+            1045,
+            76,
+            1226,
+            112
+          ]
+        },
+        {
+          "text": "取消 / 停止",
+          "bbox": [
+            1505,
+            77,
+            1686,
+            112
+          ]
+        },
+        {
+          "text": "●连接；无点交叉不连",
+          "bbox": [
+            1880,
+            53,
+            2227,
+            90
+          ]
+        },
+        {
+          "text": "浅蓝带为现有流水边界",
+          "bbox": [
+            1880,
+            95,
+            2240,
+            131
+          ]
+        },
+        {
+          "text": "IF",
+          "bbox": [
+            212.5,
+            151,
+            247.5,
+            182
+          ]
+        },
+        {
+          "text": "ID",
+          "bbox": [
+            602.5,
+            151,
+            647.5,
+            182
+          ]
+        },
+        {
+          "text": "EX",
+          "bbox": [
+            1164.4921875,
+            151,
+            1215.4921875,
+            182
+          ]
+        },
+        {
+          "text": "MEM",
+          "bbox": [
+            1672.5,
+            151,
+            1777.5,
+            182
+          ]
+        },
+        {
+          "text": "WB",
+          "bbox": [
+            2120.0,
+            151,
+            2190.0,
+            182
+          ]
+        },
+        {
+          "text": "IF/ID",
+          "bbox": [
+            370.5,
+            187,
+            469.5,
+            222
+          ]
+        },
+        {
+          "text": "ID/EX",
+          "bbox": [
+            782.4921875,
+            187,
+            897.4921875,
+            222
+          ]
+        },
+        {
+          "text": "EX/MEM",
+          "bbox": [
+            1422.4921875,
+            187,
+            1597.4921875,
+            222
+          ]
+        },
+        {
+          "text": "MEM/WB",
+          "bbox": [
+            1843.0,
+            187,
+            2037.0,
+            222
+          ]
+        },
+        {
+          "text": "pc16内部",
+          "bbox": [
+            95,
+            729,
+            273,
+            772
+          ]
+        },
+        {
+          "text": "下一值选择",
+          "bbox": [
+            114,
+            805,
+            314,
+            845
+          ]
+        },
+        {
+          "text": "重定向>保持",
+          "bbox": [
+            114,
+            849,
+            321,
+            884
+          ]
+        },
+        {
+          "text": "+1顺序推进",
+          "bbox": [
+            114,
+            890,
+            306,
+            926
+          ]
+        },
+        {
+          "text": "PC状态",
+          "bbox": [
+            114,
+            966,
+            247,
+            1004
+          ]
+        },
+        {
+          "text": "rst > redirect",
+          "bbox": [
+            92,
+            1051,
+            317,
+            1080
+          ]
+        },
+        {
+          "text": "    > hold > +1",
+          "bbox": [
+            92,
+            1093,
+            349,
+            1122
+          ]
+        },
+        {
+          "text": "外部同步IM",
+          "bbox": [
+            94,
+            1151,
+            308,
+            1190
+          ]
+        },
+        {
+          "text": "addr16 / im_en",
+          "bbox": [
+            94,
+            1195,
+            355,
+            1233
+          ]
+        },
+        {
+          "text": "dout16 已寄存",
+          "bbox": [
+            94,
+            1236,
+            336,
+            1271
+          ]
+        },
+        {
+          "text": "u_decode",
+          "bbox": [
+            484,
+            552,
+            675,
+            594
+          ]
+        },
+        {
+          "text": "Rd/Rs/imm8",
+          "bbox": [
+            484,
+            595,
+            701,
+            629
+          ]
+        },
+        {
+          "text": "源与控制意图",
+          "bbox": [
+            484,
+            635,
+            700,
+            671
+          ]
+        },
+        {
+          "text": "u_rf · 4×16",
+          "bbox": [
+            484,
+            832,
+            708,
+            874
+          ]
+        },
+        {
+          "text": "Rd/Rs两读一写",
+          "bbox": [
+            484,
+            874,
+            731,
+            909
+          ]
+        },
+        {
+          "text": "内含WB→ID旁路",
+          "bbox": [
+            484,
+            916,
+            762,
+            951
+          ]
+        },
+        {
+          "text": "R0普通可写",
+          "bbox": [
+            484,
+            957,
+            673,
+            993
+          ]
+        },
+        {
+          "text": "u_ext · 8→16",
+          "bbox": [
+            484,
+            1163,
+            748,
+            1204
+          ]
+        },
+        {
+          "text": "零/符号扩展",
+          "bbox": [
+            484,
+            1203,
+            679,
+            1239
+          ]
+        },
+        {
+          "text": "d_imm_ext16",
+          "bbox": [
+            484,
+            1247,
+            710,
+            1285
+          ]
+        },
+        {
+          "text": "d_rd2 / d_rs2",
+          "bbox": [
+            475,
+            766,
+            700,
+            804
+          ]
+        },
+        {
+          "text": "u_target 目标地址",
+          "bbox": [
+            1074,
+            361,
+            1414,
+            404
+          ]
+        },
+        {
+          "text": "JUMP绝对 / JZ相对",
+          "bbox": [
+            1074,
+            403,
+            1389,
+            439
+          ]
+        },
+        {
+          "text": "x_pc16 / imm8",
+          "bbox": [
+            530,
+            377,
+            783,
+            414
+          ]
+        },
+        {
+          "text": "x_jump_z",
+          "bbox": [
+            600,
+            420,
+            757,
+            457
+          ]
+        },
+        {
+          "text": "Z候选选择",
+          "bbox": [
+            914,
+            601,
+            1100,
+            640
+          ]
+        },
+        {
+          "text": "M>W>保存Z",
+          "bbox": [
+            914,
+            644,
+            1134,
+            679
+          ]
+        },
+        {
+          "text": "仅合格CMP",
+          "bbox": [
+            914,
+            685,
+            1103,
+            721
+          ]
+        },
+        {
+          "text": "分支判定",
+          "bbox": [
+            1234,
+            601,
+            1394,
+            640
+          ]
+        },
+        {
+          "text": "branch_req",
+          "bbox": [
+            1234,
+            645,
+            1426,
+            683
+          ]
+        },
+        {
+          "text": "合格redirect1",
+          "bbox": [
+            1234,
+            685,
+            1459,
+            721
+          ]
+        },
+        {
+          "text": "branch_target16 → PC选择输入",
+          "bbox": [
+            65,
+            278,
+            593,
+            317
+          ]
+        },
+        {
+          "text": "qualified_redirect1",
+          "bbox": [
+            65,
+            356,
+            384,
+            394
+          ]
+        },
+        {
+          "text": "JUMP=ZExt(imm8)",
+          "bbox": [
+            65,
+            417,
+            386,
+            450
+          ]
+        },
+        {
+          "text": "JZ=x_pc+1+SExt(imm8)",
+          "bbox": [
+            65,
+            463,
+            473,
+            500
+          ]
+        },
+        {
+          "text": "u_forward",
+          "bbox": [
+            910,
+            771,
+            1114,
+            813
+          ]
+        },
+        {
+          "text": "Rd前递",
+          "bbox": [
+            924,
+            831,
+            1059,
+            870
+          ]
+        },
+        {
+          "text": "rd_fwd16",
+          "bbox": [
+            924,
+            875,
+            1082,
+            913
+          ]
+        },
+        {
+          "text": "Rs前递",
+          "bbox": [
+            924,
+            1071,
+            1052,
+            1110
+          ]
+        },
+        {
+          "text": "rs_fwd16",
+          "bbox": [
+            924,
+            1115,
+            1076,
+            1153
+          ]
+        },
+        {
+          "text": "M > W >",
+          "bbox": [
+            910,
+            952,
+            1069,
+            980
+          ]
+        },
+        {
+          "text": "ID/EX保存值",
+          "bbox": [
+            910,
+            992,
+            1114,
+            1027
+          ]
+        },
+        {
+          "text": "W: wb_data16",
+          "bbox": [
+            1985,
+            271,
+            2227,
+            309
+          ]
+        },
+        {
+          "text": "M: exec16（非load）",
+          "bbox": [
+            1000,
+            260,
+            1357,
+            295
+          ]
+        },
+        {
+          "text": "前递检查目标/use",
+          "bbox": [
+            1570,
+            319,
+            1860,
+            355
+          ]
+        },
+        {
+          "text": "有效/RW/寄存fault",
+          "bbox": [
+            1570,
+            365,
+            1882,
+            401
+          ]
+        },
+        {
+          "text": "M load阻断旧W",
+          "bbox": [
+            1570,
+            413,
+            1837,
+            447
+          ]
+        },
+        {
+          "text": "A",
+          "bbox": [
+            1220.0,
+            846.0,
+            1250.0,
+            877.0
+          ]
+        },
+        {
+          "text": "B",
+          "bbox": [
+            1221.5,
+            1086.0,
+            1248.5,
+            1117.0
+          ]
+        },
+        {
+          "text": "0",
+          "bbox": [
+            1224.5,
+            746,
+            1245.5,
+            774
+          ]
+        },
+        {
+          "text": "0",
+          "bbox": [
+            1224.5,
+            985,
+            1245.5,
+            1013
+          ]
+        },
+        {
+          "text": "store_data16",
+          "bbox": [
+            920,
+            1216,
+            1141,
+            1254
+          ]
+        },
+        {
+          "text": "x_imm_ext16 → B",
+          "bbox": [
+            925,
+            1277,
+            1227,
+            1314
+          ]
+        },
+        {
+          "text": "u_alu",
+          "bbox": [
+            1324,
+            912,
+            1429,
+            954
+          ]
+        },
+        {
+          "text": "结果16",
+          "bbox": [
+            1324,
+            953,
+            1438,
+            989
+          ]
+        },
+        {
+          "text": "eq独立",
+          "bbox": [
+            1324,
+            995,
+            1439,
+            1035
+          ]
+        },
+        {
+          "text": "C/V各1",
+          "bbox": [
+            1324,
+            1039,
+            1444,
+            1073
+          ]
+        },
+        {
+          "text": "MEM访问资格",
+          "bbox": [
+            1584,
+            911,
+            1849,
+            950
+          ]
+        },
+        {
+          "text": "EA[15:8]=0",
+          "bbox": [
+            1584,
+            956,
+            1773,
+            990
+          ]
+        },
+        {
+          "text": "有效且无故障",
+          "bbox": [
+            1584,
+            995,
+            1800,
+            1031
+          ]
+        },
+        {
+          "text": "外部同步DM",
+          "bbox": [
+            1584,
+            1141,
+            1817,
+            1180
+          ]
+        },
+        {
+          "text": "addr16 / data16",
+          "bbox": [
+            1584,
+            1185,
+            1861,
+            1219
+          ]
+        },
+        {
+          "text": "MEM边沿读或写",
+          "bbox": [
+            1584,
+            1226,
+            1854,
+            1261
+          ]
+        },
+        {
+          "text": "dout16 已寄存",
+          "bbox": [
+            1584,
+            1268,
+            1826,
+            1303
+          ]
+        },
+        {
+          "text": "DM使能",
+          "bbox": [
+            1570,
+            1070,
+            1704,
+            1105
+          ]
+        },
+        {
+          "text": "exec_value16",
+          "bbox": [
+            1600,
+            816,
+            1825,
+            854
+          ]
+        },
+        {
+          "text": "WB结果选择",
+          "bbox": [
+            2014,
+            911,
+            2244,
+            950
+          ]
+        },
+        {
+          "text": "w_wb_sel",
+          "bbox": [
+            2014,
+            955,
+            2172,
+            993
+          ]
+        },
+        {
+          "text": "exec16/load16",
+          "bbox": [
+            2014,
+            997,
+            2265,
+            1031
+          ]
+        },
+        {
+          "text": "wb_data16",
+          "bbox": [
+            2014,
+            1039,
+            2199,
+            1077
+          ]
+        },
+        {
+          "text": "dm_dout16",
+          "bbox": [
+            2000,
+            1126,
+            2196,
+            1164
+          ]
+        },
+        {
+          "text": "u_flags",
+          "bbox": [
+            2014,
+            1202,
+            2156,
+            1244
+          ]
+        },
+        {
+          "text": "Z / C / V",
+          "bbox": [
+            2014,
+            1246,
+            2159,
+            1279
+          ]
+        },
+        {
+          "text": "z_we / cv_we",
+          "bbox": [
+            2014,
+            1288,
+            2234,
+            1325
+          ]
+        },
+        {
+          "text": "wb_data16 → RF",
+          "bbox": [
+            480,
+            1341,
+            766,
+            1379
+          ]
+        },
+        {
+          "text": "w_rd2 / rf_we",
+          "bbox": [
+            1020,
+            1341,
+            1249,
+            1379
+          ]
+        },
+        {
+          "text": "eq/C/V各1",
+          "bbox": [
+            1580,
+            1329,
+            1758,
+            1367
+          ]
+        },
+        {
+          "text": "m_cmp_z1（M）",
+          "bbox": [
+            2000,
+            337,
+            2287,
+            374
+          ]
+        },
+        {
+          "text": "w_cmp_z1（W）",
+          "bbox": [
+            2000,
+            383,
+            2283,
+            420
+          ]
+        },
+        {
+          "text": "Z1（已保存）",
+          "bbox": [
+            2000,
+            427,
+            2223,
+            462
+          ]
+        },
+        {
+          "text": "WB级控制",
+          "bbox": [
+            2014,
+            631,
+            2204,
+            670
+          ]
+        },
+        {
+          "text": "W控制与资格",
+          "bbox": [
+            2014,
+            673,
+            2231,
+            709
+          ]
+        },
+        {
+          "text": "RF / Z / CV使能",
+          "bbox": [
+            2014,
+            716,
+            2273,
+            751
+          ]
+        },
+        {
+          "text": "① IF/ID",
+          "bbox": [
+            74,
+            1443,
+            225,
+            1483
+          ]
+        },
+        {
+          "text": "pc16 / valid / fetch_fault",
+          "bbox": [
+            74,
+            1485,
+            491,
+            1523
+          ]
+        },
+        {
+          "text": "inst16=IM寄存输出",
+          "bbox": [
+            74,
+            1526,
+            395,
+            1561
+          ]
+        },
+        {
+          "text": "② ID/EX",
+          "bbox": [
+            664,
+            1443,
+            831,
+            1483
+          ]
+        },
+        {
+          "text": "pc,rd/rs,源值,imm16",
+          "bbox": [
+            664,
+            1484,
+            1007,
+            1523
+          ]
+        },
+        {
+          "text": "valid/fault + CTRL_X",
+          "bbox": [
+            664,
+            1527,
+            1013,
+            1565
+          ]
+        },
+        {
+          "text": "③ EX/MEM",
+          "bbox": [
+            1249,
+            1443,
+            1476,
+            1483
+          ]
+        },
+        {
+          "text": "exec/store16,pc/rd,eq/C/V",
+          "bbox": [
+            1249,
+            1485,
+            1702,
+            1523
+          ]
+        },
+        {
+          "text": "valid/fault + CTRL_M",
+          "bbox": [
+            1249,
+            1527,
+            1610,
+            1565
+          ]
+        },
+        {
+          "text": "④ MEM/WB",
+          "bbox": [
+            1834,
+            1443,
+            2080,
+            1483
+          ]
+        },
+        {
+          "text": "exec/load16,pc/rd,eq/C/V",
+          "bbox": [
+            1834,
+            1485,
+            2276,
+            1523
+          ]
+        },
+        {
+          "text": "valid/fault/store + CTRL_W",
+          "bbox": [
+            1834,
+            1527,
+            2299,
+            1565
+          ]
+        },
+        {
+          "text": "① ADD→ADD相关",
+          "bbox": [
+            60,
+            1585,
+            420,
+            1627
+          ]
+        },
+        {
+          "text": "M→EX前递，0停顿；WB才写RF",
+          "bbox": [
+            60,
+            1633,
+            586,
+            1670
+          ]
+        },
+        {
+          "text": "② LDR→STR相关",
+          "bbox": [
+            850,
+            1585,
+            1181,
+            1627
+          ]
+        },
+        {
+          "text": "前端停1拍，再W→EX；MEM写DM",
+          "bbox": [
+            850,
+            1633,
+            1427,
+            1670
+          ]
+        },
+        {
+          "text": "③ CMP→JZ",
+          "bbox": [
+            1640,
+            1587,
+            1871,
+            1627
+          ]
+        },
+        {
+          "text": "最新Z决定条件；EX取分支才清年轻槽",
+          "bbox": [
+            1640,
+            1633,
+            2245,
+            1670
+          ]
+        }
+      ]
+    }
+  ]
+}

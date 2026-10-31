@@ -1,0 +1,2 @@
+# Preserve exact published artifact bytes, including historical CRLF evidence.
+* -text

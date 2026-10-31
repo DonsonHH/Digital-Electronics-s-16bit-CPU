@@ -1,0 +1,23 @@
+{
+  "status": "REFINEMENT_REVIEW_PASS",
+  "pages": 46,
+  "landscape_pages": [
+    9,
+    10
+  ],
+  "headings": 56,
+  "toc_entries": 56,
+  "tables": 32,
+  "figures": 10,
+  "retained_figures_unchanged": 8,
+  "references_checked": 63,
+  "original_files_unchanged": 2577,
+  "Word_sha256": "a97e63a822c10263fd29e6c908235d9420a65abd40dabdbd04852a5054cd686c",
+  "PDF_sha256": "53e5358ae86fe3bdc5e654d6517f91dfd35f9fa491751f853789e555cae956b5",
+  "RTL_TB_XDC_changed": false,
+  "new_simulation": false,
+  "new_synthesis": false,
+  "route_box_collisions": 0,
+  "route_text_collisions": 0,
+  "visual_review": "PASS five changed pages inspected and 41 other pages identical to the earlier fully inspected render"
+}

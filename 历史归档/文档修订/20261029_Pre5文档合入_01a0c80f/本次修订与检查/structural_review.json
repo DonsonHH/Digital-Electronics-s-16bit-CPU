@@ -1,0 +1,18 @@
+{
+  "status": "DOCUMENT_REVIEW_PASS",
+  "document_pages": 44,
+  "toc_entries": 54,
+  "tables": 32,
+  "figures": 9,
+  "fsm_table_rows": 11,
+  "original_nonrevised_tables_preserved": 30,
+  "ISA_changed": false,
+  "RTL_TB_XDC_changed": false,
+  "other_core_files_unchanged": true,
+  "Pre5_files_unchanged": true,
+  "new_native_simulation": false,
+  "candidate_sha256": "c486205a7ba61609db9f76911a01cf3a9279801d1738ccd7b7b3e062be59332b",
+  "rendered_pdf_sha256": "fd577237ed79b52fdd4f7efacf0fd4cf5816dd2278dcd000849dc4f5a2cf181b",
+  "backup": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261029_Pre5文档合入_01a0c80f",
+  "visual_review": "Required separately on all 44 final page images"
+}

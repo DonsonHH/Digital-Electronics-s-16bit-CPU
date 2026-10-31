@@ -1,0 +1,21 @@
+
+*** Running vivado
+    with args -log datapath_core.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source datapath_core.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Fri Oct  9 17:17:41 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source datapath_core.tcl -notrace
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 534.324 ; gain = 219.566
+Command: synth_design -top datapath_core -part xc7z020clg484-1
+0 Infos, 0 Warnings, 0 Critical Warnings and 1 Errors encountered.
+synth_design failed
+ERROR: [Common 17-1293] The path 'D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/Pre4_数据通路设计与验证/Vivado/project/pre4_v14.cache/wt' already exists, is a directory, but is not writable.
+INFO: [Common 17-206] Exiting Vivado at Fri Oct  9 17:17:50 2026...

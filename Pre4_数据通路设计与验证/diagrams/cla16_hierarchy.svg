@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="860" viewBox="0 0 1500 860">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#16618A"/></marker><marker id="p" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#B66A26"/></marker><style>text{font-family:Arial,sans-serif;fill:#153348}.h{font-size:29px;font-weight:bold}.t{font-size:23px;font-weight:bold}.b{font-size:21px}.s{font-size:17px}.pg{fill:none;stroke:#B66A26;stroke-width:3;marker-end:url(#p)}.k{fill:none;stroke:#16618A;stroke-width:3;marker-end:url(#a)}.box{fill:white;stroke:#95AFBF;stroke-width:1.5}</style></defs>
+<rect width="1500" height="860" fill="#F7FAFC"/>
+<text x="50" y="54" class="h">CLA16 · four 4-bit groups with a separate group lookahead network</text>
+<text x="50" y="94" class="b">ADD/SUB core: b_mod=b XOR {16{sub}}, K0=cin=sub; C=K4; SUB C means no borrow</text>
+<!-- Each group returns P/G upward and receives an independent carry entry. -->
+<path class="pg" d="M185 470V321"/><path class="pg" d="M525 470V321"/><path class="pg" d="M865 470V321"/><path class="pg" d="M1205 470V321"/>
+<path class="k" d="M265 320V470"/><path class="k" d="M605 320V470"/><path class="k" d="M945 320V470"/><path class="k" d="M1285 320V470"/>
+<text x="119" y="373" class="s" fill="#B66A26">P0 / G0</text><text x="459" y="373" class="s" fill="#B66A26">P1 / G1</text><text x="799" y="373" class="s" fill="#B66A26">P2 / G2</text><text x="1139" y="373" class="s" fill="#B66A26">P3 / G3</text>
+<text x="274" y="409" class="s">K0</text><text x="614" y="409" class="s">K1=c4</text><text x="954" y="409" class="s">K2=c8</text><text x="1294" y="409" class="s">K3=c12</text>
+<rect x="60" y="155" width="1380" height="165" rx="12" fill="#E4EFF6" stroke="#16618A" stroke-width="2"/>
+<text x="83" y="190" class="t">Top-level group lookahead (P/G do not depend on cin)</text>
+<text x="83" y="227" class="b">K1 = G0 | P0·K0</text><text x="600" y="227" class="b">K2 = G1 | P1·G0 | P1·P0·K0</text>
+<text x="83" y="266" class="b">K3 = G2 | P2·G1 | P2·P1·G0 | P2·P1·P0·K0</text>
+<text x="83" y="303" class="s">K4 = G3 | P3·G2 | P3·P2·G1 | P3·P2·P1·G0 | P3·P2·P1·P0·K0 → cout</text>
+<rect x="60" y="470" width="300" height="157" rx="10" class="box"/><text x="80" y="506" class="t">u_group0 · CLA4</text><text x="80" y="546" class="b">a[3:0], b_mod[3:0]</text><text x="80" y="584" class="b">cin=K0 → sum[3:0]</text><text x="80" y="613" class="s">bit-level lookahead; P0/G0</text>
+<rect x="400" y="470" width="300" height="157" rx="10" class="box"/><text x="420" y="506" class="t">u_group1 · CLA4</text><text x="420" y="546" class="b">a[7:4], b_mod[7:4]</text><text x="420" y="584" class="b">cin=K1 → sum[7:4]</text><text x="420" y="613" class="s">bit-level lookahead; P1/G1</text>
+<rect x="740" y="470" width="300" height="157" rx="10" class="box"/><text x="760" y="506" class="t">u_group2 · CLA4</text><text x="760" y="546" class="b">a[11:8], b_mod[11:8]</text><text x="760" y="584" class="b">cin=K2 → sum[11:8]</text><text x="760" y="613" class="s">bit-level lookahead; P2/G2</text>
+<rect x="1080" y="470" width="360" height="157" rx="10" class="box"/><text x="1100" y="506" class="t">u_group3 · CLA4</text><text x="1100" y="546" class="b">a[15:12], b_mod[15:12]</text><text x="1100" y="584" class="b">cin=K3 → sum[15:12]</text><text x="1100" y="613" class="s">bit-level lookahead; P3/G3</text>
+<rect x="60" y="673" width="1380" height="115" rx="10" fill="#F8F0DF"/>
+<text x="80" y="710" class="b">Within each CLA4: p=a XOR b, g=a AND b, sum=p XOR c; P=p3·p2·p1·p0</text>
+<text x="80" y="748" class="b">G=g3 | p3·g2 | p3·p2·g1 | p3·p2·p1·g0; c4=G | P·cin</text>
+<text x="60" y="835" class="s">Logical hierarchy. Group cout is not chained to the next group cin. Source + RTL Analysis establish structure; CARRY4 count alone does not.</text>
+</svg>

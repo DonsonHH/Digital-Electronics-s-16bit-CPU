@@ -1,0 +1,16 @@
+{
+  "files": {
+    "16位流水线CPU核心设计文档_AC1候选版.docx": "a97e63a822c10263fd29e6c908235d9420a65abd40dabdbd04852a5054cd686c",
+    "架构图/01_CPU整体架构.png": "28ec8e421a23a00edb4c408482de8ca1894fe48e24db1c4fdba2f2af20227356",
+    "架构图/01_CPU整体架构.svg": "5c8e6ed3db241ca0fa7e3da185f0914060c8fa1acadb3c226b5bb23790052646",
+    "架构图/02_五级Datapath.png": "14a3cd26569ccfc6ac50c0d178cc96762b7bcfc95df78f8e3aa88a9979e68d6d",
+    "架构图/02_五级Datapath.svg": "23ba609db79bcf6bf7e93df704f775d13efff0a3206ea60322de4cf15c2332a7",
+    "README.md": "0d6555212c5b2312926d75f80c6027de14439b59145fe94ab2b6dcd7a6780210",
+    "证据索引.json": "d1fddc5a5f5d8847967f75dffdadedb372c8300dc20517e8fe42096bf801478d",
+    "文件SHA256.json": "fdcaf87302aa17df3c13982433c177e655bc35436427f99aa01ad957374d2352"
+  },
+  "historical_missing_preserved": [
+    "验证记录/AC1已验收负向原始证据.zip"
+  ],
+  "reviewed_Word_sha256": "a97e63a822c10263fd29e6c908235d9420a65abd40dabdbd04852a5054cd686c"
+}

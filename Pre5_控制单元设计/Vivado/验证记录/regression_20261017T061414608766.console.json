@@ -1,0 +1,11 @@
+{
+  "stage": "regression",
+  "status": "NATIVE_COMPLETED",
+  "native_exit": 0,
+  "started_at_utc": "2026-10-17T06:14:14.608766+00:00",
+  "ended_at_utc": "2026-10-17T06:15:24.640321+00:00",
+  "console": "验证记录/regression_20261017T061414608766.console.log",
+  "console_sha256": "48409f0c22dedd883ae17a7d6271d3b9c035dfea064ded749df4d53d9aa01ebc",
+  "error": null,
+  "hardware_programmed": false
+}

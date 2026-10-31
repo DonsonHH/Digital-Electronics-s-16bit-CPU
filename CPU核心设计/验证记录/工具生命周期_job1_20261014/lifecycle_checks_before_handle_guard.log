@@ -1,0 +1,7 @@
+LIFECYCLE_CHECK_PASS exit_0
+LIFECYCLE_CHECK_PASS exit_7
+LIFECYCLE_CHECK_PASS launch_failure
+LIFECYCLE_CHECK_PASS forced_launcher_exit
+LIFECYCLE_CHECK_PASS normal_exit_cleans_orphan
+LIFECYCLE_CHECK_PASS negative_timeout_receipt
+PROCESS_LIFECYCLE_PASS checks=6 scope=owned_processes_only

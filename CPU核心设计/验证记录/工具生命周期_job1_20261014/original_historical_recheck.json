@@ -1,0 +1,16 @@
+{
+  "status": "HISTORICAL_REVALIDATION_PASS",
+  "result_kind": "historical_revalidation",
+  "new_xsim_execution": false,
+  "new_execution_pass": false,
+  "verification_revision": "1.6-vtools-r1",
+  "revalidated_at_utc": "2026-10-14T08:18:47.049389+00:00",
+  "run": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\CPU核心设计\\验证记录\\cpu_v16_72d999810aef4b1d8c13e8d7bc624cf9",
+  "original_attempt_id": "72d99981-0aef-4b1d-8c13-e8d7bc624cf9",
+  "original_completed_at_utc": "2026-10-13T17:09:20.196527+00:00",
+  "original_receipt_sha256": "a249214713ac3acf6313b112e477e7f2df9484f99ef5d1a8a401cf67bba354bc",
+  "evidence_integrity_verified": true,
+  "current_package_compatible": false,
+  "scope": "uniform five-stage completion and bounded hazard regression; not exhaustive CPU state, timing closure or board validation",
+  "note": "Only the recorded evidence was revalidated; no xvlog/xelab/xsim was executed here"
+}

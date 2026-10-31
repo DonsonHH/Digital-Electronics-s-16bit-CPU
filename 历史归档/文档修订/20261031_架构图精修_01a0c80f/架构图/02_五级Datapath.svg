@@ -1,0 +1,394 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1500" viewBox="0 0 2400 1500" role="img">
+<title>五级Datapath详细连接</title><desc>AC1现有数据、前递、分支、写回与四个逻辑流水边界。</desc>
+<defs><marker id="a_data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#24384B"/></marker><marker id="a_ctrl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2B68A6"/></marker><marker id="a_fwd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087C7C"/></marker><marker id="a_kill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#BD4E26"/></marker><marker id="a_muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#536477"/></marker><marker id="a_line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#BCC8D2"/></marker><marker id="a_pale" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F1F5F8"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;fill:#162B3E;font-size:36px} .title{font-size:48px;font-weight:700}.head{font-size:40px;font-weight:700}.label{font-size:36px}.small{font-size:36px}.mono{font-family:Consolas,"Microsoft YaHei",monospace;font-size:36px}</style>
+<rect width="2400" height="1500" fill="white"/>
+<text x="60" y="58" class="title" text-anchor="start">
+<tspan x="60" dy="0">五级Datapath详细连接</tspan>
+</text>
+<path id="legend_data_clearance" d="M 60,93 L 135,93" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_data" d="M 60,93 L 135,93" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<text x="155" y="105" class="label" text-anchor="start">
+<tspan x="155" dy="0">数据 / 载荷</tspan>
+</text>
+<path id="legend_ctrl_clearance" d="M 485,93 L 560,93" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_ctrl" d="M 485,93 L 560,93" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<text x="580" y="105" class="label" text-anchor="start">
+<tspan x="580" dy="0">控制 / 资格</tspan>
+</text>
+<path id="legend_fwd_clearance" d="M 935,93 L 1010,93" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_fwd" d="M 935,93 L 1010,93" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<text x="1030" y="105" class="label" text-anchor="start">
+<tspan x="1030" dy="0">前递 / 反馈</tspan>
+</text>
+<path id="legend_kill_clearance" d="M 1395,93 L 1470,93" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="legend_kill" d="M 1395,93 L 1470,93" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<text x="1490" y="105" class="label" text-anchor="start">
+<tspan x="1490" dy="0">取消 / 停止</tspan>
+</text>
+<text x="1875" y="78" class="label" text-anchor="start">
+<tspan x="1875" dy="0">●连接；无点交叉不连</tspan>
+<tspan x="1875" dy="46">同字母为同网连接</tspan>
+</text>
+<rect id="stage_bg_IF" x="65" y="140" width="430" height="1085" rx="12" fill="#FAFCFE" stroke="#D4DEE6" stroke-width="3"/>
+<text x="280" y="184" class="head" text-anchor="middle">
+<tspan x="280" dy="0">IF</tspan>
+</text>
+<rect id="stage_bg_ID" x="525" y="140" width="430" height="1085" rx="12" fill="#FAFCFE" stroke="#D4DEE6" stroke-width="3"/>
+<text x="740" y="184" class="head" text-anchor="middle">
+<tspan x="740" dy="0">ID</tspan>
+</text>
+<rect id="stage_bg_EX" x="985" y="140" width="430" height="1085" rx="12" fill="#FAFCFE" stroke="#D4DEE6" stroke-width="3"/>
+<text x="1200" y="184" class="head" text-anchor="middle">
+<tspan x="1200" dy="0">EX</tspan>
+</text>
+<rect id="stage_bg_MEM" x="1445" y="140" width="430" height="1085" rx="12" fill="#FAFCFE" stroke="#D4DEE6" stroke-width="3"/>
+<text x="1660" y="184" class="head" text-anchor="middle">
+<tspan x="1660" dy="0">MEM</tspan>
+</text>
+<rect id="stage_bg_WB" x="1905" y="140" width="430" height="1085" rx="12" fill="#FAFCFE" stroke="#D4DEE6" stroke-width="3"/>
+<text x="2120" y="184" class="head" text-anchor="middle">
+<tspan x="2120" dy="0">WB</tspan>
+</text>
+<path id="boundary_IF_ID" d="M510,245 V1210" stroke="#BCC8D2" stroke-width="7" stroke-dasharray="14 10"/>
+<text x="510" y="230" class="head" text-anchor="middle">
+<tspan x="510" dy="0">IF/ID</tspan>
+</text>
+<path id="boundary_ID_EX" d="M970,245 V1210" stroke="#BCC8D2" stroke-width="7" stroke-dasharray="14 10"/>
+<text x="970" y="230" class="head" text-anchor="middle">
+<tspan x="970" dy="0">ID/EX</tspan>
+</text>
+<path id="boundary_EX_MEM" d="M1430,245 V1210" stroke="#BCC8D2" stroke-width="7" stroke-dasharray="14 10"/>
+<text x="1430" y="230" class="head" text-anchor="middle">
+<tspan x="1430" dy="0">EX/MEM</tspan>
+</text>
+<path id="boundary_MEM_WB" d="M1890,245 V1210" stroke="#BCC8D2" stroke-width="7" stroke-dasharray="14 10"/>
+<text x="1890" y="230" class="head" text-anchor="middle">
+<tspan x="1890" dy="0">MEM/WB</tspan>
+</text>
+<rect id="pc_select" x="95" y="295" width="360" height="145" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="113" y="341" class="head" text-anchor="start">
+<tspan x="113" dy="0">PC下一值选择</tspan>
+</text>
+<text x="113" y="383" class="label" text-anchor="start">
+<tspan x="113" dy="0">重定向 &gt; 保持 &gt; +1</tspan>
+</text>
+<rect id="pc_state" x="95" y="525" width="360" height="145" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="113" y="571" class="head" text-anchor="start">
+<tspan x="113" dy="0">u_pc · 唯一PC</tspan>
+</text>
+<text x="113" y="613" class="label" text-anchor="start">
+<tspan x="113" dy="0">PC_fetch16</tspan>
+<tspan x="113" dy="46">同步rst优先</tspan>
+</text>
+<rect id="pc_plus_one" x="95" y="755" width="360" height="130" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="113" y="801" class="head" text-anchor="start">
+<tspan x="113" dy="0">顺序+1</tspan>
+</text>
+<text x="113" y="843" class="label" text-anchor="start">
+<tspan x="113" dy="0">PC_fetch+1 低16位</tspan>
+</text>
+<rect id="sync_im" x="95" y="965" width="360" height="210" rx="12" fill="white" stroke="#24384B" stroke-width="3" stroke-dasharray="12 8"/>
+<text x="113" y="1011" class="head" text-anchor="start">
+<tspan x="113" dy="0">外部同步IM</tspan>
+</text>
+<text x="113" y="1053" class="label" text-anchor="start">
+<tspan x="113" dy="0">im_addr16 / im_en</tspan>
+<tspan x="113" dy="46">im_dout16 已寄存</tspan>
+<tspan x="113" dy="46">en=0保持输出</tspan>
+</text>
+<path id="pc_select_to_pc_clearance" d="M 275,440 L 275,525" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="pc_select_to_pc" d="M 275,440 L 275,525" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="pc_to_increment_clearance" d="M 275,670 L 275,755" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="pc_to_increment" d="M 275,670 L 275,755" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="pc_increment_feedback_clearance" d="M 95,815 L 78,815 L 78,365 L 95,365" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="pc_increment_feedback" d="M 95,815 L 78,815 L 78,365 L 95,365" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="pc_to_im_clearance" d="M 410,670 L 470,670 L 470,945 L 280,945 L 280,965" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="pc_to_im" d="M 410,670 L 470,670 L 470,945 L 280,945 L 280,965" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<text x="120" y="925" class="label" text-anchor="start" style="fill:#2B68A6">
+<tspan x="120" dy="0">IFCU: im_en / pc_hold</tspan>
+</text>
+<rect id="decode_fields" x="555" y="295" width="360" height="145" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="573" y="341" class="head" text-anchor="start">
+<tspan x="573" dy="0">u_decode 译码</tspan>
+</text>
+<text x="573" y="383" class="label" text-anchor="start">
+<tspan x="573" dy="0">inst → Rd/Rs/imm</tspan>
+<tspan x="573" dy="46">d_ctrl → CTRL_X</tspan>
+</text>
+<rect id="rf_and_bypass" x="555" y="535" width="360" height="210" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="573" y="581" class="head" text-anchor="start">
+<tspan x="573" dy="0">u_rf · 4×16</tspan>
+</text>
+<text x="573" y="623" class="label" text-anchor="start">
+<tspan x="573" dy="0">Rd/Rs两读，W一写</tspan>
+<tspan x="573" dy="46">含WB→ID同址旁路</tspan>
+<tspan x="573" dy="46">Rd值 / Rs值 各16</tspan>
+</text>
+<rect id="immediate_ext" x="555" y="930" width="360" height="145" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="573" y="976" class="head" text-anchor="start">
+<tspan x="573" dy="0">u_ext · 8→16</tspan>
+</text>
+<text x="573" y="1018" class="label" text-anchor="start">
+<tspan x="573" dy="0">d_imm_signed选择</tspan>
+<tspan x="573" dy="46">d_imm_ext16</tspan>
+</text>
+<path id="im_dout_to_decode_clearance" d="M 455,1045 L 490,1045 L 490,360 L 555,360" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="im_dout_to_decode" d="M 455,1045 L 490,1045 L 490,360 L 555,360" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<text x="555" y="520" class="label" text-anchor="start">
+<tspan x="555" dy="0">d_rd2 / d_rs2</tspan>
+</text>
+<path id="decode_to_rf_clearance" d="M 890,440 L 890,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="decode_to_rf" d="M 890,440 L 890,535" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="decode_imm_to_ext_clearance" d="M 915,395 L 940,395 L 940,905 L 730,905 L 730,930" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="decode_imm_to_ext" d="M 915,395 L 940,395 L 940,905 L 730,905 L 730,930" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="decode_mode_to_ext_clearance" d="M 915,425 L 925,425 L 925,990 L 915,990" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="decode_mode_to_ext" d="M 915,425 L 925,425 L 925,990 L 915,990" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<rect id="operand_forward" x="1015" y="535" width="360" height="180" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1033" y="581" class="head" text-anchor="start">
+<tspan x="1033" dy="0">u_forward</tspan>
+</text>
+<text x="1033" y="623" class="label" text-anchor="start">
+<tspan x="1033" dy="0">前递：M &gt; W &gt; ID</tspan>
+<tspan x="1033" dy="46">Rd / Rs 独立前递16</tspan>
+</text>
+<path id="saved_rd_rs_to_forward_clearance" d="M 915,630 L 1015,630" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="saved_rd_rs_to_forward" d="M 915,630 L 1015,630" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<text x="930" y="603" class="label" text-anchor="start" style="fill:#24384B">
+<tspan x="930" dy="0">2×16</tspan>
+</text>
+<rect id="a_mux" x="1015" y="785" width="170" height="110" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1033" y="831" class="head" text-anchor="start">
+<tspan x="1033" dy="0">选A</tspan>
+</text>
+<text x="1033" y="873" class="label" text-anchor="start">
+<tspan x="1033" dy="0">0,Rd,Rs</tspan>
+</text>
+<rect id="b_mux" x="1205" y="785" width="170" height="110" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1223" y="831" class="head" text-anchor="start">
+<tspan x="1223" dy="0">选B</tspan>
+</text>
+<text x="1223" y="873" class="label" text-anchor="start">
+<tspan x="1223" dy="0">0,Rs,I</tspan>
+</text>
+<path id="fwd_to_a_clearance" d="M 1095,715 L 1095,785" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="fwd_to_a" d="M 1095,715 L 1095,785" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="fwd_to_b_clearance" d="M 1295,715 L 1295,785" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="fwd_to_b" d="M 1295,715 L 1295,785" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="imm_to_b_clearance" d="M 915,1010 L 952,1010 L 952,753 L 1350,753 L 1350,785" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="imm_to_b" d="M 915,1010 L 952,1010 L 952,753 L 1350,753 L 1350,785" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<rect id="alu" x="1015" y="955" width="360" height="210" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1033" y="1001" class="head" text-anchor="start">
+<tspan x="1033" dy="0">u_alu · 16位</tspan>
+</text>
+<text x="1033" y="1043" class="label" text-anchor="start">
+<tspan x="1033" dy="0">ADD/SUB: 17位+</tspan>
+<tspan x="1033" dy="46">PASS_B,AND,OR</tspan>
+<tspan x="1033" dy="46">独立eq；C/V候选</tspan>
+</text>
+<path id="alu_a_clearance" d="M 1095,895 L 1095,955" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="alu_a" d="M 1095,895 L 1095,955" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="alu_b_clearance" d="M 1295,895 L 1295,955" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="alu_b" d="M 1295,895 L 1295,955" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<rect id="z_select_branch" x="1015" y="295" width="360" height="175" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1033" y="341" class="head" text-anchor="start">
+<tspan x="1033" dy="0">Z选择 / u_target</tspan>
+</text>
+<text x="1033" y="383" class="label" text-anchor="start">
+<tspan x="1033" dy="0">CMP: M &gt; W &gt; Z</tspan>
+<tspan x="1033" dy="46">JUMP绝对 / JZ相对</tspan>
+</text>
+<circle cx="1035" cy="500" r="27" fill="white" stroke="#BD4E26" stroke-width="3"/>
+<text x="1035" y="512" class="label" text-anchor="middle" style="fill:#BD4E26">
+<tspan x="1035" dy="0">R</tspan>
+</text>
+<path id="branch_target_net_clearance" d="M 1035,470 L 1035,473" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="branch_target_net" d="M 1035,470 L 1035,473" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round"/>
+<text x="555" y="477" class="label" text-anchor="start">
+<tspan x="555" dy="0">x_pc16 / imm8 →</tspan>
+</text>
+<path id="x_pc_imm_to_target_clearance" d="M 970,475 L 995,475 L 995,440 L 1015,440" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="x_pc_imm_to_target" d="M 970,475 L 995,475 L 995,440 L 1015,440" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<circle cx="300" cy="260" r="27" fill="white" stroke="#BD4E26" stroke-width="3"/>
+<text x="300" y="272" class="label" text-anchor="middle" style="fill:#BD4E26">
+<tspan x="300" dy="0">R</tspan>
+</text>
+<path id="redirect_to_pc_clearance" d="M 300,287 L 300,295" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="redirect_to_pc" d="M 300,287 L 300,295" fill="none" stroke="#BD4E26" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_kill)"/>
+<text x="68" y="1240" class="label" text-anchor="start" style="fill:#BD4E26">
+<tspan x="68" dy="0">R：EX合格重定向回PC；JUMP=ZExt(imm8)，JZ=low16(x_pc+1+SExt(imm8))。</tspan>
+</text>
+<text x="1500" y="1240" class="label" text-anchor="start" style="fill:#2B68A6">
+<tspan x="1500" dy="0">load_use：PC/D保持，X bubble</tspan>
+</text>
+<rect id="m_exec" x="1475" y="535" width="360" height="145" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1493" y="581" class="head" text-anchor="start">
+<tspan x="1493" dy="0">结果 / 地址传递</tspan>
+</text>
+<text x="1493" y="623" class="label" text-anchor="start">
+<tspan x="1493" dy="0">m_exec_value16</tspan>
+<tspan x="1493" dy="46">随行eq/C/V各1</tspan>
+</text>
+<path id="alu_to_m_clearance" d="M 1375,1050 L 1405,1050 L 1405,575 L 1475,575" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="alu_to_m" d="M 1375,1050 L 1405,1050 L 1405,575 L 1475,575" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<text x="1422" y="560" class="label" text-anchor="start">
+<tspan x="1422" dy="0">19</tspan>
+</text>
+<rect id="ea_guard" x="1475" y="745" width="360" height="145" rx="12" fill="white" stroke="#2B68A6" stroke-width="3"/>
+<text x="1493" y="791" class="head" text-anchor="start">
+<tspan x="1493" dy="0">完整EA范围检查</tspan>
+</text>
+<text x="1493" y="833" class="label" text-anchor="start">
+<tspan x="1493" dy="0">EA[15:8]必须为0</tspan>
+<tspan x="1493" dy="46">dm_en / dm_we</tspan>
+</text>
+<rect id="sync_dm" x="1475" y="965" width="360" height="210" rx="12" fill="white" stroke="#24384B" stroke-width="3" stroke-dasharray="12 8"/>
+<text x="1493" y="1011" class="head" text-anchor="start">
+<tspan x="1493" dy="0">外部同步DM</tspan>
+</text>
+<text x="1493" y="1053" class="label" text-anchor="start">
+<tspan x="1493" dy="0">地址16 / 写数据16</tspan>
+<tspan x="1493" dy="46">MEM边沿读/写一次</tspan>
+<tspan x="1493" dy="46">dout → W加载值</tspan>
+</text>
+<path id="ea_to_guard_clearance" d="M 1660,680 L 1660,745" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="ea_to_guard" d="M 1660,680 L 1660,745" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="ea_to_dm_clearance" d="M 1475,575 L 1458,575 L 1458,940 L 1530,940 L 1530,965" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="ea_to_dm" d="M 1475,575 L 1458,575 L 1458,940 L 1530,940 L 1530,965" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="guard_to_enable_clearance" d="M 1810,890 L 1810,965" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="guard_to_enable" d="M 1810,890 L 1810,965" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<path id="store_data_to_mem_clearance" d="M 1335,715 L 1390,715 L 1390,1190 L 1565,1190 L 1565,1175" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="store_data_to_mem" d="M 1335,715 L 1390,715 L 1390,1190 L 1565,1190 L 1565,1175" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<text x="1565" y="935" class="label" text-anchor="start">
+<tspan x="1565" dy="0">STR数据16</tspan>
+</text>
+<rect id="write_qualify" x="1935" y="535" width="360" height="145" rx="12" fill="white" stroke="#2B68A6" stroke-width="3"/>
+<text x="1953" y="581" class="head" text-anchor="start">
+<tspan x="1953" dy="0">WB写入资格</tspan>
+</text>
+<text x="1953" y="623" class="label" text-anchor="start">
+<tspan x="1953" dy="0">W有效/无故障/活跃</tspan>
+<tspan x="1953" dy="46">rf_we,z_we,cv_we</tspan>
+</text>
+<rect id="flags" x="1935" y="745" width="360" height="145" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1953" y="791" class="head" text-anchor="start">
+<tspan x="1953" dy="0">u_flags · Z/C/V</tspan>
+</text>
+<text x="1953" y="833" class="label" text-anchor="start">
+<tspan x="1953" dy="0">w_cmp_z,w_c,w_v</tspan>
+<tspan x="1953" dy="46">按z_we / cv_we写入</tspan>
+</text>
+<rect id="wb_mux" x="1935" y="965" width="360" height="145" rx="12" fill="white" stroke="#24384B" stroke-width="3"/>
+<text x="1953" y="1011" class="head" text-anchor="start">
+<tspan x="1953" dy="0">WB结果MUX</tspan>
+</text>
+<text x="1953" y="1053" class="label" text-anchor="start">
+<tspan x="1953" dy="0">w_wb_sel</tspan>
+<tspan x="1953" dy="46">exec16 / load16</tspan>
+</text>
+<path id="exec_to_w_clearance" d="M 1835,575 L 1862,575 L 1862,945 L 2015,945 L 2015,965" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="exec_to_w" d="M 1835,575 L 1862,575 L 1862,945 L 2015,945 L 2015,965" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<path id="load_to_w_clearance" d="M 1835,1045 L 1935,1045" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="load_to_w" d="M 1835,1045 L 1935,1045" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<text x="1850" y="1018" class="label" text-anchor="start">
+<tspan x="1850" dy="0">16</tspan>
+</text>
+<path id="wb_write_to_rf_net_clearance" d="M 2115,1110 L 2115,1155" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="wb_write_to_rf_net" d="M 2115,1110 L 2115,1155" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="2115" cy="1183" r="27" fill="white" stroke="#087C7C" stroke-width="3"/>
+<text x="2115" y="1195" class="label" text-anchor="middle" style="fill:#087C7C">
+<tspan x="2115" dy="0">W</tspan>
+</text>
+<text x="2157" y="1196" class="label" text-anchor="start" style="fill:#087C7C">
+<tspan x="2157" dy="0">16</tspan>
+</text>
+<circle cx="735" cy="810" r="27" fill="white" stroke="#087C7C" stroke-width="3"/>
+<text x="735" y="822" class="label" text-anchor="middle" style="fill:#087C7C">
+<tspan x="735" dy="0">W</tspan>
+</text>
+<path id="wb_to_id_clearance" d="M 735,783 L 735,745" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="wb_to_id" d="M 735,783 L 735,745" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<text x="555" y="862" class="label" text-anchor="start" style="fill:#087C7C">
+<tspan x="555" dy="0">W=wb_data16</tspan>
+<tspan x="555" dy="46">w_rd2 / rf_we</tspan>
+</text>
+<path id="w_controls_flags_clearance" d="M 2115,680 L 2115,745" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="w_controls_flags" d="M 2115,680 L 2115,745" fill="none" stroke="#2B68A6" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_ctrl)" stroke-dasharray="12 8"/>
+<path id="flags_to_w_clearance" d="M 1835,645 L 1850,645 L 1850,815 L 1935,815" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="flags_to_w" d="M 1835,645 L 1850,645 L 1850,815 L 1935,815" fill="none" stroke="#24384B" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_data)"/>
+<circle cx="1640" cy="490" r="27" fill="white" stroke="#087C7C" stroke-width="3"/>
+<text x="1640" y="502" class="label" text-anchor="middle" style="fill:#087C7C">
+<tspan x="1640" dy="0">M</tspan>
+</text>
+<path id="m_value_fwd_source_clearance" d="M 1640,535 L 1640,517" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="m_value_fwd_source" d="M 1640,535 L 1640,517" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<circle cx="1125" cy="490" r="27" fill="white" stroke="#087C7C" stroke-width="3"/>
+<text x="1125" y="502" class="label" text-anchor="middle" style="fill:#087C7C">
+<tspan x="1125" dy="0">M</tspan>
+</text>
+<path id="m_to_ex_clearance" d="M 1125,517 L 1125,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="m_to_ex" d="M 1125,517 L 1125,535" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<circle cx="1235" cy="490" r="27" fill="white" stroke="#087C7C" stroke-width="3"/>
+<text x="1235" y="502" class="label" text-anchor="middle" style="fill:#087C7C">
+<tspan x="1235" dy="0">W</tspan>
+</text>
+<path id="w_to_ex_clearance" d="M 1235,517 L 1235,535" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="w_to_ex" d="M 1235,517 L 1235,535" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<text x="1475" y="295" class="label" text-anchor="start" style="fill:#087C7C">
+<tspan x="1475" dy="0">M/W按目标与资格选</tspan>
+<tspan x="1475" dy="46">M load阻断EA/旧W</tspan>
+<tspan x="1475" dy="46">寄存m_fault管前递</tspan>
+<tspan x="1475" dy="46">新访问故障走取消</tspan>
+</text>
+<text x="1935" y="310" class="label" text-anchor="start" style="fill:#087C7C">
+<tspan x="1935" dy="0">Z反馈组 → EX</tspan>
+<tspan x="1935" dy="46">M/W.CMP与保存Z</tspan>
+<tspan x="1935" dy="46">有效且ZW才选候选</tspan>
+</text>
+<circle cx="2115" cy="465" r="27" fill="white" stroke="#087C7C" stroke-width="3"/>
+<text x="2115" y="477" class="label" text-anchor="middle" style="fill:#087C7C">
+<tspan x="2115" dy="0">Z</tspan>
+</text>
+<circle cx="1335" cy="260" r="27" fill="white" stroke="#087C7C" stroke-width="3"/>
+<text x="1335" y="272" class="label" text-anchor="middle" style="fill:#087C7C">
+<tspan x="1335" dy="0">Z</tspan>
+</text>
+<path id="z_to_branch_clearance" d="M 1335,287 L 1335,295" fill="none" stroke="white" stroke-width="11" stroke-linejoin="round"/>
+<path id="z_to_branch" d="M 1335,287 L 1335,295" fill="none" stroke="#087C7C" stroke-width="4" stroke-linejoin="round" marker-end="url(#a_fwd)"/>
+<rect id="d_payload" x="65" y="1280" width="515" height="195" rx="12" fill="#F1F5F8" stroke="#24384B" stroke-width="3"/>
+<text x="83" y="1326" class="head" text-anchor="start">
+<tspan x="83" dy="0">① IF/ID</tspan>
+</text>
+<text x="83" y="1368" class="label" text-anchor="start">
+<tspan x="83" dy="0">pc16, valid/fetch_fault</tspan>
+<tspan x="83" dy="46">d_inst=im_dout16</tspan>
+<tspan x="83" dy="46">IM输出就是指令数据边界</tspan>
+</text>
+<rect id="x_payload" x="650" y="1280" width="515" height="195" rx="12" fill="#F1F5F8" stroke="#24384B" stroke-width="3"/>
+<text x="668" y="1326" class="head" text-anchor="start">
+<tspan x="668" dy="0">② ID/EX</tspan>
+</text>
+<text x="668" y="1368" class="label" text-anchor="start">
+<tspan x="668" dy="0">pc16, rd/rs各2</tspan>
+<tspan x="668" dy="46">Rd值/Rs值/imm各16</tspan>
+<tspan x="668" dy="46">valid/fault + CTRL_X</tspan>
+</text>
+<rect id="m_payload" x="1235" y="1280" width="515" height="195" rx="12" fill="#F1F5F8" stroke="#24384B" stroke-width="3"/>
+<text x="1253" y="1326" class="head" text-anchor="start">
+<tspan x="1253" dy="0">③ EX/MEM</tspan>
+</text>
+<text x="1253" y="1368" class="label" text-anchor="start">
+<tspan x="1253" dy="0">pc16, rd2, exec/store各16</tspan>
+<tspan x="1253" dy="46">cmp_z/c/v各1</tspan>
+<tspan x="1253" dy="46">valid/fault + CTRL_M</tspan>
+</text>
+<rect id="w_payload" x="1820" y="1280" width="515" height="195" rx="12" fill="#F1F5F8" stroke="#24384B" stroke-width="3"/>
+<text x="1838" y="1326" class="head" text-anchor="start">
+<tspan x="1838" dy="0">④ MEM/WB</tspan>
+</text>
+<text x="1838" y="1368" class="label" text-anchor="start">
+<tspan x="1838" dy="0">pc16, rd2, exec/load各16</tspan>
+<tspan x="1838" dy="46">cmp_z/c/v各1, store1</tspan>
+<tspan x="1838" dy="46">valid/fault + CTRL_W</tspan>
+</text>
+</svg>

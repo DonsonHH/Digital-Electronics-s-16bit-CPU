@@ -1,0 +1,19 @@
+{
+  "status": "VISUAL_REVIEW_PASS",
+  "Word_sha256": "969dcd666b950d1e5be7d3379804b1c35cb9e56095c00a7959f45ea28a607b23",
+  "PDF_sha256": "4118becd92c7399893cff050c19ef2b1339d16c4fbf3ffd5307e7a9abbdd2dc2",
+  "renderer": "Microsoft Word 16 via private desktop job; PDF rasterized with bundled Poppler at 120 dpi",
+  "packaged_renderer": "Attempted; bundled soffice.exe unavailable on this Windows host; native Word fallback used",
+  "reviewed_pages": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46],
+  "landscape_pages": [9,10],
+  "headings_TOC_figure_captions_page_numbers": "Checked against saved DOCX and native heading map",
+  "page_breaks_and_tables": "No clipped text, overlapping additions, missing glyphs or unintended blank pages observed; continuation headers retained",
+  "figures": "Both new master PNGs and their full Word pages inspected; native SVG text/shapes retained",
+  "independent_review": {
+    "spec": "Resolved CU boundary, M-W payload mapping, target PC/imm inputs, R qualification, and result/flag width; final recheck found no new technical blocker",
+    "standards": "Resolved STR arrow direction and data/control color separation; final figure recheck found no new layout issue"
+  },
+  "implementation_change": false,
+  "new_simulation": false,
+  "new_synthesis": false
+}
