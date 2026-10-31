@@ -1,0 +1,87 @@
+{
+  "status": "ROUTED_DESIGN_ACCEPTED_PHYSICAL_PENDING",
+  "base_commit": "5dfe09ec153c4807d418efecbf7f2cf3c25d419e",
+  "implementation_attempt": "cpu345_board_hm1gthqt",
+  "latest_clean_simulation_attempt": "cpu345_board_pjn0kj4p",
+  "identical_hardware_inputs": true,
+  "implementation": {
+    "scope": "routed implementation, physical EES-331 unverified",
+    "part": "xc7z020clg484-1",
+    "period_ns": 10,
+    "timing": {
+      "wns_ns": 2.086,
+      "tns_ns": 0.0,
+      "setup_failed": 0.0,
+      "setup_endpoints": 4279.0,
+      "whs_ns": 0.071,
+      "ths_ns": 0.0,
+      "hold_failed": 0.0,
+      "hold_endpoints": 4263.0,
+      "wpws_ns": 3.75,
+      "tpws_ns": 0.0,
+      "pulse_failed": 0.0,
+      "pulse_endpoints": 2878.0
+    },
+    "resources": {
+      "lut_total": 1118,
+      "lut_logic": 1094,
+      "lutram": 24,
+      "srl": 0,
+      "ff": 2826,
+      "bram36": 0,
+      "bram18": 2,
+      "dsp": 0,
+      "carry4": 80
+    },
+    "drc_warnings": {
+      "PDCN-1569": 3,
+      "RTSTAT-10": 1,
+      "ZPS7-1": 1
+    },
+    "warning_disposition": {
+      "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+      "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+      "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+    },
+    "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+    "bus_skew_slacks_ns": [
+      9.204,
+      8.887,
+      9.092,
+      9.148
+    ],
+    "auxiliary_evidence_sha256": {
+      "reports/bus_skew.rpt": "a7dfbb2480f940512b0f477aadc8e2f141072a77ba9c93270eef42b8f8a6863c",
+      "reports/methodology.rpt": "5583436f262be75a1ea5c09ce58c9dee91ca5fc0eb2f2942012afbe855b052f3"
+    },
+    "ordinary_warnings": {
+      "Timing 38-436": 2,
+      "Power 33-332": 1
+    },
+    "methodology_warnings": {
+      "LUTAR-1": 4,
+      "SYNTH-6": 2
+    },
+    "additional_warning_disposition": {
+      "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+      "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+      "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+      "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+      "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+      "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+      "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+    },
+    "build_id": "d23714a2ee1b8076",
+    "bitstream_sha256": "0e64a1863e368ad7d2522a9c775d9416df1c3fc94988dc6980aa8ee71cae272e",
+    "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+    "placed_and_routed": true,
+    "board_validated": false
+  },
+  "review": {
+    "spec": "No actionable findings",
+    "standards": "Version and all-console/methodology warning gaps closed; no remaining blocking finding"
+  },
+  "physical_board_connected": false,
+  "device_programmed": false,
+  "stage4_performance_baseline_frozen": false
+}

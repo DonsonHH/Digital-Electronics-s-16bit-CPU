@@ -2,7 +2,9 @@
 if {[catch {
 set root [file dirname [file normalize [info script]]]
 cd $root
+if {[version -short] ne "2025.2"} {error "Pinned Vivado2025.2 required; actual [version -short]"}
 create_project ees331 ./project -part xc7z020clg484-1
+set_property AUTO_INCREMENTAL_CHECKPOINT 0 [get_runs synth_1]
 set_param general.maxThreads 4
 set_property target_language Verilog [current_project]
 set_property simulator_language Mixed [current_project]
@@ -37,6 +39,9 @@ launch_runs impl_1 -to_step route_design -jobs 4
 wait_on_run impl_1
 if {[get_property PROGRESS [get_runs impl_1]] ne "100%"} {error "Board routing failed"}
 open_run impl_1
+set implementation_dir [get_property DIRECTORY [get_runs impl_1]]
+file copy [file join $implementation_dir ees331_top_bus_skew_routed.rpt] reports/bus_skew.rpt
+file copy [file join $implementation_dir ees331_top_methodology_drc_routed.rpt] reports/methodology.rpt
 report_timing_summary -delay_type min_max -report_unconstrained -max_paths 10 -file reports/timing.rpt
 report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file reports/setup_paths.rpt
 report_timing -delay_type min -max_paths 10 -path_type full_clock_expanded -file reports/hold_paths.rpt

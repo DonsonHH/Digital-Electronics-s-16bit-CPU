@@ -3,9 +3,13 @@ from pathlib import Path
 import sys,unittest
 B=Path(__file__).resolve().parents[1];P=B.parent
 sys.path.insert(0,str(B))
-from verify_board_results import parse_timing,analyze_reports,verify_attempt
+from verify_board_results import parse_timing,analyze_reports,verify_attempt,require_tool_version,review_console_warnings
 GOOD=P/'验证/cpu345_board_oo6rg6jq'
 class RoutedEvidence(unittest.TestCase):
+ def test_other_tool_version_and_unreviewed_warnings_are_rejected(self):
+  with self.assertRaisesRegex(ValueError,'2025.2'):require_tool_version('2026.1')
+  with self.assertRaisesRegex(ValueError,'Unreviewed'):review_console_warnings('WARNING: [Synth 8-9999] new issue\n')
+  with self.assertRaisesRegex(ValueError,'context'):review_console_warnings("WARNING: [Synth 8-7071] port 'dm_we' of module 'cpu_system' is unconnected for instance 'bad'\n")
  def test_real_routed_report_and_physical_lut_accounting(self):
   result=verify_attempt(GOOD)
   self.assertEqual(result['resources']['lut_total'],1118)

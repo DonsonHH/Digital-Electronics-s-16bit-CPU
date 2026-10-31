@@ -3,8 +3,8 @@
 module tb_selected_program;
  `include "selected_expected.svh"
  reg clk=0,btn_n=1,reset_request=1;always #5 clk=~clk;
- wire[255:0] state;wire[159:0]perf;wire[127:0]ev;wire rst;
- ees331_application #(.RELEASE_BITS(3),.BUILD_ID(64'habcdef0123456789)) dut(.clk(clk),.reset_btn_n(btn_n),.debug_reset(reset_request),.state_probe(state),.perf_probe(perf),.event_probe(ev),.core_reset(rst));
+ wire[255:0] state;wire[159:0]perf;wire[127:0]ev;wire[7:0]led;wire rst;
+ ees331_application #(.RELEASE_BITS(3),.BUILD_ID(64'habcdef0123456789)) dut(.clk(clk),.reset_btn_n(btn_n),.debug_reset(reset_request),.state_probe(state),.perf_probe(perf),.event_probe(ev),.led(led),.core_reset(rst));
  reg[63:0] gold[0:255],packet;reg[79:0]store_gold[0:255],store_packet;
  integer n=0,s=0,cycles=0,stalls=0,redirects=0;
  initial begin
@@ -31,6 +31,7 @@ module tb_selected_program;
    #1;if(state[86])begin
     if(state[88]!==1||state[89]!==0||state[87]!==1||state[82:67]!==EXPECTED_PC||state[85:83]!==1||state[66:64]!==EXPECTED_FLAGS||state[63:0]!==EXPECTED_RF||state[90]!==1||state[106:91]!==EXPECTED_PC)$fatal(1,"SELECTED_STOP_STATE");
     if(state[107]!==(EXPECTED_STORES>0)||state[140]!==0||state[191:142]!==0||state[255:192]!==64'habcdef0123456789)$fatal(1,"SELECTED_STOP_LAYOUT");
+    if(led[7:1]!==7'b0010110)$fatal(1,"SELECTED_LED_POLARITY");
     if(EXPECTED_STORES>0&&(state[123:108]!==store_packet[62:47]||state[139:124]!==store_packet[37:22]))$fatal(1,"SELECTED_LAST_STORE");
     if(perf!=={32'(EXPECTED_STORES),32'(EXPECTED_REDIRECTS),32'(EXPECTED_STALLS),32'(EXPECTED_N),32'(EXPECTED_CYCLES)}||cycles!==EXPECTED_CYCLES||n!==EXPECTED_N||s!==EXPECTED_STORES||stalls!==EXPECTED_STALLS||redirects!==EXPECTED_REDIRECTS)$fatal(1,"SELECTED_COUNTERS");
     $display("BOARD_SELECTED_PASS program=%s cycles=%0d completed=%0d stalls=%0d redirects=%0d stores=%0d",PROGRAM,cycles,n,stalls,redirects,s);$finish;

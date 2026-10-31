@@ -5,7 +5,7 @@ B=Path(__file__).resolve().parent;P=B.parent;V=P/'Vivado';S=P/'系统'
 sys.path.insert(0,str(V));sys.path.insert(0,str(S))
 from tool_config import add_tool_arguments,resolve_tools
 from run_system import validate_images
-from verify_board_results import analyze_reports
+from verify_board_results import analyze_reports,require_tool_version,review_console_warnings
 from verification.isa_reference import oracle,pack
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -30,6 +30,11 @@ def main():
     step.update(ended_at_utc=utc(),console_sha256=sha(log))
   text=log.read_text(encoding='utf-8',errors='replace')
   if step.get('exit')!=0 or re.search(r'(?im)^ERROR:|^Fatal:|FATAL_ERROR|^CRITICAL WARNING:',text):raise RuntimeError('Board native failure: '+label)
+  step['ordinary_warnings']=review_console_warnings(text)
+  if tool=='xelab':
+   version=re.search(r'^Vivado Simulator v([\d.]+)',text,re.M)
+   if not version:raise ValueError('Native simulator version header missing')
+   require_tool_version(version[1]);result['executed_simulator_version']=version[1]
   print('BOARD_NATIVE_EXIT_OK '+label,flush=True)
  try:
   validate_images(S)
@@ -65,7 +70,9 @@ def main():
    (work/'sim.tcl').write_text('puts "BOARD_ATTEMPT=$env(CPU_BOARD_ATTEMPT)"\nrun all\nquit\n',encoding='ascii')
    native('xsim','simulate','board_sim -tclbatch sim.tcl -log simulation.log -wdb simulation.wdb')
    log=(work/'simulation.log').read_text(encoding='utf-8',errors='replace')
-   if not re.search(r'^BOARD_APPLICATION_PASS cases=3 reset_paths=2 bounce=1$',log,re.M) or 'BOARD_ATTEMPT='+work.name not in log or '$finish called at time' not in log:raise ValueError('Board simulation terminal/attempt missing')
+   kinds=re.findall(r'^BOARD_CASE_PASS kind=(\d+)$',log,re.M)
+   if kinds!=['0','1','2'] and (len(kinds)!=3 or set(kinds)!={'0','1','2'}):raise ValueError('Board reset/observation case coverage missing')
+   if len(re.findall(r'^BOARD_APPLICATION_PASS cases=3 reset_paths=2 bounce=1$',log,re.M))!=1 or 'BOARD_ATTEMPT='+work.name not in log or '$finish called at time' not in log:raise ValueError('Board simulation terminal/attempt missing')
    result['simulation']='PASS'
    native('xelab','elaborate_selected','tb_selected_program -s selected_sim -debug typical')
    native('xsim','simulate_selected','selected_sim -tclbatch sim.tcl -log selected.log -wdb selected.wdb')

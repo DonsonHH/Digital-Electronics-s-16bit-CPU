@@ -5,7 +5,23 @@ import argparse,hashlib,json,re
 def require(condition,detail):
  if not condition:raise ValueError(detail)
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def require_tool_version(version):require(version=='2025.2','Executed tool is not the pinned Vivado2025.2 recipe')
+def review_console_warnings(text):
+ patterns={
+  'Vivado 12-7122':r'^Auto Incremental Compile:: No reference checkpoint was found.*standard flow',
+  'Synth 8-7071':r"^port '(event_probe|core_reset)' of module 'ees331_application' is unconnected for instance 'application_i'",
+  'Synth 8-7023':r"^instance 'application_i' of module 'ees331_application' has 8 connections declared, but only 6 given",
+  'Timing 38-436':r'^There are set_bus_skew constraint\(s\) in this design\. Please run report_bus_skew',
+  'Power 33-332':r'^Found switching activity that implies high-fanout reset nets being asserted for excessive periods of time',
+  'VRFC 10-3645':r"^port 'led' remains unconnected for this instance \[[^\n]+/tb/tb_selected_program\.sv:\d+\]$",
+ }
+ counts={}
+ for code,message in re.findall(r'^WARNING: \[([^]]+)\] (.*)$',text,re.M|re.I):
+  require(code in patterns and re.search(patterns[code],message),'Unreviewed ordinary warning or context: '+code)
+  counts[code]=counts.get(code,0)+1
+ return counts
 def parse_timing(text):
+ version=re.search(r'Tool Version\s*: Vivado v\.([\d.]+)',text);require(version is not None,'Timing tool version missing');require_tool_version(version[1])
  require('Design State : Routed' in text,'Timing report is not routed')
  require('Device       : 7z020-clg484' in text and 'Speed File   : -1 ' in text,'Wrong timing device/speed')
  row=re.search(r'WNS\(ns\)[^\n]*\n[^\n]*\n([^\n]+)',text)
@@ -49,6 +65,23 @@ def analyze_reports(run,build_id):
  for chunk in re.findall(r'(?ms)^PDCN-1569#\d+ Warning\n(.*?)(?=^[A-Z][A-Z0-9]+-\d+#|\Z)',drc):
   require('of cell dbg_hub/' in chunk,'LUT warning outside vendor debug hub')
  require('REQP-1840' not in drc,'Asynchronous control of memory requires correction')
+ auxiliary={}
+ def auxiliary_report(name,legacy):
+  path=reports/name
+  if not path.exists():path=run/'project/ees331.runs/impl_1'/legacy
+  require(path.is_file(),'Missing auxiliary timing/methodology report: '+name)
+  auxiliary[path.relative_to(run).as_posix()]=sha(path)
+  return path.read_text()
+ bus=auxiliary_report('bus_skew.rpt','ees331_top_bus_skew_routed.rpt')
+ bus_slacks=[float(x) for x in re.findall(r'^Slack \(MET\)\s*:\s*([-\d.]+)ns',bus,re.M)]
+ require(len(bus_slacks)==4 and min(bus_slacks)>=0 and 'VIOLATED' not in bus,'Bus skew constraints missing or violated')
+ method=auxiliary_report('methodology.rpt','ees331_top_methodology_drc_routed.rpt')
+ method_rows=re.findall(r'^\|\s*([A-Z][A-Z0-9]+-\d+)\s*\|\s*(\w+)\s*\|[^\n]+\|\s*(\d+)\s*\|',method,re.M)
+ require({code for code,_,_ in method_rows}<={'LUTAR-1','SYNTH-6'} and all(severity=='Warning' for _,severity,_ in method_rows),'Unreviewed methodology warning')
+ for chunk in re.findall(r'(?ms)^LUTAR-1#\d+ Warning\n(.*?)(?=^[A-Z][A-Z0-9]+-\d+#|\Z)',method):require('LUT cell dbg_hub/' in chunk,'Async-reset methodology warning outside vendor hub')
+ for chunk in re.findall(r'(?ms)^SYNTH-6#\d+ Warning\n(.*?)(?=^[A-Z][A-Z0-9]+-\d+#|\Z)',method):require(re.search(r'instance application_i/system_i/(im|dm)/',chunk),'RAM latency warning outside CPU memories')
+ method_count=re.search(r'Checks found:\s*(\d+)',method)
+ require(method_count is not None and sum(int(n) for _,_,n in method_rows)==int(method_count[1]),'Methodology summary incomplete')
  ltx=json.loads((output/'debug.ltx').read_text());cores=[c for d in ltx['ltx_root']['ltx_data'] for c in d['debug_cores']]
  vio=[c for c in cores if c['type']=='VIO_V2'];require(len(vio)==1,'Expected one VIO')
  ports={p['name']:(p['direction'],abs(p['leftIndex']-p['rightIndex'])+1) for p in vio[0]['pins']}
@@ -61,10 +94,16 @@ def analyze_reports(run,build_id):
  require(len(ids)==2 and all(int(v,2)==int(build_id,16) for v in ids),'Executed generic build identity missing/different')
  require(not re.search(r'(?m)^CRITICAL WARNING:|^ERROR:',synth),'Synthesis error/critical warning')
  native=json.loads((reports/'implementation.json').read_text())
+ require_tool_version(native['tool'])
+ impl_log=(run/'implementation.log').read_text(encoding='utf-8',errors='replace')
+ version=re.search(r'^# Vivado v([\d.]+)',impl_log,re.M);require(version is not None,'Native Vivado header missing');require_tool_version(version[1])
+ warnings=review_console_warnings(impl_log)
  resources['carry4']=native['carry4']
  return {'scope':'routed implementation, physical EES-331 unverified','part':'xc7z020clg484-1','period_ns':10,'timing':timing,'resources':resources,
   'drc_warnings':{code:int(count) for code,_,count in violations},'warning_disposition':{'PDCN-1569':'Vendor debug-hub unused LUT input terms; no CPU cell affected','RTSTAT-10':'Unused nets with no routable loads in generated debug hub','ZPS7-1':'PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check'},
   'untimed_external_IO':'Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception',
+  'bus_skew_slacks_ns':bus_slacks,'auxiliary_evidence_sha256':auxiliary,'ordinary_warnings':warnings,'methodology_warnings':{code:int(n) for code,_,n in method_rows},
+  'additional_warning_disposition':{'LUTAR-1':'Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset','SYNTH-6':'IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced','Synth 8-7071 / 8-7023':'Only intentionally unused application event/reset outputs, already included in VIO state as applicable','Vivado 12-7122':'Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode','Timing 38-436':'All4 generated debug-hub bus-skew checks explicitly meet','Power 33-332':'Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion','VRFC 10-3645':'Legacy selected bench omitted only LED output; current bench connects and checks it'},
   'build_id':build_id,'bitstream_sha256':sha(bit),'ltx_sha256':sha(output/'debug.ltx'),'placed_and_routed':True,'board_validated':False}
 
 def verify_attempt(run):
@@ -79,6 +118,7 @@ def verify_attempt(run):
  for step in receipt['steps']:
   require(step['exit']==0 and sha(run/(step['label']+'.console.log'))==step['console_sha256'],'Native step changed/failed')
   require(sha(run/(step['label']+'.cmd'))==step['command_sha256'],'Native command changed')
+  review_console_warnings((run/(step['label']+'.console.log')).read_text(encoding='utf-8',errors='replace'))
  expected={p.relative_to(run).as_posix() for group in ['rtl','tb','programs','constraints'] for p in (run/group).rglob('*') if p.is_file()}
  expected.update(['build_board.tcl','probe_hardware.tcl','run_board.py','desktop_launch.py'])
  if (run/'verify_board_results.py').exists():expected.add('verify_board_results.py')
