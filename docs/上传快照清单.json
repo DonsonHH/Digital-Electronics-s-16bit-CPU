@@ -2,7 +2,7 @@
   "snapshot_date": "2026-10-31",
   "scope": "All presently retained conversation-project artifacts in the enumerated sources; two deleted archives confirmed by user",
   "original_artifact_files": 3076,
-  "original_artifact_bytes": 160229494,
+  "original_artifact_bytes": 160228332,
   "source_groups": [
     {
       "group": "CPU核心设计",
@@ -52,7 +52,7 @@
     {
       "group": "历史归档/Shudian工作区/Git历史恢复",
       "files": 22,
-      "bytes": 151590
+      "bytes": 150428
     },
     {
       "group": "历史归档/Shudian工作区/Shudian历史Git.bundle",
@@ -18143,134 +18143,134 @@
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/.gitignore",
-      "bytes": 45,
-      "sha256": "0a52ab95d3ba24fd4de399f68ab3f2df0f23ace118d25d373482d7e559d29506",
+      "bytes": 40,
+      "sha256": "eb6339604a1a64d1cfca33108de580434bf52fcfb47ce3ea4d125fd76ab1da75",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/build.mjs",
-      "bytes": 1354,
-      "sha256": "7cb7703d8daef673ed973faf39704a92387e138a02a19e650699b6d8d62643db",
+      "bytes": 1344,
+      "sha256": "90708e77d01c661fe47d0e1adf5c1089800cf9e5daa4fcce446f1b61d6f23806",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/CONTEXT.md",
-      "bytes": 5085,
-      "sha256": "8e07326b1b9066c86f5c182bc22ac6a90c287b22b218713e6080903b4d48c7f4",
+      "bytes": 5049,
+      "sha256": "0b718fa87e1b5423c8f6d4749dd0f77ac8fef33a9c6f5bf9d41615a97cf9bda9",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/package.json",
-      "bytes": 484,
-      "sha256": "42940152addf8b3d22d7776109e943013caee8c24fe90523409c3ddd1a49ff03",
+      "bytes": 475,
+      "sha256": "81d0e69213149f01ea6d98a2ff3faeb5246ebf51b14fde812480be0f7e507f46",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/pnpm-lock.yaml",
-      "bytes": 11445,
-      "sha256": "c9389abdcfd628fa1e0db1acd213cd579d67c153b4fc0360564c08b94afbaa38",
+      "bytes": 11081,
+      "sha256": "2a067a9d77e9812bc45e7d6ae34f47f8c97a4871b516bba3220618efc29a5856",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/prepare.mjs",
-      "bytes": 3304,
-      "sha256": "8719a45440c12dcb43039b43ddb64f0f6308a548a3216daf0901efd7db78feb6",
+      "bytes": 3275,
+      "sha256": "25b5b08a285b872217990f7bd11c54ec0fe2c3cc09f7427e4225a61d7a72cc2d",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/publish.mjs",
-      "bytes": 4206,
-      "sha256": "8cec37c0ed5c00de0c037967d5afb96b8a830dc789b11c67761f34a60e22f84d",
+      "bytes": 4162,
+      "sha256": "2f7749e0db4321bb91483cf766076833f5d752fe80a76ab0be312c974c7162a0",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/README.md",
-      "bytes": 4625,
-      "sha256": "9d532e278121a9aab7516a585b6db601b813a1b3bfc4d1b0777fdd7c207f1ba1",
+      "bytes": 4582,
+      "sha256": "2a81b2ea94dbcefe0148488e962a5b27053ca4c9052a54937aa5b31c8722e028",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/REVIEW.md",
-      "bytes": 8642,
-      "sha256": "d404283d826ea041b3045fd9156c1fa2e23999a920fd2226e41a40096c851440",
+      "bytes": 8563,
+      "sha256": "d6df99fb56c8b84989385fd785e2039b9c519b12726fc72aeea0ee8040a45431",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/semantics.mjs",
-      "bytes": 12961,
-      "sha256": "f3d95fc0b92b13df6b8451bab2c8a7afdae404f9e30f594649f03cfa530845de",
+      "bytes": 12921,
+      "sha256": "e63027ebc547b1080cd59db963a2f6f754c78f4ef03718f3608f1720678d6f40",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/serve.mjs",
-      "bytes": 664,
-      "sha256": "2ec3a13efc18a2a444802b144f3fb3d7dfa80ae5b188d9333cd27cf0fd801604",
+      "bytes": 659,
+      "sha256": "44b4d3f9b38593835b307434b5717b78deb699760d637297d31781a975aa0414",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/tsconfig.json",
-      "bytes": 300,
-      "sha256": "41dbe91496b45af658088c5381e7f826e3d990d5ce7c9b9f26579af0bad58989",
+      "bytes": 292,
+      "sha256": "7d5a52c44e4bf9caf3bda442a71d4af5965eea56ba17d5bd3c297400c3e7b3ac",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/src/App.tsx",
-      "bytes": 25493,
-      "sha256": "7848275014b2d6783380ab3b428b9d6a16880b36299898a3f9901f059bb78139",
+      "bytes": 25415,
+      "sha256": "78bf164e196036d55aaebcb29d47efffb4bf1843476d20da244f25099b4d7c7f",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/src/canvas.ts",
-      "bytes": 10088,
-      "sha256": "bd67bde1b82a8d22038ceaadb0848af50bba232b4d590a19d8b77d3be587a8d2",
+      "bytes": 10031,
+      "sha256": "9708bc4d5c3eeb953bf172478612e1f41c53dbc19d37e05a9163e31ba8a633cb",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/src/domain.ts",
-      "bytes": 4642,
-      "sha256": "0546a98570dfc057bbbf4b0c42b96a966b4e425a027fdb39d775525c7f85705f",
+      "bytes": 4598,
+      "sha256": "87b01b1ef68535bb10681f40388887c2ecc4eb9c0dcd4b61014ea6ea8473f925",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/src/styles.css",
-      "bytes": 19447,
-      "sha256": "e3f9291a1cf921481a4a5787421654971641dcf4a46805370f9065d9395a59a2",
+      "bytes": 19420,
+      "sha256": "f33c64e57ba7699c1b693dfda7ad3d63a71c51e9ae1bc01f8db8b662f8754783",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/src/types.ts",
-      "bytes": 1449,
-      "sha256": "1401ef4936b09e14f2f6bca8583cb309a86539b903cad8f479de7976e54dfa9e",
+      "bytes": 1439,
+      "sha256": "a7ffb79c97a869fc4ef3078837d0c2eac7d8d89740cd34fe7bccc623b2ed6990",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/tests/capture.mjs",
-      "bytes": 2084,
-      "sha256": "6940134513d8075d27f7ed2c7f469724a382e2f1a07dec1bab746743fbdb52f5",
+      "bytes": 2063,
+      "sha256": "bc91334edf78a6bba11f9538cfcf859a63bdda4ac790380e1a52d8da38d5b450",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/tests/focus.test.mjs",
-      "bytes": 10930,
-      "sha256": "8fa050db4e7b702895299414539882ab123d45b083973ffe56d0e63e2e6bce5f",
+      "bytes": 10819,
+      "sha256": "5c37472153da9eacafd7e0c976de732a2af135713d62e0c2841e431e9619745d",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/tests/model.test.mjs",
-      "bytes": 4565,
-      "sha256": "113d257a3b66d06a5978bbbc54c74a996aea7e7c80914d737f9dcbf028e81902",
+      "bytes": 4542,
+      "sha256": "9a74016a1ede2756680a9a190d128dbd26481f8cae56d0552aeb777f63096329",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/tests/readability.test.mjs",
-      "bytes": 9033,
-      "sha256": "3ec73419eb9f303cd268e48a81550bf13d81ccf27383985b446e01fbb3c466ce",
+      "bytes": 8962,
+      "sha256": "a96ab31a755a2457f5527a688f51a56898161c1bc124d153c25cd7c939d7a337",
       "source_group": "历史归档"
     },
     {
       "path": "历史归档/Shudian工作区/Git历史恢复/datapath_web_20261011/tests/web.test.mjs",
-      "bytes": 10744,
-      "sha256": "f54c948570c3ee8021ddb5d05aaea593bb2cbfbc267a6a5c45679a162d4f23e2",
+      "bytes": 10696,
+      "sha256": "35d175ad7b63a295c8505a50aab4a6892ea4a6ec6415c58710afb610415eb892",
       "source_group": "历史归档"
     },
     {
