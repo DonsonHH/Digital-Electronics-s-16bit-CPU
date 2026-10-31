@@ -1,5 +1,6 @@
 # Invoked only by the explicit confirmed-board host entry. No first-target guess.
 proc cpu_hardware_session {} {
+global env
 if {[version -short] ne "2025.2"} {error "Pinned Vivado2025.2 required"}
 if {$env(CPU_CONFIRMED_BOARD) ne "EES-331"} {error "Physical board confirmation missing"}
 open_hw_manager

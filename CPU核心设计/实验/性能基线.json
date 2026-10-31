@@ -1,0 +1,66 @@
+{
+  "status": "OFFLINE_ROUTED_BASELINE_FROZEN_PHYSICAL_PENDING",
+  "base_commit": "5dfe09ec153c4807d418efecbf7f2cf3c25d419e",
+  "matrix_relative": "验证/performance_ac1_9b449e40f5d44bd78936f207953b77d6/result.json",
+  "matrix_sha256": "9fbef8fccd06c17e464371a73ebc00068b0f9d98e787d8e6d787a1652e08c84f",
+  "source_recipe_sha256": "767e655434ab4956e6271fc72fea3c1a3977001f83882e5b2eeb079ebfb79fe6",
+  "common_input_count": 98,
+  "programs": [
+    {
+      "program": "all_ops",
+      "cycles": 25,
+      "completed": 16,
+      "stalls": 1,
+      "redirects": 2,
+      "stores": 1,
+      "calculated_cpu_time_ns": 250
+    },
+    {
+      "program": "baseline",
+      "cycles": 17,
+      "completed": 10,
+      "stalls": 1,
+      "redirects": 1,
+      "stores": 1,
+      "calculated_cpu_time_ns": 170
+    },
+    {
+      "program": "loop",
+      "cycles": 30,
+      "completed": 18,
+      "stalls": 0,
+      "redirects": 4,
+      "stores": 0,
+      "calculated_cpu_time_ns": 300
+    },
+    {
+      "program": "memory_copy",
+      "cycles": 15,
+      "completed": 7,
+      "stalls": 2,
+      "redirects": 1,
+      "stores": 1,
+      "calculated_cpu_time_ns": 150
+    },
+    {
+      "program": "copy_checksum",
+      "cycles": 55,
+      "completed": 35,
+      "stalls": 16,
+      "redirects": 0,
+      "stores": 8,
+      "calculated_cpu_time_ns": 550
+    }
+  ],
+  "native_tool_version": "2025.2",
+  "part": "xc7z020clg484-1",
+  "period_ns": 10,
+  "logical_IM_DM": "each256x16 one synchronous read, write outputhold, reset retainsDM",
+  "debug": "VIO256-bitstate/160-bitcounters/1-bitreset, fixed hardware recipe",
+  "review": {
+    "spec": "Tclenvfixed, no remaining issue",
+    "standards": "preflight/nullable effects/final acceptance fixed, no remaining issue"
+  },
+  "physical_board_validated": false,
+  "measured_board_time_ns": null
+}
