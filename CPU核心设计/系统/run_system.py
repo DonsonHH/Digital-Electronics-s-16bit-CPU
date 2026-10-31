@@ -18,6 +18,21 @@ V = PACKAGE / 'Vivado'
 sys.path.insert(0, str(V))
 from tool_config import add_tool_arguments, resolve_tools
 
+# Independent acceptance identity, not reduced by a program manifest edit.
+REVIEWED_CASES = (
+    ('baseline', 0), ('all_ops', 0), ('loop', 0), ('memory_copy', 0),
+    ('fetch_fault', 0), ('data_fault', 0), ('illegal', 0),
+    ('load_before_halt', 0), ('store_before_halt', 0),
+    ('reset_after_halt', 1), ('reset_before_store', 2),
+)
+
+
+def validate_case_identity(manifest):
+    identity = [(r['id'], r['name'], r['reset_kind']) for r in manifest['cases']]
+    expected = [(i, name, reset) for i, (name, reset) in enumerate(REVIEWED_CASES)]
+    if (identity != expected or manifest['case_count'] != 11 or manifest['normal_case_rows'] != 12):
+        raise ValueError('Reviewed system case/reset identity or expected 12 epoch rows changed')
+
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -41,12 +56,12 @@ def validate_images(root):
             words = path.read_text(encoding='ascii').splitlines()
             if len(words) != 256 or any(re.fullmatch(r'[0-9a-fA-F]{4}', w) is None for w in words):
                 raise ValueError('System boot image must contain 256 four-hex-digit words: ' + name)
-    if manifest['case_count'] != 11 or len(manifest['cases']) != 11 or manifest['normal_case_rows'] != 12:
-        raise ValueError('Reviewed system case counts changed')
+    validate_case_identity(manifest)
     return manifest
 
 
 def check_simulation(log, attempt, label, manifest):
+    validate_case_identity(manifest)
     if ('SYSTEM_ATTEMPT=' + attempt not in log or '$finish called at time' not in log
             or re.search(r'(?im)^Fatal:|^ERROR:', log)):
         raise ValueError('Native completion missing: ' + label)
@@ -59,8 +74,10 @@ def check_simulation(log, attempt, label, manifest):
     rows = [dict(zip(['name', 'epoch', 'cycles', 'wb', 'stores', 'stalls', 'redirects', 'stop_pc', 'reason', 'rf'], m))
             for m in re.findall(pattern, log, re.M)]
     expected = {('all_ops', '0')} if label == 'mapped' else {
-        (row['name'], str(epoch)) for row in manifest['cases']
-        for epoch in ([0, 1] if row['reset_kind'] == 1 else [1] if row['reset_kind'] == 2 else [0])}
+        (name, str(epoch)) for name, reset in REVIEWED_CASES
+        for epoch in ([0, 1] if reset == 1 else [1] if reset == 2 else [0])}
+    if len(expected) != (1 if label == 'mapped' else manifest['normal_case_rows']):
+        raise ValueError('Expected system epoch row count changed')
     if len(rows) != len(expected) or {(r['name'], r['epoch']) for r in rows} != expected:
         raise ValueError('System case rows are missing, repeated, or unexpected')
     by_name = {r['name']: r for r in manifest['cases']}

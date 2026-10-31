@@ -1,65 +1,57 @@
-# CPU核心设计 当前使用入口
+# CPU核心设计当前入口
 
-当前源码为v1.6-timing-AC1独立候选，ISA v1.5、验证协议1.6-vtools-r1，运行包装增加job1生命周期补丁。打开根目录AC1核心Word和五页Buffer/Interlock说明即可；原冻结v1.6规范及旧工程已移入外部可恢复归档。
+当前为 **AC1系统准备r1**，CPU v1.6、ISA v1.5，目标课程EES-331（xc7z020clg484-1）。开发入口是本Git工作副本。核心Word保持四章架构；第2.10和4.11节补充文件启动、结果观测、稳定停止与真实系统验证。Pre4、Pre5及旧执行快照保留当时的版本语义。
 
-## 2026-10-31 架构图精修
+## 阅读与源码
 
-核心Word现为46页，保留四章结构和Word内56项可点击分级目录。第2.1.1、2.1.2节分别为整体控制与数据通路架构图、五级Datapath详细图，独占第9、10页横向图页；其余正文为纵向。两张主图与现有F/Q/G、冒险网络及五状态FSM相互对应。
+- [核心Word](16位流水线CPU核心设计文档_AC1候选版.docx)：50页、Word内分级目录。第9–10页是两张原有主图，第47页新增文件启动系统图。
+- [核心RTL](Vivado/rtl)：13份；本轮只扩展datapath_core的被动观测，以及sync_memories的文件初始化。原执行仲裁、写入边沿及11份其他RTL保持。
+- [最小系统顶层](系统/rtl/cpu_system.sv)：第14份系统源码，连接一拍同步IM/DM，提供RF写回影子与最后store观测。
+- [系统契约](系统/接口与停止现场契约.md) · [文件启动镜像与manifest](系统/programs) · [既有Buffer说明](CPU流水线冒险与Buffer_Interlock完整设计方案.docx) · [证据索引](证据索引.json)。
+- [系统图SVG](架构图/03_文件启动系统与停止观测.svg) · [PNG](架构图/03_文件启动系统与停止观测.png)。原整体图、五级datapath、F/Q/G和模式FSM仍适用原执行路径。
 
-可编辑源图位于`架构图/`：`01_CPU整体架构.svg/.png`的PNG为3600×2250，`02_五级Datapath.svg/.png`的PNG为3600×2520。第2.6节（第17–19页）的表14给出方框、实际RTL及输入输出对应；IFCU至WBCU是core内部职责分区，CTRL_X/M/W是既有随行控制字段集合。第3.7节（第29–31页）继续解释运行模式与WB排空边界；第4.4.2节（第36页）保留Pre5执行记录的原日期及覆盖口径。
+## 工具配置与复跑
 
-精修重点：Z来源选择、目标地址计算与分支资格分别表示；两路前递明确回退到ID/EX保存值；STR数据与基址分开追踪；M/W、RF与三路Z反馈均画出源端和目标端。整体图按“随行控制→级控制逻辑→合格使能”组织；PC状态及下一值逻辑统一标为pc16内部。四个浅蓝边界关联数据、标签和剩余控制，未增加寄存器。图中三条典型路径对应ADD→ADD、LDR→STR和CMP→JZ。
+需要Windows、Python 3.11或更新版本、Vivado 2025.2。复制tools.example.json为不提交的tools.local.json并填写本机路径，或使用CPU_VIVADO_BIN/CPU_PYTHON及PATH。优先级：显式CLI > 项目配置 > 环境变量 > PATH。直接用某个Python启动时，回执记录该实际解释器。
 
-本轮只修订图文，CPU实现版本、ISA、13份生产RTL、全部TB与XDC不变。加减仍采用原生17位`+`表达式，没有接入Hybrid。图中同步IM输出承担D级指令数据边界，DM输出承担W级load数据边界；没有新增IR/MDR、独立五级控制器、FIFO/cache或resume端口。
-
-本轮按当前源码重新核对ADD相关、LDR到STR、CMP/JZ、HALT排空、MEM故障与Reset；只读重解析Pre5原始VCD的4,824个上升沿，逐项核对11份CSV/JSON。所用九套回归attempt仍为`440e0d7a-1244-4333-a4f8-5adf612f9833`，独立48例仍为`cpu_ac1_independent_glok75my`，均位于相邻`../Pre5_控制单元设计/Vivado`。这是历史证据复核，不是2026-10-31新运行XSim、综合或下板。
-
-修改前的Word、两图、README、索引与指纹保存在`C:/Users/Donson/Documents/ChatGPT_CPU_归档/20261031_架构图精修_01a0c80f`；较早归档继续保留。当前文档与图形摘要见`证据索引.json`，`文件SHA256.json`同步当前指纹；原有执行receipt不改写。清单中原有缺失的`验证记录/AC1已验收负向原始证据.zip`仍保留原记录，本轮未恢复该历史文件。
-
-## 创建及打开 Vivado
-
-已创建项目：Vivado/project/cpu_v16.xpr。器件xc7z020clg484-1，设计top=datapath_core，默认仿真top=tb_datapath。源码和约束全部从本目录登记。双击Vivado/run_project.cmd或运行下面命令会创建项目；已有project时请用另一个目录名，不会删除现有工程。
+从本目录执行；在其他目录可使用脚本绝对路径：
 
 ```powershell
-.\Vivado\create_project.ps1 -ProjectDirectoryName project_new
+# 九套回归、独立48例、五类错误注入、X/Z、证据校验、生命周期
+python -B -X utf8 .\Vivado\verify.py --suite all
+# 7项存储检查、11程序、系统OOC、同镜像网表回放、真实工程仿真
+python -B -X utf8 .\系统\run_system.py --test all
 ```
 
-## 验证与综合
+两个入口都新建attempt并保存失败，不以旧成功替代本次结果。系统检查可单独选择memory、system、synthesis或project。synthesis同时回放all_ops网表；project实际创建工程并launch_simulation，不只是注册文件。原core-only入口Vivado/run_synthesis.ps1仍可用，但资源和顶层与系统OOC不同。
 
-从本目录运行：
-```powershell
-.\Vivado\run_verify.ps1
-.\Vivado\run_synthesis.ps1
-```
-完整功能入口真实调用九套XSim并创建新attempt及19步记录；失败不会冒充旧成功。OOC综合只分析核心，仍不代表板级。GUI的单独Run All只运行所选TB，不自动得到九套绑定PASS。
-
-独立48例或已有负向检查：
-```powershell
-$cpuPy='C:\Users\Donson\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
-& $cpuPy -X utf8 .\Vivado\run_independent.py
-& $cpuPy -X utf8 .\Vivado\run_mutations.py
-& $cpuPy -X utf8 .\Vivado\run_unknown_controls.py
-& $cpuPy -X utf8 .\Vivado\run_evidence_tests.py
-```
-evidence测试放在完整run_verify之后执行；正常runner更新最近运行。2026-10-14落实job1后已重新实际执行九套，当前attempt为eae32d52-1b00-4d6d-a524-cd3902d502d0，19步均通过。原始九套attempt 72d99981-0aef-4b1d-8c13-e8d7bc624cf9及其118文件保留原身份；复制不生成新运行。最近运行以其JSON中的状态、attempt和路径为准。
-
-仅读取复核历史原始证据：
-```powershell
-& $cpuPy -B -X utf8 .\Vivado\verify_results.py --run .\验证记录\cpu_v16_72d999810aef4b1d8c13e8d7bc624cf9 --output .\historical_recheck_new.json
-```
-预期HISTORICAL_REVALIDATION_PASS/new_xsim_execution=false，不能当作新XSim执行。上面的旧记录按其原始输入快照核验，不加--package；否则job1包装脚本的预期差异会被判为当前驱动不兼容。当前完整九套记录可另加--package .核对当前输入。每次指定尚不存在的--output文件名，避免覆盖历史复核结果。
-
-原迁移操作只适配创建包装入口和文档路径，并验证创建入口及独立48例。后续job1仅修补执行包装、独立入口及负向测试辅助工具；13份生产RTL、全部TB、ISA和XDC均不变。旧执行快照不会被新脚本覆盖。
-
-## 进程生命周期自测（job1）
+独立48例的维护生成入口不再依赖归档脚本：
 
 ```powershell
-& $cpuPy -B -X utf8 .\Vivado\test_process_lifecycle.py
+python -B -X utf8 .\Vivado\generate_independent.py --output C:\Temp\cpu_cases_new
+python -B -X utf8 .\Vivado\run_independent.py --cases C:\Temp\cpu_cases_new
 ```
-检查正常/失败退出、启动失败、强制结束后的两级子进程清理、主进程正常退出后的遗留子进程清理，以及负向入口超时记录；无关哨兵进程须保持存活。包装器使用本次调用专属、句柄不继承的Windows Job，并在CreateProcess时绑定，未对现有Vivado或系统Job修改策略。独立48例默认超时600秒，可用--timeout指定正的有限秒数；超时/中断返回失败并保存部分日志，不发布PASS。
 
-修改前脚本和根目录记录保存在C:/Users/Donson/Documents/ChatGPT_CPU_归档/20261014_进程清理补丁_job1/修改前。自测与补丁证据位于验证记录/工具生命周期_job1_20261014；这不是新的CPU版本、架构变更或板级验收。
+输出目录必须尚不存在。冻结373份消费输入（含369份MEM）保持内容契约；私有执行TB仅把原12端口的.*替换为显式连接，以兼容新增观测输出，所有断言不变，原包及执行后指纹分别保存。
 
-AC1已存OOC为287 LUT/260 FF、WNS+2.620ns、TNS0、0失败端点。缺真实板级顶层、时钟/复位/RAM集成和完整I/O约束，尚未布局布线/实际setup-hold/比特流/下板。未完成完整算术穷举和全状态形式证明。禁止把OOC或功能PASS写成已实现板级100MHz。
+## Vivado工程
 
-证据位置见证据索引.json；旧绝对执行路径仅属原上下文，不是当前源码入口。说明/内历史原件保留身份；新整理Review说明当前目录。所有移除材料及原冻结文档的恢复位置见说明/归档位置.md。
+原Vivado/create_project.ps1生成core-only项目。新系统入口为系统/create_project.tcl，top=cpu_system、sim top=tb_cpu_system，登记13份核心RTL加1份系统RTL；已有输出目录拒绝覆盖。
+
+`run_system.py --test project`已验证该Tcl的创建和实际仿真路径。新attempt保留XPR、源码及相对programs镜像；打开输出记录中的project/cpu_system.xpr可以查看。本机原执行临时目录中的工程也保留。完整快照移动时须一起移动rtl、tb、programs、constraints和project，不能只复制XPR。更换程序后新建工程，避免用旧镜像副本。
+
+## 当前验收范围
+
+阶段0固定7753502与2947份历史文件；阶段1固定独立生成及统一工具，提交76950d1；阶段2添加最小系统与被动观测。原五级组织和ISA保持：STR只在MEM写一次、WB保留标签；JUMP/JZ在EX重定向后继续推进；HALT/故障标记在原WB排空边沿停止。reset禁止写入并清观测状态，保留DM。
+
+接受证据分别为验证/tools_50040838e0ec474680085bb91e8fb001和验证/cpu_system_n0r4buws。后者含12行系统epoch结果、2次受控诊断注入、all_ops同拍网表回放和真实工程启动；baseline为17拍，all_ops为25拍。前者包括九套19步、独立48例/10 reset见证/58行、五类mutant、X/Z、证据和生命周期检查。
+
+系统OOC：376 LUT、431 FF、2 RAMB18、15 CARRY4；10 ns下WNS +1.363 ns、TNS 0、0失败端点。它包含观测与影子资源，不能与旧core-only的287 LUT/260 FF直接混比。尚未布局布线、完整IO约束、实际setup/hold、比特流或下板；ZPS7-1 Warning仍在。没有合入WB→MEM免停、单步、暂停或可变延迟存储。
+
+正式Word生成器要求显式指定完整通过回执，并核对当前源码及回归TB指纹；旧PASS或改过源码的记录会被拒绝：
+
+```powershell
+python -B -X utf8 .\系统\build_core_document.py --system-receipt .\验证\cpu_system_n0r4buws\result.json --tools-receipt .\验证\tools_50040838e0ec474680085bb91e8fb001\result.json
+```
+
+生成后仍须用Word刷新目录、导出并逐页检查。文件SHA256.json只反映其生成时刻的受跟踪交付；历史导入清单保持7753502原快照身份。两份用户已确认删除的旧ZIP不会被误记为已恢复。

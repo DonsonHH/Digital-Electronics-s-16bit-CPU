@@ -3,7 +3,9 @@ from pathlib import Path
 from io import BytesIO
 import argparse
 import copy
+import hashlib
 import json
+import re
 import subprocess
 from docx import Document
 from docx.oxml import OxmlElement
@@ -17,25 +19,81 @@ PACKAGE = ROOT / 'CPU核心设计'
 NAME = '16位流水线CPU核心设计文档_AC1候选版.docx'
 
 
-def latest_receipt(prefix, test=None):
-    for file in sorted((PACKAGE / '验证').glob(prefix + '*/result.json'), key=lambda p:p.stat().st_mtime, reverse=True):
-        data = json.loads(file.read_text(encoding='utf-8'))
-        if data['status'] == 'PASS' and (test is None or data.get('test') == test):
-            return file, data
-    raise ValueError('No completed evidence: ' + prefix)
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def bound_receipts(system_path, tools_path):
+    """Author only from explicitly selected, complete, current-source evidence."""
+    system_path, tools_path = system_path.resolve(), tools_path.resolve()
+    system = json.loads(system_path.read_text(encoding='utf-8'))
+    tools = json.loads(tools_path.read_text(encoding='utf-8'))
+    if system['status']!='PASS' or system.get('test')!='all':
+        raise ValueError('System receipt must be an explicit full-scope PASS')
+    required=['regression','independent','mutations','unknown','evidence','lifecycle']
+    if tools['status']!='PASS' or tools.get('suites')!=required:
+        raise ValueError('Tool receipt must be an explicit full six-suite PASS')
+    if len(tools['steps'])!=6 or any(s['suite']!=n or s['exit']!=0 for s,n in zip(tools['steps'],required)):
+        raise ValueError('Incomplete native tool suite steps')
+    labels=['compile','elab_memory','memory','elab_system','system','synthesis','compile_mapped','elab_mapped','mapped','project']
+    if [s['label'] for s in system['steps']]!=labels:
+        raise ValueError('Incomplete system native step sequence')
+    # Reconstruct the runners' actual current copy/glob inventories. Matching
+    # only receipt-declared entries would overlook a newly added source file.
+    inventory={}
+    for group in ['rtl','tb','programs','constraints']:
+        for file in (PACKAGE/'系统'/group).rglob('*'):
+            if file.is_file():inventory[file.relative_to(PACKAGE/'系统').as_posix()]=file
+    for file in (PACKAGE/'Vivado/rtl').iterdir():
+        if file.is_file():inventory['rtl/'+file.name]=file
+    for name in ['synth_system.tcl','create_project.tcl','run_system.py','generate_programs.py']:
+        inventory[name]=PACKAGE/'系统'/name
+    inventory['desktop_launch.py']=PACKAGE/'Vivado/desktop_launch.py'
+    if set(system['input_sha256'])!=set(inventory):
+        raise ValueError('System execution inventory differs from current source')
+    tool_inventory={file.relative_to(PACKAGE/'Vivado').as_posix() for file in (PACKAGE/'Vivado').rglob('*')
+        if file.is_file() and (file.suffix in ['.py','.ps1','.cmd'] or (file.parent.name=='verification' and file.suffix in ['.md','.json']))
+        and not any(part in file.parts for part in ['project','__pycache__','时序记录','创建记录'])}
+    if set(tools['source_sha256'])!=tool_inventory:
+        raise ValueError('Tool execution inventory differs from current source')
+    for name,digest in system['input_sha256'].items():
+        rel=Path(name)
+        source=inventory[name]
+        if sha(source)!=digest or sha(system_path.parent/rel)!=digest:
+            raise ValueError('Stale system input: '+name)
+    for name,digest in tools['source_sha256'].items():
+        if sha(PACKAGE/'Vivado'/name)!=digest:raise ValueError('Stale tool input: '+name)
+    for step in tools['steps']:
+        if sha(tools_path.parent/(step['suite']+'.console.log'))!=step['log_sha256']:
+            raise ValueError('Tool console hash differs')
+    for step in system['steps']:
+        if step['exit']!=0 or sha(system_path.parent/(step['label']+'.console.log'))!=step['console_sha256']:
+            raise ValueError('System native step is incomplete or changed')
+    regression_log=(tools_path.parent/'regression.console.log').read_text(encoding='utf-8')
+    archive=re.findall(r'^V16_VERIFIED_RESULTS=(.+)$',regression_log,re.M)
+    if len(archive)!=1:raise ValueError('Bound regression archive missing')
+    regression_path=PACKAGE/'验证记录'/Path(archive[0].strip()).name/'verification_results.json'
+    regression=json.loads(regression_path.read_text(encoding='utf-8-sig'))
+    if regression['status']!='PASS' or not regression['new_xsim_execution'] or regression['execution_binding']['native_subprocesses']!=19:
+        raise ValueError('Regression receipt is not a fresh completed nine-suite run')
+    for group in ['rtl','tb']:
+        if set(regression[group+'_sha256'])!={p.name for p in (PACKAGE/'Vivado'/group).iterdir() if p.is_file()}:
+            raise ValueError('Regression source inventory differs: '+group)
+        for name,digest in regression[group+'_sha256'].items():
+            if sha(PACKAGE/'Vivado'/group/name)!=digest:raise ValueError('Stale regression '+group+': '+name)
+    return system_path,system,tools_path,tools
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--baseline', default='775350246d3806c9a09ac683edadf1a35e3e68bb')
+    parser.add_argument('--system-receipt',type=Path,required=True)
+    parser.add_argument('--tools-receipt',type=Path,required=True)
     args = parser.parse_args()
+    system_path,system,tools_path,tools=bound_receipts(args.system_receipt,args.tools_receipt)
     raw = subprocess.check_output(['git', 'show', args.baseline + ':CPU核心设计/' + NAME], cwd=ROOT)
     doc = Document(BytesIO(raw))
     original = list(doc.paragraphs)
-    system_path, system = latest_receipt('cpu_system_', 'all')
-    tools_path, tools = latest_receipt('tools_')
-    if tools.get('suites') != ['regression','independent','mutations','unknown','evidence','lifecycle']:
-        raise ValueError('A full fresh six-suite receipt is required')
     synthesis = system['synthesis']
     edits = {
         1:'实现 AC1系统准备r1    CPU v1.6    ISA v1.5    文档修订 2026年10月31日',
@@ -43,6 +101,7 @@ def main():
         6:'当前实现为AC1系统准备r1，目标课程EES-331、xc7z020clg484-1。原执行控制与算术路径不变，datapath_core追加只读观测和随行停止原因；sync_memories增加INIT_FILE，系统另有cpu_system。已重新执行有限功能回归、文件启动系统仿真、系统OOC综合和一例网表回放，结果见第四章系统集成记录；尚未布局布线或下板。',
         119:'表7列出原12项执行接口，合计87位；本版追加的只读观测接口另见第2.10节及系统集成表，不计入此87位。逻辑端口不等于FPGA外部引脚；cpu_system把执行接口接至片上IM/DM，无需无协议转换职责的Adapter。',
         197:'数据、控制、pc和valid属于同一条指令。下面列的是逻辑字段；同步RAM输出承担相应数据边界，不增加IR/MDR。本版X/M/W各增加3位reason诊断字段，随同一有效标签推进；它不反馈控制，也不改变原指令行为。',
+        293:'非法mode的RTL默认分支进入FAULTED，不得自行回到RUN重新取指；mode_active同时阻断非法状态下的访问及写入。原九套回归检查可达状态、停止边沿和复位。本版系统另以受控仿真注入非法二进制mode，检查原因6及无指令PC的现场；不表示一般硬件容错。状态寄存器用非阻塞赋值，next-state及输出组合逻辑完整覆盖。',
         297:'当前开发入口为Git工作副本CPU核心设计。Vivado/rtl保留13个核心源码文件，Vivado/tb保留9个TB入口和2份共享.svh；系统/rtl另有cpu_system.sv。core仍集成原流水控制、前递、保护和停止，追加公开观测；sync_memories提供文件初始化同步存储。Pre5原包仍是观测扩展前快照，不再声称其13份RTL与当前文件逐字节相同。',
         298:'AC1相对冻结v1.6的原组合优化及72d99981、eae32d52等记录保留为历史。本轮仅在datapath_core追加观测输出、X/M/W原因字段和停止锁存，在sync_memories追加INIT_FILE及映射属性；其余11个核心RTL与基线7753502相同。原9套TB不改；独立48例的私有运行副本仅把原.*连接替换为12个执行端口的显式连接，断言与冻结镜像不变，并分别记录包内与执行后TB指纹。',
         299:'当前维护入口为Vivado/verify.py与系统/run_system.py，使用统一工具配置；每次执行保留新的attempt、源码镜像和原始日志。新失败不替换成旧PASS。verify_results.py的历史再校验不代表新运行XSim；当前回归、系统仿真、综合和工程启动各有实际执行记录。',
@@ -130,7 +189,7 @@ def main():
     ],[0.55,3.15,2.85],'表34 停止原因编码')
     paragraph(anchor, 'reason按X→M→W随有效标签传递；MEM访存故障按年龄覆盖年轻EX事件。正常或指令故障停止在原drain_done边沿锁存w_pc，不使用PC_fetch；取消的年轻标签没有现场。reset清RF/flags、影子、流水有效位及现场，不清DM。原因5/6只做受控仿真注入验证，不代表一般硬件容错。')
 
-    paragraph(anchor, '实际结果与验收边界', 'Heading 3', page=True)
+    paragraph(anchor, '实际结果与验收边界', 'Heading 3')
     table(['检查','真实执行结果与范围'],[
         ('独立用例与回归','冻结48例、10个reset见证、58行结果；九套回归19个native步骤；五类mutant匹配预期失败；另有X/Z、证据和生命周期检查'),
         ('同步存储','7项公开端口检查：文件读、逐拍更新、禁用保持、写时保持与写后读'),
@@ -151,6 +210,7 @@ def main():
             field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),f'SEQ {kind} \\* ARABIC')
             r=OxmlElement('w:r');value=OxmlElement('w:t');value.text=number;r.append(value);field.append(r);p._p.append(field)
             p.add_run(text[text.index(' '):])
+    anchor.paragraph_format.page_break_before=True
     doc.core_properties.version='AC1-system-prep-r1'
     doc.core_properties.comments='ISA v1.5 and execution cycle contract retained; observation-only system increment.'
     target=PACKAGE/NAME;doc.save(target)

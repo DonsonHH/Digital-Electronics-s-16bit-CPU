@@ -22,6 +22,7 @@ module system_checker #(parameter CASE_ID=0, LABEL="baseline", IM_FILE="programs
  .rf_snapshot(rf),.observe_mem_en(mem_en),.observe_mem_we(mem_we),.observe_mem_addr(mem_addr),.observe_mem_data(mem_data),
  .last_store_valid(last_store_valid),.last_store_addr(last_addr),.last_store_data(last_data));
  reg[63:0] e0[0:255],e1[0:255];reg[79:0] s0[0:255],s1[0:255];reg[63:0] expected;reg[79:0] expected_store;
+ reg expected_last_valid;reg[15:0] expected_last_pc;
  initial begin
   $readmemh(E0,e0,0,N0-1);$readmemh(E1,e1,0,N1-1);
   $readmemh(S0,s0,0,STORES0>0?STORES0-1:0);$readmemh(S1,s1,0,STORES1>0?STORES1-1:0);
@@ -61,13 +62,19 @@ module system_checker #(parameter CASE_ID=0, LABEL="baseline", IM_FILE="programs
    #1;
    if(halted||fault)begin
     if(wb_count!==(epoch==0?N0:N1)||stores!==(epoch==0?STORES0:STORES1)||cycles!==CYCLES||stalls!==STALLS||redirects!==REDIRECTS)$fatal(1,"SYSTEM_COUNTS %s cycles=%0d wb=%0d stores=%0d stalls=%0d redirects=%0d",LABEL,cycles,wb_count,stores,stalls,redirects);
-    if(rf!==(epoch==0?RF0:RF1)||flags!==(epoch==0?FLAGS0:FLAGS1)||!stop_valid||!pc_valid||stop_pc!==STOP_PC||reason!==REASON||fault!==(REASON!=1)||halted!==(REASON==1)||pipe_valid!==0)$fatal(1,"SYSTEM_STOP_STATE %s rf=%h flags=%b pc=%h reason=%0d",LABEL,rf,flags,stop_pc,reason);
+    if(rf!==(epoch==0?RF0:RF1)||flags!==(epoch==0?FLAGS0:FLAGS1)||stop_valid!==1||pc_valid!==1||stop_pc!==STOP_PC||reason!==REASON||fault!==(REASON!=1)||halted!==(REASON==1)||pipe_valid!==0)$fatal(1,"SYSTEM_STOP_STATE %s rf=%h flags=%b pc=%h reason=%0d",LABEL,rf,flags,stop_pc,reason);
     if(stores>0&&(!last_store_valid||last_addr!==expected_store[62:47]||last_data!==expected_store[37:22]))$fatal(1,"SYSTEM_LAST_STORE %s",LABEL);
-    if(REASON==1&&(!last_valid||last_pc!==STOP_PC))$fatal(1,"SYSTEM_LAST_COMPLETED %s",LABEL);
+    if(stores==0&&last_store_valid!==0)$fatal(1,"SYSTEM_PHANTOM_LAST_STORE %s",LABEL);
+    expected_last_valid=REASON==1||(epoch==0?N0:N1)>1;
+    expected_last_pc=REASON==1?STOP_PC:epoch==0?e0[N0-2][15:0]:e1[N1-2][15:0];
+    if(last_valid!==expected_last_valid||(expected_last_valid&&last_pc!==expected_last_pc))$fatal(1,"SYSTEM_LAST_COMPLETED %s",LABEL);
     $display("SYSTEM_CASE_PASS name=%s epoch=%0d cycles=%0d wb=%0d stores=%0d stalls=%0d redirects=%0d stop_pc=%h reason=%0d rf=%h",LABEL,epoch,cycles,wb_count,stores,stalls,redirects,stop_pc,reason,rf);
     if(RESET_KIND==1&&epoch==0)first_done=1;
     else begin
-     repeat(3)begin @(posedge clk);#1;if(stop_pc!==STOP_PC||reason!==REASON||rw!==0||mem_en!==0||mem_we!==0)$fatal(1,"SYSTEM_STOP_HOLD %s",LABEL);end
+     repeat(3)begin @(posedge clk);#1;
+      if(stop_valid!==1||pc_valid!==1||stop_pc!==STOP_PC||reason!==REASON||halted!==(REASON==1)||fault!==(REASON!=1)||pipe_valid!==0||rw!==0||zw!==0||cvw!==0||mem_en!==0||mem_we!==0||rf!==(epoch==0?RF0:RF1)||flags!==(epoch==0?FLAGS0:FLAGS1)||last_valid!==expected_last_valid||(expected_last_valid&&last_pc!==expected_last_pc))$fatal(1,"SYSTEM_STOP_HOLD %s",LABEL);
+      if(last_store_valid!==(stores>0)||(stores>0&&(last_addr!==expected_store[62:47]||last_data!==expected_store[37:22])))$fatal(1,"SYSTEM_LAST_STORE_HOLD %s",LABEL);
+     end
      done=1;
     end
    end

@@ -1,13 +1,13 @@
 {
   "CPU_base": "v1.6",
-  "candidate": "v1.6-timing-AC1",
+  "candidate": "AC1-system-prep-r1",
   "ISA": "v1.5",
   "vtools": "1.6-vtools-r1",
-  "functional_attempt": "72d99981-0aef-4b1d-8c13-e8d7bc624cf9",
-  "functional_record_relative": "验证记录/cpu_v16_72d999810aef4b1d8c13e8d7bc624cf9",
+  "functional_attempt": "3df8066a-3273-4d19-867a-a613f4d42481",
+  "functional_record_relative": "验证记录/cpu_v16_3df8066a32734d19867aa613f4d42481",
   "timing_record_relative": "Vivado/时序记录/AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc",
   "independent_48_relative": "验证记录/independent_48_saved",
-  "result_semantics": "saved real execution; relocation creates no new XSim PASS",
+  "result_semantics": "Explicit input-bound fresh executions and separately preserved historical snapshots",
   "original_execution_absolute_paths_preserved_in_raw_records": true,
   "archive_root": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261014_会话清理_01a13444",
   "frozen_original_core_sha256": "e7d1d4af741117bab268faab69c2767fb1a160f7f91c0adf615c7c0b3ef5f171",
@@ -41,27 +41,31 @@
   },
   "current_document": {
     "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
-    "revision_date": "2026-10-31",
-    "CPU": "v1.6-timing-AC1",
+    "CPU": "v1.6",
+    "candidate": "AC1-system-prep-r1",
     "ISA": "v1.5",
-    "sha256": "a97e63a822c10263fd29e6c908235d9420a65abd40dabdbd04852a5054cd686c",
-    "pages": 46,
-    "toc_entries": 56,
-    "tables": 32,
-    "figures": 10,
-    "sections_updated": [
-      "2.1 figures/captions and three example paths",
-      "2.6.2 table14 forwarding and Z roles",
-      "same 56-entry TOC and existing references refreshed and checked"
-    ],
-    "RTL_TB_XDC_changed": false,
-    "new_simulation_or_synthesis": false,
-    "backup_and_QA": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261031_架构图精修_01a0c80f",
+    "revision_date": "2026-10-31",
+    "sha256": "cce1190d4e0c3c691717b8c0bc14536196eb5fed61f692d713c78b9663e3c1d8",
+    "pages": 50,
+    "toc_entries": 61,
+    "tables": 35,
+    "figures": 11,
     "landscape_pages": [
       9,
       10
     ],
-    "revision_label": "20261031-architecture-refinement"
+    "sections_updated": [
+      "2.2 execution vs observation interface",
+      "2.7 passive reason payload",
+      "2.10 file boot and observations",
+      "3.7 scoped illegal-mode injection evidence",
+      "4.1 current source entry",
+      "4.8 measured system cycles",
+      "4.9-4.11 current system results and boundaries"
+    ],
+    "RTL_extended": true,
+    "ISA_or_execution_cycles_changed": false,
+    "new_simulation_or_synthesis": true
   },
   "Pre5_control_evidence": {
     "relative_to_course_root": "Pre5_控制单元设计/Vivado",
@@ -81,7 +85,8 @@
     "independent_result_rows": 58,
     "independent_cycle_rows": 952,
     "trace_cases": 11,
-    "original_VCD_rising_edges_reparsed": 4824
+    "original_VCD_rising_edges_reparsed": 4824,
+    "comparison_role": "Historical Pre5 versus pre-observation AC1; current core has passive observer extensions"
   },
   "document_revision_history": [
     {
@@ -126,6 +131,30 @@
         9,
         10
       ]
+    },
+    {
+      "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
+      "revision_date": "2026-10-31",
+      "CPU": "v1.6-timing-AC1",
+      "ISA": "v1.5",
+      "sha256": "a97e63a822c10263fd29e6c908235d9420a65abd40dabdbd04852a5054cd686c",
+      "pages": 46,
+      "toc_entries": 56,
+      "tables": 32,
+      "figures": 10,
+      "sections_updated": [
+        "2.1 figures/captions and three example paths",
+        "2.6.2 table14 forwarding and Z roles",
+        "same 56-entry TOC and existing references refreshed and checked"
+      ],
+      "RTL_TB_XDC_changed": false,
+      "new_simulation_or_synthesis": false,
+      "backup_and_QA": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261031_架构图精修_01a0c80f",
+      "landscape_pages": [
+        9,
+        10
+      ],
+      "revision_label": "20261031-architecture-refinement"
     }
   ],
   "architecture_figures": {
@@ -170,6 +199,53 @@
     "revision_label": "20261031-architecture-refinement",
     "diagram_logic_review": "PASS for five requested refinements",
     "diagram_visual_review": "PASS native-font boxes, lines, text overlaps and borders checked; independent review completed",
-    "Word_page_review": "5 changed pages visually reopened; 41 other page PNGs identical to the previously fully inspected render"
+    "Word_page_review": "5 changed pages visually reopened; 41 other page PNGs identical to the previously fully inspected render",
+    "current_execution_path_retained": true
+  },
+  "system_preparation": {
+    "base_commit": "775350246d3806c9a09ac683edadf1a35e3e68bb",
+    "implementation": "AC1-system-prep-r1",
+    "board": "EES-331",
+    "part": "xc7z020clg484-1",
+    "system_receipt_relative": "验证/cpu_system_n0r4buws/result.json",
+    "tool_receipt_relative": "验证/tools_50040838e0ec474680085bb91e8fb001/result.json",
+    "core_files_modified": [
+      "datapath_core.sv",
+      "sync_memories.v"
+    ],
+    "new_system_RTL": "系统/rtl/cpu_system.sv",
+    "legacy_TB_11_unchanged": true,
+    "original_execution_text_identical_after_observation_strip": true,
+    "system_programs": 11,
+    "system_epoch_rows": 12,
+    "mapped_programs": 1,
+    "memory_checks": 7,
+    "controlled_debug_injections": 2,
+    "synthesis": {
+      "tool": "Vivado 2025.2",
+      "part": "xc7z020clg484-1",
+      "top": "cpu_system",
+      "period_ns": 10,
+      "lut": 376,
+      "ff": 431,
+      "bram": 2,
+      "carry4": 15,
+      "wns_ns": 1.363,
+      "tns_ns": 0.0,
+      "failing_endpoints": 0,
+      "reported_setup_met": true,
+      "timing_closed": false,
+      "placed_and_routed": false,
+      "board_validated": false,
+      "boot_image": "programs/all_ops_im.mem",
+      "boot_image_sha256": "a22c6d230ee1780afde6b04e9b9c880d7ec5318a0bff3417f101be568abdd71f",
+      "data_image_sha256": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e"
+    },
+    "diagram_files": {
+      "架构图\\03_文件启动系统与停止观测.svg": "3b88126dcdc3ef6d9ee493a6658bf6907aa73cd3b5028ce0e3e7905052e5c8c3",
+      "架构图\\03_文件启动系统与停止观测.png": "6a6ea5388c6c4469aa26dc284ddef90e30d7d67f84d1a93d8f10813c85676662"
+    },
+    "timing_closed": false,
+    "board_validated": false
   }
 }

@@ -1,0 +1,24 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 65800
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 31 22:44:27 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/mapped_sim/xsim_script.tcl
+# xsim {mapped_sim} -wdb {mapped.wdb} -autoloadwcfg -tclbatch {mapped.tcl}
+Time resolution is 1 ps
+source mapped.tcl
+## puts "SYSTEM_ATTEMPT=$env(CPU_SYSTEM_ATTEMPT)"
+SYSTEM_ATTEMPT=cpu_system_n0r4buws
+## run all
+SYSTEM_CASE_PASS name=all_ops epoch=0 cycles=25 wb=16 stores=1 stalls=1 redirects=2 stop_pc=0012 reason=1 rf=0020000500050005
+SYSTEM_MAPPED_PASS cases=1 boot=file_only
+$finish called at time : 416 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_system_n0r4buws/tb/tb_cpu_system.sv" Line 90
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 22:44:29 2026...
+DESKTOP_EXIT 0

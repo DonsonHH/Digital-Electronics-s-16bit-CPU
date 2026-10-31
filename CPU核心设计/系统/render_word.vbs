@@ -22,11 +22,6 @@ stream.WriteText "PAGES=" & doc.ComputeStatistics(2) & vbCrLf
 stream.WriteText "TOC=" & doc.TablesOfContents.Count & vbCrLf
 stream.WriteText "TABLES=" & doc.Tables.Count & vbCrLf
 stream.WriteText "FIGURES=" & doc.InlineShapes.Count & vbCrLf
-For i = 1 To doc.Paragraphs.Count
-  If doc.Paragraphs(i).OutlineLevel < 4 Then
-    stream.WriteText doc.Paragraphs(i).Range.Information(3) & vbTab & doc.Paragraphs(i).Range.Text & vbCrLf
-  End If
-Next
 stream.SaveToFile WScript.Arguments(2), 2
 stream.Close
 doc.Close False

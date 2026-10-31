@@ -4,6 +4,8 @@ import hashlib
 import importlib.util
 import json
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -14,6 +16,40 @@ spec.loader.exec_module(runner)
 
 
 class SystemContract(unittest.TestCase):
+    def test_document_cli_rejects_incomplete_inventory_and_native_steps(self):
+        source=json.loads((SYSTEM.parent/'验证/cpu_system_n0r4buws/result.json').read_text())
+        document=SYSTEM.parent/'16位流水线CPU核心设计文档_AC1候选版.docx'
+        before=hashlib.sha256(document.read_bytes()).hexdigest()
+        with tempfile.TemporaryDirectory(prefix='cpu_bad_receipt_') as directory:
+            for mode,detail in [('inventory','execution inventory'),('steps','step sequence')]:
+                data=json.loads(json.dumps(source))
+                if mode=='inventory':data['input_sha256'].pop('rtl/datapath_core.sv')
+                else:data['steps'].pop()
+                bad=Path(directory)/(mode+'.json');bad.write_text(json.dumps(data))
+                result=subprocess.run([sys.executable,'-B','-X','utf8',str(SYSTEM/'build_core_document.py'),
+                    '--system-receipt',str(bad),'--tools-receipt',str(SYSTEM.parent/'验证/tools_50040838e0ec474680085bb91e8fb001/result.json')],capture_output=True,text=True,encoding='utf-8')
+                self.assertNotEqual(result.returncode,0);self.assertIn(detail,result.stderr)
+        self.assertEqual(hashlib.sha256(document.read_bytes()).hexdigest(),before)
+
+    def test_document_cli_rejects_stale_receipt_before_touching_word(self):
+        document=SYSTEM.parent/'16位流水线CPU核心设计文档_AC1候选版.docx'
+        before=hashlib.sha256(document.read_bytes()).hexdigest()
+        run=subprocess.run([sys.executable,'-B','-X','utf8',str(SYSTEM/'build_core_document.py'),
+            '--system-receipt',str(SYSTEM.parent/'验证/cpu_system_q38z9y_0/result.json'),
+            '--tools-receipt',str(SYSTEM.parent/'验证/tools_50040838e0ec474680085bb91e8fb001/result.json')],capture_output=True,text=True,encoding='utf-8')
+        self.assertNotEqual(run.returncode,0)
+        self.assertIn('Stale system input',run.stderr)
+        self.assertEqual(hashlib.sha256(document.read_bytes()).hexdigest(),before)
+
+    def test_reset_epoch_cannot_be_removed_by_editing_the_manifest(self):
+        manifest = json.loads((SYSTEM / 'programs/manifest.json').read_text())
+        manifest['cases'][9]['reset_kind'] = 0
+        saved = SYSTEM.parent / '验证/cpu_system_q38z9y_0/system.log'
+        log = saved.read_text(encoding='utf-8')
+        shortened = '\n'.join(line for line in log.splitlines() if not line.startswith('SYSTEM_CASE_PASS name=reset_after_halt epoch=1 '))
+        with self.assertRaises(ValueError):
+            runner.check_simulation(shortened, 'cpu_system_q38z9y_0', 'system', manifest)
+
     def test_missing_and_malformed_boot_files_are_rejected(self):
         with tempfile.TemporaryDirectory(prefix='cpu_image_contract_') as directory:
             root = Path(directory)

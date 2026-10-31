@@ -1,0 +1,20 @@
+{
+  "tool": "Vivado 2025.2",
+  "part": "xc7z020clg484-1",
+  "top": "cpu_system",
+  "period_ns": 10,
+  "lut": 376,
+  "ff": 431,
+  "bram": 2,
+  "carry4": 15,
+  "wns_ns": 1.363,
+  "tns_ns": 0.0,
+  "failing_endpoints": 0,
+  "reported_setup_met": true,
+  "timing_closed": false,
+  "placed_and_routed": false,
+  "board_validated": false,
+  "boot_image": "programs/all_ops_im.mem",
+  "boot_image_sha256": "a22c6d230ee1780afde6b04e9b9c880d7ec5318a0bff3417f101be568abdd71f",
+  "data_image_sha256": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e"
+}

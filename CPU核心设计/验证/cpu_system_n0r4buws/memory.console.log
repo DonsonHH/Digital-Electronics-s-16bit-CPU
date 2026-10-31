@@ -1,0 +1,23 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 1016
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 31 22:43:03 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/memory_sim/xsim_script.tcl
+# xsim {memory_sim} -wdb {memory.wdb} -autoloadwcfg -tclbatch {memory.tcl}
+Time resolution is 1 ps
+source memory.tcl
+## puts "SYSTEM_ATTEMPT=$env(CPU_SYSTEM_ATTEMPT)"
+SYSTEM_ATTEMPT=cpu_system_n0r4buws
+## run all
+MEMORY_FILE_CONTRACT_PASS checks=7
+$finish called at time : 76 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_system_n0r4buws/tb/tb_memory_files.sv" Line 24
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 22:43:06 2026...
+DESKTOP_EXIT 0
