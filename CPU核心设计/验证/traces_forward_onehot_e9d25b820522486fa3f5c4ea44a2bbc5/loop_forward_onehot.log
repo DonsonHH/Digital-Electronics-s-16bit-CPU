@@ -1,0 +1,12 @@
+BOARD_NATIVE_START compile
+BOARD_NATIVE_EXIT_OK compile
+BOARD_NATIVE_START elaborate
+BOARD_NATIVE_EXIT_OK elaborate
+BOARD_NATIVE_START simulate
+BOARD_NATIVE_EXIT_OK simulate
+BOARD_NATIVE_START elaborate_selected
+BOARD_NATIVE_EXIT_OK elaborate_selected
+BOARD_NATIVE_START simulate_selected
+BOARD_NATIVE_EXIT_OK simulate_selected
+BOARD_RECORD=C:\Users\Donson\Documents\GitHub\Digital-Electronics-s-16bit-CPU\CPU核心设计\验证\cpu345_board_bf0z2ql8
+BOARD_ATTEMPT_PASS scope=selected_native_checks_not_physical_board

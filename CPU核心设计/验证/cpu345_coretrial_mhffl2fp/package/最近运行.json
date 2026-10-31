@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "result_kind": "fresh_execution",
+  "attempt_id": "597569c7-aa54-4a81-a08d-2534504d6f4d",
+  "spec_version": "1.6",
+  "isa_version": "1.5",
+  "verification_revision": "1.6-vtools-r1",
+  "started_at_utc": "2026-10-31T19:34:24.0735771Z",
+  "note": "New native execution passed; 19 tool records, pre-run inputs, raw artifacts and validation are bound to this attempt.",
+  "runtime": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_597569c7aa544a81a08d2534504d6f4d",
+  "completed_at_utc": "2026-10-31T19:35:49.6639649Z",
+  "archived_run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu345_coretrial_mhffl2fp\\package\\验证记录\\cpu_v16_597569c7aa544a81a08d2534504d6f4d"
+}

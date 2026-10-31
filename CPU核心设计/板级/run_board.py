@@ -7,12 +7,14 @@ from tool_config import add_tool_arguments,resolve_tools
 from run_system import validate_images
 from verify_board_results import analyze_reports,require_tool_version,review_console_warnings
 from benchmark_programs import PROGRAMS,prepare_selected
+from candidate_registry import CANDIDATES,apply_candidate
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def main():
  parser=argparse.ArgumentParser(description=__doc__);add_tool_arguments(parser)
  parser.add_argument('--mode',choices=['simulate','implement','all'],default='all')
  parser.add_argument('--program',choices=list(PROGRAMS),default='all_ops')
+ parser.add_argument('--candidate',choices=list(CANDIDATES),default='ac1')
  a=parser.parse_args();tools=resolve_tools(a.vivado_bin,python=sys.executable,config=a.config)
  work=Path(tempfile.mkdtemp(prefix='cpu345_board_'));dest=P/'验证'/work.name
  result={'status':'RUNNING','stage':3,'mode':a.mode,'attempt':work.name,'started_at_utc':utc(),'scope':'EES-331 board design and simulation, physical validation separate','part':'xc7z020clg484-1','clock_period_ns':10,'tools':tools,'program':a.program,'steps':[],'board_validated':False}
@@ -43,12 +45,14 @@ def main():
    else:(work/name).mkdir()
   for source in list((V/'rtl').iterdir())+list((S/'rtl').iterdir()):
    if source.is_file():shutil.copy2(source,work/'rtl'/source.name)
+  result['candidate']=a.candidate;result['candidate_overlay_sha256']=apply_candidate(work,a.candidate)
   shutil.copytree(S/'programs',work/'programs')
   expected,gold=prepare_selected(work,S,a.program)
   c,n,stalls,redirects=PROGRAMS[a.program]
-  result['selected_expectation']=expected;result['verification_revision']='board_benchmarks_v3'
+  result['selected_expectation']=expected;result['verification_revision']='board_candidates_v4'
   (work/'oracle_source').mkdir();shutil.copy2(V/'verification/isa_reference.py',work/'oracle_source/isa_reference.py')
   shutil.copy2(B/'benchmark_programs.py',work/'benchmark_programs.py')
+  shutil.copy2(B/'candidate_registry.py',work/'candidate_registry.py')
   shutil.copy2(V/'desktop_launch.py',work/'desktop_launch.py');shutil.copy2(Path(__file__),work/'run_board.py')
   shutil.copy2(B/'verify_board_results.py',work/'verify_board_results.py')
   for name in ['build_board.tcl','probe_hardware.tcl']:shutil.copy2(B/name,work/name)
@@ -74,6 +78,7 @@ def main():
    terminal=f'BOARD_SELECTED_PASS program={a.program} cycles={c} completed={n} stalls={stalls} redirects={redirects} stores={len(gold["stores"])}'
    if log.splitlines().count(terminal)!=1 or '$finish called at time' not in log or 'BOARD_ATTEMPT='+work.name not in log:raise ValueError('Selected actual boot-image simulation missing')
    result['selected_simulation']='PASS';result['selected_result']={'rf':gold['rf'],'flags':gold['flags'],'stop_pc':gold['events'][-1]['pc'],'cycles':c,'completed':n,'stalls':stalls,'redirects':redirects,'stores':len(gold['stores']),'calculated_cpu_time_ns_at_implemented_clock':c*10,'measured_board_time_ns':None}
+   result['selected_trace_sha256']=sha(work/'selected_trace.csv')
   if a.mode in ['implement','all']:
    native('vivado','implement','-mode batch -source build_board.tcl -log implementation.log -nojournal')
    log=(work/'implementation.log').read_text(encoding='utf-8',errors='replace')

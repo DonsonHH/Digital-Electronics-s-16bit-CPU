@@ -1,0 +1,95 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 29604
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/addsub16_cla.v" into library work
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/alu16.v" into library work
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/branch_target16.v" into library work
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/cla16.v" into library work
+INFO: [VRFC 10-311] analyzing module cla16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/cla4_pg.v" into library work
+INFO: [VRFC 10-311] analyzing module cla4_pg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/datapath_core.sv" into library work
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/flags_reg.v" into library work
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/imm_ext16.v" into library work
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/isa_decode.v" into library work
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/operand_forward.v" into library work
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/pc16.v" into library work
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/regfile4x16.v" into library work
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/sync_memories.v" into library work
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_audit3.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_audit3
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_datapath.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_datapath
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_forward_contract.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_forward_contract
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_hazards.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_hazards
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_isa_contract.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_isa_contract
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_stress.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stress
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_trace.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_trace
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_uniform_smoke.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_uniform_smoke
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_units.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_units
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe tb_datapath -s private_sim -debug typical 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'observe_wb_valid' remains unconnected for this instance [C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/rtl/sync_memories.v:26]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.pc16
+Compiling module work.isa_decode
+Compiling module work.imm_ext16
+Compiling module work.regfile4x16
+Compiling module work.flags_reg
+Compiling module work.operand_forward
+Compiling module work.addsub16_cla
+Compiling module work.alu16
+Compiling module work.branch_target16
+Compiling module work.datapath_core
+Compiling module work.instruction_memory
+Compiling module work.data_memory
+Compiling module work.pre4_system
+Compiling module work.tb_datapath
+Built simulation snapshot private_sim
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sun Nov  1 03:38:19 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/private_sim/xsim_script.tcl
+# xsim {private_sim} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run all
+Fatal: CONTROL_XZ phase=settled_half_cycle scope=tb_datapath.check_cpu_controls
+Time: 41 ns  Iteration: 0  Process: /tb_datapath/check_cpu_controls  Scope: tb_datapath.check_cpu_controls  File: C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_p7oek6yo/running_redirect_z/tb/tb_control_checks.svh Line: 15
+$finish called at time : 41 ns
+## quit
+INFO: [Common 17-206] Exiting xsim at Sun Nov  1 03:38:21 2026...
+DESKTOP_EXIT 0

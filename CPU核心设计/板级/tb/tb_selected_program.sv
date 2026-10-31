@@ -7,11 +7,15 @@ module tb_selected_program;
  ees331_application #(.RELEASE_BITS(3),.BUILD_ID(64'habcdef0123456789)) dut(.clk(clk),.reset_btn_n(btn_n),.debug_reset(reset_request),.state_probe(state),.perf_probe(perf),.event_probe(ev),.led(led),.core_reset(rst));
  reg[63:0] gold[0:255],packet;reg[79:0]store_gold[0:255],store_packet;
  integer n=0,s=0,cycles=0,stalls=0,redirects=0;
+ integer trace,trace_tick=0;
  initial begin
+  trace=$fopen("selected_trace.csv","w");if(!trace)$fatal(1,"SELECTED_TRACE_OPEN");
+  $fdisplay(trace,"tick,state_before,perf_before,events_before");
   $readmemh("programs/selected_events.mem",gold,0,EXPECTED_N-1);
   $readmemh("programs/selected_stores.mem",store_gold,0,EXPECTED_STORES>0?EXPECTED_STORES-1:0);
   repeat(5)@(negedge clk);reset_request=0;
  end
+ always @(posedge clk)begin trace_tick=trace_tick+1;$fdisplay(trace,"%0d,%h,%h,%h",trace_tick,state,perf,ev);end
  always @(posedge clk)begin
   if(rst)begin n=0;s=0;cycles=0;stalls=0;redirects=0;end
   else if(!state[88]&&!state[89])begin
@@ -34,7 +38,7 @@ module tb_selected_program;
     if(led[7:1]!==7'b0010110)$fatal(1,"SELECTED_LED_POLARITY");
     if(EXPECTED_STORES>0&&(state[123:108]!==store_packet[62:47]||state[139:124]!==store_packet[37:22]))$fatal(1,"SELECTED_LAST_STORE");
     if(perf!=={32'(EXPECTED_STORES),32'(EXPECTED_REDIRECTS),32'(EXPECTED_STALLS),32'(EXPECTED_N),32'(EXPECTED_CYCLES)}||cycles!==EXPECTED_CYCLES||n!==EXPECTED_N||s!==EXPECTED_STORES||stalls!==EXPECTED_STALLS||redirects!==EXPECTED_REDIRECTS)$fatal(1,"SELECTED_COUNTERS");
-    $display("BOARD_SELECTED_PASS program=%s cycles=%0d completed=%0d stalls=%0d redirects=%0d stores=%0d",PROGRAM,cycles,n,stalls,redirects,s);$finish;
+    $display("BOARD_SELECTED_PASS program=%s cycles=%0d completed=%0d stalls=%0d redirects=%0d stores=%0d",PROGRAM,cycles,n,stalls,redirects,s);$fclose(trace);$finish;
    end
   end
  end

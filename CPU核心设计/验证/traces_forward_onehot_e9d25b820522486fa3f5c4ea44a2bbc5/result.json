@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "candidate": "forward_onehot",
+  "expected_programs": [
+    "all_ops",
+    "baseline",
+    "loop",
+    "memory_copy",
+    "copy_checksum"
+  ],
+  "rows": [
+    {
+      "program": "all_ops",
+      "clock_rows": 41,
+      "trace_sha256": "cb9acd51856afaaf4bc0a0f809aaaf8764d7e7052f7c41feccad6f76907d4101",
+      "baseline_relative": "验证/cpu345_board_lsb3hpv2",
+      "candidate_relative": "验证/cpu345_board_q417jg95"
+    },
+    {
+      "program": "baseline",
+      "clock_rows": 33,
+      "trace_sha256": "19a30eaf8c8dd6014e1c0bc5bfda50e7eb94be37ecff12ae402480239abccfe9",
+      "baseline_relative": "验证/cpu345_board_i85jyudb",
+      "candidate_relative": "验证/cpu345_board_z3h3a43h"
+    },
+    {
+      "program": "loop",
+      "clock_rows": 46,
+      "trace_sha256": "870cdd353b28cbeb8169429ca130405d7669396a12ce61b443d6f2c9b6c08729",
+      "baseline_relative": "验证/cpu345_board_fse7mx59",
+      "candidate_relative": "验证/cpu345_board_bf0z2ql8"
+    },
+    {
+      "program": "memory_copy",
+      "clock_rows": 31,
+      "trace_sha256": "597129b8683fcb1ade6fb073982a2f3c56321c1da790008222cf2fad8d601a35",
+      "baseline_relative": "验证/cpu345_board_d8hd3f1p",
+      "candidate_relative": "验证/cpu345_board_mwasrvw0"
+    },
+    {
+      "program": "copy_checksum",
+      "clock_rows": 71,
+      "trace_sha256": "4565f8e16ac885f3cf576b67580d009be20376626ec65a8156516de1ca3e7ce5",
+      "baseline_relative": "验证/cpu345_board_tx1szgw2",
+      "candidate_relative": "验证/cpu345_board_sx5sbdut"
+    }
+  ],
+  "scope": "Exact RTL clock trace equality, not physical hardware"
+}
