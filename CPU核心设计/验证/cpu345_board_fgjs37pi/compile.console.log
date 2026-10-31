@@ -1,0 +1,42 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 39988
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/addsub16_cla.v" into library work
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/alu16.v" into library work
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/branch_target16.v" into library work
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/cla16.v" into library work
+INFO: [VRFC 10-311] analyzing module cla16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/cla4_pg.v" into library work
+INFO: [VRFC 10-311] analyzing module cla4_pg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/cpu_system.sv" into library work
+INFO: [VRFC 10-311] analyzing module cpu_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/datapath_core.sv" into library work
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/ees331_application.sv" into library work
+INFO: [VRFC 10-311] analyzing module ees331_application
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/ees331_top.sv" into library work
+INFO: [VRFC 10-311] analyzing module ees331_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/flags_reg.v" into library work
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/imm_ext16.v" into library work
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/isa_decode.v" into library work
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/operand_forward.v" into library work
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/pc16.v" into library work
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/regfile4x16.v" into library work
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/rtl/sync_memories.v" into library work
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/tb/tb_board_application.sv" into library work
+INFO: [VRFC 10-311] analyzing module board_case
+INFO: [VRFC 10-311] analyzing module tb_board_application
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu345_board_fgjs37pi/tb/tb_selected_program.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_selected_program
+DESKTOP_EXIT 0

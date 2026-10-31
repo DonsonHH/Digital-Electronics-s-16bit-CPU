@@ -1,0 +1,629 @@
+{
+  "status": "FULL_CANDIDATE_PASS_PHYSICAL_PENDING",
+  "stage": 5,
+  "candidate": "forward_onehot",
+  "requested_programs": [
+    "all_ops",
+    "baseline",
+    "loop",
+    "memory_copy",
+    "copy_checksum"
+  ],
+  "tools": {
+    "vivado_bin": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin",
+    "python": "C:\\Users\\Donson\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "config_file": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\tools.local.json"
+  },
+  "script_sha256": "46fb773ce7cadc1d01c3124c6b5903c97241798ee2d749332fd94286c84517a6",
+  "rows": [
+    {
+      "program": "all_ops",
+      "attempt_relative": "验证/cpu345_board_ug0e3m04",
+      "receipt_sha256": "1c15eb9237ac124b911c8378a664d605793228ff2027f99e9e127900c5826775",
+      "cycles": 25,
+      "completed": 16,
+      "stalls": 1,
+      "redirects": 2,
+      "stores": 1,
+      "rf": [
+        5,
+        5,
+        5,
+        32
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": 18,
+      "CPI": 1.5625,
+      "calculated_cpu_time_ns": 250,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 2.222,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4279.0,
+          "whs_ns": 0.095,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4263.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2878.0
+        },
+        "resources": {
+          "lut_total": 1139,
+          "lut_logic": 1115,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2826,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          9.072,
+          9.183,
+          9.167,
+          9.172
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "d98cfd257b630bb4852b6154d25d1e16c9a15316b182375f1361c439c5a45e83",
+          "reports/methodology.rpt": "e71b4d7d425292c14ceacbd06c65b94d264391d2ec14f074e9ce51e1e00cb20a"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "2268ff7f4a66b5ce",
+        "bitstream_sha256": "7b2a89694940ee94e72ab3284530f91074114c2f55274d2172643f8e30f28396",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "c80a5c2c049db8c8c1fd822d00b2293e5720e569433920b733ffb5b2d6757d23",
+      "data_image_sha256": "af1846335f4af5a7e0e9a0c4543c94429971014cd644091fdca6beacd52a5423"
+    },
+    {
+      "program": "baseline",
+      "attempt_relative": "验证/cpu345_board_fgjs37pi",
+      "receipt_sha256": "359d1a1ff2fc54ded56f4de9caa092af04d1e60e71ee17d5c5c30ac79e3dbc5b",
+      "cycles": 17,
+      "completed": 10,
+      "stalls": 1,
+      "redirects": 1,
+      "stores": 1,
+      "rf": [
+        8,
+        2,
+        8,
+        32
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": 10,
+      "CPI": 1.7,
+      "calculated_cpu_time_ns": 170,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 1.69,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4277.0,
+          "whs_ns": 0.049,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4261.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2877.0
+        },
+        "resources": {
+          "lut_total": 1133,
+          "lut_logic": 1109,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2825,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          9.019,
+          9.312,
+          9.114,
+          8.743
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "2bc1879de1e5e4453d7740a17367227ceb6433b24c1f7699b033d09857a40a23",
+          "reports/methodology.rpt": "16e22187e1b121f1b5bc8345bff6668c0b9f6d72c3fe2074c6a539fa72fc5c2a"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "8d5a80734d0c0d49",
+        "bitstream_sha256": "e5b82996716bcdcf3d58b33aeec84a9b2e93e9f454efc389fe3ec749b84a22f7",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "38bf56a5500ad274a69c91192147478d9fa8331ad56d1b91c686409d71763c19",
+      "data_image_sha256": "af1846335f4af5a7e0e9a0c4543c94429971014cd644091fdca6beacd52a5423"
+    },
+    {
+      "program": "loop",
+      "attempt_relative": "验证/cpu345_board_ydhq6iv1",
+      "receipt_sha256": "75c8d43e130bf5c52802e347772bd203e9bb71e15989ff93b8ae6dece6619886",
+      "cycles": 30,
+      "completed": 18,
+      "stalls": 0,
+      "redirects": 4,
+      "stores": 0,
+      "rf": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": 6,
+      "CPI": 1.6666666666666667,
+      "calculated_cpu_time_ns": 300,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 1.613,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4271.0,
+          "whs_ns": 0.051,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4255.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2874.0
+        },
+        "resources": {
+          "lut_total": 1140,
+          "lut_logic": 1116,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2822,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          9.067,
+          9.262,
+          9.018,
+          9.141
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "3c7df040e3965aeacadaeb0ea3ae57aa80b87d1bd9dd6a8ff494e622ba68cd4c",
+          "reports/methodology.rpt": "09116175997ec951c5bc13ec8cbf8f3c4258ba28736da83487d189a7a05a3a65"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "70b5f55980025d58",
+        "bitstream_sha256": "21846614e309f708618dd6cbcc4c11c90785a1885ff267affbfbefeaf0c4ef0c",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "ec81320f9c6fdcd4c63f56ea33aa9cea3e023596e96c10ccc402a80abffe86ee",
+      "data_image_sha256": "af1846335f4af5a7e0e9a0c4543c94429971014cd644091fdca6beacd52a5423"
+    },
+    {
+      "program": "memory_copy",
+      "attempt_relative": "验证/cpu345_board_scglv0y1",
+      "receipt_sha256": "a14e6ae5c194cbfea224b67221b403c370f3920124ffaff0e52198c1829fe4f3",
+      "cycles": 15,
+      "completed": 7,
+      "stalls": 2,
+      "redirects": 1,
+      "stores": 1,
+      "rf": [
+        48879,
+        48879,
+        0,
+        32
+      ],
+      "flags": [
+        1,
+        0,
+        0
+      ],
+      "stop_pc": 7,
+      "CPI": 2.142857142857143,
+      "calculated_cpu_time_ns": 150,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 1.275,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4273.0,
+          "whs_ns": 0.056,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4257.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2875.0
+        },
+        "resources": {
+          "lut_total": 1134,
+          "lut_logic": 1110,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2823,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          9.116,
+          9.127,
+          9.165,
+          9.157
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "1fb81b03a45067981f9a91a7793f4bcfba378560f14e62a4f661747cf30d10cb",
+          "reports/methodology.rpt": "3a7f4db524eb1b88fbb938ba04f3d661563e3fd0474d822ff2408e0b1dc2b4aa"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "cdae7e586dbefc1d",
+        "bitstream_sha256": "8f92e5ce77a4b782fc3d2e114e8f9e0b0a1aafe99e86397bce832039acd30330",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "e397ed9d3d8242a9d8083783780e668a83c359f5f132fcce77df14b4222650eb",
+      "data_image_sha256": "ca36731723920c2fcb350723f21233b3701d872c7a289097cc3b6d0e263baeea"
+    },
+    {
+      "program": "copy_checksum",
+      "attempt_relative": "验证/cpu345_board_ve8lyveg",
+      "receipt_sha256": "37dc6351f5f34417361293eaead1cfa48d4ebbe78b875f8dbaf6779dc794f26d",
+      "cycles": 55,
+      "completed": 35,
+      "stalls": 16,
+      "redirects": 0,
+      "stores": 8,
+      "rf": [
+        0,
+        4658,
+        0,
+        32
+      ],
+      "flags": [
+        0,
+        0,
+        0
+      ],
+      "stop_pc": 34,
+      "CPI": 1.5714285714285714,
+      "calculated_cpu_time_ns": 550,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 1.008,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4275.0,
+          "whs_ns": 0.083,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4259.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2876.0
+        },
+        "resources": {
+          "lut_total": 1190,
+          "lut_logic": 1166,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2824,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          9.176,
+          8.887,
+          9.134,
+          9.419
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "8a42a90ce70b982e107a1d107bc88a29583eaacae323f3be8330aaeecdce82cc",
+          "reports/methodology.rpt": "1ef8d3b65db589e451ac0fb4a2d985e038c4616339130a93bc67d32bdad71688"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "24519ee228ec5a7c",
+        "bitstream_sha256": "cd6a2ac3d0b62bf19516d9ab687a191e9647ed49881ba7a21beeea5caba52288",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "36fe5e15d7e041a8418829140e97784c7dc971ba16bf73ed120c9cc75fb9440b",
+      "data_image_sha256": "197f1fe2407894679b9923c2a57e767eb7da5d09c232431ed09bdbf0a2d9889b"
+    }
+  ],
+  "source_recipe": {
+    "benchmark_programs.py": "405c2f4a06f10eca85ff6237b3fe1e14a24f7a528741f1e8562107a3b0c8da41",
+    "build_board.tcl": "3dbd96ea57ffb08aebe48bbe5986d86a92f97f84168c3b31dcf1bba97e107a0e",
+    "candidate_registry.py": "b67ea700b77f124142215eedd1f45b4db43e44ff3c13c9a128a6d1317c5f2cc3",
+    "desktop_launch.py": "4fbfe6a0bd6691c12cc4a47f45dc72fbef9147d880b08f9d7dee5e3bb09067b2",
+    "probe_hardware.tcl": "f01f1818b984957fddd7c17ff141af747412df40edba07e0643000ca10b24689",
+    "run_board.py": "f0e3ee19e96c5109b26d743026dcaeec7a99b0e605100b99d03f58dee341afcc",
+    "verify_board_results.py": "d7c7651373586ad2f3a689822cfd97839984876cfc6ae0d1871f1e2fb3264bff",
+    "constraints/ees331.xdc": "e490cf047c5f0489efe3eb2097d7080a863d8a1cc2ebd1fa7bb870057c1fa820",
+    "constraints/human_io.xdc": "feb1602f3672c4ed33d1ceee72578697d23cc312a088b2d72a1895f9c08126c4",
+    "oracle_source/isa_reference.py": "ed3b7832b7ccb96c66b9c861625d1674c289662e30b39f45ba8bd427945a1144",
+    "programs/all_ops_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "programs/all_ops_e0_events.mem": "7c502281001b8d560b3571d142ad033f5e78816d766b8eb25a4e00bc6e721a11",
+    "programs/all_ops_e0_stores.mem": "1f69f6bcae02e6ad135ae61e23057154c52e1eb832837da7bc146b0fa42a4dfb",
+    "programs/all_ops_e1_events.mem": "7c502281001b8d560b3571d142ad033f5e78816d766b8eb25a4e00bc6e721a11",
+    "programs/all_ops_e1_stores.mem": "1f69f6bcae02e6ad135ae61e23057154c52e1eb832837da7bc146b0fa42a4dfb",
+    "programs/all_ops_im.mem": "a22c6d230ee1780afde6b04e9b9c880d7ec5318a0bff3417f101be568abdd71f",
+    "programs/baseline_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "programs/baseline_e0_events.mem": "8a8190ef390c15686ee7327ae2823bff7e00ce1aa1a488c1c5b28fdb9a8ea71a",
+    "programs/baseline_e0_stores.mem": "4bab409fe0c2969f25427040a14f9fcece072bfee4898d4de5edd0645b64b26b",
+    "programs/baseline_e1_events.mem": "8a8190ef390c15686ee7327ae2823bff7e00ce1aa1a488c1c5b28fdb9a8ea71a",
+    "programs/baseline_e1_stores.mem": "4bab409fe0c2969f25427040a14f9fcece072bfee4898d4de5edd0645b64b26b",
+    "programs/baseline_im.mem": "086202700989134d096fbf91c95f6c50ee33e3f0e73c348a8ce9881cb25b7834",
+    "programs/control_fault_dm.mem": "b47557cc760f8bb38a4a4df306e731e12ffba58864284056d3908e48a9ecc2f4",
+    "programs/control_fault_im.mem": "7a65f3c60e151a4dad10fd8aa450011b480e467e35ffe07e5676439e95aef094",
+    "programs/data_fault_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "programs/data_fault_e0_events.mem": "cc548d391981986b44e58900da9f7ecba0c0e5d945bc1877312b99c5a7336ba9",
+    "programs/data_fault_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/data_fault_e1_events.mem": "cc548d391981986b44e58900da9f7ecba0c0e5d945bc1877312b99c5a7336ba9",
+    "programs/data_fault_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/data_fault_im.mem": "ad76e8cbea10bfafb6a0f99dad75e9cfbcd3b88180c45f589fa5cde50bf5e475",
+    "programs/fetch_fault_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "programs/fetch_fault_e0_events.mem": "973df33cc9a7ebead65345881f2e4893de6a08a0c55367a4209cc6f93b640704",
+    "programs/fetch_fault_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/fetch_fault_e1_events.mem": "973df33cc9a7ebead65345881f2e4893de6a08a0c55367a4209cc6f93b640704",
+    "programs/fetch_fault_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/fetch_fault_im.mem": "b5f6cab45bacaf94d1c0bc50912f4a9e11468c33279561f8ffbc743c343d98bc",
+    "programs/illegal_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "programs/illegal_e0_events.mem": "bf10f9f29818b5686c6d6d1d8716fe28fbc471b142a1198869c1496cc4abfe39",
+    "programs/illegal_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/illegal_e1_events.mem": "bf10f9f29818b5686c6d6d1d8716fe28fbc471b142a1198869c1496cc4abfe39",
+    "programs/illegal_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/illegal_im.mem": "c2fa111fc057b4585ad1b8a13f31cb1969be001c78f5dc3a31a3aec731ee4606",
+    "programs/load_before_halt_dm.mem": "40a1cb29c43d0bef772d3018a465134b7aeebe34402848a237de78ac02c69f7c",
+    "programs/load_before_halt_e0_events.mem": "f047706f27bcb513785d888c8c0119352b8678caa3e3de79e0b734b7b0c01c91",
+    "programs/load_before_halt_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/load_before_halt_e1_events.mem": "f047706f27bcb513785d888c8c0119352b8678caa3e3de79e0b734b7b0c01c91",
+    "programs/load_before_halt_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/load_before_halt_im.mem": "45eb05db808e0e3536e01fa07395307ff9abec004a1efb4ee945883760f7b719",
+    "programs/loop_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "programs/loop_e0_events.mem": "a09930c4855875d530bd9548e468990b534c1656fc21cbcc1aef01459b7853bb",
+    "programs/loop_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/loop_e1_events.mem": "a09930c4855875d530bd9548e468990b534c1656fc21cbcc1aef01459b7853bb",
+    "programs/loop_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "programs/loop_im.mem": "0c9f97a7587aa5234daf70abe311c2fde448d8244036645894d0785d5fcb62a6",
+    "programs/manifest.json": "1e0038c107af86f749ffed38472da530f29855b75ccc2c3dfe1f456425a40cf9",
+    "programs/memory_copy_dm.mem": "fef682501668d586fbc70257e8ec02adf19ab6eb6c9f6d405cc874d0c1d00347",
+    "programs/memory_copy_e0_events.mem": "4083de87face9f6de508afeaf693780d1f9fddc35bf90d3dede027f58f419b2e",
+    "programs/memory_copy_e0_stores.mem": "1164b67c6e00ac4aab9417f6429177802d85b0837962253bbef05cf6bcf281c5",
+    "programs/memory_copy_e1_events.mem": "4083de87face9f6de508afeaf693780d1f9fddc35bf90d3dede027f58f419b2e",
+    "programs/memory_copy_e1_stores.mem": "1164b67c6e00ac4aab9417f6429177802d85b0837962253bbef05cf6bcf281c5",
+    "programs/memory_copy_im.mem": "a7fc518e2a493f2b954e4e9658df053ab41c1744072bad42696d4df3813532ae",
+    "programs/memory_dm.mem": "01465a2d021b4bd2ea46ec50467340987d6cac0087ec7bd196a26a77f0ae9df6",
+    "programs/memory_im.mem": "7ff78762f3afdfafa4baeddc0dbbdeee63ec7376fb4b4d09c3d45985b15cccf2",
+    "programs/reset_after_halt_dm.mem": "b47557cc760f8bb38a4a4df306e731e12ffba58864284056d3908e48a9ecc2f4",
+    "programs/reset_after_halt_e0_events.mem": "402619dcea4d4d5c1b3fd33167d4340e017e6cda0f06591c686db1e498cade2c",
+    "programs/reset_after_halt_e0_stores.mem": "c6360580a9e01d1f0406dcb05904096bf75320ef7f43a23693e62cf4acd47dc9",
+    "programs/reset_after_halt_e1_events.mem": "022581185ee97519dff930ba790eb2d54da092d29045ad8a98bb9bddfdd5b906",
+    "programs/reset_after_halt_e1_stores.mem": "6b43d9b0879af94e7a3cafad969f184b626eeb65fb4c6256bbf8e1d2085d4189",
+    "programs/reset_after_halt_im.mem": "a08e637da8ba1ebed04b430a94ad9c6d4a87d00e7b1f81c2d47b77fbc611460c",
+    "programs/reset_before_store_dm.mem": "40a1cb29c43d0bef772d3018a465134b7aeebe34402848a237de78ac02c69f7c",
+    "programs/reset_before_store_e0_events.mem": "80b1c5ae1053bbde6c06bdb185daa27a3e05ea0f694608e037dd3c79554c259d",
+    "programs/reset_before_store_e0_stores.mem": "e5becc14882eb4c48692dbc25ed2dc9fe2582a2c2ce0b31d22e24d59dc79e5c2",
+    "programs/reset_before_store_e1_events.mem": "80b1c5ae1053bbde6c06bdb185daa27a3e05ea0f694608e037dd3c79554c259d",
+    "programs/reset_before_store_e1_stores.mem": "e5becc14882eb4c48692dbc25ed2dc9fe2582a2c2ce0b31d22e24d59dc79e5c2",
+    "programs/reset_before_store_im.mem": "4d53830649add1e86c50cfca1b4acda85b859a1336a0375758e8feb73c8ba733",
+    "programs/store_before_halt_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "programs/store_before_halt_e0_events.mem": "2fa5a9ea37acaf338b6c6a91cd8319476a2af38c7dc48e3dcd514b4a312eda1d",
+    "programs/store_before_halt_e0_stores.mem": "afe410a9eca8cb18a8d7d54966a52c5a966100b22c24630bf70d8af64a4b55bb",
+    "programs/store_before_halt_e1_events.mem": "2fa5a9ea37acaf338b6c6a91cd8319476a2af38c7dc48e3dcd514b4a312eda1d",
+    "programs/store_before_halt_e1_stores.mem": "afe410a9eca8cb18a8d7d54966a52c5a966100b22c24630bf70d8af64a4b55bb",
+    "programs/store_before_halt_im.mem": "f18233a4b02240968c3cc95d928321abac93a8dee69c9640c985a95d8b3aeb56",
+    "rtl/addsub16_cla.v": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+    "rtl/alu16.v": "ac1e94a66ee28698f906da1927b50c96b80f3b04989b3c75b9cf6df5dde509e9",
+    "rtl/branch_target16.v": "7c48a5e0e8af99cccf66c6111b78f99e0fc8f096802e2d1c122fb7a04cb2739e",
+    "rtl/cla16.v": "8d3221021088d0362faf8cb4e39128d0bc2e8b6e145dfe30a5f11d1e44218d42",
+    "rtl/cla4_pg.v": "31434ab4794c155a4ad2f439b85bfbc0cf6216e86e1921f771d7b168d4e0fab7",
+    "rtl/cpu_system.sv": "68160c3b9442539be0628640dd3b0fd2cc4b7470482d1b48addbf1370e50d366",
+    "rtl/datapath_core.sv": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999",
+    "rtl/ees331_application.sv": "dc20ed66de199aea1518bac7cacc31947894e7da26fa1a16b6786550710bc61c",
+    "rtl/ees331_top.sv": "77091a8c075f4d62b438dd36bbf029762e76dd67815ae2c84f6aa93c9089c118",
+    "rtl/flags_reg.v": "fe0abc775c5a99ec4a77ad2bf45a750c1fe9d9cf0fd9bfe65ceab96d46eb50ac",
+    "rtl/imm_ext16.v": "9d0c17270462f619dff7a9f19cb618b7a6f482d8d2ddce76d9bd77fbca139844",
+    "rtl/isa_decode.v": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2",
+    "rtl/operand_forward.v": "c827c08a58ea77bfabb8e272ecc64cc9298a01aab33e57c539bd43da09d2687b",
+    "rtl/pc16.v": "969f0729a1f09740bc9627294ba7f0d8e39f3eaa9f0071504455b42b45405a38",
+    "rtl/regfile4x16.v": "06a3cb9622b766909a141c6dce572ea8d41e62fd91c7a44214dfa284e45a1029",
+    "rtl/sync_memories.v": "55b3b6fcac5c6fa556b769037282e58bae54bf9c46f7de622e22825ff7f170bf",
+    "tb/tb_board_application.sv": "7c310bc39d7d0b225fb2eacf4c69cbf04b9602e76f369a954b2c072a03231551",
+    "tb/tb_selected_program.sv": "41852a790bd469322555796ca3720abd7370e51c5264392da199d2e91a9bc490"
+  },
+  "physical_board_validated": false,
+  "started_at_utc": "2026-10-31T19:38:07.463820+00:00",
+  "completed_at_utc": "2026-10-31T20:20:49.584846+00:00"
+}

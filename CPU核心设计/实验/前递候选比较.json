@@ -1,0 +1,87 @@
+{
+  "status": "COMPARISON_ACCEPTED_PHYSICAL_PENDING",
+  "candidate": "forward_onehot",
+  "hardware_variable": "rtl/operand_forward.v only; images and board/debug/constraints/implementation recipe identical for each pair",
+  "functional_suites": "Original9/independent48/mutations/unknown PASS",
+  "exact_cycle_programs": 5,
+  "rows": [
+    {
+      "program": "all_ops",
+      "cycles": 25,
+      "baseline_LUT": 1118,
+      "candidate_LUT": 1139,
+      "LUT_delta": 21,
+      "FF_delta": 0,
+      "baseline_WNS_ns": 2.086,
+      "candidate_WNS_ns": 2.222,
+      "WNS_delta_ns": 0.13600000000000012,
+      "baseline_WHS_ns": 0.071,
+      "candidate_WHS_ns": 0.095,
+      "cpu_time_delta_ns_at100MHz": 0
+    },
+    {
+      "program": "baseline",
+      "cycles": 17,
+      "baseline_LUT": 1120,
+      "candidate_LUT": 1133,
+      "LUT_delta": 13,
+      "FF_delta": 0,
+      "baseline_WNS_ns": 1.838,
+      "candidate_WNS_ns": 1.69,
+      "WNS_delta_ns": -0.14800000000000013,
+      "baseline_WHS_ns": 0.083,
+      "candidate_WHS_ns": 0.049,
+      "cpu_time_delta_ns_at100MHz": 0
+    },
+    {
+      "program": "loop",
+      "cycles": 30,
+      "baseline_LUT": 1160,
+      "candidate_LUT": 1140,
+      "LUT_delta": -20,
+      "FF_delta": 0,
+      "baseline_WNS_ns": 2.101,
+      "candidate_WNS_ns": 1.613,
+      "WNS_delta_ns": -0.488,
+      "baseline_WHS_ns": 0.062,
+      "candidate_WHS_ns": 0.051,
+      "cpu_time_delta_ns_at100MHz": 0
+    },
+    {
+      "program": "memory_copy",
+      "cycles": 15,
+      "baseline_LUT": 1119,
+      "candidate_LUT": 1134,
+      "LUT_delta": 15,
+      "FF_delta": 0,
+      "baseline_WNS_ns": 1.54,
+      "candidate_WNS_ns": 1.275,
+      "WNS_delta_ns": -0.2650000000000001,
+      "baseline_WHS_ns": 0.086,
+      "candidate_WHS_ns": 0.056,
+      "cpu_time_delta_ns_at100MHz": 0
+    },
+    {
+      "program": "copy_checksum",
+      "cycles": 55,
+      "baseline_LUT": 1082,
+      "candidate_LUT": 1190,
+      "LUT_delta": 108,
+      "FF_delta": 0,
+      "baseline_WNS_ns": 1.434,
+      "candidate_WNS_ns": 1.008,
+      "WNS_delta_ns": -0.42599999999999993,
+      "baseline_WHS_ns": 0.073,
+      "candidate_WHS_ns": 0.083,
+      "cpu_time_delta_ns_at100MHz": 0
+    }
+  ],
+  "recommendation": "Preserve stable AC1; candidate has no cycle-time benefit at fixed100MHz. Assess recorded LUT/margin trade-off rather than assuming one-hot is better.",
+  "source_receipt_sha256": {
+    "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证\\performance_ac1_9b449e40f5d44bd78936f207953b77d6\\result.json": "9fbef8fccd06c17e464371a73ebc00068b0f9d98e787d8e6d787a1652e08c84f",
+    "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证\\performance_forward_onehot_64e1934ab4654bd58c4063cfbd0583ec\\result.json": "8b006bb367493407e827a3fee9ff70c6f19cd21693b29de85df7138f4d9a0b57",
+    "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证\\cpu345_coretrial_mhffl2fp\\result.json": "e25cdf90975b05ef543c1eec32b4733405de43675945ffa02825badc980d85e0",
+    "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证\\traces_forward_onehot_e9d25b820522486fa3f5c4ea44a2bbc5\\result.json": "b1e4971cac44d621073c9ccc27a631f0f7e5fd0515ae78f147a584eac8bd16bd"
+  },
+  "physical_board_validated": false
+}

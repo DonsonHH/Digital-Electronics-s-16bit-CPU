@@ -1,0 +1,9 @@
+localparam PROGRAM="copy_checksum";
+localparam EXPECTED_CYCLES=55;
+localparam EXPECTED_N=35;
+localparam EXPECTED_STALLS=16;
+localparam EXPECTED_REDIRECTS=0;
+localparam EXPECTED_STORES=8;
+localparam[63:0] EXPECTED_RF=64'h0020000012320000;
+localparam[2:0] EXPECTED_FLAGS=3'd0;
+localparam[15:0] EXPECTED_PC=16'd34;
