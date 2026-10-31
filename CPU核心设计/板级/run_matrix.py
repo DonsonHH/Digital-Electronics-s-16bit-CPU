@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,re,subprocess,sys,uuid
 B=Path(__file__).resolve().parent;P=B.parent
 sys.path.insert(0,str(B));sys.path.insert(0,str(P/'Vivado'))
-from benchmark_programs import PROGRAMS
+from benchmark_programs import PROGRAMS,timing_profile
 from verify_board_results import verify_attempt,require
 from tool_config import add_tool_arguments,resolve_tools
 from candidate_registry import CANDIDATES
@@ -35,7 +35,7 @@ def main():
     runs[name]=Path(markers[0].strip())
    path=runs[name];data=json.loads((path/'result.json').read_text(encoding='utf-8'));implementation=verify_attempt(path)
    require(data['program']==name and data['mode']=='all' and data.get('verification_revision') in ['board_benchmarks_v3','board_candidates_v4'] and data.get('selected_simulation')=='PASS' and data.get('candidate','ac1')==a.candidate,'Not a complete selected-program benchmark')
-   c,n,s,r=PROGRAMS[name];observed=data['selected_result']
+   c,n,s,r=timing_profile(name,a.candidate);observed=data['selected_result']
    require([observed[k] for k in ['cycles','completed','stalls','redirects']]==[c,n,s,r],'Benchmark count contract differs')
    # Only selected images and their independent expected data may vary.
    varying={'programs/dut_im.mem','programs/dut_dm.mem','programs/selected_events.mem','programs/selected_stores.mem','tb/selected_expected.svh'}

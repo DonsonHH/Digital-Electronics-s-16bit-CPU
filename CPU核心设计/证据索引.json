@@ -1,6 +1,6 @@
 {
   "CPU_base": "v1.6",
-  "candidate": "AC1-system-prep-r1",
+  "candidate": "AC1-board-experiments-r2",
   "ISA": "v1.5",
   "vtools": "1.6-vtools-r1",
   "functional_attempt": "3df8066a-3273-4d19-867a-a613f4d42481",
@@ -42,30 +42,32 @@
   "current_document": {
     "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
     "CPU": "v1.6",
-    "candidate": "AC1-system-prep-r1",
+    "candidate": "AC1-board-experiments-r2",
     "ISA": "v1.5",
-    "revision_date": "2026-10-31",
-    "sha256": "cce1190d4e0c3c691717b8c0bc14536196eb5fed61f692d713c78b9663e3c1d8",
-    "pages": 50,
-    "toc_entries": 61,
-    "tables": 35,
-    "figures": 11,
+    "revision_date": "2026-11-01",
+    "sha256": "ea7ab5dc4ffac6e6ffafb8288cfa253ef0defa74079e2c1deed82a9ccf89e302",
+    "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
+    "pdf_sha256": "da80c8ff865dbd451defed6fd2d59ff11d805895be1dc6fbdbeade891e3a1956",
+    "pages": 54,
+    "toc_entries": 68,
+    "tables": 39,
+    "figures": 12,
     "landscape_pages": [
       9,
       10
     ],
     "sections_updated": [
-      "2.2 execution vs observation interface",
-      "2.7 passive reason payload",
-      "2.10 file boot and observations",
-      "3.7 scoped illegal-mode injection evidence",
-      "4.1 current source entry",
-      "4.8 measured system cycles",
-      "4.9-4.11 current system results and boundaries"
+      "Preface and stale stage2 boundary wording",
+      "4.11 clarified as stage2 system evidence",
+      "4.12 EES-331 board implementation and five-program baseline",
+      "4.12 isolated forwarding and WB/MEM comparisons",
+      "4.13 board manual reference"
     ],
-    "RTL_extended": true,
-    "ISA_or_execution_cycles_changed": false,
-    "new_simulation_or_synthesis": true
+    "production_RTL_changed": false,
+    "ISA_changed": false,
+    "default_execution_cycles_changed": false,
+    "new_routed_implementation": true,
+    "physical_board_validated": false
   },
   "Pre5_control_evidence": {
     "relative_to_course_root": "Pre5_控制单元设计/Vivado",
@@ -155,6 +157,34 @@
         10
       ],
       "revision_label": "20261031-architecture-refinement"
+    },
+    {
+      "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
+      "CPU": "v1.6",
+      "candidate": "AC1-system-prep-r1",
+      "ISA": "v1.5",
+      "revision_date": "2026-10-31",
+      "sha256": "cce1190d4e0c3c691717b8c0bc14536196eb5fed61f692d713c78b9663e3c1d8",
+      "pages": 50,
+      "toc_entries": 61,
+      "tables": 35,
+      "figures": 11,
+      "landscape_pages": [
+        9,
+        10
+      ],
+      "sections_updated": [
+        "2.2 execution vs observation interface",
+        "2.7 passive reason payload",
+        "2.10 file boot and observations",
+        "3.7 scoped illegal-mode injection evidence",
+        "4.1 current source entry",
+        "4.8 measured system cycles",
+        "4.9-4.11 current system results and boundaries"
+      ],
+      "RTL_extended": true,
+      "ISA_or_execution_cycles_changed": false,
+      "new_simulation_or_synthesis": true
     }
   ],
   "architecture_figures": {
@@ -200,7 +230,14 @@
     "diagram_logic_review": "PASS for five requested refinements",
     "diagram_visual_review": "PASS native-font boxes, lines, text overlaps and borders checked; independent review completed",
     "Word_page_review": "5 changed pages visually reopened; 41 other page PNGs identical to the previously fully inspected render",
-    "current_execution_path_retained": true
+    "current_execution_path_retained": true,
+    "board_system_r2": {
+      "svg": "架构图/04_EES331板级系统.svg",
+      "png": "架构图/04_EES331板级系统.png",
+      "svg_sha256": "6bdf74f50de0b8979944ff6583a2750d2556af4bc053af885d2aa937ce7c762d",
+      "png_sha256": "3c5ea125d301417d02dfeae7c22d45f17e789835fd4c96d2ffe97d269adea448",
+      "word_figure": 12
+    }
   },
   "system_preparation": {
     "base_commit": "775350246d3806c9a09ac683edadf1a35e3e68bb",
@@ -247,5 +284,36 @@
     },
     "timing_closed": false,
     "board_validated": false
+  },
+  "stage3_to_5": {
+    "status": "OFFLINE_STAGES_3_TO_5_REVIEWED_PHYSICAL_PENDING",
+    "stage3_review_relative": "验证/阶段3复核.json",
+    "baseline_pointer": "实验/性能基线.json",
+    "forward_comparison": "实验/前递候选比较.json",
+    "wb_mem_comparison": "实验/WB_MEM候选比较.json",
+    "final_review_relative": "验证/cpu345_final_review_37c610599eda4db49caddee908734b12/result.json",
+    "document_qa_relative": "验证/cpu345_final_review_37c610599eda4db49caddee908734b12/document_qa.json",
+    "default_candidate": "ac1",
+    "separate_candidates": [
+      "forward_onehot",
+      "wb_mem"
+    ],
+    "board": "EES-331",
+    "part": "xc7z020clg484-1",
+    "clock_period_ns": 10,
+    "accepted_offline_program_pairs": 10,
+    "physical_board_connected": false,
+    "physical_board_validated": false,
+    "measured_board_time_ns": null,
+    "WB_mem_validation": {
+      "original_ISA_cases": 48,
+      "reset_witnesses": 10,
+      "new_cases": 2005,
+      "exact_cycle_normal_cases": 2002,
+      "per_clock_fault_cases": 3,
+      "seeded_stress_programs": 64,
+      "protocol_guard_cases": 12,
+      "detected_mutants": 6
+    }
   }
 }

@@ -1,0 +1,34 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sun Nov  1 05:15:25 2026
+# Process ID         : 78684
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/wb_mem_guards_65mzfrlg/store_wb_dropped
+# Command line       : xsim.exe -log private.log -mode tcl -source {xsim.dir/private_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/wb_mem_guards_65mzfrlg/store_wb_dropped/private.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/wb_mem_guards_65mzfrlg/store_wb_dropped\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 21063 MB
+#-----------------------------------------------------------
+source xsim.dir/private_sim/xsim_script.tcl
+# xsim {private_sim} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run all
+GUARD_REAL_WITNESS kind=0 pending=1
+Fatal: GUARD_STORE_WB_TOKEN
+Time: 85 ns  Iteration: 0  Process: /tb_wb_guards/edge_check  Scope: tb_wb_guards.edge_check  File: C:/Users/Donson/AppData/Local/Temp/wb_mem_guards_65mzfrlg/store_wb_dropped/tb_wb_guards.sv Line: 26
+$finish called at time : 85 ns
+## quit
+INFO: [Common 17-206] Exiting xsim at Sun Nov  1 05:15:27 2026...

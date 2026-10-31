@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "scope": "Python parser/lifecycle/board helper unit checks only; no device access",
+  "steps": [
+    {
+      "suite": "board_tests",
+      "exit": 0,
+      "console_sha256": "21a8bb12cfcce094309c864ac8adcbc5d6ce1534077c25f12afdcaf286f38420"
+    },
+    {
+      "suite": "wb_receipts",
+      "exit": 0,
+      "console_sha256": "0ac72053c2c4a3314b8dddc4efa9e926c5b7ee7153b6f23f49469810c58ac092"
+    }
+  ],
+  "finished_at": "2026-10-31T21:27:54.219031+00:00"
+}

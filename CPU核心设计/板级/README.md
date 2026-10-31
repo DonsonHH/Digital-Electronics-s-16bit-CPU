@@ -42,10 +42,16 @@ python -B -X utf8 .\板级\verify_board_results.py --run .\验证\某个已完�
 
 用户已确认课程板尚未连接。曾只读扫描到另一条xc7z020 JTAG链，未配置设备；不能将其视为EES-331验收。当前结果只证明仿真与已布线设计，不证明真实板上100MHz运行、物理按键行为或实际程序运行时间。后续接板必须读取构建身份、寄存器、标志、停止PC/原因和计数，不能仅观察LED。
 
-接板后的入口为run_hardware.py：必须显式指定已确认的EES-331目标和经过校验的实现attempt；默认只采集，program-device和run-program分别控制配置与CPU重启。当前只做过Python语法和真实仿真样本的解码检查，硬件流程尚未执行，不能据此标为下板通过。
+接板后的入口为run_hardware.py：必须显式指定已确认的EES-331目标和经过校验的实现attempt；默认只采集，program-device和run-program分别控制配置与CPU重启。Python前置、拒绝未知板型的Tcl检查及真实仿真样本解码通过；测试使用替身，不访问真实设备。硬件流程尚未执行，不能据此标为下板通过。
 
 ```powershell
 python -B -X utf8 .\板级\run_hardware.py --implementation .\验证\某个有效实现 --target "确认后的完整JTAG目标名" --confirmed-board EES-331 --program-device --run-program
 ```
 
 脚本检查实际构建身份后才操作CPU复位，读取两份停止快照并比较RF、标志、PC、计数及最后store；失败不发布硬件PASS。不要把当前其他设备的目标名代入此命令。
+
+## 固定基线与候选
+
+run_matrix.py每次运行五个固定工作负载，原始结果分别位于显式的新attempt。基线见../实验/性能基线.json，两个候选比较见../实验/前递候选比较.json和../实验/WB_MEM候选比较.json。候选通过registry覆盖私有执行目录，生产RTL不改；forward_onehot只改operand_forward.v，wb_mem只改datapath_core.sv，两者不组合。
+
+三组五程序均完成实际布局布线和独立报告复核；共同板级/RAM/VIO/约束/工具配方不变，每个程序成对比较。WB候选仅改变特定STR数据停顿规则，独立检查ISA事件和新周期；不要求旧轨迹逐字节一致。最新保护验证为12项正向、6类被捕获错误变体，额外拒绝超时、被中断或来源不匹配的负向“通过”。

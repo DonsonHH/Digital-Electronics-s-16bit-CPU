@@ -1,14 +1,15 @@
 # CPU核心设计当前入口
 
-当前为 **AC1系统准备r1**，CPU v1.6、ISA v1.5，目标课程EES-331（xc7z020clg484-1）。开发入口是本Git工作副本。核心Word保持四章架构；第2.10和4.11节补充文件启动、结果观测、稳定停止与真实系统验证。Pre4、Pre5及旧执行快照保留当时的版本语义。
+当前为 **AC1板级与性能实验r2**，CPU v1.6、ISA v1.5，目标课程EES-331（xc7z020clg484-1）。开发入口是本Git工作副本。默认生产核心仍为稳定AC1；核心Word保持四章架构，第4.12节补充板级实现及两项独立候选比较。Pre4、Pre5及旧执行快照保留当时的版本语义。
 
 ## 阅读与源码
 
-- [核心Word](16位流水线CPU核心设计文档_AC1候选版.docx)：50页、Word内分级目录。第9–10页是两张原有主图，第47页新增文件启动系统图。
+- [核心Word](16位流水线CPU核心设计文档_AC1候选版.docx)：Word内分级目录，保留两张主图、文件启动图，新增板级时钟复位与观测图。
 - [核心RTL](Vivado/rtl)：13份；本轮只扩展datapath_core的被动观测，以及sync_memories的文件初始化。原执行仲裁、写入边沿及11份其他RTL保持。
 - [最小系统顶层](系统/rtl/cpu_system.sv)：第14份系统源码，连接一拍同步IM/DM，提供RF写回影子与最后store观测。
 - [系统契约](系统/接口与停止现场契约.md) · [文件启动镜像与manifest](系统/programs) · [既有Buffer说明](CPU流水线冒险与Buffer_Interlock完整设计方案.docx) · [证据索引](证据索引.json)。
 - [系统图SVG](架构图/03_文件启动系统与停止观测.svg) · [PNG](架构图/03_文件启动系统与停止观测.png)。原整体图、五级datapath、F/Q/G和模式FSM仍适用原执行路径。
+- [板级工程与接板入口](板级/README.md) · [板级SVG](架构图/04_EES331板级系统.svg) · [PNG](架构图/04_EES331板级系统.png) · [性能基线](实验/性能基线.json) · [前递比较](实验/前递候选比较.json) · [WB到MEM比较](实验/WB_MEM候选比较.json)。
 
 ## 工具配置与复跑
 
@@ -46,12 +47,20 @@ python -B -X utf8 .\Vivado\run_independent.py --cases C:\Temp\cpu_cases_new
 
 接受证据分别为验证/tools_50040838e0ec474680085bb91e8fb001和验证/cpu_system_n0r4buws。后者含12行系统epoch结果、2次受控诊断注入、all_ops同拍网表回放和真实工程启动；baseline为17拍，all_ops为25拍。前者包括九套19步、独立48例/10 reset见证/58行、五类mutant、X/Z、证据和生命周期检查。
 
-系统OOC：376 LUT、431 FF、2 RAMB18、15 CARRY4；10 ns下WNS +1.363 ns、TNS 0、0失败端点。它包含观测与影子资源，不能与旧core-only的287 LUT/260 FF直接混比。尚未布局布线、完整IO约束、实际setup/hold、比特流或下板；ZPS7-1 Warning仍在。没有合入WB→MEM免停、单步、暂停或可变延迟存储。
+阶段2系统OOC：376 LUT、431 FF、2 RAMB18、15 CARRY4；10 ns下WNS +1.363 ns。阶段3至5另完成含VIO的ees331_top真实布局布线、比特流和setup/hold/脉宽检查；这两个顶层的资源不能直接混比。AC1五个程序的setup裕量为1.434至2.101 ns，hold均为正，均使用2个BRAM18。课程板尚未连接，没有烧录、物理按键或板上计时验收。
 
-正式Word生成器要求显式指定完整通过回执，并核对当前源码及回归TB指纹；旧PASS或改过源码的记录会被拒绝：
+两个候选均隔离于实验/候选，不改变生产13份RTL及cpu_system：前递one-hot改写周期不变、四个负载的setup余量下降，未采用；WB到MEM只免除STR数据相关停顿，基址相关仍停一拍，内存复制15→14拍、复制校验和55→47拍。后者在校验和负载增加86 LUT、2 FF。所有时间差均按已布线100MHz计算，不是板上实测。
+
+候选验证与性能复跑：
 
 ```powershell
-python -B -X utf8 .\系统\build_core_document.py --system-receipt .\验证\cpu_system_n0r4buws\result.json --tools-receipt .\验证\tools_50040838e0ec474680085bb91e8fb001\result.json
+python -B -X utf8 .\板级\run_matrix.py --candidate ac1
+python -B -X utf8 .\板级\run_matrix.py --candidate forward_onehot
+python -B -X utf8 .\板级\run_matrix.py --candidate wb_mem
+python -B -X utf8 .\实验\run_wb_validation.py
+python -B -X utf8 .\实验\run_wb_guards.py
 ```
 
-生成后仍须用Word刷新目录、导出并逐页检查。文件SHA256.json只反映其生成时刻的受跟踪交付；历史导入清单保持7753502原快照身份。两份用户已确认删除的旧ZIP不会被误记为已恢复。
+WB到MEM验证包含48例/10复位见证、2005个候选用例（2002个正常程序查精确周期、3个故障查逐拍行为）、12项保护及6个被捕获错误变体。XSim的Fatal可能返回退出码0；入口同时检查日志标记、正常生命周期、输入和输出指纹，不能仅看进程退出码。独立48例原包不改，只有私有候选TB排除两个旧总周期期待，并增加候选逐拍检查。
+
+本版Word维护入口为板级/update_core_document.py，必须显式传入baseline-matrix、forward-comparison、wb-matrix、wb-validation、wb-guards和wb-comparison六项证据；源码/回执不匹配会拒绝生成。系统/build_core_document.py只复现阶段2文档，不是本版生成入口。生成后仍须用Word刷新目录、导出并逐页检查。文件SHA256.json反映其生成时刻的当前交付；历史导入清单保持7753502原快照身份。两份用户已确认删除的旧ZIP不会被误记为已恢复。

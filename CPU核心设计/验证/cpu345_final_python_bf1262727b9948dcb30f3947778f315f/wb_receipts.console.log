@@ -1,0 +1,8 @@
+test_incomplete_lifecycle_rejected_despite_intended_fatal (__main__.LifecycleTests.test_incomplete_lifecycle_rejected_despite_intended_fatal) ... ok
+test_integer_fatal_exit_zero_is_complete_but_not_positive (__main__.LifecycleTests.test_integer_fatal_exit_zero_is_complete_but_not_positive) ... ok
+test_replaced_console_rejected (__main__.LifecycleTests.test_replaced_console_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.066s
+
+OK

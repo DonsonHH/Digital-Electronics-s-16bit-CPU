@@ -6,7 +6,7 @@ sys.path.insert(0,str(V));sys.path.insert(0,str(S))
 from tool_config import add_tool_arguments,resolve_tools
 from run_system import validate_images
 from verify_board_results import analyze_reports,require_tool_version,review_console_warnings
-from benchmark_programs import PROGRAMS,prepare_selected
+from benchmark_programs import PROGRAMS,prepare_selected,timing_profile
 from candidate_registry import CANDIDATES,apply_candidate
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -47,8 +47,8 @@ def main():
    if source.is_file():shutil.copy2(source,work/'rtl'/source.name)
   result['candidate']=a.candidate;result['candidate_overlay_sha256']=apply_candidate(work,a.candidate)
   shutil.copytree(S/'programs',work/'programs')
-  expected,gold=prepare_selected(work,S,a.program)
-  c,n,stalls,redirects=PROGRAMS[a.program]
+  expected,gold=prepare_selected(work,S,a.program,a.candidate)
+  c,n,stalls,redirects=timing_profile(a.program,a.candidate)
   result['selected_expectation']=expected;result['verification_revision']='board_candidates_v4'
   (work/'oracle_source').mkdir();shutil.copy2(V/'verification/isa_reference.py',work/'oracle_source/isa_reference.py')
   shutil.copy2(B/'benchmark_programs.py',work/'benchmark_programs.py')

@@ -1,0 +1,9 @@
+localparam PROGRAM="memory_copy";
+localparam EXPECTED_CYCLES=14;
+localparam EXPECTED_N=7;
+localparam EXPECTED_STALLS=1;
+localparam EXPECTED_REDIRECTS=1;
+localparam EXPECTED_STORES=1;
+localparam[63:0] EXPECTED_RF=64'h00200000beefbeef;
+localparam[2:0] EXPECTED_FLAGS=3'd4;
+localparam[15:0] EXPECTED_PC=16'd7;

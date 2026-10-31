@@ -1,5 +1,7 @@
 {
   "status": "COMPARISON_ACCEPTED_PHYSICAL_PENDING",
+  "verification_revision": 2,
+  "verifier_sha256": "6b2ceaff593e52ad1ce77d193a8a37e5f37194e8d5b40054467facc3b5a9c291",
   "candidate": "forward_onehot",
   "hardware_variable": "rtl/operand_forward.v only; images and board/debug/constraints/implementation recipe identical for each pair",
   "functional_suites": "Original9/independent48/mutations/unknown PASS",

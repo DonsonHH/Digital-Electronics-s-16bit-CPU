@@ -2,7 +2,7 @@
 from pathlib import Path
 import hashlib,json,shutil
 B=Path(__file__).resolve().parent;P=B.parent
-CANDIDATES={'ac1':None,'forward_onehot':('operand_forward.v',)}
+CANDIDATES={'ac1':None,'forward_onehot':('operand_forward.v',),'wb_mem':('datapath_core.sv',)}
 def apply_candidate(work,name):
  baseline=json.loads((P/'验证/cpu_system_n0r4buws/result.json').read_text(encoding='utf-8'))['input_sha256']
  for folder in [P/'Vivado/rtl',P/'系统/rtl']:

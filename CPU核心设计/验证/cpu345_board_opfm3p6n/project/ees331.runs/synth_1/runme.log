@@ -1,0 +1,336 @@
+
+*** Running vivado
+    with args -log ees331_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source ees331_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sun Nov  1 05:24:02 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source ees331_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:18 ; elapsed = 00:00:08 . Memory (MB): peak = 540.125 ; gain = 225.703
+Command: synth_design -top ees331_top -part xc7z020clg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 72540
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1326.953 ; gain = 541.238
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'ees331_top' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/ees331_top.sv:2]
+	Parameter BUILD_ID bound to: 64'b1000110111011100000000000111010100101101010101000111011100111011 
+INFO: [Synth 8-6157] synthesizing module 'BUFG' [C:/AMDDesignTools/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2678]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [C:/AMDDesignTools/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2678]
+INFO: [Synth 8-6157] synthesizing module 'ees331_application' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/ees331_application.sv:3]
+	Parameter BUILD_ID bound to: 64'b1000110111011100000000000111010100101101010101000111011100111011 
+INFO: [Synth 8-6157] synthesizing module 'cpu_system' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/cpu_system.sv:4]
+	Parameter IM_INIT_FILE bound to: programs/dut_im.mem - type: string 
+	Parameter DM_INIT_FILE bound to: programs/dut_dm.mem - type: string 
+INFO: [Synth 8-6157] synthesizing module 'datapath_core' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/datapath_core.sv:9]
+INFO: [Synth 8-6157] synthesizing module 'pc16' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/pc16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc16' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/pc16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'isa_decode' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/isa_decode.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'isa_decode' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/isa_decode.v:4]
+INFO: [Synth 8-6157] synthesizing module 'imm_ext16' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'imm_ext16' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regfile4x16' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'regfile4x16' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'flags_reg' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/flags_reg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'flags_reg' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/flags_reg.v:4]
+INFO: [Synth 8-6157] synthesizing module 'operand_forward' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/operand_forward.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'operand_forward' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/operand_forward.v:6]
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'addsub16_cla' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'addsub16_cla' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'branch_target16' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'branch_target16' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'datapath_core' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/datapath_core.sv:9]
+INFO: [Synth 8-6157] synthesizing module 'instruction_memory' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/sync_memories.v:5]
+	Parameter INIT_FILE bound to: programs/dut_im.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'programs/dut_im.mem' is read successfully [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/sync_memories.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'instruction_memory' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/sync_memories.v:5]
+INFO: [Synth 8-6157] synthesizing module 'data_memory' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/sync_memories.v:12]
+	Parameter INIT_FILE bound to: programs/dut_dm.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'programs/dut_dm.mem' is read successfully [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/sync_memories.v:15]
+INFO: [Synth 8-6155] done synthesizing module 'data_memory' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/sync_memories.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/cpu_system.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'ees331_application' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/ees331_application.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'ees331_vio' [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/project/ees331.runs/synth_1/.Xil/Vivado-37524-LAPTOP-BSM79J69/realtime/ees331_vio_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ees331_vio' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/project/ees331.runs/synth_1/.Xil/Vivado-37524-LAPTOP-BSM79J69/realtime/ees331_vio_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ees331_top' (0#1) [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/ees331_top.sv:2]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'debug_i'. This will prevent further optimization [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/ees331_top.sv:8]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'application_i'. This will prevent further optimization [C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/rtl/ees331_top.sv:5]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1455.266 ; gain = 669.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1455.266 ; gain = 669.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1455.266 ; gain = 669.551
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.041 . Memory (MB): peak = 1455.266 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [c:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/project/ees331.gen/sources_1/ip/ees331_vio/ees331_vio/ees331_vio_in_context.xdc] for cell 'debug_i'
+Finished Parsing XDC File [c:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/project/ees331.gen/sources_1/ip/ees331_vio/ees331_vio/ees331_vio_in_context.xdc] for cell 'debug_i'
+Parsing XDC File [c:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/constraints/ees331.xdc]
+Finished Parsing XDC File [c:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/constraints/ees331.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [c:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/constraints/ees331.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/ees331_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/ees331_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1522.281 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1522.281 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1522.281 ; gain = 736.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1522.281 ; gain = 736.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1522.281 ; gain = 736.566
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'mode_reg' in module 'datapath_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                     RUN |                              100 |                              000
+             DRAIN_FAULT |                              010 |                              010
+                 FAULTED |                              000 |                              100
+              DRAIN_HALT |                              011 |                              001
+                  HALTED |                              001 |                              011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'mode_reg' using encoding 'sequential' in module 'datapath_core'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 1522.281 ; gain = 736.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   17 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	               16 Bit    Registers := 24    
+	               12 Bit    Registers := 1     
+	                3 Bit    Registers := 6     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 47    
++---RAMs : 
+	               4K Bit	(256 X 16 bit)          RAMs := 1     
++---ROMs : 
+	                    ROMs := 1     
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 15    
+	   4 Input   16 Bit        Muxes := 2     
+	   3 Input   16 Bit        Muxes := 2     
+	  15 Input    3 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 3     
+	   2 Input    3 Bit        Muxes := 10    
+	   3 Input    3 Bit        Muxes := 1     
+	  15 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 4     
+	   3 Input    2 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 20    
+	  15 Input    1 Bit        Muxes := 12    
+	   5 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 1538.070 ; gain = 752.355
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++--------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name   | RTL Object          | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++--------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|application_i | system_i/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++--------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:39 ; elapsed = 00:00:41 . Memory (MB): peak = 1655.238 ; gain = 869.523
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:46 ; elapsed = 00:00:47 . Memory (MB): peak = 1803.383 ; gain = 1017.668
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++--------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name   | RTL Object          | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++--------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|application_i | system_i/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++--------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance application_i/system_i/im/dout_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance application_i/system_i/dm/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:46 ; elapsed = 00:00:48 . Memory (MB): peak = 1820.691 ; gain = 1034.977
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1993.168 ; gain = 1207.453
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1993.168 ; gain = 1207.453
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1993.168 ; gain = 1207.453
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1993.168 ; gain = 1207.453
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1994.125 ; gain = 1208.410
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1994.125 ; gain = 1208.410
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |ees331_vio    |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+-----------+------+
+|      |Cell       |Count |
++------+-----------+------+
+|1     |ees331_vio |     1|
+|2     |BUFG       |     1|
+|3     |CARRY4     |    68|
+|4     |LUT1       |   122|
+|5     |LUT2       |    62|
+|6     |LUT3       |    44|
+|7     |LUT4       |    70|
+|8     |LUT5       |    88|
+|9     |LUT6       |   182|
+|10    |RAMB18E1   |     2|
+|12    |FDRE       |   576|
+|13    |FDSE       |     1|
+|14    |IBUF       |     2|
+|15    |OBUF       |     8|
++------+-----------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1994.125 ; gain = 1208.410
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:38 ; elapsed = 00:00:51 . Memory (MB): peak = 1994.125 ; gain = 1141.395
+Synthesis Optimization Complete : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1994.125 ; gain = 1208.410
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.036 . Memory (MB): peak = 1994.125 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 70 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2007.008 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: ec2ad0be
+INFO: [Common 17-83] Releasing license: Synthesis
+57 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:59 ; elapsed = 00:01:05 . Memory (MB): peak = 2007.008 ; gain = 1451.422
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 2007.008 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/AppData/Local/Temp/cpu345_board_opfm3p6n/project/ees331.runs/synth_1/ees331_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file ees331_top_utilization_synth.rpt -pb ees331_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sun Nov  1 05:25:23 2026...

@@ -1,0 +1,9 @@
+localparam PROGRAM="baseline";
+localparam EXPECTED_CYCLES=17;
+localparam EXPECTED_N=10;
+localparam EXPECTED_STALLS=1;
+localparam EXPECTED_REDIRECTS=1;
+localparam EXPECTED_STORES=1;
+localparam[63:0] EXPECTED_RF=64'h0020000800020008;
+localparam[2:0] EXPECTED_FLAGS=3'd6;
+localparam[15:0] EXPECTED_PC=16'd10;

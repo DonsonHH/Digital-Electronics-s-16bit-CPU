@@ -1,0 +1,757 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Sun Nov  1 05:03:48 2026
+| Host         : LAPTOP-BSM79J69 running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file reports/setup_paths.rpt
+| Design       : ees331_top
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             1.739ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_c_reg/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        8.187ns  (logic 4.468ns (54.574%)  route 3.719ns (45.426%))
+  Logic Levels:           9  (CARRY4=5 LUT3=1 LUT4=1 LUT5=1 LUT6=1)
+  Clock Path Skew:        -0.067ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.044ns = ( 15.044 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.430ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.084 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.084    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_0
+    SLICE_X13Y3          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.198 r  application_i/system_i/core/m_exec_value_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.198    application_i/system_i/core/m_exec_value_reg[11]_i_2_n_0
+    SLICE_X13Y4          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.312 r  application_i/system_i/core/m_exec_value_reg[15]_i_4/CO[3]
+                         net (fo=1, routed)           0.000    12.312    application_i/system_i/core/m_exec_value_reg[15]_i_4_n_0
+    SLICE_X13Y5          CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    12.583 r  application_i/system_i/core/m_c_reg_i_2/CO[0]
+                         net (fo=1, routed)           0.772    13.355    application_i/system_i/core/arithmetic_carry
+    SLICE_X9Y3           LUT4 (Prop_lut4_I0_O)        0.373    13.728 r  application_i/system_i/core/m_c_i_1/O
+                         net (fo=1, routed)           0.000    13.728    application_i/system_i/core/alu_c
+    SLICE_X9Y3           FDRE                                         r  application_i/system_i/core/m_c_reg/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.580    15.044    application_i/system_i/core/clk
+    SLICE_X9Y3           FDRE                                         r  application_i/system_i/core/m_c_reg/C
+                         clock pessimism              0.430    15.473    
+                         clock uncertainty           -0.035    15.438    
+    SLICE_X9Y3           FDRE (Setup_fdre_C_D)        0.029    15.467    application_i/system_i/core/m_c_reg
+  -------------------------------------------------------------------
+                         required time                         15.467    
+                         arrival time                         -13.728    
+  -------------------------------------------------------------------
+                         slack                                  1.739    
+
+Slack (MET) :             2.215ns  (required time - arrival time)
+  Source:                 application_i/system_i/im/dout_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/im/dout_reg/ENARDEN
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.306ns  (logic 2.950ns (40.375%)  route 4.356ns (59.625%))
+  Logic Levels:           4  (LUT4=2 LUT6=2)
+  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.086ns = ( 15.086 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.455ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/im/clk
+    RAMB18_X0Y1          RAMB18E1                                     r  application_i/system_i/im/dout_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y1          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     7.995 r  application_i/system_i/im/dout_reg/DOADO[9]
+                         net (fo=16, routed)          1.201     9.196    application_i/system_i/im/im_dout[12]
+    SLICE_X8Y4           LUT4 (Prop_lut4_I1_O)        0.124     9.320 r  application_i/system_i/im/x_use_rd_i_3/O
+                         net (fo=2, routed)           1.214    10.534    application_i/system_i/im/x_use_rd_i_3_n_0
+    SLICE_X7Y1           LUT6 (Prop_lut6_I1_O)        0.124    10.658 f  application_i/system_i/im/stalls[31]_i_4/O
+                         net (fo=18, routed)          0.782    11.440    application_i/system_i/core/u_pc/pc_reg[0]_0
+    SLICE_X1Y1           LUT6 (Prop_lut6_I0_O)        0.124    11.564 r  application_i/system_i/core/u_pc/dout_reg_i_1/O
+                         net (fo=2, routed)           0.446    12.009    application_i/system_i/im/im_en
+    SLICE_X1Y1           LUT4 (Prop_lut4_I3_O)        0.124    12.133 r  application_i/system_i/im/dout_reg_ENARDEN_cooolgate_en_gate_4/O
+                         net (fo=1, routed)           0.714    12.847    application_i/system_i/im/dout_reg_ENARDEN_cooolgate_en_sig_4
+    RAMB18_X0Y1          RAMB18E1                                     r  application_i/system_i/im/dout_reg/ENARDEN
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.623    15.086    application_i/system_i/im/clk
+    RAMB18_X0Y1          RAMB18E1                                     r  application_i/system_i/im/dout_reg/CLKARDCLK
+                         clock pessimism              0.455    15.541    
+                         clock uncertainty           -0.035    15.506    
+    RAMB18_X0Y1          RAMB18E1 (Setup_ramb18e1_CLKARDCLK_ENARDEN)
+                                                     -0.443    15.063    application_i/system_i/im/dout_reg
+  -------------------------------------------------------------------
+                         required time                         15.063    
+                         arrival time                         -12.847    
+  -------------------------------------------------------------------
+                         slack                                  2.215    
+
+Slack (MET) :             2.220ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_v_reg/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.720ns  (logic 4.329ns (56.077%)  route 3.391ns (43.923%))
+  Logic Levels:           8  (CARRY4=4 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.103ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.044ns = ( 15.044 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.084 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.084    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_0
+    SLICE_X13Y3          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.198 r  application_i/system_i/core/m_exec_value_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.198    application_i/system_i/core/m_exec_value_reg[11]_i_2_n_0
+    SLICE_X13Y4          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    12.511 r  application_i/system_i/core/m_exec_value_reg[15]_i_4/O[3]
+                         net (fo=2, routed)           0.444    12.955    application_i/system_i/core/arithmetic_result[15]
+    SLICE_X12Y4          LUT6 (Prop_lut6_I4_O)        0.306    13.261 r  application_i/system_i/core/m_v_i_1/O
+                         net (fo=1, routed)           0.000    13.261    application_i/system_i/core/alu_v
+    SLICE_X12Y4          FDRE                                         r  application_i/system_i/core/m_v_reg/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.580    15.044    application_i/system_i/core/clk
+    SLICE_X12Y4          FDRE                                         r  application_i/system_i/core/m_v_reg/C
+                         clock pessimism              0.394    15.437    
+                         clock uncertainty           -0.035    15.402    
+    SLICE_X12Y4          FDRE (Setup_fdre_C_D)        0.079    15.481    application_i/system_i/core/m_v_reg
+  -------------------------------------------------------------------
+                         required time                         15.481    
+                         arrival time                         -13.261    
+  -------------------------------------------------------------------
+                         slack                                  2.220    
+
+Slack (MET) :             2.286ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_exec_value_reg[13]/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.652ns  (logic 4.347ns (56.809%)  route 3.305ns (43.191%))
+  Logic Levels:           8  (CARRY4=4 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.103ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.044ns = ( 15.044 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.084 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.084    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_0
+    SLICE_X13Y3          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.198 r  application_i/system_i/core/m_exec_value_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.198    application_i/system_i/core/m_exec_value_reg[11]_i_2_n_0
+    SLICE_X13Y4          CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334    12.532 r  application_i/system_i/core/m_exec_value_reg[15]_i_4/O[1]
+                         net (fo=1, routed)           0.358    12.890    application_i/system_i/core/m_exec_value_reg[15]_i_4_n_6
+    SLICE_X12Y4          LUT6 (Prop_lut6_I0_O)        0.303    13.193 r  application_i/system_i/core/m_exec_value[13]_i_1/O
+                         net (fo=1, routed)           0.000    13.193    application_i/system_i/core/result[13]
+    SLICE_X12Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[13]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.580    15.044    application_i/system_i/core/clk
+    SLICE_X12Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[13]/C
+                         clock pessimism              0.394    15.437    
+                         clock uncertainty           -0.035    15.402    
+    SLICE_X12Y4          FDRE (Setup_fdre_C_D)        0.077    15.479    application_i/system_i/core/m_exec_value_reg[13]
+  -------------------------------------------------------------------
+                         required time                         15.479    
+                         arrival time                         -13.193    
+  -------------------------------------------------------------------
+                         slack                                  2.286    
+
+Slack (MET) :             2.296ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_exec_value_reg[15]/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.646ns  (logic 4.329ns (56.617%)  route 3.317ns (43.383%))
+  Logic Levels:           8  (CARRY4=4 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.103ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.044ns = ( 15.044 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.084 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.084    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_0
+    SLICE_X13Y3          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.198 r  application_i/system_i/core/m_exec_value_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.198    application_i/system_i/core/m_exec_value_reg[11]_i_2_n_0
+    SLICE_X13Y4          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    12.511 r  application_i/system_i/core/m_exec_value_reg[15]_i_4/O[3]
+                         net (fo=2, routed)           0.370    12.881    application_i/system_i/core/arithmetic_result[15]
+    SLICE_X12Y4          LUT6 (Prop_lut6_I5_O)        0.306    13.187 r  application_i/system_i/core/m_exec_value[15]_i_1/O
+                         net (fo=1, routed)           0.000    13.187    application_i/system_i/core/result[15]
+    SLICE_X12Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[15]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.580    15.044    application_i/system_i/core/clk
+    SLICE_X12Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[15]/C
+                         clock pessimism              0.394    15.437    
+                         clock uncertainty           -0.035    15.402    
+    SLICE_X12Y4          FDRE (Setup_fdre_C_D)        0.081    15.483    application_i/system_i/core/m_exec_value_reg[15]
+  -------------------------------------------------------------------
+                         required time                         15.483    
+                         arrival time                         -13.187    
+  -------------------------------------------------------------------
+                         slack                                  2.296    
+
+Slack (MET) :             2.312ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_exec_value_reg[14]/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.630ns  (logic 4.251ns (55.716%)  route 3.379ns (44.284%))
+  Logic Levels:           8  (CARRY4=4 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.103ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.044ns = ( 15.044 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.084 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.084    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_0
+    SLICE_X13Y3          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.198 r  application_i/system_i/core/m_exec_value_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.198    application_i/system_i/core/m_exec_value_reg[11]_i_2_n_0
+    SLICE_X13Y4          CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.239    12.437 r  application_i/system_i/core/m_exec_value_reg[15]_i_4/O[2]
+                         net (fo=1, routed)           0.432    12.869    application_i/system_i/core/m_exec_value_reg[15]_i_4_n_5
+    SLICE_X12Y5          LUT6 (Prop_lut6_I0_O)        0.302    13.171 r  application_i/system_i/core/m_exec_value[14]_i_1/O
+                         net (fo=1, routed)           0.000    13.171    application_i/system_i/core/result[14]
+    SLICE_X12Y5          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[14]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.580    15.044    application_i/system_i/core/clk
+    SLICE_X12Y5          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[14]/C
+                         clock pessimism              0.394    15.437    
+                         clock uncertainty           -0.035    15.402    
+    SLICE_X12Y5          FDRE (Setup_fdre_C_D)        0.081    15.483    application_i/system_i/core/m_exec_value_reg[14]
+  -------------------------------------------------------------------
+                         required time                         15.483    
+                         arrival time                         -13.171    
+  -------------------------------------------------------------------
+                         slack                                  2.312    
+
+Slack (MET) :             2.341ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_exec_value_reg[11]/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.601ns  (logic 4.215ns (55.456%)  route 3.386ns (44.544%))
+  Logic Levels:           7  (CARRY4=3 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.103ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.044ns = ( 15.044 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.084 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.084    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_0
+    SLICE_X13Y3          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    12.397 r  application_i/system_i/core/m_exec_value_reg[11]_i_2/O[3]
+                         net (fo=1, routed)           0.438    12.836    application_i/system_i/core/m_exec_value_reg[11]_i_2_n_4
+    SLICE_X14Y4          LUT6 (Prop_lut6_I0_O)        0.306    13.142 r  application_i/system_i/core/m_exec_value[11]_i_1/O
+                         net (fo=1, routed)           0.000    13.142    application_i/system_i/core/result[11]
+    SLICE_X14Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[11]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.580    15.044    application_i/system_i/core/clk
+    SLICE_X14Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[11]/C
+                         clock pessimism              0.394    15.437    
+                         clock uncertainty           -0.035    15.402    
+    SLICE_X14Y4          FDRE (Setup_fdre_C_D)        0.081    15.483    application_i/system_i/core/m_exec_value_reg[11]
+  -------------------------------------------------------------------
+                         required time                         15.483    
+                         arrival time                         -13.142    
+  -------------------------------------------------------------------
+                         slack                                  2.341    
+
+Slack (MET) :             2.344ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_exec_value_reg[12]/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.596ns  (logic 4.231ns (55.700%)  route 3.365ns (44.300%))
+  Logic Levels:           8  (CARRY4=4 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.103ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.044ns = ( 15.044 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.084 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.084    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_0
+    SLICE_X13Y3          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.198 r  application_i/system_i/core/m_exec_value_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.198    application_i/system_i/core/m_exec_value_reg[11]_i_2_n_0
+    SLICE_X13Y4          CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.222    12.420 r  application_i/system_i/core/m_exec_value_reg[15]_i_4/O[0]
+                         net (fo=1, routed)           0.418    12.838    application_i/system_i/core/m_exec_value_reg[15]_i_4_n_7
+    SLICE_X14Y4          LUT6 (Prop_lut6_I0_O)        0.299    13.137 r  application_i/system_i/core/m_exec_value[12]_i_1/O
+                         net (fo=1, routed)           0.000    13.137    application_i/system_i/core/result[12]
+    SLICE_X14Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[12]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.580    15.044    application_i/system_i/core/clk
+    SLICE_X14Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[12]/C
+                         clock pessimism              0.394    15.437    
+                         clock uncertainty           -0.035    15.402    
+    SLICE_X14Y4          FDRE (Setup_fdre_C_D)        0.079    15.481    application_i/system_i/core/m_exec_value_reg[12]
+  -------------------------------------------------------------------
+                         required time                         15.481    
+                         arrival time                         -13.137    
+  -------------------------------------------------------------------
+                         slack                                  2.344    
+
+Slack (MET) :             2.428ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_exec_value_reg[7]/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.513ns  (logic 4.101ns (54.586%)  route 3.412ns (45.414%))
+  Logic Levels:           6  (CARRY4=2 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.102ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.045ns = ( 15.045 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    12.283 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/O[3]
+                         net (fo=1, routed)           0.465    12.748    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_4
+    SLICE_X14Y2          LUT6 (Prop_lut6_I0_O)        0.306    13.054 r  application_i/system_i/core/m_exec_value[7]_i_1/O
+                         net (fo=1, routed)           0.000    13.054    application_i/system_i/core/result[7]
+    SLICE_X14Y2          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[7]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.581    15.045    application_i/system_i/core/clk
+    SLICE_X14Y2          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[7]/C
+                         clock pessimism              0.394    15.438    
+                         clock uncertainty           -0.035    15.403    
+    SLICE_X14Y2          FDRE (Setup_fdre_C_D)        0.079    15.482    application_i/system_i/core/m_exec_value_reg[7]
+  -------------------------------------------------------------------
+                         required time                         15.482    
+                         arrival time                         -13.054    
+  -------------------------------------------------------------------
+                         slack                                  2.428    
+
+Slack (MET) :             2.431ns  (required time - arrival time)
+  Source:                 application_i/system_i/dm/mem_reg/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            application_i/system_i/core/m_exec_value_reg[10]/D
+                            (rising edge-triggered cell FDRE clocked by board_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             board_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (board_clk rise@10.000ns - board_clk rise@0.000ns)
+  Data Path Delay:        7.507ns  (logic 4.137ns (55.108%)  route 3.370ns (44.892%))
+  Logic Levels:           7  (CARRY4=3 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.103ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.044ns = ( 15.044 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock board_clk rise edge)
+                                                      0.000     0.000 r  
+    M19                                               0.000     0.000 r  clk100 (IN)
+                         net (fo=0)                   0.000     0.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.436     1.436 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.205     3.641    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.101     3.742 r  clock_buffer/O
+                         net (fo=2395, routed)        1.798     5.541    application_i/system_i/dm/clk
+    RAMB18_X0Y0          RAMB18E1                                     r  application_i/system_i/dm/mem_reg/CLKARDCLK
+  -------------------------------------------------------------------    -------------------
+    RAMB18_X0Y0          RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[0])
+                                                      2.454     7.995 f  application_i/system_i/dm/mem_reg/DOADO[0]
+                         net (fo=6, routed)           1.033     9.028    application_i/system_i/core/u_rf/DOADO[0]
+    SLICE_X19Y3          LUT3 (Prop_lut3_I0_O)        0.124     9.152 f  application_i/system_i/core/u_rf/regs[3][0]_i_1/O
+                         net (fo=7, routed)           0.751     9.903    application_i/system_i/core/u_rf_n_64
+    SLICE_X16Y2          LUT6 (Prop_lut6_I2_O)        0.124    10.027 r  application_i/system_i/core/m_exec_value[3]_i_16/O
+                         net (fo=2, routed)           0.760    10.787    application_i/system_i/core/u_alu/u_addsub/m_exec_value_reg[3]_i_2
+    SLICE_X12Y1          LUT5 (Prop_lut5_I2_O)        0.124    10.911 r  application_i/system_i/core/u_alu/u_addsub/m_exec_value[3]_i_10/O
+                         net (fo=1, routed)           0.403    11.314    application_i/system_i/core/u_alu_n_41
+    SLICE_X13Y1          CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    11.970 r  application_i/system_i/core/m_exec_value_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    11.970    application_i/system_i/core/m_exec_value_reg[3]_i_2_n_0
+    SLICE_X13Y2          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    12.084 r  application_i/system_i/core/m_exec_value_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000    12.084    application_i/system_i/core/m_exec_value_reg[7]_i_2_n_0
+    SLICE_X13Y3          CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.239    12.323 r  application_i/system_i/core/m_exec_value_reg[11]_i_2/O[2]
+                         net (fo=1, routed)           0.423    12.746    application_i/system_i/core/m_exec_value_reg[11]_i_2_n_5
+    SLICE_X14Y4          LUT6 (Prop_lut6_I0_O)        0.302    13.048 r  application_i/system_i/core/m_exec_value[10]_i_1/O
+                         net (fo=1, routed)           0.000    13.048    application_i/system_i/core/result[10]
+    SLICE_X14Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[10]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock board_clk rise edge)
+                                                     10.000    10.000 r  
+    M19                                               0.000    10.000 r  clk100 (IN)
+                         net (fo=0)                   0.000    10.000    clk100
+    M19                  IBUF (Prop_ibuf_I_O)         1.366    11.366 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           2.006    13.372    clk100_IBUF
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    13.463 r  clock_buffer/O
+                         net (fo=2395, routed)        1.580    15.044    application_i/system_i/core/clk
+    SLICE_X14Y4          FDRE                                         r  application_i/system_i/core/m_exec_value_reg[10]/C
+                         clock pessimism              0.394    15.437    
+                         clock uncertainty           -0.035    15.402    
+    SLICE_X14Y4          FDRE (Setup_fdre_C_D)        0.077    15.479    application_i/system_i/core/m_exec_value_reg[10]
+  -------------------------------------------------------------------
+                         required time                         15.479    
+                         arrival time                         -13.048    
+  -------------------------------------------------------------------
+                         slack                                  2.431    
+
+
+
+

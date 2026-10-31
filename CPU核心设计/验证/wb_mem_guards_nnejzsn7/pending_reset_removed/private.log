@@ -1,0 +1,33 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sun Nov  1 05:05:58 2026
+# Process ID         : 22756
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/wb_mem_guards_nnejzsn7/pending_reset_removed
+# Command line       : xsim.exe -log private.log -mode tcl -source {xsim.dir/private_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/wb_mem_guards_nnejzsn7/pending_reset_removed/private.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/wb_mem_guards_nnejzsn7/pending_reset_removed\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 19968 MB
+#-----------------------------------------------------------
+source xsim.dir/private_sim/xsim_script.tcl
+# xsim {private_sim} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run all
+Fatal: GUARD_RESET_PENDING
+Time: 16 ns  Iteration: 0  Process: /tb_wb_guards/Initial40_19  Scope: tb_wb_guards  File: C:/Users/Donson/AppData/Local/Temp/wb_mem_guards_nnejzsn7/pending_reset_removed/tb_wb_guards.sv Line: 48
+$finish called at time : 16 ns
+## quit
+INFO: [Common 17-206] Exiting xsim at Sun Nov  1 05:06:00 2026...

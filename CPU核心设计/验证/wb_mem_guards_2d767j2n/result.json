@@ -1,0 +1,19 @@
+{
+  "status": "FAIL",
+  "candidate": "wb_mem",
+  "scope": "Injected internal-protocol guards and checker sensitivity; not additional ISA instructions",
+  "tools": {
+    "vivado_bin": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin",
+    "python": "C:\\Users\\Donson\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "config_file": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\tools.local.json"
+  },
+  "mutations": [],
+  "candidate_rtl_sha256": "bbe100cd8ab698943c352166ce31763ca3f0748d67dcb69d0f4464d0817cbe03",
+  "positive": {
+    "cases": 10,
+    "log_sha256": "b605b96e6e83b80b96db3c15117e8a8757d46435c9fc672eea1b0ece624716f8",
+    "csv_sha256": "5e25c492c9b2e9ed9a19d47d2e261c4fb9374411dbb64c80b069111c2abe48b0"
+  },
+  "error": "Mutant was not rejected by the intended checker: stale_store_data",
+  "runner_sha256": "f731ed275bd29c4bf24dc573e5623483e9f0c452870703a8c375799eead0e164"
+}

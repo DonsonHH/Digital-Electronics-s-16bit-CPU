@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "candidate": "wb_mem",
+  "tools": {
+    "vivado_bin": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin",
+    "python": "C:\\Users\\Donson\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "config_file": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\tools.local.json"
+  },
+  "physical_board_validated": false,
+  "seed": "0x57424d31",
+  "overlay": {
+    "datapath_core.sv": "bbe100cd8ab698943c352166ce31763ca3f0748d67dcb69d0f4464d0817cbe03"
+  },
+  "candidate_rtl_sha256": "bbe100cd8ab698943c352166ce31763ca3f0748d67dcb69d0f4464d0817cbe03",
+  "executed_rtl_sha256": {
+    "addsub16_cla.v": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+    "alu16.v": "ac1e94a66ee28698f906da1927b50c96b80f3b04989b3c75b9cf6df5dde509e9",
+    "branch_target16.v": "7c48a5e0e8af99cccf66c6111b78f99e0fc8f096802e2d1c122fb7a04cb2739e",
+    "cla16.v": "8d3221021088d0362faf8cb4e39128d0bc2e8b6e145dfe30a5f11d1e44218d42",
+    "cla4_pg.v": "31434ab4794c155a4ad2f439b85bfbc0cf6216e86e1921f771d7b168d4e0fab7",
+    "datapath_core.sv": "bbe100cd8ab698943c352166ce31763ca3f0748d67dcb69d0f4464d0817cbe03",
+    "flags_reg.v": "fe0abc775c5a99ec4a77ad2bf45a750c1fe9d9cf0fd9bfe65ceab96d46eb50ac",
+    "imm_ext16.v": "9d0c17270462f619dff7a9f19cb618b7a6f482d8d2ddce76d9bd77fbca139844",
+    "isa_decode.v": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2",
+    "operand_forward.v": "30513341d5b60a4393a1784dcc0cb756fd251206655a458f2e2c17e01d1faa65",
+    "pc16.v": "969f0729a1f09740bc9627294ba7f0d8e39f3eaa9f0071504455b42b45405a38",
+    "regfile4x16.v": "06a3cb9622b766909a141c6dce572ea8d41e62fd91c7a44214dfa284e45a1029",
+    "sync_memories.v": "55b3b6fcac5c6fa556b769037282e58bae54bf9c46f7de622e22825ff7f170bf"
+  },
+  "frozen_packet_manifest_sha256": "790512aab21bf442ba7b36991a6192a17b8ae4415f16753dc60158e38e9c5304",
+  "frozen48": {
+    "status": "PASS",
+    "cases": 48,
+    "rows": 58,
+    "reset_witnesses": 10,
+    "witnesses": {
+      "late": 1,
+      "pending_stores": 1,
+      "base_stalls": 1
+    },
+    "private_checker_sha256": "6918effdd005d1433d9d280338b39a23907a71986a00132d5583950976681ffa",
+    "log_sha256": "3a1655665689e253983f878c3bad5d90ecd6c6574f7b4564878943dbf5f0bd6f",
+    "results_sha256": "caecf00a5dd7d76bad0c420e267e06aefae8007009fa86c037c948f2f0fe7420",
+    "cycles_sha256": "7a4928e6c2cc3c74942af17e4846e3ab15f161e93289462bec4d32c087fa7fe2",
+    "scope": "ISA events and every-clock RF/DM/flags/order/stop; raw-ISA HDU; candidate pending/forwarding. Frozen old cycle totals excluded only; original packet preserved."
+  },
+  "directed": {
+    "status": "PASS",
+    "cases": 2005,
+    "rows": 2005,
+    "reset_witnesses": 0,
+    "witnesses": {
+      "late": 289,
+      "pending_stores": 287,
+      "base_stalls": 16
+    },
+    "private_checker_sha256": "7f9d414b10fe487f221e3476d87527c36892b0b5195b71545beac131a28da01a",
+    "log_sha256": "5281f297f38e3e95c07e19218496743ed75cb2dc51a1d453cccf5c4f3b28ac4c",
+    "results_sha256": "1394fe9bd99db1987646b9b82fcb8bf86dc86b9a521cc3cdd9dc16604e4d494a",
+    "cycles_sha256": "2643ed51c3243a737738278f90fa809f0e99d00bf4fd4e1fb19d1f17733e030c",
+    "scope": "ISA events and every-clock RF/DM/flags/order/stop; raw-ISA HDU; candidate pending/forwarding. Exact new cycles and stalls for all normal HALT programs."
+  },
+  "runner_sha256": "68646bc5f208e88fc81e1e9eb7b354e40749972fa3c1b6faf9dece6c78f89419"
+}

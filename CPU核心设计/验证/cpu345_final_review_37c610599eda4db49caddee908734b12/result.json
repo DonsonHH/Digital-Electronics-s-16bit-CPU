@@ -1,0 +1,49 @@
+{
+  "status": "OFFLINE_STAGES_3_TO_5_REVIEWED_PHYSICAL_PENDING",
+  "base_commit": "5dfe09ec153c4807d418efecbf7f2cf3c25d419e",
+  "independent_axes": {
+    "spec": "Findings fixed and closed",
+    "standards": "Findings fixed and closed"
+  },
+  "immutable_history_files": 2947,
+  "production_RTL_unchanged": 14,
+  "original_TB_unchanged": 11,
+  "python_tests": {
+    "board_tools": {
+      "exit": 0,
+      "console_sha256": "7bea28aa353eb30c1a25e713523b99e785253f99afa185ff5b48aa58f30d482e"
+    },
+    "wb_lifecycle": {
+      "exit": 0,
+      "console_sha256": "0ac72053c2c4a3314b8dddc4efa9e926c5b7ee7153b6f23f49469810c58ac092"
+    },
+    "document_binding": {
+      "exit": 0,
+      "console_sha256": "d0f1af3dff744ae3ef50c5084519f91d258cdc6fe620f6a721821c2489f2d01c"
+    }
+  },
+  "python_test_count": 15,
+  "comparison_recomputed_exactly": [
+    "实验/前递候选比较.json",
+    "实验/WB_MEM候选比较.json"
+  ],
+  "native_programming_or_physical_run_performed": false,
+  "limitations": [
+    "EES-331 not connected",
+    "No physical reset/boot/JTAG result acceptance",
+    "No measured board execution time",
+    "Scoped vendor DRC/methodology warnings retained",
+    "Bounded simulation; no all-state formal proof"
+  ],
+  "resolved_findings": [
+    "Fatal exit0 handled with explicit log terminals",
+    "Interrupted/timeout negative results rejected",
+    "Guard RTL/mutants bound to all13 candidate sources",
+    "Word arguments bound to comparison graph",
+    "Illegal/X EX late qualification checked",
+    "Four-state data claim narrowed",
+    "Stale board-reset wording and pagination corrected"
+  ],
+  "document_qa_sha256": "a4df4bd293c46797e4d2611ef3c48b2a7abab48562a9534516056df3814444e5",
+  "finalized_at_utc": "2026-10-31T22:11:08.306908+00:00"
+}

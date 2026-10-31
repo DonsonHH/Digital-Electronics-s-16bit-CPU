@@ -1,0 +1,34 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sun Nov  1 04:41:59 2026
+# Process ID         : 68444
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu345_board_p5m1ums5
+# Command line       : xsim.exe -log selected.log -mode tcl -source {xsim.dir/selected_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu345_board_p5m1ums5/selected.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/cpu345_board_p5m1ums5\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 22750 MB
+#-----------------------------------------------------------
+source xsim.dir/selected_sim/xsim_script.tcl
+# xsim {selected_sim} -wdb {selected.wdb} -autoloadwcfg -tclbatch {sim.tcl}
+Time resolution is 1 ps
+source sim.tcl
+## puts "BOARD_ATTEMPT=$env(CPU_BOARD_ATTEMPT)"
+BOARD_ATTEMPT=cpu345_board_p5m1ums5
+## run all
+BOARD_SELECTED_PASS program=memory_copy cycles=14 completed=7 stalls=1 redirects=1 stores=1
+$finish called at time : 296 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu345_board_p5m1ums5/tb/tb_selected_program.sv" Line 41
+## quit
+INFO: [Common 17-206] Exiting xsim at Sun Nov  1 04:42:01 2026...

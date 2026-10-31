@@ -7,6 +7,10 @@ from verification.isa_reference import ins,oracle,pack
 # cycles, completed instructions, stalls, redirects for the stable AC1 pipeline.
 PROGRAMS={'all_ops':(25,16,1,2),'baseline':(17,10,1,1),'loop':(30,18,0,4),
           'memory_copy':(15,7,2,1),'copy_checksum':(55,35,16,0)}
+def timing_profile(program,candidate='ac1'):
+ if candidate=='wb_mem' and program=='memory_copy':return (14,7,1,1)
+ if candidate=='wb_mem' and program=='copy_checksum':return (47,35,8,0)
+ return PROGRAMS[program]
 
 def checksum_program():
  words=[ins(1,3,b=32),ins(1,1,b=0)]
@@ -19,9 +23,9 @@ def checksum_program():
  assert expected['rf']==[0,0x1232,0,32] and expected['flags']==[0,0,0]
  return image,memory
 
-def prepare_selected(work,system,program):
+def prepare_selected(work,system,program,candidate='ac1'):
  work,system=Path(work),Path(system)
- c,n,stalls,redirects=PROGRAMS[program]
+ c,n,stalls,redirects=timing_profile(program,candidate)
  if program=='copy_checksum':image,memory=checksum_program()
  else:
   image=[int(x,16) for x in (system/'programs'/(program+'_im.mem')).read_text().splitlines()]

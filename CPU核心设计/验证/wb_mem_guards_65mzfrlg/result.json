@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "candidate": "wb_mem",
+  "scope": "Injected internal-protocol guards and checker sensitivity; not additional ISA instructions",
+  "tools": {
+    "vivado_bin": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin",
+    "python": "C:\\Users\\Donson\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "config_file": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\tools.local.json"
+  },
+  "mutations": [
+    {
+      "name": "stale_store_data",
+      "status": "EXPECTED_FAILURE_DETECTED",
+      "native_exit": 0,
+      "marker": "GUARD_STORE_VALUE",
+      "mutated_rtl_sha256": "52ea14aa4fc04613794a9eca941ba5c6298c453cc9f3f43226a692ba77d97f31",
+      "log_sha256": "8c2e0d5494694b39b2f5019af69a312dabfa05b29a037decef56198965c13362"
+    },
+    {
+      "name": "base_stall_removed",
+      "status": "EXPECTED_FAILURE_DETECTED",
+      "native_exit": 0,
+      "marker": "GUARD_BASE_STALL",
+      "mutated_rtl_sha256": "8aa372274523cbf3f8de043f84d41fc11d8e482621cdba2af743ce4cbe8de51d",
+      "log_sha256": "5fe9b570515a30c33683b1e131caba17bb838ccfe1403a68d0d0b4e8eeb30c88"
+    },
+    {
+      "name": "readiness_forced_true",
+      "status": "EXPECTED_FAILURE_DETECTED",
+      "native_exit": 0,
+      "marker": "GUARD_READY_FAIL_CLOSED",
+      "mutated_rtl_sha256": "f6f47d4cfadb51d2a3c55179579a17c70c8efeb0ab3b4ee1b5f45bfdeec2d7a1",
+      "log_sha256": "f891291de0ead99d6b81c45dbc420bd2566d958b6bbd2b699f19232e444dea67"
+    },
+    {
+      "name": "pending_reset_removed",
+      "status": "EXPECTED_FAILURE_DETECTED",
+      "native_exit": 0,
+      "marker": "GUARD_RESET_PENDING",
+      "mutated_rtl_sha256": "8e80318fd3ab7d77c979f7cd0878bb3635e8c54f84629deb7b56a77612930008",
+      "log_sha256": "4967b5f2782496d7d208f0e0ab6a7d0b9ca3b6cd4713e14b44b846ca85161ce8"
+    },
+    {
+      "name": "store_wb_dropped",
+      "status": "EXPECTED_FAILURE_DETECTED",
+      "native_exit": 0,
+      "marker": "GUARD_STORE_WB_TOKEN",
+      "mutated_rtl_sha256": "b444e922dac5ff643957efbbcfca3d7fc01cc4613b8bfac6696a6d4774a474b7",
+      "log_sha256": "ec34b386cf1675e23b53c2518b81282bb1f96d1d03a70fcc4f223baa25439ae4"
+    }
+  ],
+  "candidate_rtl_sha256": "bbe100cd8ab698943c352166ce31763ca3f0748d67dcb69d0f4464d0817cbe03",
+  "positive": {
+    "cases": 10,
+    "log_sha256": "c9f4dbc12cea6e4e376968175abcf3bead0ccffd5dc78b02907090e1f3733744",
+    "csv_sha256": "5e25c492c9b2e9ed9a19d47d2e261c4fb9374411dbb64c80b069111c2abe48b0"
+  },
+  "runner_sha256": "07094a21fee4b8b069fa477e42b9f1f644321f9db8394a24c3ab2d3be303ed93"
+}

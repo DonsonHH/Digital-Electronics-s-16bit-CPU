@@ -1,0 +1,2 @@
+kind,cycles,stores,stalls,injected,halted,fault,stop_reason
+0,7,1,0,1,1,0,1
