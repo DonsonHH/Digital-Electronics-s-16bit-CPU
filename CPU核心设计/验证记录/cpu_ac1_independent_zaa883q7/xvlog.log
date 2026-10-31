@@ -1,0 +1,30 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/addsub16_cla.v" into library work
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/alu16.v" into library work
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/branch_target16.v" into library work
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/cla16.v" into library work
+INFO: [VRFC 10-311] analyzing module cla16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/cla4_pg.v" into library work
+INFO: [VRFC 10-311] analyzing module cla4_pg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/datapath_core.sv" into library work
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/flags_reg.v" into library work
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/imm_ext16.v" into library work
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/isa_decode.v" into library work
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/operand_forward.v" into library work
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/pc16.v" into library work
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/regfile4x16.v" into library work
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/rtl/sync_memories.v" into library work
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_zaa883q7/tb_adversarial.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_adversarial

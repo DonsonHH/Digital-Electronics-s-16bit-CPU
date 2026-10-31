@@ -1,0 +1,2 @@
+name,epoch,cycles,wb,stores,stalls,redirects,stop_pc,reason,rf
+all_ops,0,25,16,1,1,2,0012,1,0020000500050005

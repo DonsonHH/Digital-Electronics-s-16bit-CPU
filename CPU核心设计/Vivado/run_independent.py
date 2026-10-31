@@ -46,6 +46,17 @@ def main():
     declared=json.loads((run/'manifest.json').read_text(encoding='utf-8'))['input_sha256']
     for name,digest in declared.items():
         if sha(run/name)!=digest:raise ValueError('Case package changed during copying: '+name)
+    # Keep the reviewed frozen checker byte-for-byte in the generated packet.
+    # In the PRIVATE execution copy only, connect its original 12 ports
+    # explicitly so later observation-only output ports may remain open.
+    # The replacement cannot touch any oracle, assertion or timing logic.
+    checker=run/'tb_adversarial.sv';before=sha(checker)
+    text=checker.read_text(encoding='utf-8')
+    old='datapath_core dut(.*);'
+    explicit='datapath_core dut(.clk(clk),.rst(rst),.im_addr(im_addr),.im_en(im_en),.im_dout(im_dout),.dm_addr(dm_addr),.dm_en(dm_en),.dm_we(dm_we),.dm_din(dm_din),.dm_dout(dm_dout),.halted(halted),.fault(fault));'
+    if text.count(old)!=1:raise ValueError('Frozen checker connection seam changed')
+    checker.write_text(text.replace(old,explicit),encoding='utf-8')
+    checker_adapter={'revision':'explicit_original_ports_r1','scope':'private connection-only substitution; frozen packet and all checker assertions unchanged','packet_sha256':before,'executed_sha256':sha(checker)}
     bins=tools['vivado_bin'];files=' '.join('rtl/'+p.name for p in sorted((run/'rtl').iterdir()) if p.suffix in ('.v','.sv'))
     command=f'@echo off\ncall "{bins}\\xvlog.bat" --sv -i . {files} tb_adversarial.sv\nif errorlevel 1 exit /b 1\ncall "{bins}\\xelab.bat" tb_adversarial -s independent_sim -debug typical\nif errorlevel 1 exit /b 1\ncall "{bins}\\xsim.bat" independent_sim -tclbatch run.tcl -log private.log\nexit /b %errorlevel%\n'
     (run/'run.cmd').write_text(command,encoding='ascii');(run/'run.tcl').write_text('run all\nquit\n',encoding='ascii')
@@ -69,6 +80,7 @@ def main():
         passed=len(rows)==expected['result_rows'] and len({(r['case'],r['epoch']) for r in rows})==len(rows) and {r['case'] for r in rows}==set(expected['labels'])
     if any(sha(run/name)!=digest for name,digest in inputs.items()):passed=False;error='Executed inputs changed during run'
     data={'status':'PASS' if passed else 'FAIL','scope':'independent48 only; not a nine-suite receipt or all-state proof','new_xsim_execution':bool(re.search(r'(?m)^#\s+xsim v',log)),'native_execution_complete':passed,'lifecycle_revision':'job1','attempt_id':run.name,'launcher_pid':pid,'native_exit':rc,'timeout_seconds':a.timeout,'error':error,'runner_sha256':sha(Path(__file__)),'started_at_utc':start,'ended_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'input_sha256':inputs,'console_sha256':sha(run/'console.log'),'log_sha256':sha(run/'private.log') if (run/'private.log').exists() else None,'tool_configuration':tools,'fixture_source':'generated_current' if a.cases is None else str(source)}
+    data['checker_interface_adapter']=checker_adapter
     (run/'independent_result.json').write_text(json.dumps(data,indent=2),encoding='utf-8')
     dest=PACKAGE/'验证记录'/run.name;shutil.copytree(run,dest,ignore=shutil.ignore_patterns('.Xil','xsim.dir','__pycache__'))
     if not passed:raise SystemExit('Independent execution failed; raw failed attempt saved: '+str(dest))

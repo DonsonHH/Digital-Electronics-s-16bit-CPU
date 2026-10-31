@@ -1,0 +1,33 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Oct 31 22:27:31 2026
+# Process ID         : 75940
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu_v16_mutant_ob2k0yf6
+# Command line       : xsim.exe -log mutant.log -mode tcl -source {xsim.dir/mutant_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu_v16_mutant_ob2k0yf6/mutant.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/cpu_v16_mutant_ob2k0yf6\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 5534 MB
+#-----------------------------------------------------------
+source xsim.dir/mutant_sim/xsim_script.tcl
+# xsim {mutant_sim} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run all
+Fatal: Unready newest producer consumed BASELINE
+Time: 125 ns  Iteration: 0  Process: /tb_datapath/run_program  Scope: tb_datapath.run_program  File: C:/Users/Donson/AppData/Local/Temp/cpu_v16_mutant_ob2k0yf6/tb/tb_datapath.sv Line: 163
+$finish called at time : 125 ns
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 22:27:33 2026...

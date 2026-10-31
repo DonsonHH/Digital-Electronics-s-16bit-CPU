@@ -1,0 +1,25 @@
+// Same all_ops image used in RTL simulation and system synthesis.
+system_checker #(
+ .CASE_ID(1),
+ .LABEL("all_ops"),
+ .IM_FILE("programs/all_ops_im.mem"),
+ .DM_FILE("programs/all_ops_dm.mem"),
+ .E0("programs/all_ops_e0_events.mem"),
+ .S0("programs/all_ops_e0_stores.mem"),
+ .N0(16),
+ .STORES0(1),
+ .RF0(64'h0020000500050005),
+ .FLAGS0(3'd6),
+ .E1("programs/all_ops_e1_events.mem"),
+ .S1("programs/all_ops_e1_stores.mem"),
+ .N1(16),
+ .STORES1(1),
+ .RF1(64'h0020000500050005),
+ .FLAGS1(3'd6),
+ .CYCLES(25),
+ .STALLS(1),
+ .REDIRECTS(2),
+ .RESET_KIND(0),
+ .REASON(3'd1),
+ .STOP_PC(16'h0012)
+) case_all_ops(.clk(clk),.done(done));

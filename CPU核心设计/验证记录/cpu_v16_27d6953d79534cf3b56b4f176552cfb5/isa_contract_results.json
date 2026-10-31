@@ -1,0 +1,1 @@
+{"scope":"approved binary decoder contract and directed ALU checks, not exhaustive CPU validation","status":"PASS","spec_version":"1.6","decode_words_checked":65536,"compatible":65536,"incompatible":0,"alu_directed_checks":14}

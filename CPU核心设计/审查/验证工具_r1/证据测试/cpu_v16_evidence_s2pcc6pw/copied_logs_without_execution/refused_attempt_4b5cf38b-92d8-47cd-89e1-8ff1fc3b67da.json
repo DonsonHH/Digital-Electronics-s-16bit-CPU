@@ -1,0 +1,11 @@
+{
+  "attempt_id": "4b5cf38b-92d8-47cd-89e1-8ff1fc3b67da",
+  "status": "FAILED",
+  "result_kind": "actual_native_execution",
+  "started_at_utc": "2026-10-31T14:29:31.108652+00:00",
+  "verification_revision": "1.6-vtools-r1",
+  "steps": [],
+  "ended_at_utc": "2026-10-31T14:29:31.108652+00:00",
+  "error": "Fresh runtime required; output already exists",
+  "native_execution_complete": false
+}

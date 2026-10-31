@@ -1,0 +1,124 @@
+{
+  "status": "PASS",
+  "verification_revision": "1.6-vtools-r1",
+  "cases": 9,
+  "results": [
+    {
+      "case": "actual_fresh_execution",
+      "status": "PASS",
+      "attempt_id": "3df8066a-3273-4d19-867a-a613f4d42481",
+      "native_commands": 19
+    },
+    {
+      "case": "new_record_historical_recheck",
+      "exit": 0,
+      "result": {
+        "status": "HISTORICAL_REVALIDATION_PASS",
+        "result_kind": "historical_revalidation",
+        "new_xsim_execution": false,
+        "new_execution_pass": false,
+        "verification_revision": "1.6-vtools-r1",
+        "revalidated_at_utc": "2026-10-31T14:29:30.575983+00:00",
+        "run": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证记录\\cpu_v16_3df8066a32734d19867aa613f4d42481",
+        "original_attempt_id": "3df8066a-3273-4d19-867a-a613f4d42481",
+        "original_completed_at_utc": "2026-10-31T14:27:07.158678+00:00",
+        "original_receipt_sha256": "10c4136f3475ad4c26ba413c77c315ee83bbbe7023f724e1e55fd74ae48eff26",
+        "evidence_integrity_verified": true,
+        "current_package_compatible": false,
+        "scope": "uniform five-stage completion and bounded hazard regression; not exhaustive CPU state, timing closure or board validation",
+        "note": "Only the recorded evidence was revalidated; no xvlog/xelab/xsim was executed here"
+      },
+      "console_sha256": "0448294a3b185fe35184931d781f876050d41659a2546767480a59e94f76d052"
+    },
+    {
+      "case": "copied_no_receipt",
+      "exit": 2,
+      "result": {
+        "status": "PENDING_VERIFICATION",
+        "result_kind": "historical_revalidation",
+        "new_xsim_execution": false,
+        "new_execution_pass": false,
+        "verification_revision": "1.6-vtools-r1",
+        "revalidated_at_utc": "2026-10-31T14:29:30.999072+00:00",
+        "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_s2pcc6pw\\copied_logs_without_execution",
+        "reason": "Original receipt and evidence hashes missing; copied logs do not prove execution"
+      },
+      "console_sha256": "1d2a468e0ca4c79463375a730e7817e17e19c032aa231cca07e6b5e52076d9b9"
+    },
+    {
+      "case": "reused_native_directory",
+      "rejected": true,
+      "old_ledger_unchanged": true
+    },
+    {
+      "case": "missing_csv",
+      "exit": 1,
+      "result": {
+        "status": "FAIL",
+        "result_kind": "historical_revalidation",
+        "new_xsim_execution": false,
+        "new_execution_pass": false,
+        "verification_revision": "1.6-vtools-r1",
+        "revalidated_at_utc": "2026-10-31T14:29:31.341373+00:00",
+        "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_s2pcc6pw\\missing_csv",
+        "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\Donson\\\\AppData\\\\Local\\\\Temp\\\\cpu_v16_evidence_s2pcc6pw\\\\missing_csv\\\\case_results.csv'"
+      },
+      "console_sha256": "18abb932714bc94f98c5bd02ab0919c85cc13b76dd5800f920ba416f5141e886"
+    },
+    {
+      "case": "missing_native_log",
+      "exit": 1,
+      "result": {
+        "status": "FAIL",
+        "result_kind": "historical_revalidation",
+        "new_xsim_execution": false,
+        "new_execution_pass": false,
+        "verification_revision": "1.6-vtools-r1",
+        "revalidated_at_utc": "2026-10-31T14:29:31.576728+00:00",
+        "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_s2pcc6pw\\missing_native_log",
+        "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\Donson\\\\AppData\\\\Local\\\\Temp\\\\cpu_v16_evidence_s2pcc6pw\\\\missing_native_log\\\\hazards.log'"
+      },
+      "console_sha256": "43d401e9da6bb647d3613c3984b3913a3fcd4a80b5d31fafc8a5934a565b278c"
+    },
+    {
+      "case": "input_snapshot_drift",
+      "exit": 1,
+      "result": {
+        "status": "FAIL",
+        "result_kind": "historical_revalidation",
+        "new_xsim_execution": false,
+        "new_execution_pass": false,
+        "verification_revision": "1.6-vtools-r1",
+        "revalidated_at_utc": "2026-10-31T14:29:31.808588+00:00",
+        "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_s2pcc6pw\\input_snapshot_drift",
+        "error": "Historical input missing or changed: tb_datapath.sv"
+      },
+      "console_sha256": "074ca883807a269b2fec03b64bb62612d0d8a19d89ff0fec72bb0a12758befde"
+    },
+    {
+      "case": "current_package_mismatch",
+      "exit": 1,
+      "result": {
+        "status": "FAIL",
+        "result_kind": "historical_revalidation",
+        "new_xsim_execution": false,
+        "new_execution_pass": false,
+        "verification_revision": "1.6-vtools-r1",
+        "revalidated_at_utc": "2026-10-31T14:29:32.066303+00:00",
+        "run": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证记录\\cpu_v16_3df8066a32734d19867aa613f4d42481",
+        "error": "Source snapshot drift: tb_datapath.sv"
+      },
+      "console_sha256": "d3485871368961be1eff67dadf43460c6342836c71f6e31af36cfbd3473beabb"
+    },
+    {
+      "case": "fresh_fatal_and_old_success",
+      "status": "failed",
+      "wrapper_exit": 1,
+      "old_success_preserved": true,
+      "failed_attempt_id": "35e02251-ab52-466e-83ff-ce70f6cd9aaf",
+      "successful_attempt_id": "3df8066a-3273-4d19-867a-a613f4d42481",
+      "archive": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_s2pcc6pw\\fresh_fatal_package\\验证记录\\cpu_v16_35e02251ab52466e83ffce70f6cd9aaf",
+      "fatal": "Unready newest producer consumed BASELINE"
+    }
+  ]
+}

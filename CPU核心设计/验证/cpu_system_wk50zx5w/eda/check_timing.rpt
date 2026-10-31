@@ -1,0 +1,341 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Sat Oct 31 22:16:29 2026
+| Host         : LAPTOP-BSM79J69 running 64-bit major release  (build 9200)
+| Command      : check_timing -verbose -file eda/check_timing.rpt
+| Design       : cpu_system
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock (0)
+2. checking constant_clock (0)
+3. checking pulse_width_clock (0)
+4. checking unconstrained_internal_endpoints (0)
+5. checking no_input_delay (1)
+6. checking no_output_delay (240)
+7. checking multiple_clock (0)
+8. checking generated_clocks (0)
+9. checking loops (0)
+10. checking partial_input_delay (0)
+11. checking partial_output_delay (0)
+12. checking latch_loops (0)
+
+1. checking no_clock (0)
+------------------------
+ There are 0 register/latch pins with no clock.
+
+
+2. checking constant_clock (0)
+------------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock (0)
+---------------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints (0)
+------------------------------------------------
+ There are 0 pins that are not constrained for maximum delay.
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay (1)
+------------------------------
+ There is 1 input port with no input delay specified. (HIGH)
+
+rst
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay (240)
+---------------------------------
+ There are 240 ports with no output delay specified. (HIGH)
+
+fault
+halted
+last_completed_pc[0]
+last_completed_pc[10]
+last_completed_pc[11]
+last_completed_pc[12]
+last_completed_pc[13]
+last_completed_pc[14]
+last_completed_pc[15]
+last_completed_pc[1]
+last_completed_pc[2]
+last_completed_pc[3]
+last_completed_pc[4]
+last_completed_pc[5]
+last_completed_pc[6]
+last_completed_pc[7]
+last_completed_pc[8]
+last_completed_pc[9]
+last_completed_valid
+last_store_addr[0]
+last_store_addr[10]
+last_store_addr[11]
+last_store_addr[12]
+last_store_addr[13]
+last_store_addr[14]
+last_store_addr[15]
+last_store_addr[1]
+last_store_addr[2]
+last_store_addr[3]
+last_store_addr[4]
+last_store_addr[5]
+last_store_addr[6]
+last_store_addr[7]
+last_store_addr[8]
+last_store_addr[9]
+last_store_data[0]
+last_store_data[10]
+last_store_data[11]
+last_store_data[12]
+last_store_data[13]
+last_store_data[14]
+last_store_data[15]
+last_store_data[1]
+last_store_data[2]
+last_store_data[3]
+last_store_data[4]
+last_store_data[5]
+last_store_data[6]
+last_store_data[7]
+last_store_data[8]
+last_store_data[9]
+last_store_valid
+observe_cv_we
+observe_fetch_pc[0]
+observe_fetch_pc[10]
+observe_fetch_pc[11]
+observe_fetch_pc[12]
+observe_fetch_pc[13]
+observe_fetch_pc[14]
+observe_fetch_pc[15]
+observe_fetch_pc[1]
+observe_fetch_pc[2]
+observe_fetch_pc[3]
+observe_fetch_pc[4]
+observe_fetch_pc[5]
+observe_fetch_pc[6]
+observe_fetch_pc[7]
+observe_fetch_pc[8]
+observe_fetch_pc[9]
+observe_flags[0]
+observe_flags[1]
+observe_flags[2]
+observe_mem_addr[0]
+observe_mem_addr[10]
+observe_mem_addr[11]
+observe_mem_addr[12]
+observe_mem_addr[13]
+observe_mem_addr[14]
+observe_mem_addr[15]
+observe_mem_addr[1]
+observe_mem_addr[2]
+observe_mem_addr[3]
+observe_mem_addr[4]
+observe_mem_addr[5]
+observe_mem_addr[6]
+observe_mem_addr[7]
+observe_mem_addr[8]
+observe_mem_addr[9]
+observe_mem_data[0]
+observe_mem_data[10]
+observe_mem_data[11]
+observe_mem_data[12]
+observe_mem_data[13]
+observe_mem_data[14]
+observe_mem_data[15]
+observe_mem_data[1]
+observe_mem_data[2]
+observe_mem_data[3]
+observe_mem_data[4]
+observe_mem_data[5]
+observe_mem_data[6]
+observe_mem_data[7]
+observe_mem_data[8]
+observe_mem_data[9]
+observe_mem_en
+observe_mem_we
+observe_pipeline_valid[0]
+observe_pipeline_valid[1]
+observe_pipeline_valid[2]
+observe_pipeline_valid[3]
+observe_redirect
+observe_rf_we
+observe_stall
+observe_wb_data[0]
+observe_wb_data[10]
+observe_wb_data[11]
+observe_wb_data[12]
+observe_wb_data[13]
+observe_wb_data[14]
+observe_wb_data[15]
+observe_wb_data[1]
+observe_wb_data[2]
+observe_wb_data[3]
+observe_wb_data[4]
+observe_wb_data[5]
+observe_wb_data[6]
+observe_wb_data[7]
+observe_wb_data[8]
+observe_wb_data[9]
+observe_wb_fault
+observe_wb_flags[0]
+observe_wb_flags[1]
+observe_wb_flags[2]
+observe_wb_halt
+observe_wb_pc[0]
+observe_wb_pc[10]
+observe_wb_pc[11]
+observe_wb_pc[12]
+observe_wb_pc[13]
+observe_wb_pc[14]
+observe_wb_pc[15]
+observe_wb_pc[1]
+observe_wb_pc[2]
+observe_wb_pc[3]
+observe_wb_pc[4]
+observe_wb_pc[5]
+observe_wb_pc[6]
+observe_wb_pc[7]
+observe_wb_pc[8]
+observe_wb_pc[9]
+observe_wb_rd[0]
+observe_wb_rd[1]
+observe_wb_store
+observe_wb_valid
+observe_z_we
+rf_snapshot[0]
+rf_snapshot[10]
+rf_snapshot[11]
+rf_snapshot[12]
+rf_snapshot[13]
+rf_snapshot[14]
+rf_snapshot[15]
+rf_snapshot[16]
+rf_snapshot[17]
+rf_snapshot[18]
+rf_snapshot[19]
+rf_snapshot[1]
+rf_snapshot[20]
+rf_snapshot[21]
+rf_snapshot[22]
+rf_snapshot[23]
+rf_snapshot[24]
+rf_snapshot[25]
+rf_snapshot[26]
+rf_snapshot[27]
+rf_snapshot[28]
+rf_snapshot[29]
+rf_snapshot[2]
+rf_snapshot[30]
+rf_snapshot[31]
+rf_snapshot[32]
+rf_snapshot[33]
+rf_snapshot[34]
+rf_snapshot[35]
+rf_snapshot[36]
+rf_snapshot[37]
+rf_snapshot[38]
+rf_snapshot[39]
+rf_snapshot[3]
+rf_snapshot[40]
+rf_snapshot[41]
+rf_snapshot[42]
+rf_snapshot[43]
+rf_snapshot[44]
+rf_snapshot[45]
+rf_snapshot[46]
+rf_snapshot[47]
+rf_snapshot[48]
+rf_snapshot[49]
+rf_snapshot[4]
+rf_snapshot[50]
+rf_snapshot[51]
+rf_snapshot[52]
+rf_snapshot[53]
+rf_snapshot[54]
+rf_snapshot[55]
+rf_snapshot[56]
+rf_snapshot[57]
+rf_snapshot[58]
+rf_snapshot[59]
+rf_snapshot[5]
+rf_snapshot[60]
+rf_snapshot[61]
+rf_snapshot[62]
+rf_snapshot[63]
+rf_snapshot[6]
+rf_snapshot[7]
+rf_snapshot[8]
+rf_snapshot[9]
+stop_pc[0]
+stop_pc[10]
+stop_pc[11]
+stop_pc[12]
+stop_pc[13]
+stop_pc[14]
+stop_pc[15]
+stop_pc[1]
+stop_pc[2]
+stop_pc[3]
+stop_pc[4]
+stop_pc[5]
+stop_pc[6]
+stop_pc[7]
+stop_pc[8]
+stop_pc[9]
+stop_pc_valid
+stop_reason[0]
+stop_reason[1]
+stop_reason[2]
+stop_valid
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock (0)
+------------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks (0)
+--------------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops (0)
+---------------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay (0)
+------------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay (0)
+-------------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops (0)
+----------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+

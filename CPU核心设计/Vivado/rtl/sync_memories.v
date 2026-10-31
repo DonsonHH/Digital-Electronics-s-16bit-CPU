@@ -2,14 +2,18 @@
 // Fixed one-edge native memories, matching v1.5 IM/DM boundary contracts.
 // Their registered read outputs are the IF/ID and MEM/WB data boundaries.
 // The CPU carries tags/controls beside these outputs; it does not add IR/MDR.
-module instruction_memory(input clk,en,input [7:0] addr,output reg [15:0] dout);
- reg [15:0] mem[0:255];integer i;
- initial begin dout=0;for(i=0;i<256;i=i+1)mem[i]=16'hb000;end
+module instruction_memory #(parameter INIT_FILE="")(input clk,en,input [7:0] addr,output reg [15:0] dout);
+ (* rom_style = "block" *) reg [15:0] mem[0:255];integer i;
+ initial begin dout=0;for(i=0;i<256;i=i+1)mem[i]=16'hb000;
+  if(INIT_FILE!="")$readmemh(INIT_FILE,mem,0,255);
+ end
  always @(posedge clk) if(en)dout<=mem[addr]; // hold when disabled
 endmodule
-module data_memory(input clk,en,we,input [7:0] addr,input [15:0] din,output reg [15:0] dout);
- reg [15:0] mem[0:255];integer i;
- initial begin dout=0;for(i=0;i<256;i=i+1)mem[i]=16'h0000;end
+module data_memory #(parameter INIT_FILE="")(input clk,en,we,input [7:0] addr,input [15:0] din,output reg [15:0] dout);
+ (* ram_style = "block" *) reg [15:0] mem[0:255];integer i;
+ initial begin dout=0;for(i=0;i<256;i=i+1)mem[i]=16'h0000;
+  if(INIT_FILE!="")$readmemh(INIT_FILE,mem,0,255);
+ end
  // Successful store followed by load observes the newly written array value.
  // No simultaneous read and write request exists in this single-port contract.
  always @(posedge clk) if(en)begin

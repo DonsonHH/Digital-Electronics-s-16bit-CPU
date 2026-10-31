@@ -1,0 +1,16 @@
+Time resolution is 1 ps
+SYSTEM_CASE_PASS name=load_before_halt epoch=0 cycles=6 wb=2 stores=0 stalls=0 redirects=0 stop_pc=0001 reason=1 rf=0000000000001234
+SYSTEM_CASE_PASS name=illegal epoch=0 cycles=6 wb=2 stores=0 stalls=0 redirects=0 stop_pc=0001 reason=2 rf=0000000000000001
+SYSTEM_CASE_PASS name=data_fault epoch=0 cycles=6 wb=2 stores=0 stalls=0 redirects=0 stop_pc=0001 reason=4 rf=0000000000ff0000
+SYSTEM_CASE_PASS name=store_before_halt epoch=0 cycles=7 wb=3 stores=1 stalls=0 redirects=0 stop_pc=0002 reason=1 rf=0000000000000055
+SYSTEM_CASE_PASS name=fetch_fault epoch=0 cycles=9 wb=3 stores=0 stalls=0 redirects=1 stop_pc=0100 reason=3 rf=0000000000000001
+SYSTEM_CASE_PASS name=reset_after_halt epoch=0 cycles=10 wb=5 stores=1 stalls=1 redirects=0 stop_pc=0004 reason=1 rf=0020000000000006
+DEBUG_INJECTION_PASS checks=2 scope=controlled_simulation_only
+SYSTEM_CASE_PASS name=memory_copy epoch=0 cycles=15 wb=7 stores=1 stalls=2 redirects=1 stop_pc=0007 reason=1 rf=00200000beefbeef
+SYSTEM_CASE_PASS name=reset_before_store epoch=1 cycles=9 wb=5 stores=1 stalls=0 redirects=0 stop_pc=0004 reason=1 rf=0020000012340055
+SYSTEM_CASE_PASS name=baseline epoch=0 cycles=17 wb=10 stores=1 stalls=1 redirects=1 stop_pc=000a reason=1 rf=0020000800020008
+SYSTEM_CASE_PASS name=reset_after_halt epoch=1 cycles=10 wb=5 stores=1 stalls=1 redirects=0 stop_pc=0004 reason=1 rf=0020000000000007
+SYSTEM_CASE_PASS name=all_ops epoch=0 cycles=25 wb=16 stores=1 stalls=1 redirects=2 stop_pc=0012 reason=1 rf=0020000500050005
+SYSTEM_CASE_PASS name=loop epoch=0 cycles=30 wb=18 stores=0 stalls=0 redirects=4 stop_pc=0006 reason=1 rf=0000000000000000
+SYSTEM_PASS cases=11 boot=file_only reset_kinds=2 debug_injections=2
+$finish called at time : 466 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_system_59b6_8as/tb/tb_cpu_system.sv" Line 104

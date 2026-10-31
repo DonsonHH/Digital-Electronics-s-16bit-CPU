@@ -1,0 +1,135 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 66060
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/addsub16_cla.v" into library work
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/alu16.v" into library work
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/branch_target16.v" into library work
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/cla16.v" into library work
+INFO: [VRFC 10-311] analyzing module cla16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/cla4_pg.v" into library work
+INFO: [VRFC 10-311] analyzing module cla4_pg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/datapath_core.sv" into library work
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/flags_reg.v" into library work
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/imm_ext16.v" into library work
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/isa_decode.v" into library work
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/operand_forward.v" into library work
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/pc16.v" into library work
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/regfile4x16.v" into library work
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/rtl/sync_memories.v" into library work
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/tb_adversarial.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_adversarial
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe tb_adversarial -s independent_sim -debug typical 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'observe_wb_valid' remains unconnected for this instance [C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/tb_adversarial.sv:9]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.pc16
+Compiling module work.isa_decode
+Compiling module work.imm_ext16
+Compiling module work.regfile4x16
+Compiling module work.flags_reg
+Compiling module work.operand_forward
+Compiling module work.addsub16_cla
+Compiling module work.alu16
+Compiling module work.branch_target16
+Compiling module work.datapath_core
+Compiling module work.tb_adversarial
+Built simulation snapshot independent_sim
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 31 22:21:46 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/independent_sim/xsim_script.tcl
+# xsim {independent_sim} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run all
+ADVERSARIAL_CASE_PASS THREE_WRITERS_R0 cycles=10 tokens=6 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS LATEST_LOAD_MANY_CONSUMERS cycles=14 tokens=9 stores=1 stalls=1 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS STR_DATA_LOAD_W_BASE_M cycles=15 tokens=8 stores=1 stalls=1 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS STR_DATA_M_BASE_W cycles=9 tokens=5 stores=1 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS LOAD_R0_RD_RS_SAME cycles=15 tokens=7 stores=1 stalls=2 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS FALSE_IMMEDIATE_RS cycles=10 tokens=6 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS WB_ID_AND_OVERWRITES cycles=11 tokens=7 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS CMP_101_JZ cycles=12 tokens=6 stores=0 stalls=0 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS CMP_010_JZ cycles=11 tokens=7 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS CMP_ACROSS_ALU_STORE_LOAD cycles=16 tokens=9 stores=1 stalls=1 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS CMP_LOAD_JZ_W_FALLBACK cycles=11 tokens=5 stores=0 stalls=0 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS REFETCH_CANCELLED_HALT cycles=9 tokens=3 stores=0 stalls=0 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS REFETCH_CANCELLED_STR cycles=11 tokens=5 stores=1 stalls=0 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS REFETCH_CANCELLED_RESERVED cycles=8 tokens=2 stores=0 stalls=0 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS LOAD_BEFORE_HALT cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS LEGAL_STR_BEFORE_HALT cycles=8 tokens=4 stores=1 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS MEM_FAULT_OVER_BRANCH cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS MEM_FAULT_OVER_JZ cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS MEM_FAULT_WITH_LOAD_USE cycles=7 tokens=3 stores=0 stalls=1 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS STR_BEFORE_MEM_FAULT cycles=8 tokens=4 stores=1 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS STR_BEFORE_RESERVED cycles=8 tokens=4 stores=1 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS CONSECUTIVE_RESERVED cycles=6 tokens=2 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS EA_UPPER_FAULT_NO_ALIAS cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS EA_NEGATIVE_FAULT_NO_ALIAS cycles=6 tokens=2 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS EA_MODULO_WRAP cycles=10 tokens=6 stores=1 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS JZ_S8_LOW_PC_WRAP cycles=9 tokens=3 stores=0 stalls=0 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS FETCH_256_CORRECT_PATH cycles=9 tokens=3 stores=0 stalls=0 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS FETCH_256_SQUASH cycles=11 tokens=3 stores=0 stalls=0 redirects=2 reset=0
+ADVERSARIAL_CASE_PASS LONG_ALTERNATING_18_ROUNDS cycles=241 tokens=183 stores=18 stalls=18 redirects=18 reset=0
+ADVERSARIAL_CASE_PASS LONG_LOOP_MEMORY_CONSUMERS cycles=202 tokens=153 stores=15 stalls=15 redirects=15 reset=0
+ADVERSARIAL_CASE_PASS FLAGS_CV_Z_LONG_LIFETIMES cycles=20 tokens=12 stores=1 stalls=2 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS IGNORED_FIELDS_BOTH_SIGNS cycles=16 tokens=10 stores=0 stalls=0 redirects=1 reset=0
+AUDIT_SUPP_CMP_WITNESS newest_M_rd=1 older_W_rs=1 stalls=0
+ADVERSARIAL_CASE_PASS SUPP_MOV_ALU_TO_CMP cycles=11 tokens=5 stores=0 stalls=0 redirects=1 reset=0
+AUDIT_SUPP_G1_WITNESS rs_sel=0 saved=0021 W_valid=0 middle_load_stalled=1
+ADVERSARIAL_CASE_PASS SUPP_G1_INTERVENING_LOAD_STALL cycles=10 tokens=5 stores=0 stalls=1 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS DOC_ADD_ADD cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS DOC_LOAD_STR cycles=8 tokens=3 stores=1 stalls=1 redirects=0 reset=0
+ADVERSARIAL_CASE_PASS DOC_CMP_JZ cycles=9 tokens=3 stores=0 stalls=0 redirects=1 reset=0
+ADVERSARIAL_CASE_PASS DOC_STR_HALT cycles=6 tokens=2 stores=1 stalls=0 redirects=0 reset=0
+AUDIT_RESET_WITNESS RESET_LOAD_USE kind=1 cycle=7 mode=0 stores=1 stall=1 redirect=0
+ADVERSARIAL_CASE_PASS RESET_LOAD_USE cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_REDIRECT kind=2 cycle=12 mode=0 stores=1 stall=0 redirect=1
+ADVERSARIAL_CASE_PASS RESET_REDIRECT cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_DRAIN_HALT kind=3 cycle=16 mode=1 stores=1 stall=0 redirect=0
+ADVERSARIAL_CASE_PASS RESET_DRAIN_HALT cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_BEFORE_STORE kind=4 cycle=6 mode=0 stores=0 stall=0 redirect=0
+ADVERSARIAL_CASE_PASS RESET_BEFORE_STORE cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_AFTER_STORE kind=5 cycle=7 mode=0 stores=1 stall=1 redirect=0
+ADVERSARIAL_CASE_PASS RESET_AFTER_STORE cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_HALT_WB kind=6 cycle=17 mode=1 stores=1 stall=0 redirect=0
+ADVERSARIAL_CASE_PASS RESET_HALT_WB cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_DRAIN_FAULT kind=7 cycle=5 mode=2 stores=0 stall=0 redirect=0
+ADVERSARIAL_CASE_PASS RESET_DRAIN_FAULT cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_FAULT_WB kind=8 cycle=6 mode=2 stores=0 stall=0 redirect=0
+ADVERSARIAL_CASE_PASS RESET_FAULT_WB cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_HALTED kind=9 cycle=7 mode=3 stores=0 stall=0 redirect=0
+ADVERSARIAL_CASE_PASS RESET_HALTED cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+AUDIT_RESET_WITNESS RESET_FAULTED kind=10 cycle=7 mode=4 stores=0 stall=0 redirect=0
+ADVERSARIAL_CASE_PASS RESET_FAULTED cycles=7 tokens=3 stores=0 stalls=0 redirects=0 reset=1
+ADVERSARIAL_PASS cases=48 reset_witnesses=10 failures=0 oracle=external_python memory=independent_sync
+$finish called at time : 12026 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_ac1_independent_m7aa_q8u/tb_adversarial.sv" Line 209
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 22:21:48 2026...
+DESKTOP_EXIT 0

@@ -1,0 +1,1 @@
+cycle,fetch_pc,d_valid,d_pc,x_valid,x_pc,m_valid,m_pc,w_valid,w_pc,stall,redirect,dm_en,dm_we,dm_addr,dm_din,Z,C,V

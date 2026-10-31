@@ -1,0 +1,2 @@
+case,cycles,retired,stalls,redirects,halted,fault,witness_seen,witness_required
+TRACE_LOAD_STR,12,5,1,1,1,0,0001,0001

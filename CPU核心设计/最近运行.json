@@ -1,13 +1,13 @@
 {
   "status": "PASS",
   "result_kind": "fresh_execution",
-  "attempt_id": "f214e7d1-dd4c-45fc-a44e-9865322655d7",
+  "attempt_id": "3df8066a-3273-4d19-867a-a613f4d42481",
   "spec_version": "1.6",
   "isa_version": "1.5",
   "verification_revision": "1.6-vtools-r1",
-  "started_at_utc": "2026-10-31T13:52:07.1460466Z",
+  "started_at_utc": "2026-10-31T14:25:59.4164075Z",
   "note": "New native execution passed; 19 tool records, pre-run inputs, raw artifacts and validation are bound to this attempt.",
-  "runtime": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_f214e7d1dd4c45fca44e9865322655d7",
-  "completed_at_utc": "2026-10-31T13:53:14.7256023Z",
-  "archived_run": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证记录\\cpu_v16_f214e7d1dd4c45fca44e9865322655d7"
+  "runtime": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_3df8066a32734d19867aa613f4d42481",
+  "completed_at_utc": "2026-10-31T14:27:07.8374282Z",
+  "archived_run": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证记录\\cpu_v16_3df8066a32734d19867aa613f4d42481"
 }

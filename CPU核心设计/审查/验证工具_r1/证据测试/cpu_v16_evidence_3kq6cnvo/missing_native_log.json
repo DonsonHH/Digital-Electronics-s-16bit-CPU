@@ -1,0 +1,10 @@
+{
+  "status": "FAIL",
+  "result_kind": "historical_revalidation",
+  "new_xsim_execution": false,
+  "new_execution_pass": false,
+  "verification_revision": "1.6-vtools-r1",
+  "revalidated_at_utc": "2026-10-31T14:24:08.339455+00:00",
+  "run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_3kq6cnvo\\missing_native_log",
+  "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\Donson\\\\AppData\\\\Local\\\\Temp\\\\cpu_v16_evidence_3kq6cnvo\\\\missing_native_log\\\\hazards.log'"
+}

@@ -1,0 +1,23 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  -i "../../../../../tb" --include "../../../../../../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../../tb" \
+"../../../../../rtl/addsub16_cla.v" \
+"../../../../../rtl/alu16.v" \
+"../../../../../rtl/branch_target16.v" \
+"../../../../../rtl/flags_reg.v" \
+"../../../../../rtl/imm_ext16.v" \
+"../../../../../rtl/isa_decode.v" \
+"../../../../../rtl/operand_forward.v" \
+"../../../../../rtl/pc16.v" \
+"../../../../../rtl/regfile4x16.v" \
+"../../../../../rtl/sync_memories.v" \
+
+sv xil_defaultlib  -i "../../../../../tb" --include "../../../../../../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../../tb" \
+"../../../../../rtl/cpu_system.sv" \
+"../../../../../rtl/datapath_core.sv" \
+"../../../../../tb/tb_cpu_system.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

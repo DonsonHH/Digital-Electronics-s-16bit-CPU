@@ -17,7 +17,22 @@ module datapath_core (
     output wire [15:0] dm_din,
     input  wire [15:0] dm_dout,
     output wire        halted,
-    output wire        fault
+    output wire        fault,
+    // Observation-only interface; none of these signals feed execution.
+    output wire observe_wb_valid, observe_wb_fault, observe_wb_halt, observe_wb_store,
+    output wire observe_rf_we, observe_z_we, observe_cv_we,
+    output wire [1:0] observe_wb_rd,
+    output wire [15:0] observe_wb_pc, observe_wb_data,
+    output wire [2:0] observe_wb_flags,
+    output wire observe_stall, observe_redirect,
+    output wire [15:0] observe_fetch_pc,
+    output wire [3:0] observe_pipeline_valid,
+    output wire [2:0] observe_flags,
+    output reg stop_valid, stop_pc_valid,
+    output reg [15:0] stop_pc,
+    output reg [2:0] stop_reason,
+    output reg last_completed_valid,
+    output reg [15:0] last_completed_pc
 );
     localparam [2:0] RUN         = 3'd0;
     localparam [2:0] DRAIN_HALT  = 3'd1;
@@ -263,6 +278,52 @@ module datapath_core (
             FAULTED: mode_next = FAULTED;
             default: mode_next = FAULTED; // fail safe, never restart silently
         endcase
+    end
+
+    assign observe_wb_valid = !rst && mode_active && w_valid;
+    assign observe_wb_fault = observe_wb_valid && w_fault;
+    assign observe_wb_halt = observe_wb_valid && w_halt;
+    assign observe_wb_store = observe_wb_valid && w_store;
+    assign observe_rf_we = rf_we;
+    assign observe_z_we = z_we;
+    assign observe_cv_we = cv_we;
+    assign observe_wb_rd = w_rd;
+    assign observe_wb_pc = w_pc;
+    assign observe_wb_data = wb_data;
+    assign observe_wb_flags = {w_cmp_z,w_c,w_v};
+    assign observe_stall = !rst && mode == RUN && !frontend_kill && load_use;
+    assign observe_redirect = qualified_redirect;
+    assign observe_fetch_pc = PC_fetch;
+    assign observe_pipeline_valid = {d_valid,x_valid,m_valid,w_valid};
+    assign observe_flags = {Z,C,V};
+
+    // Diagnostic reasons follow the SAME valid tokens, without changing CU
+    // arbitration or memory timing. 1=HALT, 2=opcode, 3=fetch range,
+    // 4=DM range, 5=internal control, 6=illegal binary mode (no PC).
+    reg [2:0] x_reason, m_reason, w_reason;
+    always @(posedge clk) begin
+        if (rst) begin
+            x_reason <= 0; m_reason <= 0; w_reason <= 0;
+            stop_valid <= 0; stop_pc_valid <= 0; stop_pc <= 0; stop_reason <= 0;
+            last_completed_valid <= 0; last_completed_pc <= 0;
+        end else begin
+            x_reason <= x_valid_next && d_fault ? (d_fetch_fault ? 3'd3 : 3'd2) : 3'd0;
+            m_reason <= !m_valid_next ? 3'd0 : x_fault ? x_reason :
+                        x_control_illegal ? 3'd5 : x_halt ? 3'd1 : 3'd0;
+            w_reason <= !w_valid_next ? 3'd0 : m_fault ? m_reason :
+                        m_access_fault ? 3'd4 : m_halt ? 3'd1 : 3'd0;
+            if (observe_wb_valid && !w_fault) begin
+                last_completed_valid <= 1;
+                last_completed_pc <= w_pc;
+            end
+            if (!stop_valid && drain_done) begin
+                stop_valid <= 1; stop_pc_valid <= 1;
+                stop_pc <= w_pc; stop_reason <= w_fault ? w_reason : 3'd1;
+            end else if (!stop_valid && mode > FAULTED) begin
+                stop_valid <= 1; stop_pc_valid <= 0;
+                stop_pc <= 0; stop_reason <= 3'd6;
+            end
+        end
     end
 
     // One driver for every pipeline state. Backend advances during an ID

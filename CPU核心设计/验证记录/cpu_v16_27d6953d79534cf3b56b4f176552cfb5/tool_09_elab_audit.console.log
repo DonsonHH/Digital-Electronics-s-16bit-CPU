@@ -1,0 +1,30 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 62372
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe tb_audit3 -s audit_v16_sim -debug typical 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'observe_wb_valid' remains unconnected for this instance [C:/Users/Donson/AppData/Local/Temp/cpu_v16_27d6953d79534cf3b56b4f176552cfb5/rtl/sync_memories.v:26]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.pc16
+Compiling module work.isa_decode
+Compiling module work.imm_ext16
+Compiling module work.regfile4x16
+Compiling module work.flags_reg
+Compiling module work.operand_forward
+Compiling module work.addsub16_cla
+Compiling module work.alu16
+Compiling module work.branch_target16
+Compiling module work.datapath_core
+Compiling module work.instruction_memory
+Compiling module work.data_memory
+Compiling module work.pre4_system
+Compiling module work.tb_audit3
+Built simulation snapshot audit_v16_sim
+DESKTOP_EXIT 0

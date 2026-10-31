@@ -1,0 +1,608 @@
+{
+  "schema": 1,
+  "cases": [
+    {
+      "id": 0,
+      "name": "baseline",
+      "cycles": 17,
+      "stalls": 1,
+      "redirects": 1,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 10,
+          "stores": 1,
+          "rf": [
+            8,
+            2,
+            8,
+            32
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": 10,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        },
+        {
+          "events": 10,
+          "stores": 1,
+          "rf": [
+            8,
+            2,
+            8,
+            32
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": 10,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "all_ops",
+      "cycles": 25,
+      "stalls": 1,
+      "redirects": 2,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 16,
+          "stores": 1,
+          "rf": [
+            5,
+            5,
+            5,
+            32
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": 18,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        },
+        {
+          "events": 16,
+          "stores": 1,
+          "rf": [
+            5,
+            5,
+            5,
+            32
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": 18,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "loop",
+      "cycles": 30,
+      "stalls": 0,
+      "redirects": 4,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 18,
+          "stores": 0,
+          "rf": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": 6,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        },
+        {
+          "events": 18,
+          "stores": 0,
+          "rf": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": 6,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "memory_copy",
+      "cycles": 15,
+      "stalls": 2,
+      "redirects": 1,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 7,
+          "stores": 1,
+          "rf": [
+            48879,
+            48879,
+            0,
+            32
+          ],
+          "flags": [
+            1,
+            0,
+            0
+          ],
+          "stop_pc": 7,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        },
+        {
+          "events": 7,
+          "stores": 1,
+          "rf": [
+            48879,
+            48879,
+            0,
+            32
+          ],
+          "flags": [
+            1,
+            0,
+            0
+          ],
+          "stop_pc": 7,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "fetch_fault",
+      "cycles": 9,
+      "stalls": 0,
+      "redirects": 1,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 3,
+          "stores": 0,
+          "rf": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 256,
+          "stop_reason": 3,
+          "fault": 1,
+          "halt": 0
+        },
+        {
+          "events": 3,
+          "stores": 0,
+          "rf": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 256,
+          "stop_reason": 3,
+          "fault": 1,
+          "halt": 0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "data_fault",
+      "cycles": 6,
+      "stalls": 0,
+      "redirects": 0,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 2,
+          "stores": 0,
+          "rf": [
+            0,
+            255,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 1,
+          "stop_reason": 4,
+          "fault": 1,
+          "halt": 0
+        },
+        {
+          "events": 2,
+          "stores": 0,
+          "rf": [
+            0,
+            255,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 1,
+          "stop_reason": 4,
+          "fault": 1,
+          "halt": 0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "illegal",
+      "cycles": 6,
+      "stalls": 0,
+      "redirects": 0,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 2,
+          "stores": 0,
+          "rf": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 1,
+          "stop_reason": 2,
+          "fault": 1,
+          "halt": 0
+        },
+        {
+          "events": 2,
+          "stores": 0,
+          "rf": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 1,
+          "stop_reason": 2,
+          "fault": 1,
+          "halt": 0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "load_before_halt",
+      "cycles": 6,
+      "stalls": 0,
+      "redirects": 0,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 2,
+          "stores": 0,
+          "rf": [
+            4660,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 1,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        },
+        {
+          "events": 2,
+          "stores": 0,
+          "rf": [
+            4660,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 1,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "store_before_halt",
+      "cycles": 7,
+      "stalls": 0,
+      "redirects": 0,
+      "reset_kind": 0,
+      "epochs": [
+        {
+          "events": 3,
+          "stores": 1,
+          "rf": [
+            85,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 2,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        },
+        {
+          "events": 3,
+          "stores": 1,
+          "rf": [
+            85,
+            0,
+            0,
+            0
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 2,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "reset_after_halt",
+      "cycles": 10,
+      "stalls": 1,
+      "redirects": 0,
+      "reset_kind": 1,
+      "epochs": [
+        {
+          "events": 5,
+          "stores": 1,
+          "rf": [
+            6,
+            0,
+            0,
+            32
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 4,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        },
+        {
+          "events": 5,
+          "stores": 1,
+          "rf": [
+            7,
+            0,
+            0,
+            32
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 4,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "reset_before_store",
+      "cycles": 9,
+      "stalls": 0,
+      "redirects": 0,
+      "reset_kind": 2,
+      "epochs": [
+        {
+          "events": 5,
+          "stores": 1,
+          "rf": [
+            85,
+            4660,
+            0,
+            32
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 4,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        },
+        {
+          "events": 5,
+          "stores": 1,
+          "rf": [
+            85,
+            4660,
+            0,
+            32
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": 4,
+          "stop_reason": 1,
+          "fault": 0,
+          "halt": 1
+        }
+      ]
+    }
+  ],
+  "case_count": 11,
+  "normal_case_rows": 12,
+  "input_sha256": {
+    "all_ops_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "all_ops_e0_events.mem": "7c502281001b8d560b3571d142ad033f5e78816d766b8eb25a4e00bc6e721a11",
+    "all_ops_e0_stores.mem": "1f69f6bcae02e6ad135ae61e23057154c52e1eb832837da7bc146b0fa42a4dfb",
+    "all_ops_e1_events.mem": "7c502281001b8d560b3571d142ad033f5e78816d766b8eb25a4e00bc6e721a11",
+    "all_ops_e1_stores.mem": "1f69f6bcae02e6ad135ae61e23057154c52e1eb832837da7bc146b0fa42a4dfb",
+    "all_ops_im.mem": "a22c6d230ee1780afde6b04e9b9c880d7ec5318a0bff3417f101be568abdd71f",
+    "baseline_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "baseline_e0_events.mem": "8a8190ef390c15686ee7327ae2823bff7e00ce1aa1a488c1c5b28fdb9a8ea71a",
+    "baseline_e0_stores.mem": "4bab409fe0c2969f25427040a14f9fcece072bfee4898d4de5edd0645b64b26b",
+    "baseline_e1_events.mem": "8a8190ef390c15686ee7327ae2823bff7e00ce1aa1a488c1c5b28fdb9a8ea71a",
+    "baseline_e1_stores.mem": "4bab409fe0c2969f25427040a14f9fcece072bfee4898d4de5edd0645b64b26b",
+    "baseline_im.mem": "086202700989134d096fbf91c95f6c50ee33e3f0e73c348a8ce9881cb25b7834",
+    "control_fault_dm.mem": "b47557cc760f8bb38a4a4df306e731e12ffba58864284056d3908e48a9ecc2f4",
+    "control_fault_im.mem": "7a65f3c60e151a4dad10fd8aa450011b480e467e35ffe07e5676439e95aef094",
+    "data_fault_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "data_fault_e0_events.mem": "cc548d391981986b44e58900da9f7ecba0c0e5d945bc1877312b99c5a7336ba9",
+    "data_fault_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "data_fault_e1_events.mem": "cc548d391981986b44e58900da9f7ecba0c0e5d945bc1877312b99c5a7336ba9",
+    "data_fault_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "data_fault_im.mem": "ad76e8cbea10bfafb6a0f99dad75e9cfbcd3b88180c45f589fa5cde50bf5e475",
+    "fetch_fault_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "fetch_fault_e0_events.mem": "973df33cc9a7ebead65345881f2e4893de6a08a0c55367a4209cc6f93b640704",
+    "fetch_fault_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "fetch_fault_e1_events.mem": "973df33cc9a7ebead65345881f2e4893de6a08a0c55367a4209cc6f93b640704",
+    "fetch_fault_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "fetch_fault_im.mem": "b5f6cab45bacaf94d1c0bc50912f4a9e11468c33279561f8ffbc743c343d98bc",
+    "illegal_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "illegal_e0_events.mem": "bf10f9f29818b5686c6d6d1d8716fe28fbc471b142a1198869c1496cc4abfe39",
+    "illegal_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "illegal_e1_events.mem": "bf10f9f29818b5686c6d6d1d8716fe28fbc471b142a1198869c1496cc4abfe39",
+    "illegal_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "illegal_im.mem": "c2fa111fc057b4585ad1b8a13f31cb1969be001c78f5dc3a31a3aec731ee4606",
+    "load_before_halt_dm.mem": "40a1cb29c43d0bef772d3018a465134b7aeebe34402848a237de78ac02c69f7c",
+    "load_before_halt_e0_events.mem": "f047706f27bcb513785d888c8c0119352b8678caa3e3de79e0b734b7b0c01c91",
+    "load_before_halt_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "load_before_halt_e1_events.mem": "f047706f27bcb513785d888c8c0119352b8678caa3e3de79e0b734b7b0c01c91",
+    "load_before_halt_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "load_before_halt_im.mem": "45eb05db808e0e3536e01fa07395307ff9abec004a1efb4ee945883760f7b719",
+    "loop_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "loop_e0_events.mem": "a09930c4855875d530bd9548e468990b534c1656fc21cbcc1aef01459b7853bb",
+    "loop_e0_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "loop_e1_events.mem": "a09930c4855875d530bd9548e468990b534c1656fc21cbcc1aef01459b7853bb",
+    "loop_e1_stores.mem": "dc9b32a0665df4784318cbc2a8d48d2d6fe9cc2c28a0a8b797d516bb21de161f",
+    "loop_im.mem": "0c9f97a7587aa5234daf70abe311c2fde448d8244036645894d0785d5fcb62a6",
+    "memory_copy_dm.mem": "fef682501668d586fbc70257e8ec02adf19ab6eb6c9f6d405cc874d0c1d00347",
+    "memory_copy_e0_events.mem": "4083de87face9f6de508afeaf693780d1f9fddc35bf90d3dede027f58f419b2e",
+    "memory_copy_e0_stores.mem": "1164b67c6e00ac4aab9417f6429177802d85b0837962253bbef05cf6bcf281c5",
+    "memory_copy_e1_events.mem": "4083de87face9f6de508afeaf693780d1f9fddc35bf90d3dede027f58f419b2e",
+    "memory_copy_e1_stores.mem": "1164b67c6e00ac4aab9417f6429177802d85b0837962253bbef05cf6bcf281c5",
+    "memory_copy_im.mem": "a7fc518e2a493f2b954e4e9658df053ab41c1744072bad42696d4df3813532ae",
+    "memory_dm.mem": "01465a2d021b4bd2ea46ec50467340987d6cac0087ec7bd196a26a77f0ae9df6",
+    "memory_im.mem": "7ff78762f3afdfafa4baeddc0dbbdeee63ec7376fb4b4d09c3d45985b15cccf2",
+    "reset_after_halt_dm.mem": "b47557cc760f8bb38a4a4df306e731e12ffba58864284056d3908e48a9ecc2f4",
+    "reset_after_halt_e0_events.mem": "402619dcea4d4d5c1b3fd33167d4340e017e6cda0f06591c686db1e498cade2c",
+    "reset_after_halt_e0_stores.mem": "c6360580a9e01d1f0406dcb05904096bf75320ef7f43a23693e62cf4acd47dc9",
+    "reset_after_halt_e1_events.mem": "022581185ee97519dff930ba790eb2d54da092d29045ad8a98bb9bddfdd5b906",
+    "reset_after_halt_e1_stores.mem": "6b43d9b0879af94e7a3cafad969f184b626eeb65fb4c6256bbf8e1d2085d4189",
+    "reset_after_halt_im.mem": "a08e637da8ba1ebed04b430a94ad9c6d4a87d00e7b1f81c2d47b77fbc611460c",
+    "reset_before_store_dm.mem": "40a1cb29c43d0bef772d3018a465134b7aeebe34402848a237de78ac02c69f7c",
+    "reset_before_store_e0_events.mem": "80b1c5ae1053bbde6c06bdb185daa27a3e05ea0f694608e037dd3c79554c259d",
+    "reset_before_store_e0_stores.mem": "e5becc14882eb4c48692dbc25ed2dc9fe2582a2c2ce0b31d22e24d59dc79e5c2",
+    "reset_before_store_e1_events.mem": "80b1c5ae1053bbde6c06bdb185daa27a3e05ea0f694608e037dd3c79554c259d",
+    "reset_before_store_e1_stores.mem": "e5becc14882eb4c48692dbc25ed2dc9fe2582a2c2ce0b31d22e24d59dc79e5c2",
+    "reset_before_store_im.mem": "4d53830649add1e86c50cfca1b4acda85b859a1336a0375758e8feb73c8ba733",
+    "store_before_halt_dm.mem": "532dd13c8826d7f26fb504c86c97e1bd743e8e1e31ee050911b5f05511736d2e",
+    "store_before_halt_e0_events.mem": "2fa5a9ea37acaf338b6c6a91cd8319476a2af38c7dc48e3dcd514b4a312eda1d",
+    "store_before_halt_e0_stores.mem": "afe410a9eca8cb18a8d7d54966a52c5a966100b22c24630bf70d8af64a4b55bb",
+    "store_before_halt_e1_events.mem": "2fa5a9ea37acaf338b6c6a91cd8319476a2af38c7dc48e3dcd514b4a312eda1d",
+    "store_before_halt_e1_stores.mem": "afe410a9eca8cb18a8d7d54966a52c5a966100b22c24630bf70d8af64a4b55bb",
+    "store_before_halt_im.mem": "f18233a4b02240968c3cc95d928321abac93a8dee69c9640c985a95d8b3aeb56"
+  },
+  "note": "Fixed reviewed cycle/stall/redirect expectations; independent sequential oracle supplies architecture events and state"
+}

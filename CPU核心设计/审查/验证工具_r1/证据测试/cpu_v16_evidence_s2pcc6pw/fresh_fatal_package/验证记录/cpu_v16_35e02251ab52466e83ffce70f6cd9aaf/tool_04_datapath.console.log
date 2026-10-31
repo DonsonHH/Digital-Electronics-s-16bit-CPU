@@ -1,0 +1,34 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 17676
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 31 22:29:46 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/datapath_v16_sim/xsim_script.tcl
+# xsim {datapath_v16_sim} -wdb {datapath.wdb} -autoloadwcfg -tclbatch {sim.tcl}
+Time resolution is 1 ps
+source sim.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=35e02251-ab52-466e-83ff-ce70f6cd9aaf input_sha256=c778d85e2559f48893fd8b079a15ab89d737c2b1f1e24f4025da5da000cfbfa3
+## open_vcd datapath.vcd
+## log_vcd /tb_datapath/dut/core/*
+## log_vcd /tb_datapath/dut/*
+## log_vcd /tb_datapath/clk /tb_datapath/rst
+## log_wave -r /tb_datapath/dut/core/*
+## run all
+Fatal: Unready newest producer consumed BASELINE
+Time: 125 ns  Iteration: 0  Process: /tb_datapath/run_program  Scope: tb_datapath.run_program  File: C:/Users/Donson/AppData/Local/Temp/cpu_v16_35e02251ab52466e83ffce70f6cd9aaf/tb/tb_datapath.sv Line: 163
+$finish called at time : 125 ns
+## close_vcd
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 22:29:48 2026...
+DESKTOP_EXIT 0

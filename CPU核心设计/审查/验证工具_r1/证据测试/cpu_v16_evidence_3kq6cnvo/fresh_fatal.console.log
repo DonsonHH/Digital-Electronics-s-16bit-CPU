@@ -1,0 +1,16 @@
+V16_FRESH_RUNTIME=C:\Users\Donson\AppData\Local\Temp\cpu_v16_095b9b14d1f54470ba796d04c52c079b
+NATIVE_STEP_START 0 xvlog compile
+NATIVE_STEP_END 0 compile exit=0
+NATIVE_STEP_START 1 xelab elab_contract
+NATIVE_STEP_END 1 elab_contract exit=0
+NATIVE_STEP_START 2 xsim contract
+NATIVE_STEP_END 2 contract exit=0
+NATIVE_STEP_START 3 xelab elab_datapath
+NATIVE_STEP_END 3 elab_datapath exit=0
+NATIVE_STEP_START 4 xsim datapath
+CPU_V16_EXECUTION_FAILED Native failure, even if tool exit was zero: datapath
+Exception: C:\Users\Donson\AppData\Local\Temp\cpu_v16_evidence_3kq6cnvo\fresh_fatal_package\Vivado\run_verify.ps1:35
+Line |
+  35 |  … CODE -ne 0){throw 'Actual native execution or bound evidence validati …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Actual native execution or bound evidence validation failed; no new execution PASS published.

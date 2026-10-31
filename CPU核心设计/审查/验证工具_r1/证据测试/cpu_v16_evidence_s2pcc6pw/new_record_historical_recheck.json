@@ -1,0 +1,16 @@
+{
+  "status": "HISTORICAL_REVALIDATION_PASS",
+  "result_kind": "historical_revalidation",
+  "new_xsim_execution": false,
+  "new_execution_pass": false,
+  "verification_revision": "1.6-vtools-r1",
+  "revalidated_at_utc": "2026-10-31T14:29:30.575983+00:00",
+  "run": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证记录\\cpu_v16_3df8066a32734d19867aa613f4d42481",
+  "original_attempt_id": "3df8066a-3273-4d19-867a-a613f4d42481",
+  "original_completed_at_utc": "2026-10-31T14:27:07.158678+00:00",
+  "original_receipt_sha256": "10c4136f3475ad4c26ba413c77c315ee83bbbe7023f724e1e55fd74ae48eff26",
+  "evidence_integrity_verified": true,
+  "current_package_compatible": false,
+  "scope": "uniform five-stage completion and bounded hazard regression; not exhaustive CPU state, timing closure or board validation",
+  "note": "Only the recorded evidence was revalidated; no xvlog/xelab/xsim was executed here"
+}

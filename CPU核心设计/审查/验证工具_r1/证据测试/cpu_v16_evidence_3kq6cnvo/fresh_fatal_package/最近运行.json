@@ -1,0 +1,14 @@
+{
+  "status": "failed",
+  "result_kind": "fresh_execution",
+  "attempt_id": "095b9b14-d1f5-4470-ba79-6d04c52c079b",
+  "spec_version": "1.6",
+  "isa_version": "1.5",
+  "verification_revision": "1.6-vtools-r1",
+  "started_at_utc": "2026-10-31T14:24:09.4730317Z",
+  "note": "No new successful execution receipt published; prior 验证结果.json remains historical.",
+  "runtime": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_095b9b14d1f54470ba796d04c52c079b",
+  "completed_at_utc": "2026-10-31T14:24:23.2254109Z",
+  "error": "Actual native execution or bound evidence validation failed; no new execution PASS published.",
+  "archived_run": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_evidence_3kq6cnvo\\fresh_fatal_package\\验证记录\\cpu_v16_095b9b14d1f54470ba796d04c52c079b"
+}
