@@ -111,7 +111,8 @@ def verify_attempt(run):
  require(receipt['status']=='PASS','Attempt did not finish successfully')
  labels=['compile','elaborate','simulate'] if receipt['mode']=='all' else []
  if (run/'tb/tb_selected_program.sv').exists():
-  require(receipt.get('verification_revision')=='board_selected_v2','Selected program verification revision missing')
+  revision='board_benchmarks_v3' if (run/'benchmark_programs.py').exists() else 'board_selected_v2'
+  require(receipt.get('verification_revision')==revision,'Selected program verification revision missing')
   if receipt['mode']=='all':labels+=['elaborate_selected','simulate_selected']
  labels+=['implement']
  require([s['label'] for s in receipt['steps']]==labels,'Native step sequence missing')
@@ -122,6 +123,8 @@ def verify_attempt(run):
  expected={p.relative_to(run).as_posix() for group in ['rtl','tb','programs','constraints'] for p in (run/group).rglob('*') if p.is_file()}
  expected.update(['build_board.tcl','probe_hardware.tcl','run_board.py','desktop_launch.py'])
  if (run/'verify_board_results.py').exists():expected.add('verify_board_results.py')
+ if (run/'benchmark_programs.py').exists():
+  expected.add('benchmark_programs.py');expected.add('oracle_source/isa_reference.py')
  require(set(receipt['input_sha256'])==expected,'Executed input inventory missing/different')
  expected_out={p.relative_to(run).as_posix() for group in ['reports','output'] for p in (run/group).rglob('*') if p.is_file()}
  require(set(receipt['output_sha256'])==expected_out,'Output inventory missing/different')

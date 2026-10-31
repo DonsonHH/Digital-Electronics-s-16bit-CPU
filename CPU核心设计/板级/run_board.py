@@ -6,13 +6,13 @@ sys.path.insert(0,str(V));sys.path.insert(0,str(S))
 from tool_config import add_tool_arguments,resolve_tools
 from run_system import validate_images
 from verify_board_results import analyze_reports,require_tool_version,review_console_warnings
-from verification.isa_reference import oracle,pack
+from benchmark_programs import PROGRAMS,prepare_selected
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def main():
  parser=argparse.ArgumentParser(description=__doc__);add_tool_arguments(parser)
  parser.add_argument('--mode',choices=['simulate','implement','all'],default='all')
- parser.add_argument('--program',choices=['all_ops','baseline','loop','memory_copy'],default='all_ops')
+ parser.add_argument('--program',choices=list(PROGRAMS),default='all_ops')
  a=parser.parse_args();tools=resolve_tools(a.vivado_bin,python=sys.executable,config=a.config)
  work=Path(tempfile.mkdtemp(prefix='cpu345_board_'));dest=P/'验证'/work.name
  result={'status':'RUNNING','stage':3,'mode':a.mode,'attempt':work.name,'started_at_utc':utc(),'scope':'EES-331 board design and simulation, physical validation separate','part':'xc7z020clg484-1','clock_period_ns':10,'tools':tools,'program':a.program,'steps':[],'board_validated':False}
@@ -44,17 +44,11 @@ def main():
   for source in list((V/'rtl').iterdir())+list((S/'rtl').iterdir()):
    if source.is_file():shutil.copy2(source,work/'rtl'/source.name)
   shutil.copytree(S/'programs',work/'programs')
-  shutil.copy2(work/'programs'/(a.program+'_im.mem'),work/'programs/dut_im.mem');shutil.copy2(work/'programs'/(a.program+'_dm.mem'),work/'programs/dut_dm.mem')
-  reviewed={'all_ops':(25,16,1,2),'baseline':(17,10,1,1),'loop':(30,18,0,4),'memory_copy':(15,7,2,1)}
-  c,n,stalls,redirects=reviewed[a.program]
-  image=[int(x,16) for x in (work/'programs/dut_im.mem').read_text().splitlines()];memory=[int(x,16) for x in (work/'programs/dut_dm.mem').read_text().splitlines()]
-  gold=oracle(image,memory);assert len(gold['events'])==n and gold['halt'] and not gold['fault']
-  (work/'programs/selected_events.mem').write_text(''.join(f'{pack(e):016x}\n' for e in gold['events']),encoding='ascii')
-  (work/'programs/selected_stores.mem').write_text(''.join(f"{pack(e)|(e['sequence']<<63):020x}\n" for e in gold['stores']) or '00000000000000000000\n',encoding='ascii')
-  expected={'CYCLES':c,'N':n,'STALLS':stalls,'REDIRECTS':redirects,'STORES':len(gold['stores'])}
-  config='localparam PROGRAM="'+a.program+'";\n'+''.join('localparam EXPECTED_'+k+'='+str(v)+';\n' for k,v in expected.items())
-  config+=f"localparam[63:0] EXPECTED_RF=64'h{sum(v<<(16*i) for i,v in enumerate(gold['rf'])):016x};\nlocalparam[2:0] EXPECTED_FLAGS=3'd{gold['flags'][0]*4+gold['flags'][1]*2+gold['flags'][2]};\nlocalparam[15:0] EXPECTED_PC=16'd{gold['events'][-1]['pc']};\n"
-  (work/'tb/selected_expected.svh').write_text(config,encoding='ascii');result['selected_expectation']=expected;result['verification_revision']='board_selected_v2'
+  expected,gold=prepare_selected(work,S,a.program)
+  c,n,stalls,redirects=PROGRAMS[a.program]
+  result['selected_expectation']=expected;result['verification_revision']='board_benchmarks_v3'
+  (work/'oracle_source').mkdir();shutil.copy2(V/'verification/isa_reference.py',work/'oracle_source/isa_reference.py')
+  shutil.copy2(B/'benchmark_programs.py',work/'benchmark_programs.py')
   shutil.copy2(V/'desktop_launch.py',work/'desktop_launch.py');shutil.copy2(Path(__file__),work/'run_board.py')
   shutil.copy2(B/'verify_board_results.py',work/'verify_board_results.py')
   for name in ['build_board.tcl','probe_hardware.tcl']:shutil.copy2(B/name,work/name)
@@ -79,7 +73,7 @@ def main():
    log=(work/'selected.log').read_text(encoding='utf-8',errors='replace')
    terminal=f'BOARD_SELECTED_PASS program={a.program} cycles={c} completed={n} stalls={stalls} redirects={redirects} stores={len(gold["stores"])}'
    if log.splitlines().count(terminal)!=1 or '$finish called at time' not in log or 'BOARD_ATTEMPT='+work.name not in log:raise ValueError('Selected actual boot-image simulation missing')
-   result['selected_simulation']='PASS'
+   result['selected_simulation']='PASS';result['selected_result']={'rf':gold['rf'],'flags':gold['flags'],'stop_pc':gold['events'][-1]['pc'],'cycles':c,'completed':n,'stalls':stalls,'redirects':redirects,'stores':len(gold['stores']),'calculated_cpu_time_ns_at_implemented_clock':c*10,'measured_board_time_ns':None}
   if a.mode in ['implement','all']:
    native('vivado','implement','-mode batch -source build_board.tcl -log implementation.log -nojournal')
    log=(work/'implementation.log').read_text(encoding='utf-8',errors='replace')

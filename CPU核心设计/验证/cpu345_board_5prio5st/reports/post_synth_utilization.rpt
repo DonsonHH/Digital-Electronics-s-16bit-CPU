@@ -1,0 +1,41 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Sun Nov  1 01:59:08 2026
+| Host         : LAPTOP-BSM79J69 running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file reports/post_synth_utilization.rpt
+| Design       : ees331_top
+| Device       : xc7z020clg484-1
+| Speed File   : -1
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++---------------------+-------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|       Instance      |                Module               | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++---------------------+-------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| ees331_top          |                               (top) |        650 |        650 |       0 |    0 | 2081 |      0 |      2 |          0 |
+|   (ees331_top)      |                               (top) |        114 |        114 |       0 |    0 |    0 |      0 |      0 |          0 |
+|   application_i     |                  ees331_application |        299 |        299 |       0 |    0 |  576 |      0 |      2 |          0 |
+|     (application_i) |                  ees331_application |         15 |         15 |       0 |    0 |  211 |      0 |      0 |          0 |
+|     system_i        |                          cpu_system |        284 |        284 |       0 |    0 |  365 |      0 |      2 |          0 |
+|       core          |                       datapath_core |        259 |        259 |       0 |    0 |  332 |      0 |      0 |          0 |
+|         (core)      |                       datapath_core |         72 |         72 |       0 |    0 |  249 |      0 |      0 |          0 |
+|         u_alu       |                               alu16 |         73 |         73 |       0 |    0 |    0 |      0 |      0 |          0 |
+|           (u_alu)   |                               alu16 |         58 |         58 |       0 |    0 |    0 |      0 |      0 |          0 |
+|         u_rf        |                         regfile4x16 |         61 |         61 |       0 |    0 |   64 |      0 |      0 |          0 |
+|   debug_i           |                          ees331_vio |        237 |        237 |       0 |    0 | 1505 |      0 |      0 |          0 |
+|     inst            |          ees331_vio_vio_v3_0_27_vio |        237 |        237 |       0 |    0 | 1505 |      0 |      0 |          0 |
+|       U_XSDB_SLAVE  |       ees331_vio_xsdbs_v1_0_5_xsdbs |         77 |         77 |       0 |    0 |  161 |      0 |      0 |          0 |
+|       PROBE_IN_INST | ees331_vio_vio_v3_0_27_probe_in_one |        135 |        135 |       0 |    0 | 1273 |      0 |      0 |          0 |
++---------------------+-------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+
+

@@ -1,0 +1,9 @@
+localparam PROGRAM="loop";
+localparam EXPECTED_CYCLES=30;
+localparam EXPECTED_N=18;
+localparam EXPECTED_STALLS=0;
+localparam EXPECTED_REDIRECTS=4;
+localparam EXPECTED_STORES=0;
+localparam[63:0] EXPECTED_RF=64'h0000000000000000;
+localparam[2:0] EXPECTED_FLAGS=3'd6;
+localparam[15:0] EXPECTED_PC=16'd6;

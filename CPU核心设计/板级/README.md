@@ -41,3 +41,11 @@ python -B -X utf8 .\板级\verify_board_results.py --run .\验证\某个已完�
 方法学提示也单独核查：LUTAR-1仅允许厂商debug hub内部复位同步；SYNTH-6仅允许当前IM/DM保留一拍读、未另加输出流水寄存器。生成的4项bus-skew约束逐项检查并保存报告指纹。普通警告按代码和作用范围审查，完整处置在验证JSON中；向量无活动输入的功耗估算不作为测量结论。执行工具必须确为2025.2，其他安装即使可调用也不能冒充本基线配方。
 
 用户已确认课程板尚未连接。曾只读扫描到另一条xc7z020 JTAG链，未配置设备；不能将其视为EES-331验收。当前结果只证明仿真与已布线设计，不证明真实板上100MHz运行、物理按键行为或实际程序运行时间。后续接板必须读取构建身份、寄存器、标志、停止PC/原因和计数，不能仅观察LED。
+
+接板后的入口为run_hardware.py：必须显式指定已确认的EES-331目标和经过校验的实现attempt；默认只采集，program-device和run-program分别控制配置与CPU重启。当前只做过Python语法和真实仿真样本的解码检查，硬件流程尚未执行，不能据此标为下板通过。
+
+```powershell
+python -B -X utf8 .\板级\run_hardware.py --implementation .\验证\某个有效实现 --target "确认后的完整JTAG目标名" --confirmed-board EES-331 --program-device --run-program
+```
+
+脚本检查实际构建身份后才操作CPU复位，读取两份停止快照并比较RF、标志、PC、计数及最后store；失败不发布硬件PASS。不要把当前其他设备的目标名代入此命令。
