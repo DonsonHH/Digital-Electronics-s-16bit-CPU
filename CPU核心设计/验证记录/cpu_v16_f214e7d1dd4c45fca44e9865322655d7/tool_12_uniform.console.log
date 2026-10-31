@@ -1,0 +1,27 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 16404
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 31 21:52:52 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/uniform_v16_sim/xsim_script.tcl
+# xsim {uniform_v16_sim} -wdb {uniform.wdb} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=f214e7d1-dd4c-45fc-a44e-9865322655d7 input_sha256=16aea05bae724ba1e90d5688cd8963b38944f684aeef858bbe9919267634948d
+## run all
+UNIFORM_SMOKE_PASS retired=5 stores=1 store_wb=1 branch_wb=1
+$finish called at time : 126 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_v16_f214e7d1dd4c45fca44e9865322655d7/tb/tb_uniform_smoke.sv" Line 32
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 21:52:54 2026...
+DESKTOP_EXIT 0

@@ -1,0 +1,38 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Oct 31 21:43:57 2026
+# Process ID         : 69160
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c
+# Command line       : xsim.exe -log uniform.log -mode tcl -source {xsim.dir/uniform_v16_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c/uniform.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 6614 MB
+#-----------------------------------------------------------
+source xsim.dir/uniform_v16_sim/xsim_script.tcl
+# xsim {uniform_v16_sim} -wdb {uniform.wdb} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=043e1155-b22d-41d8-b0ee-24fb00734f9c input_sha256=80e6181f6260a7d7c264619971d351a28efe05564e8ed941b1d095cc6ea8c891
+## run all
+UNIFORM_SMOKE_PASS retired=5 stores=1 store_wb=1 branch_wb=1
+$finish called at time : 126 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c/tb/tb_uniform_smoke.sv" Line 32
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 21:43:59 2026...

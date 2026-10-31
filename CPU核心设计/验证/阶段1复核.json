@@ -1,0 +1,31 @@
+{
+  "status": "STAGE1_ACCEPTED",
+  "base_commit": "775350246d3806c9a09ac683edadf1a35e3e68bb",
+  "RTL_and_legacy_TB_unchanged": true,
+  "immutable_history_files_verified": 2947,
+  "frozen_directed_cases": 48,
+  "consumed_program_files_equal": 369,
+  "unconsumed_historical_files_preserved": 14,
+  "unit_tests": {
+    "bundled_python": 5,
+    "PATH_python_3_11": 5
+  },
+  "native_suites": [
+    "regression",
+    "independent",
+    "mutations",
+    "unknown",
+    "evidence",
+    "lifecycle"
+  ],
+  "accepted_receipt": "验证/tools_e79feaa9d8f54a179aeefdc61f790d02/result.json",
+  "accepted_receipt_sha256": "249d96b3a941a708f2f286804b16413a606f144271317addb90f695ee84351c8",
+  "native_regression_steps": 19,
+  "external_mutation_output_test": "5 deliberate faults rejected at specified runtime assertions",
+  "independent_reviews": {
+    "spec": "PASS after fixing input inventory/hash gate and reused-directory failure cause",
+    "standards": "PASS after external-output paths and Python3.11 junction compatibility fix"
+  },
+  "superseded_trial": "tools_e0a995d4a63343b0af812e7c6d5d4c4e retained; its reused-directory negative case exited at argparse, so not accepted as complete tooling evidence",
+  "limitations": "No new CPU functionality, system preparation or board/timing acceptance is claimed at this stage"
+}

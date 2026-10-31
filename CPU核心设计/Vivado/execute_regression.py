@@ -31,7 +31,7 @@ def check_package(run,package):
  for p in (package/'程序镜像').iterdir():require(p.read_bytes()==(run/'programs'/p.name).read_bytes(),'Program/package drift')
 def main():
  p=argparse.ArgumentParser();p.add_argument('--run',type=Path,required=True);p.add_argument('--package',type=Path,required=True)
- p.add_argument('--vivado-bin',type=Path,default=Path(r'C:\AMDDesignTools\2025.2\Vivado\bin'));p.add_argument('--attempt-id',required=True)
+ p.add_argument('--vivado-bin',type=Path,required=True);p.add_argument('--attempt-id',required=True)
  a=p.parse_args();run=a.run.resolve();package=a.package.resolve();attempt=str(uuid.UUID(a.attempt_id))
  ledger=dict(attempt_id=attempt,status='RUNNING',result_kind='actual_native_execution',started_at_utc=utc(),verification_revision=VERIFICATION_REVISION,steps=[])
  ledger_path=run/'execution_ledger.json';manifest_path=run/'attempt_manifest.json'

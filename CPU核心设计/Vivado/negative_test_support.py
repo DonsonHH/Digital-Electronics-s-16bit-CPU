@@ -1,6 +1,11 @@
 from pathlib import Path
 import sys,subprocess,datetime,json,hashlib,shutil
+from tool_config import resolve_tools
 ROOT=Path(__file__).resolve().parent
+_tools=None
+def configure(vivado_bin=None,config=None):
+    global _tools
+    _tools=resolve_tools(vivado_bin,config=config)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def execute(work,label='native',timeout=600):
     work=Path(work);before={p.relative_to(work).as_posix():sha(p) for p in work.rglob('*') if p.is_file()}
@@ -28,12 +33,13 @@ def prepare(work,top,tbfiles,rtl=None):
     sources=' '.join('rtl/'+p.name for p in (work/'rtl').iterdir() if p.suffix in ('.v','.sv'))
     sources+=' '+' '.join('tb/'+p.name for p in (work/'tb').glob('*.sv'))
     sources+=' '+' '.join(n for n in tbfiles if n.endswith('.sv'))
+    bins=(_tools or resolve_tools())['vivado_bin']
     (work/'run.cmd').write_text(f'''@echo off
-call "C:\\AMDDesignTools\\2025.2\\Vivado\\bin\\xvlog.bat" --sv -i tb {sources}
+call "{bins}\\xvlog.bat" --sv -i tb {sources}
 if errorlevel 1 exit /b 1
-call "C:\\AMDDesignTools\\2025.2\\Vivado\\bin\\xelab.bat" {top} -s private_sim -debug typical
+call "{bins}\\xelab.bat" {top} -s private_sim -debug typical
 if errorlevel 1 exit /b 1
-call "C:\\AMDDesignTools\\2025.2\\Vivado\\bin\\xsim.bat" private_sim -tclbatch run.tcl -log private.log
+call "{bins}\\xsim.bat" private_sim -tclbatch run.tcl -log private.log
 if errorlevel 1 exit /b 1
 exit /b 0
 ''',encoding='ascii')

@@ -1,0 +1,44 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Oct 31 21:53:04 2026
+# Process ID         : 74100
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu_v16_f214e7d1dd4c45fca44e9865322655d7
+# Command line       : xsim.exe -log trace.log -mode tcl -source {xsim.dir/trace_v16_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu_v16_f214e7d1dd4c45fca44e9865322655d7/trace.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/cpu_v16_f214e7d1dd4c45fca44e9865322655d7\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 5872 MB
+#-----------------------------------------------------------
+source xsim.dir/trace_v16_sim/xsim_script.tcl
+# xsim {trace_v16_sim} -wdb {trace.wdb} -autoloadwcfg -tclbatch {trace.tcl}
+Time resolution is 1 ps
+source trace.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=f214e7d1-dd4c-45fc-a44e-9865322655d7 input_sha256=16aea05bae724ba1e90d5688cd8963b38944f684aeef858bbe9919267634948d
+## open_vcd interlock.vcd
+## log_vcd /tb_trace/test/dut/core/*
+## log_vcd /tb_trace/test/dut/*
+## log_vcd /tb_trace/test/clk /tb_trace/test/rst
+## run all
+CASE_PASS TRACE_LOAD_STR cycles=12 retired=5 stalls=1 redirects=1 RF=0007/0021/0000/0020 ZCV=100 halt=1 fault=0
+INTERLOCK_TRACE_PASS cycles=12 retired=5 stalls=1 redirects=1 store_wb=1
+$finish called at time : 176 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_v16_f214e7d1dd4c45fca44e9865322655d7/tb/tb_datapath.sv" Line 360
+## close_vcd
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 21:53:06 2026...

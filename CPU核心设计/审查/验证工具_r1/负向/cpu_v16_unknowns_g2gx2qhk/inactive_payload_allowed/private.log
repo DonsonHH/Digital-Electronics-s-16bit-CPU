@@ -1,0 +1,177 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Oct 31 21:25:52 2026
+# Process ID         : 74252
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_g2gx2qhk/inactive_payload_allowed
+# Command line       : xsim.exe -log private.log -mode tcl -source {xsim.dir/private_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_g2gx2qhk/inactive_payload_allowed/private.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_g2gx2qhk/inactive_payload_allowed\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 11327 MB
+#-----------------------------------------------------------
+source xsim.dir/private_sim/xsim_script.tcl
+# xsim {private_sim} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run all
+INACTIVE_PAYLOAD_ALLOWED
+CASE_PASS BASELINE cycles=17 retired=10 stalls=1 redirects=1 RF=0008/0002/0008/0020 ZCV=110 halt=1 fault=0
+CASE_PASS T01 cycles=10 retired=4 stalls=0 redirects=1 RF=0001/0001/0000/0000 ZCV=110 halt=1 fault=0
+CASE_PASS T02 cycles=9 retired=5 stalls=0 redirects=0 RF=0001/0002/0055/0000 ZCV=000 halt=1 fault=0
+CASE_PASS T03 cycles=9 retired=4 stalls=1 redirects=0 RF=8000/0020/beef/0000 ZCV=001 halt=1 fault=0
+CASE_PASS T04 cycles=8 retired=2 stalls=0 redirects=1 RF=ffff/0000/0000/0000 ZCV=000 halt=1 fault=0
+CASE_PASS T05 cycles=6 retired=1 stalls=1 redirects=0 RF=8000/00ff/0000/0000 ZCV=001 halt=0 fault=1
+CASE_PASS T06 cycles=11 retired=4 stalls=1 redirects=1 RF=0001/0020/0001/0000 ZCV=100 halt=1 fault=0
+CASE_PASS T07 cycles=6 retired=2 stalls=0 redirects=0 RF=0020/1234/0000/0000 ZCV=000 halt=1 fault=0
+CASE_PASS T08 cycles=10 retired=5 stalls=1 redirects=0 RF=8000/0020/0002/0000 ZCV=000 halt=1 fault=0
+CASE_PASS T10 cycles=7 retired=3 stalls=0 redirects=0 RF=000f/000f/0000/0000 ZCV=111 halt=1 fault=0
+CASE_PASS T11a cycles=6 retired=2 stalls=0 redirects=0 RF=7fff/0001/0000/0000 ZCV=111 halt=1 fault=0
+CASE_PASS T11b cycles=6 retired=2 stalls=0 redirects=0 RF=ffff/0001/0000/0000 ZCV=100 halt=1 fault=0
+CASE_PASS T12 cycles=6 retired=2 stalls=0 redirects=0 RF=0505/0f0f/0000/0000 ZCV=111 halt=1 fault=0
+CASE_PASS T13 cycles=6 retired=2 stalls=0 redirects=0 RF=a5a5/00a5/0000/0000 ZCV=111 halt=1 fault=0
+CASE_PASS T14a cycles=6 retired=1 stalls=0 redirects=0 RF=0001/0000/0000/0000 ZCV=000 halt=0 fault=1
+CASE_PASS T14b cycles=6 retired=1 stalls=0 redirects=0 RF=0001/0000/0000/0000 ZCV=000 halt=0 fault=1
+CASE_PASS T15 cycles=15 retired=9 stalls=0 redirects=1 RF=0000/0001/0000/0000 ZCV=010 halt=1 fault=0
+CASE_PASS T16 cycles=5 retired=0 stalls=0 redirects=0 RF=0000/00ff/55aa/0000 ZCV=000 halt=0 fault=1
+CASE_PASS T17a cycles=6 retired=1 stalls=0 redirects=0 RF=8000/00ff/0000/0000 ZCV=101 halt=0 fault=1
+CASE_PASS T17b cycles=6 retired=1 stalls=0 redirects=0 RF=0001/0000/0000/0000 ZCV=000 halt=0 fault=1
+CASE_PASS T18a cycles=9 retired=2 stalls=0 redirects=1 RF=0001/0000/0000/0000 ZCV=000 halt=0 fault=1
+CASE_PASS T18b cycles=11 retired=3 stalls=0 redirects=2 RF=0000/0000/0000/0000 ZCV=000 halt=1 fault=0
+CASE_PASS LOAD_MOV_NO_FALSE_STALL cycles=7 retired=3 stalls=0 redirects=0 RF=0005/0020/0000/0000 ZCV=000 halt=1 fault=0
+CASE_PASS LOAD_STR_BASE cycles=8 retired=3 stalls=1 redirects=0 RF=0021/0020/beef/0000 ZCV=000 halt=1 fault=0
+CASE_PASS NEWEST_M_OVER_W cycles=8 retired=4 stalls=0 redirects=0 RF=0002/0002/0000/0000 ZCV=000 halt=1 fault=0
+CASE_PASS MEM_FAULT_OVER_REDIRECT cycles=5 retired=0 stalls=0 redirects=0 RF=0000/00ff/0000/0000 ZCV=000 halt=0 fault=1
+CASE_PASS LEGAL_STR_BEFORE_EX_FAULT cycles=6 retired=1 stalls=0 redirects=0 RF=cafe/0020/0000/0000 ZCV=000 halt=0 fault=1
+CASE_PASS WRAPPED_EA cycles=7 retired=3 stalls=0 redirects=0 RF=cafe/ffff/cafe/0000 ZCV=000 halt=1 fault=0
+RESET_PASS fault_sequence=0 phase=0 old_mode=0 pending_store=0
+RESET_PASS fault_sequence=0 phase=1 old_mode=0 pending_store=0
+RESET_PASS fault_sequence=0 phase=2 old_mode=0 pending_store=0
+RESET_PASS fault_sequence=0 phase=3 old_mode=0 pending_store=0
+RESET_PASS fault_sequence=0 phase=4 old_mode=0 pending_store=0
+RESET_PASS fault_sequence=0 phase=5 old_mode=0 pending_store=1
+RESET_PASS fault_sequence=0 phase=6 old_mode=0 pending_store=0
+RESET_PASS fault_sequence=0 phase=7 old_mode=0 pending_store=0
+RESET_PASS fault_sequence=0 phase=8 old_mode=0 pending_store=0
+RESET_PASS fault_sequence=0 phase=9 old_mode=1 pending_store=0
+RESET_PASS fault_sequence=0 phase=10 old_mode=1 pending_store=0
+RESET_PASS fault_sequence=0 phase=11 old_mode=3 pending_store=0
+RESET_PASS fault_sequence=0 phase=12 old_mode=3 pending_store=0
+RESET_PASS fault_sequence=1 phase=4 old_mode=2 pending_store=0
+RESET_PASS fault_sequence=1 phase=5 old_mode=2 pending_store=0
+RESET_PASS fault_sequence=1 phase=6 old_mode=4 pending_store=0
+CASE_PASS RANDOM_0 cycles=38 retired=33 stalls=1 redirects=0 RF=0088/0000/0000/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_1 cycles=38 retired=33 stalls=1 redirects=0 RF=0020/0160/ffe0/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_2 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/0000/0000/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_3 cycles=38 retired=33 stalls=1 redirects=0 RF=feff/0101/00ce/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_4 cycles=38 retired=33 stalls=1 redirects=0 RF=0093/ff45/ffa3/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_5 cycles=37 retired=33 stalls=0 redirects=0 RF=00dd/0020/00d0/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_6 cycles=38 retired=33 stalls=1 redirects=0 RF=0076/0000/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_7 cycles=39 retired=33 stalls=2 redirects=0 RF=18ea/0000/19ea/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_8 cycles=38 retired=33 stalls=1 redirects=0 RF=0020/00fb/78d7/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_9 cycles=38 retired=33 stalls=1 redirects=0 RF=ffe0/ffe0/00cb/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_10 cycles=37 retired=33 stalls=0 redirects=0 RF=00a9/0009/00a9/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_11 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/01a2/0107/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_12 cycles=39 retired=33 stalls=2 redirects=0 RF=cedf/ff67/3121/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_13 cycles=37 retired=33 stalls=0 redirects=0 RF=fff1/009a/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_14 cycles=37 retired=33 stalls=0 redirects=0 RF=00fe/00c4/008c/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_15 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/00f5/0020/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_16 cycles=38 retired=33 stalls=1 redirects=0 RF=0001/0000/0000/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_17 cycles=38 retired=33 stalls=1 redirects=0 RF=0020/ffc6/0107/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_18 cycles=39 retired=33 stalls=2 redirects=0 RF=007f/001e/001e/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_19 cycles=37 retired=33 stalls=0 redirects=0 RF=0000/0096/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_20 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/004d/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_21 cycles=37 retired=33 stalls=0 redirects=0 RF=00c8/012d/ff27/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_22 cycles=39 retired=33 stalls=2 redirects=0 RF=0000/0000/0000/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_23 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/e3f7/e479/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_24 cycles=37 retired=33 stalls=0 redirects=0 RF=0048/00e0/0062/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_25 cycles=38 retired=33 stalls=1 redirects=0 RF=0034/ba4a/0000/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_26 cycles=39 retired=33 stalls=2 redirects=0 RF=ff1d/02ad/ff38/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_27 cycles=38 retired=33 stalls=1 redirects=0 RF=103a/011b/00a9/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_28 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/fff0/0053/0020 ZCV=110 halt=1 fault=0
+CASE_PASS RANDOM_29 cycles=38 retired=33 stalls=1 redirects=0 RF=00de/0000/00ab/0020 ZCV=110 halt=1 fault=0
+CASE_PASS RANDOM_30 cycles=39 retired=33 stalls=2 redirects=0 RF=ffdc/0020/00c2/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_31 cycles=37 retired=33 stalls=0 redirects=0 RF=0000/ff76/0004/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_32 cycles=39 retired=33 stalls=2 redirects=0 RF=0000/0000/fff5/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_33 cycles=37 retired=33 stalls=0 redirects=0 RF=00ba/00a0/0000/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_34 cycles=38 retired=33 stalls=1 redirects=0 RF=00fe/006d/0000/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_35 cycles=37 retired=33 stalls=0 redirects=0 RF=ff42/0020/0020/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_36 cycles=38 retired=33 stalls=1 redirects=0 RF=00ad/00ad/f7ff/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_37 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/008c/00ec/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_38 cycles=40 retired=33 stalls=3 redirects=0 RF=ff2a/0000/002e/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_39 cycles=37 retired=33 stalls=0 redirects=0 RF=004c/00fe/004c/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_40 cycles=39 retired=33 stalls=2 redirects=0 RF=ffc9/0090/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_41 cycles=39 retired=33 stalls=2 redirects=0 RF=ff70/0000/2370/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_42 cycles=39 retired=33 stalls=2 redirects=0 RF=0000/0001/00b2/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_43 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/fff7/ffc5/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_44 cycles=39 retired=33 stalls=2 redirects=0 RF=0000/0054/0000/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_45 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/0000/ffaf/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_46 cycles=38 retired=33 stalls=1 redirects=0 RF=005b/0000/feaf/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_47 cycles=38 retired=33 stalls=1 redirects=0 RF=2dd6/00ce/2e56/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_48 cycles=40 retired=33 stalls=3 redirects=0 RF=0000/0048/0000/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_49 cycles=38 retired=33 stalls=1 redirects=0 RF=00b8/0008/0169/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_50 cycles=37 retired=33 stalls=0 redirects=0 RF=8411/0000/00d6/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_51 cycles=38 retired=33 stalls=1 redirects=0 RF=0020/ffe0/ff8b/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_52 cycles=37 retired=33 stalls=0 redirects=0 RF=0000/0000/0000/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_53 cycles=37 retired=33 stalls=0 redirects=0 RF=0347/002b/0000/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_54 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/0001/0001/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_55 cycles=38 retired=33 stalls=1 redirects=0 RF=ff74/ff18/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_56 cycles=37 retired=33 stalls=0 redirects=0 RF=fdba/4507/00af/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_57 cycles=39 retired=33 stalls=2 redirects=0 RF=ffa5/00d5/00a5/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_58 cycles=37 retired=33 stalls=0 redirects=0 RF=00f5/7f04/00f5/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_59 cycles=37 retired=33 stalls=0 redirects=0 RF=ffdb/002a/00ff/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_60 cycles=37 retired=33 stalls=0 redirects=0 RF=0000/febe/0284/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_61 cycles=38 retired=33 stalls=1 redirects=0 RF=0060/3e48/3e48/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_62 cycles=38 retired=33 stalls=1 redirects=0 RF=61d0/0000/61b8/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_63 cycles=40 retired=33 stalls=3 redirects=0 RF=0063/ffe9/0076/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_64 cycles=38 retired=33 stalls=1 redirects=0 RF=009c/009c/005f/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_65 cycles=38 retired=33 stalls=1 redirects=0 RF=00a2/009b/fff4/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_66 cycles=41 retired=33 stalls=4 redirects=0 RF=0020/0000/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_67 cycles=37 retired=33 stalls=0 redirects=0 RF=0020/ffec/0182/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_68 cycles=38 retired=33 stalls=1 redirects=0 RF=ffea/ffe0/0032/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_69 cycles=37 retired=33 stalls=0 redirects=0 RF=00f5/008e/011f/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_70 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/0000/00f9/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_71 cycles=40 retired=33 stalls=3 redirects=0 RF=ff29/0000/ffeb/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_72 cycles=39 retired=33 stalls=2 redirects=0 RF=0254/0000/0254/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_73 cycles=38 retired=33 stalls=1 redirects=0 RF=fe1d/0000/ff2a/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_74 cycles=39 retired=33 stalls=2 redirects=0 RF=0020/0020/0000/0020 ZCV=110 halt=1 fault=0
+CASE_PASS RANDOM_75 cycles=37 retired=33 stalls=0 redirects=0 RF=fffb/00c6/0020/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_76 cycles=38 retired=33 stalls=1 redirects=0 RF=0058/ff30/ff33/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_77 cycles=38 retired=33 stalls=1 redirects=0 RF=0002/fec6/0020/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_78 cycles=37 retired=33 stalls=0 redirects=0 RF=72c5/0020/0020/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_79 cycles=38 retired=33 stalls=1 redirects=0 RF=004c/0040/0040/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_80 cycles=38 retired=33 stalls=1 redirects=0 RF=eee9/005a/0052/0020 ZCV=110 halt=1 fault=0
+CASE_PASS RANDOM_81 cycles=39 retired=33 stalls=2 redirects=0 RF=0000/007c/ffd7/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_82 cycles=37 retired=33 stalls=0 redirects=0 RF=00eb/00eb/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_83 cycles=38 retired=33 stalls=1 redirects=0 RF=0182/0186/0328/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_84 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/7e9f/0000/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_85 cycles=38 retired=33 stalls=1 redirects=0 RF=0020/0000/0000/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_86 cycles=40 retired=33 stalls=3 redirects=0 RF=ff4c/00b2/0000/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_87 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/fe6f/fe6f/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_88 cycles=37 retired=33 stalls=0 redirects=0 RF=106b/f11d/efe4/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_89 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/0064/00db/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_90 cycles=38 retired=33 stalls=1 redirects=0 RF=ffc4/003f/0059/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_91 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/0000/fffc/0020 ZCV=000 halt=1 fault=0
+CASE_PASS RANDOM_92 cycles=37 retired=33 stalls=0 redirects=0 RF=0000/0129/ffea/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_93 cycles=37 retired=33 stalls=0 redirects=0 RF=0034/00b5/0000/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_94 cycles=37 retired=33 stalls=0 redirects=0 RF=0092/0191/0154/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_95 cycles=37 retired=33 stalls=0 redirects=0 RF=00ab/0000/01c1/0020 ZCV=110 halt=1 fault=0
+CASE_PASS RANDOM_96 cycles=39 retired=33 stalls=2 redirects=0 RF=0000/0000/0000/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_97 cycles=39 retired=33 stalls=2 redirects=0 RF=0020/0000/0000/0020 ZCV=100 halt=1 fault=0
+CASE_PASS RANDOM_98 cycles=38 retired=33 stalls=1 redirects=0 RF=0000/ffad/3b58/0020 ZCV=010 halt=1 fault=0
+CASE_PASS RANDOM_99 cycles=37 retired=33 stalls=0 redirects=0 RF=ffb2/00bc/0134/0020 ZCV=000 halt=1 fault=0
+DATAPATH_PASS cases=128 reset_probes=16 retired=3380 failures=0 legal_opcode_coverage=14/14
+$finish called at time : 48056 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_g2gx2qhk/inactive_payload_allowed/tb/tb_datapath.sv" Line 412
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 21:25:55 2026...

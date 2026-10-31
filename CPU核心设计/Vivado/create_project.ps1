@@ -1,5 +1,8 @@
-﻿param([string]$Python='C:\Users\Donson\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe',[string]$VivadoBin='C:\AMDDesignTools\2025.2\Vivado\bin',[string]$ProjectDirectoryName='project')
+﻿param([string]$Python='',[string]$VivadoBin='',[string]$ProjectDirectoryName='project',[string]$ToolConfig='')
 $ErrorActionPreference='Stop'
+. (Join-Path $PSScriptRoot 'tool_config.ps1')
+$resolvedCpuTools=Resolve-CpuTools -Python $Python -VivadoBin $VivadoBin -ToolConfig $ToolConfig
+$Python=$resolvedCpuTools.python;$VivadoBin=$resolvedCpuTools.vivado_bin
 if($ProjectDirectoryName -notmatch '^[A-Za-z0-9_-]+$'){throw 'ProjectDirectoryName must be a short ASCII directory name.'}
 $existingCoreProject=Join-Path $PSScriptRoot $ProjectDirectoryName
 if(Test-Path -LiteralPath $existingCoreProject){throw 'Project output already exists; choose a new -ProjectDirectoryName. Existing projects are never erased.'}

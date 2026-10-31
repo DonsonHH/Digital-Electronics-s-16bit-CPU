@@ -1,0 +1,65 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Wed Oct 14 13:39:06 2026
+# Process ID         : 57604
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu_core_project_32fdc0e09a2b4948a60fbba15727c6d7
+# Command line       : vivado.exe -mode batch -source entry.tcl -log create.log -nojournal
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu_core_project_32fdc0e09a2b4948a60fbba15727c6d7/create.log
+# Journal file       : 
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2396 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 26425 MB
+# Total Virtual      : 59945 MB
+# Available Virtual  : 24755 MB
+#-----------------------------------------------------------
+source entry.tcl
+# set argv [list {project}]
+# source "D:/OneDrive - University of Glasgow/\u540c\u6b65\u6587\u4ef6\u5939/\u5927\u4e09\u4e0a/Courses/\u6570\u7535/CPU\u6838\u5fc3\u8bbe\u8ba1/Vivado/create_project.tcl"
+## set root [file dirname [file normalize [info script]]]
+## set part xc7z020clg484-1
+## set project_dir [file join $root project]
+## if {[llength $argv] > 0} {set project_dir [file join $root [lindex $argv 0]]}
+## create_project cpu_v16 $project_dir -part $part
+INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter.
+Current project path is 'D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/project'
+create_project: Time (s): cpu = 00:00:14 ; elapsed = 00:00:12 . Memory (MB): peak = 532.934 ; gain = 218.234
+## set_property target_language Verilog [current_project]
+## set_property simulator_language Mixed [current_project]
+## set sources [concat [glob [file join $root rtl *.v]] [glob [file join $root rtl *.sv]]]
+## add_files -norecurse $sources
+## add_files -fileset sim_1 -norecurse [glob [file join $root tb *.sv]]
+## add_files -fileset sim_1 -norecurse [glob [file join $root tb *.svh]]
+## set_property include_dirs [list [file join $root tb]] [get_filesets sim_1]
+## add_files -fileset constrs_1 -norecurse [list [file join $root constraints core_ooc.xdc]]
+## set_property top datapath_core [get_filesets sources_1]
+## set_property top tb_datapath [get_filesets sim_1]
+## set_property xsim.simulate.runtime {0ns} [get_filesets sim_1]
+## update_compile_order -fileset sources_1
+## update_compile_order -fileset sim_1
+## puts "PROJECT_READY=[file join $project_dir cpu_v16.xpr]"
+PROJECT_READY=D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/CPU核心设计/Vivado/project/cpu_v16.xpr
+## puts "SIM_TOP=tb_datapath; run all in XSim Tcl console for the full regression."
+SIM_TOP=tb_datapath; run all in XSim Tcl console for the full regression.
+## set reg [open [file join $project_dir source_registration.tsv] w]
+## fconfigure $reg -encoding utf-8
+## puts $reg "fileset\tname\ttype"
+## foreach fs {sources_1 sim_1 constrs_1} {
+##  foreach item [get_files -of_objects [get_filesets $fs]] {
+##   puts $reg "$fs\t[get_property NAME $item]\t[get_property FILE_TYPE $item]"
+##  }
+## }
+## close $reg
+## puts "CORE_PROJECT_SOURCES_VERIFIED tool=[version -short] part=$part"
+CORE_PROJECT_SOURCES_VERIFIED tool=2025.2 part=xc7z020clg484-1
+## close_project
+## exit
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 14 13:39:28 2026...

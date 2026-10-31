@@ -1,0 +1,10 @@
+{
+  "status": "FAIL",
+  "result_kind": "historical_revalidation",
+  "new_xsim_execution": false,
+  "new_execution_pass": false,
+  "verification_revision": "1.6-vtools-r1",
+  "revalidated_at_utc": "2026-10-31T13:55:34.469000+00:00",
+  "run": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证记录\\cpu_v16_f214e7d1dd4c45fca44e9865322655d7",
+  "error": "Source snapshot drift: tb_datapath.sv"
+}

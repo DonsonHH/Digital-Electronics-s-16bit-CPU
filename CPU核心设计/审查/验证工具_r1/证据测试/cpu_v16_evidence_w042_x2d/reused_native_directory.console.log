@@ -1,0 +1,3 @@
+usage: execute_regression.py [-h] --run RUN --package PACKAGE --vivado-bin
+                             VIVADO_BIN --attempt-id ATTEMPT_ID
+execute_regression.py: error: the following arguments are required: --vivado-bin

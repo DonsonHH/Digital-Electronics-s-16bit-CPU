@@ -1,0 +1,27 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 29760
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 31 21:43:31 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/units_v16_sim/xsim_script.tcl
+# xsim {units_v16_sim} -wdb {units.wdb} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=043e1155-b22d-41d8-b0ee-24fb00734f9c input_sha256=80e6181f6260a7d7c264619971d351a28efe05564e8ed941b1d095cc6ea8c891
+## run all
+UNITS_PASS CLA4=512 CLA16=564300 ADD_SUB=564300 ALU=2257200 DECODE=65536 IMM=512 FLAGS=512 RF=262161 PC=65539 TARGET=3584
+$finish called at time : 4402081 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c/tb/tb_units.sv" Line 308
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 21:43:37 2026...
+DESKTOP_EXIT 0

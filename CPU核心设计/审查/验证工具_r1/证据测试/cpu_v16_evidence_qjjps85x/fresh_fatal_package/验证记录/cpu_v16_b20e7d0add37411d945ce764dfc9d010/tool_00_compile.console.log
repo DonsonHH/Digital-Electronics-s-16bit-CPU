@@ -1,0 +1,49 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 42196
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/cla4_pg.v" into library work
+INFO: [VRFC 10-311] analyzing module cla4_pg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/cla16.v" into library work
+INFO: [VRFC 10-311] analyzing module cla16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/addsub16_cla.v" into library work
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/alu16.v" into library work
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/flags_reg.v" into library work
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/isa_decode.v" into library work
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/regfile4x16.v" into library work
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/pc16.v" into library work
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/imm_ext16.v" into library work
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/branch_target16.v" into library work
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/operand_forward.v" into library work
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/datapath_core.sv" into library work
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/rtl/sync_memories.v" into library work
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_isa_contract.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_isa_contract
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_datapath.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_datapath
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_units.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_units
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_stress.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stress
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_audit3.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_audit3
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_uniform_smoke.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_uniform_smoke
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_forward_contract.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_forward_contract
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_trace.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_trace
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_b20e7d0add37411d945ce764dfc9d010/tb/tb_hazards.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_hazards
+DESKTOP_EXIT 0

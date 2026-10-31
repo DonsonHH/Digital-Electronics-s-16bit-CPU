@@ -1,5 +1,10 @@
 from pathlib import Path
 import json,shutil,subprocess,sys,uuid,hashlib,re,tempfile
+from tool_config import add_tool_arguments,resolve_tools
+import argparse,os
+parser=argparse.ArgumentParser();add_tool_arguments(parser);options=parser.parse_args()
+resolved=resolve_tools(options.vivado_bin,config=options.config)
+os.environ['CPU_VIVADO_BIN']=resolved['vivado_bin'];os.environ['CPU_PYTHON']=sys.executable
 from negative_test_support import ROOT,sha
 base=ROOT.parent;out=Path(tempfile.mkdtemp(prefix='cpu_v16_evidence_'))
 status=json.loads((base/'最近运行.json').read_text(encoding='utf-8-sig'));positive=Path(status['archived_run'])
@@ -18,9 +23,10 @@ cli('new_record_historical_recheck',positive)
 copied=out/'copied_logs_without_execution';shutil.copytree(positive,copied);(copied/'verification_results.json').unlink()
 cli('copied_no_receipt',copied,['--package',str(base)],expect=2)
 ledger_before=sha(copied/'execution_ledger.json')
-argv=[sys.executable,str(base/'Vivado'/'execute_regression.py'),'--run',str(copied),'--package',str(base),'--attempt-id',str(uuid.uuid4())]
+argv=[sys.executable,str(base/'Vivado'/'execute_regression.py'),'--run',str(copied),'--package',str(base),'--vivado-bin',resolved['vivado_bin'],'--attempt-id',str(uuid.uuid4())]
 with (out/'reused_native_directory.console.log').open('wb') as f:p=subprocess.run(argv,stdout=f,stderr=subprocess.STDOUT)
-if p.returncode==0 or (copied/'verification_results.json').exists() or sha(copied/'execution_ledger.json')!=ledger_before:raise RuntimeError('Copied native directory accepted or old ledger overwritten')
+refusal=(out/'reused_native_directory.console.log').read_text(encoding='utf-8',errors='replace')
+if p.returncode==0 or 'Fresh runtime required; output already exists' not in refusal or (copied/'verification_results.json').exists() or sha(copied/'execution_ledger.json')!=ledger_before:raise RuntimeError('Copied native directory accepted, unrelated argument error, or old ledger overwritten')
 results.append(dict(case='reused_native_directory',rejected=True,old_ledger_unchanged=True))
 for label,file in [('missing_csv','case_results.csv'),('missing_native_log','hazards.log')]:
     target=out/label;shutil.copytree(positive,target);(target/file).unlink();cli(label,target,expect=1)

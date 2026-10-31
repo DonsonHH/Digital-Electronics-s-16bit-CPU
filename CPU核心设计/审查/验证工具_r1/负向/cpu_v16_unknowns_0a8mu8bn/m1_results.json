@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "verification_revision": "1.6-vtools-r1",
+  "negative_variants": 10,
+  "unused_payload_positive": true,
+  "hardware_fault_tolerance_claim": false,
+  "results": [
+    {
+      "case": "stopped_dm_we_x",
+      "top": "tb_datapath",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=post_NBA scope=tb_datapath.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\stopped_dm_we_x\\rtl\\datapath_core.sv",
+      "target_sha256": "07befefd333c2a77b955357f47a1e4d8a0d857f2e052f132d8d59d94e86ba165",
+      "log_sha256": "c6621d783a43fcc8e15c81b056db33d35acbf94d5c2ee4544c8702e21234d106"
+    },
+    {
+      "case": "stopped_dm_we_x_stress",
+      "top": "tb_stress",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=post_NBA scope=tb_stress.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\stopped_dm_we_x_stress\\rtl\\datapath_core.sv",
+      "target_sha256": "07befefd333c2a77b955357f47a1e4d8a0d857f2e052f132d8d59d94e86ba165",
+      "log_sha256": "eb3f555bd5ac9566396ddbcc4f97d6b30f93968cbd25ec2123f8161f2fa19610"
+    },
+    {
+      "case": "stopped_dm_we_x_audit",
+      "top": "tb_audit3",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=post_NBA scope=tb_audit3.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\stopped_dm_we_x_audit\\rtl\\datapath_core.sv",
+      "target_sha256": "07befefd333c2a77b955357f47a1e4d8a0d857f2e052f132d8d59d94e86ba165",
+      "log_sha256": "27bde17064928c6273aa8afc7b25e82e8b77ad967a34c319966a51962c790da2"
+    },
+    {
+      "case": "stopped_dm_we_x_uniform",
+      "top": "tb_uniform_smoke",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=before_finish scope=tb_uniform_smoke.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\stopped_dm_we_x_uniform\\rtl\\datapath_core.sv",
+      "target_sha256": "07befefd333c2a77b955357f47a1e4d8a0d857f2e052f132d8d59d94e86ba165",
+      "log_sha256": "e5b58ad9521b5d61b0df8adf1643e70fc146c1d8a54faa89a48e2d8f164b3c9e"
+    },
+    {
+      "case": "stopped_im_en_z",
+      "top": "tb_datapath",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=settled_half_cycle scope=tb_datapath.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\stopped_im_en_z\\tb\\tb_datapath.sv",
+      "target_sha256": "657f0f326cffab062109b5c1a2d3523bd627cbb44ff69038f787a86ca8897431",
+      "log_sha256": "803961f610ab0b103121b6dc135eabfbadca0d5a807bc77e93d0d1b5b34e41bf"
+    },
+    {
+      "case": "stopped_rf_we_x",
+      "top": "tb_datapath",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=settled_half_cycle scope=tb_datapath.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\stopped_rf_we_x\\tb\\tb_datapath.sv",
+      "target_sha256": "b9988e61a3e7df72a33e3ef8a8ff02407e67e46a7c234b6f635df8f7346896a7",
+      "log_sha256": "87ffb034519a61459cce3939d0068c98ab2e6e5de65c0b5aea91d720ab19acd3"
+    },
+    {
+      "case": "stopped_valid_z",
+      "top": "tb_datapath",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=settled_half_cycle scope=tb_datapath.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\stopped_valid_z\\tb\\tb_datapath.sv",
+      "target_sha256": "1ba374909bbd7b58fbbe2346b5ddd40fba3e9a5a6091ab77777d2cc48be509dd",
+      "log_sha256": "eee530bcdb4be7736b718276a2f2c2729d6113620d0e8ceaa19df3b4e0c05bc3"
+    },
+    {
+      "case": "running_stall_x",
+      "top": "tb_datapath",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=settled_half_cycle scope=tb_datapath.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\running_stall_x\\tb\\tb_datapath.sv",
+      "target_sha256": "227e4d0e26d7d90fe3d44e8b7a3745d997e16a46f3cf824f28d57e2f3b2acda6",
+      "log_sha256": "a4068d5321eb1c0bd8a481bbe342c66fc488f9a83116830d3f33b9b73e9f692e"
+    },
+    {
+      "case": "running_redirect_z",
+      "top": "tb_datapath",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=settled_half_cycle scope=tb_datapath.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\running_redirect_z\\tb\\tb_datapath.sv",
+      "target_sha256": "a69d5199b3a47b880cf46fa3a7443e17c02b77b3b14bbf7a1ed8f0cac2d865db",
+      "log_sha256": "53ab8e72d9524bf3fe37ad7a78d6a5f21631246a2f23a3ad1c6bc240e4d05588"
+    },
+    {
+      "case": "reset_dm_en_z",
+      "top": "tb_datapath",
+      "expected_runtime_failure": true,
+      "fatal": "CONTROL_XZ phase=settled_half_cycle scope=tb_datapath.check_cpu_controls",
+      "native_exit": 0,
+      "target": "C:\\Users\\Donson\\AppData\\Local\\Temp\\cpu_v16_unknowns_0a8mu8bn\\reset_dm_en_z\\tb\\tb_datapath.sv",
+      "target_sha256": "ba0ba77541424717ce82f649fba423c98e0cddca41f7f2f4c8a2afbf5e79ab9e",
+      "log_sha256": "609cdac24763e4e78f7dd948d7774e59fd42b54c419b8fce375ed1802cab846b"
+    },
+    {
+      "case": "inactive_payload_allowed",
+      "normal_pass": true,
+      "log_sha256": "53ddec170394352c589bd4e49d5b79bdcdccc0f8a6e3945c473b4de8b4fd3f9e"
+    }
+  ]
+}

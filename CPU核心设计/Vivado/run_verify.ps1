@@ -1,4 +1,4 @@
-param([string]$Python='C:\Users\Donson\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe',[string]$VivadoBin='C:\AMDDesignTools\2025.2\Vivado\bin')
+param([string]$Python='',[string]$VivadoBin='',[string]$ToolConfig='')
 $ErrorActionPreference='Stop'
 $packageRoot=(Resolve-Path -LiteralPath (Split-Path -Parent $PSScriptRoot)).Path
 $attemptStatusPath=Join-Path $packageRoot '最近运行.json'
@@ -16,6 +16,9 @@ function Save-AttemptEvidence([string]$runtimeAudit,[string]$destinationAudit) {
 }
 try {
  $attemptStatus | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $attemptStatusPath -Encoding utf8
+ . (Join-Path $PSScriptRoot 'tool_config.ps1')
+ $resolvedCpuTools=Resolve-CpuTools -Python $Python -VivadoBin $VivadoBin -ToolConfig $ToolConfig
+ $Python=$resolvedCpuTools.python;$VivadoBin=$resolvedCpuTools.vivado_bin
  foreach($toolAudit in @('xvlog.bat','xelab.bat','xsim.bat')){if(-not(Test-Path -LiteralPath (Join-Path $VivadoBin $toolAudit) -PathType Leaf)){throw "Required tool missing: $toolAudit"}}
  if(-not(Test-Path -LiteralPath $Python -PathType Leaf)){throw 'Bundled Python missing; supply -Python.'}
  $runtimeDirectory=Join-Path ([System.IO.Path]::GetTempPath()) ('cpu_v16_'+$attemptId.Replace('-',''))

@@ -1,0 +1,8 @@
+M2_CASE_CHECKED new_record_historical_recheck HISTORICAL_REVALIDATION_PASS
+M2_CASE_CHECKED copied_no_receipt PENDING_VERIFICATION
+M2_CASE_CHECKED missing_csv FAIL
+M2_CASE_CHECKED missing_native_log FAIL
+M2_CASE_CHECKED input_snapshot_drift FAIL
+M2_CASE_CHECKED current_package_mismatch FAIL
+M2_ACCEPTANCE_PASS cases=9
+EVIDENCE_TESTS_ARCHIVE=C:\Users\Donson\Documents\GitHub\Digital-Electronics-s-16bit-CPU\CPU核心设计\审查\验证工具_r1\证据测试\cpu_v16_evidence_w042_x2d

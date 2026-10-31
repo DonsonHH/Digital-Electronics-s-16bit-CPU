@@ -1,6 +1,7 @@
 param(
- [string]$Python='C:\Users\Donson\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe',
- [string]$VivadoBin='C:\AMDDesignTools\2025.2\Vivado\bin'
+ [string]$Python='',
+ [string]$VivadoBin='',
+ [string]$ToolConfig=''
 )
 $ErrorActionPreference='Stop'
 $packageRoot=(Resolve-Path -LiteralPath (Split-Path -Parent $PSScriptRoot)).Path
@@ -10,6 +11,9 @@ $previousCpuVivadoBin=$env:CPU_VIVADO_BIN
 $locationPushed=$false
 try{
  $attempt | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $statusPath -Encoding utf8
+ . (Join-Path $PSScriptRoot 'tool_config.ps1')
+ $resolvedCpuTools=Resolve-CpuTools -Python $Python -VivadoBin $VivadoBin -ToolConfig $ToolConfig
+ $Python=$resolvedCpuTools.python;$VivadoBin=$resolvedCpuTools.vivado_bin
  if(-not(Test-Path -LiteralPath $Python -PathType Leaf)){throw 'Bundled Python is missing; supply -Python.'}
  if(-not(Test-Path -LiteralPath (Join-Path $VivadoBin 'vivado.bat') -PathType Leaf)){throw 'Required Vivado executable is missing; supply -VivadoBin.'}
  $runtimeDirectory=Join-Path ([System.IO.Path]::GetTempPath()) ('cpu_v16_synth_'+[guid]::NewGuid().ToString('N'))

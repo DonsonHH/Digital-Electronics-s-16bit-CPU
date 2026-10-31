@@ -1,0 +1,30 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Wed Oct 14 01:06:53 2026
+| Host         : LAPTOP-BSM79J69 running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file utilization.rpt
+| Design       : datapath_core
+| Device       : xc7z020clg484-1
+| Speed File   : -1
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++-------------------+-------------+------------+------------+---------+------+-----+--------+--------+------------+
+|      Instance     |    Module   | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP Blocks |
++-------------------+-------------+------------+------------+---------+------+-----+--------+--------+------------+
+| datapath_core     |       (top) |        287 |        287 |       0 |    0 | 260 |      0 |      0 |          0 |
+|   (datapath_core) |       (top) |        100 |        100 |       0 |    0 | 177 |      0 |      0 |          0 |
+|   u_rf            | regfile4x16 |         54 |         54 |       0 |    0 |  64 |      0 |      0 |          0 |
++-------------------+-------------+------------+------------+---------+------+-----+--------+--------+------------+
+
+

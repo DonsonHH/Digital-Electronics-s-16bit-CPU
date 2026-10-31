@@ -1,0 +1,46 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/addsub16_cla.v" into library work
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/alu16.v" into library work
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/branch_target16.v" into library work
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/cla16.v" into library work
+INFO: [VRFC 10-311] analyzing module cla16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/cla4_pg.v" into library work
+INFO: [VRFC 10-311] analyzing module cla4_pg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/datapath_core.sv" into library work
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/flags_reg.v" into library work
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/imm_ext16.v" into library work
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/isa_decode.v" into library work
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/operand_forward.v" into library work
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/pc16.v" into library work
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/regfile4x16.v" into library work
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/rtl/sync_memories.v" into library work
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_audit3.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_audit3
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_datapath.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_datapath
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_forward_contract.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_forward_contract
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_hazards.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_hazards
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_isa_contract.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_isa_contract
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_stress.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stress
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_trace.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_trace
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_uniform_smoke.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_uniform_smoke
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/cpu_v16_unknowns_3064rrnt/stopped_rf_we_x/tb/tb_units.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_units

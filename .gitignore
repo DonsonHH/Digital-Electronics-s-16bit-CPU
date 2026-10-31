@@ -2,3 +2,5 @@
 .DS_Store
 Thumbs.db
 ~$*
+__pycache__/
+/CPU核心设计/tools.local.json

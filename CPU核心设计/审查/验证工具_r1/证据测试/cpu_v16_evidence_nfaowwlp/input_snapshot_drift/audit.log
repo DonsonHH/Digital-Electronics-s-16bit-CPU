@@ -1,0 +1,54 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Oct 31 21:43:51 2026
+# Process ID         : 68000
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c
+# Command line       : xsim.exe -log audit.log -mode tcl -source {xsim.dir/audit_v16_sim/xsim_script.tcl}
+# Log file           : C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c/audit.log
+# Journal file       : C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c\xsim.jou
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 6626 MB
+#-----------------------------------------------------------
+source xsim.dir/audit_v16_sim/xsim_script.tcl
+# xsim {audit_v16_sim} -wdb {audit.wdb} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=043e1155-b22d-41d8-b0ee-24fb00734f9c input_sha256=80e6181f6260a7d7c264619971d351a28efe05564e8ed941b1d095cc6ea8c891
+## run all
+AUDIT3_CASE_PASS BACK_LOAD_DIFFERENT cycles=9 stalls=1 events=4
+AUDIT3_CASE_PASS BACK_LOAD_SAME_DEST cycles=9 stalls=1 events=4
+AUDIT3_CASE_PASS M_RESULT_OVER_OLD_LOAD cycles=8 stalls=0 events=4
+AUDIT3_CASE_PASS NEW_LOAD_OVER_OLD_VALUE cycles=9 stalls=1 events=4
+AUDIT3_CASE_PASS STR_DATA_W_BASE_M cycles=8 stalls=0 events=4
+AUDIT3_CASE_PASS STR_DATA_M_BASE_W cycles=8 stalls=0 events=4
+AUDIT3_CASE_PASS STR_SAME_SOURCE_M cycles=7 stalls=0 events=3
+AUDIT3_CASE_PASS LOAD_STR_BOTH_SOURCES_W cycles=8 stalls=1 events=3
+AUDIT3_CASE_PASS Z_W_CMP_THROUGH_M_ADD cycles=10 stalls=0 events=4
+AUDIT3_CASE_PASS Z_NEW_M_ZERO_OVER_W_ONE cycles=9 stalls=0 events=5
+AUDIT3_CASE_PASS OLD_CMP_WB_WITH_MEM_STORE_FAULT cycles=6 stalls=0 events=1
+AUDIT3_CASE_PASS OLD_LOAD_WB_WITH_YOUNGER_LOAD_FAULT cycles=6 stalls=0 events=1
+AUDIT3_CASE_PASS RESET_RESTART_fault0_consumption1 cycles=6 stalls=0 events=2
+AUDIT3_CASE_PASS RESET_RESTART_fault1_consumption1 cycles=6 stalls=0 events=2
+AUDIT3_CASE_PASS RESET_RESTART_fault0_consumption0 cycles=6 stalls=0 events=2
+AUDIT3_CASE_PASS RESET_RESTART_fault1_consumption0 cycles=6 stalls=0 events=2
+AUDIT3_PASS directed=12 reset_restart=4 total=16 failures=0
+$finish called at time : 2236 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_v16_043e1155b22d41d8b0ee24fb00734f9c/tb/tb_audit3.sv" Line 174
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 21:43:53 2026...

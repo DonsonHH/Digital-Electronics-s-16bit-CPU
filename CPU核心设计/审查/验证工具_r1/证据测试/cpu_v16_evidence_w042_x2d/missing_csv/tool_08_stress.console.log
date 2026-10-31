@@ -1,0 +1,27 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 66224
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sat Oct 31 21:22:58 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/stress_v16_sim/xsim_script.tcl
+# xsim {stress_v16_sim} -wdb {stress.wdb} -autoloadwcfg -tclbatch {run_all.tcl}
+Time resolution is 1 ps
+source run_all.tcl
+## if {[info exists ::env(CPU_VERIFY_ATTEMPT_ID)] && [info exists ::env(CPU_VERIFY_INPUT_SHA256)]} {
+##  puts "CPU_VERIFY_ATTEMPT id=$::env(CPU_VERIFY_ATTEMPT_ID) input_sha256=$::env(CPU_VERIFY_INPUT_SHA256)"
+## } else {
+##  puts "CPU_VERIFY_UNBOUND_RUN new_execution_receipt_not_authorized"
+## }
+CPU_VERIFY_ATTEMPT id=5c8414ba-107d-4ed3-999f-11b5d5f7c5ef input_sha256=436872770282131e71fbafe9ec625a9658933d056dbf99f62184b36d1d0fd056
+## run all
+STRESS_PASS cases=4696 memory_offset_boundary=3584 loops=100 random_control_flow=500 branch_offset_edges=512 completed=33134 fault_tokens=1408 taken=3636 not_taken=2155 legal_opcodes=14/14 failures=0 seed=A9D41009
+$finish called at time : 859896 ns : File "C:/Users/Donson/AppData/Local/Temp/cpu_v16_5c8414ba107d4ed3999f11b5d5f7c5ef/tb/tb_stress.sv" Line 200
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 31 21:23:01 2026...
+DESKTOP_EXIT 0

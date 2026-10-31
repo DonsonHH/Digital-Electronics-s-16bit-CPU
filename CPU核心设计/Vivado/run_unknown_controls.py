@@ -1,5 +1,8 @@
-from negative_test_support import ROOT,prepare,execute,sha
+from negative_test_support import ROOT,prepare,execute,sha,configure
 import json,re,sys,tempfile,shutil
+from tool_config import add_tool_arguments
+import argparse
+parser=argparse.ArgumentParser();add_tool_arguments(parser);options=parser.parse_args();configure(options.vivado_bin,options.config)
 base=ROOT;out=__import__('pathlib').Path(tempfile.mkdtemp(prefix='cpu_v16_unknowns_'))
 variants=[('stopped_dm_we_x','tb_datapath',None),('stopped_dm_we_x_stress','tb_stress',None),
  ('stopped_dm_we_x_audit','tb_audit3',None),('stopped_dm_we_x_uniform','tb_uniform_smoke',None),

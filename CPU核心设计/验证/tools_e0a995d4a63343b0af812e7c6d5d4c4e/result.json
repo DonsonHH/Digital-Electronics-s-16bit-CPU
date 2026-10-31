@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "suites": [
+    "regression",
+    "independent",
+    "mutations",
+    "unknown",
+    "evidence",
+    "lifecycle"
+  ],
+  "tools": {
+    "vivado_bin": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin",
+    "python": "C:\\Users\\Donson\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "config_file": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\tools.local.json"
+  },
+  "source_sha256": {
+    "build_hazard_matrix.py": "da66cd06c7ad90e52ad8f1a00cc94965774b80b61abdc09ae6d81ca5a54dfc9a",
+    "create_project.ps1": "e71e1534c2762daa27a12b33756873597c186287e2e8a0791fda3e91aec73d19",
+    "desktop_launch.py": "4fbfe6a0bd6691c12cc4a47f45dc72fbef9147d880b08f9d7dee5e3bb09067b2",
+    "execute_regression.py": "ae07924602eba41aa0b43e6838f41de09f2a7e511cc85e895572fa7cd96f11f0",
+    "generate_independent.py": "24f50a20dd742e65cb0ef8b874c4a92e4d4fe6f4c608d791d8e79349a628ad35",
+    "negative_test_support.py": "a6cbf699fb5c183438b5d1870a897c62994522d35b731bd77fb88a1fbf254d4b",
+    "run_evidence_tests.py": "7bdf94801ecc64d712359a285ecd62f726c6e560504ce04c0aa3fb5d4837509b",
+    "run_independent.py": "df057ab8cdf127b9bc8d23f96f630c96b7605934707701aaba7a6e4f04cd37e1",
+    "run_mutations.py": "b724511544bc0de278c9a173cb2367a1ece9962b7ff021dbd07a0b12f294559f",
+    "run_synthesis.ps1": "34c5e2715f38767a8972d7236609edd686a31d48f3f20b2bb880c9f8b5e16fa2",
+    "run_unknown_controls.py": "a3d247021c874552be4419424e19db2efdb1be92dc0725c6feb875b5c017f567",
+    "run_verify.ps1": "755dd7c5dec13f6ceddf1756d1366e95b763ca8a4d4e8399aa01bc87ec9abe2d",
+    "test_process_lifecycle.py": "96b69f6fb9a8d42a415f50bd76531b1f5d81a0ab4bd8726a8e7a883058468c2e",
+    "tool_config.ps1": "1920d644cc737c6e4209ef957e4465ed4bc7bf6b8c814a8fab436bba71af566f",
+    "tool_config.py": "94f191de485000776da5e5874371fe3928e9d2dea66f0e7c302db80a604aaf29",
+    "verify.py": "68bd600930b07fedbf516f7daa827a1eaddc87eb2c3c3eeced791598a2dc9342",
+    "verify_results.py": "8fd998125ef2d99bcbc3acd484cab905795bf6de48012d43c54da06fcc6e5b24",
+    "verify_synthesis.py": "568804f634d8350c847336f17ba649928ee557228926fdf9786b343f05808a49",
+    "tests/test_generator.py": "96d67ffd3c69d9d385b460888b20f096183a64ea35e7ec36c6b96e7bf6cfd2e3",
+    "tests/test_tool_config.py": "c7899ac9fa2f194f803983019f515766b06e17c3b025b0713d3fed4681246f17",
+    "verification/independent_vectors.py": "eb3b859d01d59211262324315b48370d4b1edc384e06e4550257a42917d88041",
+    "verification/isa_reference.py": "ed3b7832b7ccb96c66b9c861625d1674c289662e30b39f45ba8bd427945a1144",
+    "verification/test_manifest.json": "77d10c949ef02f8bb3b3c8cc633cdc416c2a9f1c022fe295963ceb64a8e329f7",
+    "verification/__init__.py": "fd006de8f7a9fa891f6069870b7b4e7ae2eeb70cf95765e8df10fc7e3305a400",
+    "创建记录/cpu_core_project_32fdc0e09a2b4948a60fbba15727c6d7/desktop_launch.py": "b26dec3371de2cf4de5da28f2957189ed4ca7bdbb01c3d58c636750455b746c9"
+  },
+  "manifest_sha256": "77d10c949ef02f8bb3b3c8cc633cdc416c2a9f1c022fe295963ceb64a8e329f7",
+  "steps": [
+    {
+      "suite": "regression",
+      "exit": 0,
+      "log_sha256": "2cde3d7517aabfd54d31a21caa8a58a762107e3620027161fc14cc29393c6d15"
+    },
+    {
+      "suite": "independent",
+      "exit": 0,
+      "log_sha256": "9a0108d45fcfc58b70e580282e41c1d4a55bc702679efa64bc9e8c2d0859bd3e"
+    },
+    {
+      "suite": "mutations",
+      "exit": 0,
+      "log_sha256": "b2ed5342bb7a1d1303166bd4758f1bc1c78929713101b9d1b9dedbc6b043e4e6"
+    },
+    {
+      "suite": "unknown",
+      "exit": 0,
+      "log_sha256": "93dcb0f9aa306da54bcc9837b29b6d3d9118e96c77f5c20b2cd447dbbb51872f"
+    },
+    {
+      "suite": "evidence",
+      "exit": 0,
+      "log_sha256": "b3f03f9bb180d4fa3a65d1466561cbb0156c341c52f488153167a380e355a5bc"
+    },
+    {
+      "suite": "lifecycle",
+      "exit": 0,
+      "log_sha256": "ce75c6e21d91b3884d57da0c4ba6b9817b39ae9cee5c188dc16e92c59901688a"
+    }
+  ],
+  "scope": "Tooling and native execution checks, not hardware acceptance",
+  "completed_at_utc": "2026-10-31T13:26:16.621775+00:00"
+}
