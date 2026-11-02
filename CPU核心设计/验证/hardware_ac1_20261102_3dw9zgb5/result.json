@@ -1,0 +1,456 @@
+{
+  "status": "AC1_FIVE_PROGRAMS_AND_S1_BOARD_PASS",
+  "started_at_utc": "2026-11-02T07:51:40.332457+00:00",
+  "CPU": "v1.6 default AC1",
+  "ISA": "v1.5",
+  "board": "EES-331",
+  "physical_binding": "User confirms only EES-331 USB/JTAG connected and PYNQ disconnected; user confirmed8-LED behavior after exact-target programming",
+  "target": "localhost:3121/xilinx_tcf/Xilinx/1234-tulA",
+  "new_build": false,
+  "RTL_changed": false,
+  "Flash_written": false,
+  "serial_port_opened": false,
+  "measured_clock_frequency_Hz": null,
+  "measured_wall_time_ns": null,
+  "first_failed_attempt": "验证/cpu345_hardware_8orngee2",
+  "failure_cause": "Windows Tcl %016x truncated64-bit build ID to32bits; fixed by complete integer comparison; no CPU hardware change",
+  "fix_commit": "47eb8c3",
+  "program_records": {
+    "all_ops": "验证/cpu345_hardware_mhdc67ya",
+    "baseline": "验证/cpu345_hardware_nhbxiiwe",
+    "loop": "验证/cpu345_hardware_wgocvlq3",
+    "memory_copy": "验证/cpu345_hardware_c2r8w4bv",
+    "copy_checksum": "验证/cpu345_hardware_apuwfhhk"
+  },
+  "button_checked": true,
+  "limitations": [
+    "Program coverage is finite; no full hardware formal or arithmetic exhaustive proof.",
+    "100MHz is the board oscillator design basis; no independent frequency or wall-time instrument measurement.",
+    "Experimental overlays remain unprogrammed; only default AC1 is accepted."
+  ],
+  "verified_programs": [
+    {
+      "program": "all_ops",
+      "record": "验证/cpu345_hardware_mhdc67ya",
+      "receipt_sha256": "4a63abf61877aea1a71e7268ee8f685bcb559f1a9797dba26de8377367d95145",
+      "hardware_log_sha256": "3aa789a5faa05863eb6f46b6fed2ece617664df55461c5e913219ff4862f70a8",
+      "raw_snapshots_sha256": "2cec64d5931aece53976f03a4e1964cfcffa2973246b36345892b7c88aa48d66",
+      "actual": {
+        "build_id": "5b9305e20eac5015",
+        "rf": [
+          5,
+          5,
+          5,
+          32
+        ],
+        "flags": [
+          1,
+          1,
+          0
+        ],
+        "stop_pc": 18,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 18,
+        "last_store_valid": 1,
+        "last_store_addr": 32,
+        "last_store_data": 5,
+        "core_reset": 0,
+        "heartbeat": 0,
+        "reserved": 0,
+        "cycles": 25,
+        "completed": 16,
+        "stalls": 1,
+        "redirects": 2,
+        "stores": 1
+      }
+    },
+    {
+      "program": "baseline",
+      "record": "验证/cpu345_hardware_nhbxiiwe",
+      "receipt_sha256": "bfb30b1d9a93b876ba179840b27fcc732e54efd69c9dc39785b5d7e2a4513975",
+      "hardware_log_sha256": "43f966f0ab6a2b394e7df66539d2a680f2f17e6cc45d93a1a0987f6d253a31a1",
+      "raw_snapshots_sha256": "a68b700e27d75ae7916f0782f543f5e12476393aa296efe5ae33da382780650d",
+      "actual": {
+        "build_id": "cf1cd751e48f903d",
+        "rf": [
+          8,
+          2,
+          8,
+          32
+        ],
+        "flags": [
+          1,
+          1,
+          0
+        ],
+        "stop_pc": 10,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 10,
+        "last_store_valid": 1,
+        "last_store_addr": 32,
+        "last_store_data": 8,
+        "core_reset": 0,
+        "heartbeat": 0,
+        "reserved": 0,
+        "cycles": 17,
+        "completed": 10,
+        "stalls": 1,
+        "redirects": 1,
+        "stores": 1
+      }
+    },
+    {
+      "program": "loop",
+      "record": "验证/cpu345_hardware_wgocvlq3",
+      "receipt_sha256": "6fe89227cf16e7345a320120922d3d5c150aa70ccaf312520807e1bb50076dd3",
+      "hardware_log_sha256": "6b88c16a0df4cd0ec7af0730c6b88f49431909e88c5ccf73ac5c9421884d506b",
+      "raw_snapshots_sha256": "851e6c0ea267dc2e65c90f9d19efc308385f372651c97cd8da507aebe00d446f",
+      "actual": {
+        "build_id": "eadc07c95f98b0c3",
+        "rf": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": [
+          1,
+          1,
+          0
+        ],
+        "stop_pc": 6,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 6,
+        "last_store_valid": 0,
+        "last_store_addr": 0,
+        "last_store_data": 0,
+        "core_reset": 0,
+        "heartbeat": 1,
+        "reserved": 0,
+        "cycles": 30,
+        "completed": 18,
+        "stalls": 0,
+        "redirects": 4,
+        "stores": 0
+      }
+    },
+    {
+      "program": "memory_copy",
+      "record": "验证/cpu345_hardware_c2r8w4bv",
+      "receipt_sha256": "25f3a1d5f99daa640f0bf748578cc9c9d00ba331549f6d1081501b097b20d266",
+      "hardware_log_sha256": "439b58b347c60618a6c460c06d46169ce5398edd5320505acf6e51f1322d5ab0",
+      "raw_snapshots_sha256": "fa62b582873718b5101164335f58e528ef10fa96eac5b7a8a1a35b60fdd7abcb",
+      "actual": {
+        "build_id": "1e2d2af733a1194a",
+        "rf": [
+          48879,
+          48879,
+          0,
+          32
+        ],
+        "flags": [
+          1,
+          0,
+          0
+        ],
+        "stop_pc": 7,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 7,
+        "last_store_valid": 1,
+        "last_store_addr": 33,
+        "last_store_data": 48879,
+        "core_reset": 0,
+        "heartbeat": 0,
+        "reserved": 0,
+        "cycles": 15,
+        "completed": 7,
+        "stalls": 2,
+        "redirects": 1,
+        "stores": 1
+      }
+    },
+    {
+      "program": "copy_checksum",
+      "record": "验证/cpu345_hardware_apuwfhhk",
+      "receipt_sha256": "43851b44ad01d02eaec1fa002c5dd547353ac4b22a2b3ff83f18989c579dfc3a",
+      "hardware_log_sha256": "87e407464694d5d9f0c6ed9ca8df86c103efc131db49267c720dfd5e63b23e5a",
+      "raw_snapshots_sha256": "e73c743fb3937c9b285f3d841641226f0b35b4bbfc7d83ceb2b2c7583a012f34",
+      "actual": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          4658,
+          0,
+          32
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 34,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 34,
+        "last_store_valid": 1,
+        "last_store_addr": 71,
+        "last_store_data": 0,
+        "core_reset": 0,
+        "heartbeat": 1,
+        "reserved": 0,
+        "cycles": 55,
+        "completed": 35,
+        "stalls": 16,
+        "redirects": 0,
+        "stores": 8
+      }
+    }
+  ],
+  "five_programs_verified_at_utc": "2026-11-02T07:54:15.757225+00:00",
+  "physical_board_validated": true,
+  "button_status": "PHYSICAL_S1_RESET_AND_RESTART_PASS",
+  "button_samples": [
+    {
+      "label": "before",
+      "host_sample_time_ms": 1793606782574,
+      "decoded": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          4658,
+          0,
+          32
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 34,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 34,
+        "last_store_valid": 1,
+        "last_store_addr": 71,
+        "last_store_data": 0,
+        "core_reset": 0,
+        "heartbeat": 0,
+        "reserved": 0,
+        "cycles": 55,
+        "completed": 35,
+        "stalls": 16,
+        "redirects": 0,
+        "stores": 8
+      }
+    },
+    {
+      "label": "pressed",
+      "host_sample_time_ms": 1793606917836,
+      "decoded": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 0,
+        "stop_reason": 0,
+        "stop_valid": 0,
+        "stop_pc_valid": 0,
+        "halted": 0,
+        "fault": 0,
+        "last_completed_valid": 0,
+        "last_completed_pc": 0,
+        "last_store_valid": 0,
+        "last_store_addr": 0,
+        "last_store_data": 0,
+        "core_reset": 1,
+        "heartbeat": 0,
+        "reserved": 0,
+        "cycles": 0,
+        "completed": 0,
+        "stalls": 0,
+        "redirects": 0,
+        "stores": 0
+      }
+    },
+    {
+      "label": "after_0",
+      "host_sample_time_ms": 1793607016330,
+      "decoded": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          4658,
+          0,
+          32
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 34,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 34,
+        "last_store_valid": 1,
+        "last_store_addr": 71,
+        "last_store_data": 0,
+        "core_reset": 0,
+        "heartbeat": 1,
+        "reserved": 0,
+        "cycles": 55,
+        "completed": 35,
+        "stalls": 16,
+        "redirects": 0,
+        "stores": 8
+      }
+    },
+    {
+      "label": "after_1",
+      "host_sample_time_ms": 1793607016435,
+      "decoded": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          4658,
+          0,
+          32
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 34,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 34,
+        "last_store_valid": 1,
+        "last_store_addr": 71,
+        "last_store_data": 0,
+        "core_reset": 0,
+        "heartbeat": 1,
+        "reserved": 0,
+        "cycles": 55,
+        "completed": 35,
+        "stalls": 16,
+        "redirects": 0,
+        "stores": 8
+      }
+    }
+  ],
+  "button_log": "button_session_long.log",
+  "completed_at_utc": "2026-11-02T08:15:23.222611+00:00",
+  "board_acceptance_scope": "Default AC1 finite5programs, each two VIO stop snapshots; real S1 assertion clears public state/counters and release restarts copy_checksum; LED program separately user-observed",
+  "button_attempts": [
+    {
+      "script": "button_session.tcl",
+      "status": "PROBE_FILTER_FAILED_BEFORE_LISTEN",
+      "log_sha256": "1964d8df793b84aaa6d1fa2c66136d94f662c55a35a0f37438cf1c24c01b9510"
+    },
+    {
+      "script": "button_session_names.tcl",
+      "status": "NO_PRESS_OBSERVED_BEFORE_TIMEOUT",
+      "log_sha256": "fdae5219b6b8d21030cd88b306c5bee17444201db87e687e74088fcc08ccd5fc"
+    },
+    {
+      "script": "button_session_long.tcl",
+      "status": "PASS",
+      "log_sha256": "33f62b3288f12cbd9d0e3f99de26340789393f0b458b34e863cf33939caeb03c"
+    }
+  ],
+  "button_history_note": "The before-only partial TSV from the timed-out helper was replaced by the later successful helper; earlier logs remain and are not counted as successful button evidence.",
+  "host_tools_tests": {
+    "count": 12,
+    "exit": 0,
+    "console_sha256": "8e61143d816ee6297c8771c31404712548bc5f7bdd840dd8ad8f348375f9fd56"
+  },
+  "independent_code_review": {
+    "spec": "No actionable findings for47eb8c3; all64bits and pre-reset guard checked",
+    "standards": "No actionable findings; full real Tcl entry tested with all hardware/file calls stubbed"
+  },
+  "evidence_sha256": {
+    "baseline.entry.log": "8ce8e32d42eb411a8a6595f8bc935ce7adc428757924a72dc86e2657198cc329",
+    "button_session.cmd": "590182b41f7eecc0ea05d260a9632b8659ff2ddb8d88c5ef72f383899dd80cc5",
+    "button_session.console.log": "77d2e1b5aa142d0746fd6e18505b6bf64966ccafebf4e5d80b892904d3959856",
+    "button_session.jou": "f9ad35c74c6db16fa8301e026795c34d200329dd4f4c69dbe0f02d373e4b314b",
+    "button_session.log": "1964d8df793b84aaa6d1fa2c66136d94f662c55a35a0f37438cf1c24c01b9510",
+    "button_session.tcl": "d1f8805d6eb2485273456c57e08cdd8d4bcb44993e5320f89ee91664cc6e197d",
+    "button_session_long.cmd": "913be72f433e2a4f6a27d1ee7fab38c26275d04eb47f0681af8065770e145220",
+    "button_session_long.console.log": "4231809772e7e9b1638590d530bb5921d380ead2be62db75f71614215b75e024",
+    "button_session_long.jou": "f792dd75e07ae3db504bfa0e3e885643da45b001cc34b81195477efaa3e40a60",
+    "button_session_long.log": "33f62b3288f12cbd9d0e3f99de26340789393f0b458b34e863cf33939caeb03c",
+    "button_session_long.tcl": "127ecc1fd4ac0aff2e962984d5a4996819f4ac5b447e7ed4d40c7190a76dfc89",
+    "button_session_names.cmd": "103c6820dd153f32b98508b9a6bfcef9d87f0f4c336ad5177e18939185518dbb",
+    "button_session_names.console.log": "08d90418fb0271344ce39e5890cc7bb2f6ba108fd73763fdbccc03a279660c86",
+    "button_session_names.jou": "76270079e69f802e377f4257d4064500dca5bbe2acecb32948425150de3e40d6",
+    "button_session_names.log": "fdae5219b6b8d21030cd88b306c5bee17444201db87e687e74088fcc08ccd5fc",
+    "button_session_names.tcl": "afcd575b7a116e6154136be1d2a9c1174ee6218f03cff4fa63c1ced1dde7ac6b",
+    "button_snapshots.tsv": "d37722f6be0880fdf07e624a9597421eb105c3bbad7b8c129f4a070d553f70f0",
+    "copy_checksum.entry.log": "5dff21969756716285c6f55ca00df5ccc987716ed25b7df168225a93542dd86a",
+    "dfx_runtime.txt": "3f5da73223faaccd53f59b80c89a7cceb34b0828a474fd53a288d6370f06288e",
+    "host_tools_tests.log": "8e61143d816ee6297c8771c31404712548bc5f7bdd840dd8ad8f348375f9fd56",
+    "loop.entry.log": "57a6dc01df96982c6fe041642d19ca85c987025961264544857ee4ea4cf183a6",
+    "memory_copy.entry.log": "c3129f6ed38772c1264d6c32fbb105069079c185ef155e7b9ba8d9c48d13ecc7",
+    "run_batch.py": "86ad12e5530fdd5c48a5f768bfbc79347c263d4f4f55b249cfbbe907481beca4",
+    "run_button_watch.py": "1134d2a331de0ab6250e26e9a8983247b46f4e5567ebd79d0a08e41851892355",
+    "run_remaining.py": "f92b86bc9478bc0e78db6111c6efde22118226f240197eb3f52c7538c8e5980d",
+    "led_confirmation/build.log": "3093380793850b4033788cf1f458887b0a6673a61391e0178dd93ffc9410f417",
+    "led_confirmation/drc.rpt": "ee0285e23bca4a16d9a76566989dacfc06157254b79ee5397a51b90885c14598",
+    "led_confirmation/ees331_led.bit": "4ccf86bd787b61c60f0652d3963f4b44de34982635d822316233bbb33761cba9",
+    "led_confirmation/ees331_led.v": "51c51c754f3654cbca849db6a5b1e841c42ee857a94eb72ab4e68dbf8db29432",
+    "led_confirmation/ees331_led.xdc": "58c3f9ed14c9b94c00b103ca348cf6da19d6630eee6926d9aa3bf01cb4080bdf",
+    "led_confirmation/inspect.tsv": "b5a3e00ac919e7f25823967702e5f2bc152560ea48cc56493ef9859c58789eeb",
+    "led_confirmation/inspect_current.log": "f3bffd0fc9992a93d71249ecaa3820e115eb4b41ee5bcbbbfd46497342a33393",
+    "led_confirmation/inspect_current.tcl": "92205db6739a74587c7e5ad1ddd756e6f526c896b7f9012166608ef293d0d61f",
+    "led_confirmation/program.tsv": "618e7b2167f20a81ce24152a84ccf9f21805ee25c1edab546a7a83597f34cc03",
+    "led_confirmation/program_confirmed.log": "4db11764b74a651ddddc9abfebf5953add787d3ccf51431445307b0290fc1251",
+    "led_confirmation/program_confirmed.tcl": "5a56e3b4aa0c2b266e425a3e6445613810ccea078ff94fe9bf21387a4d88a1fa",
+    "led_confirmation/result.json": "9523597d02fa61f69f82d17e9cbae85e7d405db7a254f024ba38379311f5d196",
+    "led_confirmation/timing_summary.rpt": "8301deff30cedee2e6a27ddc5ae8dbfbb87d46fbbe1a97dd250edfc49093587b"
+  }
+}

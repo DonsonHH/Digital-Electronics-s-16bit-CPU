@@ -1,12 +1,12 @@
 {
   "schema": 1,
-  "revision": "AC1-architecture-r3",
+  "revision": "AC1-architecture-r4",
   "baseline_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf",
   "baseline_document": "CPU核心设计/16位流水线CPU核心设计文档_AC1候选版.docx",
   "default_implementation": "AC1",
   "CPU": "v1.6",
   "ISA": "v1.5",
-  "scope": "Architecture responsibilities and documentation only. Production RTL, ISA, pipeline cycles and experimental overlays remain unchanged. Hardware access/programming is prohibited in this task.",
+  "scope": "Architecture and finite EES-331 physical validation record. Default CPU RTL, ISA, pipeline cycles and isolated overlays remain unchanged. Document authoring reads archived board evidence without device access.",
   "decisions": [
     "Adopt the three control layers: global mode, cross-stage arbitration, and stage-local responsibilities.",
     "Keep datapath_core as its historical RTL name; describe it as the complete execution core containing both datapath and hardwired pipeline control.",
@@ -14,94 +14,377 @@
     "Preserve one RF, one architectural flags register, four logical boundaries and one-cycle synchronous IM/DM. Observation shadows never feed execution.",
     "Retain default AC1 and both isolated experiments. Do not combine cycle-preserving document reorganization with WB-to-MEM adoption.",
     "Do not extract new RTL modules without a demonstrated ownership/interface defect. Current signal owners are unique; internal TB/mutation seams make unmotivated extraction costly.",
-    "Preserve historical reports and tests. Regenerate current-source independent48 traces for the five worked examples; do not claim a new nine-suite or P&R run.",
-    "Unconfirmed-target programming attempts are not EES-331 evidence. Physical validation is deferred by the user."
+    "Preserve historical reports and tests. The r3 independent48 traces remain the source for five worked examples; no new nine-suite or P&R execution is claimed for this board-validation update.",
+    "Exclude unconfirmed-target attempts. After explicit user resumption and single-board physical confirmation, five default AC1 programs and real S1 reset/restart were verified on EES-331; frequency and wall-time were not independently measured."
   ],
   "control_groups": {
     "CW_X": {
       "prefix": "x_",
-      "fields": {"use_rd":1,"use_rs":1,"alu_a_sel":2,"alu_b_sel":2,"alu_op":3,"reg_write":1,"mem_read":1,"mem_write":1,"z_write":1,"cv_write":1,"wb_sel":1,"jump_abs":1,"jump_z":1,"halt":1},
+      "fields": {
+        "use_rd": 1,
+        "use_rs": 1,
+        "alu_a_sel": 2,
+        "alu_b_sel": 2,
+        "alu_op": 3,
+        "reg_write": 1,
+        "mem_read": 1,
+        "mem_write": 1,
+        "z_write": 1,
+        "cv_write": 1,
+        "wb_sel": 1,
+        "jump_abs": 1,
+        "jump_z": 1,
+        "halt": 1
+      },
       "width": 18
     },
     "CW_M": {
       "prefix": "m_",
-      "fields": {"reg_write":1,"mem_read":1,"mem_write":1,"z_write":1,"cv_write":1,"wb_sel":1,"halt":1},
+      "fields": {
+        "reg_write": 1,
+        "mem_read": 1,
+        "mem_write": 1,
+        "z_write": 1,
+        "cv_write": 1,
+        "wb_sel": 1,
+        "halt": 1
+      },
       "width": 7
     },
     "CW_W": {
       "prefix": "w_",
-      "fields": {"reg_write":1,"z_write":1,"cv_write":1,"wb_sel":1,"halt":1},
+      "fields": {
+        "reg_write": 1,
+        "z_write": 1,
+        "cv_write": 1,
+        "wb_sel": 1,
+        "halt": 1
+      },
       "width": 5
     }
   },
   "ownership": [
-    ["全局运行模式", "core组合逻辑由当前mode及合格故障/HALT/drain_done求mode_next", "Reset > MEM/EX fault > HALT；停止状态保持至Reset", "core主时序块唯一更新mode；非IF到WB的串行FSM"],
-    ["指令译码", "u_decode产生源使用、ALU选择和RW/MR/MW/ZW/CVW等意图；u_ext在ID解释立即数", "core用d_valid/d_fault及发射资格屏蔽无效控制", "译码为组合逻辑；意图在进入ID/EX的边沿锁存"],
-    ["IF请求与PC", "EX目标、mode、load_use及事件共同提供取指资格", "core产生qualified_redirect、fetch_accept、pc_hold及im_en", "u_pc唯一保存PC；同步IM保存指令dout；core保存D标签"],
-    ["ID保持与发射", "ID实际源与EX load目的比较形成load_use", "core统一计算d_valid_next/x_valid_next，非独立ID暂停FSM", "主时序块更新D/X有效位；停顿时PC/IM/D标签共同保持、X注入bubble"],
-    ["EX操作数前递", "u_forward比较use/源号及M/W valid/fault/RW/readiness", "最近M匹配优先；M load未就绪阻断旧W", "u_forward内比较/sel/blocked属控制、16位选择属DP；core再选ALU输入"],
-    ["Z与分支资格", "core选择M CMP候选、W候选、已保存Z；u_target计算目标", "EX产生branch_req，再经年龄与故障资格得到qualified_redirect", "pc16采样重定向；目标计算不决定是否跳转，CMP候选不直接写Z"],
-    ["MEM访问与故障", "M控制、完整EA、valid/fault、rst和mode_active", "m_address_in_range/m_access_fault；老MEM故障取消年轻EX/ID/IF", "core驱动dm_en/dm_we；同步DM在MEM结束边沿读或写，STR只写一次"],
-    ["WB架构写入", "W控制、valid/fault、rst和mode_active；同步DM给出load数据", "core形成wb_ok、rf_we、z_we、cv_we", "u_rf与u_flags各自唯一更新架构状态；W级store/branch标签不产生RF写入"],
-    ["流水数据与CW", "各级数据和意图形成下一载荷", "core唯一的占用仲裁计算valid_next及fault_next", "core主时序块更新D/X/M/W载荷；有效性掩码保证同一条指令的数据与控制对齐"],
-    ["原因与停止现场", "ID/EX/MEM识别reason；WB停止token与pipeline_empty_next决定drain_done", "诊断使用同一有效标签；取消的年轻指令不保留现场", "core另一个时序块更新x/m/w_reason与stop/last_completed，非全部流水字段同一always"],
-    ["系统观察状态", "cpu_system采样合格RF/MEM写入事件", "不参与任何执行选择或仲裁", "system时序块保存RF影子和最后store；与架构RF不是两份执行资源"]
+    [
+      "全局运行模式",
+      "core组合逻辑由当前mode及合格故障/HALT/drain_done求mode_next",
+      "Reset > MEM/EX fault > HALT；停止状态保持至Reset",
+      "core主时序块唯一更新mode；非IF到WB的串行FSM"
+    ],
+    [
+      "指令译码",
+      "u_decode产生源使用、ALU选择和RW/MR/MW/ZW/CVW等意图；u_ext在ID解释立即数",
+      "core用d_valid/d_fault及发射资格屏蔽无效控制",
+      "译码为组合逻辑；意图在进入ID/EX的边沿锁存"
+    ],
+    [
+      "IF请求与PC",
+      "EX目标、mode、load_use及事件共同提供取指资格",
+      "core产生qualified_redirect、fetch_accept、pc_hold及im_en",
+      "u_pc唯一保存PC；同步IM保存指令dout；core保存D标签"
+    ],
+    [
+      "ID保持与发射",
+      "ID实际源与EX load目的比较形成load_use",
+      "core统一计算d_valid_next/x_valid_next，非独立ID暂停FSM",
+      "主时序块更新D/X有效位；停顿时PC/IM/D标签共同保持、X注入bubble"
+    ],
+    [
+      "EX操作数前递",
+      "u_forward比较use/源号及M/W valid/fault/RW/readiness",
+      "最近M匹配优先；M load未就绪阻断旧W",
+      "u_forward内比较/sel/blocked属控制、16位选择属DP；core再选ALU输入"
+    ],
+    [
+      "Z与分支资格",
+      "core选择M CMP候选、W候选、已保存Z；u_target计算目标",
+      "EX产生branch_req，再经年龄与故障资格得到qualified_redirect",
+      "pc16采样重定向；目标计算不决定是否跳转，CMP候选不直接写Z"
+    ],
+    [
+      "MEM访问与故障",
+      "M控制、完整EA、valid/fault、rst和mode_active",
+      "m_address_in_range/m_access_fault；老MEM故障取消年轻EX/ID/IF",
+      "core驱动dm_en/dm_we；同步DM在MEM结束边沿读或写，STR只写一次"
+    ],
+    [
+      "WB架构写入",
+      "W控制、valid/fault、rst和mode_active；同步DM给出load数据",
+      "core形成wb_ok、rf_we、z_we、cv_we",
+      "u_rf与u_flags各自唯一更新架构状态；W级store/branch标签不产生RF写入"
+    ],
+    [
+      "流水数据与CW",
+      "各级数据和意图形成下一载荷",
+      "core唯一的占用仲裁计算valid_next及fault_next",
+      "core主时序块更新D/X/M/W载荷；有效性掩码保证同一条指令的数据与控制对齐"
+    ],
+    [
+      "原因与停止现场",
+      "ID/EX/MEM识别reason；WB停止token与pipeline_empty_next决定drain_done",
+      "诊断使用同一有效标签；取消的年轻指令不保留现场",
+      "core另一个时序块更新x/m/w_reason与stop/last_completed，非全部流水字段同一always"
+    ],
+    [
+      "系统观察状态",
+      "cpu_system采样合格RF/MEM写入事件",
+      "不参与任何执行选择或仲裁",
+      "system时序块保存RF影子和最后store；与架构RF不是两份执行资源"
+    ]
   ],
   "payload": [
-    ["IF/ID", "inst16由同步IM的dout保存", "d_pc16、d_valid1、d_fetch_fault1", "尚未译码，无CW_X", "core标签18位 + 外部IM输出16位；不另加IR"],
-    ["ID/EX", "x_rd_value16、x_rs_value16、x_imm_ext16", "x_pc16、x_rd2、x_rs2、x_valid1、x_fault1、x_reason3", "CW_X 18位逻辑集合", "core现有寄存字段91位；imm_signed已在ID消费，不继续保存"],
-    ["EX/MEM", "m_exec_value16、m_store_data16、m_cmp_z1、m_c1、m_v1", "m_pc16、m_rd2、m_valid1、m_fault1、m_reason3", "CW_M 7位逻辑集合", "core现有字段65位；exec可作ALU结果或EA，store数据独立"],
-    ["MEM/WB", "w_exec_value16、w_cmp_z1、w_c1、w_v1；load16来自同步DM的dout", "w_pc16、w_rd2、w_valid1、w_fault1、w_reason3、w_store1", "CW_W 5位逻辑集合", "core字段48位 + 外部DM输出16位；不另加MDR"]
+    [
+      "IF/ID",
+      "inst16由同步IM的dout保存",
+      "d_pc16、d_valid1、d_fetch_fault1",
+      "尚未译码，无CW_X",
+      "core标签18位 + 外部IM输出16位；不另加IR"
+    ],
+    [
+      "ID/EX",
+      "x_rd_value16、x_rs_value16、x_imm_ext16",
+      "x_pc16、x_rd2、x_rs2、x_valid1、x_fault1、x_reason3",
+      "CW_X 18位逻辑集合",
+      "core现有寄存字段91位；imm_signed已在ID消费，不继续保存"
+    ],
+    [
+      "EX/MEM",
+      "m_exec_value16、m_store_data16、m_cmp_z1、m_c1、m_v1",
+      "m_pc16、m_rd2、m_valid1、m_fault1、m_reason3",
+      "CW_M 7位逻辑集合",
+      "core现有字段65位；exec可作ALU结果或EA，store数据独立"
+    ],
+    [
+      "MEM/WB",
+      "w_exec_value16、w_cmp_z1、w_c1、w_v1；load16来自同步DM的dout",
+      "w_pc16、w_rd2、w_valid1、w_fault1、w_reason3、w_store1",
+      "CW_W 5位逻辑集合",
+      "core字段48位 + 外部DM输出16位；不另加MDR"
+    ]
   ],
   "examples": [
-    {"id":"EX_ADD_FORWARD","case":"DOC_ADD_ADD","title":"相邻ADD的M到EX前递"},
-    {"id":"EX_LOAD_USE","case":"DOC_LOAD_STR","title":"默认AC1的load use保持与bubble"},
-    {"id":"EX_CMP_JZ","case":"DOC_CMP_JZ","title":"CMP到JZ的Z前递与年轻取消"},
-    {"id":"EX_STORE_HALT","case":"DOC_STR_HALT","title":"STR在MEM写入并在HALT前完成WB标签"},
-    {"id":"EX_MEM_FAULT","case":"MEM_FAULT_OVER_BRANCH","title":"较老MEM故障胜过年轻EX分支"}
+    {
+      "id": "EX_ADD_FORWARD",
+      "case": "DOC_ADD_ADD",
+      "title": "相邻ADD的M到EX前递"
+    },
+    {
+      "id": "EX_LOAD_USE",
+      "case": "DOC_LOAD_STR",
+      "title": "默认AC1的load use保持与bubble"
+    },
+    {
+      "id": "EX_CMP_JZ",
+      "case": "DOC_CMP_JZ",
+      "title": "CMP到JZ的Z前递与年轻取消"
+    },
+    {
+      "id": "EX_STORE_HALT",
+      "case": "DOC_STR_HALT",
+      "title": "STR在MEM写入并在HALT前完成WB标签"
+    },
+    {
+      "id": "EX_MEM_FAULT",
+      "case": "MEM_FAULT_OVER_BRANCH",
+      "title": "较老MEM故障胜过年轻EX分支"
+    }
   ],
   "chapters": [
-    {"id":"CH1","title":"设计目标与指令契约","sections":[
-      {"id":"GOALS","kind":"reuse","heading":"架构规格","title":"设计目标与实现边界"},
-      {"id":"FORMAT","kind":"reuse","heading":"指令长度与字段划分"},
-      {"id":"ISA","kind":"reuse","heading":"指令编码与完整语义"},
-      {"id":"IMMEDIATE","kind":"reuse","heading":"立即数与地址规则"},
-      {"id":"ENCODING","kind":"reuse","heading":"编码示例"},
-      {"id":"CORE_IF","kind":"reuse","heading":"外部接口","title":"核心执行接口"},
-      {"id":"MEMORY_EDGE","kind":"reuse","heading":"同步存储边沿契约"},
-      {"id":"DESIGN_FLOW","kind":"new"}
-    ]},
-    {"id":"CH2","title":"数据通路与状态边界","sections":[
-      {"id":"OVERVIEW","kind":"overview"},
-      {"id":"COMPONENTS","kind":"reuse","heading":"主要模块与接口","title":"关键部件如何组成执行核心"},
-      {"id":"SINGLE_STATE","kind":"new"},
-      {"id":"PAYLOAD","kind":"reuse","heading":"流水寄存器字段","title":"四个流水边界的分类载荷"},
-      {"id":"STAGE_CONTRACT","kind":"reuse","heading":"统一五级执行契约"},
-      {"id":"INSTRUCTION_DP","kind":"reuse","heading":"典型指令的数据流与逐拍操作","title":"典型指令的数据路径"}
-    ]},
-    {"id":"CH3","title":"流水控制与跨级协调","sections":[
-      {"id":"CONTROL_LAYERS","kind":"reuse","heading":"控制单元组成与接口","title":"控制模型与职责所有权"},
-      {"id":"CW_CLASSIFICATION","kind":"new"},
-      {"id":"DECODE","kind":"reuse","heading":"译码控制表","level":3,"title":"ID译码与指令操作意图"},
-      {"id":"INTENT_ACTION","kind":"new"},
-      {"id":"INTERLOCK","kind":"reuse","heading":"Buffer与冒险处理体系","title":"前递与流水协调的组成"},
-      {"id":"LOAD_USE","kind":"reuse","heading":"数据相关与load use停顿"},
-      {"id":"HAZARD_MATRIX","kind":"reuse","heading":"冒险分类与解决矩阵"},
-      {"id":"ARBITRATION","kind":"reuse","heading":"写入资格与事件优先级"},
-      {"id":"STOPS","kind":"reuse","heading":"HALT 故障与复位"},
-      {"id":"MODE_FSM","kind":"reuse","heading":"CU状态图与状态转移","title":"全局运行模式FSM"},
-      {"id":"CLOCKED_EXAMPLES","kind":"examples"}
-    ]},
-    {"id":"CH4","title":"系统集成与验证结果","sections":[
-      {"id":"SYSTEM","kind":"system"},
-      {"id":"BOARD","kind":"board"},
-      {"id":"SOURCE","kind":"reuse","heading":"源码边界与连接约定"},
-      {"id":"CONNECTIONS","kind":"reuse","heading":"目标数据通路的连接片段","title":"数据通路与控制的RTL连接"},
-      {"id":"VERIFICATION","kind":"verification"},
-      {"id":"PERFORMANCE","kind":"performance"},
-      {"id":"EXPERIMENTS","kind":"experiments"},
-      {"id":"REPRODUCE","kind":"reproduce"},
-      {"id":"REFERENCES","kind":"reuse","heading":"参考资料"}
-    ]}
-  ]
+    {
+      "id": "CH1",
+      "title": "设计目标与指令契约",
+      "sections": [
+        {
+          "id": "GOALS",
+          "kind": "reuse",
+          "heading": "架构规格",
+          "title": "设计目标与实现边界"
+        },
+        {
+          "id": "FORMAT",
+          "kind": "reuse",
+          "heading": "指令长度与字段划分"
+        },
+        {
+          "id": "ISA",
+          "kind": "reuse",
+          "heading": "指令编码与完整语义"
+        },
+        {
+          "id": "IMMEDIATE",
+          "kind": "reuse",
+          "heading": "立即数与地址规则"
+        },
+        {
+          "id": "ENCODING",
+          "kind": "reuse",
+          "heading": "编码示例"
+        },
+        {
+          "id": "CORE_IF",
+          "kind": "reuse",
+          "heading": "外部接口",
+          "title": "核心执行接口"
+        },
+        {
+          "id": "MEMORY_EDGE",
+          "kind": "reuse",
+          "heading": "同步存储边沿契约"
+        },
+        {
+          "id": "DESIGN_FLOW",
+          "kind": "new"
+        }
+      ]
+    },
+    {
+      "id": "CH2",
+      "title": "数据通路与状态边界",
+      "sections": [
+        {
+          "id": "OVERVIEW",
+          "kind": "overview"
+        },
+        {
+          "id": "COMPONENTS",
+          "kind": "reuse",
+          "heading": "主要模块与接口",
+          "title": "关键部件如何组成执行核心"
+        },
+        {
+          "id": "SINGLE_STATE",
+          "kind": "new"
+        },
+        {
+          "id": "PAYLOAD",
+          "kind": "reuse",
+          "heading": "流水寄存器字段",
+          "title": "四个流水边界的分类载荷"
+        },
+        {
+          "id": "STAGE_CONTRACT",
+          "kind": "reuse",
+          "heading": "统一五级执行契约"
+        },
+        {
+          "id": "INSTRUCTION_DP",
+          "kind": "reuse",
+          "heading": "典型指令的数据流与逐拍操作",
+          "title": "典型指令的数据路径"
+        }
+      ]
+    },
+    {
+      "id": "CH3",
+      "title": "流水控制与跨级协调",
+      "sections": [
+        {
+          "id": "CONTROL_LAYERS",
+          "kind": "reuse",
+          "heading": "控制单元组成与接口",
+          "title": "控制模型与职责所有权"
+        },
+        {
+          "id": "CW_CLASSIFICATION",
+          "kind": "new"
+        },
+        {
+          "id": "DECODE",
+          "kind": "reuse",
+          "heading": "译码控制表",
+          "level": 3,
+          "title": "ID译码与指令操作意图"
+        },
+        {
+          "id": "INTENT_ACTION",
+          "kind": "new"
+        },
+        {
+          "id": "INTERLOCK",
+          "kind": "reuse",
+          "heading": "Buffer与冒险处理体系",
+          "title": "前递与流水协调的组成"
+        },
+        {
+          "id": "LOAD_USE",
+          "kind": "reuse",
+          "heading": "数据相关与load use停顿"
+        },
+        {
+          "id": "HAZARD_MATRIX",
+          "kind": "reuse",
+          "heading": "冒险分类与解决矩阵"
+        },
+        {
+          "id": "ARBITRATION",
+          "kind": "reuse",
+          "heading": "写入资格与事件优先级"
+        },
+        {
+          "id": "STOPS",
+          "kind": "reuse",
+          "heading": "HALT 故障与复位"
+        },
+        {
+          "id": "MODE_FSM",
+          "kind": "reuse",
+          "heading": "CU状态图与状态转移",
+          "title": "全局运行模式FSM"
+        },
+        {
+          "id": "CLOCKED_EXAMPLES",
+          "kind": "examples"
+        }
+      ]
+    },
+    {
+      "id": "CH4",
+      "title": "系统集成与验证结果",
+      "sections": [
+        {
+          "id": "SYSTEM",
+          "kind": "system"
+        },
+        {
+          "id": "BOARD",
+          "kind": "board"
+        },
+        {
+          "id": "SOURCE",
+          "kind": "reuse",
+          "heading": "源码边界与连接约定"
+        },
+        {
+          "id": "CONNECTIONS",
+          "kind": "reuse",
+          "heading": "目标数据通路的连接片段",
+          "title": "数据通路与控制的RTL连接"
+        },
+        {
+          "id": "VERIFICATION",
+          "kind": "verification"
+        },
+        {
+          "id": "PERFORMANCE",
+          "kind": "performance"
+        },
+        {
+          "id": "EXPERIMENTS",
+          "kind": "experiments"
+        },
+        {
+          "id": "REPRODUCE",
+          "kind": "reproduce"
+        },
+        {
+          "id": "REFERENCES",
+          "kind": "reuse",
+          "heading": "参考资料"
+        }
+      ]
+    }
+  ],
+  "board_validation": {
+    "record": "验证/hardware_ac1_20261102_3dw9zgb5/result.json",
+    "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+  }
 }

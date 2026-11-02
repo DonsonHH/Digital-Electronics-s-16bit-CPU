@@ -3,12 +3,12 @@ from pathlib import Path
 import argparse,json,re,zipfile
 from lxml import etree
 from docx import Document
-from source_validation import P,read,require,sha,check_rtl_contract
+from source_validation import P,read,require,sha,check_rtl_contract,verify_board_validation
 from document_content import body_content_digest
 B=Path(__file__).resolve().parent
 
 def validate(path,proof_path=None):
-    plan=read(B/'architecture.json');check_rtl_contract(plan);doc=Document(path)
+    plan=read(B/'architecture.json');check_rtl_contract(plan);board=verify_board_validation(plan);doc=Document(path)
     require(doc.core_properties.version==plan['revision'],'Word revision does not match architecture source')
     h1=[p.text for p in doc.paragraphs if p.style.name=='Heading 1']
     require(h1==[chapter['title']for chapter in plan['chapters']],'The four top-level chapters differ')
@@ -32,6 +32,7 @@ def validate(path,proof_path=None):
         for name,digest in proof['source_files'].items():require(sha(B/name)==digest,'Document authoring input changed: '+name)
         for name,digest in proof['figure_sources'].items():require(sha(P/name)==digest,'Document figure source changed: '+name)
         require(body_content_digest(doc)==proof['word_body_content_sha256'],'Word body no longer matches the authored architecture content')
+        require(proof.get('board_validation')==board,'Document physical-board evidence binding differs')
     return dict(status='STATIC_WORD_CHECKS_PASS_VISUAL_QA_SEPARATE',chapters=h1,tables=len(doc.tables),figures=len(doc.inline_shapes),reference_fields=len(refs),toc_entries=sum(p.style.name.lower().startswith('toc ')for p in doc.paragraphs),section_count=len(doc.sections),hardware_access_performed=False)
 
 def main():

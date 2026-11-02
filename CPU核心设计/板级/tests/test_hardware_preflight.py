@@ -1,9 +1,23 @@
 """Prepared hardware-flow preflight checks. No actual Labtools/device commands."""
 from pathlib import Path
-import json,sys,tkinter,unittest
+import copy,json,sys,tkinter,unittest
 B=Path(__file__).resolve().parents[1];P=B.parent;sys.path.insert(0,str(B))
-from run_hardware import expected_before_device_access
+from run_hardware import expected_before_device_access,verify_stopped_captures
 class HardwarePreflight(unittest.TestCase):
+ def physical_capture_fixture(self):
+  capture=json.loads((P/'验证/cpu345_hardware_mhdc67ya/result.json').read_text())
+  root=P/'验证/cpu345_board_dzb2hgao';expected=json.loads((root/'result.json').read_text())['selected_result']
+  packet=int((root/'programs/selected_stores.mem').read_text().splitlines()[-1],16)
+  return copy.deepcopy(capture['snapshots']),expected,packet
+ def test_both_real_stopped_captures_match_expected(self):
+  verify_stopped_captures(*self.physical_capture_fixture())
+ def test_first_stopped_capture_is_fully_checked(self):
+  for field in ['rf','last_store_data']:
+   with self.subTest(field=field):
+    snapshots,expected,packet=self.physical_capture_fixture()
+    if field=='rf':snapshots[0]['rf'][0]^=1
+    else:snapshots[0][field]^=1
+    with self.assertRaisesRegex(ValueError,'Hardware (differs|last-store differs)'):verify_stopped_captures(snapshots,expected,packet)
  def _run_tcl_identity_guard(self,actual,expected):
   # Execute the real complete Tcl entry with every hardware/file command stubbed.
   interp=tkinter.Tcl();printed=[];exits=[];programmed=[]

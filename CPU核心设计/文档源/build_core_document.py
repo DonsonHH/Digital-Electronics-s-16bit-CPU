@@ -11,7 +11,7 @@ from docx.shared import Inches,Pt,RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
 from docx.enum.section import WD_SECTION_START,WD_ORIENT
-from source_validation import P,ROOT,BASELINE,read,require,sha,source_bytes,check_rtl_contract,extract_examples
+from source_validation import P,ROOT,BASELINE,read,require,sha,source_bytes,check_rtl_contract,extract_examples,verify_board_validation
 from document_content import body_content_digest
 
 B=Path(__file__).resolve().parent;NAME='16位流水线CPU核心设计文档_AC1候选版.docx'
@@ -74,7 +74,7 @@ class Compiler:
     def alias(self,old,key):self.old_sections[old]=key
     @staticmethod
     def normalize(text):
-        for old,new in [('CTRL_X','CW_X'),('CTRL_M','CW_M'),('CTRL_W','CW_W'),('本轮完整工具复跑','阶段1至2的完整工具复跑'),('实际板卡尚未接入','实物验收已按用户要求延期'),('课程板尚未接入','实物验收已按用户要求延期'),('课程板尚未连接','实物验收已按用户要求延期'),('当前没有真实板上功能','当前尚无本CPU的真实板上功能')]:text=text.replace(old,new)
+        for old,new in [('CTRL_X','CW_X'),('CTRL_M','CW_M'),('CTRL_W','CW_W'),('本轮完整工具复跑','阶段1至2的完整工具复跑'),('实际板卡尚未接入','该阶段记录未包含实板验收'),('课程板尚未接入','该阶段记录未包含实板验收'),('课程板尚未连接','该阶段记录未包含实板验收'),('当前没有真实板上功能','该历史记录未包含真实板上功能')]:text=text.replace(old,new)
         return text
     def add_text(self,p,text):
         position=0
@@ -163,12 +163,12 @@ class Compiler:
         for text in content.get('code',[]):self.paragraph(text,'Code')
     def cover(self):
         self.doc.add_paragraph('16位流水线CPU核心设计文档','Title')
-        p=self.paragraph('默认AC1    CPU v1.6    ISA v1.5    架构版r3    2026年11月2日');self.bookmark(p,'DOC_ROOT')
+        p=self.paragraph('默认AC1    CPU v1.6    ISA v1.5    架构版r4    2026年11月2日');self.bookmark(p,'DOC_ROOT')
         for text in [
           '本规范从指令契约、数据与状态边界、流水控制和系统验证四个层次描述一颗16位顺序单发射五级CPU。datapath_core沿用历史名称，实际包含数据通路和硬连线流水控制。设计目标是让每条指令的数据、控制意图、有效标签及副作用形成可检查的完整链条。',
           '所有被接受且未取消的指令沿IF→ID→EX→MEM→WB传递。RF和flags在WB写入；STR在MEM写DM一次，并继续保留有效WB完成标签。Stall延长停留，bubble以valid=0表示，分支和故障按年龄取消年轻指令。五级并行工作，与全局五个运行模式不是同一概念。',
           '默认生产实现固定为已验证AC1。one-hot前递和WB到MEM为两个隔离实验，后者使用自己的停顿契约；本架构整理不更改ISA、生产RTL或周期。RF影子、停止现场及VIO输入探针只做观测；VIO的独立复位输出则经板级同步链控制core_reset，须与被动观测区分。',
-          '课程目标为EES-331、xc7z020clg484-1、M19/100MHz。离线功能与布局布线结果按证据范围列出；实板验收由用户延期，目标对应未确认的尝试不计CPU验证通过。',
+          '课程目标为EES-331、xc7z020clg484-1、M19/100MHz。默认AC1五程序及真实S1复位已通过实板验证；周期数来自VIO，纳秒数仍按设计频率推算。此前目标未确认的尝试不计通过。',
           'RF为寄存器组，IM/DM为指令/数据存储，CU为控制职责，CW为随行操作意图。数据宽16位，指令定长16位，地址以16位字为单位；机器字与寄存器值默认十六进制。']:
             self.paragraph(text)
         self.doc.add_paragraph('目录','FrontHeading').paragraph_format.page_break_before=True
@@ -202,11 +202,11 @@ class Compiler:
         self.new('VERIFICATION')
         self.table([['层次','权威证据','本轮状态与限度'],
           ['源码与职责','14份默认RTL字节等于0d888cc；CW字段和时序块所有权核对','无RTL变更；控制集合不是新增总线或模块'],
-          ['当前独立ISA检查','新XSim：48例、10复位见证、58结果、952逐拍行','本轮真实重跑；五个正文例直接来自该CSV'],
+          ['当前独立ISA检查','r3实际XSim：48例、10复位见证、58结果、952逐拍行','保持原执行身份；五个正文例直接来自该CSV'],
           ['原九套回归','0d888cc已存绑定源码的9套/19原生步骤','沿用原始执行身份，不声称本轮重跑九套'],
           ['文件启动系统','已存11程序/12 epoch、同步RAM契约、网表和工程启动','与当前14份源码一致；原结果范围保持'],
           ['板级实现与候选','AC1及两候选各五程序的已存完整布局布线','软件/硬件输入未改，不重新宣称执行P&R'],
-          ['实板','用户延期；未确认目标的配置尝试已排除','没有EES-331功能或实测时间PASS']],[1.1,3.0,2.75],'N_EVIDENCE','分层验证与当前证据状态')
+          ['实板','EES-331默认AC1五程序，每例两份VIO快照；真实S1清零并重启','有限功能与计数通过；频率和直接运行时间未独立测量']],[1.1,3.0,2.75],'N_EVIDENCE','分层验证与当前证据状态')
         self.reuse('自检查测试方法',level=3)
         self.reuse('既有实现与验证证据',level=3)
         self.reuse('统一五级与冒险验证结果',level=3)
@@ -249,7 +249,7 @@ class Compiler:
             field.set(qn('w:instr'),'REF ARCH_'+target+(' \\w'if key.startswith('S:')else'')+' \\h');field.find('.//'+qn('w:t')).text=value
         require(self.caption_counts['F']==12 and self.caption_counts['T']>=39,'Mature figures or tables were lost')
         self.doc.core_properties.title='16位流水线CPU核心设计文档';self.doc.core_properties.version=self.plan['revision'];self.doc.core_properties.identifier='architecture-schema-1'
-        self.doc.core_properties.comments='Architecture-source edition; default AC1 ISA/pipeline unchanged; no physical board acceptance.'
+        self.doc.core_properties.comments='Default AC1 five-program and physical S1 acceptance; ISA/pipeline unchanged; no independent frequency, wall-time or experimental-board acceptance.'
         return self.doc
     def build(self):
         self.cover()
@@ -257,7 +257,7 @@ class Compiler:
           'CH1':'先定义可观察的指令行为、接口和设计依赖。数据通路、译码、控制和TB都必须实现同一版本的ISA，不能混用早期Pre4映射。',
           'CH2':'本章说明值从哪里来、何时就绪、存在哪里。控制职责用于说明连接，详细动作和仲裁在第三章展开。',
           'CH3':'本章从控制模型与所有权，进入ID意图及CW传播，再说明前递、保持、取消和停止。全局模式只管理运行资格，不能把五状态当成五级执行序列。',
-          'CH4':'以完整系统层次组织实现、功能及性能证据。历史、有限输入、当前新运行与尚未完成的实物验收分别说明。'}
+          'CH4':'以完整系统层次组织实现、功能及性能证据。历史仿真、布局布线、本次有限实板验收与未完成的直接测量分别说明。'}
         for n,chapter in enumerate(self.plan['chapters'],1):
             self.heading(chapter['title'],1,chapter['id'],old=str(n),page=True);self.paragraph(introductions[chapter['id']])
             for section in chapter['sections']:
@@ -271,7 +271,7 @@ class Compiler:
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--independent-run',type=Path,required=True);parser.add_argument('--output',type=Path,default=P/NAME);parser.add_argument('--proof-output',type=Path)
     a=parser.parse_args();plan=read(B/'architecture.json');legacy=read(B/'sections.json');content=read(B/'content.json')
-    rtl=check_rtl_contract(plan);examples=extract_examples(plan,a.independent_run)
+    rtl=check_rtl_contract(plan);examples=extract_examples(plan,a.independent_run);board=verify_board_validation(plan)
     compiler=Compiler(plan,legacy,content,examples);doc=compiler.build();doc.save(a.output)
     image_paths={r['path']for section in legacy['sections'].values()for node in section['children']for r in node.get('runs',[])if r['kind']=='image'}
     image_paths.update('架构图/'+n+'.svg'for n in ['01_CPU整体架构','02_五级Datapath','03_文件启动系统与停止观测'])
@@ -279,6 +279,8 @@ def main():
     proof['source_files']['canonical_outputs.json']=sha(B/'canonical_outputs.json')
     proof['source_files']['document_content.py']=sha(B/'document_content.py')
     proof['word_body_content_sha256']=body_content_digest(doc)
+    proof['board_validation']=board
+    proof['new_native_execution_claim']='Read-only authoring; consumes prior independent48 and the recorded five-program/S1 physical run. No new XSim or P&R from this command.'
     proof['csv_binding']='Byte equality to same13-RTL frozen48 output digests pinned in0d888cc package manifest'
     if a.proof_output:a.proof_output.write_text(json.dumps(proof,ensure_ascii=False,indent=2),encoding='utf-8')
     print('ARCHITECTURE_WORD_AUTHORED '+str(a.output))

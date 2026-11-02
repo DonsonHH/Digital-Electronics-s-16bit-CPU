@@ -1,0 +1,93 @@
+{
+  "status": "FUNCTIONAL_BOARD_PASS",
+  "physical_board_confirmation": "EES-331",
+  "target": "localhost:3121/xilinx_tcf/Xilinx/1234-tulA",
+  "source_implementation": "C:\\Users\\Donson\\Documents\\GitHub\\Digital-Electronics-s-16bit-CPU\\CPU核心设计\\验证\\cpu345_board_5prio5st",
+  "source_receipt_sha256": "09ffc7c088ba896bad98e7d9863e8ec3e6596e8da2f552853687b17242ed65eb",
+  "programming_requested": true,
+  "controlled_run_requested": true,
+  "programmed": true,
+  "reset_asserted": true,
+  "reset_released": true,
+  "board_validated": true,
+  "started_at_utc": "2026-11-02T07:53:56.451677+00:00",
+  "input_sha256": {
+    "desktop_launch.py": "4fbfe6a0bd6691c12cc4a47f45dc72fbef9147d880b08f9d7dee5e3bb09067b2",
+    "hardware_session.tcl": "4ca3a6a233111ba719825ebcc2a60533e7d787e0dd10ef81f9cf28b2b0a85d52",
+    "probes.ltx": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+    "program.bit": "770dec3c15b52e42d96517a5d63a48a478019b0ee3cd095900fa552c7bd7f873",
+    "run.cmd": "c3ae2707ae7c1e53d7ff60bbd41f64ad999125a1e4cdead95ea6916336841599"
+  },
+  "native_exit": 0,
+  "snapshots": [
+    {
+      "build_id": "22b2a23f057c652b",
+      "rf": [
+        0,
+        4658,
+        0,
+        32
+      ],
+      "flags": [
+        0,
+        0,
+        0
+      ],
+      "stop_pc": 34,
+      "stop_reason": 1,
+      "stop_valid": 1,
+      "stop_pc_valid": 1,
+      "halted": 1,
+      "fault": 0,
+      "last_completed_valid": 1,
+      "last_completed_pc": 34,
+      "last_store_valid": 1,
+      "last_store_addr": 71,
+      "last_store_data": 0,
+      "core_reset": 0,
+      "heartbeat": 1,
+      "reserved": 0,
+      "cycles": 55,
+      "completed": 35,
+      "stalls": 16,
+      "redirects": 0,
+      "stores": 8
+    },
+    {
+      "build_id": "22b2a23f057c652b",
+      "rf": [
+        0,
+        4658,
+        0,
+        32
+      ],
+      "flags": [
+        0,
+        0,
+        0
+      ],
+      "stop_pc": 34,
+      "stop_reason": 1,
+      "stop_valid": 1,
+      "stop_pc_valid": 1,
+      "halted": 1,
+      "fault": 0,
+      "last_completed_valid": 1,
+      "last_completed_pc": 34,
+      "last_store_valid": 1,
+      "last_store_addr": 71,
+      "last_store_data": 0,
+      "core_reset": 0,
+      "heartbeat": 1,
+      "reserved": 0,
+      "cycles": 55,
+      "completed": 35,
+      "stalls": 16,
+      "redirects": 0,
+      "stores": 8
+    }
+  ],
+  "measured_board_time_ns": null,
+  "clock_basis": "EES331100MHz oscillator via BUFG; frequency not independently measured",
+  "ended_at_utc": "2026-11-02T07:54:15.725241+00:00"
+}

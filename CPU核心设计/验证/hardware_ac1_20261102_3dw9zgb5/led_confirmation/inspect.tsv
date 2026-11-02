@@ -1,0 +1,4 @@
+target	localhost:3121/xilinx_tcf/Xilinx/1234-tulA
+device	arm_dap_0	arm_dap
+device	xc7z020_1	xc7z020
+fpga	xc7z020_1	23727093	15b4e958

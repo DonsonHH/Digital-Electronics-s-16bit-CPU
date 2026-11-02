@@ -1,6 +1,6 @@
 # CPU核心设计当前入口
 
-当前正式文档为 **AC1架构版r3**，CPU v1.6、ISA v1.5，课程目标EES-331（xc7z020clg484-1）。开发入口是本Git工作副本。默认生产核心和两个隔离候选均保持0d888cc原字节；本轮完善架构表达、职责契约和文档维护方式。Pre4、Pre5及旧执行快照保留当时的版本语义。实物验收由用户延期，本任务不进行任何板卡连接或烧录。
+当前正式文档为 **AC1架构版r4**，CPU v1.6、ISA v1.5，课程目标EES-331（xc7z020clg484-1）。默认生产核心和两个隔离候选保持0d888cc原字节；本轮在用户确认仅连接EES-331并恢复任务后，复用既有bitstream完成默认AC1五程序和真实S1复位验证。Pre4、Pre5及旧快照保留原版本语义。
 
 ## 阅读与源码
 
@@ -55,7 +55,9 @@ python -B -X utf8 .\Vivado\run_independent.py --cases C:\Temp\cpu_cases_new
 
 接受证据分别为验证/tools_50040838e0ec474680085bb91e8fb001和验证/cpu_system_n0r4buws。后者含12行系统epoch结果、2次受控诊断注入、all_ops同拍网表回放和真实工程启动；baseline为17拍，all_ops为25拍。前者包括九套19步、独立48例/10 reset见证/58行、五类mutant、X/Z、证据和生命周期检查。
 
-阶段2系统OOC：376 LUT、431 FF、2 RAMB18、15 CARRY4；10 ns下WNS +1.363 ns。阶段3至5另完成含VIO的ees331_top真实布局布线、比特流和setup/hold/脉宽检查；这两个顶层的资源不能直接混比。AC1五个程序的setup裕量为1.434至2.101 ns，hold均为正，均使用2个BRAM18。实板验收已延期，目标未确认的配置尝试不计EES-331的功能、时钟或运行时间证据。
+阶段2系统OOC：376 LUT、431 FF、2 RAMB18、15 CARRY4；10 ns下WNS +1.363 ns。阶段3至5含VIO的ees331_top已完成布局布线及setup/hold/脉宽检查，五程序setup裕量1.434至2.101 ns、hold为正、均用2个BRAM18。当前五程序及S1已真实上板；未确认目标的旧尝试仍不计通过。各顶层资源边界不变。
+
+[实板验收记录](验证/hardware_ac1_20261102_3dw9zgb5/result.json)保存每程序两份VIO停止快照及S1按住、松开后的实际样本。all_ops、baseline、loop、memory_copy、copy_checksum分别为25、17、30、15、55周期；RF、Z/C/V、停止PC、最后store及全部计数吻合预期。S1按住时清零，松开后checksum在55周期重新HALT。本次只接受有限默认AC1程序，未独立测量频率或直接运行时间。
 
 两个候选均隔离于实验/候选，不改变生产13份RTL及cpu_system：前递one-hot改写周期不变、四个负载的setup余量下降，未采用；WB到MEM只免除STR数据相关停顿，基址相关仍停一拍，内存复制15→14拍、复制校验和55→47拍。后者在校验和负载增加86 LUT、2 FF。所有时间差均按已布线100MHz计算，不是板上实测。
 

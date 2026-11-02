@@ -1,0 +1,19 @@
+test_both_real_stopped_captures_match_expected (test_hardware_preflight.HardwarePreflight.test_both_real_stopped_captures_match_expected) ... ok
+test_checksum_run_has_complete_independent_expected_state (test_hardware_preflight.HardwarePreflight.test_checksum_run_has_complete_independent_expected_state) ... ok
+test_first_stopped_capture_is_fully_checked (test_hardware_preflight.HardwarePreflight.test_first_stopped_capture_is_fully_checked) ... ok
+test_legacy_run_is_rejected_before_access_but_readonly_is_allowed (test_hardware_preflight.HardwarePreflight.test_legacy_run_is_rejected_before_access_but_readonly_is_allowed) ... ok
+test_tcl_confirmation_guard_reads_process_environment_before_hardware (test_hardware_preflight.HardwarePreflight.test_tcl_confirmation_guard_reads_process_environment_before_hardware) ... ok
+test_tcl_identity_guard_preserves_all_64_bits (test_hardware_preflight.HardwarePreflight.test_tcl_identity_guard_preserves_all_64_bits) ... ok
+test_tcl_identity_guard_rejects_different_upper_half (test_hardware_preflight.HardwarePreflight.test_tcl_identity_guard_rejects_different_upper_half) ... ok
+test_actual_c0_last_vcd_sample (test_probe_codec.ProbeLayout.test_actual_c0_last_vcd_sample) ... ok
+test_unknown_and_oversized_probe_values_fail (test_probe_codec.ProbeLayout.test_unknown_and_oversized_probe_values_fail) ... ok
+test_bitstream_with_failed_image_initialization_is_rejected (test_routed_evidence.RoutedEvidence.test_bitstream_with_failed_image_initialization_is_rejected) ... ok
+test_failed_native_attempt_cannot_be_promoted (test_routed_evidence.RoutedEvidence.test_failed_native_attempt_cannot_be_promoted) ... ok
+test_negative_hold_cannot_be_hidden_by_positive_setup (test_routed_evidence.RoutedEvidence.test_negative_hold_cannot_be_hidden_by_positive_setup) ... ok
+test_other_tool_version_and_unreviewed_warnings_are_rejected (test_routed_evidence.RoutedEvidence.test_other_tool_version_and_unreviewed_warnings_are_rejected) ... ok
+test_real_routed_report_and_physical_lut_accounting (test_routed_evidence.RoutedEvidence.test_real_routed_report_and_physical_lut_accounting) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.087s
+
+OK

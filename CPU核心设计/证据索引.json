@@ -1,6 +1,6 @@
 {
   "CPU_base": "v1.6",
-  "candidate": "AC1-architecture-r3",
+  "candidate": "AC1-architecture-r4",
   "ISA": "v1.5",
   "vtools": "1.6-vtools-r1",
   "functional_attempt": "3df8066a-3273-4d19-867a-a613f4d42481",
@@ -43,13 +43,13 @@
   "current_document": {
     "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
     "CPU": "v1.6",
-    "candidate": "AC1-architecture-r3",
+    "candidate": "AC1-architecture-r4",
     "ISA": "v1.5",
     "revision_date": "2026-11-02",
-    "sha256": "7a837b00fda59b2cf88a67abe7a97de19086299543f138781e42e5ff6904a4ff",
+    "sha256": "131575c79b9748adf0d9319dd2e3ac5fa64de220cf59611040a6979bb75b612d",
     "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
-    "pdf_sha256": "1dac390d76ec0742a744cce97f5dd580ff22b164c3544ba2066cef591f4c7bb8",
-    "pages": 61,
+    "pdf_sha256": "17a55564ccc7e6b8c6a5a9bc4bf695a325ec699b3660d4aeb45cf048afd69d66",
+    "pages": 62,
     "toc_entries": 72,
     "tables": 50,
     "figures": 12,
@@ -58,20 +58,21 @@
       13
     ],
     "sections_updated": [
-      "Four chapters reorganized around ISA, datapath/state, pipeline control and system verification",
-      "Top-level contract, ownership and CW/data/action classification",
-      "Five cycle examples extracted from fresh source-bound independent48 CSV",
-      "Editable diagrams, unique state, dynamic cross-references and maintenance source"
+      "Cover and2.1 execution contract",
+      "4.2 physical board evidence",
+      "4.5 simulation vsphysical coverage",
+      "4.6 VIO cycles vsunmeasured time",
+      "4.8 acceptance boundary andexportedmetadata"
     ],
     "production_RTL_changed": false,
     "ISA_changed": false,
     "default_execution_cycles_changed": false,
     "new_routed_implementation": false,
-    "new_independent48_execution": true,
-    "physical_board_validated": false,
-    "physical_validation_status": "DEFERRED_BY_USER",
+    "new_independent48_execution": false,
+    "physical_board_validated": true,
+    "physical_validation_scope": "DefaultAC1 fiveprograms andphysicalS1 only",
     "source_entry": "文档源/README.md",
-    "QA": "验证/architecture_r3_20261102_1b40e4f7/final_qa.json"
+    "QA": "验证/board_document_r4_20261102_len05xlq/final_qa.json"
   },
   "Pre5_control_evidence": {
     "relative_to_course_root": "Pre5_控制单元设计/Vivado",
@@ -219,6 +220,39 @@
       "default_execution_cycles_changed": false,
       "new_routed_implementation": true,
       "physical_board_validated": false
+    },
+    {
+      "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
+      "CPU": "v1.6",
+      "candidate": "AC1-architecture-r3",
+      "ISA": "v1.5",
+      "revision_date": "2026-11-02",
+      "sha256": "7a837b00fda59b2cf88a67abe7a97de19086299543f138781e42e5ff6904a4ff",
+      "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
+      "pdf_sha256": "1dac390d76ec0742a744cce97f5dd580ff22b164c3544ba2066cef591f4c7bb8",
+      "pages": 61,
+      "toc_entries": 72,
+      "tables": 50,
+      "figures": 12,
+      "landscape_pages": [
+        12,
+        13
+      ],
+      "sections_updated": [
+        "Four chapters reorganized around ISA, datapath/state, pipeline control and system verification",
+        "Top-level contract, ownership and CW/data/action classification",
+        "Five cycle examples extracted from fresh source-bound independent48 CSV",
+        "Editable diagrams, unique state, dynamic cross-references and maintenance source"
+      ],
+      "production_RTL_changed": false,
+      "ISA_changed": false,
+      "default_execution_cycles_changed": false,
+      "new_routed_implementation": false,
+      "new_independent48_execution": true,
+      "physical_board_validated": false,
+      "physical_validation_status": "DEFERRED_BY_USER",
+      "source_entry": "文档源/README.md",
+      "QA": "验证/architecture_r3_20261102_1b40e4f7/final_qa.json"
     }
   ],
   "architecture_figures": {
@@ -344,7 +378,9 @@
       "seeded_stress_programs": 64,
       "protocol_guard_cases": 12,
       "detected_mutants": 6
-    }
+    },
+    "current_physical_acceptance_ref": "physical_board_acceptance",
+    "record_scope": "Historical offline nativeexecution results; originalphysical_pending flags retained, currentlimitedphysicalacceptance separateabove"
   },
   "architecture_figures_revision_history": [
     {
@@ -427,5 +463,34 @@
     "production_RTL_changed": false,
     "physical_board_validated": false,
     "hardware_access_performed": false
+  },
+  "physical_board_acceptance": {
+    "status": "AC1_FIVE_PROGRAMS_AND_S1_BOARD_PASS",
+    "record": "验证/hardware_ac1_20261102_3dw9zgb5/result.json",
+    "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9",
+    "board": "EES-331",
+    "part": "xc7z020clg484-1",
+    "connection_basis": "User confirms singleEES USB/JTAG andPYNQdisconnected;8LEDphysicalbehaviorverified",
+    "target": "localhost:3121/xilinx_tcf/Xilinx/1234-tulA",
+    "program_cycles": {
+      "all_ops": 25,
+      "baseline": 17,
+      "loop": 30,
+      "memory_copy": 15,
+      "copy_checksum": 55
+    },
+    "snapshots_per_program": 2,
+    "physical_S1_reset_and_restart": true,
+    "host_fix_committed_as": "47eb8c3 full64bitidentity plusfollowupsnapshotvalidation",
+    "first_correct_target_failed_record": "验证/cpu345_hardware_8orngee2",
+    "old_unconfirmed_target_record_excluded": true,
+    "independent_frequency_measured": false,
+    "wall_time_measured": false,
+    "Flash_written": false,
+    "UART_opened": false,
+    "experimental_candidates_programmed": false,
+    "RTL_changed": false,
+    "new_build": false,
+    "document_QA": "验证/board_document_r4_20261102_len05xlq/final_qa.json"
   }
 }

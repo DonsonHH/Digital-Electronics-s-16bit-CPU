@@ -1,0 +1,6 @@
+target	localhost:3121/xilinx_tcf/Xilinx/1234-tulA
+device	xc7z020_1
+usr_access	15B4E958
+done	1
+eos	1
+crc_error	0

@@ -40,11 +40,13 @@ python -B -X utf8 .\板级\verify_board_results.py --run .\验证\某个已完�
 
 方法学提示也单独核查：LUTAR-1仅允许厂商debug hub内部复位同步；SYNTH-6仅允许当前IM/DM保留一拍读、未另加输出流水寄存器。生成的4项bus-skew约束逐项检查并保存报告指纹。普通警告按代码和作用范围审查，完整处置在验证JSON中；向量无活动输入的功耗估算不作为测量结论。执行工具必须确为2025.2，其他安装即使可调用也不能冒充本基线配方。
 
-实板验收已按用户2026年11月2日的要求延期。此前目标对应未确认的配置/诊断尝试不作为EES-331功能、时钟或性能证据；它们也不能证明课程板存在时钟或CPU故障。当前正式结果只证明有限仿真与已布线设计，没有真实板上100MHz运行、物理按键或实测程序时间的通过结论。
+2026年11月2日，用户恢复任务并确认仅EES-331连接USB/JTAG、PYNQ数据线已拔下；八灯现象确认后，默认AC1五个既有镜像实际下载并通过VIO核对。每程序两份停止快照均核对RF、标志、停止PC、最后store和计数。真实S1按住清零、松开后checksum重新完成55周期。[原始记录](../验证/hardware_ac1_20261102_3dw9zgb5/result.json)保留实际日志及失败尝试。
 
-后续只有用户明确恢复上板任务后才使用下方入口。电脑可能同时连接EES-331与PYNQ，应先通过实际拔插核对USB/JTAG目标与实物板，不能仅凭xc7z020、FTDI序号或Programmed状态选择设备。确认目标后，再读取构建身份、RF/flags、停止PC/原因及计数。
+本次发现并修复两处主机验收问题：Windows Tcl的%x截断64位构建身份；Python缩进使部分结果仅检查第二份快照。当前完整整数比较和两份完整检查已通过14项工具测试，并用五程序全部10份实际快照重放。CPU RTL和bitstream未改。早期目标未确认的尝试不计通过；实验候选、独立频率和直接运行时间仍未验证。
 
-接板后的入口为run_hardware.py：必须显式指定已确认的EES-331目标和经过校验的实现attempt；默认只采集，program-device和run-program分别控制配置与CPU重启。Python前置、拒绝未知板型的Tcl检查及真实仿真样本解码通过；测试使用替身，不访问真实设备。EES-331实物验收尚未完成，不能据此标为下板通过。
+重新接板或更换USB/JTAG连接后，仍须核对目标与实物。电脑可能同时连接EES-331与PYNQ，不能仅凭xc7z020、FTDI序号或Programmed状态选择设备；应结合实际拔插或已确认的单板连接，再读取构建身份、RF/flags、停止PC/原因及计数。
+
+接板入口为run_hardware.py：必须显式指定已确认的EES-331目标和经过校验的实现attempt；默认只采集，program-device和run-program分别控制配置与CPU重启。软件前置测试使用替身，不访问设备；上述五程序和S1结果则来自本次真实设备，分别保留证据。
 
 ```powershell
 python -B -X utf8 .\板级\run_hardware.py --implementation .\验证\某个有效实现 --target "确认后的完整JTAG目标名" --confirmed-board EES-331 --program-device --run-program

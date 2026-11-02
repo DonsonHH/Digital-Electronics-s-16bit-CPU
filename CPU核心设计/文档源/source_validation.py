@@ -1,6 +1,6 @@
 """Read-only RTL/fixture/trace gates for the architecture document. No hardware access."""
 from pathlib import Path
-import csv,hashlib,json,re,subprocess
+import csv,hashlib,json,re,subprocess,sys
 from io import StringIO
 
 P=Path(__file__).resolve().parents[1];ROOT=P.parent;V=P/'Vivado'
@@ -101,6 +101,53 @@ def verify_independent(run):
     return r,rows,cycles,read(run/'cases.json')
 
 OP_NAMES={0:'MOV',1:'MOV',2:'AND',3:'OR',4:'ADD',5:'ADD',6:'SUB',7:'SUB',8:'LDR',9:'STR',10:'CMP',11:'RES',12:'JUMP',13:'JZ',14:'HALT',15:'RES'}
+
+def verify_board_validation(plan):
+    """Read recorded physical evidence only; never open hardware from document authoring."""
+    entry=plan.get('board_validation')
+    require(isinstance(entry,dict)and {'record','sha256'}<=set(entry),'Board acceptance pin is required for this document edition')
+    record=P/entry['record'];root=record.parent
+    require(sha(record)==entry['sha256'],'Board acceptance receipt changed')
+    result=read(record)
+    require(result['status']=='AC1_FIVE_PROGRAMS_AND_S1_BOARD_PASS'and result['physical_board_validated']and result['button_checked'],'Physical acceptance incomplete')
+    for name,digest in result['evidence_sha256'].items():require(sha(root/name)==digest,'Board evidence changed: '+name)
+    baseline=read(P/'实验/性能基线.json');matrix=P/baseline['matrix_relative']
+    require(sha(matrix)==baseline['matrix_sha256'],'Frozen routed matrix changed')
+    expected_rows={r['program']:r for r in read(matrix)['rows']}
+    require(set(result['program_records'])==set(expected_rows)=={r['program']for r in result['verified_programs']},'Physical program coverage differs')
+    sys.path.insert(0,str(P/'板级'))
+    from probe_codec import decode
+    public_keys=['rf','flags','stop_pc','cycles','completed','stalls','redirects','stores']
+    decoded={}
+    for row in result['verified_programs']:
+        name=row['program'];capture=P/row['record'];receipt=read(capture/'result.json');frozen=expected_rows[name];impl=P/frozen['attempt_relative']
+        require(sha(capture/'result.json')==row['receipt_sha256'],'Physical capture receipt changed')
+        require(receipt['status']=='FUNCTIONAL_BOARD_PASS'and receipt['native_exit']==0 and receipt['board_validated'],'Physical capture incomplete')
+        require(receipt['source_receipt_sha256']==sha(impl/'result.json')==frozen['receipt_sha256'],'Physical source implementation changed')
+        for f,digest in receipt['input_sha256'].items():require(sha(capture/f)==digest,'Physical execution input changed: '+f)
+        require(sha(capture/'program.bit')==frozen['implementation']['bitstream_sha256'],'Physical bitstream differs')
+        log=(capture/'hardware.log').read_text(encoding='utf-8',errors='replace')
+        require(log.splitlines().count('HARDWARE_CAPTURE_COMPLETE attempt='+capture.name)==1 and not re.search(r'(?im)^WARNING:|^ERROR:|^CRITICAL WARNING:|^HARDWARE_SESSION_FAILED=',log),'Physical native log incomplete')
+        require(sha(capture/'hardware.log')==row['hardware_log_sha256']and sha(capture/'snapshots.tsv')==row['raw_snapshots_sha256'],'Physical raw output changed')
+        raw=[decode(*line.split('\t')[1:])for line in(capture/'snapshots.tsv').read_text().splitlines()]
+        require(raw==receipt['snapshots']and len(raw)==2,'Physical raw snapshots differ')
+        expected=read(impl/'result.json')['selected_result']
+        for sample in raw:
+            require(sample['build_id']==frozen['implementation']['build_id'],'Physical build identity differs')
+            require(all(sample[k]==expected[k]for k in public_keys),'Physical architecture or counters differ')
+            require(sample['core_reset']==0 and sample['halted']==1 and sample['fault']==0 and sample['stop_valid']==1 and sample['stop_pc_valid']==1 and sample['reserved']==0,'Physical stop state differs')
+        require(raw[-1]==row['actual'],'Physical summary differs from raw snapshot')
+        require({k:v for k,v in raw[0].items()if k!='heartbeat'}=={k:v for k,v in raw[1].items()if k!='heartbeat'},'Physical stop is not stable')
+        decoded[name]=raw[-1]
+    button=[]
+    for line in(root/'button_snapshots.tsv').read_text().splitlines():
+        label,at,state,perf=line.split('\t');button.append(dict(label=label,host_sample_time_ms=int(at),decoded=decode(state,perf)))
+    require(button==result['button_samples']and [x['label']for x in button]==['before','pressed','after_0','after_1'],'Button raw observations differ')
+    held=button[1]['decoded']
+    require(held['core_reset']==1 and not any(held['rf']+held['flags'])and all(held[k]==0 for k in ['stop_valid','stop_pc_valid','halted','fault','last_completed_valid','last_store_valid','cycles','completed','stalls','redirects','stores']),'Physical button reset state differs')
+    for item in button[2:]:require(all(item['decoded'][k]==v for k,v in decoded['copy_checksum'].items()if k!='heartbeat'),'Physical button restart differs')
+    require((root/'button_session_long.log').read_text(encoding='utf-8',errors='replace').splitlines().count('BUTTON_PHYSICAL_RESET_OBSERVATION_COMPLETE')==1,'Physical button lifecycle incomplete')
+    return dict(record=entry['record'],receipt_sha256=entry['sha256'],status=result['status'],programs=decoded,physical_S1_verified=True,independent_frequency_or_wall_time_measured=False)
 def stage_text(row,letter,bit,image):
     if not int(row['DXMW_valid'],2)&(1<<bit):return '—'
     pc=int(row[letter+'_pc'],16);return f'{pc:02X}:{OP_NAMES[image[pc]>>12]}'if pc<256 else f'{pc:04X}:FAULT'

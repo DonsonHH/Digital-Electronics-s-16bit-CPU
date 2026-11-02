@@ -26,6 +26,15 @@ def expected_before_device_access(data,implementation,run_requested):
  require(len(packets)==max(1,expected['stores']),'Expected store file count differs')
  last_store=int(packets[-1],16) if expected['stores'] else None
  return expected,last_store
+def verify_stopped_captures(captures,expected,last_store):
+ require(len(captures)==2,'Two hardware snapshots required')
+ for c in captures:
+  require(c['core_reset']==0 and c['stop_valid']==1 and c['stop_pc_valid']==1 and c['halted']==1 and c['fault']==0 and c['stop_reason']==1,'Hardware did not halt normally')
+  for key in ['rf','flags','stop_pc','cycles','completed','stalls','redirects','stores']:require(c[key]==expected[key],'Hardware differs: '+key)
+  require(c['last_completed_valid']==1 and c['last_completed_pc']==expected['stop_pc'] and c['reserved']==0,'Hardware completion/layout differs')
+  require(c['last_store_valid']==int(expected['stores']>0),'Hardware store-valid differs')
+  if last_store is not None:require(c['last_store_addr']==((last_store>>47)&0xffff) and c['last_store_data']==((last_store>>22)&0xffff),'Hardware last-store differs')
+
 def main():
  p=argparse.ArgumentParser(description=__doc__);add_tool_arguments(p)
  p.add_argument('--implementation',type=Path,required=True);p.add_argument('--target',required=True)
@@ -56,12 +65,7 @@ def main():
   captures=[decode(s,t) for _,s,t in (line.split('\t') for line in (work/'snapshots.tsv').read_text().splitlines())];require(len(captures)==2,'Two hardware snapshots required')
   require(all(c['build_id']==implementation['build_id'] for c in captures),'Hardware build identity mismatch');r['snapshots']=captures;r['programmed']=a.program_device
   if a.run_program:
-   for c in captures:
-    require(c['core_reset']==0 and c['stop_valid']==1 and c['stop_pc_valid']==1 and c['halted']==1 and c['fault']==0 and c['stop_reason']==1,'Hardware did not halt normally')
-    for key in ['rf','flags','stop_pc','cycles','completed','stalls','redirects','stores']:require(c[key]==expected[key],'Hardware differs: '+key)
-    require(c['last_completed_valid']==1 and c['last_completed_pc']==expected['stop_pc'] and c['reserved']==0,'Hardware completion/layout differs')
-    require(c['last_store_valid']==int(expected['stores']>0),'Hardware store-valid differs')
-    if last_store is not None:require(c['last_store_addr']==((last_store>>47)&0xffff) and c['last_store_data']==((last_store>>22)&0xffff),'Hardware last-store differs')
+   verify_stopped_captures(captures,expected,last_store)
    require(not re.search(r'(?im)^WARNING:',text),'Hardware warnings require review before acceptance')
    r.update(status='FUNCTIONAL_BOARD_PASS',measured_board_time_ns=None,clock_basis='EES331100MHz oscillator via BUFG; frequency not independently measured')
   else:r['status']='PROGRAMMED_AND_OBSERVED_NOT_FUNCTIONAL_ACCEPTANCE' if a.program_device else 'READ_ONLY_OBSERVATION_NOT_FUNCTIONAL_ACCEPTANCE'
