@@ -4,10 +4,12 @@
 
 ## 阅读与源码
 
+正式版本以`main`和冻结标签`cpu-v1.6-ac1-ees331-verified`为入口：CPU v1.6、ISA v1.5、默认AC1、EES-331有限实板验收、文档r4定稿。历史机器码按第一章的v1.4→v1.5迁移说明查阅。
+
 - [核心Word](16位流水线CPU核心设计文档_AC1候选版.docx)：Word内分级目录，包含两张主图、文件启动图及板级时钟复位与观测图。
 - [核心RTL](Vivado/rtl)：13份；阶段2扩展了datapath_core的被动观测及sync_memories的文件初始化。架构版r3保持这些源码原字节，未改变执行仲裁与写入边沿。
 - [最小系统顶层](系统/rtl/cpu_system.sv)：第14份系统源码，连接一拍同步IM/DM，提供RF写回影子与最后store观测。
-- [系统契约](系统/接口与停止现场契约.md) · [文件启动镜像与manifest](系统/programs) · [既有Buffer说明](CPU流水线冒险与Buffer_Interlock完整设计方案.docx) · [证据索引](证据索引.json)。
+- [系统契约](系统/接口与停止现场契约.md) · [文件启动镜像与manifest](系统/programs) · [默认AC1的Buffer/Interlock说明](CPU流水线冒险与Buffer_Interlock完整设计方案.docx) · [证据索引](证据索引.json)。
 - [系统图SVG](架构图/03_文件启动系统与停止观测.svg) · [PNG](架构图/03_文件启动系统与停止观测.png)。原整体图、五级datapath、F/Q/G和模式FSM仍适用原执行路径。
 - [板级工程与接板入口](板级/README.md) · [板级SVG](架构图/04_EES331板级系统.svg) · [PNG](架构图/04_EES331板级系统.png) · [性能基线](实验/性能基线.json) · [前递比较](实验/前递候选比较.json) · [WB到MEM比较](实验/WB_MEM候选比较.json)。
 - [文档维护源](文档源/README.md)：`architecture.json`组织章节和契约，`sections.json`保存成熟正文，`content.json`补充总体说明；统一由新生成入口维护单一核心Word。
@@ -57,7 +59,7 @@ python -B -X utf8 .\Vivado\run_independent.py --cases C:\Temp\cpu_cases_new
 
 阶段2系统OOC：376 LUT、431 FF、2 RAMB18、15 CARRY4；10 ns下WNS +1.363 ns。阶段3至5含VIO的ees331_top已完成布局布线及setup/hold/脉宽检查，五程序setup裕量1.434至2.101 ns、hold为正、均用2个BRAM18。当前五程序及S1已真实上板；未确认目标的旧尝试仍不计通过。各顶层资源边界不变。
 
-[实板验收记录](验证/hardware_ac1_20261102_3dw9zgb5/result.json)保存每程序两份VIO停止快照及S1按住、松开后的实际样本。all_ops、baseline、loop、memory_copy、copy_checksum分别为25、17、30、15、55周期；RF、Z/C/V、停止PC、最后store及全部计数吻合预期。S1按住时清零，松开后checksum在55周期重新HALT。本次只接受有限默认AC1程序，未独立测量频率或直接运行时间。
+[实板验收记录](验证/hardware_ac1_20261102_3dw9zgb5/result.json)保存每程序两份VIO停止快照及S1按住、松开后的实际样本。all_ops、baseline、loop、memory_copy、copy_checksum分别为25、17、30、15、55周期；RF写回影子、架构Z/C/V、停止PC、最后store及全部计数吻合预期。CPU停止后按住S1清零，松开后checksum在55周期重新HALT。实板采样为稳定终态和计数；第三章逐拍实例来自仿真CSV。本次未独立测量频率或直接运行时间。
 
 两个候选均隔离于实验/候选，不改变生产13份RTL及cpu_system：前递one-hot改写周期不变、四个负载的setup余量下降，未采用；WB到MEM只免除STR数据相关停顿，基址相关仍停一拍，内存复制15→14拍、复制校验和55→47拍。后者在校验和负载增加86 LUT、2 FF。所有时间差均按已布线100MHz计算，不是板上实测。
 

@@ -4,12 +4,16 @@
 
 正式规范为 **AC1架构版r4**，CPU v1.6、**ISA v1.5**，课程目标EES-331（xc7z020clg484-1）。默认生产RTL与两个实验候选保持提交0d888cc的原字节；本版补入默认AC1五程序和真实S1复位的实板结果。主机采集脚本的64位身份比较及两份快照检查已修复；此前目标未确认的尝试不计通过。
 
+正式入口为 `main`，冻结标签为 [cpu-v1.6-ac1-ees331-verified](https://github.com/DonsonHH/Digital-Electronics-s-16bit-CPU/tree/cpu-v1.6-ac1-ees331-verified)。版本身份为 **CPU v1.6 / ISA v1.5 / 默认AC1 / EES-331已验收 / 文档r4定稿**。Word沿用原文件名，正式版本由此入口和标签确定。
+
+实板验收范围为五个正常HALT程序及停止后的S1复位重启；VIO读取RF写回影子、架构标志、停止现场、最后store和计数。逐拍轨迹来自仿真CSV，板上采样为稳定终态和计数。
+
 ## 先看这些
 
 1. [CPU核心设计文档 Word](CPU核心设计/16位流水线CPU核心设计文档_AC1候选版.docx) · [同版PDF](docs/16位流水线CPU核心设计文档_AC1候选版.pdf)：四章为设计目标与指令契约、数据通路与状态边界、流水控制与跨级协调、系统集成与验证结果。第三章包含五个当前源码的实际逐拍实例。
 2. [整体控制与数据通路架构 SVG](CPU核心设计/架构图/01_CPU整体架构.svg) · [PNG](CPU核心设计/架构图/01_CPU整体架构.png)。
 3. [五级Datapath详细连接 SVG](CPU核心设计/架构图/02_五级Datapath.svg) · [PNG](CPU核心设计/架构图/02_五级Datapath.png)：目标计算、Z选择与分支判定独立，画出实际前递、写回、Z反馈及四个流水边界。
-4. [Buffer/Interlock说明](CPU核心设计/CPU流水线冒险与Buffer_Interlock完整设计方案.docx)。
+4. [默认AC1的Buffer/Interlock说明](CPU核心设计/CPU流水线冒险与Buffer_Interlock完整设计方案.docx)。
 5. [当前核心RTL](CPU核心设计/Vivado/rtl) · [最小系统](CPU核心设计/系统) · [文件启动镜像](CPU核心设计/系统/programs) · [工程入口](CPU核心设计/README.md) · [证据索引](CPU核心设计/证据索引.json)。
 6. [文件启动与停止观测 SVG](CPU核心设计/架构图/03_文件启动系统与停止观测.svg) · [PNG](CPU核心设计/架构图/03_文件启动系统与停止观测.png)。
 7. [EES331板级连接 SVG](CPU核心设计/架构图/04_EES331板级系统.svg) · [PNG](CPU核心设计/架构图/04_EES331板级系统.png) · [工程及接板说明](CPU核心设计/板级/README.md) · [WB到MEM实验比较](CPU核心设计/实验/WB_MEM候选比较.json)。

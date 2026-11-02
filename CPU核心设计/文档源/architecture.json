@@ -386,5 +386,12 @@
   "board_validation": {
     "record": "验证/hardware_ac1_20261102_3dw9zgb5/result.json",
     "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+  },
+  "release": {
+    "identity": "CPU v1.6 / ISA v1.5 / default AC1 / EES-331 verified / document r4 final",
+    "default_branch": "main",
+    "tag": "cpu-v1.6-ac1-ees331-verified",
+    "frozen_hardware_baseline_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf",
+    "scope": "Five normal-HALT programs and S1 restart after stop; VIO RF writeback shadow, architectural flags, stop/last-store state and counters. Experiments and independent timing remain separate."
   }
 }

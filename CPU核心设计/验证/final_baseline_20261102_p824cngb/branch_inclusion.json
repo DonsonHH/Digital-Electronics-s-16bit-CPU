@@ -1,0 +1,57 @@
+[
+  {
+    "ref": "refs/heads/feat/cpu-architecture-contracts",
+    "sha": "3793bf1c02c4ea8209eb3eef0d0633a022c84e62",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/heads/feat/ees331-board-performance",
+    "sha": "0d888cc65a8b650575317be7fa5d5d4040266abf",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/heads/feat/ees331-hardware-validation",
+    "sha": "c2bb5c3818b974c8b9a20cab7474f36914b26ff1",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/heads/feat/ees331-system-prep",
+    "sha": "5dfe09ec153c4807d418efecbf7f2cf3c25d419e",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/heads/main",
+    "sha": "775350246d3806c9a09ac683edadf1a35e3e68bb",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/remotes/origin/HEAD",
+    "sha": "775350246d3806c9a09ac683edadf1a35e3e68bb",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/remotes/origin/feat/cpu-architecture-contracts",
+    "sha": "3793bf1c02c4ea8209eb3eef0d0633a022c84e62",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/remotes/origin/feat/ees331-board-performance",
+    "sha": "0d888cc65a8b650575317be7fa5d5d4040266abf",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/remotes/origin/feat/ees331-hardware-validation",
+    "sha": "c2bb5c3818b974c8b9a20cab7474f36914b26ff1",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/remotes/origin/feat/ees331-system-prep",
+    "sha": "5dfe09ec153c4807d418efecbf7f2cf3c25d419e",
+    "included_in_current_ancestry": true
+  },
+  {
+    "ref": "refs/remotes/origin/main",
+    "sha": "775350246d3806c9a09ac683edadf1a35e3e68bb",
+    "included_in_current_ancestry": true
+  }
+]

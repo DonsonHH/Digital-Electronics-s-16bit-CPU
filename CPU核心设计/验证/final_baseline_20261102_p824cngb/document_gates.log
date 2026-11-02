@@ -1,0 +1,9 @@
+test_changed_button_summary_cannot_replace_raw_data (test_board_evidence.BoardEvidence.test_changed_button_summary_cannot_replace_raw_data) ... ok
+test_changed_program_summary_cannot_replace_raw_data (test_board_evidence.BoardEvidence.test_changed_program_summary_cannot_replace_raw_data) ... ok
+test_missing_or_empty_acceptance_pin_fails_closed (test_board_evidence.BoardEvidence.test_missing_or_empty_acceptance_pin_fails_closed) ... ok
+test_real_physical_record_is_read_only_valid (test_board_evidence.BoardEvidence.test_real_physical_record_is_read_only_valid) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.221s
+
+OK

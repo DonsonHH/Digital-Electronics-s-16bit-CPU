@@ -3,6 +3,8 @@ proc cpu_hardware_session {} {
 global env
 if {[version -short] ne "2025.2"} {error "Pinned Vivado2025.2 required"}
 if {$env(CPU_CONFIRMED_BOARD) ne "EES-331"} {error "Physical board confirmation missing"}
+puts "HARDWARE_VIVADO_VERSION=[version -short]"
+puts "HARDWARE_TCL_VERSION=[info patchlevel]"
 open_hw_manager
 connect_hw_server -url localhost:3121
 set target [get_hw_targets $env(CPU_HW_TARGET)]

@@ -3374,7 +3374,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "故障使用同样的WB结束规则。MEM检测到越界时，立即阻断故障自身的DM访问，取消年轻EX，把故障标记随valid送到WB；本拍老WB仍可写RF或标志。故障STR保留WB的valid和fault；成功STR同样保留有效WB，只是无故障且不再产生写入。EX故障只取消自身副作用和年轻指令，故障标记经MEM送到WB，老MEM合法STR仍可写DM。故障标记不允许写RF、DM或Z/C/V；在WB消费标记并确认下一拍为空后进入FAULTED，fault置1直到复位。故障原因和fault_pc属于可选诊断，不实现异常返回或重试。"
+              "text": "故障使用同样的WB结束规则。MEM检测到越界时，立即阻断故障自身的DM访问，取消年轻EX，把故障标记随valid送到WB；本拍老WB仍可写RF或标志。故障STR保留WB的valid和fault；成功STR同样保留有效WB，只是无故障且不再产生写入。EX故障只取消自身副作用和年轻指令，故障标记经MEM送到WB，老MEM合法STR仍可写DM。故障标记不允许写RF、DM或Z/C/V；在WB消费标记并确认下一拍为空后进入FAULTED，fault置1直到复位。现有stop_pc、stop_reason及有效标记提供诊断观测；不增加ISA异常返回或重试语义。"
             }
           ]
         },
@@ -6374,7 +6374,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "当前ISA依据为2026年10月11日确认的Group 1至Group 7编码表，与最终Pre4汇报第3页的Opcode分组一致。使用其字段划分与控制副作用规则；机器字示例以第一章按位校核后的结果为准。"
+              "text": "当前ISA以第一章ISA v1.5编码与语义表为准。Pre4资料用于追溯字段划分、控制副作用及开发过程；其中v1.4的Opcode和未同步更新的机器字示例，按第一章迁移表解释。"
             }
           ]
         },

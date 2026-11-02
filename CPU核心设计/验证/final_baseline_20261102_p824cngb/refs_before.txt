@@ -1,0 +1,11 @@
+refs/heads/feat/cpu-architecture-contracts 3793bf1c02c4ea8209eb3eef0d0633a022c84e62
+refs/heads/feat/ees331-board-performance 0d888cc65a8b650575317be7fa5d5d4040266abf
+refs/heads/feat/ees331-hardware-validation c2bb5c3818b974c8b9a20cab7474f36914b26ff1
+refs/heads/feat/ees331-system-prep 5dfe09ec153c4807d418efecbf7f2cf3c25d419e
+refs/heads/main 775350246d3806c9a09ac683edadf1a35e3e68bb
+refs/remotes/origin/HEAD 775350246d3806c9a09ac683edadf1a35e3e68bb
+refs/remotes/origin/feat/cpu-architecture-contracts 3793bf1c02c4ea8209eb3eef0d0633a022c84e62
+refs/remotes/origin/feat/ees331-board-performance 0d888cc65a8b650575317be7fa5d5d4040266abf
+refs/remotes/origin/feat/ees331-hardware-validation c2bb5c3818b974c8b9a20cab7474f36914b26ff1
+refs/remotes/origin/feat/ees331-system-prep 5dfe09ec153c4807d418efecbf7f2cf3c25d419e
+refs/remotes/origin/main 775350246d3806c9a09ac683edadf1a35e3e68bb

@@ -46,9 +46,9 @@
     "candidate": "AC1-architecture-r4",
     "ISA": "v1.5",
     "revision_date": "2026-11-02",
-    "sha256": "131575c79b9748adf0d9319dd2e3ac5fa64de220cf59611040a6979bb75b612d",
+    "sha256": "e3819844c2b7a600e4d53ec1f673a7b09bb00a9b37a9d174b0e9ef8c3df2d6e6",
     "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
-    "pdf_sha256": "17a55564ccc7e6b8c6a5a9bc4bf695a325ec699b3660d4aeb45cf048afd69d66",
+    "pdf_sha256": "aa786bbcbec94df0435b24cd6bedcf2d8b23feae2770780e88762330122a83d9",
     "pages": 62,
     "toc_entries": 72,
     "tables": 50,
@@ -58,11 +58,9 @@
       13
     ],
     "sections_updated": [
-      "Cover and2.1 execution contract",
-      "4.2 physical board evidence",
-      "4.5 simulation vsphysical coverage",
-      "4.6 VIO cycles vsunmeasured time",
-      "4.8 acceptance boundary andexportedmetadata"
+      "3.7 implementedstop_pc/stop_reason diagnosis",
+      "4.2 RFwritebackshadow andstoppedS1scope",
+      "4.9 ISA v1.5 authority vsPre4history"
     ],
     "production_RTL_changed": false,
     "ISA_changed": false,
@@ -72,7 +70,8 @@
     "physical_board_validated": true,
     "physical_validation_scope": "DefaultAC1 fiveprograms andphysicalS1 only",
     "source_entry": "文档源/README.md",
-    "QA": "验证/board_document_r4_20261102_len05xlq/final_qa.json"
+    "QA": "验证/final_baseline_20261102_p824cngb/final_qa.json",
+    "revision_label": "r4-final"
   },
   "Pre5_control_evidence": {
     "relative_to_course_root": "Pre5_控制单元设计/Vivado",
@@ -253,6 +252,40 @@
       "physical_validation_status": "DEFERRED_BY_USER",
       "source_entry": "文档源/README.md",
       "QA": "验证/architecture_r3_20261102_1b40e4f7/final_qa.json"
+    },
+    {
+      "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
+      "CPU": "v1.6",
+      "candidate": "AC1-architecture-r4",
+      "ISA": "v1.5",
+      "revision_date": "2026-11-02",
+      "sha256": "131575c79b9748adf0d9319dd2e3ac5fa64de220cf59611040a6979bb75b612d",
+      "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
+      "pdf_sha256": "17a55564ccc7e6b8c6a5a9bc4bf695a325ec699b3660d4aeb45cf048afd69d66",
+      "pages": 62,
+      "toc_entries": 72,
+      "tables": 50,
+      "figures": 12,
+      "landscape_pages": [
+        12,
+        13
+      ],
+      "sections_updated": [
+        "Cover and2.1 execution contract",
+        "4.2 physical board evidence",
+        "4.5 simulation vsphysical coverage",
+        "4.6 VIO cycles vsunmeasured time",
+        "4.8 acceptance boundary andexportedmetadata"
+      ],
+      "production_RTL_changed": false,
+      "ISA_changed": false,
+      "default_execution_cycles_changed": false,
+      "new_routed_implementation": false,
+      "new_independent48_execution": false,
+      "physical_board_validated": true,
+      "physical_validation_scope": "DefaultAC1 fiveprograms andphysicalS1 only",
+      "source_entry": "文档源/README.md",
+      "QA": "验证/board_document_r4_20261102_len05xlq/final_qa.json"
     }
   ],
   "architecture_figures": {
@@ -492,5 +525,17 @@
     "RTL_changed": false,
     "new_build": false,
     "document_QA": "验证/board_document_r4_20261102_len05xlq/final_qa.json"
+  },
+  "formal_release": {
+    "identity": "CPU v1.6 / ISA v1.5 / default AC1 / EES-331 verified / document r4 final",
+    "default_branch": "main",
+    "tag": "cpu-v1.6-ac1-ees331-verified",
+    "frozen_hardware_baseline_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf",
+    "scope": "Five normal-HALT programs and S1 restart after stop; VIO RF writeback shadow, architectural flags, stop/last-store state and counters. Experiments and independent timing remain separate.",
+    "document_SHA256": "e3819844c2b7a600e4d53ec1f673a7b09bb00a9b37a9d174b0e9ef8c3df2d6e6",
+    "PDF_SHA256": "aa786bbcbec94df0435b24cd6bedcf2d8b23feae2770780e88762330122a83d9",
+    "pre_merge_QA": "验证/final_baseline_20261102_p824cngb/final_qa.json",
+    "hardware_evidence_preserved_with_original_execution_identity": true,
+    "future_capture_provenance_enhancement": "host_sources snapshots/git/python/native Tcl+Vivado markers; offline-tested only in this finalization"
   }
 }
