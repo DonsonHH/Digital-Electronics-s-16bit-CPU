@@ -1,0 +1,230 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 106700
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Nov  3 04:12:22 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source project_flow.tcl
+# set root [file dirname [file normalize [info script]]]
+# if {[catch {
+# set kind [lindex $argv 0]
+# set mode [lindex $argv 1]
+# if {$kind ni {cpu board}} {error "Project kind must be cpu or board"}
+# if {[version -short] ne "2025.2"} {error "Use the reviewed Vivado 2025.2 toolchain"}
+# set project_dir [file join $root project]
+# if {[file exists $project_dir]} {error "Refusing to overwrite a project"}
+# create_project pre6_cpu $project_dir -part xc7z020clg484-1
+# set_property default_lib xil_defaultlib [current_project]
+# set_property target_language Verilog [current_project]
+# set_property simulator_language Mixed [current_project]
+# set_param general.maxThreads 4
+# set_property AUTO_INCREMENTAL_CHECKPOINT 0 [get_runs synth_1]
+# set rtl {}
+# foreach source [concat [glob [file join $root rtl *.v]] [glob [file join $root rtl *.sv]]] {
+#  set name [file tail $source]
+#  if {$kind eq "cpu" && $name in {ees331_application.sv pre6_ees331_top.sv}} {continue}
+#  if {$kind eq "board" && $name eq "pre6_cpu_top.v"} {continue}
+#  lappend rtl $source
+# }
+# add_files -norecurse $rtl
+# add_files -norecurse [list [file join $root data dut_im.mem] [file join $root data dut_dm.mem]]
+# add_files -fileset sim_1 -norecurse [list [file join $root data selected_events.mem] [file join $root data selected_stores.mem] [file join $root tb selected_expected.svh]]
+# set_property include_dirs [list [file join $root tb]] [get_filesets sim_1]
+# set_property xsim.simulate.runtime 0ns [get_filesets sim_1]
+# if {$kind eq "cpu"} {
+#  set top pre6_cpu_top
+#  set bench tb_pre6_cpu
+#  add_files -fileset sim_1 -norecurse [file join $root tb tb_pre6_cpu.sv]
+#  add_files -fileset constrs_1 -norecurse [file join $root constraints cpu_clock.xdc]
+#  # Ask the native run object for the documented mode property, then verify its command in the log.
+#  # AMD AR59168; this exact option is also checked in the native synth command.
+#  set_property -name {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} -value {-mode out_of_context} -objects [get_runs synth_1]
+# } else {
+#  set top pre6_ees331_top
+#  set bench tb_pre6_board
+#  add_files -fileset sim_1 -norecurse [file join $root tb tb_pre6_board.sv]
+#  add_files -fileset constrs_1 -norecurse [file join $root constraints ees331.xdc]
+#  add_files -fileset constrs_1 -norecurse [file join $root constraints human_io.xdc]
+#  set_property USED_IN_SYNTHESIS false [get_files *human_io.xdc]
+#  create_ip -name vio -vendor xilinx.com -library ip -version 3.0 -module_name ees331_vio
+#  set_property -dict [list CONFIG.C_NUM_PROBE_IN {2} CONFIG.C_PROBE_IN0_WIDTH {256} CONFIG.C_PROBE_IN1_WIDTH {160} CONFIG.C_NUM_PROBE_OUT {1} CONFIG.C_PROBE_OUT0_WIDTH {1} CONFIG.C_PROBE_OUT0_INIT_VAL {0x1} CONFIG.C_EN_PROBE_IN_ACTIVITY {0}] [get_ips ees331_vio]
+#  generate_target all [get_ips ees331_vio]
+# }
+# set_property top $top [get_filesets sources_1]
+# set_property top $bench [get_filesets sim_1]
+# update_compile_order -fileset sources_1
+# update_compile_order -fileset sim_1
+# puts "PRE6_R3_PROJECT_READY kind=$kind top=$top bench=$bench images=dut_im.mem,dut_dm.mem"
+# if {$mode ne "create"} {
+#  launch_simulation -mode behavioral
+#  log_wave -r /*
+#  run all
+#  close_sim
+#  puts "PRE6_R3_BEHAVIORAL_COMPLETE"
+# }
+# if {$mode in {synthesis full}} {
+#  reset_run synth_1
+#  launch_runs synth_1 -jobs 4
+#  wait_on_run synth_1
+#  if {[get_property PROGRESS [get_runs synth_1]] ne "100%"} {error "Synthesis did not complete"}
+#  set fh [open [file join [get_property DIRECTORY [get_runs synth_1]] runme.log] r];set log [read $fh];close $fh
+#  if {[regexp {(?m)^ERROR:|^CRITICAL WARNING:} $log]} {error "Synthesis log contains an error or critical warning"}
+#  open_run synth_1
+#  file mkdir [file join $root reports]
+#  report_utilization -file [file join $root reports synthesis_utilization.rpt]
+#  report_timing_summary -file [file join $root reports synthesis_timing.rpt]
+#  write_checkpoint [file join $root reports synthesized.dcp]
+#  close_design
+#  puts "PRE6_R3_SYNTHESIS_COMPLETE kind=$kind"
+#  if {$kind eq "cpu"} {
+#   launch_simulation -mode post-synthesis -type functional
+#   log_wave -r /*
+#   run all
+#   close_sim
+#   puts "PRE6_R3_POST_SYNTH_COMPLETE"
+#  }
+# }
+# if {$kind eq "board" && $mode eq "full"} {
+#  launch_runs impl_1 -to_step write_bitstream -jobs 4
+#  wait_on_run impl_1
+#  if {[get_property PROGRESS [get_runs impl_1]] ne "100%"} {error "Implementation/bitstream did not complete"}
+#  open_run impl_1
+#  report_timing_summary -delay_type min_max -report_unconstrained -file [file join $root reports routed_timing.rpt]
+#  report_utilization -file [file join $root reports routed_utilization.rpt]
+#  report_drc -file [file join $root reports drc.rpt]
+#  set setup [get_property SLACK [get_timing_paths -delay_type max -max_paths 1]]
+#  set hold [get_property SLACK [get_timing_paths -delay_type min -max_paths 1]]
+#  if {$setup<0 || $hold<0} {error "Timing failed setup=$setup hold=$hold"}
+#  puts "PRE6_R3_IMPLEMENTATION_COMPLETE setup=$setup hold=$hold"
+# }
+# close_project
+# puts "PRE6_R3_FLOW_COMPLETE kind=$kind mode=$mode"
+# } message options]} {
+#  puts "PRE6_R3_FLOW_FAILED=$message"
+#  puts [dict get $options -errorinfo]
+#  catch {close_project}
+#  exit 1
+# }
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 535.258 ; gain = 220.449
+PRE6_R3_PROJECT_READY kind=cpu top=pre6_cpu_top bench=tb_pre6_cpu images=dut_im.mem,dut_dm.mem
+Command: launch_simulation  -mode behavioral
+INFO: [Vivado 12-25911] Executing simulation for 'XSim' simulator
+INFO: [Vivado 12-28535] Process started - Tue Nov  3 04:12:33 2026
+
+INFO: [Vivado 12-12493] Simulation top is 'tb_pre6_cpu'
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/AMDDesignTools/2025.2/Vivado/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_pre6_cpu' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim/dut_im.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim/dut_dm.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim/selected_stores.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim/selected_stores.mem'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -prj tb_pre6_cpu_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/addsub16_cla.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/alu16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/branch_target16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/flags_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/imm_ext16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/isa_decode.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/operand_forward.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/pc16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/pre6_cpu_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_cpu_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/regfile4x16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/sync_memories.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/cpu_system.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/rtl/datapath_core.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/tb/tb_pre6_cpu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_checker
+INFO: [VRFC 10-311] analyzing module tb_pre6_cpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 4 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_pre6_cpu_behav xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 4 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_pre6_cpu_behav xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log 
+Using 4 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.pc16
+Compiling module xil_defaultlib.isa_decode
+Compiling module xil_defaultlib.imm_ext16
+Compiling module xil_defaultlib.regfile4x16
+Compiling module xil_defaultlib.flags_reg
+Compiling module xil_defaultlib.operand_forward
+Compiling module xil_defaultlib.addsub16_cla
+Compiling module xil_defaultlib.alu16
+Compiling module xil_defaultlib.branch_target16
+Compiling module xil_defaultlib.datapath_core
+Compiling module xil_defaultlib.instruction_memory(INIT_FILE="du...
+Compiling module xil_defaultlib.data_memory(INIT_FILE="dut_dm.me...
+Compiling module xil_defaultlib.cpu_system(IM_INIT_FILE="dut_im....
+Compiling module xil_defaultlib.pre6_cpu_top
+Compiling module xil_defaultlib.pre6_checker(E0="selected_events...
+Compiling module xil_defaultlib.tb_pre6_cpu
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_pre6_cpu_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/project/pre6_cpu.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_pre6_cpu_behav -key {Behavioral:sim_1:Functional:tb_pre6_cpu} -tclbatch {tb_pre6_cpu.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_pre6_cpu.tcl
+## set curr_wave [current_wave_config]
+## if { [string length $curr_wave] == 0 } {
+##   if { [llength [get_objects]] > 0} {
+##     add_wave /
+##     set_property needs_save false [current_wave_config]
+##   } else {
+##      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+##   }
+## }
+## run 0ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_pre6_cpu_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 0ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 555.227 ; gain = 19.969
+SYSTEM_CASE_PASS name=baseline epoch=0 cycles=17 wb=10 stores=1 stalls=1 redirects=1 stop_pc=000a reason=1 rf=0020000800020008
+PRE6_CPU_PASS program=baseline cycles=17 completed=10 stalls=1 redirects=1 stores=1
+$finish called at time : 336 ns : File "C:/Users/Donson/AppData/Local/Temp/pre6_r3_hcftu_1p/tb/tb_pre6_cpu.sv" Line 96
+INFO: [Simtcl 6-16] Simulation closed
+PRE6_R3_BEHAVIORAL_COMPLETE
+PRE6_R3_FLOW_COMPLETE kind=cpu mode=behavioral
+# exit 0
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 04:12:41 2026...
+DESKTOP_EXIT 0

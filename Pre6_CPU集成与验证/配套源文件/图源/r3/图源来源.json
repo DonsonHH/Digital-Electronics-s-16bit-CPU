@@ -1,0 +1,54 @@
+[
+  {
+    "file": "Lab_整体架构.svg",
+    "url": "https://lab.donson.top/datapath/#view=architecture",
+    "sha256": "f41dbb737860e0415bf43285142b9dfebede0d0d6d5d1a5d949b78f8d9e091c3",
+    "source_kind": "Live Lab SVG export",
+    "retrieved_date": "2026-11-03"
+  },
+  {
+    "file": "Lab_五级Datapath.svg",
+    "url": "https://lab.donson.top/datapath/#view=pipeline",
+    "sha256": "0f4bb66bec4513b5dbbb9938ae8645843c8bb435811af30592ad0fca3cdaf2d4",
+    "source_kind": "Live Lab SVG export",
+    "retrieved_date": "2026-11-03"
+  },
+  {
+    "file": "ISA_官网编码表.svg",
+    "url": "https://lab.donson.top/isa/",
+    "sha256": "236f0b5d82bdaa1018073076387b22d20f424822c1b99d99d2ab1b8f938a6ccd",
+    "source_kind": "Live Lab SVG export",
+    "retrieved_date": "2026-11-03"
+  },
+  {
+    "file": "CPU_整体架构_中文.svg",
+    "relative": "CPU核心设计/架构图/01_CPU整体架构.svg",
+    "sha256": "6e6b8f5fdbb1331e348b02bde876d8b117eb5c7e6957eae42d44e6b49604cfcb",
+    "source_kind": "Verified r4 Chinese source"
+  },
+  {
+    "file": "CPU_五级Datapath_中文.svg",
+    "relative": "CPU核心设计/架构图/02_五级Datapath.svg",
+    "sha256": "2cd5a5555535372b462905d55e716832c17abfdc6fe7c40e8ceb3fe88b23d88b",
+    "source_kind": "Verified r4 Chinese source"
+  },
+  {
+    "file": "CPU_整体架构_中文.png",
+    "relative": "CPU核心设计/架构图/01_CPU整体架构.png",
+    "sha256": "ec9a19467b11af3fa27f40c281be06ebf3b61d8e310528af8273f468bad64c13",
+    "source_kind": "Verified r4 Chinese source"
+  },
+  {
+    "file": "CPU_五级Datapath_中文.png",
+    "relative": "CPU核心设计/架构图/02_五级Datapath.png",
+    "sha256": "46d82564513474c6dcd99e7a1e7f789e935172354875efc86cc1b75d5c2f79aa",
+    "source_kind": "Verified r4 Chinese source"
+  },
+  {
+    "file": "EES331_平台图_手册.png",
+    "source_pdf": "D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/参考文献EES331_UserManual_v1.0_1220.pdf",
+    "page": 3,
+    "label": "Platform photo from the EES-331 user manual; archived VIO data provides the test evidence.",
+    "sha256": "3b658a6a9c69035e7f5ee16e182ff0cae14622f97fe3e0f20e26c9df75ce80f4"
+  }
+]

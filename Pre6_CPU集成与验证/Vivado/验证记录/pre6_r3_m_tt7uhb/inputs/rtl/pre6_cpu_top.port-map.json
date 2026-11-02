@@ -1,0 +1,229 @@
+{
+  "generator": "soc-integrate generate_wrapper",
+  "source": "CPU核心设计/系统/rtl/cpu_system.sv",
+  "source_sha256": "68160c3b9442539be0628640dd3b0fd2cc4b7470482d1b48addbf1370e50d366",
+  "ports": [
+    [
+      "input",
+      "",
+      "clk"
+    ],
+    [
+      "input",
+      "",
+      "rst"
+    ],
+    [
+      "output",
+      "",
+      "halted"
+    ],
+    [
+      "output",
+      "",
+      "fault"
+    ],
+    [
+      "output",
+      "",
+      "observe_wb_valid"
+    ],
+    [
+      "output",
+      "",
+      "observe_wb_fault"
+    ],
+    [
+      "output",
+      "",
+      "observe_wb_halt"
+    ],
+    [
+      "output",
+      "",
+      "observe_wb_store"
+    ],
+    [
+      "output",
+      "",
+      "observe_rf_we"
+    ],
+    [
+      "output",
+      "",
+      "observe_z_we"
+    ],
+    [
+      "output",
+      "",
+      "observe_cv_we"
+    ],
+    [
+      "output",
+      "[1:0]",
+      "observe_wb_rd"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "observe_wb_pc"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "observe_wb_data"
+    ],
+    [
+      "output",
+      "[2:0]",
+      "observe_wb_flags"
+    ],
+    [
+      "output",
+      "",
+      "observe_stall"
+    ],
+    [
+      "output",
+      "",
+      "observe_redirect"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "observe_fetch_pc"
+    ],
+    [
+      "output",
+      "[3:0]",
+      "observe_pipeline_valid"
+    ],
+    [
+      "output",
+      "[2:0]",
+      "observe_flags"
+    ],
+    [
+      "output",
+      "",
+      "stop_valid"
+    ],
+    [
+      "output",
+      "",
+      "stop_pc_valid"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "stop_pc"
+    ],
+    [
+      "output",
+      "[2:0]",
+      "stop_reason"
+    ],
+    [
+      "output",
+      "",
+      "last_completed_valid"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "last_completed_pc"
+    ],
+    [
+      "output",
+      "[63:0]",
+      "rf_snapshot"
+    ],
+    [
+      "output",
+      "",
+      "observe_mem_en"
+    ],
+    [
+      "output",
+      "",
+      "observe_mem_we"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "observe_mem_addr"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "observe_mem_data"
+    ],
+    [
+      "output",
+      "",
+      "last_store_valid"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "last_store_addr"
+    ],
+    [
+      "output",
+      "[15:0]",
+      "last_store_data"
+    ]
+  ],
+  "mappings": {
+    "clk": "clk",
+    "rst": "rst",
+    "halted": "halted",
+    "fault": "fault",
+    "observe_wb_valid": "observe_wb_valid",
+    "observe_wb_fault": "observe_wb_fault",
+    "observe_wb_halt": "observe_wb_halt",
+    "observe_wb_store": "observe_wb_store",
+    "observe_rf_we": "observe_rf_we",
+    "observe_z_we": "observe_z_we",
+    "observe_cv_we": "observe_cv_we",
+    "observe_wb_rd": "observe_wb_rd",
+    "observe_wb_pc": "observe_wb_pc",
+    "observe_wb_data": "observe_wb_data",
+    "observe_wb_flags": "observe_wb_flags",
+    "observe_stall": "observe_stall",
+    "observe_redirect": "observe_redirect",
+    "observe_fetch_pc": "observe_fetch_pc",
+    "observe_pipeline_valid": "observe_pipeline_valid",
+    "observe_flags": "observe_flags",
+    "stop_valid": "stop_valid",
+    "stop_pc_valid": "stop_pc_valid",
+    "stop_pc": "stop_pc",
+    "stop_reason": "stop_reason",
+    "last_completed_valid": "last_completed_valid",
+    "last_completed_pc": "last_completed_pc",
+    "rf_snapshot": "rf_snapshot",
+    "observe_mem_en": "observe_mem_en",
+    "observe_mem_we": "observe_mem_we",
+    "observe_mem_addr": "observe_mem_addr",
+    "observe_mem_data": "observe_mem_data",
+    "last_store_valid": "last_store_valid",
+    "last_store_addr": "last_store_addr",
+    "last_store_data": "last_store_data"
+  },
+  "parameters": {
+    "IM_INIT_FILE": "dut_im.mem",
+    "DM_INIT_FILE": "dut_dm.mem"
+  },
+  "original_parameters": [
+    [
+      "IM_INIT_FILE",
+      "\"programs/all_ops_im.mem\"",
+      ""
+    ],
+    [
+      "DM_INIT_FILE",
+      "\"programs/all_ops_dm.mem\"",
+      ""
+    ]
+  ]
+}

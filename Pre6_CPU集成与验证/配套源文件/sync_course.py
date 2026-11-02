@@ -26,7 +26,8 @@ def main():
         if (REPO/'CPU核心设计/tools.local.json').is_file():files.append(REPO/'CPU核心设计/tools.local.json')
     if a.group in ['pre6','all']:
         files.extend(p for p in (REPO/'Pre6_CPU集成与验证').rglob('*')if p.is_file()
-                     and '__pycache__'not in p.parts and not p.name.startswith('~$'))
+                     and '__pycache__'not in p.parts and not p.name.startswith('~$')
+                     and not p.is_relative_to(REPO/'Pre6_CPU集成与验证/Vivado/工程'))
     backup=Path(r'C:/Users/Donson/Documents/ChatGPT_CPU_归档')/('Pre6同步前_'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
     changed=[];same=0;copied_bytes=0
     for src in files:
@@ -38,7 +39,8 @@ def main():
         if dst.exists():
             if not dst.is_file():raise ValueError('Destination is not a regular file: '+str(dst))
             saved=backup/rel;saved.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(dst,saved)
-        dst.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(src,dst)
+        # Source/material sync never imports archive directory modes or GUI run state.
+        dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(src.read_bytes())
         if sha(dst)!=digest:raise RuntimeError('Copy hash mismatch: '+str(dst))
         changed.append(rel.as_posix());copied_bytes+=src.stat().st_size
     summary={'group':a.group,'source':str(REPO),'destination':str(COURSE),'checked':len(files),

@@ -1,0 +1,1526 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Tue Nov  3 04:45:54 2026
+# Process ID         : 121124
+# Current directory  : C:/Users/Donson/AppData/Local/Temp/pre6_r3_publish_0e0_up3u
+# Command line       : vivado.exe -mode gui -source bootstrap.tcl -log native.log -nojournal
+# Log file           : C:/Users/Donson/AppData/Local/Temp/pre6_r3_publish_0e0_up3u/native.log
+# Journal file       : 
+# Running On         : LAPTOP-BSM79J69
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7940HX with Radeon Graphics        
+# CPU Frequency      : 2395 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 32
+# Host memory        : 33520 MB
+# Swap memory        : 25769 MB
+# Total Virtual      : 59290 MB
+# Available Virtual  : 19040 MB
+#-----------------------------------------------------------
+start_gui
+source bootstrap.tcl
+# set argv [list "C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.xpr"]
+# source -encoding utf-8 "D:/OneDrive - University of Glasgow/\u540c\u6b65\u6587\u4ef6\u5939/\u5927\u4e09\u4e0a/Courses/\u6570\u7535/Pre6_CPU\u96c6\u6210\u4e0e\u9a8c\u8bc1/Vivado/accept_gui_project.tcl"
+## if {[catch {
+## set project_file [file normalize [lindex $argv 0]]
+## open_project $project_file
+## set project_root [file dirname $project_file]
+## set root [file dirname $project_root]
+## if {[get_property PART [current_project]] ne "xc7z020clg484-1"} {error "Incorrect device"}
+## if {[get_property TOP [get_filesets sources_1]] ne "pre6_cpu_top"} {error "Incorrect verification top"}
+## set_property xsim.simulate.runtime 0ns [get_filesets sim_1]
+## foreach pass {first after_reset} {
+##  if {$pass eq "after_reset"} {reset_simulation -mode behavioral sim_1}
+##  launch_simulation -mode behavioral
+##  log_wave -r /*
+##  run all
+##  close_sim
+##  puts "GUI_BEHAVIORAL_PASS=$pass"
+## }
+## foreach pass {first after_reset} {
+##  set run_dir [file normalize [get_property DIRECTORY [get_runs synth_1]]]
+##  if {![string match "$root/*" $run_dir]} {error "Run path escaped working project"}
+##  reset_run synth_1
+##  launch_runs synth_1 -jobs 4
+##  wait_on_run synth_1
+##  if {[get_property PROGRESS [get_runs synth_1]] ne "100%"} {error "Synthesis incomplete"}
+##  set f [open [file join $run_dir runme.log] r];set text [read $f];close $f
+##  if {[regexp {(?m)^ERROR:|^CRITICAL WARNING:} $text]} {error "Synthesis error/critical warning"}
+##  if {![string match *-mode\ out_of_context* $text]} {error "OOC command absent"}
+##  puts "GUI_SYNTHESIS_PASS=$pass"
+## }
+## open_run synth_1
+## close_design
+## launch_simulation -mode post-synthesis -type functional
+## log_wave -r /*
+## run all
+## close_sim
+## puts "GUI_POST_SYNTH_PASS"
+## close_project
+## puts "PRE6_GUI_ACCEPTANCE_COMPLETE"
+## } message options]} {
+##  puts "PRE6_GUI_ACCEPTANCE_FAILED=$message"
+##  puts [dict get $options -errorinfo]
+##  catch {close_project}
+##  exit 1
+## }
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:ac701:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\ac701\1.4\board.xml as part xc7a200tfbg676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:emb-plus-vpr-4616:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\emb-plus-vpr-4616\1.0\board.xml as part xcve2302-sfva784-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:emb-plus-vpr-4616:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\emb-plus-vpr-4616\1.1\board.xml as part xcve2302-sfva784-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kc705:part0:1.6 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kc705\1.6\board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kc705:part0:1.7 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kc705\1.7\board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu105:part0:1.6 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu105\1.6\board.xml as part xcku040-ffva1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu105:part0:1.7 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu105\1.7\board.xml as part xcku040-ffva1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu116:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu116\1.4\board.xml as part xcku5p-ffvb676-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu116:part0:1.5 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu116\1.5\board.xml as part xcku5p-ffvb676-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu1500:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu1500\1.2\board.xml as part xcku115-flvb2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:scu35:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\scu35\1.0\board.xml as part xcsu35p-sbvb625-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:sp701:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\sp701\1.0\board.xml as part xc7s100fgga676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:sp701:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\sp701\1.1\board.xml as part xc7s100fgga676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:v80:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\v80\1.0\board.xml as part xcv80-lsva4737-2mhp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc707:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc707\1.4\board.xml as part xc7vx485tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc707:part0:1.5 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc707\1.5\board.xml as part xc7vx485tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc709:part0:1.8 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc709\1.8\board.xml as part xc7vx690tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:2.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\2.2\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.0\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.1\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.2\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.3\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.4\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190_newl:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190_newl\production\1.0\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190_newl:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190_newl\production\1.1\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190_newl:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190_newl\production\1.2\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190_newl:part0:1.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190_newl\production\1.3\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu108:part0:1.6 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu108\1.6\board.xml as part xcvu095-ffva2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu108:part0:1.7 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu108\1.7\board.xml as part xcvu095-ffva2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu110:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu110\1.4\board.xml as part xcvu190-flgc2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu118:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu118\2.0\board.xml as part xcvu9p-flga2104-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu118:part0:2.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu118\2.3\board.xml as part xcvu9p-flga2104-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu118:part0:2.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu118\2.4\board.xml as part xcvu9p-flga2104-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu128:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu128\production\1.0\board.xml as part xcvu37p-fsvh2892-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu129:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu129\production\1.0\board.xml as part xcvu29p-fsga2577-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vcu1525:part0:1.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vcu1525\1.3\board.xml as part xcvu9p-fsgd2104-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek280\production\1.0\board.xml as part xcve2802-vsvh1760-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek280\production\1.1\board.xml as part xcve2802-vsvh1760-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek280\production\1.2\board.xml as part xcve2802-vsvh1760-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek385:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek385\1.0\board.xml as part xc2ve3858-ssva2112-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek385:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek385\1.1\board.xml as part xc2ve3858-ssva2112-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek385_1:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vek385_2\1.0\board.xml as part xc2ve3858-ssva2112-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vermeo_t1_mpsoc:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vermeo_t1_mpsoc\1.0\board.xml as part xczu19eg-ffvd1760-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vermeo_t1_rfsoc:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vermeo_t1_rfsoc\1.0\board.xml as part xczu21dr-ffvd1156-2l-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vhk158\production\1.0\board.xml as part xcvh1582-vsva3697-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vhk158\production\1.1\board.xml as part xcvh1582-vsva3697-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vhk158\production\1.2\board.xml as part xcvh1582-vsva3697-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:2.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\2.2\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:3.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\3.0\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:3.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\3.1\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:3.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\3.2\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180:part0:3.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180\production\3.3\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180_newl:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180_newl\production\1.0\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vmk180_newl:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vmk180_newl\production\1.1\board.xml as part xcvm1802-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk120\production\1.0\board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk120\production\1.1\board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk120:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk120\production\1.2\board.xml as part xcvp1202-vsva2785-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk180:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk180\production\1.0\board.xml as part xcvp1802-lsvc4072-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk180:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk180\production\1.1\board.xml as part xcvp1802-lsvc4072-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vpk180:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vpk180\production\1.2\board.xml as part xcvp1802-lsvc4072-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vrk160:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vrk160\1.0\board.xml as part xcvr1602-vsva2488-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vrk160:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vrk160\1.1\board.xml as part xcvr1602-vsva2488-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zc706:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zc706\1.4\board.xml as part xc7z045ffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zc706:part0:1.5 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zc706\1.5\board.xml as part xc7z045ffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu102:part0:3.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu102\3.3\board.xml as part xczu9eg-ffvb1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu102:part0:3.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu102\3.4\board.xml as part xczu9eg-ffvb1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu111\1.2\board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu111\1.3\board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu111:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu111\1.4\board.xml as part xczu28dr-ffvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu1275:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu1275\1.0\board.xml as part xczu29dr-ffvf1760-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu1285:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu1285\1.0\board.xml as part xczu39dr-ffvf1760-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu208:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu208\production\2.0\board.xml as part xczu48dr-fsvg1517-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu208ld:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu208ld\production\2.0\board.xml as part xczu58dr-fsvg1517-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu216\production\2.0\board.xml as part xczu49dr-ffvf1760-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216ld:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu216ld\production\2.0\board.xml as part xczu59dr-ffvf1760-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670:part0:2.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu670\2.0\board.xml as part xczu67dr-fsve1156-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\zcu670ld\1.0\board.xml as part xczu57dr-fsve1156-2-i specified in board_part file is either invalid or not available
+INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:ac701:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\ac701\1.4\board.xml as part xc7a200tfbg676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:emb-plus-vpr-4616:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\emb-plus-vpr-4616\1.0\board.xml as part xcve2302-sfva784-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:emb-plus-vpr-4616:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\emb-plus-vpr-4616\1.1\board.xml as part xcve2302-sfva784-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kc705:part0:1.6 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kc705\1.6\board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kc705:part0:1.7 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kc705\1.7\board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu105:part0:1.6 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu105\1.6\board.xml as part xcku040-ffva1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu105:part0:1.7 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu105\1.7\board.xml as part xcku040-ffva1156-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu116:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu116\1.4\board.xml as part xcku5p-ffvb676-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu116:part0:1.5 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu116\1.5\board.xml as part xcku5p-ffvb676-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu1500:part0:1.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\kcu1500\1.2\board.xml as part xcku115-flvb2104-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:scu35:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\scu35\1.0\board.xml as part xcsu35p-sbvb625-2-e specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:sp701:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\sp701\1.0\board.xml as part xc7s100fgga676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:sp701:part0:1.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\sp701\1.1\board.xml as part xc7s100fgga676-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:v80:part0:1.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\v80\1.0\board.xml as part xcv80-lsva4737-2mhp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc707:part0:1.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc707\1.4\board.xml as part xc7vx485tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc707:part0:1.5 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc707\1.5\board.xml as part xc7vx485tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vc709:part0:1.8 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vc709\1.8\board.xml as part xc7vx690tffg1761-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:2.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\2.2\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.0 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.0\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.1 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.1\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.2 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.2\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.3 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.3\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vck190:part0:3.4 available at C:/AMDDesignTools/2025.2/data/xhub/boards\XilinxBoardStore\boards\Xilinx\vck190\production\3.4\board.xml as part xcvc1902-vsva2197-2mp-e-s specified in board_part file is either invalid or not available
+INFO: [Common 17-14] Message 'Board 49-26' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Project 1-5713] Board part '' set for the project  is not found. BoardPart property will be unset. Please select board from latest repo build 
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/AMDDesignTools/2025.2/Vivado/data/ip'.
+open_project: Time (s): cpu = 00:00:15 ; elapsed = 00:00:07 . Memory (MB): peak = 1658.477 ; gain = 208.953
+Command: launch_simulation  -mode behavioral
+INFO: [Vivado 12-25911] Executing simulation for 'XSim' simulator
+INFO: [Vivado 12-28535] Process started - Tue Nov  3 04:46:09 2026
+
+INFO: [Vivado 12-12493] Simulation top is 'tb_pre6_cpu'
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/AMDDesignTools/2025.2/Vivado/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_pre6_cpu' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/dut_im.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/dut_dm.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/selected_stores.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/selected_stores.mem'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -prj tb_pre6_cpu_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/addsub16_cla.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/alu16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/branch_target16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/flags_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/imm_ext16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/isa_decode.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/operand_forward.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pc16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pre6_cpu_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_cpu_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/regfile4x16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/cpu_system.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/datapath_core.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/tb/tb_pre6_cpu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_checker
+INFO: [VRFC 10-311] analyzing module tb_pre6_cpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_pre6_cpu_behav xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_pre6_cpu_behav xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.pc16
+Compiling module xil_defaultlib.isa_decode
+Compiling module xil_defaultlib.imm_ext16
+Compiling module xil_defaultlib.regfile4x16
+Compiling module xil_defaultlib.flags_reg
+Compiling module xil_defaultlib.operand_forward
+Compiling module xil_defaultlib.addsub16_cla
+Compiling module xil_defaultlib.alu16
+Compiling module xil_defaultlib.branch_target16
+Compiling module xil_defaultlib.datapath_core
+Compiling module xil_defaultlib.instruction_memory(INIT_FILE="du...
+Compiling module xil_defaultlib.data_memory(INIT_FILE="dut_dm.me...
+Compiling module xil_defaultlib.cpu_system(IM_INIT_FILE="dut_im....
+Compiling module xil_defaultlib.pre6_cpu_top
+Compiling module xil_defaultlib.pre6_checker(LABEL="copy_checksu...
+Compiling module xil_defaultlib.tb_pre6_cpu
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_pre6_cpu_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_pre6_cpu_behav -key {Behavioral:sim_1:Functional:tb_pre6_cpu} -tclbatch {tb_pre6_cpu.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_pre6_cpu.tcl
+### set curr_wave [current_wave_config]
+### if { [string length $curr_wave] == 0 } {
+###   if { [llength [get_objects]] > 0} {
+###     add_wave /
+###     set_property needs_save false [current_wave_config]
+###   } else {
+###      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+###   }
+### }
+### run 0ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_pre6_cpu_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 0ns
+launch_simulation: Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 1676.340 ; gain = 17.863
+SYSTEM_CASE_PASS name=copy_checksum epoch=0 cycles=55 wb=35 stores=8 stalls=16 redirects=0 stop_pc=0022 reason=1 rf=0020000012320000
+PRE6_CPU_PASS program=copy_checksum cycles=55 completed=35 stalls=16 redirects=0 stores=8
+$finish called at time : 716 ns : File "C:/Users/Donson/Documents/CPU_Pre6/CPU/tb/tb_pre6_cpu.sv" Line 96
+INFO: [Simtcl 6-16] Simulation closed
+GUI_BEHAVIORAL_PASS=first
+INFO: [Vivado 12-2266] Removing simulation data...
+INFO: [Vivado 12-2267] Reset complete
+Command: launch_simulation  -mode behavioral
+INFO: [Vivado 12-25911] Executing simulation for 'XSim' simulator
+INFO: [Vivado 12-28535] Process started - Tue Nov  3 04:46:20 2026
+
+INFO: [Vivado 12-12493] Simulation top is 'tb_pre6_cpu'
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/AMDDesignTools/2025.2/Vivado/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_pre6_cpu' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/dut_im.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/dut_dm.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/selected_stores.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/selected_stores.mem'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -prj tb_pre6_cpu_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/addsub16_cla.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/alu16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/branch_target16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/flags_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/imm_ext16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/isa_decode.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/operand_forward.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pc16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pre6_cpu_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_cpu_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/regfile4x16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/cpu_system.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/datapath_core.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/tb/tb_pre6_cpu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_checker
+INFO: [VRFC 10-311] analyzing module tb_pre6_cpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_pre6_cpu_behav xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_pre6_cpu_behav xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.pc16
+Compiling module xil_defaultlib.isa_decode
+Compiling module xil_defaultlib.imm_ext16
+Compiling module xil_defaultlib.regfile4x16
+Compiling module xil_defaultlib.flags_reg
+Compiling module xil_defaultlib.operand_forward
+Compiling module xil_defaultlib.addsub16_cla
+Compiling module xil_defaultlib.alu16
+Compiling module xil_defaultlib.branch_target16
+Compiling module xil_defaultlib.datapath_core
+Compiling module xil_defaultlib.instruction_memory(INIT_FILE="du...
+Compiling module xil_defaultlib.data_memory(INIT_FILE="dut_dm.me...
+Compiling module xil_defaultlib.cpu_system(IM_INIT_FILE="dut_im....
+Compiling module xil_defaultlib.pre6_cpu_top
+Compiling module xil_defaultlib.pre6_checker(LABEL="copy_checksu...
+Compiling module xil_defaultlib.tb_pre6_cpu
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_pre6_cpu_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_pre6_cpu_behav -key {Behavioral:sim_1:Functional:tb_pre6_cpu} -tclbatch {tb_pre6_cpu.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_pre6_cpu.tcl
+### set curr_wave [current_wave_config]
+### if { [string length $curr_wave] == 0 } {
+###   if { [llength [get_objects]] > 0} {
+###     add_wave /
+###     set_property needs_save false [current_wave_config]
+###   } else {
+###      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+###   }
+### }
+### run 0ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_pre6_cpu_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 0ns
+launch_simulation: Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1696.738 ; gain = 15.094
+SYSTEM_CASE_PASS name=copy_checksum epoch=0 cycles=55 wb=35 stores=8 stalls=16 redirects=0 stop_pc=0022 reason=1 rf=0020000012320000
+PRE6_CPU_PASS program=copy_checksum cycles=55 completed=35 stalls=16 redirects=0 stores=8
+$finish called at time : 716 ns : File "C:/Users/Donson/Documents/CPU_Pre6/CPU/tb/tb_pre6_cpu.sv" Line 96
+INFO: [Simtcl 6-16] Simulation closed
+GUI_BEHAVIORAL_PASS=after_reset
+[Tue Nov  3 04:46:27 2026] Launched synth_1...
+Run output will be captured here: C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.runs/synth_1/runme.log
+[Tue Nov  3 04:46:27 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:46:32 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:46:37 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:46:42 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:46:52 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:47:02 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:47:13 2026] Waiting for synth_1 to finish...
+
+*** Running vivado
+    with args -log pre6_cpu_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source pre6_cpu_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Nov  3 04:46:29 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source pre6_cpu_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 535.828 ; gain = 221.777
+Command: synth_design -top pre6_cpu_top -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 88932
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1308.918 ; gain = 541.367
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'pre6_cpu_top' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pre6_cpu_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/cpu_system.sv:4]
+	Parameter IM_INIT_FILE bound to: dut_im.mem - type: string 
+	Parameter DM_INIT_FILE bound to: dut_dm.mem - type: string 
+INFO: [Synth 8-6157] synthesizing module 'datapath_core' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'pc16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pc16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pc16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'isa_decode' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/isa_decode.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'isa_decode' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/isa_decode.v:4]
+INFO: [Synth 8-6157] synthesizing module 'imm_ext16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'imm_ext16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regfile4x16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'regfile4x16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'flags_reg' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/flags_reg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'flags_reg' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/flags_reg.v:4]
+INFO: [Synth 8-6157] synthesizing module 'operand_forward' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/operand_forward.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'operand_forward' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/operand_forward.v:6]
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'addsub16_cla' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'addsub16_cla' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'branch_target16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'branch_target16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'datapath_core' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'instruction_memory' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:5]
+	Parameter INIT_FILE bound to: dut_im.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'dut_im.mem' is read successfully [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'instruction_memory' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:5]
+INFO: [Synth 8-6157] synthesizing module 'data_memory' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:12]
+	Parameter INIT_FILE bound to: dut_dm.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'dut_dm.mem' is read successfully [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:15]
+INFO: [Synth 8-6155] done synthesizing module 'data_memory' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/cpu_system.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'pre6_cpu_top' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pre6_cpu_top.v:3]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1434.168 ; gain = 666.617
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1434.168 ; gain = 666.617
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1434.168 ; gain = 666.617
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1434.168 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+Finished Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1513.738 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 1513.738 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1513.738 ; gain = 746.188
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1513.738 ; gain = 746.188
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1513.738 ; gain = 746.188
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'mode_reg' in module 'datapath_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                     RUN |                              100 |                              000
+             DRAIN_FAULT |                              010 |                              010
+                 FAULTED |                              000 |                              100
+              DRAIN_HALT |                              011 |                              001
+                  HALTED |                              001 |                              011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'mode_reg' using encoding 'sequential' in module 'datapath_core'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1513.738 ; gain = 746.188
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   17 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	               16 Bit    Registers := 24    
+	               12 Bit    Registers := 1     
+	                3 Bit    Registers := 5     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 45    
++---RAMs : 
+	               4K Bit	(256 X 16 bit)          RAMs := 1     
++---ROMs : 
+	                    ROMs := 1     
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 14    
+	   4 Input   16 Bit        Muxes := 2     
+	   3 Input   16 Bit        Muxes := 2     
+	  15 Input    3 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 12    
+	   3 Input    3 Bit        Muxes := 1     
+	  15 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 5     
+	   3 Input    2 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 20    
+	  15 Input    1 Bit        Muxes := 12    
+	   5 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1513.863 ; gain = 746.312
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name  | RTL Object                   | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|pre6_cpu_top | u_cpu_system_inst/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1637.086 ; gain = 869.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1733.969 ; gain = 966.418
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name  | RTL Object                   | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|pre6_cpu_top | u_cpu_system_inst/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance u_cpu_system_inst/im/dout_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance u_cpu_system_inst/dm/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1754.355 ; gain = 986.805
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1946.262 ; gain = 1178.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1946.262 ; gain = 1178.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1946.262 ; gain = 1178.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1946.262 ; gain = 1178.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1947.203 ; gain = 1179.652
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1947.203 ; gain = 1179.652
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    15|
+|2     |LUT1     |     1|
+|3     |LUT2     |    30|
+|4     |LUT3     |    40|
+|5     |LUT4     |    67|
+|6     |LUT5     |    59|
+|7     |LUT6     |   135|
+|8     |RAMB18E1 |     2|
+|10    |FDRE     |   364|
+|11    |FDSE     |     1|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1947.203 ; gain = 1179.652
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:19 ; elapsed = 00:00:25 . Memory (MB): peak = 1947.203 ; gain = 1100.082
+Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1947.203 ; gain = 1179.652
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1956.355 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 17 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1960.000 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: ad324dfb
+INFO: [Common 17-83] Releasing license: Synthesis
+48 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 1960.000 ; gain = 1424.172
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1960.000 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.runs/synth_1/pre6_cpu_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file pre6_cpu_top_utilization_synth.rpt -pb pre6_cpu_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 04:47:11 2026...
+[Tue Nov  3 04:47:13 2026] synth_1 finished
+wait_on_runs: Time (s): cpu = 00:00:03 ; elapsed = 00:00:45 . Memory (MB): peak = 1698.203 ; gain = 1.465
+GUI_SYNTHESIS_PASS=first
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.runs/synth_1
+
+[Tue Nov  3 04:47:13 2026] Launched synth_1...
+Run output will be captured here: C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.runs/synth_1/runme.log
+[Tue Nov  3 04:47:13 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:47:18 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:47:23 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:47:28 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:47:38 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:47:48 2026] Waiting for synth_1 to finish...
+[Tue Nov  3 04:47:58 2026] Waiting for synth_1 to finish...
+
+*** Running vivado
+    with args -log pre6_cpu_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source pre6_cpu_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Nov  3 04:46:29 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source pre6_cpu_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 535.828 ; gain = 221.777
+Command: synth_design -top pre6_cpu_top -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 88932
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1308.918 ; gain = 541.367
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'pre6_cpu_top' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pre6_cpu_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/cpu_system.sv:4]
+	Parameter IM_INIT_FILE bound to: dut_im.mem - type: string 
+	Parameter DM_INIT_FILE bound to: dut_dm.mem - type: string 
+INFO: [Synth 8-6157] synthesizing module 'datapath_core' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'pc16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pc16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pc16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'isa_decode' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/isa_decode.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'isa_decode' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/isa_decode.v:4]
+INFO: [Synth 8-6157] synthesizing module 'imm_ext16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'imm_ext16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regfile4x16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'regfile4x16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'flags_reg' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/flags_reg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'flags_reg' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/flags_reg.v:4]
+INFO: [Synth 8-6157] synthesizing module 'operand_forward' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/operand_forward.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'operand_forward' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/operand_forward.v:6]
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'addsub16_cla' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'addsub16_cla' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'branch_target16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'branch_target16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'datapath_core' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'instruction_memory' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:5]
+	Parameter INIT_FILE bound to: dut_im.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'dut_im.mem' is read successfully [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'instruction_memory' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:5]
+INFO: [Synth 8-6157] synthesizing module 'data_memory' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:12]
+	Parameter INIT_FILE bound to: dut_dm.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'dut_dm.mem' is read successfully [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:15]
+INFO: [Synth 8-6155] done synthesizing module 'data_memory' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/cpu_system.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'pre6_cpu_top' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pre6_cpu_top.v:3]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1434.168 ; gain = 666.617
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1434.168 ; gain = 666.617
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1434.168 ; gain = 666.617
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1434.168 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+Finished Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1513.738 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 1513.738 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1513.738 ; gain = 746.188
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1513.738 ; gain = 746.188
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1513.738 ; gain = 746.188
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'mode_reg' in module 'datapath_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                     RUN |                              100 |                              000
+             DRAIN_FAULT |                              010 |                              010
+                 FAULTED |                              000 |                              100
+              DRAIN_HALT |                              011 |                              001
+                  HALTED |                              001 |                              011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'mode_reg' using encoding 'sequential' in module 'datapath_core'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1513.738 ; gain = 746.188
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   17 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	               16 Bit    Registers := 24    
+	               12 Bit    Registers := 1     
+	                3 Bit    Registers := 5     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 45    
++---RAMs : 
+	               4K Bit	(256 X 16 bit)          RAMs := 1     
++---ROMs : 
+	                    ROMs := 1     
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 14    
+	   4 Input   16 Bit        Muxes := 2     
+	   3 Input   16 Bit        Muxes := 2     
+	  15 Input    3 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 12    
+	   3 Input    3 Bit        Muxes := 1     
+	  15 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 5     
+	   3 Input    2 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 20    
+	  15 Input    1 Bit        Muxes := 12    
+	   5 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1513.863 ; gain = 746.312
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name  | RTL Object                   | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|pre6_cpu_top | u_cpu_system_inst/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1637.086 ; gain = 869.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1733.969 ; gain = 966.418
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name  | RTL Object                   | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|pre6_cpu_top | u_cpu_system_inst/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance u_cpu_system_inst/im/dout_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance u_cpu_system_inst/dm/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1754.355 ; gain = 986.805
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1946.262 ; gain = 1178.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1946.262 ; gain = 1178.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1946.262 ; gain = 1178.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1946.262 ; gain = 1178.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1947.203 ; gain = 1179.652
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1947.203 ; gain = 1179.652
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    15|
+|2     |LUT1     |     1|
+|3     |LUT2     |    30|
+|4     |LUT3     |    40|
+|5     |LUT4     |    67|
+|6     |LUT5     |    59|
+|7     |LUT6     |   135|
+|8     |RAMB18E1 |     2|
+|10    |FDRE     |   364|
+|11    |FDSE     |     1|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1947.203 ; gain = 1179.652
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:19 ; elapsed = 00:00:25 . Memory (MB): peak = 1947.203 ; gain = 1100.082
+Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1947.203 ; gain = 1179.652
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1956.355 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 17 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1960.000 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: ad324dfb
+INFO: [Common 17-83] Releasing license: Synthesis
+48 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 1960.000 ; gain = 1424.172
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1960.000 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.runs/synth_1/pre6_cpu_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file pre6_cpu_top_utilization_synth.rpt -pb pre6_cpu_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 04:47:11 2026...
+
+*** Running vivado
+    with args -log pre6_cpu_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source pre6_cpu_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Nov  3 04:47:20 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source pre6_cpu_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 535.590 ; gain = 222.098
+Command: synth_design -top pre6_cpu_top -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 114144
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1307.711 ; gain = 540.219
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'pre6_cpu_top' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pre6_cpu_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/cpu_system.sv:4]
+	Parameter IM_INIT_FILE bound to: dut_im.mem - type: string 
+	Parameter DM_INIT_FILE bound to: dut_dm.mem - type: string 
+INFO: [Synth 8-6157] synthesizing module 'datapath_core' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'pc16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pc16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pc16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'isa_decode' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/isa_decode.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'isa_decode' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/isa_decode.v:4]
+INFO: [Synth 8-6157] synthesizing module 'imm_ext16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'imm_ext16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regfile4x16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'regfile4x16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'flags_reg' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/flags_reg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'flags_reg' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/flags_reg.v:4]
+INFO: [Synth 8-6157] synthesizing module 'operand_forward' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/operand_forward.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'operand_forward' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/operand_forward.v:6]
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'addsub16_cla' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'addsub16_cla' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'branch_target16' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'branch_target16' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'datapath_core' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'instruction_memory' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:5]
+	Parameter INIT_FILE bound to: dut_im.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'dut_im.mem' is read successfully [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'instruction_memory' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:5]
+INFO: [Synth 8-6157] synthesizing module 'data_memory' [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:12]
+	Parameter INIT_FILE bound to: dut_dm.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'dut_dm.mem' is read successfully [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:15]
+INFO: [Synth 8-6155] done synthesizing module 'data_memory' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/sync_memories.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/cpu_system.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'pre6_cpu_top' (0#1) [C:/Users/Donson/Documents/CPU_Pre6/CPU/rtl/pre6_cpu_top.v:3]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1432.129 ; gain = 664.637
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1432.129 ; gain = 664.637
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1432.129 ; gain = 664.637
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 1432.129 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+Finished Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1471.934 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.030 . Memory (MB): peak = 1471.934 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1471.934 ; gain = 704.441
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1471.934 ; gain = 704.441
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1471.934 ; gain = 704.441
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'mode_reg' in module 'datapath_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                     RUN |                              100 |                              000
+             DRAIN_FAULT |                              010 |                              010
+                 FAULTED |                              000 |                              100
+              DRAIN_HALT |                              011 |                              001
+                  HALTED |                              001 |                              011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'mode_reg' using encoding 'sequential' in module 'datapath_core'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1471.934 ; gain = 704.441
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   17 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	               16 Bit    Registers := 24    
+	               12 Bit    Registers := 1     
+	                3 Bit    Registers := 5     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 45    
++---RAMs : 
+	               4K Bit	(256 X 16 bit)          RAMs := 1     
++---ROMs : 
+	                    ROMs := 1     
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 14    
+	   4 Input   16 Bit        Muxes := 2     
+	   3 Input   16 Bit        Muxes := 2     
+	  15 Input    3 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 12    
+	   3 Input    3 Bit        Muxes := 1     
+	  15 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 5     
+	   3 Input    2 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 20    
+	  15 Input    1 Bit        Muxes := 12    
+	   5 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1511.598 ; gain = 744.105
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name  | RTL Object                   | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|pre6_cpu_top | u_cpu_system_inst/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1633.840 ; gain = 866.348
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1730.129 ; gain = 962.637
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name  | RTL Object                   | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|pre6_cpu_top | u_cpu_system_inst/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance u_cpu_system_inst/im/dout_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance u_cpu_system_inst/dm/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1749.723 ; gain = 982.230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1941.062 ; gain = 1173.570
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1941.062 ; gain = 1173.570
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1941.062 ; gain = 1173.570
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1941.062 ; gain = 1173.570
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1942.059 ; gain = 1174.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1942.059 ; gain = 1174.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    15|
+|2     |LUT1     |     1|
+|3     |LUT2     |    30|
+|4     |LUT3     |    40|
+|5     |LUT4     |    67|
+|6     |LUT5     |    59|
+|7     |LUT6     |   135|
+|8     |RAMB18E1 |     2|
+|10    |FDRE     |   364|
+|11    |FDSE     |     1|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1942.059 ; gain = 1174.566
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:25 . Memory (MB): peak = 1942.059 ; gain = 1134.762
+Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1942.059 ; gain = 1174.566
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1951.223 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 17 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1954.855 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: ad324dfb
+INFO: [Common 17-83] Releasing license: Synthesis
+48 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1954.855 ; gain = 1419.266
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1954.855 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.runs/synth_1/pre6_cpu_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file pre6_cpu_top_utilization_synth.rpt -pb pre6_cpu_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 04:48:02 2026...
+[Tue Nov  3 04:48:03 2026] synth_1 finished
+wait_on_runs: Time (s): cpu = 00:00:04 ; elapsed = 00:00:50 . Memory (MB): peak = 1698.203 ; gain = 0.000
+GUI_SYNTHESIS_PASS=after_reset
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7z020clg484-1
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-5699] Read binary netlist with skipMacroContent - 1
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1925.742 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 17 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2025.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+Finished Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2046.344 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+open_run: Time (s): cpu = 00:00:12 ; elapsed = 00:00:11 . Memory (MB): peak = 4088.570 ; gain = 2390.367
+Command: launch_simulation  -mode post-synthesis -type functional
+INFO: [Vivado 12-25911] Executing simulation for 'XSim' simulator
+INFO: [Vivado 12-28535] Process started - Tue Nov  3 04:48:16 2026
+
+INFO: [Vivado 12-12493] Simulation top is 'tb_pre6_cpu'
+INFO: [Vivado 12-5682] Launching post-synthesis functional simulation in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/AMDDesignTools/2025.2/Vivado/tps/boost_1_72_0'
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7z020clg484-1
+INFO: [Project 1-5699] Read binary netlist with skipMacroContent - 1
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 4116.844 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 17 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2025.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+Finished Parsing XDC File [C:/Users/Donson/Documents/CPU_Pre6/CPU/constraints/cpu_clock.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4116.844 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+open_run: Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 4116.844 ; gain = 0.000
+INFO: [SIM-utils-24] Writing simulation netlist file for design 'synth_1'...
+INFO: [SIM-utils-25] write_verilog -mode funcsim -nolib -force -file "C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/tb_pre6_cpu_func_synth.v"
+INFO: [SIM-utils-36] Netlist generated:C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/tb_pre6_cpu_func_synth.v
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_pre6_cpu' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/dut_im.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/dut_dm.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/selected_stores.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/selected_stores.mem'
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim'
+"xvlog --incr --relax -L uvm -prj tb_pre6_cpu_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim/tb_pre6_cpu_func_synth.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-311] analyzing module cpu_system
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-311] analyzing module pre6_cpu_top
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/Documents/CPU_Pre6/CPU/tb/tb_pre6_cpu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_checker
+INFO: [VRFC 10-311] analyzing module tb_pre6_cpu
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L secureip --snapshot tb_pre6_cpu_func_synth xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L secureip --snapshot tb_pre6_cpu_func_synth xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.LUT6
+Compiling module unisims_ver.LUT5
+Compiling module unisims_ver.x_lut2_mux4
+Compiling module unisims_ver.LUT2
+Compiling module unisims_ver.LUT4
+Compiling module unisims_ver.x_lut3_mux8
+Compiling module unisims_ver.LUT3
+Compiling module unisims_ver.FDRE_default
+Compiling module unisims_ver.FDSE_default
+Compiling module unisims_ver.CARRY4
+Compiling module xil_defaultlib.addsub16_cla
+Compiling module xil_defaultlib.alu16
+Compiling module xil_defaultlib.flags_reg
+Compiling module xil_defaultlib.pc16
+Compiling module unisims_ver.x_lut1_mux2
+Compiling module unisims_ver.LUT1(INIT=2'b01)
+Compiling module xil_defaultlib.branch_target16
+Compiling module xil_defaultlib.datapath_core
+Compiling module unisims_ver.RB18_INTERNAL_VLOG(RDADDR_COLLIS...
+Compiling module unisims_ver.RAMB18E1(INIT_02=256'b0101101001...
+Compiling module xil_defaultlib.data_memory
+Compiling module unisims_ver.RB18_INTERNAL_VLOG(RDADDR_COLLIS...
+Compiling module unisims_ver.RAMB18E1(INIT_00=256'b0100100110...
+Compiling module xil_defaultlib.instruction_memory
+Compiling module xil_defaultlib.cpu_system
+Compiling module xil_defaultlib.pre6_cpu_top
+Compiling module xil_defaultlib.pre6_checker(LABEL="copy_checksu...
+Compiling module xil_defaultlib.tb_pre6_cpu
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_pre6_cpu_func_synth
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/Donson/Documents/CPU_Pre6/CPU/project/pre6_cpu.sim/sim_1/synth/func/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_pre6_cpu_func_synth -key {Post-Synthesis:sim_1:Functional:tb_pre6_cpu} -tclbatch {tb_pre6_cpu.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_pre6_cpu.tcl
+### set curr_wave [current_wave_config]
+### if { [string length $curr_wave] == 0 } {
+###   if { [llength [get_objects]] > 0} {
+###     add_wave /
+###     set_property needs_save false [current_wave_config]
+###   } else {
+###      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+###   }
+### }
+### run 0ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_pre6_cpu_func_synth' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 0ns
+launch_simulation: Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 4116.844 ; gain = 0.000
+SYSTEM_CASE_PASS name=copy_checksum epoch=0 cycles=55 wb=35 stores=8 stalls=16 redirects=0 stop_pc=0022 reason=1 rf=0020000012320000
+PRE6_CPU_PASS program=copy_checksum cycles=55 completed=35 stalls=16 redirects=0 stores=8
+$finish called at time : 716 ns : File "C:/Users/Donson/Documents/CPU_Pre6/CPU/tb/tb_pre6_cpu.sv" Line 96
+INFO: [Simtcl 6-16] Simulation closed
+GUI_POST_SYNTH_PASS
+PRE6_GUI_ACCEPTANCE_COMPLETE
+## exit 0
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 04:48:34 2026...

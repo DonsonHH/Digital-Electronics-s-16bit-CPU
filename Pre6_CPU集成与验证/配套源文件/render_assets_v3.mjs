@@ -1,0 +1,17 @@
+// Render verified SVG sources without translating or redrawing their circuitry.
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+const require=createRequire('C:/Users/Donson/.codex/skills/wavedrom-gen/package.json');
+const {Resvg}=require('@resvg/resvg-js');
+const root=path.resolve(process.argv[2]);
+async function render(input,output,view){
+ let svg=await fs.readFile(path.join(root,input),'utf8');
+ if(view){svg=svg.replace(/viewBox="[^"]+"/,`viewBox="${view.join(' ')}"`).replace(/width="[^"]+"/,`width="${view[2]}"`).replace(/height="[^"]+"/,`height="${view[3]}"`);}
+ const image=new Resvg(svg,{font:{loadSystemFonts:true,defaultFontFamily:'Microsoft YaHei'},fitTo:{mode:'width',value:3600}}).render();
+ await fs.writeFile(path.join(root,output),image.asPng());
+}
+await render('ISA_官网编码表.svg','ISA_官网编码表.png');
+await render('CPU_整体架构_中文.svg','CPU_控制区_中文.png',[45,205,2310,620]);
+await render('CPU_五级Datapath_中文.svg','CPU_EX_WB路径_中文.png',[865,180,1505,1225]);
+console.log('VERIFIED_SOURCE_ASSETS_RENDERED');

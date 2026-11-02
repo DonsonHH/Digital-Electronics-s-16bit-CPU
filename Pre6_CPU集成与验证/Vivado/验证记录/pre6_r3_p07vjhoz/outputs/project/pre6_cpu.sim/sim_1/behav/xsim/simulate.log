@@ -1,0 +1,4 @@
+Time resolution is 1 ps
+SYSTEM_CASE_PASS name=copy_checksum epoch=0 cycles=55 wb=35 stores=8 stalls=16 redirects=0 stop_pc=0022 reason=1 rf=0020000012320000
+PRE6_CPU_PASS program=copy_checksum cycles=55 completed=35 stalls=16 redirects=0 stores=8
+$finish called at time : 716 ns : File "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/tb/tb_pre6_cpu.sv" Line 96

@@ -1,0 +1,4 @@
+Time resolution is 1 ps
+SYSTEM_CASE_PASS name=loop epoch=0 cycles=30 wb=18 stores=0 stalls=0 redirects=4 stop_pc=0006 reason=1 rf=0000000000000000
+PRE6_CPU_PASS program=loop cycles=30 completed=18 stalls=0 redirects=4 stores=0
+$finish called at time : 466 ns : File "C:/Users/Donson/AppData/Local/Temp/pre6_r3_bgc3_6p4/tb/tb_pre6_cpu.sv" Line 96

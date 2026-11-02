@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "suites": [
+    "regression",
+    "independent",
+    "mutations",
+    "unknown",
+    "evidence",
+    "lifecycle"
+  ],
+  "tools": {
+    "vivado_bin": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin",
+    "python": "C:\\Users\\Donson\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "config_file": "C:\\Users\\Donson\\AppData\\Local\\Temp\\pre6_r3_core_review_4c0eyfw3\\tools.local.json"
+  },
+  "source_sha256": {
+    "build_hazard_matrix.py": "da66cd06c7ad90e52ad8f1a00cc94965774b80b61abdc09ae6d81ca5a54dfc9a",
+    "create_project.ps1": "e71e1534c2762daa27a12b33756873597c186287e2e8a0791fda3e91aec73d19",
+    "desktop_launch.py": "4fbfe6a0bd6691c12cc4a47f45dc72fbef9147d880b08f9d7dee5e3bb09067b2",
+    "execute_regression.py": "ae07924602eba41aa0b43e6838f41de09f2a7e511cc85e895572fa7cd96f11f0",
+    "generate_independent.py": "384fd9727ff568a99d7d6f305fba8488f6da669bce655afc55717248be4c9547",
+    "negative_test_support.py": "a6cbf699fb5c183438b5d1870a897c62994522d35b731bd77fb88a1fbf254d4b",
+    "run_all.cmd": "eff5c63f9d03f92280c0393c2386c89dfd4fdb03b32a99f764f6513472a7ef75",
+    "run_evidence_tests.py": "efc5565b666d52035d0b66bf3cf6f80f8720c314f1255bf53a628ee121efa37e",
+    "run_independent.py": "7a7d1a374f4d802381bb4f444adcdf419891dd88e46ee5e786d232ce39eab1a9",
+    "run_mutations.py": "a54d472b1bce0c37a89bad0af57fe54cee43de5d2af6316cba96bb3e2e0f477e",
+    "run_project.cmd": "c65c5decc43efb934df50c32e48a4c7758b804c97edfdf93189bf1bddb08df5b",
+    "run_synth.cmd": "001662d622da48fdcd9b8d09362d98fe1bcd06a5880377526a0c8826470a16b1",
+    "run_synthesis.ps1": "b8789c9cc91384db2c5cddaf56addd8b23e50c60f1378aba3ed49c97f3c272f4",
+    "run_unknown_controls.py": "a3d247021c874552be4419424e19db2efdb1be92dc0725c6feb875b5c017f567",
+    "run_verify.ps1": "5f0735bf00313672486ec0e2f8df09142d25ed18a8ae49fc28eb78ddf1b0552d",
+    "test_process_lifecycle.py": "96b69f6fb9a8d42a415f50bd76531b1f5d81a0ab4bd8726a8e7a883058468c2e",
+    "tool_config.ps1": "3343458cca904131aa01cd386b7e87b241e32459e8ad6f49019bad6e1aa3b00c",
+    "tool_config.py": "41d3337a18ffbb40fc299bb688ad89a7e7bfbe29e01742a41772f0e77ede9bf8",
+    "verify.py": "7ca2bde7b327fb0ec796735fef8dff8ea31f0ee994c55aadc474a6f33c189b51",
+    "verify_results.py": "8fd998125ef2d99bcbc3acd484cab905795bf6de48012d43c54da06fcc6e5b24",
+    "verify_synthesis.py": "568804f634d8350c847336f17ba649928ee557228926fdf9786b343f05808a49",
+    "tests/test_case_package.py": "569f3edda2a1ecd09088231bf7b6b8b222b77b72322b5a62774f9c0334b72cf9",
+    "tests/test_generator.py": "96d67ffd3c69d9d385b460888b20f096183a64ea35e7ec36c6b96e7bf6cfd2e3",
+    "tests/test_preflight_status.py": "97918dc21c5ce63664a595534db316a70c6181a25694c67b475fabd5467c911d",
+    "tests/test_tool_config.py": "bdd77f3e4b2c166c8466846a6ccb977fb81d84daf824c81b74efc832288b1ff7",
+    "verification/frozen48_content.json": "c3cb3b9cdd7f5441e19555ae6c42a7bf2ebc5b35236b92062cb9c6c5043a8a30",
+    "verification/independent_vectors.py": "eb3b859d01d59211262324315b48370d4b1edc384e06e4550257a42917d88041",
+    "verification/isa_reference.py": "ed3b7832b7ccb96c66b9c861625d1674c289662e30b39f45ba8bd427945a1144",
+    "verification/ISA_v1.5_contract.md": "73d1cb1017d7785841d7cbd6c5e5a208a2589198624f8d0c06ecd95baf05b96d",
+    "verification/test_manifest.json": "77d10c949ef02f8bb3b3c8cc633cdc416c2a9f1c022fe295963ceb64a8e329f7",
+    "verification/__init__.py": "fd006de8f7a9fa891f6069870b7b4e7ae2eeb70cf95765e8df10fc7e3305a400"
+  },
+  "manifest_sha256": "77d10c949ef02f8bb3b3c8cc633cdc416c2a9f1c022fe295963ceb64a8e329f7",
+  "steps": [
+    {
+      "suite": "regression",
+      "exit": 0,
+      "log_sha256": "d59f33c308e9c308af17711054d73ea05cb3d4506998c09dc9239f6df571cca4"
+    },
+    {
+      "suite": "independent",
+      "exit": 0,
+      "log_sha256": "86de7bf7ea5baca7fc5f1a1a64c84f871666b65eb33a7deea77ad5e73e1bd286"
+    },
+    {
+      "suite": "mutations",
+      "exit": 0,
+      "log_sha256": "69cc37a22c063d922ce37411e74411bda12602bf7ed1b0fba6e8a1f77174f518"
+    },
+    {
+      "suite": "unknown",
+      "exit": 0,
+      "log_sha256": "5013b7843a6ece066531be924ba4b15780f4947831c8faf6ec56c70ab3f0dbab"
+    },
+    {
+      "suite": "evidence",
+      "exit": 0,
+      "log_sha256": "47af490959ade94aae732bb17108e8391f09a620d57368173608d54c41435bec"
+    },
+    {
+      "suite": "lifecycle",
+      "exit": 0,
+      "log_sha256": "ce75c6e21d91b3884d57da0c4ba6b9817b39ae9cee5c188dc16e92c59901688a"
+    }
+  ],
+  "scope": "Tooling and native execution checks, not hardware acceptance",
+  "completed_at_utc": "2026-11-02T19:37:42.071972+00:00"
+}

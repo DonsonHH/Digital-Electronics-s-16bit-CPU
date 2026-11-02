@@ -1,31 +1,89 @@
 {
-  "status": "pass",
+  "status": "PASS",
+  "revision": "Pre6-r3",
   "frozen_inputs": 53,
-  "slides": 23,
-  "main": 23,
-  "backup": 0,
-  "native_tables": 17,
-  "editable_charts": 1,
-  "chart_workbooks": 1,
-  "numeric_chart_points": 20,
-  "note_parts": 23,
-  "speech_note_word_alignment": "pass",
-  "source_refs": "pass",
-  "real_fresh_project_suites": [
-    "copy_checksum",
-    "baseline",
-    "system",
-    "all_ops",
-    "memory_copy",
-    "loop"
+  "slides": 24,
+  "notes": 24,
+  "native_tables": 18,
+  "editable_charts": 2,
+  "chart_workbooks": 2,
+  "chart_numeric_points": 24,
+  "embedded_images": 9,
+  "production_RTL_unchanged": 19,
+  "port_mappings": 34,
+  "source_refs": "PASS",
+  "speech_note_word_alignment": "PASS",
+  "native_project_runs": [
+    {
+      "program": "copy_checksum",
+      "kind": "cpu",
+      "mode": "behavioral",
+      "gui_mode": false,
+      "status": "PASS"
+    },
+    {
+      "program": "loop",
+      "kind": "cpu",
+      "mode": "behavioral",
+      "gui_mode": false,
+      "status": "PASS"
+    },
+    {
+      "program": "baseline",
+      "kind": "cpu",
+      "mode": "behavioral",
+      "gui_mode": false,
+      "status": "PASS"
+    },
+    {
+      "program": "memory_copy",
+      "kind": "cpu",
+      "mode": "behavioral",
+      "gui_mode": false,
+      "status": "PASS"
+    },
+    {
+      "program": "copy_checksum",
+      "kind": "cpu",
+      "mode": "full",
+      "gui_mode": false,
+      "status": "PASS"
+    },
+    {
+      "program": "copy_checksum",
+      "kind": "cpu",
+      "mode": "full",
+      "gui_mode": true,
+      "status": "PASS"
+    },
+    {
+      "program": "all_ops",
+      "kind": "cpu",
+      "mode": "behavioral",
+      "gui_mode": false,
+      "status": "PASS"
+    },
+    {
+      "program": "copy_checksum",
+      "kind": "board",
+      "mode": "full",
+      "gui_mode": false,
+      "status": "PASS"
+    }
   ],
-  "packaged_RTL": 15,
-  "package_inputs": 118,
-  "VCD_CSV_agreement": true,
-  "new_CPU_simulation": true,
-  "new_hardware_execution": false,
+  "core_replay_suites": [
+    "regression",
+    "independent",
+    "mutations",
+    "unknown",
+    "evidence",
+    "lifecycle"
+  ],
+  "GUI_CPU_repeat_and_post_synthesis": "PASS",
+  "GUI_board_bitstream": "GENERATED_NOT_PROGRAMMED",
+  "new_physical_board_execution": false,
   "timing_model": {
-    "words": 1302,
+    "words": 1273,
     "speech_budget_seconds": 840,
     "buffer_seconds": 60,
     "human_rehearsal": "not performed",
@@ -33,191 +91,176 @@
       {
         "slide": 1,
         "speaker": "A",
-        "budget_seconds": 20,
-        "words": 31,
-        "speech_seconds_at_105wpm": 17.7,
-        "pointer_pause_budget_at_105wpm": 2.3
+        "budget_seconds": 10,
+        "words": 11,
+        "speech_seconds_at_105wpm": 6.3
       },
       {
         "slide": 2,
         "speaker": "A",
-        "budget_seconds": 50,
-        "words": 59,
-        "speech_seconds_at_105wpm": 33.7,
-        "pointer_pause_budget_at_105wpm": 16.3
+        "budget_seconds": 10,
+        "words": 15,
+        "speech_seconds_at_105wpm": 8.6
       },
       {
         "slide": 3,
         "speaker": "A",
-        "budget_seconds": 40,
-        "words": 60,
-        "speech_seconds_at_105wpm": 34.3,
-        "pointer_pause_budget_at_105wpm": 5.7
+        "budget_seconds": 50,
+        "words": 58,
+        "speech_seconds_at_105wpm": 33.1
       },
       {
         "slide": 4,
         "speaker": "A",
-        "budget_seconds": 45,
+        "budget_seconds": 40,
         "words": 59,
-        "speech_seconds_at_105wpm": 33.7,
-        "pointer_pause_budget_at_105wpm": 11.3
+        "speech_seconds_at_105wpm": 33.7
       },
       {
         "slide": 5,
-        "speaker": "B",
-        "budget_seconds": 30,
-        "words": 39,
-        "speech_seconds_at_105wpm": 22.3,
-        "pointer_pause_budget_at_105wpm": 7.7
+        "speaker": "A",
+        "budget_seconds": 45,
+        "words": 66,
+        "speech_seconds_at_105wpm": 37.7
       },
       {
         "slide": 6,
         "speaker": "B",
-        "budget_seconds": 35,
-        "words": 47,
-        "speech_seconds_at_105wpm": 26.9,
-        "pointer_pause_budget_at_105wpm": 8.1
+        "budget_seconds": 20,
+        "words": 39,
+        "speech_seconds_at_105wpm": 22.3
       },
       {
         "slide": 7,
         "speaker": "B",
-        "budget_seconds": 35,
-        "words": 58,
-        "speech_seconds_at_105wpm": 33.1,
-        "pointer_pause_budget_at_105wpm": 1.9
+        "budget_seconds": 40,
+        "words": 54,
+        "speech_seconds_at_105wpm": 30.9
       },
       {
         "slide": 8,
         "speaker": "B",
         "budget_seconds": 40,
-        "words": 52,
-        "speech_seconds_at_105wpm": 29.7,
-        "pointer_pause_budget_at_105wpm": 10.3
+        "words": 64,
+        "speech_seconds_at_105wpm": 36.6
       },
       {
         "slide": 9,
         "speaker": "B",
-        "budget_seconds": 25,
-        "words": 49,
-        "speech_seconds_at_105wpm": 28.0,
-        "pointer_pause_budget_at_105wpm": -3.0
+        "budget_seconds": 40,
+        "words": 60,
+        "speech_seconds_at_105wpm": 34.3
       },
       {
         "slide": 10,
-        "speaker": "C",
-        "budget_seconds": 50,
-        "words": 61,
-        "speech_seconds_at_105wpm": 34.9,
-        "pointer_pause_budget_at_105wpm": 15.1
+        "speaker": "B",
+        "budget_seconds": 25,
+        "words": 52,
+        "speech_seconds_at_105wpm": 29.7
       },
       {
         "slide": 11,
         "speaker": "C",
-        "budget_seconds": 35,
-        "words": 63,
-        "speech_seconds_at_105wpm": 36.0,
-        "pointer_pause_budget_at_105wpm": -1.0
+        "budget_seconds": 50,
+        "words": 69,
+        "speech_seconds_at_105wpm": 39.4
       },
       {
         "slide": 12,
         "speaker": "C",
-        "budget_seconds": 45,
+        "budget_seconds": 35,
         "words": 58,
-        "speech_seconds_at_105wpm": 33.1,
-        "pointer_pause_budget_at_105wpm": 11.9
+        "speech_seconds_at_105wpm": 33.1
       },
       {
         "slide": 13,
         "speaker": "C",
-        "budget_seconds": 50,
-        "words": 78,
-        "speech_seconds_at_105wpm": 44.6,
-        "pointer_pause_budget_at_105wpm": 5.4
+        "budget_seconds": 45,
+        "words": 61,
+        "speech_seconds_at_105wpm": 34.9
       },
       {
         "slide": 14,
-        "speaker": "D",
-        "budget_seconds": 35,
-        "words": 57,
-        "speech_seconds_at_105wpm": 32.6,
-        "pointer_pause_budget_at_105wpm": 2.4
+        "speaker": "C",
+        "budget_seconds": 50,
+        "words": 70,
+        "speech_seconds_at_105wpm": 40.0
       },
       {
         "slide": 15,
         "speaker": "D",
-        "budget_seconds": 25,
+        "budget_seconds": 30,
         "words": 56,
-        "speech_seconds_at_105wpm": 32.0,
-        "pointer_pause_budget_at_105wpm": -7.0
+        "speech_seconds_at_105wpm": 32.0
       },
       {
         "slide": 16,
         "speaker": "D",
-        "budget_seconds": 35,
-        "words": 53,
-        "speech_seconds_at_105wpm": 30.3,
-        "pointer_pause_budget_at_105wpm": 4.7
+        "budget_seconds": 40,
+        "words": 64,
+        "speech_seconds_at_105wpm": 36.6
       },
       {
         "slide": 17,
         "speaker": "D",
-        "budget_seconds": 35,
-        "words": 59,
-        "speech_seconds_at_105wpm": 33.7,
-        "pointer_pause_budget_at_105wpm": 1.3
+        "budget_seconds": 25,
+        "words": 51,
+        "speech_seconds_at_105wpm": 29.1
       },
       {
         "slide": 18,
         "speaker": "D",
         "budget_seconds": 40,
-        "words": 71,
-        "speech_seconds_at_105wpm": 40.6,
-        "pointer_pause_budget_at_105wpm": -0.6
+        "words": 58,
+        "speech_seconds_at_105wpm": 33.1
       },
       {
         "slide": 19,
-        "speaker": "E",
+        "speaker": "D",
         "budget_seconds": 35,
-        "words": 59,
-        "speech_seconds_at_105wpm": 33.7,
-        "pointer_pause_budget_at_105wpm": 1.3
+        "words": 63,
+        "speech_seconds_at_105wpm": 36.0
       },
       {
         "slide": 20,
         "speaker": "E",
-        "budget_seconds": 65,
-        "words": 84,
-        "speech_seconds_at_105wpm": 48.0,
-        "pointer_pause_budget_at_105wpm": 17.0
+        "budget_seconds": 35,
+        "words": 52,
+        "speech_seconds_at_105wpm": 29.7
       },
       {
         "slide": 21,
         "speaker": "E",
-        "budget_seconds": 25,
-        "words": 52,
-        "speech_seconds_at_105wpm": 29.7,
-        "pointer_pause_budget_at_105wpm": -4.7
+        "budget_seconds": 60,
+        "words": 67,
+        "speech_seconds_at_105wpm": 38.3
       },
       {
         "slide": 22,
         "speaker": "E",
         "budget_seconds": 25,
-        "words": 53,
-        "speech_seconds_at_105wpm": 30.3,
-        "pointer_pause_budget_at_105wpm": -5.3
+        "words": 40,
+        "speech_seconds_at_105wpm": 22.9
       },
       {
         "slide": 23,
         "speaker": "E",
+        "budget_seconds": 30,
+        "words": 56,
+        "speech_seconds_at_105wpm": 32.0
+      },
+      {
+        "slide": 24,
+        "speaker": "E",
         "budget_seconds": 20,
-        "words": 44,
-        "speech_seconds_at_105wpm": 25.1,
-        "pointer_pause_budget_at_105wpm": -5.1
+        "words": 30,
+        "speech_seconds_at_105wpm": 17.1
       }
     ]
   },
+  "course_files_compared": 677,
   "deliverable_sha256": {
-    "Pre6_Group2_CPU_Integration_EN.pptx": "4052ea7d11b2c4180a9f5f2c5ccdcd19fda2350f3ba1c02c463eb97bae280ab8",
-    "Pre6_英文讲稿与答辩.docx": "71b0ad1c1ca31aaa1f7997269763118482d933e1f65b0ad4d04e97cef354174c"
+    "Pre6_Group2_CPU_Integration_EN.pptx": "6bf4f49b08759e5f339cd16183b4e883f8883cc7fac34fd4d31a4e407e7555bf",
+    "Pre6_英文讲稿与答辩.docx": "41bb85318a14c6561d48484ce5987d8bb3603a7fa04f6ef752254d4ffd411a67"
   }
 }

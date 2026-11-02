@@ -1,0 +1,36 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/project/pre6_cpu.gen/sources_1/ip/ees331_vio/sim/ees331_vio.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ees331_vio
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/addsub16_cla.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/alu16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/branch_target16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/flags_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/imm_ext16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/isa_decode.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/operand_forward.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/pc16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/regfile4x16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/sync_memories.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/cpu_system.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/datapath_core.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/ees331_application.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ees331_application
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/rtl/pre6_ees331_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_ees331_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/tb/tb_pre6_board.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_pre6_board
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_v2odi31f/project/pre6_cpu.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

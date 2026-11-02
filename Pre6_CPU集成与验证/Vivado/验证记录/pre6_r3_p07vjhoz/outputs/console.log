@@ -1,0 +1,699 @@
+DESKTOP_JOB_BOUND kill_on_close=1 revision=job1
+DESKTOP_WRAPPER_PID 90000
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Nov  3 03:55:57 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source project_flow.tcl
+# set root [file dirname [file normalize [info script]]]
+# if {[catch {
+# set kind [lindex $argv 0]
+# set mode [lindex $argv 1]
+# if {$kind ni {cpu board}} {error "Project kind must be cpu or board"}
+# if {[version -short] ne "2025.2"} {error "Use the reviewed Vivado 2025.2 toolchain"}
+# set project_dir [file join $root project]
+# if {[file exists $project_dir]} {error "Refusing to overwrite a project"}
+# create_project pre6_cpu $project_dir -part xc7z020clg484-1
+# set_property default_lib xil_defaultlib [current_project]
+# set_property target_language Verilog [current_project]
+# set_property simulator_language Mixed [current_project]
+# set_param general.maxThreads 4
+# set_property AUTO_INCREMENTAL_CHECKPOINT 0 [get_runs synth_1]
+# set rtl {}
+# foreach source [concat [glob [file join $root rtl *.v]] [glob [file join $root rtl *.sv]]] {
+#  set name [file tail $source]
+#  if {$kind eq "cpu" && $name in {ees331_application.sv pre6_ees331_top.sv}} {continue}
+#  if {$kind eq "board" && $name eq "pre6_cpu_top.v"} {continue}
+#  lappend rtl $source
+# }
+# add_files -norecurse $rtl
+# add_files -norecurse [list [file join $root data dut_im.mem] [file join $root data dut_dm.mem]]
+# add_files -fileset sim_1 -norecurse [list [file join $root data selected_events.mem] [file join $root data selected_stores.mem] [file join $root tb selected_expected.svh]]
+# set_property include_dirs [list [file join $root tb]] [get_filesets sim_1]
+# set_property xsim.simulate.runtime 0ns [get_filesets sim_1]
+# if {$kind eq "cpu"} {
+#  set top pre6_cpu_top
+#  set bench tb_pre6_cpu
+#  add_files -fileset sim_1 -norecurse [file join $root tb tb_pre6_cpu.sv]
+#  add_files -fileset constrs_1 -norecurse [file join $root constraints cpu_clock.xdc]
+#  # Ask the native run object for the documented mode property, then verify its command in the log.
+#  # AMD AR59168; this exact option is also checked in the native synth command.
+#  set_property -name {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} -value {-mode out_of_context} -objects [get_runs synth_1]
+# } else {
+#  set top pre6_ees331_top
+#  set bench tb_pre6_board
+#  add_files -fileset sim_1 -norecurse [file join $root tb tb_pre6_board.sv]
+#  add_files -fileset constrs_1 -norecurse [file join $root constraints ees331.xdc]
+#  add_files -fileset constrs_1 -norecurse [file join $root constraints human_io.xdc]
+#  set_property USED_IN_SYNTHESIS false [get_files *human_io.xdc]
+#  create_ip -name vio -vendor xilinx.com -library ip -version 3.0 -module_name ees331_vio
+#  set_property -dict [list CONFIG.C_NUM_PROBE_IN {2} CONFIG.C_PROBE_IN0_WIDTH {256} CONFIG.C_PROBE_IN1_WIDTH {160} CONFIG.C_NUM_PROBE_OUT {1} CONFIG.C_PROBE_OUT0_WIDTH {1} CONFIG.C_PROBE_OUT0_INIT_VAL {0x1} CONFIG.C_EN_PROBE_IN_ACTIVITY {0}] [get_ips ees331_vio]
+#  generate_target all [get_ips ees331_vio]
+# }
+# set_property top $top [get_filesets sources_1]
+# set_property top $bench [get_filesets sim_1]
+# update_compile_order -fileset sources_1
+# update_compile_order -fileset sim_1
+# puts "PRE6_R3_PROJECT_READY kind=$kind top=$top bench=$bench images=dut_im.mem,dut_dm.mem"
+# if {$mode ne "create"} {
+#  launch_simulation -mode behavioral
+#  log_wave -r /*
+#  run all
+#  close_sim
+#  puts "PRE6_R3_BEHAVIORAL_COMPLETE"
+# }
+# if {$mode in {synthesis full}} {
+#  reset_run synth_1
+#  launch_runs synth_1 -jobs 4
+#  wait_on_run synth_1
+#  if {[get_property PROGRESS [get_runs synth_1]] ne "100%"} {error "Synthesis did not complete"}
+#  set fh [open [file join [get_property DIRECTORY [get_runs synth_1]] runme.log] r];set log [read $fh];close $fh
+#  if {[regexp {(?m)^ERROR:|^CRITICAL WARNING:} $log]} {error "Synthesis log contains an error or critical warning"}
+#  open_run synth_1
+#  file mkdir [file join $root reports]
+#  report_utilization -file [file join $root reports synthesis_utilization.rpt]
+#  report_timing_summary -file [file join $root reports synthesis_timing.rpt]
+#  write_checkpoint [file join $root reports synthesized.dcp]
+#  close_design
+#  puts "PRE6_R3_SYNTHESIS_COMPLETE kind=$kind"
+#  if {$kind eq "cpu"} {
+#   launch_simulation -mode post-synthesis -type functional
+#   log_wave -r /*
+#   run all
+#   close_sim
+#   puts "PRE6_R3_POST_SYNTH_COMPLETE"
+#  }
+# }
+# if {$kind eq "board" && $mode eq "full"} {
+#  launch_runs impl_1 -to_step write_bitstream -jobs 4
+#  wait_on_run impl_1
+#  if {[get_property PROGRESS [get_runs impl_1]] ne "100%"} {error "Implementation/bitstream did not complete"}
+#  open_run impl_1
+#  report_timing_summary -delay_type min_max -report_unconstrained -file [file join $root reports routed_timing.rpt]
+#  report_utilization -file [file join $root reports routed_utilization.rpt]
+#  report_drc -file [file join $root reports drc.rpt]
+#  set setup [get_property SLACK [get_timing_paths -delay_type max -max_paths 1]]
+#  set hold [get_property SLACK [get_timing_paths -delay_type min -max_paths 1]]
+#  if {$setup<0 || $hold<0} {error "Timing failed setup=$setup hold=$hold"}
+#  puts "PRE6_R3_IMPLEMENTATION_COMPLETE setup=$setup hold=$hold"
+# }
+# close_project
+# puts "PRE6_R3_FLOW_COMPLETE kind=$kind mode=$mode"
+# } message options]} {
+#  puts "PRE6_R3_FLOW_FAILED=$message"
+#  puts [dict get $options -errorinfo]
+#  catch {close_project}
+#  exit 1
+# }
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 536.414 ; gain = 222.953
+PRE6_R3_PROJECT_READY kind=cpu top=pre6_cpu_top bench=tb_pre6_cpu images=dut_im.mem,dut_dm.mem
+Command: launch_simulation  -mode behavioral
+INFO: [Vivado 12-25911] Executing simulation for 'XSim' simulator
+INFO: [Vivado 12-28535] Process started - Tue Nov  3 03:56:09 2026
+
+INFO: [Vivado 12-12493] Simulation top is 'tb_pre6_cpu'
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/AMDDesignTools/2025.2/Vivado/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_pre6_cpu' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim/dut_im.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim/dut_dm.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim/selected_stores.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim/selected_stores.mem'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -prj tb_pre6_cpu_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/addsub16_cla.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/alu16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/branch_target16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/flags_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/imm_ext16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module imm_ext16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/isa_decode.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module isa_decode
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/operand_forward.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module operand_forward
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/pc16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/pre6_cpu_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_cpu_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/regfile4x16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regfile4x16
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/sync_memories.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module pre4_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/cpu_system.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_system
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/datapath_core.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/tb/tb_pre6_cpu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_checker
+INFO: [VRFC 10-311] analyzing module tb_pre6_cpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 4 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_pre6_cpu_behav xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 4 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_pre6_cpu_behav xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log 
+Using 4 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.pc16
+Compiling module xil_defaultlib.isa_decode
+Compiling module xil_defaultlib.imm_ext16
+Compiling module xil_defaultlib.regfile4x16
+Compiling module xil_defaultlib.flags_reg
+Compiling module xil_defaultlib.operand_forward
+Compiling module xil_defaultlib.addsub16_cla
+Compiling module xil_defaultlib.alu16
+Compiling module xil_defaultlib.branch_target16
+Compiling module xil_defaultlib.datapath_core
+Compiling module xil_defaultlib.instruction_memory(INIT_FILE="du...
+Compiling module xil_defaultlib.data_memory(INIT_FILE="dut_dm.me...
+Compiling module xil_defaultlib.cpu_system(IM_INIT_FILE="dut_im....
+Compiling module xil_defaultlib.pre6_cpu_top
+Compiling module xil_defaultlib.pre6_checker(LABEL="copy_checksu...
+Compiling module xil_defaultlib.tb_pre6_cpu
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_pre6_cpu_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_pre6_cpu_behav -key {Behavioral:sim_1:Functional:tb_pre6_cpu} -tclbatch {tb_pre6_cpu.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_pre6_cpu.tcl
+## set curr_wave [current_wave_config]
+## if { [string length $curr_wave] == 0 } {
+##   if { [llength [get_objects]] > 0} {
+##     add_wave /
+##     set_property needs_save false [current_wave_config]
+##   } else {
+##      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+##   }
+## }
+## run 0ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_pre6_cpu_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 0ns
+launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:00:07 . Memory (MB): peak = 555.414 ; gain = 19.000
+SYSTEM_CASE_PASS name=copy_checksum epoch=0 cycles=55 wb=35 stores=8 stalls=16 redirects=0 stop_pc=0022 reason=1 rf=0020000012320000
+PRE6_CPU_PASS program=copy_checksum cycles=55 completed=35 stalls=16 redirects=0 stores=8
+$finish called at time : 716 ns : File "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/tb/tb_pre6_cpu.sv" Line 96
+INFO: [Simtcl 6-16] Simulation closed
+PRE6_R3_BEHAVIORAL_COMPLETE
+[Tue Nov  3 03:56:16 2026] Launched synth_1...
+Run output will be captured here: C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.runs/synth_1/runme.log
+[Tue Nov  3 03:56:16 2026] Waiting for synth_1 to finish...
+
+
+*** Running vivado
+    with args -log pre6_cpu_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source pre6_cpu_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Nov  3 03:56:18 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source pre6_cpu_top.tcl -notrace
+Command: synth_design -top pre6_cpu_top -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 96932
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1311.219 ; gain = 540.453
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'pre6_cpu_top' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/pre6_cpu_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/cpu_system.sv:4]
+	Parameter IM_INIT_FILE bound to: dut_im.mem - type: string 
+	Parameter DM_INIT_FILE bound to: dut_dm.mem - type: string 
+INFO: [Synth 8-6157] synthesizing module 'datapath_core' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'pc16' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/pc16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc16' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/pc16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'isa_decode' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/isa_decode.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'isa_decode' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/isa_decode.v:4]
+INFO: [Synth 8-6157] synthesizing module 'imm_ext16' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'imm_ext16' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/imm_ext16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regfile4x16' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'regfile4x16' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/regfile4x16.v:3]
+INFO: [Synth 8-6157] synthesizing module 'flags_reg' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/flags_reg.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'flags_reg' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/flags_reg.v:4]
+INFO: [Synth 8-6157] synthesizing module 'operand_forward' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/operand_forward.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'operand_forward' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/operand_forward.v:6]
+INFO: [Synth 8-6157] synthesizing module 'alu16' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'addsub16_cla' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'addsub16_cla' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/addsub16_cla.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'alu16' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/alu16.v:4]
+INFO: [Synth 8-6157] synthesizing module 'branch_target16' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'branch_target16' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/branch_target16.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'datapath_core' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/datapath_core.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'instruction_memory' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/sync_memories.v:5]
+	Parameter INIT_FILE bound to: dut_im.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'dut_im.mem' is read successfully [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/sync_memories.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'instruction_memory' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/sync_memories.v:5]
+INFO: [Synth 8-6157] synthesizing module 'data_memory' [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/sync_memories.v:12]
+	Parameter INIT_FILE bound to: dut_dm.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'dut_dm.mem' is read successfully [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/sync_memories.v:15]
+INFO: [Synth 8-6155] done synthesizing module 'data_memory' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/sync_memories.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/cpu_system.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'pre6_cpu_top' (0#1) [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/rtl/pre6_cpu_top.v:3]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1437.105 ; gain = 666.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1437.105 ; gain = 666.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1437.105 ; gain = 666.340
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1437.105 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/constraints/cpu_clock.xdc]
+Finished Parsing XDC File [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/constraints/cpu_clock.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1517.195 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.025 . Memory (MB): peak = 1517.195 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1517.195 ; gain = 746.430
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1517.195 ; gain = 746.430
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1517.195 ; gain = 746.430
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'mode_reg' in module 'datapath_core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                     RUN |                              100 |                              000
+             DRAIN_FAULT |                              010 |                              010
+                 FAULTED |                              000 |                              100
+              DRAIN_HALT |                              011 |                              001
+                  HALTED |                              001 |                              011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'mode_reg' using encoding 'sequential' in module 'datapath_core'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1517.195 ; gain = 746.430
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   17 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	               16 Bit    Registers := 24    
+	               12 Bit    Registers := 1     
+	                3 Bit    Registers := 5     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 45    
++---RAMs : 
+	               4K Bit	(256 X 16 bit)          RAMs := 1     
++---ROMs : 
+	                    ROMs := 1     
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 14    
+	   4 Input   16 Bit        Muxes := 2     
+	   3 Input   16 Bit        Muxes := 2     
+	  15 Input    3 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 12    
+	   3 Input    3 Bit        Muxes := 1     
+	  15 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 5     
+	   3 Input    2 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 20    
+	  15 Input    1 Bit        Muxes := 12    
+	   5 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1520.332 ; gain = 749.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name  | RTL Object                   | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|pre6_cpu_top | u_cpu_system_inst/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1643.531 ; gain = 872.766
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1738.719 ; gain = 967.953
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name  | RTL Object                   | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|pre6_cpu_top | u_cpu_system_inst/dm/mem_reg | 256 x 16(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------+------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance u_cpu_system_inst/im/dout_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance u_cpu_system_inst/dm/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1759.055 ; gain = 988.289
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1951.945 ; gain = 1181.180
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1951.945 ; gain = 1181.180
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1951.945 ; gain = 1181.180
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1951.945 ; gain = 1181.180
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1952.922 ; gain = 1182.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1952.922 ; gain = 1182.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |    15|
+|2     |LUT1     |     1|
+|3     |LUT2     |    30|
+|4     |LUT3     |    40|
+|5     |LUT4     |    67|
+|6     |LUT5     |    59|
+|7     |LUT6     |   135|
+|8     |RAMB18E1 |     2|
+|10    |FDRE     |   364|
+|11    |FDSE     |     1|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1952.922 ; gain = 1182.156
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:22 . Memory (MB): peak = 1952.922 ; gain = 1102.066
+Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1952.922 ; gain = 1182.156
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 1962.062 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 17 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1965.848 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: ad324dfb
+INFO: [Common 17-83] Releasing license: Synthesis
+48 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:29 . Memory (MB): peak = 1965.848 ; gain = 1426.602
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1965.848 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.runs/synth_1/pre6_cpu_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file pre6_cpu_top_utilization_synth.rpt -pb pre6_cpu_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 03:56:54 2026...
+[Tue Nov  3 03:56:57 2026] synth_1 finished
+wait_on_runs: Time (s): cpu = 00:00:00 ; elapsed = 00:00:40 . Memory (MB): peak = 555.414 ; gain = 0.000
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7z020clg484-1
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-5699] Read binary netlist with skipMacroContent - 1
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 794.383 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 17 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2025.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/constraints/cpu_clock.xdc]
+Finished Parsing XDC File [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/constraints/cpu_clock.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 931.910 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 4 CPUs
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "clk" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1491.934 ; gain = 0.074
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/reports/synthesized.dcp' has been generated.
+PRE6_R3_SYNTHESIS_COMPLETE kind=cpu
+Command: launch_simulation  -mode post-synthesis -type functional
+INFO: [Vivado 12-25911] Executing simulation for 'XSim' simulator
+INFO: [Vivado 12-28535] Process started - Tue Nov  3 03:57:05 2026
+
+INFO: [Vivado 12-12493] Simulation top is 'tb_pre6_cpu'
+INFO: [Vivado 12-5682] Launching post-synthesis functional simulation in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/AMDDesignTools/2025.2/Vivado/tps/boost_1_72_0'
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7z020clg484-1
+INFO: [Project 1-5699] Read binary netlist with skipMacroContent - 1
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1491.934 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 17 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2025.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/constraints/cpu_clock.xdc]
+Finished Parsing XDC File [C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/constraints/cpu_clock.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1491.934 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [SIM-utils-24] Writing simulation netlist file for design 'synth_1'...
+INFO: [SIM-utils-25] write_verilog -mode funcsim -nolib -force -file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/tb_pre6_cpu_func_synth.v"
+INFO: [SIM-utils-36] Netlist generated:C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/tb_pre6_cpu_func_synth.v
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_pre6_cpu' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/dut_im.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/dut_dm.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/selected_stores.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/selected_events.mem'
+INFO: [SIM-utils-43] Exported 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/selected_stores.mem'
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim'
+"xvlog --incr --relax -L uvm -prj tb_pre6_cpu_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim/tb_pre6_cpu_func_synth.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module addsub16_cla
+INFO: [VRFC 10-311] analyzing module alu16
+INFO: [VRFC 10-311] analyzing module branch_target16
+INFO: [VRFC 10-311] analyzing module cpu_system
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module datapath_core
+INFO: [VRFC 10-311] analyzing module flags_reg
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module pc16
+INFO: [VRFC 10-311] analyzing module pre6_cpu_top
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/tb/tb_pre6_cpu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pre6_checker
+INFO: [VRFC 10-311] analyzing module tb_pre6_cpu
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim'
+"xelab --incr --debug typical --relax --mt 4 -L xil_defaultlib -L uvm -L unisims_ver -L secureip --snapshot tb_pre6_cpu_func_synth xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 4 -L xil_defaultlib -L uvm -L unisims_ver -L secureip --snapshot tb_pre6_cpu_func_synth xil_defaultlib.tb_pre6_cpu xil_defaultlib.glbl -log elaborate.log 
+Using 4 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.LUT6
+Compiling module unisims_ver.LUT5
+Compiling module unisims_ver.x_lut2_mux4
+Compiling module unisims_ver.LUT2
+Compiling module unisims_ver.LUT4
+Compiling module unisims_ver.x_lut3_mux8
+Compiling module unisims_ver.LUT3
+Compiling module unisims_ver.FDRE_default
+Compiling module unisims_ver.FDSE_default
+Compiling module unisims_ver.CARRY4
+Compiling module xil_defaultlib.addsub16_cla
+Compiling module xil_defaultlib.alu16
+Compiling module xil_defaultlib.flags_reg
+Compiling module xil_defaultlib.pc16
+Compiling module unisims_ver.x_lut1_mux2
+Compiling module unisims_ver.LUT1(INIT=2'b01)
+Compiling module xil_defaultlib.branch_target16
+Compiling module xil_defaultlib.datapath_core
+Compiling module unisims_ver.RB18_INTERNAL_VLOG(RDADDR_COLLIS...
+Compiling module unisims_ver.RAMB18E1(INIT_02=256'b0101101001...
+Compiling module xil_defaultlib.data_memory
+Compiling module unisims_ver.RB18_INTERNAL_VLOG(RDADDR_COLLIS...
+Compiling module unisims_ver.RAMB18E1(INIT_00=256'b0100100110...
+Compiling module xil_defaultlib.instruction_memory
+Compiling module xil_defaultlib.cpu_system
+Compiling module xil_defaultlib.pre6_cpu_top
+Compiling module xil_defaultlib.pre6_checker(LABEL="copy_checksu...
+Compiling module xil_defaultlib.tb_pre6_cpu
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_pre6_cpu_func_synth
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/project/pre6_cpu.sim/sim_1/synth/func/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_pre6_cpu_func_synth -key {Post-Synthesis:sim_1:Functional:tb_pre6_cpu} -tclbatch {tb_pre6_cpu.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_pre6_cpu.tcl
+## set curr_wave [current_wave_config]
+## if { [string length $curr_wave] == 0 } {
+##   if { [llength [get_objects]] > 0} {
+##     add_wave /
+##     set_property needs_save false [current_wave_config]
+##   } else {
+##      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+##   }
+## }
+## run 0ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_pre6_cpu_func_synth' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 0ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1491.934 ; gain = 0.000
+SYSTEM_CASE_PASS name=copy_checksum epoch=0 cycles=55 wb=35 stores=8 stalls=16 redirects=0 stop_pc=0022 reason=1 rf=0020000012320000
+PRE6_CPU_PASS program=copy_checksum cycles=55 completed=35 stalls=16 redirects=0 stores=8
+$finish called at time : 716 ns : File "C:/Users/Donson/AppData/Local/Temp/pre6_r3_p07vjhoz/tb/tb_pre6_cpu.sv" Line 96
+INFO: [Simtcl 6-16] Simulation closed
+PRE6_R3_POST_SYNTH_COMPLETE
+PRE6_R3_FLOW_COMPLETE kind=cpu mode=full
+# exit 0
+INFO: [Common 17-206] Exiting Vivado at Tue Nov  3 03:57:13 2026...
+DESKTOP_EXIT 0

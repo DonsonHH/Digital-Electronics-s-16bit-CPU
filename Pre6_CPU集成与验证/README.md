@@ -1,58 +1,69 @@
 # Pre6 CPU集成与验证
 
-日常使用目录：`D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/Pre6_CPU集成与验证`。相邻的`CPU核心设计`已同步当前AC1架构版r4正式文档、源码、工具与证据。Git仓库保留制作与版本管理源。
+常用目录：`D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/Pre6_CPU集成与验证`。
 
-打开 [英文PPT](Pre6_Group2_CPU_Integration_EN.pptx) 和 [五人英文讲稿与答辩](Pre6_英文讲稿与答辩.docx)。PPT为23页连续正文；讲稿包含逐页英文、中文指图提示、交接句、答辩和Vivado操作步骤。
+主要材料为[英文PPT](Pre6_Group2_CPU_Integration_EN.pptx)和[五人英文讲稿与答辩](Pre6_英文讲稿与答辩.docx)。本版为24页连续正文，含独立目录及1.1、3.3.1等层级编号；约1,273个英文词，讲解预算14分钟，另留1分钟换页和指图。中文架构原图用于定位，正文和口头讲解为英文。
 
-| 老师要求 | 正文页 |
-|---|---|
-| ISA设计 | 2–3：完整16项Opcode、字段、真实源、立即数及标志语义 |
-| 设计流程 | 4：ISA、资源、时序、控制、集成、验证之间的依赖 |
-| CPU结构与接口 | 5–15：完整架构、datapath、CU、系统、板级、接口及执行实例 |
-| 功能验证 | 16–18：验证链、实际XSim波形、实板五程序及S1 |
-| 性能验证 | 19–22：计数口径、周期构成、CPI、布线结果、两项候选 |
+| 章节与老师要求 | PPT页码 | 主要内容 |
+|---|---|---|
+| 开场与目录 | 1–2 | 项目身份与六章主线 |
+| 1 ISA设计 | 3–4 | 官网完整编码表、真实源、立即数和Z/C/V |
+| 2 设计流程 | 5 | 约束→决策→架构后果；实际设计顺序 |
+| 3 CPU结构、接口与执行 | 6–16 | 中文整体图/DP、系统、板级、CU、冒险、分支与停止 |
+| 4 功能验证 | 17–19 | 模型→预期→XSim→EES-331观测 |
+| 5 性能验证与权衡 | 20–23 | 周期与CPI、布线结果、离线优化候选 |
+| 6 交付 | 24 | 对应老师要求归纳成果 |
 
 | 讲者 | 页码 | 负责内容 | 预算 |
 |---|---|---|---|
-| A | 1–4 | ISA、设计流程 | 2:35 |
-| B | 5–9 | 完整架构、datapath、系统接口 | 2:45 |
-| C | 10–13 | 完整CU、模式、冒险、load-to-store | 3:00 |
-| D | 14–18 | 控制流、功能验证、实板结果 | 2:50 |
-| E | 19–23 | 性能、候选、交付 | 2:50 |
+| A | 1–5 | ISA与设计流程 | 2:35 |
+| B | 6–10 | 整体架构、DP、系统和板级接口 | 2:45 |
+| C | 11–14 | 控制协作、模式、依赖与load-to-store | 3:00 |
+| D | 15–19 | 分支、精确停止、仿真与实板证据 | 2:50 |
+| E | 20–24 | 性能、工程权衡与交付 | 2:50 |
 
-英文正文约1,302词，预算14分钟，另留1分钟交接和指图停顿。预算用于五人实际排练；完整编码表与连接图供讲解时定位，不逐格朗读。
+## 直接打开Vivado
 
-## 直接自行验证
+在D盘本目录双击：
 
-1. 双击 [Vivado工程](Vivado/工程/project/pre6_cpu.xpr)。默认仿真程序为`copy_checksum`，simulation top为`tb_selected_program`，design top为`cpu_system`。
-2. 在Vivado运行 **Run Simulation → Run Behavioral Simulation → Run All**。TB自动检查每次WB、store、标志、停止状态及计数；正常结束输出`BOARD_SELECTED_PASS`和55周期。
-3. 双击 [运行全部验证](Vivado/Run_Pre6_Verification.cmd)，或在本目录运行：
+- [Open_CPU_Project.cmd](Vivado/Open_CPU_Project.cmd)：CPU行为仿真、RTL结构、OOC综合和综合后功能仿真。
+- [Open_EES331_Project.cmd](Vivado/Open_EES331_Project.cmd)：带VIO和真实引脚约束的板级综合、布局布线和bitstream生成。
+
+入口自动建立`C:/Users/Donson/Documents/CPU_Pre6/CPU`或`EES331`工作工程，处理Vivado GUI和IP生成对路径的要求，无需手动搬目录。D盘保留源包与测试记录。工作目录从源码创建，避免携带旧缓存的只读属性；综合、仿真登记同一组MEM文件。已有可用工作工程与用户修改会保留；首次创建失败后可直接重试。
+
+默认程序`copy_checksum`；CPU design top为`pre6_cpu_top`，simulation top为`tb_pre6_cpu`。**Run Synthesis**应无错误完成；**Behavioral Simulation**和**Post-Synthesis Functional Simulation**各自检查55周期、35条完成指令、16次hold、0次redirect、8次store。详见[Vivado操作说明](Vivado/README.md)。
+
+在本目录PowerShell复跑：
 
 ```powershell
 .\Vivado\run_tests.ps1 -Program all
+.\Vivado\run_tests.ps1 -Program baseline
+.\Vivado\run_tests.ps1 -Program copy_checksum -Mode full
 ```
 
-依次运行`all_ops`、`baseline`、`loop`、`memory_copy`、`copy_checksum`和`system`。也可单选程序。每次新建记录，不覆盖已有记录；`最近运行.json`指向本次结果，失败会保留`FAIL`。
+五程序周期为25/17/30/15/55。`full`还检查真实OOC综合与综合网表功能；每次在独立英文工作目录运行，原始输入和保留输出写入`Vivado/验证记录`并逐项绑定哈希。完整九套回归和独立/负向检查继续使用相邻[CPU核心设计](../CPU核心设计/README.md)入口。
 
-[Vivado说明](Vivado/README.md)介绍测试入口、文件、看波形和更换工具路径。本次已实际完成六套工程验证，并在D盘重开课堂工程、重新仿真55周期；D盘PowerShell入口也已实际复跑通过。运行记录保留原始输入、日志、CSV、WDB/VCD和XPR。`工程`是便于GUI使用的工作副本，原始记录另存。
+本轮已重跑五程序、CPU综合前后检查、板级完整构建；还通过原生Vivado GUI模式重置后重复仿真/综合及板级实现。当前板级GUI构建setup/hold裕量1.530/0.073ns；bitstream已生成，本轮未连接或下载板卡。保存的工具原始记录见[运行核对索引](配套源文件/核对/运行核对.json)。
 
-## 设计和证据口径
+## 技术和证据口径
 
-基线为`9475f210c7e567cb41f3856ff3bcebc6611ac991` / `cpu-v1.6-ac1-ees331-verified`：CPU v1.6、ISA v1.5、默认AC1、EES-331（xc7z020clg484-1）。CPU的ISA、生产RTL、流水时序和验收标签保持不变。
+冻结基线：`9475f210c7e567cb41f3856ff3bcebc6611ac991` / `cpu-v1.6-ac1-ees331-verified`，CPU v1.6、ISA v1.5、默认AC1、EES-331（xc7z020clg484-1）。生产RTL、ISA、流水时序及验收标签保持不变。源包新增的两份配置封装只直通原有接口并统一镜像文件名。
 
-- 第13–15页的8/9/6周期执行表来自已绑定的独立仿真CSV。第17页展示本次baseline的C6–C13采样窗口，CSV与VCD逐边沿对照；C9同时有前端停顿和较老store。
-- 第18页为 **Decoded archived VIO snapshots**，RF读数是写回影子。S1实板结论限于CPU停止后的复位重启；本轮没有重新连接、烧录板卡。
-- 第19–20页的周期来自既有实板计数；`C=N+4+S+2R`用于这五个正常HALT程序，N含HALT。时间换算采用设计100MHz；没有独立频率或墙钟测量。
-- 第21页是含VIO、存储器和观测逻辑的完整board top布线结果。第22页的两项候选保持离线身份，默认AC1为实板验收版本。
+- 第6–11页复用核心规范的中文原图；第3页采用Lab网站ISA原SVG。SVG、PNG及[来源记录](配套源文件/图源/r3/图源来源.json)随源包保存。
+- 第14–16页来自真实独立仿真记录。故障例C6中老ADD同拍完成WB、M级LDR越界、年轻JUMP取消，C7进入FAULTED。
+- 第18页波形来自本轮baseline实际XSim CSV/VCD逐边沿核对。C9同时发生前端hold和老store；波形不是Vivado界面截图。
+- 第19页为**Decoded archived VIO snapshots**。RF为写回影子；实板S1结论限于HALT后的复位重启。平台照片注明手册来源，测试依据为归档VIO。模型代码、镜像、预期值及实际结果均有来源绑定。
+- 第20–21页的周期来自已归档实板计数。`C=N+4+S+2R`适用于这五个正常HALT程序，N含HALT；时间换算采用100MHz设计时钟。
+- 第22页资源与时序来自原验收版本的五份完整board top布线报告，含存储器、VIO及观测逻辑；与本轮新GUI构建分别记载。第23页两项候选保持离线实验身份。
 
-逐页来源、预期、实际与SHA256见 [来源索引](配套源文件/source_map.json)，每页备注也保留同一来源。冻结输入按Git原字节核对；新运行的输入和保留输出逐项核哈希。
+逐页的“结论→来源→预期→实际→可支持范围”见[来源索引](配套源文件/source_map.json)，同一来源及SHA256保留在PPT备注中。
 
-## 制作源
+## 当前制作入口
 
-- [narrative_v2.py](配套源文件/narrative_v2.py)：23页英文正文、中文提示、分工与预算；Word和PPT备注同源。
-- [collect_v2.py](配套源文件/collect_v2.py)：核对冻结基线与实际运行，生成数据、讲稿源和来源表。
-- [diagram_layouts.mjs](配套源文件/diagram_layouts.mjs)：六张投影版完整图，同源生成可编辑SVG与原生PPT几何；[图源](配套源文件/图源)还保留四张规范原图及英文版。
-- [build_slides_v2.mjs](配套源文件/build_slides_v2.mjs)、[build_script_word.py](配套源文件/build_script_word.py)：生成正式PPT和Word。图表含内嵌XLSX；波形保留WaveJSON、SVG和离线编辑HTML。
-- [check_delivery.py](配套源文件/check_delivery.py)：核查23页/备注/讲稿、原生表格和图表、非空媒体、工程输入、真实运行与来源哈希。
+1. [collect_v3.py](配套源文件/collect_v3.py)：冻结输入、新XSim、ISA预期及图源核对；生成统一内容和证据索引。
+2. [narrative_v3.py](配套源文件/narrative_v3.py)：24页英文正文、中文指图提示、章节和时间预算。
+3. [build_slides_v3.mjs](配套源文件/build_slides_v3.mjs)和[build_script_word_v3.py](配套源文件/build_script_word_v3.py)：生成PPT和Word；表格、性能图保持原生可编辑，完整中文连接图保留SVG源。
+4. [check_delivery.py](配套源文件/check_delivery.py)：检查最终文件、页码/备注/讲稿、媒体、图表工作簿、来源、工程输入和原始运行证据。
+5. [sync_course.py](配套源文件/sync_course.py)：带备份和逐文件哈希核对的课程目录同步。
 
-输出先在临时目录生成，经过原生PowerPoint和Word渲染后发布。完整核心规范继续由相邻`CPU核心设计`维护。
+旧版制作脚本保留其版本名，仅供历史追溯，当前材料采用上述v3入口。主要交付仅PPT和讲稿；渲染及运行记录放在配套源中。CPU核心规范继续由相邻`CPU核心设计`维护。
