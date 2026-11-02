@@ -1,0 +1,9 @@
+Time resolution is 1 ps
+INFO: HDL object /tb_selected_program/gold is an unpacked array. VCD does not support unpacked array type according to IEEE LRM 1800-2009, section21.7.5.
+INFO: HDL object /tb_selected_program/store_gold is an unpacked array. VCD does not support unpacked array type according to IEEE LRM 1800-2009, section21.7.5.
+INFO: HDL object /tb_selected_program/dut/system_i/rf_shadow is an unpacked array. VCD does not support unpacked array type according to IEEE LRM 1800-2009, section21.7.5.
+INFO: HDL object /tb_selected_program/dut/system_i/core/u_rf/regs is an unpacked array. VCD does not support unpacked array type according to IEEE LRM 1800-2009, section21.7.5.
+INFO: HDL object /tb_selected_program/dut/system_i/im/mem is an unpacked array. VCD does not support unpacked array type according to IEEE LRM 1800-2009, section21.7.5.
+INFO: HDL object /tb_selected_program/dut/system_i/dm/mem is an unpacked array. VCD does not support unpacked array type according to IEEE LRM 1800-2009, section21.7.5.
+BOARD_SELECTED_PASS program=memory_copy cycles=15 completed=7 stalls=2 redirects=1 stores=1
+$finish called at time : 306 ns : File "C:/Users/Donson/AppData/Local/Temp/pre6_xsim_fen4e4b_/tb/tb_selected_program.sv" Line 41

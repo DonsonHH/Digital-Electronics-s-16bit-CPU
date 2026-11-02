@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 ~$*
+.Xil/
+Vivado/工程/**/xsim.dir/

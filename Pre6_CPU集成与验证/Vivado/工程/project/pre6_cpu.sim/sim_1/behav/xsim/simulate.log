@@ -1,0 +1,3 @@
+Time resolution is 1 ps
+BOARD_SELECTED_PASS program=copy_checksum cycles=55 completed=35 stalls=16 redirects=0 stores=8
+$finish called at time : 706 ns : File "D:/OneDrive - University of Glasgow/同步文件夹/大三上/Courses/数电/Pre6_CPU集成与验证/Vivado/工程/tb/tb_selected_program.sv" Line 41

@@ -1,246 +1,320 @@
 {
+  "revision": "Pre6-r2",
   "main": [
     {
-      "title": "Project Goal and Final Baseline",
+      "title": "CPU Integration and Verification",
       "speaker": "A",
       "seconds": 20,
-      "goal": "Identify the completed CPU and the frozen delivery baseline.",
+      "section": "Project",
+      "goal": "Identify the integrated design and the five parts of this presentation.",
+      "speech": "Good morning. Our project is a sixteen-bit, five-stage CPU with four writable registers. We integrated it on EES-331. We will explain the ISA, design process, complete architecture, functional verification, and performance.",
+      "cue": "开场直接对应老师要求。版本为CPU v1.6、ISA v1.5、默认AC1。",
       "refs": [
         "SPEC",
         "BOARD"
-      ],
-      "speech": "Good morning. We present our sixteen-bit, five-stage CPU on EES-331. The accepted AC1 baseline connects a defined instruction set, integrated architecture, functional evidence, and physical cycle counters.",
-      "cue": "先说明最终版本与本次范围。这里的实板结论是五个正常程序和停止后的S1重启。"
+      ]
     },
     {
-      "title": "ISA Design",
+      "title": "Complete ISA Encoding",
       "speaker": "A",
-      "seconds": 65,
-      "goal": "Explain how instruction semantics determine datapath resources and writes.",
+      "seconds": 50,
+      "section": "ISA design",
+      "goal": "Present every opcode and the complete instruction field layout.",
+      "speech": "Every instruction occupies sixteen bits. The fields are a four-bit opcode, two register fields, and an eight-bit immediate or displacement. This table contains the entire encoding, including the two reserved opcodes. AND and OR use two and three; loads and stores use eight and nine. The field roles depend on the instruction. Register zero is an ordinary writable register.",
+      "cue": "展示完整16项编码，讲分组，不逐格念。Rd字段在CMP/STR等形式中的角色要分清。",
       "refs": [
-        "SPEC",
-        "ISA"
-      ],
-      "speech": "The instruction word has four opcode bits, two destination bits, two source bits, and eight immediate bits. All four registers, including R zero, are writable. Arithmetic register instructions read both registers. An immediate MOV needs no old register value. Loads read a base register, while stores read a base and a separate data register. Constants use zero extension. Memory displacements and conditional branches use sign extension. ADD and SUB update carry and overflow. CMP updates only Z. These rules determine the operand paths and the write permissions used by the hardware.",
-      "cue": "指向4+2+2+8字段，再讲真实源和标志更新。C为加法进位或减法无借位；完整编码在备用13页。"
+        "ISA",
+        "SPEC"
+      ]
     },
     {
-      "title": "From ISA to a Verified CPU",
+      "title": "Operands, Immediates and State Updates",
       "speaker": "A",
-      "seconds": 70,
-      "goal": "Explain design dependencies and the actual iterative course workflow.",
+      "seconds": 40,
+      "section": "ISA design",
+      "goal": "Explain source roles and all architectural write permissions.",
+      "speech": "These rules determine the datapath. Register arithmetic reads both fields, while immediate MOV needs no register source. A store reads its base from Rs and its data from Rd. Constants and absolute jumps use zero extension; memory displacements and conditional branches use sign extension. ADD and SUB update carry and overflow. CMP updates only Z. Other operations preserve those flags.",
+      "cue": "真实源、写入目标和Z/C/V规则；C为进位或减法无借位。下一页将这些规则连接到设计流程。",
       "refs": [
-        "SPEC",
-        "FLOW"
-      ],
-      "speech": "We first fixed observable instruction behavior and the board constraints. Next, we assigned operations to resources and defined the memory timing. We then specified the four pipeline boundaries, including data, control intentions, and valid tags. Decode, forwarding, interlock, cancellation, and stopping rules followed from those contracts. Finally, we connected the system and checked it through simulation, implementation, and board observation. The course development was iterative: basic modules came first, followed by datapath integration and control. We revised the interfaces as the design matured. I will now hand over to B to explain how these decisions form the integrated system.",
-      "cue": "强调这是设计依赖顺序，实际课程按Pre2模块、Pre3模块/ISA、Pre4数据通路、Pre5控制迭代推进。"
+        "ISA",
+        "RTL"
+      ]
     },
     {
-      "title": "System Integration and Interfaces",
+      "title": "Design Process and Dependencies",
+      "speaker": "A",
+      "seconds": 45,
+      "section": "Design process",
+      "goal": "Connect the engineering decisions in their dependency order.",
+      "speech": "We defined instruction behavior and constraints, then resources and interfaces. Memory timing and pipeline boundaries determined the control and hazard rules. Integration followed those contracts. Simulation checked behavior, implementation checked FPGA mapping, and board observations checked selected programs. Development was iterative across Pre2 to Pre5; this diagram shows the dependencies between decisions. B will now present the connected hardware.",
+      "cue": "先指设计依赖链，再讲课程实际迭代过程；末句交接B。",
+      "refs": [
+        "FLOW",
+        "SPEC"
+      ]
+    },
+    {
+      "title": "Complete CPU Architecture",
       "speaker": "B",
-      "seconds": 80,
-      "goal": "Distinguish core ports, system memory, and physical board interfaces.",
+      "seconds": 30,
+      "section": "CPU structure",
+      "goal": "Show the full control, datapath, memories and feedback connections.",
+      "speech": "This complete architecture places control above the five datapath stages. It includes mode, decode, stage responsibilities, and cross-stage arbitration. The lower paths carry data and feedback. IM and DM sit outside the core. Local CU names identify implementation responsibilities.",
+      "cue": "这是完整总图；沿上下层指出CU、DP、外部IM/DM。细节在后续页放大，不逐线念。",
       "refs": [
-        "SPEC",
-        "RTL",
-        "SYSTEM"
-      ],
-      "speech": "The execution core connects to separate instruction and data memories. Each memory contains two hundred and fifty-six sixteen-bit words and uses synchronous reads. The core supplies sixteen-bit word addresses. It checks the complete data address before selecting a physical memory entry. The original execution interface carries clock, reset, memory addresses, data, enables, and stopped status. At board level, the design adds the clock buffer, synchronized reset request, performance counters, and VIO. VIO reads a register writeback shadow, flags, and stopping information. Its reset output is an active control input. These observation resources do not supply operands to the CPU.",
-      "cue": "区分core逻辑端口与板级引脚。寄存器读数来自写回影子，不能称为独立读回物理RF或全部DM。"
-    },
-    {
-      "title": "Five-Stage Datapath",
-      "speaker": "B",
-      "seconds": 85,
-      "goal": "Trace values through resources and the existing four stage boundaries.",
-      "refs": [
-        "SPEC",
-        "RTL",
-        "DIAGRAMS"
-      ],
-      "speech": "The PC supplies the fetch address. Decode reads the register file and extends the immediate. In execute, forwarding selects the newest available operands before the ALU inputs are selected. A store uses Rs for its base address and Rd for its data, so these are separate paths. Memory performs a qualified load or store. Writeback selects an execution result or returned load data and updates the architectural state. A successful store writes memory once, then retains a valid completion tag in writeback. The synchronous instruction output supplies the decode data boundary, and the data-memory output supplies the load boundary. Data and control remain aligned. C will now explain how the controller coordinates these stages.",
-      "cue": "依次沿五级指图。重点讲STR两条源路径、MEM唯一写入、WB保留标签；IM/DM输出处不再串接IR/MDR。"
-    },
-    {
-      "title": "How Pipeline Control Works",
-      "speaker": "C",
-      "seconds": 75,
-      "goal": "Relate global modes, cross-stage arbitration and local qualified actions.",
-      "refs": [
-        "SPEC",
+        "DIAGRAMS",
         "RTL",
         "CW"
-      ],
-      "speech": "Our controller has three levels of responsibility. The global mode handles running, draining, and final stopping. During RUN, all five stages can process different instructions. Cross-stage logic compares register dependencies and resolves events by instruction age. Stage-local logic turns the current instruction's control intentions into actual actions. For example, decode can request a register write, but only a valid, fault-free writeback slot can enable that write. Control fields travel beside the instruction's data and tags. A cancelled slot cannot update memory, registers, or flags, even if its old control bits remain. The five operating modes describe the whole processor. They do not form a serial fetch-to-writeback controller. The next example shows why coordination must observe more than one stage.",
-      "cue": "先讲三层职责，再指CW到rf_we的资格关系。五个局部CU是逻辑职责，不是五个独立FSM或新增实体模块。"
+      ]
     },
     {
-      "title": "Data Dependencies and Interlock",
-      "speaker": "C",
-      "seconds": 105,
-      "goal": "Explain the exact load-use hold and store path using the eight-cycle trace.",
+      "title": "Complete Five-Stage Datapath",
+      "speaker": "B",
+      "seconds": 35,
+      "section": "CPU structure",
+      "goal": "Retain all functional paths and the four existing pipeline boundaries.",
+      "speech": "The full datapath shows PC, RF, extension, forwarding, ALU, branch logic, memory, and writeback. Four boundaries align data, control, and valid tags. The registered IM output supplies the decode data boundary; registered DM output supplies the load return. No additional instruction or memory-data register is cascaded there.",
+      "cue": "完整图保留前递、Z选择、目标计算和RF/flags回路。强调同步IM/DM输出承担边界。",
       "refs": [
-        "SIM_LOAD",
-        "SIM_ADD",
-        "RTL"
-      ],
-      "speech": "This simulation loads seven into R zero and immediately stores it through another base register. In cycle three, the load is in execute and the store is in decode. The store needs the load result, which is not ready. The interlock holds the PC and decode state and inserts a bubble into execute. Older instructions continue. At the end of cycle four, synchronous memory returns the load data. In cycle five, the store enters execute and receives seven from writeback forwarding. The store writes memory in cycle six. Its valid tag continues through writeback in cycle seven, and HALT completes in cycle eight. The load's address must never be forwarded as its data. Adjacent ADD instructions can instead forward a ready memory-stage result without this stall. D will next explain control transfers and verification.",
-      "cue": "按C3保持/C4 bubble/C5 W→EX/C6写DM/C7 STR有效WB/C8 HALT指图。初始RF/DM由该仿真TB预置，不声称是板上演示。"
-    },
-    {
-      "title": "Branch Redirect and Safe Completion",
-      "speaker": "D",
-      "seconds": 55,
-      "goal": "Explain flag forwarding, wrong-path cancellation, and the WB halt edge.",
-      "refs": [
-        "SIM_BRANCH",
-        "SIM_STORE_HALT",
-        "RTL"
-      ],
-      "speech": "CMP produces an equality candidate, and JZ uses it in execute before architectural Z writeback. In cycle four, the branch redirects and cancels the younger store. The branch itself continues through memory and writeback. The target HALT reaches its stopping edge in cycle nine, allowing older work to finish. Valid tags distinguish instructions from bubbles and cancelled slots. This simulation checks the accepted redirect and the absence of a wrong-path memory write. These events form part of our functional verification.",
-      "cue": "指C4的M.CMP与X.JZ，说明M→Z选择；错误STR不得写DM；HALT的正式停止边沿在C9的WB。"
-    },
-    {
-      "title": "Functional Verification Strategy",
-      "speaker": "D",
-      "seconds": 55,
-      "goal": "Connect independent expectations, edge checks and real trace evidence.",
-      "refs": [
-        "SIM_LOAD",
-        "SIM_BRANCH",
-        "INDEPENDENT",
-        "HOST_CHECKS"
-      ],
-      "speech": "Reference behavior comes from the ISA and independently prepared test conditions. The testbench compares writes, flags, stopping behavior, and clock-by-clock events such as front-end hold and an execute bubble. The external-ISA archive contains forty-eight cases and ten reset witnesses. The highlighted load-store trace checks one stall and one memory write, as well as the final result. These internal timing observations come from simulation. The next page separately checks final state and cycle counters on the implemented board system.",
-      "cue": "把输入、ISA参考、DUT和自动比较串起来。48案例+10复位见证不等于全CPU穷举；工具检查也不等于板上功能测试。"
-    },
-    {
-      "title": "EES-331 Board Results",
-      "speaker": "D",
-      "seconds": 60,
-      "goal": "Present decoded physical evidence with correct observation scope.",
-      "refs": [
-        "BOARD",
-        "BUTTON"
-      ],
-      "speech": "All five archived board programs reached their expected normal stop. For each program, we decoded two VIO snapshots and checked the writeback shadow, architectural flags, stop PC, last store, and counters. The checksum program ends with R one equal to hexadecimal one two three two after fifty-five cycles. In the physical S one test, the CPU had already stopped. Holding the button cleared the public running state and counters. Releasing it restarted the program, which again completed in fifty-five cycles. These tables decode the archived VIO data. E will now use those counters to explain performance.",
-      "cue": "明确标注Decoded archived VIO snapshots。指五程序摘要、R1=0x1232、S1 pressed计数0与after计数55。"
-    },
-    {
-      "title": "Explaining CPU Performance",
-      "speaker": "E",
-      "seconds": 145,
-      "goal": "Explain useful instruction work and the measured sources of extra cycles.",
-      "refs": [
-        "BOARD",
-        "PERFORMANCE",
-        "PPA"
-      ],
-      "speech": "The chart separates useful instruction count from pipeline overhead. For these five normal HALT programs, total cycles equal N plus four, plus S, plus twice R. N includes HALT. Four accounts for pipeline filling and completion, S counts load-use stalls, and each accepted redirect costs two cycles. For baseline, ten instructions plus four, one stall, and two redirect cycles gives seventeen. For loop, four redirects contribute eight extra cycles. For checksum, thirty-five instructions plus four and sixteen stalls gives fifty-five. This explains its dominant overhead. CPI divides cycles by completed instructions, so it also reflects instruction mix and fixed overhead. Checksum has more stalls than baseline, but its CPI is about one point five seven, compared with one point seven zero. It also completes more instructions, spreading the four-cycle fixed overhead across a larger instruction count. The chart therefore supports an explanation of each workload. A design speedup would require comparing the same program under matched conditions. Different programs perform different work, and total cycles alone do not rank their designs. The counters came from board VIO. Times derived using ten nanoseconds per cycle assume the target hundred-megahertz clock. We did not independently measure frequency or wall time. Existing routed reports separately show that all five designs meet their setup and hold checks. Detailed resource results and the isolated optimization comparison are available in the backup slides.",
-      "cue": "先解释图中N、固定4、S、2R四段。带入baseline和checksum；CPI有固定开销，不能用不同工作量总周期直接排名。时间只作设计频率推算。"
-    },
-    {
-      "title": "What We Delivered",
-      "speaker": "E",
-      "seconds": 25,
-      "goal": "Close against the four course requirements and the accepted baseline.",
-      "refs": [
-        "SPEC",
-        "BOARD",
-        "PERFORMANCE"
-      ],
-      "speech": "We delivered the ISA, integrated architecture, design process, and verification evidence. Simulation checks internal execution. EES-331 confirms the selected programs and reset restart. Counters explain performance overhead. Default AC1 is our accepted baseline. Thank you.",
-      "cue": "对应老师四项要求结束。答辩再跳转备用页，不在结尾开启新的架构介绍。"
-    }
-  ],
-  "backup": [
-    {
-      "title": "ISA Encoding Reference",
-      "goal": "Provide the complete ISA v1.5 opcode map.",
-      "refs": [
-        "ISA"
-      ],
-      "answer": "The opcode occupies bits fifteen through twelve. The low register and immediate fields have meanings defined by each instruction form. AND and OR use opcodes two and three. LDR and STR use eight and nine. B and F are reserved. Current ISA v1.5 is the encoding authority.",
-      "cue": "完整16种Opcode。历史Pre4机器码要按迁移表解释。"
-    },
-    {
-      "title": "Interface Reference",
-      "goal": "Separate execution, observation and board interfaces.",
-      "refs": [
-        "SPEC",
+        "DIAGRAMS",
         "RTL",
-        "SYSTEM"
-      ],
-      "answer": "These twelve original core execution ports total eighty-seven bits. They connect to the system memories, rather than directly to board pins. Diagnostic observation outputs are additional. The board top has clock, button and eight LED ports. JTAG reaches VIO through the FPGA debug infrastructure.",
-      "cue": "87位只计原执行接口；额外观测端口另列，板级逻辑IO为10个。"
+        "SPEC"
+      ]
+    },
+    {
+      "title": "Operand and Result Paths",
+      "speaker": "B",
+      "seconds": 35,
+      "section": "CPU structure",
+      "goal": "Trace register, store, branch and writeback paths in the detailed design.",
+      "speech": "Execute first selects the newest available register operands. The ALU input selection then chooses a register or extended immediate. Store data follows its own path beside address calculation. Branch target calculation and Z selection are separate from that address path. At writeback, the result selector chooses an execution result or load data; qualified enables update RF or flags.",
+      "cue": "放大原完整datapath中ID/EX至WB部分。分开指STR基址与数据、目标地址与Z条件。",
+      "refs": [
+        "DIAGRAMS",
+        "RTL"
+      ]
+    },
+    {
+      "title": "Core Integration and Logical Interfaces",
+      "speaker": "B",
+      "seconds": 40,
+      "section": "CPU structure",
+      "goal": "Connect the complete system diagram to every original execution port.",
+      "speech": "The system connects two synchronous memories, each with two hundred and fifty-six sixteen-bit words. The original twelve execution ports total eighty-seven bits and carry clock, reset, memory traffic, and stop status. The core checks the complete sixteen-bit effective address before indexing memory. Observation ports are additional. Core reset preserves committed data memory.",
+      "cue": "左完整系统图，右完整原执行接口表。同步读一拍、store只写一次、reset不重载DM。",
+      "refs": [
+        "SYSTEM",
+        "DIAGRAMS",
+        "SPEC"
+      ]
+    },
+    {
+      "title": "EES-331 Board Integration",
+      "speaker": "B",
+      "seconds": 25,
+      "section": "CPU structure",
+      "goal": "Explain the complete clock, reset, VIO and observation connections.",
+      "speech": "The board top adds the clock buffer, synchronized reset release, counters, LEDs, and VIO. M19 is the clock input and L18 is the active-low S1 request. VIO reads a writeback shadow, stop state, and counters; its reset output is a real control input. C will now explain pipeline control.",
+      "cue": "完整板级图。RF读数是写回影子；VIO reset是控制输入，不能说整个VIO完全只读。交接C。",
+      "refs": [
+        "SYSTEM",
+        "DIAGRAMS",
+        "BOARD"
+      ]
+    },
+    {
+      "title": "Complete Pipeline Control",
+      "speaker": "C",
+      "seconds": 50,
+      "section": "CPU structure",
+      "goal": "Explain global mode, traveling control fields and qualified stage actions.",
+      "speech": "Global mode handles running, draining, and stopping. Cross-stage logic checks dependencies, readiness, and instruction age. Local logic turns traveling control intentions into stage actions. The existing X, M, and W control groups contain eighteen, seven, and five bits. Decode can request a register write, but only an eligible writeback slot produces rf_we. Data and control belong to the same instruction.",
+      "cue": "指完整CU放大图：FSM与跨级仲裁在上，各级资格在下。CW_X/M/W不是额外寄存器或五个FSM。",
+      "refs": [
+        "DIAGRAMS",
+        "CW",
+        "RTL"
+      ]
     },
     {
       "title": "Operating Modes and Event Priority",
-      "goal": "Explain the global state machine and event ordering.",
+      "speaker": "C",
+      "seconds": 35,
+      "section": "CPU structure",
+      "goal": "Show the complete five-mode transition graph and qualified priority order.",
+      "speech": "RUN permits normal progress, stalls, and redirects. An accepted HALT or instruction fault starts the corresponding drain mode. The stopping token reaches writeback before the core enters HALTED or FAULTED. Reset returns the core to RUN. Arbitration considers instruction age: an older memory fault suppresses a younger execute event while preserving eligible older writeback. The illegal-mode fallback separately enters the fail-safe faulted state.",
+      "cue": "五状态是整机运行模式，不是IF到WB串行状态。MEM故障优先于年轻EX事件，不能把不可能并发的事件硬画成状态转移。",
       "refs": [
-        "SPEC",
+        "CW",
         "RTL",
-        "CW"
-      ],
-      "answer": "RUN allows normal progress, stalls and accepted redirects. HALT and faults start drain modes. The stopping token must reach writeback before the corresponding final state. Reset has highest priority. An older memory fault suppresses a younger execute event while preserving eligible older writeback. Only reset leaves the final stopped modes.",
-      "cue": "状态：RUN、DRAIN_HALT、DRAIN_FAULT、HALTED、FAULTED。仲裁优先级按年龄与资格，不把互斥事件当作必然同拍。"
+        "SPEC"
+      ]
     },
     {
-      "title": "Additional Hazard Cases",
-      "goal": "Support questions on source roles, newest producers and fault age.",
+      "title": "Dependencies and Resolution Network",
+      "speaker": "C",
+      "seconds": 45,
+      "section": "CPU structure",
+      "goal": "Show forwarding, bypass, interlock, flag selection and false-source exclusion.",
+      "speech": "Forwarding checks both real sources and selects the nearest eligible producer: M, then W, then the saved operand. An unready load cannot forward its address or permit an older same-register value. An adjacent load dependency holds the front end once. WB-to-ID bypass handles simultaneous RF read and write. CMP-to-JZ selects the newest Z. Source-use masks exclude false dependencies.",
+      "cue": "完整矩阵包含数据、标志、控制和资源；R0可写，Rd=Rs两路独立检查。Harvard排除IF/MEM争用，顺序流水排除WAR/WAW。",
       "refs": [
-        "SPEC",
         "RTL",
+        "CW",
         "SIM_ADD",
-        "SIM_STORE_HALT",
-        "SIM_FAULT"
-      ],
-      "answer": "Forwarding chooses the nearest eligible producer. A matching memory-stage load blocks an older same-register writeback value until data is ready. Register zero participates normally. Immediate MOV has no register source, preventing a false dependency. A store needs separate base and data checks. The fault and HALT examples here come from simulation.",
-      "cue": "相邻load真实源停1拍，普通ALU可M前递；假相关、R0和Rd=Rs要识别真实use掩码。"
+        "SIM_LOAD"
+      ]
     },
     {
-      "title": "Reference Model and Coverage",
-      "goal": "Explain why the automated checks are meaningful and bounded.",
+      "title": "Load-to-Store Interlock: Eight Cycles",
+      "speaker": "C",
+      "seconds": 50,
+      "section": "CPU structure",
+      "goal": "Explain the real eight-cycle trace and exactly one memory write.",
+      "speech": "This trace loads seven into R zero and stores it through R one. In cycle three, the load executes while the store waits in decode. The front end holds; cycle four contains an execute bubble. In cycle five, writeback forwards the ready load value. The store writes memory in cycle six and keeps its WB tag in seven. HALT completes in eight. Adjacent ADDs use ready M forwarding without this stall. D will explain control flow and verification.",
+      "cue": "按真实C3保持/C4 bubble/C5 W前递/C6唯一DM写/C7 STR标签/C8HALT讲。初态来自TB预置。交接D。",
+      "refs": [
+        "SIM_LOAD",
+        "SIM_ADD",
+        "RTL"
+      ]
+    },
+    {
+      "title": "CMP, JZ and Wrong-Path Cancellation",
+      "speaker": "D",
+      "seconds": 35,
+      "section": "CPU structure",
+      "goal": "Explain the real nine-cycle branch trace and cancelled store.",
+      "speech": "CMP produces an equality candidate. In cycle four, JZ uses the memory-stage candidate before architectural Z writeback. The accepted redirect cancels the younger wrong-path store. The branch itself continues through memory and writeback. The target HALT finishes in cycle nine. Thus, redirecting early does not create a separate pipeline exit, and the cancelled store never writes memory.",
+      "cue": "C4 M.CMP对X.JZ前递Z，D.STR取消；目标HALT在C9完成。",
+      "refs": [
+        "SIM_BRANCH",
+        "RTL"
+      ]
+    },
+    {
+      "title": "HALT, Fault and Precise Completion",
+      "speaker": "D",
+      "seconds": 25,
+      "section": "CPU structure",
+      "goal": "Distinguish a real instruction, a bubble, a held slot and a cancelled slot.",
+      "speech": "A valid instruction may pass through a stage without writing anything. A bubble has no valid instruction; a stall holds an instruction; a flush cancels younger work. In the store-before-HALT example, the older store writes in MEM and continues to WB before HALT stops the processor. Fault arbitration blocks invalid accesses and preserves eligible older work.",
+      "cue": "用老STR与年轻HALT逐拍表讲年龄；MEM故障压制年轻跳转的例子保持仿真身份。",
+      "refs": [
+        "SIM_STORE_HALT",
+        "SIM_FAULT",
+        "RTL"
+      ]
+    },
+    {
+      "title": "Functional Verification and Coverage",
+      "speaker": "D",
+      "seconds": 35,
+      "section": "Functional verification",
+      "goal": "Connect ISA expectations, per-edge assertions and integrated verification layers.",
+      "speech": "Automatic checks compare actual writes, flags, stores, stop state, and cycle events with ISA behavior and explicit expectations. Existing evidence includes module and hazard tests, forty-eight independent cases, and ten reset witnesses. This delivery also includes fresh Vivado runs of five programs and the eleven-case system suite. Each layer provides finite, specific coverage.",
+      "cue": "分层展示已有回归与本次新运行；21项主机/文档检查不是实板功能测试。",
       "refs": [
         "INDEPENDENT",
-        "HOST_CHECKS",
-        "SPEC"
-      ],
-      "answer": "The external ISA model predicts instruction effects, while the testbench checks actual writes and timing events. Directed boundaries and manual examples cross-check the reference calculations. Forty-eight cases and ten reset witnesses are a bounded program set. The twenty-one archived host and document checks validate the evidence pipeline, not twenty-one physical CPU scenarios.",
-      "cue": "回答自己算自己验证：独立ISA行为、人工边界例、逐边沿检查、负向错误注入分别说明。"
+        "LIVE",
+        "HOST_CHECKS"
+      ]
     },
     {
-      "title": "Raw VIO and Physical Reset Evidence",
-      "goal": "Connect decoded values to the captured words and real button observations.",
+      "title": "Actual XSim Waveform and Reproduction",
+      "speaker": "D",
+      "seconds": 35,
+      "section": "Functional verification",
+      "goal": "Show sampled events from the delivered project and its executable entry.",
+      "speech": "This delivered baseline waveform shows qualified events at active clock edges. In cycle nine, a front-end stall coexists with an older store. We check the stall, memory write, redirect, and writeback sequence, plus the final result. The package includes RTL, testbenches, images, project creation, WDB, and VCD. Open the included project or rerun these checks from the course directory.",
+      "cue": "显示本次baseline真实edge数据，并给出工程相对位置与运行命令；不伪造Vivado界面截图。",
+      "refs": [
+        "LIVE",
+        "SYSTEM"
+      ]
+    },
+    {
+      "title": "Board Results and Physical S1 Reset",
+      "speaker": "D",
+      "seconds": 40,
+      "section": "Functional verification",
+      "goal": "Present all five archived physical outcomes and the raw reset sequence.",
+      "speech": "All five archived EES-331 programs reached their expected normal stop. We decoded two stable VIO snapshots per program. Checksum ends with R one equal to hexadecimal one two three two after fifty-five cycles. The raw S1 samples show fifty-five cycles before pressing, zero while reset is held, and fifty-five again after release. This physical reset test starts after the CPU has stopped. E will use the recorded counters to explain performance.",
+      "cue": "完整五程序表、checksum终态、四帧S1和原始hex摘录同在正文。标签注明Decoded archived VIO snapshots。交接E。",
       "refs": [
         "BOARD",
         "BUTTON"
-      ],
-      "answer": "The raw state probe contains the build identity, register writeback shadow, flags and stop information. The performance probe contains five thirty-two-bit counters. The S one observer first confirmed that VIO reset was released and then read the physical button response. Heartbeat and build identity remain independent of CPU reset. These captures do not independently dump every physical register or data-memory word.",
-      "cue": "四帧before/pressed/after_0/after_1，按住时RF影子和计数0，释放后两帧55周期结果相同；心跳可不同。"
+      ]
+    },
+    {
+      "title": "Performance Counters and Cycle Model",
+      "speaker": "E",
+      "seconds": 35,
+      "section": "Performance verification",
+      "goal": "Define the physical counters and the domain of the cycle equation.",
+      "speech": "We measure performance through completed instructions, cycles, load-use stalls, and accepted redirects. For these five normal-HALT programs, total cycles equal N plus four plus S plus twice R. N includes HALT. Four represents pipeline filling and completion; each accepted redirect costs two cycles. CPI divides cycles by N. This formula describes the current fixed-latency AC1 pipeline under these conditions.",
+      "cue": "先定义N、S、R、C和CPI，再展示数值。不要把公式推广到故障或任意复位epoch。",
+      "refs": [
+        "PERFORMANCE",
+        "RTL",
+        "BOARD"
+      ]
+    },
+    {
+      "title": "Measured Cycles and CPI",
+      "speaker": "E",
+      "seconds": 65,
+      "section": "Performance verification",
+      "goal": "Explain the complete five-program cycle breakdown and avoid workload ranking.",
+      "speech": "The bars separate instructions from overhead. Baseline is ten plus four plus one plus two: seventeen cycles. Loop's four redirects add eight cycles. Checksum is thirty-five plus four plus sixteen: fifty-five. Despite more stalls, checksum's CPI is one point five seven, below baseline's one point seven zero, because more instructions spread the fixed overhead. Different workloads cannot rank CPU designs by total cycles. The counters are physical VIO observations. Time conversion assumes the designed one-hundred-megahertz clock; frequency and wall time were not independently measured.",
+      "cue": "按堆叠颜色讲N/4/S/2R，重点loop与checksum；总周期不能跨工作量排名。",
+      "refs": [
+        "BOARD",
+        "PERFORMANCE"
+      ]
     },
     {
       "title": "FPGA Resources and Routed Timing",
-      "goal": "Show the correct implementation scope for resource and timing values.",
+      "speaker": "E",
+      "seconds": 25,
+      "section": "Performance verification",
+      "goal": "Show all five implementation results with their correct top-level scope.",
+      "speech": "These are complete board-top results, including memories, VIO, and observation logic. All five archived implementations use two BRAM18 blocks and have positive setup and hold slack at the ten-nanosecond constraint. The table reports WNS and WHS, rather than propagation delays. These resource counts should not be compared directly with core-only synthesis figures.",
+      "cue": "完整资源和setup/hold表回到正文；LUT total含LUTRAM，WNS/WHS单位ns。",
       "refs": [
-        "PPA",
-        "SPEC"
-      ],
-      "answer": "These values belong to the complete board top, including VIO, memory and observation logic. They are not core-only resource counts. Each selected program uses two BRAM18 blocks. Setup and hold slack are positive for all five archived routed implementations. Static timing and finite board execution are complementary evidence, rather than an independent measurement of maximum clock frequency.",
-      "cue": "Total LUT包含LUTRAM，不能把LUT原语个数当物理总LUT；不将OOC和含VIO整机面积直接比较。"
+        "PPA"
+      ]
     },
     {
-      "title": "Isolated WB-to-MEM Optimization",
-      "goal": "Explain the optional candidate and its implementation tradeoff.",
+      "title": "Optimization Experiments and Final Choice",
+      "speaker": "E",
+      "seconds": 25,
+      "section": "Performance verification",
+      "goal": "Account for both completed offline candidates without changing the accepted design.",
+      "speech": "We evaluated two isolated candidates. A forwarding-MUX rewrite kept cycle counts unchanged and did not improve the routed result overall. WB-to-MEM forwarding reduced memory-copy cycles from fifteen to fourteen and checksum from fifty-five to forty-seven, with extra logic. Those are offline comparisons. Default AC1 remains the physically accepted implementation used throughout this presentation.",
+      "cue": "两项已做候选都纳入正文。WB_MEM不会免除STR基址相关停顿；候选未实板验收。",
       "refs": [
         "CANDIDATE",
+        "FORWARD_CANDIDATE",
         "PPA"
-      ],
-      "answer": "The candidate delays store data consumption until memory and can forward ready writeback data there. Store base addresses still need execute-stage operands. Offline tests and routed comparisons reduce memory-copy cycles from fifteen to fourteen and checksum cycles from fifty-five to forty-seven. The checksum build adds eighty-six LUTs and two flip-flops. This candidate has not received the default AC1 physical board acceptance.",
-      "cue": "两项候选互相隔离；本页为离线结果。55/47约1.17倍固定频率加速，不宣称已上板。"
+      ]
+    },
+    {
+      "title": "Deliverables and Independent Verification",
+      "speaker": "E",
+      "seconds": 20,
+      "section": "Delivery",
+      "goal": "Close the assignment with the actual runnable files and design document.",
+      "speech": "We delivered the ISA, complete architecture, design process, and functional and performance evidence. The course folder now includes the updated core document, this presentation, the group script, and a runnable Vivado package. The sources and test results identify the accepted AC1 design. Thank you.",
+      "cue": "收束到老师四项要求与常用目录的真实工程文件。演示可选，不自动连接硬件。",
+      "refs": [
+        "SPEC",
+        "LIVE",
+        "BOARD"
+      ]
     }
   ],
+  "backup": [],
   "questions": [
     [
       "Why do five pipeline stages not mean five global execution states?",
@@ -293,5 +367,5 @@
   ],
   "main_seconds": 840,
   "buffer_seconds": 60,
-  "spoken_words": 1199
+  "spoken_words": 1302
 }

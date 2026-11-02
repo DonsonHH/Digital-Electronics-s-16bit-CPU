@@ -1,0 +1,8359 @@
+{
+  "01": {
+    "width": 2400.0,
+    "height": 1500.0,
+    "source": "01_CPU整体架构_EN.svg",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 0.0,
+        "y": 0.0,
+        "w": 2400.0,
+        "h": 1500.0,
+        "fill": "white",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "rect",
+        "x": 40.0,
+        "y": 140.0,
+        "w": 2320.0,
+        "h": 1090.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 65.0,
+        "y": 205.0,
+        "w": 2270.0,
+        "h": 615.0,
+        "fill": "#F6F9FC",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 509.0,
+        "y": 535.0,
+        "w": 22.0,
+        "h": 285.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 509.0,
+        "y": 866.0,
+        "w": 22.0,
+        "h": 204.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 954.0,
+        "y": 535.0,
+        "w": 22.0,
+        "h": 285.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 954.0,
+        "y": 866.0,
+        "w": 22.0,
+        "h": 204.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1399.0,
+        "y": 535.0,
+        "w": 22.0,
+        "h": 285.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1399.0,
+        "y": 866.0,
+        "w": 22.0,
+        "h": 204.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1844.0,
+        "y": 535.0,
+        "w": 22.0,
+        "h": 285.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1844.0,
+        "y": 866.0,
+        "w": 22.0,
+        "h": 204.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            60.0,
+            94.0
+          ],
+          [
+            135.0,
+            94.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            60.0,
+            94.0
+          ],
+          [
+            135.0,
+            94.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            500.0,
+            94.0
+          ],
+          [
+            575.0,
+            94.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            500.0,
+            94.0
+          ],
+          [
+            575.0,
+            94.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            950.0,
+            94.0
+          ],
+          [
+            1025.0,
+            94.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            950.0,
+            94.0
+          ],
+          [
+            1025.0,
+            94.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1410.0,
+            94.0
+          ],
+          [
+            1485.0,
+            94.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1410.0,
+            94.0
+          ],
+          [
+            1485.0,
+            94.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1100.0,
+            320.0
+          ],
+          [
+            1000.0,
+            320.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1100.0,
+            320.0
+          ],
+          [
+            1000.0,
+            320.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            320.0,
+            435.0
+          ],
+          [
+            320.0,
+            470.0
+          ],
+          [
+            2300.0,
+            470.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            320.0,
+            435.0
+          ],
+          [
+            320.0,
+            470.0
+          ],
+          [
+            2300.0,
+            470.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1710.0,
+            435.0
+          ],
+          [
+            1710.0,
+            510.0
+          ],
+          [
+            100.0,
+            510.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1710.0,
+            435.0
+          ],
+          [
+            1710.0,
+            510.0
+          ],
+          [
+            100.0,
+            510.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1710.0,
+            510.0
+          ],
+          [
+            2300.0,
+            510.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1710.0,
+            510.0
+          ],
+          [
+            2300.0,
+            510.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            915.0,
+            589.0
+          ],
+          [
+            1010.0,
+            589.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            915.0,
+            589.0
+          ],
+          [
+            1010.0,
+            589.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            740.0,
+            632.0
+          ],
+          [
+            740.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            740.0,
+            632.0
+          ],
+          [
+            740.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1360.0,
+            589.0
+          ],
+          [
+            1455.0,
+            589.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1360.0,
+            589.0
+          ],
+          [
+            1455.0,
+            589.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1185.0,
+            632.0
+          ],
+          [
+            1185.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1185.0,
+            632.0
+          ],
+          [
+            1185.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1805.0,
+            589.0
+          ],
+          [
+            1900.0,
+            589.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1805.0,
+            589.0
+          ],
+          [
+            1900.0,
+            589.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1630.0,
+            632.0
+          ],
+          [
+            1630.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1630.0,
+            632.0
+          ],
+          [
+            1630.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2075.0,
+            632.0
+          ],
+          [
+            2075.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2075.0,
+            632.0
+          ],
+          [
+            2075.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            490.0,
+            470.0
+          ],
+          [
+            490.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            490.0,
+            470.0
+          ],
+          [
+            490.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            100.0,
+            510.0
+          ],
+          [
+            100.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            100.0,
+            510.0
+          ],
+          [
+            100.0,
+            665.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            295.0,
+            810.0
+          ],
+          [
+            295.0,
+            880.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            295.0,
+            810.0
+          ],
+          [
+            295.0,
+            880.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            500.0,
+            950.0
+          ],
+          [
+            535.0,
+            950.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            500.0,
+            950.0
+          ],
+          [
+            535.0,
+            950.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            425.0,
+            1065.0
+          ],
+          [
+            425.0,
+            1125.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            425.0,
+            1065.0
+          ],
+          [
+            425.0,
+            1125.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            935.0,
+            470.0
+          ],
+          [
+            935.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            935.0,
+            470.0
+          ],
+          [
+            935.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            545.0,
+            510.0
+          ],
+          [
+            545.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            545.0,
+            510.0
+          ],
+          [
+            545.0,
+            665.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            740.0,
+            810.0
+          ],
+          [
+            740.0,
+            880.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            740.0,
+            810.0
+          ],
+          [
+            740.0,
+            880.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            945.0,
+            950.0
+          ],
+          [
+            980.0,
+            950.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            945.0,
+            950.0
+          ],
+          [
+            980.0,
+            950.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            870.0,
+            1065.0
+          ],
+          [
+            870.0,
+            1125.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            870.0,
+            1065.0
+          ],
+          [
+            870.0,
+            1125.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1380.0,
+            470.0
+          ],
+          [
+            1380.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1380.0,
+            470.0
+          ],
+          [
+            1380.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            990.0,
+            510.0
+          ],
+          [
+            990.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            990.0,
+            510.0
+          ],
+          [
+            990.0,
+            665.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1185.0,
+            810.0
+          ],
+          [
+            1185.0,
+            880.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1185.0,
+            810.0
+          ],
+          [
+            1185.0,
+            880.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1390.0,
+            950.0
+          ],
+          [
+            1425.0,
+            950.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1390.0,
+            950.0
+          ],
+          [
+            1425.0,
+            950.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1315.0,
+            1065.0
+          ],
+          [
+            1315.0,
+            1125.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1315.0,
+            1065.0
+          ],
+          [
+            1315.0,
+            1125.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1825.0,
+            470.0
+          ],
+          [
+            1825.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1825.0,
+            470.0
+          ],
+          [
+            1825.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1435.0,
+            510.0
+          ],
+          [
+            1435.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1435.0,
+            510.0
+          ],
+          [
+            1435.0,
+            665.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1630.0,
+            810.0
+          ],
+          [
+            1630.0,
+            880.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1630.0,
+            810.0
+          ],
+          [
+            1630.0,
+            880.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1835.0,
+            950.0
+          ],
+          [
+            1870.0,
+            950.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1835.0,
+            950.0
+          ],
+          [
+            1870.0,
+            950.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1760.0,
+            1065.0
+          ],
+          [
+            1760.0,
+            1125.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1760.0,
+            1065.0
+          ],
+          [
+            1760.0,
+            1125.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2270.0,
+            470.0
+          ],
+          [
+            2270.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2270.0,
+            470.0
+          ],
+          [
+            2270.0,
+            665.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1880.0,
+            510.0
+          ],
+          [
+            1880.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1880.0,
+            510.0
+          ],
+          [
+            1880.0,
+            665.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2075.0,
+            810.0
+          ],
+          [
+            2075.0,
+            880.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2075.0,
+            810.0
+          ],
+          [
+            2075.0,
+            880.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2205.0,
+            1065.0
+          ],
+          [
+            2205.0,
+            1125.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2205.0,
+            1065.0
+          ],
+          [
+            2205.0,
+            1125.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            145.0,
+            1125.0
+          ],
+          [
+            2320.0,
+            1125.0
+          ],
+          [
+            2320.0,
+            475.0
+          ],
+          [
+            2305.0,
+            475.0
+          ],
+          [
+            2305.0,
+            435.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            145.0,
+            1125.0
+          ],
+          [
+            2320.0,
+            1125.0
+          ],
+          [
+            2320.0,
+            475.0
+          ],
+          [
+            2305.0,
+            475.0
+          ],
+          [
+            2305.0,
+            435.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            145.0,
+            1065.0
+          ],
+          [
+            145.0,
+            1250.0
+          ],
+          [
+            180.0,
+            1250.0
+          ],
+          [
+            180.0,
+            1270.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            145.0,
+            1065.0
+          ],
+          [
+            145.0,
+            1250.0
+          ],
+          [
+            180.0,
+            1250.0
+          ],
+          [
+            180.0,
+            1270.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            680.0,
+            1270.0
+          ],
+          [
+            680.0,
+            1245.0
+          ],
+          [
+            720.0,
+            1245.0
+          ],
+          [
+            720.0,
+            1065.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            680.0,
+            1270.0
+          ],
+          [
+            680.0,
+            1245.0
+          ],
+          [
+            720.0,
+            1245.0
+          ],
+          [
+            720.0,
+            1065.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1600.0,
+            1065.0
+          ],
+          [
+            1600.0,
+            1270.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1600.0,
+            1065.0
+          ],
+          [
+            1600.0,
+            1270.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1960.0,
+            1390.0
+          ],
+          [
+            2290.0,
+            1390.0
+          ],
+          [
+            2290.0,
+            1065.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1960.0,
+            1390.0
+          ],
+          [
+            2290.0,
+            1390.0
+          ],
+          [
+            2290.0,
+            1065.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            90.0,
+            400.0
+          ],
+          [
+            70.0,
+            400.0
+          ],
+          [
+            70.0,
+            1438.0
+          ],
+          [
+            2080.0,
+            1438.0
+          ],
+          [
+            2080.0,
+            1370.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            90.0,
+            400.0
+          ],
+          [
+            70.0,
+            400.0
+          ],
+          [
+            70.0,
+            1438.0
+          ],
+          [
+            2080.0,
+            1438.0
+          ],
+          [
+            2080.0,
+            1370.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 90.0,
+        "y": 270.0,
+        "w": 910.0,
+        "h": 165.0,
+        "fill": "white",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1100.0,
+        "y": 270.0,
+        "w": 1205.0,
+        "h": 165.0,
+        "fill": "white",
+        "stroke": "#BD4E26",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 565.0,
+        "y": 550.0,
+        "w": 350.0,
+        "h": 82.0,
+        "fill": "#EAF2FA",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1010.0,
+        "y": 550.0,
+        "w": 350.0,
+        "h": 82.0,
+        "fill": "#EAF2FA",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1455.0,
+        "y": 550.0,
+        "w": 350.0,
+        "h": 82.0,
+        "fill": "#EAF2FA",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1900.0,
+        "y": 550.0,
+        "w": 350.0,
+        "h": 82.0,
+        "fill": "#EAF2FA",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 90.0,
+        "y": 665.0,
+        "w": 410.0,
+        "h": 145.0,
+        "fill": "white",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 90.0,
+        "y": 880.0,
+        "w": 410.0,
+        "h": 185.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 535.0,
+        "y": 665.0,
+        "w": 410.0,
+        "h": 145.0,
+        "fill": "white",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 535.0,
+        "y": 880.0,
+        "w": 410.0,
+        "h": 185.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 980.0,
+        "y": 665.0,
+        "w": 410.0,
+        "h": 145.0,
+        "fill": "white",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 980.0,
+        "y": 880.0,
+        "w": 410.0,
+        "h": 185.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1425.0,
+        "y": 665.0,
+        "w": 410.0,
+        "h": 145.0,
+        "fill": "white",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1425.0,
+        "y": 880.0,
+        "w": 410.0,
+        "h": 185.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1870.0,
+        "y": 665.0,
+        "w": 410.0,
+        "h": 145.0,
+        "fill": "white",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1870.0,
+        "y": 880.0,
+        "w": 410.0,
+        "h": 185.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 90.0,
+        "y": 1270.0,
+        "w": 680.0,
+        "h": 155.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1200.0,
+        "y": 1270.0,
+        "w": 760.0,
+        "h": 155.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "Complete CPU control and datapath",
+        "x": 60.0,
+        "y": 19.400000000000006,
+        "w": 646.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Data / payload",
+        "x": 155.0,
+        "y": 73.16,
+        "w": 240.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Control / eligibility",
+        "x": 595.0,
+        "y": 73.16,
+        "w": 290.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Forwarding / feedback",
+        "x": 1045.0,
+        "y": 73.16,
+        "w": 364.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Cancel / stop",
+        "x": 1505.0,
+        "y": 73.16,
+        "w": 218.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Dot = connected; crossing alone = no connection",
+        "x": 1880.0,
+        "y": 62.356500000000004,
+        "w": 510.0,
+        "h": 28.78125,
+        "size": 23.025,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Blue bands = existing pipeline boundaries",
+        "x": 1880.0,
+        "y": 104.35650000000001,
+        "w": 436.0,
+        "h": 28.78125,
+        "size": 23.025,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "datapath_core (CU + DP) / one clock / synchronous active-high reset",
+        "x": 65.0,
+        "y": 147.4,
+        "w": 1218.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Pipeline CU / control intentions, eligibility and coordination",
+        "x": 85.0,
+        "y": 210.4,
+        "w": 1029.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Global mode FSM",
+        "x": 104.0,
+        "y": 276.4,
+        "w": 328.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "RUN / DRAIN_HALT / DRAIN_FAULT",
+        "x": 104.0,
+        "y": 323.85514,
+        "w": 548.890625,
+        "h": 40.08625000000001,
+        "size": 32.069,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "HALTED / FAULTED: stop token reaches WB; pipeline empty",
+        "x": 104.0,
+        "y": 365.85514,
+        "w": 883.90625,
+        "h": 40.08625000000001,
+        "size": 32.069,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Cross-stage hazards and event arbitration",
+        "x": 1114.0,
+        "y": 276.4,
+        "w": 746.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Reset > MEM fault > EX stop > redirect > load-use",
+        "x": 1114.0,
+        "y": 320.16,
+        "w": 812.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "UPD: advance / hold / bubble / kill younger slots",
+        "x": 1114.0,
+        "y": 362.16,
+        "w": 772.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Events",
+        "x": 981.0,
+        "y": 270.16,
+        "w": 118.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#BD4E26",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Mode eligibility",
+        "x": 95.0,
+        "y": 446.16,
+        "w": 244.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#2867A5",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "IF/ID",
+        "x": 477.0,
+        "y": 819.16,
+        "w": 86.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "ID/EX",
+        "x": 914.0,
+        "y": 819.16,
+        "w": 102.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "EX/MEM",
+        "x": 1335.0,
+        "y": 819.16,
+        "w": 150.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "MEM/WB",
+        "x": 1775.0,
+        "y": 819.16,
+        "w": 160.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "PC_fetch / range",
+        "x": 105.0,
+        "y": 550.16,
+        "w": 278.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#536477",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Front-end eligibility",
+        "x": 105.0,
+        "y": 596.16,
+        "w": 310.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#536477",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "IDCU decode d_ctrl",
+        "x": 579.0,
+        "y": 560.37056,
+        "w": 322.0,
+        "h": 44.720000000000006,
+        "size": 35.776,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "ID/EX.CW_X",
+        "x": 1024.0,
+        "y": 560.16,
+        "w": 216.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "EX/MEM.CW_M",
+        "x": 1469.0,
+        "y": 560.16,
+        "w": 270.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "MEM/WB.CW_W",
+        "x": 1914.0,
+        "y": 560.16,
+        "w": 284.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "IFCU fetch eligibility",
+        "x": 104.0,
+        "y": 671.4,
+        "w": 360.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "fetch_accept/pc_hold",
+        "x": 104.0,
+        "y": 715.16,
+        "w": 348.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "im_en",
+        "x": 104.0,
+        "y": 757.16,
+        "w": 106.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "IF: single PC",
+        "x": 104.0,
+        "y": 886.4,
+        "w": 236.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "u_pc / PC_fetch16",
+        "x": 104.0,
+        "y": 930.16,
+        "w": 304.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "+1 / hold / redirect",
+        "x": 104.0,
+        "y": 972.16,
+        "w": 297.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "IDCU issue eligibility",
+        "x": 549.0,
+        "y": 671.4,
+        "w": 372.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Hold / cancel / issue",
+        "x": 549.0,
+        "y": 715.16,
+        "w": 330.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "x_valid_next",
+        "x": 549.0,
+        "y": 757.16,
+        "w": 208.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "ID: read and extend",
+        "x": 549.0,
+        "y": 886.4,
+        "w": 356.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "u_rf: 4×16, 2R1W",
+        "x": 549.0,
+        "y": 930.16,
+        "w": 291.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "u_ext: imm8 → 16",
+        "x": 549.0,
+        "y": 972.16,
+        "w": 300.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "EXCU execution eligibility",
+        "x": 994.0,
+        "y": 678.14074,
+        "w": 380.0,
+        "h": 41.03625,
+        "size": 32.829,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "ALU select / redirect",
+        "x": 994.0,
+        "y": 715.16,
+        "w": 332.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "halt / fault request",
+        "x": 994.0,
+        "y": 757.16,
+        "w": 294.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "EX: compute and decide",
+        "x": 994.0,
+        "y": 891.6010200000001,
+        "w": 378.0,
+        "h": 43.083749999999995,
+        "size": 34.467,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "u_forward / u_alu",
+        "x": 994.0,
+        "y": 930.16,
+        "w": 286.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Z select / u_target",
+        "x": 994.0,
+        "y": 972.16,
+        "w": 296.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "MEMCU access eligibility",
+        "x": 1439.0,
+        "y": 677.66698,
+        "w": 376.0,
+        "h": 41.66625,
+        "size": 33.333,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Full EA / valid slot",
+        "x": 1439.0,
+        "y": 715.16,
+        "w": 293.96875,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "dm_en / dm_we",
+        "x": 1439.0,
+        "y": 757.16,
+        "w": 264.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "MEM: access or pass",
+        "x": 1439.0,
+        "y": 887.1755,
+        "w": 385.0,
+        "h": 48.96875,
+        "size": 39.175,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "EA16 / store_data16",
+        "x": 1439.0,
+        "y": 934.09484,
+        "w": 302.0,
+        "h": 39.7675,
+        "size": 31.814,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Synchronous DM eligibility",
+        "x": 1439.0,
+        "y": 976.09484,
+        "w": 385.0,
+        "h": 39.7675,
+        "size": 31.814,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "WBCU write eligibility",
+        "x": 1884.0,
+        "y": 672.1755,
+        "w": 383.0,
+        "h": 48.96875,
+        "size": 39.175,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Valid W / write intention",
+        "x": 1884.0,
+        "y": 715.50874,
+        "w": 383.953125,
+        "h": 44.536249999999995,
+        "size": 35.629,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "rf_we / z_we / cv_we",
+        "x": 1884.0,
+        "y": 757.50874,
+        "w": 342.0,
+        "h": 44.536249999999995,
+        "size": 35.629,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "WB: architectural writes",
+        "x": 1884.0,
+        "y": 890.45986,
+        "w": 386.0,
+        "h": 44.60124999999999,
+        "size": 35.681,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "wb_data16 selection",
+        "x": 1884.0,
+        "y": 930.16,
+        "w": 336.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "RF and Z/C/V writes",
+        "x": 1884.0,
+        "y": 972.16,
+        "w": 332.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "PC/range",
+        "x": 200.0,
+        "y": 1061.16,
+        "w": 160.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Sources / use",
+        "x": 540.0,
+        "y": 1061.16,
+        "w": 228.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "eq / branch / stop",
+        "x": 985.0,
+        "y": 1061.16,
+        "w": 286.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "EA/fault",
+        "x": 1430.0,
+        "y": 1061.16,
+        "w": 134.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Destination / valid / tags",
+        "x": 1875.0,
+        "y": 1061.16,
+        "w": 390.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Feedback: events / drain",
+        "x": 200.0,
+        "y": 1146.16,
+        "w": 402.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "External synchronous IM / 256 x 16",
+        "x": 104.0,
+        "y": 1276.4,
+        "w": 630.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "im_addr16 / im_en → IM",
+        "x": 104.0,
+        "y": 1320.16,
+        "w": 402.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "IM → im_dout16 (= d_inst)",
+        "x": 104.0,
+        "y": 1362.16,
+        "w": 433.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "External synchronous DM / 256 x 16",
+        "x": 1214.0,
+        "y": 1276.4,
+        "w": 648.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "dm_addr16 / dm_din16 / dm_en / dm_we",
+        "x": 1214.0,
+        "y": 1320.16,
+        "w": 664.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "DM → dm_dout16 (= w_load_data)",
+        "x": 1214.0,
+        "y": 1362.16,
+        "w": 569.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "halted / fault",
+        "x": 2000.0,
+        "y": 1266.16,
+        "w": 204.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#BD4E26",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Decoded from mode",
+        "x": 2000.0,
+        "y": 1312.16,
+        "w": 334.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#BD4E26",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Local CU names denote responsibilities. CW_X/M/W are existing fields; u_* are instances. Data, control and tags align; no added IR/MDR.",
+        "x": 90.0,
+        "y": 1448.04,
+        "w": 2084.0,
+        "h": 42.5,
+        "size": 34.0,
+        "fill": "#536477",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            520.0,
+            510.0
+          ],
+          [
+            520.0,
+            535.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            965.0,
+            510.0
+          ],
+          [
+            965.0,
+            535.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1410.0,
+            510.0
+          ],
+          [
+            1410.0,
+            535.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1855.0,
+            510.0
+          ],
+          [
+            1855.0,
+            535.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "circle",
+        "x": 1703.0,
+        "y": 503.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#BD4E26",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 483.0,
+        "y": 463.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#2867A5",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 93.0,
+        "y": 503.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#BD4E26",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 928.0,
+        "y": 463.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#2867A5",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 538.0,
+        "y": 503.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#BD4E26",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1373.0,
+        "y": 463.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#2867A5",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 983.0,
+        "y": 503.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#BD4E26",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1818.0,
+        "y": 463.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#2867A5",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1428.0,
+        "y": 503.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#BD4E26",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 2263.0,
+        "y": 463.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#2867A5",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1873.0,
+        "y": 503.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#BD4E26",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 418.0,
+        "y": 1118.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 863.0,
+        "y": 1118.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1308.0,
+        "y": 1118.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1753.0,
+        "y": 1118.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 2198.0,
+        "y": 1118.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      }
+    ]
+  },
+  "02": {
+    "width": 2400.0,
+    "height": 1680.0,
+    "source": "02_五级Datapath_EN.svg",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 0.0,
+        "y": 0.0,
+        "w": 2400.0,
+        "h": 1680.0,
+        "fill": "white",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "rect",
+        "x": 60.0,
+        "y": 140.0,
+        "w": 340.0,
+        "h": 1265.0,
+        "fill": "#FAFCFE",
+        "stroke": "none",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 450.0,
+        "y": 140.0,
+        "w": 350.0,
+        "h": 1265.0,
+        "fill": "#FAFCFE",
+        "stroke": "none",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 870.0,
+        "y": 140.0,
+        "w": 640.0,
+        "h": 1265.0,
+        "fill": "#FAFCFE",
+        "stroke": "none",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1550.0,
+        "y": 140.0,
+        "w": 350.0,
+        "h": 1265.0,
+        "fill": "#FAFCFE",
+        "stroke": "none",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1980.0,
+        "y": 140.0,
+        "w": 350.0,
+        "h": 1265.0,
+        "fill": "#FAFCFE",
+        "stroke": "none",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 402.0,
+        "y": 535.0,
+        "w": 36.0,
+        "h": 870.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 822.0,
+        "y": 300.0,
+        "w": 36.0,
+        "h": 1105.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1492.0,
+        "y": 300.0,
+        "w": 36.0,
+        "h": 1105.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1922.0,
+        "y": 300.0,
+        "w": 36.0,
+        "h": 1105.0,
+        "fill": "#DBE9F5",
+        "stroke": "#A2B7C9",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 80.0,
+        "y": 720.0,
+        "w": 300.0,
+        "h": 320.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 895.0,
+        "y": 760.0,
+        "w": 265.0,
+        "h": 420.0,
+        "fill": "#F2FAF9",
+        "stroke": "#087C7C",
+        "width": 3.0
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            60.0,
+            94.0
+          ],
+          [
+            135.0,
+            94.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            60.0,
+            94.0
+          ],
+          [
+            135.0,
+            94.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            500.0,
+            94.0
+          ],
+          [
+            575.0,
+            94.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            500.0,
+            94.0
+          ],
+          [
+            575.0,
+            94.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            950.0,
+            94.0
+          ],
+          [
+            1025.0,
+            94.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            950.0,
+            94.0
+          ],
+          [
+            1025.0,
+            94.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1410.0,
+            94.0
+          ],
+          [
+            1485.0,
+            94.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1410.0,
+            94.0
+          ],
+          [
+            1485.0,
+            94.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            230.0,
+            945.0
+          ],
+          [
+            230.0,
+            955.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            230.0,
+            945.0
+          ],
+          [
+            230.0,
+            955.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            100.0,
+            990.0
+          ],
+          [
+            88.0,
+            990.0
+          ],
+          [
+            88.0,
+            850.0
+          ],
+          [
+            100.0,
+            850.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            100.0,
+            990.0
+          ],
+          [
+            88.0,
+            990.0
+          ],
+          [
+            88.0,
+            850.0
+          ],
+          [
+            100.0,
+            850.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            360.0,
+            990.0
+          ],
+          [
+            390.0,
+            990.0
+          ],
+          [
+            390.0,
+            1130.0
+          ],
+          [
+            280.0,
+            1130.0
+          ],
+          [
+            280.0,
+            1140.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            360.0,
+            990.0
+          ],
+          [
+            390.0,
+            990.0
+          ],
+          [
+            390.0,
+            1130.0
+          ],
+          [
+            280.0,
+            1130.0
+          ],
+          [
+            280.0,
+            1140.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            380.0,
+            1230.0
+          ],
+          [
+            430.0,
+            1230.0
+          ],
+          [
+            430.0,
+            610.0
+          ],
+          [
+            470.0,
+            610.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            380.0,
+            1230.0
+          ],
+          [
+            430.0,
+            1230.0
+          ],
+          [
+            430.0,
+            610.0
+          ],
+          [
+            470.0,
+            610.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            740.0,
+            690.0
+          ],
+          [
+            740.0,
+            820.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            740.0,
+            690.0
+          ],
+          [
+            740.0,
+            820.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            610.0
+          ],
+          [
+            795.0,
+            610.0
+          ],
+          [
+            795.0,
+            1120.0
+          ],
+          [
+            630.0,
+            1120.0
+          ],
+          [
+            630.0,
+            1150.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            610.0
+          ],
+          [
+            795.0,
+            610.0
+          ],
+          [
+            795.0,
+            1120.0
+          ],
+          [
+            630.0,
+            1120.0
+          ],
+          [
+            630.0,
+            1150.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            655.0
+          ],
+          [
+            810.0,
+            655.0
+          ],
+          [
+            810.0,
+            1210.0
+          ],
+          [
+            780.0,
+            1210.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            655.0
+          ],
+          [
+            810.0,
+            655.0
+          ],
+          [
+            810.0,
+            1210.0
+          ],
+          [
+            780.0,
+            1210.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            858.0,
+            420.0
+          ],
+          [
+            1060.0,
+            420.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            858.0,
+            420.0
+          ],
+          [
+            1060.0,
+            420.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            858.0,
+            460.0
+          ],
+          [
+            1040.0,
+            460.0
+          ],
+          [
+            1040.0,
+            450.0
+          ],
+          [
+            1060.0,
+            450.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            858.0,
+            460.0
+          ],
+          [
+            1040.0,
+            460.0
+          ],
+          [
+            1040.0,
+            450.0
+          ],
+          [
+            1060.0,
+            450.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1160.0,
+            665.0
+          ],
+          [
+            1220.0,
+            665.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1160.0,
+            665.0
+          ],
+          [
+            1220.0,
+            665.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            858.0,
+            755.0
+          ],
+          [
+            1200.0,
+            755.0
+          ],
+          [
+            1200.0,
+            710.0
+          ],
+          [
+            1220.0,
+            710.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            858.0,
+            755.0
+          ],
+          [
+            1200.0,
+            755.0
+          ],
+          [
+            1200.0,
+            710.0
+          ],
+          [
+            1220.0,
+            710.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1480.0,
+            420.0
+          ],
+          [
+            1500.0,
+            420.0
+          ],
+          [
+            1500.0,
+            340.0
+          ],
+          [
+            30.0,
+            340.0
+          ],
+          [
+            30.0,
+            835.0
+          ],
+          [
+            100.0,
+            835.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1480.0,
+            420.0
+          ],
+          [
+            1500.0,
+            420.0
+          ],
+          [
+            1500.0,
+            340.0
+          ],
+          [
+            30.0,
+            340.0
+          ],
+          [
+            30.0,
+            835.0
+          ],
+          [
+            100.0,
+            835.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1480.0,
+            665.0
+          ],
+          [
+            1500.0,
+            665.0
+          ],
+          [
+            1500.0,
+            515.0
+          ],
+          [
+            45.0,
+            515.0
+          ],
+          [
+            45.0,
+            870.0
+          ],
+          [
+            100.0,
+            870.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1480.0,
+            665.0
+          ],
+          [
+            1500.0,
+            665.0
+          ],
+          [
+            1500.0,
+            515.0
+          ],
+          [
+            45.0,
+            515.0
+          ],
+          [
+            45.0,
+            870.0
+          ],
+          [
+            100.0,
+            870.0
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            880.0
+          ],
+          [
+            820.0,
+            880.0
+          ],
+          [
+            820.0,
+            900.0
+          ],
+          [
+            910.0,
+            900.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            880.0
+          ],
+          [
+            820.0,
+            880.0
+          ],
+          [
+            820.0,
+            900.0
+          ],
+          [
+            910.0,
+            900.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            995.0
+          ],
+          [
+            820.0,
+            995.0
+          ],
+          [
+            820.0,
+            1140.0
+          ],
+          [
+            910.0,
+            1140.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            995.0
+          ],
+          [
+            820.0,
+            995.0
+          ],
+          [
+            820.0,
+            1140.0
+          ],
+          [
+            910.0,
+            1140.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            858.0,
+            780.0
+          ],
+          [
+            895.0,
+            780.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            858.0,
+            780.0
+          ],
+          [
+            895.0,
+            780.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2300.0,
+            980.0
+          ],
+          [
+            2345.0,
+            980.0
+          ],
+          [
+            2345.0,
+            245.0
+          ],
+          [
+            865.0,
+            245.0
+          ],
+          [
+            865.0,
+            1115.0
+          ],
+          [
+            910.0,
+            1115.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2300.0,
+            980.0
+          ],
+          [
+            2345.0,
+            980.0
+          ],
+          [
+            2345.0,
+            245.0
+          ],
+          [
+            865.0,
+            245.0
+          ],
+          [
+            865.0,
+            1115.0
+          ],
+          [
+            910.0,
+            1115.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            865.0,
+            875.0
+          ],
+          [
+            910.0,
+            875.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            865.0,
+            875.0
+          ],
+          [
+            910.0,
+            875.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1540.0,
+            980.0
+          ],
+          [
+            1540.0,
+            310.0
+          ],
+          [
+            885.0,
+            310.0
+          ],
+          [
+            885.0,
+            1090.0
+          ],
+          [
+            910.0,
+            1090.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1540.0,
+            980.0
+          ],
+          [
+            1540.0,
+            310.0
+          ],
+          [
+            885.0,
+            310.0
+          ],
+          [
+            885.0,
+            1090.0
+          ],
+          [
+            910.0,
+            1090.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            885.0,
+            850.0
+          ],
+          [
+            910.0,
+            850.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            885.0,
+            850.0
+          ],
+          [
+            910.0,
+            850.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1235.0,
+            785.0
+          ],
+          [
+            1235.0,
+            800.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1235.0,
+            785.0
+          ],
+          [
+            1235.0,
+            800.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1235.0,
+            1025.0
+          ],
+          [
+            1235.0,
+            1040.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1235.0,
+            1025.0
+          ],
+          [
+            1235.0,
+            1040.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1140.0,
+            875.0
+          ],
+          [
+            1190.0,
+            875.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1140.0,
+            875.0
+          ],
+          [
+            1190.0,
+            875.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1165.0,
+            875.0
+          ],
+          [
+            1165.0,
+            1260.0
+          ],
+          [
+            1570.0,
+            1260.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1165.0,
+            875.0
+          ],
+          [
+            1165.0,
+            1260.0
+          ],
+          [
+            1570.0,
+            1260.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1140.0,
+            1115.0
+          ],
+          [
+            1180.0,
+            1115.0
+          ],
+          [
+            1180.0,
+            900.0
+          ],
+          [
+            1190.0,
+            900.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1140.0,
+            1115.0
+          ],
+          [
+            1180.0,
+            1115.0
+          ],
+          [
+            1180.0,
+            900.0
+          ],
+          [
+            1190.0,
+            900.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1180.0,
+            1115.0
+          ],
+          [
+            1190.0,
+            1115.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1180.0,
+            1115.0
+          ],
+          [
+            1190.0,
+            1115.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            1230.0
+          ],
+          [
+            815.0,
+            1230.0
+          ],
+          [
+            815.0,
+            1325.0
+          ],
+          [
+            1235.0,
+            1325.0
+          ],
+          [
+            1235.0,
+            1170.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            780.0,
+            1230.0
+          ],
+          [
+            815.0,
+            1230.0
+          ],
+          [
+            815.0,
+            1325.0
+          ],
+          [
+            1235.0,
+            1325.0
+          ],
+          [
+            1235.0,
+            1170.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1280.0,
+            870.0
+          ],
+          [
+            1295.0,
+            870.0
+          ],
+          [
+            1295.0,
+            970.0
+          ],
+          [
+            1310.0,
+            970.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1280.0,
+            870.0
+          ],
+          [
+            1295.0,
+            870.0
+          ],
+          [
+            1295.0,
+            970.0
+          ],
+          [
+            1310.0,
+            970.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1280.0,
+            1115.0
+          ],
+          [
+            1295.0,
+            1115.0
+          ],
+          [
+            1295.0,
+            1060.0
+          ],
+          [
+            1310.0,
+            1060.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1280.0,
+            1115.0
+          ],
+          [
+            1295.0,
+            1115.0
+          ],
+          [
+            1295.0,
+            1060.0
+          ],
+          [
+            1310.0,
+            1060.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1480.0,
+            980.0
+          ],
+          [
+            1570.0,
+            980.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1480.0,
+            980.0
+          ],
+          [
+            1570.0,
+            980.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1528.0,
+            1020.0
+          ],
+          [
+            1570.0,
+            1020.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1528.0,
+            1020.0
+          ],
+          [
+            1570.0,
+            1020.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1540.0,
+            980.0
+          ],
+          [
+            1540.0,
+            1185.0
+          ],
+          [
+            1570.0,
+            1185.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1540.0,
+            980.0
+          ],
+          [
+            1540.0,
+            1185.0
+          ],
+          [
+            1570.0,
+            1185.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1725.0,
+            1050.0
+          ],
+          [
+            1725.0,
+            1130.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1725.0,
+            1050.0
+          ],
+          [
+            1725.0,
+            1130.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1540.0,
+            980.0
+          ],
+          [
+            1540.0,
+            860.0
+          ],
+          [
+            1975.0,
+            860.0
+          ],
+          [
+            1975.0,
+            950.0
+          ],
+          [
+            2000.0,
+            950.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1540.0,
+            980.0
+          ],
+          [
+            1540.0,
+            860.0
+          ],
+          [
+            1975.0,
+            860.0
+          ],
+          [
+            1975.0,
+            950.0
+          ],
+          [
+            2000.0,
+            950.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1880.0,
+            1220.0
+          ],
+          [
+            1915.0,
+            1220.0
+          ],
+          [
+            1915.0,
+            1110.0
+          ],
+          [
+            2150.0,
+            1110.0
+          ],
+          [
+            2150.0,
+            1080.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1880.0,
+            1220.0
+          ],
+          [
+            1915.0,
+            1220.0
+          ],
+          [
+            1915.0,
+            1110.0
+          ],
+          [
+            2150.0,
+            1110.0
+          ],
+          [
+            2150.0,
+            1080.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2345.0,
+            980.0
+          ],
+          [
+            2345.0,
+            1410.0
+          ],
+          [
+            450.0,
+            1410.0
+          ],
+          [
+            450.0,
+            1080.0
+          ],
+          [
+            620.0,
+            1080.0
+          ],
+          [
+            620.0,
+            1050.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2345.0,
+            980.0
+          ],
+          [
+            2345.0,
+            1410.0
+          ],
+          [
+            450.0,
+            1410.0
+          ],
+          [
+            450.0,
+            1080.0
+          ],
+          [
+            620.0,
+            1080.0
+          ],
+          [
+            620.0,
+            1050.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1400.0,
+            1130.0
+          ],
+          [
+            1400.0,
+            1370.0
+          ],
+          [
+            1970.0,
+            1370.0
+          ],
+          [
+            1970.0,
+            1250.0
+          ],
+          [
+            2000.0,
+            1250.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1400.0,
+            1130.0
+          ],
+          [
+            1400.0,
+            1370.0
+          ],
+          [
+            1970.0,
+            1370.0
+          ],
+          [
+            1970.0,
+            1250.0
+          ],
+          [
+            2000.0,
+            1250.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1895.0,
+            1370.0
+          ],
+          [
+            1895.0,
+            500.0
+          ],
+          [
+            930.0,
+            500.0
+          ],
+          [
+            930.0,
+            590.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1895.0,
+            1370.0
+          ],
+          [
+            1895.0,
+            500.0
+          ],
+          [
+            930.0,
+            500.0
+          ],
+          [
+            930.0,
+            590.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1960.0,
+            1370.0
+          ],
+          [
+            1960.0,
+            530.0
+          ],
+          [
+            1010.0,
+            530.0
+          ],
+          [
+            1010.0,
+            590.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1960.0,
+            1370.0
+          ],
+          [
+            1960.0,
+            530.0
+          ],
+          [
+            1010.0,
+            530.0
+          ],
+          [
+            1010.0,
+            590.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2300.0,
+            1250.0
+          ],
+          [
+            2375.0,
+            1250.0
+          ],
+          [
+            2375.0,
+            560.0
+          ],
+          [
+            1090.0,
+            560.0
+          ],
+          [
+            1090.0,
+            590.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2300.0,
+            1250.0
+          ],
+          [
+            2375.0,
+            1250.0
+          ],
+          [
+            2375.0,
+            560.0
+          ],
+          [
+            1090.0,
+            560.0
+          ],
+          [
+            1090.0,
+            590.0
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1958.0,
+            700.0
+          ],
+          [
+            2000.0,
+            700.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1958.0,
+            700.0
+          ],
+          [
+            2000.0,
+            700.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2300.0,
+            750.0
+          ],
+          [
+            2320.0,
+            750.0
+          ],
+          [
+            2320.0,
+            1220.0
+          ],
+          [
+            2300.0,
+            1220.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2300.0,
+            750.0
+          ],
+          [
+            2320.0,
+            750.0
+          ],
+          [
+            2320.0,
+            1220.0
+          ],
+          [
+            2300.0,
+            1220.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2320.0,
+            1220.0
+          ],
+          [
+            2320.0,
+            1390.0
+          ],
+          [
+            465.0,
+            1390.0
+          ],
+          [
+            465.0,
+            1100.0
+          ],
+          [
+            670.0,
+            1100.0
+          ],
+          [
+            670.0,
+            1050.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            2320.0,
+            1220.0
+          ],
+          [
+            2320.0,
+            1390.0
+          ],
+          [
+            465.0,
+            1390.0
+          ],
+          [
+            465.0,
+            1100.0
+          ],
+          [
+            670.0,
+            1100.0
+          ],
+          [
+            670.0,
+            1050.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            420.0,
+            1405.0
+          ],
+          [
+            420.0,
+            1420.0
+          ],
+          [
+            317.0,
+            1420.0
+          ],
+          [
+            317.0,
+            1430.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            420.0,
+            1405.0
+          ],
+          [
+            420.0,
+            1420.0
+          ],
+          [
+            317.0,
+            1420.0
+          ],
+          [
+            317.0,
+            1430.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            840.0,
+            1405.0
+          ],
+          [
+            840.0,
+            1420.0
+          ],
+          [
+            907.0,
+            1420.0
+          ],
+          [
+            907.0,
+            1430.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            840.0,
+            1405.0
+          ],
+          [
+            840.0,
+            1420.0
+          ],
+          [
+            907.0,
+            1420.0
+          ],
+          [
+            907.0,
+            1430.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1510.0,
+            1405.0
+          ],
+          [
+            1510.0,
+            1420.0
+          ],
+          [
+            1492.0,
+            1420.0
+          ],
+          [
+            1492.0,
+            1430.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1510.0,
+            1405.0
+          ],
+          [
+            1510.0,
+            1420.0
+          ],
+          [
+            1492.0,
+            1420.0
+          ],
+          [
+            1492.0,
+            1430.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1940.0,
+            1405.0
+          ],
+          [
+            1940.0,
+            1420.0
+          ],
+          [
+            2077.0,
+            1420.0
+          ],
+          [
+            2077.0,
+            1430.0
+          ]
+        ],
+        "stroke": "white",
+        "width": 11.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1940.0,
+            1405.0
+          ],
+          [
+            1940.0,
+            1420.0
+          ],
+          [
+            2077.0,
+            1420.0
+          ],
+          [
+            2077.0,
+            1430.0
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 4.0,
+        "arrow": false,
+        "dashed": true
+      },
+      {
+        "kind": "rect",
+        "x": 100.0,
+        "y": 795.0,
+        "w": 260.0,
+        "h": 150.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 100.0,
+        "y": 955.0,
+        "w": 260.0,
+        "h": 75.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 80.0,
+        "y": 1140.0,
+        "w": 300.0,
+        "h": 175.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 470.0,
+        "y": 540.0,
+        "w": 310.0,
+        "h": 150.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 470.0,
+        "y": 820.0,
+        "w": 310.0,
+        "h": 230.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 470.0,
+        "y": 1150.0,
+        "w": 310.0,
+        "h": 140.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1060.0,
+        "y": 350.0,
+        "w": 420.0,
+        "h": 120.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 900.0,
+        "y": 590.0,
+        "w": 260.0,
+        "h": 150.0,
+        "fill": "white",
+        "stroke": "#087C7C",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1220.0,
+        "y": 590.0,
+        "w": 260.0,
+        "h": 150.0,
+        "fill": "white",
+        "stroke": "#BD4E26",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 910.0,
+        "y": 820.0,
+        "w": 230.0,
+        "h": 100.0,
+        "fill": "white",
+        "stroke": "#087C7C",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 910.0,
+        "y": 1060.0,
+        "w": 230.0,
+        "h": 100.0,
+        "fill": "white",
+        "stroke": "#087C7C",
+        "width": 3.0
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1190.0,
+            800.0
+          ],
+          [
+            1280.0,
+            825.0
+          ],
+          [
+            1280.0,
+            905.0
+          ],
+          [
+            1190.0,
+            930.0
+          ],
+          [
+            1190.0,
+            800.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 3.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1190.0,
+            1040.0
+          ],
+          [
+            1280.0,
+            1065.0
+          ],
+          [
+            1280.0,
+            1145.0
+          ],
+          [
+            1190.0,
+            1170.0
+          ],
+          [
+            1190.0,
+            1040.0
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 3.0,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 1310.0,
+        "y": 900.0,
+        "w": 170.0,
+        "h": 230.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1570.0,
+        "y": 900.0,
+        "w": 310.0,
+        "h": 150.0,
+        "fill": "white",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1570.0,
+        "y": 1130.0,
+        "w": 310.0,
+        "h": 180.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 2000.0,
+        "y": 900.0,
+        "w": 300.0,
+        "h": 180.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 2000.0,
+        "y": 1190.0,
+        "w": 300.0,
+        "h": 145.0,
+        "fill": "white",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 2000.0,
+        "y": 620.0,
+        "w": 300.0,
+        "h": 190.0,
+        "fill": "white",
+        "stroke": "#2867A5",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 60.0,
+        "y": 1430.0,
+        "w": 515.0,
+        "h": 145.0,
+        "fill": "#F1F5F8",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 650.0,
+        "y": 1430.0,
+        "w": 515.0,
+        "h": 145.0,
+        "fill": "#F1F5F8",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1235.0,
+        "y": 1430.0,
+        "w": 515.0,
+        "h": 145.0,
+        "fill": "#F1F5F8",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "rect",
+        "x": 1820.0,
+        "y": 1430.0,
+        "w": 515.0,
+        "h": 145.0,
+        "fill": "#F1F5F8",
+        "stroke": "#24384B",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "Complete five-stage datapath",
+        "x": 60.0,
+        "y": 19.400000000000006,
+        "w": 526.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Data / payload",
+        "x": 155.0,
+        "y": 73.16,
+        "w": 240.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Control / eligibility",
+        "x": 595.0,
+        "y": 73.16,
+        "w": 290.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Forwarding / feedback",
+        "x": 1045.0,
+        "y": 73.16,
+        "w": 364.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Cancel / stop",
+        "x": 1505.0,
+        "y": 73.16,
+        "w": 218.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Dot = connected; crossing alone = no connection",
+        "x": 1880.0,
+        "y": 62.356500000000004,
+        "w": 510.0,
+        "h": 28.78125,
+        "size": 23.025,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Blue bands = existing pipeline boundaries",
+        "x": 1880.0,
+        "y": 104.35650000000001,
+        "w": 436.0,
+        "h": 28.78125,
+        "size": 23.025,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "IF",
+        "x": 208.5,
+        "y": 144.4,
+        "w": 43.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "ID",
+        "x": 601.0,
+        "y": 144.4,
+        "w": 48.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "EX",
+        "x": 1159.0,
+        "y": 144.4,
+        "w": 62.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "MEM",
+        "x": 1674.5,
+        "y": 144.4,
+        "w": 101.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "WB",
+        "x": 2118.5,
+        "y": 144.4,
+        "w": 73.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "IF/ID",
+        "x": 373.0,
+        "y": 180.4,
+        "w": 94.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "ID/EX",
+        "x": 783.5,
+        "y": 180.4,
+        "w": 113.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "EX/MEM",
+        "x": 1427.0,
+        "y": 180.4,
+        "w": 166.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "MEM/WB",
+        "x": 1851.5,
+        "y": 180.4,
+        "w": 177.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Inside pc16",
+        "x": 95.0,
+        "y": 724.4,
+        "w": 211.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Next-PC select",
+        "x": 114.0,
+        "y": 807.43762,
+        "w": 235.0,
+        "h": 41.97125,
+        "size": 33.577,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Redirect > hold",
+        "x": 114.0,
+        "y": 857.90734,
+        "w": 155.0,
+        "h": 28.04875,
+        "size": 22.439,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "+1 sequential advance",
+        "x": 114.0,
+        "y": 899.90734,
+        "w": 226.0,
+        "h": 28.04875,
+        "size": 22.439,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "PC state",
+        "x": 114.0,
+        "y": 961.4,
+        "w": 161.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "rst > redirect",
+        "x": 92.0,
+        "y": 1046.16,
+        "w": 209.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#2867A5",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "    > hold > +1",
+        "x": 92.0,
+        "y": 1088.16,
+        "w": 229.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#2867A5",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "External sync IM",
+        "x": 94.0,
+        "y": 1150.38372,
+        "w": 274.0,
+        "h": 44.7025,
+        "size": 35.762,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "addr16 / im_en",
+        "x": 94.0,
+        "y": 1193.7461,
+        "w": 224.0,
+        "h": 40.23125,
+        "size": 32.185,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Registered dout16",
+        "x": 94.0,
+        "y": 1235.7461,
+        "w": 272.0,
+        "h": 40.23125,
+        "size": 32.185,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "u_decode",
+        "x": 484.0,
+        "y": 546.4,
+        "w": 182.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Rd/Rs/imm8",
+        "x": 484.0,
+        "y": 594.75566,
+        "w": 179.0,
+        "h": 38.88875,
+        "size": 31.111,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Sources / intentions",
+        "x": 484.0,
+        "y": 636.75566,
+        "w": 282.0,
+        "h": 38.88875,
+        "size": 31.111,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "u_rf · 4×16",
+        "x": 484.0,
+        "y": 826.4,
+        "w": 200.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Rd/Rs: 2 reads, 1 write",
+        "x": 484.0,
+        "y": 881.65244,
+        "w": 251.0,
+        "h": 29.7175,
+        "size": 23.774,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Includes WB-to-ID bypass",
+        "x": 484.0,
+        "y": 923.65244,
+        "w": 284.0,
+        "h": 29.7175,
+        "size": 23.774,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "R0 is writable",
+        "x": 484.0,
+        "y": 965.65244,
+        "w": 150.0,
+        "h": 29.7175,
+        "size": 23.774,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "u_ext · 8→16",
+        "x": 484.0,
+        "y": 1156.4,
+        "w": 246.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Zero / sign extension",
+        "x": 484.0,
+        "y": 1206.29444,
+        "w": 277.0,
+        "h": 36.8425,
+        "size": 29.474,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "d_imm_ext16",
+        "x": 484.0,
+        "y": 1248.29444,
+        "w": 181.0,
+        "h": 36.8425,
+        "size": 29.474,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "d_rd2 / d_rs2",
+        "x": 475.0,
+        "y": 761.16,
+        "w": 220.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "u_target branch target",
+        "x": 1074.0,
+        "y": 357.0627,
+        "w": 397.0,
+        "h": 49.118750000000006,
+        "size": 39.295,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "JUMP absolute / JZ relative",
+        "x": 1074.0,
+        "y": 404.5404,
+        "w": 389.984375,
+        "h": 39.175,
+        "size": 31.34,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "x_pc16 / imm8",
+        "x": 530.0,
+        "y": 371.16,
+        "w": 242.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "x_jump_z",
+        "x": 600.0,
+        "y": 414.16,
+        "w": 162.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#2867A5",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Z candidate select",
+        "x": 914.0,
+        "y": 607.79374,
+        "w": 239.0,
+        "h": 34.84875,
+        "size": 27.879,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "M > W > saved Z",
+        "x": 914.0,
+        "y": 647.16018,
+        "w": 229.0,
+        "h": 35.691250000000004,
+        "size": 28.553,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Eligible CMP only",
+        "x": 914.0,
+        "y": 689.16018,
+        "w": 231.984375,
+        "h": 35.691250000000004,
+        "size": 28.553,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Branch decision",
+        "x": 1234.0,
+        "y": 604.2819,
+        "w": 237.0,
+        "h": 39.51875,
+        "size": 31.615,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "branch_req",
+        "x": 1234.0,
+        "y": 646.26154,
+        "w": 162.0,
+        "h": 36.886250000000004,
+        "size": 29.509,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Qualified redirect",
+        "x": 1234.0,
+        "y": 688.26154,
+        "w": 237.0,
+        "h": 36.886250000000004,
+        "size": 29.509,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "branch_target16 to next-PC select",
+        "x": 65.0,
+        "y": 288.51474,
+        "w": 335.0,
+        "h": 25.91125,
+        "size": 20.729,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "qualified_redirect1",
+        "x": 65.0,
+        "y": 351.16,
+        "w": 302.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#BD4E26",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "JUMP=ZExt(imm8)",
+        "x": 65.0,
+        "y": 417.67138,
+        "w": 254.0,
+        "h": 36.34125,
+        "size": 29.073,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "JZ=x_pc+1+SExt(imm8)",
+        "x": 65.0,
+        "y": 463.67138,
+        "w": 321.0,
+        "h": 36.34125,
+        "size": 29.073,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "u_forward",
+        "x": 910.0,
+        "y": 765.4,
+        "w": 184.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Rd forwarding",
+        "x": 924.0,
+        "y": 834.50938,
+        "w": 199.0,
+        "h": 39.21625,
+        "size": 31.373,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "rd_fwd16",
+        "x": 924.0,
+        "y": 870.16,
+        "w": 156.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Rs forwarding",
+        "x": 924.0,
+        "y": 1074.27626,
+        "w": 207.0,
+        "h": 39.52625,
+        "size": 31.621,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "rs_fwd16",
+        "x": 924.0,
+        "y": 1110.16,
+        "w": 154.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "M > W >",
+        "x": 910.0,
+        "y": 954.45644,
+        "w": 111.0,
+        "h": 33.9675,
+        "size": 27.174,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Saved ID/EX value",
+        "x": 910.0,
+        "y": 996.45644,
+        "w": 238.0,
+        "h": 33.9675,
+        "size": 27.174,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "W: wb_data16",
+        "x": 1985.0,
+        "y": 266.16,
+        "w": 237.984375,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "M: exec16 (not load)",
+        "x": 1000.0,
+        "y": 256.16,
+        "w": 336.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Check dest / use",
+        "x": 1570.0,
+        "y": 325.1699,
+        "w": 198.0,
+        "h": 33.01875,
+        "size": 26.415,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Valid / RW / producer fault",
+        "x": 1570.0,
+        "y": 371.1699,
+        "w": 306.96875,
+        "h": 33.01875,
+        "size": 26.415,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "M load blocks older W",
+        "x": 1570.0,
+        "y": 417.1699,
+        "w": 261.0,
+        "h": 33.01875,
+        "size": 26.415,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "A",
+        "x": 1217.5,
+        "y": 839.4,
+        "w": 35.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "B",
+        "x": 1217.5,
+        "y": 1079.4,
+        "w": 35.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "0",
+        "x": 1221.0,
+        "y": 740.16,
+        "w": 28.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "0",
+        "x": 1221.0,
+        "y": 979.16,
+        "w": 28.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "store_data16",
+        "x": 920.0,
+        "y": 1211.16,
+        "w": 218.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "x_imm_ext16 → B",
+        "x": 925.0,
+        "y": 1271.16,
+        "w": 302.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "u_alu",
+        "x": 1324.0,
+        "y": 906.4,
+        "w": 105.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Result16",
+        "x": 1324.0,
+        "y": 965.2,
+        "w": 86.0,
+        "h": 25.0,
+        "size": 20.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "eq candidate",
+        "x": 1324.0,
+        "y": 1007.2,
+        "w": 122.0,
+        "h": 25.0,
+        "size": 20.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "C/V candidates",
+        "x": 1324.0,
+        "y": 1049.2,
+        "w": 143.0,
+        "h": 25.0,
+        "size": 20.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "MEM access eligibility",
+        "x": 1584.0,
+        "y": 917.54746,
+        "w": 283.0,
+        "h": 35.176249999999996,
+        "size": 28.141,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "EA[15:8]=0",
+        "x": 1584.0,
+        "y": 953.43026,
+        "w": 170.0,
+        "h": 40.651250000000005,
+        "size": 32.521,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Valid and fault-free",
+        "x": 1584.0,
+        "y": 995.43026,
+        "w": 279.96875,
+        "h": 40.651250000000005,
+        "size": 32.521,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "External sync DM",
+        "x": 1584.0,
+        "y": 1141.1,
+        "w": 283.0,
+        "h": 43.75,
+        "size": 35.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "addr16 / data16",
+        "x": 1584.0,
+        "y": 1191.65244,
+        "w": 174.0,
+        "h": 29.7175,
+        "size": 23.774,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Read / write at MEM edge",
+        "x": 1584.0,
+        "y": 1233.65244,
+        "w": 284.0,
+        "h": 29.7175,
+        "size": 23.774,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Registered dout16",
+        "x": 1584.0,
+        "y": 1275.65244,
+        "w": 201.0,
+        "h": 29.7175,
+        "size": 23.774,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "DM enables",
+        "x": 1570.0,
+        "y": 1066.16,
+        "w": 200.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#2867A5",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "exec_value16",
+        "x": 1600.0,
+        "y": 811.16,
+        "w": 230.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "WB result select",
+        "x": 2014.0,
+        "y": 909.70316,
+        "w": 268.0,
+        "h": 45.607499999999995,
+        "size": 36.486,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "w_wb_sel",
+        "x": 2014.0,
+        "y": 950.16,
+        "w": 166.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "exec16/load16",
+        "x": 2014.0,
+        "y": 992.16,
+        "w": 242.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "wb_data16",
+        "x": 2014.0,
+        "y": 1034.16,
+        "w": 184.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "dm_dout16",
+        "x": 2000.0,
+        "y": 1121.16,
+        "w": 188.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "u_flags",
+        "x": 2014.0,
+        "y": 1196.4,
+        "w": 136.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Z / C / V",
+        "x": 2014.0,
+        "y": 1240.16,
+        "w": 140.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "z_we / cv_we",
+        "x": 2014.0,
+        "y": 1282.16,
+        "w": 224.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "wb_data16 → RF",
+        "x": 480.0,
+        "y": 1336.16,
+        "w": 288.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "w_rd2 / rf_we",
+        "x": 1020.0,
+        "y": 1336.16,
+        "w": 224.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#2867A5",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "eq / C / V: 1 bit each",
+        "x": 1580.0,
+        "y": 1327.19808,
+        "w": 302.984375,
+        "h": 40.96,
+        "size": 32.768,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "m_cmp_z1（M）",
+        "x": 2000.0,
+        "y": 331.16,
+        "w": 268.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "w_cmp_z1（W）",
+        "x": 2000.0,
+        "y": 377.16,
+        "w": 268.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Saved Z1",
+        "x": 2000.0,
+        "y": 423.16,
+        "w": 162.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#087C7C",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "WB stage control",
+        "x": 2014.0,
+        "y": 631.35662,
+        "w": 274.0,
+        "h": 43.40875,
+        "size": 34.727,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "W intentions / eligibility",
+        "x": 2014.0,
+        "y": 679.43874,
+        "w": 268.0,
+        "h": 32.66125,
+        "size": 26.129,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "RF / Z / CV enables",
+        "x": 2014.0,
+        "y": 721.43874,
+        "w": 233.0,
+        "h": 32.66125,
+        "size": 26.129,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "① IF/ID",
+        "x": 74.0,
+        "y": 1436.4,
+        "w": 135.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "pc16 / valid / fetch_fault",
+        "x": 74.0,
+        "y": 1480.16,
+        "w": 386.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "inst16 = registered IM output",
+        "x": 74.0,
+        "y": 1522.16,
+        "w": 465.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "② ID/EX",
+        "x": 664.0,
+        "y": 1436.4,
+        "w": 154.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "pc, rd/rs, source values, imm16",
+        "x": 664.0,
+        "y": 1481.6922,
+        "w": 477.0,
+        "h": 42.9625,
+        "size": 34.37,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "valid/fault/reason3 + CW_X",
+        "x": 664.0,
+        "y": 1523.6922,
+        "w": 421.0,
+        "h": 42.9625,
+        "size": 34.37,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "③ EX/MEM",
+        "x": 1249.0,
+        "y": 1436.4,
+        "w": 207.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "exec/store16,pc/rd,eq/C/V",
+        "x": 1249.0,
+        "y": 1480.16,
+        "w": 424.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "valid/fault/reason3 + CW_M",
+        "x": 1249.0,
+        "y": 1522.16,
+        "w": 451.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "④ MEM/WB",
+        "x": 1834.0,
+        "y": 1436.4,
+        "w": 218.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "exec/load16,pc/rd,reason3",
+        "x": 1834.0,
+        "y": 1482.04,
+        "w": 408.0,
+        "h": 42.5,
+        "size": 34.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "valid/fault/store + CW_W",
+        "x": 1834.0,
+        "y": 1524.04,
+        "w": 382.0,
+        "h": 42.5,
+        "size": 34.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "1. ADD to ADD dependency",
+        "x": 60.0,
+        "y": 1580.4,
+        "w": 503.9375,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "M-to-EX: 0 stalls; RF write at WB",
+        "x": 60.0,
+        "y": 1630.16,
+        "w": 534.0,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "2. Default AC1: LDR to STR",
+        "x": 850.0,
+        "y": 1580.4,
+        "w": 503.96875,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Hold front 1 cycle; W-to-EX; DM write in MEM",
+        "x": 850.0,
+        "y": 1630.16,
+        "w": 735.984375,
+        "h": 45.0,
+        "size": 36.0,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "③ CMP→JZ",
+        "x": 1640.0,
+        "y": 1580.4,
+        "w": 222.0,
+        "h": 50.0,
+        "size": 40.0,
+        "fill": "#24384B",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Newest Z selects condition; accepted EX redirect kills younger slots",
+        "x": 1640.0,
+        "y": 1640.77448,
+        "w": 768.0,
+        "h": 30.884999999999998,
+        "size": 24.708,
+        "fill": "#24384B",
+        "bold": false
+      },
+      {
+        "kind": "circle",
+        "x": 858.0,
+        "y": 868.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 878.0,
+        "y": 843.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1158.0,
+        "y": 868.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#24384B",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1173.0,
+        "y": 1108.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#24384B",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1533.0,
+        "y": 973.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#24384B",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1533.0,
+        "y": 973.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#24384B",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 2338.0,
+        "y": 973.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1888.0,
+        "y": 1363.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 1953.0,
+        "y": 1363.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "circle",
+        "x": 2313.0,
+        "y": 1213.0,
+        "w": 14.0,
+        "h": 14.0,
+        "fill": "#2867A5",
+        "stroke": "none",
+        "width": 1.0
+      }
+    ]
+  },
+  "03": {
+    "width": 1400.0,
+    "height": 900.0,
+    "source": "03_文件启动系统与停止观测_EN.svg",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1400.0,
+        "h": 900.0,
+        "fill": "#fff",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "text",
+        "text": "File-boot system and stop observation",
+        "x": 40.0,
+        "y": 20.040000000000003,
+        "w": 581.0,
+        "h": 42.5,
+        "size": 34.0,
+        "fill": "#172d42",
+        "bold": true
+      },
+      {
+        "kind": "rect",
+        "x": 25.0,
+        "y": 85.0,
+        "w": 1350.0,
+        "h": 775.0,
+        "fill": "#f7f9fc",
+        "stroke": "#8da4b7",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "cpu_system",
+        "x": 50.0,
+        "y": 98.68,
+        "w": 159.0,
+        "h": 35.0,
+        "size": 28.0,
+        "fill": "#172d42",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "One clk / synchronous active-high rst",
+        "x": 350.0,
+        "y": 102.44,
+        "w": 399.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 60.0,
+        "y": 175.0,
+        "w": 1280.0,
+        "h": 75.0,
+        "fill": "#eaf0f7",
+        "stroke": "#b5c5d4",
+        "width": 2.0
+      },
+      {
+        "kind": "text",
+        "text": "IM_INIT_FILE / DM_INIT_FILE: initialization at configuration",
+        "x": 85.0,
+        "y": 182.44,
+        "w": 643.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Full 256-word images; core reset preserves committed DM and does not reload files",
+        "x": 85.0,
+        "y": 214.32,
+        "w": 812.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 60.0,
+        "y": 315.0,
+        "w": 225.0,
+        "h": 220.0,
+        "fill": "#e7eff8",
+        "stroke": "#2867a5",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "Synchronous IM",
+        "x": 88.0,
+        "y": 333.63458,
+        "w": 180.0,
+        "h": 29.74125,
+        "size": 23.793,
+        "fill": "#172d42",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "256 × 16 ROM",
+        "x": 88.0,
+        "y": 373.44,
+        "w": 164.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "One-cycle read",
+        "x": 88.0,
+        "y": 420.44,
+        "w": 169.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "en=0: hold output",
+        "x": 88.0,
+        "y": 459.7325,
+        "w": 186.0,
+        "h": 28.28125,
+        "size": 22.625,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "dout supplies D boundary",
+        "x": 88.0,
+        "y": 502.26362,
+        "w": 190.0,
+        "h": 19.596249999999998,
+        "size": 15.677,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 400.0,
+        "y": 300.0,
+        "w": 600.0,
+        "h": 260.0,
+        "fill": "#fff",
+        "stroke": "#24384b",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "datapath_core",
+        "x": 425.0,
+        "y": 314.68,
+        "w": 191.0,
+        "h": 35.0,
+        "size": 28.0,
+        "fill": "#172d42",
+        "bold": true
+      },
+      {
+        "kind": "rect",
+        "x": 425.0,
+        "y": 366.0,
+        "w": 550.0,
+        "h": 59.0,
+        "fill": "#dbe9f5",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "text",
+        "text": "IF  →  ID  →  EX  →  MEM  →  WB",
+        "x": 449.0,
+        "y": 381.44,
+        "w": 389.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Forwarding, hold, flush and drain",
+        "x": 425.0,
+        "y": 437.44,
+        "w": 353.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "ISA v1.5 / original write edges",
+        "x": 425.0,
+        "y": 477.44,
+        "w": 322.984375,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "reason_X/M/W travel with valid tags",
+        "x": 425.0,
+        "y": 518.32,
+        "w": 354.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 1115.0,
+        "y": 315.0,
+        "w": 225.0,
+        "h": 220.0,
+        "fill": "#e7eff8",
+        "stroke": "#2867a5",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "Synchronous DM",
+        "x": 1142.0,
+        "y": 334.70994,
+        "w": 187.0,
+        "h": 28.31125,
+        "size": 22.649,
+        "fill": "#172d42",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "256 × 16 RAM",
+        "x": 1142.0,
+        "y": 373.44,
+        "w": 161.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "One-cycle read / one store write",
+        "x": 1142.0,
+        "y": 431.13344,
+        "w": 193.0,
+        "h": 15.780000000000001,
+        "size": 12.624,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Hold output during store",
+        "x": 1142.0,
+        "y": 465.26816,
+        "w": 187.0,
+        "h": 20.92,
+        "size": 16.736,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "dout supplies W boundary",
+        "x": 1142.0,
+        "y": 502.46854,
+        "w": 177.0,
+        "h": 19.32375,
+        "size": 15.459,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            400.0,
+            370.0
+          ],
+          [
+            285.0,
+            370.0
+          ]
+        ],
+        "stroke": "#24384b",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "addr / en",
+        "x": 298.0,
+        "y": 327.32,
+        "w": 93.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            285.0,
+            472.0
+          ],
+          [
+            400.0,
+            472.0
+          ]
+        ],
+        "stroke": "#24384b",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "dout16",
+        "x": 300.0,
+        "y": 484.32,
+        "w": 74.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1000.0,
+            370.0
+          ],
+          [
+            1115.0,
+            370.0
+          ]
+        ],
+        "stroke": "#24384b",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "EA / write data",
+        "x": 1009.0,
+        "y": 319.32,
+        "w": 149.984375,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1115.0,
+            472.0
+          ],
+          [
+            1000.0,
+            472.0
+          ]
+        ],
+        "stroke": "#24384b",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "dout16",
+        "x": 1010.0,
+        "y": 484.32,
+        "w": 74.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Check full EA16 before indexing DM8",
+        "x": 900.0,
+        "y": 563.32,
+        "w": 370.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            700.0,
+            560.0
+          ],
+          [
+            700.0,
+            650.0
+          ]
+        ],
+        "stroke": "#b05b27",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 365.0,
+        "y": 591.0,
+        "w": 670.0,
+        "h": 40.0,
+        "fill": "#f7f9fc",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "text",
+        "text": "WB token does not imply RF write; fault token is not normal completion",
+        "x": 322.0,
+        "y": 597.44,
+        "w": 756.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 190.0,
+        "y": 650.0,
+        "w": 1020.0,
+        "h": 145.0,
+        "fill": "#fff4e9",
+        "stroke": "#b05b27",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "Read-only observation and stable stop state",
+        "x": 215.0,
+        "y": 662.68,
+        "w": 564.0,
+        "h": 35.0,
+        "size": 28.0,
+        "fill": "#172d42",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "stop_pc / reason / valid · last_completed_pc",
+        "x": 215.0,
+        "y": 706.44,
+        "w": 472.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "RF writeback shadow / last successful store / MEM events",
+        "x": 215.0,
+        "y": 746.44,
+        "w": 625.0,
+        "h": 30.0,
+        "size": 24.0,
+        "fill": "#172d42",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Observations do not control execution; stop state holds until reset; no added IR/MDR, FIFO or stage",
+        "x": 216.5,
+        "y": 814.32,
+        "w": 967.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#172d42",
+        "bold": false
+      }
+    ]
+  },
+  "04": {
+    "width": 1400.0,
+    "height": 800.0,
+    "source": "04_EES331板级系统_EN.svg",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1400.0,
+        "h": 800.0,
+        "fill": "white",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "text",
+        "text": "EES-331 clock, reset and program observation",
+        "x": 30.0,
+        "y": 15.860000000000003,
+        "w": 652.0,
+        "h": 38.75,
+        "size": 31.0,
+        "fill": "#193247",
+        "bold": true
+      },
+      {
+        "kind": "rect",
+        "x": 20.0,
+        "y": 70.0,
+        "w": 1360.0,
+        "h": 695.0,
+        "fill": "#f8fafc",
+        "stroke": "#a2b5c5",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "ees331_top",
+        "x": 40.0,
+        "y": 75.86,
+        "w": 169.0,
+        "h": 38.75,
+        "size": 31.0,
+        "fill": "#193247",
+        "bold": true
+      },
+      {
+        "kind": "rect",
+        "x": 50.0,
+        "y": 130.0,
+        "w": 300.0,
+        "h": 90.0,
+        "fill": "#e8f0f8",
+        "stroke": "#276ba5",
+        "width": 2.0
+      },
+      {
+        "kind": "text",
+        "text": "M19 / 100 MHz oscillator",
+        "x": 75.0,
+        "y": 143.24746,
+        "w": 262.0,
+        "h": 28.926249999999996,
+        "size": 23.141,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "LVCMOS33 / single-ended input",
+        "x": 75.0,
+        "y": 184.26142,
+        "w": 265.984375,
+        "h": 22.25875,
+        "size": 17.807,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 430.0,
+        "y": 130.0,
+        "w": 200.0,
+        "h": 90.0,
+        "fill": "#e8f0f8",
+        "stroke": "#276ba5",
+        "width": 2.0
+      },
+      {
+        "kind": "text",
+        "text": "BUFG",
+        "x": 485.0,
+        "y": 155.86,
+        "w": 94.0,
+        "h": 38.75,
+        "size": 31.0,
+        "fill": "#193247",
+        "bold": true
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            350.0,
+            175.0
+          ],
+          [
+            430.0,
+            175.0
+          ]
+        ],
+        "stroke": "#276ba5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            630.0,
+            175.0
+          ],
+          [
+            1010.0,
+            175.0
+          ]
+        ],
+        "stroke": "#276ba5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            800.0,
+            175.0
+          ],
+          [
+            800.0,
+            360.0
+          ]
+        ],
+        "stroke": "#276ba5",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "circle",
+        "x": 795.0,
+        "y": 170.0,
+        "w": 10.0,
+        "h": 10.0,
+        "fill": "#276ba5",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "text",
+        "text": "clk = 100 MHz",
+        "x": 820.0,
+        "y": 204.32,
+        "w": 147.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 1010.0,
+        "y": 120.0,
+        "w": 330.0,
+        "h": 185.0,
+        "fill": "#fff3e8",
+        "stroke": "#b25b28",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "JTAG / always-on VIO",
+        "x": 1035.0,
+        "y": 129.4309,
+        "w": 287.96875,
+        "h": 35.33125,
+        "size": 28.265,
+        "fill": "#193247",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "in0: state256",
+        "x": 1035.0,
+        "y": 169.56,
+        "w": 153.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "in1: counters160",
+        "x": 1035.0,
+        "y": 206.56,
+        "w": 196.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "out0: reset request1",
+        "x": 1035.0,
+        "y": 253.56,
+        "w": 234.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Initial 1; JTAG releases after observers are ready",
+        "x": 300.0,
+        "y": 249.32,
+        "w": 479.984375,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 40.0,
+        "y": 360.0,
+        "w": 1320.0,
+        "h": 380.0,
+        "fill": "#eef4f9",
+        "stroke": "#7596af",
+        "width": 2.0
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1010.0,
+            280.0
+          ],
+          [
+            810.0,
+            280.0
+          ],
+          [
+            809.140625,
+            276.71875
+          ],
+          [
+            806.875,
+            274.375
+          ],
+          [
+            803.671875,
+            272.96875
+          ],
+          [
+            800.0,
+            272.5
+          ],
+          [
+            796.328125,
+            272.96875
+          ],
+          [
+            793.125,
+            274.375
+          ],
+          [
+            790.859375,
+            276.71875
+          ],
+          [
+            790.0,
+            280.0
+          ],
+          [
+            50.0,
+            280.0
+          ],
+          [
+            50.0,
+            410.0
+          ],
+          [
+            230.0,
+            410.0
+          ],
+          [
+            230.0,
+            430.0
+          ]
+        ],
+        "stroke": "#b25b28",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "ees331_application",
+        "x": 60.0,
+        "y": 364.86,
+        "w": 274.0,
+        "h": 38.75,
+        "size": 31.0,
+        "fill": "#193247",
+        "bold": true
+      },
+      {
+        "kind": "rect",
+        "x": 65.0,
+        "y": 430.0,
+        "w": 340.0,
+        "h": 225.0,
+        "fill": "white",
+        "stroke": "#b25b28",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "Synchronized reset and stable release",
+        "x": 90.0,
+        "y": 453.74458,
+        "w": 295.0,
+        "h": 21.61625,
+        "size": 17.293,
+        "fill": "#193247",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "3-stage request synchronizer",
+        "x": 90.0,
+        "y": 488.38,
+        "w": 310.0,
+        "h": 28.75,
+        "size": 23.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "21-bit release counter",
+        "x": 90.0,
+        "y": 523.56,
+        "w": 255.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Registered core_reset",
+        "x": 90.0,
+        "y": 561.56,
+        "w": 260.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "S1 / L18: active-low request",
+        "x": 90.0,
+        "y": 609.32,
+        "w": 276.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            405.0,
+            555.0
+          ],
+          [
+            470.0,
+            555.0
+          ]
+        ],
+        "stroke": "#b25b28",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "rst",
+        "x": 412.0,
+        "y": 519.32,
+        "w": 32.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 470.0,
+        "y": 430.0,
+        "w": 500.0,
+        "h": 225.0,
+        "fill": "white",
+        "stroke": "#263f52",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "cpu_system / default AC1",
+        "x": 495.0,
+        "y": 439.86,
+        "w": 363.96875,
+        "h": 38.75,
+        "size": 31.0,
+        "fill": "#193247",
+        "bold": true
+      },
+      {
+        "kind": "rect",
+        "x": 495.0,
+        "y": 490.0,
+        "w": 450.0,
+        "h": 55.0,
+        "fill": "#dceaf5",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "text",
+        "text": "IF → ID → EX → MEM → WB",
+        "x": 518.0,
+        "y": 502.56,
+        "w": 354.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 495.0,
+        "y": 565.0,
+        "w": 210.0,
+        "h": 45.0,
+        "fill": "#f1f5f8",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "rect",
+        "x": 735.0,
+        "y": 565.0,
+        "w": 210.0,
+        "h": 45.0,
+        "fill": "#f1f5f8",
+        "stroke": "none",
+        "width": 1.0
+      },
+      {
+        "kind": "text",
+        "text": "IM 256×16",
+        "x": 514.0,
+        "y": 572.56,
+        "w": 129.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "DM 256×16",
+        "x": 754.0,
+        "y": 572.56,
+        "w": 141.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "File initialization; core reset preserves DM",
+        "x": 495.0,
+        "y": 617.32,
+        "w": 411.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "rect",
+        "x": 1050.0,
+        "y": 430.0,
+        "w": 280.0,
+        "h": 225.0,
+        "fill": "white",
+        "stroke": "#263f52",
+        "width": 3.0
+      },
+      {
+        "kind": "text",
+        "text": "Performance counters",
+        "x": 1075.0,
+        "y": 447.74926,
+        "w": 242.0,
+        "h": 29.588749999999997,
+        "size": 23.671,
+        "fill": "#193247",
+        "bold": true
+      },
+      {
+        "kind": "text",
+        "text": "Cycles / N / stalls",
+        "x": 1075.0,
+        "y": 486.56,
+        "w": 206.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "redirect / store",
+        "x": 1075.0,
+        "y": 526.56,
+        "w": 172.0,
+        "h": 32.5,
+        "size": 26.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "32 bits each; hold when stopped",
+        "x": 1075.0,
+        "y": 581.29824,
+        "w": 248.0,
+        "h": 20.880000000000003,
+        "size": 16.704,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Effective reset clears counters",
+        "x": 1075.0,
+        "y": 618.4701,
+        "w": 249.0,
+        "h": 21.981250000000003,
+        "size": 17.585,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            970.0,
+            565.0
+          ],
+          [
+            1050.0,
+            565.0
+          ]
+        ],
+        "stroke": "#263f52",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "Events",
+        "x": 979.0,
+        "y": 529.32,
+        "w": 75.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            750.0,
+            430.0
+          ],
+          [
+            750.0,
+            335.0
+          ],
+          [
+            790.0,
+            335.0
+          ],
+          [
+            790.859375,
+            331.71875
+          ],
+          [
+            793.125,
+            329.375
+          ],
+          [
+            796.328125,
+            327.96875
+          ],
+          [
+            800.0,
+            327.5
+          ],
+          [
+            803.671875,
+            327.96875
+          ],
+          [
+            806.875,
+            329.375
+          ],
+          [
+            809.140625,
+            331.71875
+          ],
+          [
+            810.0,
+            335.0
+          ],
+          [
+            1090.0,
+            335.0
+          ],
+          [
+            1090.0,
+            305.0
+          ]
+        ],
+        "stroke": "#263f52",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "RF / flags / stop state / build identity",
+        "x": 834.0,
+        "y": 307.32,
+        "w": 352.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1220.0,
+            430.0
+          ],
+          [
+            1220.0,
+            305.0
+          ]
+        ],
+        "stroke": "#263f52",
+        "width": 4.0,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 65.0,
+        "y": 682.0,
+        "w": 905.0,
+        "h": 40.0,
+        "fill": "#fff",
+        "stroke": "#b5c6d3",
+        "width": 1.0
+      },
+      {
+        "kind": "text",
+        "text": "LEDs: status / heartbeat. VIO reads program results and stop state.",
+        "x": 86.0,
+        "y": 689.32,
+        "w": 655.0,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Logical partitions; no additional CPU stages",
+        "x": 1010.0,
+        "y": 693.89968,
+        "w": 334.0,
+        "h": 21.41,
+        "size": 17.128,
+        "fill": "#193247",
+        "bold": false
+      },
+      {
+        "kind": "text",
+        "text": "Outputs: bitstream, LTX and routed checkpoint. Physical tests require the confirmed EES-331 target.",
+        "x": 40.0,
+        "y": 770.32,
+        "w": 972.984375,
+        "h": 27.5,
+        "size": 22.0,
+        "fill": "#193247",
+        "bold": false
+      }
+    ]
+  }
+}

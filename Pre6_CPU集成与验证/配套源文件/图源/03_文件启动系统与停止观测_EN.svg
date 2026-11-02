@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+<title>AC1文件启动系统与停止观测</title>
+<desc>cpu_system连接同步IM和DM。读输出承担原流水边界；核心WB事件和停止标签只向观测逻辑输出，不反馈执行。</desc>
+<defs>
+<marker id="data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10Z" fill="#24384b" /></marker>
+<marker id="debug" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10Z" fill="#b05b27" /></marker>
+</defs>
+<style>text{font-family:Arial;fill:#172d42;font-size:24px}.title{font-size:34px;font-weight:700}.head{font-size:28px;font-weight:700}.small{font-size:22px}.data{fill:none;stroke:#24384b;stroke-width:4;marker-end:url(#data)}.obs{fill:none;stroke:#b05b27;stroke-width:4;marker-end:url(#debug)}</style>
+<rect width="1400" height="900" fill="#fff" />
+<text x="40" y="52" class="title">File-boot system and stop observation</text>
+<rect x="25" y="85" width="1350" height="775" rx="16" fill="#f7f9fc" stroke="#8da4b7" stroke-width="3" />
+<text x="50" y="125" class="head">cpu_system</text>
+<text x="350" y="125">One clk / synchronous active-high rst</text>
+<rect x="60" y="175" width="1280" height="75" rx="8" fill="#eaf0f7" stroke="#b5c5d4" stroke-width="2" />
+<text x="85" y="205">IM_INIT_FILE / DM_INIT_FILE: initialization at configuration</text>
+<text x="85" y="235" class="small">Full 256-word images; core reset preserves committed DM and does not reload files</text>
+<rect x="60" y="315" width="225" height="220" rx="10" fill="#e7eff8" stroke="#2867a5" stroke-width="3" />
+<text x="88" y="356" class="head" font-size="23.793">Synchronous IM</text>
+<text x="88" y="396">256 × 16 ROM</text>
+<text x="88" y="443">One-cycle read</text>
+<text x="88" y="481" font-size="22.625">en=0: hold output</text>
+<text x="88" y="517" class="small" font-size="15.677">dout supplies D boundary</text>
+<rect x="400" y="300" width="600" height="260" rx="10" fill="#fff" stroke="#24384b" stroke-width="3" />
+<text x="425" y="341" class="head">datapath_core</text>
+<rect x="425" y="366" width="550" height="59" rx="6" fill="#dbe9f5" />
+<text x="449" y="404">IF  →  ID  →  EX  →  MEM  →  WB</text>
+<text x="425" y="460">Forwarding, hold, flush and drain</text>
+<text x="425" y="500">ISA v1.5 / original write edges</text>
+<text x="425" y="539" class="small">reason_X/M/W travel with valid tags</text>
+<rect x="1115" y="315" width="225" height="220" rx="10" fill="#e7eff8" stroke="#2867a5" stroke-width="3" />
+<text x="1142" y="356" class="head" font-size="22.649">Synchronous DM</text>
+<text x="1142" y="396">256 × 16 RAM</text>
+<text x="1142" y="443" font-size="12.624">One-cycle read / one store write</text>
+<text x="1142" y="481" font-size="16.736">Hold output during store</text>
+<text x="1142" y="517" class="small" font-size="15.459">dout supplies W boundary</text>
+<path d="M400 370 H285" class="data" /><text x="298" y="348" class="small">addr / en</text>
+<path d="M285 472 H400" class="data" /><text x="300" y="505" class="small">dout16</text>
+<path d="M1000 370 H1115" class="data" /><text x="1009" y="340" class="small">EA / write data</text>
+<path d="M1115 472 H1000" class="data" /><text x="1010" y="505" class="small">dout16</text>
+<text x="1085" y="584" text-anchor="middle" class="small">Check full EA16 before indexing DM8</text>
+<path d="M700 560 V650" class="obs" />
+<rect x="365" y="591" width="670" height="40" fill="#f7f9fc" />
+<text x="700" y="620" text-anchor="middle">WB token does not imply RF write; fault token is not normal completion</text>
+<rect x="190" y="650" width="1020" height="145" rx="10" fill="#fff4e9" stroke="#b05b27" stroke-width="3" />
+<text x="215" y="689" class="head">Read-only observation and stable stop state</text>
+<text x="215" y="729">stop_pc / reason / valid · last_completed_pc</text>
+<text x="215" y="769">RF writeback shadow / last successful store / MEM events</text>
+<text x="700" y="835" text-anchor="middle" class="small">Observations do not control execution; stop state holds until reset; no added IR/MDR, FIFO or stage</text>
+</svg>

@@ -1,0 +1,43 @@
+{
+  "signal": [
+    {
+      "name": "cycle",
+      "wave": "========",
+      "data": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ]
+    },
+    {
+      "name": "load_use",
+      "wave": "0..10..."
+    },
+    {
+      "name": "redirect",
+      "wave": "0.....10"
+    },
+    {
+      "name": "dm_we",
+      "wave": "0..10..."
+    },
+    {
+      "name": "wb_valid",
+      "wave": "1.....01"
+    }
+  ],
+  "head": {
+    "text": "baseline / XSim / cycles C6 to C13"
+  },
+  "foot": {
+    "text": "Rising-edge samples / one slot = 10 ns / no propagation delay implied"
+  },
+  "config": {
+    "hscale": 1.5
+  }
+}

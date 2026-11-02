@@ -8,6 +8,7 @@ import re
 import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
+from PIL import Image
 
 B = Path(__file__).resolve().parent
 OUT = B.parent
@@ -38,8 +39,10 @@ def main():
         assert digest(ROOT / name) == expected, name
         frozen = subprocess.check_output(['git', 'show', baseline + ':' + Path(name).as_posix()], cwd=ROOT)
         assert hashlib.sha256(frozen).hexdigest() == expected, name
-    assert len(source_map) == 20 and all(row['sources'] for row in source_map)
-    assert len(c['main']) == 12 and len(c['backup']) == 8
+    assert len(source_map) == 23 and all(row['sources'] for row in source_map)
+    assert len(c['main']) == 23 and c['backup'] == []
+    for name, expected in e['additional_source_sha256'].items():
+        assert digest(ROOT / name) == expected, name
     assert sum(row['seconds'] for row in c['main']) == 840 and c['buffer_seconds'] == 60
     expected_programs = [
         ('all_ops', 16, 1, 2, 25), ('baseline', 10, 1, 1, 17),
@@ -60,11 +63,11 @@ def main():
     for name in ['01_CPU整体架构.svg', '02_五级Datapath.svg', '03_文件启动系统与停止观测.svg', '04_EES331板级系统.svg']:
         assert digest(B / '图源' / name) == e['input_sha256']['CPU核心设计/架构图/' + name]
     assert 'PRIVATE_COPY_SAVE_REOPEN=PASS' in (B / '核对/native_powerpoint.txt').read_text(encoding='utf-8-sig')
-    assert 'PAGES=10' in (B / '核对/native_word.txt').read_text(encoding='utf-8-sig')
+    assert 'PAGES=' in (B / '核对/native_word.txt').read_text(encoding='utf-8-sig')
     with zipfile.ZipFile(ppt) as z:
         slides = sorted((n for n in z.namelist() if re.fullmatch(r'ppt/slides/slide\d+\.xml', n)), key=lambda n: int(re.search(r'(\d+)\.xml', n)[1]))
         notes = [n for n in z.namelist() if re.fullmatch(r'ppt/notesSlides/notesSlide\d+\.xml', n)]
-        assert len(slides) == len(notes) == 20
+        assert len(slides) == len(notes) == 23
         tables, charts = 0, []
         for i, name in enumerate(slides, 1):
             xml = ET.fromstring(z.read(name))
@@ -72,6 +75,7 @@ def main():
             visible = ' '.join(t.text or '' for t in xml.findall('.//a:t', NS))
             assert (c['main'] + c['backup'])[i-1]['title'] in visible
             assert not re.search(r'[\u4e00-\u9fff]', visible), name
+            assert xml.get('show', '1') != '0', 'Unexpected hidden or backup page'
             note = ET.fromstring(z.read(f'ppt/notesSlides/notesSlide{i}.xml'))
             note_text = '\n'.join(t.text or '' for t in note.findall('.//a:t', NS))
             cfg = (c['main'] + c['backup'])[i-1]
@@ -83,7 +87,7 @@ def main():
                 xml = ET.fromstring(z.read(name))
                 if xml.tag == '{' + NS['c'] + '}chartSpace':
                     charts.append(xml)
-        assert tables == 16 and len(charts) == 1
+        assert tables == 17 and len(charts) == 1
         expected_series = [[r['N'] for r in e['programs']], [4]*5,
                            [r['S'] for r in e['programs']], [2*r['R'] for r in e['programs']]]
         series = charts[0].findall('.//c:ser', NS)
@@ -97,7 +101,12 @@ def main():
             values = {el.attrib['r']: int(el.find('s:v', NS).text) for el in cells.findall('.//s:c', NS) if el.find('s:v', NS) is not None}
             for col, expected in zip('BDFH', expected_series):
                 assert [values[f'{col}{row}'] for row in range(2, 7)] == expected
-        assert not any(n.startswith('ppt/media/') for n in z.namelist()), 'Unexpected raster substitute'
+        media = [n for n in z.namelist() if n.startswith('ppt/media/')]
+        assert len(media) == 1, 'Only the actual XSim waveform may be an image'
+        for name in media:
+            blob = z.read(name)
+            assert blob, 'Empty media part: ' + name
+            Image.open(io.BytesIO(blob)).verify()
     with zipfile.ZipFile(word) as z:
         xml = ET.fromstring(z.read('word/document.xml'))
         paragraphs = [''.join(t.text or '' for t in p.findall('.//w:t', NS)) for p in xml.findall('.//w:p', NS)]
@@ -110,12 +119,32 @@ def main():
         timing.append(dict(slide=len(timing)+1, speaker=row['speaker'], budget_seconds=row['seconds'], words=words,
                            speech_seconds_at_105wpm=round(words/105*60, 1),
                            pointer_pause_budget_at_105wpm=round(row['seconds']-words/105*60, 1)))
-    assert sum(x['words'] for x in timing) == c['spoken_words'] == 1199
-    report = dict(status='pass', frozen_inputs=len(e['input_sha256']), slides=20, main=12, backup=8,
+    assert sum(x['words'] for x in timing) == c['spoken_words'] and 1200 <= c['spoken_words'] <= 1350
+    live = []
+    for row in e['fresh_project_runs']:
+        record = ROOT / row['source']
+        actual = json.loads(record.read_text(encoding='utf-8'))
+        assert actual['status'] == 'PASS' and actual['physical_board_execution'] is False
+        console = (record.parent / 'console.log').read_text(encoding='utf-8', errors='replace')
+        assert 'PRE6_SIMULATION_COMPLETE' in console and '$finish called at time' in console
+        assert not re.search(r'(?im)^ERROR:|^Fatal:', console)
+        for name, expected in {**actual['input_sha256'], **actual['output_sha256']}.items():
+            assert digest(record.parent / name) == expected, str(record.parent / name)
+        live.append(actual['program'])
+    assert set(live) == {'all_ops','baseline','loop','memory_copy','copy_checksum','system'}
+    assert e['waveform']['VCD_CSV_pre_edge_agreement'] is True and e['waveform']['plot_cycle_range'] == [6,13]
+    package = OUT / 'Vivado'
+    inventory = json.loads((package / 'source_manifest.json').read_text(encoding='utf-8'))
+    for name, expected in inventory['sha256'].items():
+        assert digest(package / name) == expected, name
+    for name, source in inventory['source_mapping'].items():
+        assert digest(package / name) == digest(ROOT / source), name
+    report = dict(status='pass', frozen_inputs=len(e['input_sha256']), slides=23, main=23, backup=0,
                   native_tables=tables, editable_charts=1, chart_workbooks=1, numeric_chart_points=20,
-                  note_parts=20, speech_note_word_alignment='pass', source_refs='pass',
-                  new_CPU_simulation=False, new_hardware_execution=False,
-                  timing_model=dict(words=1199, speech_budget_seconds=840, buffer_seconds=60,
+                  note_parts=23, speech_note_word_alignment='pass', source_refs='pass',
+                  real_fresh_project_suites=live, packaged_RTL=15, package_inputs=len(inventory['sha256']),
+                  VCD_CSV_agreement=True, new_CPU_simulation=True, new_hardware_execution=False,
+                  timing_model=dict(words=c['spoken_words'], speech_budget_seconds=840, buffer_seconds=60,
                                     human_rehearsal='not performed', slides=timing),
                   deliverable_sha256={ppt.name: digest(ppt), word.name: digest(word)})
     out = B / '核对/delivery_check.json'

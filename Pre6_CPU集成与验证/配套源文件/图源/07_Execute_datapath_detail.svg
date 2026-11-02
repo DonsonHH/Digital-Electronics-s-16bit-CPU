@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><title>Execute datapath detail</title><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs><rect width="1280" height="720" fill="white"/>
+<rect x="52" y="181" width="205" height="64" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="154.5" y="208.36" fill="#24384B" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle"><tspan x="154.5" dy="0">Saved Rd16</tspan><tspan x="154.5" dy="26.880000000000003">ID/EX source</tspan></text>
+<rect x="52" y="285" width="205" height="64" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="154.5" y="312.36" fill="#24384B" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle"><tspan x="154.5" dy="0">Saved Rs16</tspan><tspan x="154.5" dy="26.880000000000003">ID/EX source</tspan></text>
+<rect x="316" y="181" width="294" height="64" fill="#E5F4F1" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="463" y="208.36" fill="#24384B" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle"><tspan x="463" dy="0">Rd forwarding</tspan><tspan x="463" dy="26.880000000000003">M ready &gt; W &gt; saved</tspan></text>
+<rect x="316" y="285" width="294" height="64" fill="#E5F4F1" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="463" y="312.36" fill="#24384B" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle"><tspan x="463" dy="0">Rs forwarding</tspan><tspan x="463" dy="26.880000000000003">M ready &gt; W &gt; saved</tspan></text>
+<path d="M257 213 L316 213" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<path d="M257 317 L316 317" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<text x="52" y="157.36" fill="#087C7C" font-family="Arial" font-size="24" font-weight="700" text-anchor="start"><tspan x="52" dy="0">Producer gates: valid / reg_write / dest match / producer fault / load readiness</tspan></text>
+<rect x="671" y="274" width="270" height="95" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="806" y="299.58" fill="#24384B" font-family="Arial" font-size="22" font-weight="700" text-anchor="middle"><tspan x="806" dy="0">ALU A/B input muxes</tspan><tspan x="806" dy="24.64">A = 0 / Rd / Rs</tspan><tspan x="806" dy="24.64">B = 0 / Rs / imm</tspan></text>
+<rect x="1002" y="285" width="226" height="64" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="1115" y="312.36" fill="#24384B" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle"><tspan x="1115" dy="0">alu16</tspan><tspan x="1115" dy="26.880000000000003">result16 + C/V</tspan></text>
+<path d="M610 317 L671 317" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<path d="M941 307 L1002 307" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<path d="M941 335 L1002 335" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<text x="948" y="295.13" fill="#24384B" font-family="Arial" font-size="17" font-weight="400" text-anchor="start"><tspan x="948" dy="0">A16</tspan></text>
+<text x="948" y="355.13" fill="#24384B" font-family="Arial" font-size="17" font-weight="400" text-anchor="start"><tspan x="948" dy="0">B16</tspan></text>
+<path d="M610 213 L638 213 L638 260 L806 260 L806 274" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<circle cx="638" cy="213" r="3" fill="#087C7C"/>
+<rect x="52" y="421" width="205" height="73" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="154.5" y="447.47" fill="#24384B" font-family="Arial" font-size="23" font-weight="700" text-anchor="middle"><tspan x="154.5" dy="0">Immediate / x_pc</tspan><tspan x="154.5" dy="25.76">CW_X function</tspan></text>
+<path d="M257 438 L642 438 L642 335 L671 335" fill="none" stroke="#2867A5" stroke-width="2" marker-end="url(#arr)" />
+<rect x="671" y="181" width="270" height="64" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="806" y="207.47" fill="#24384B" font-family="Arial" font-size="23" font-weight="700" text-anchor="middle"><tspan x="806" dy="0">Equality comparator</tspan><tspan x="806" dy="25.76">forwarded Rd == Rs</tspan></text>
+<path d="M610 213 L671 213" fill="none" stroke="#087C7C" stroke-width="2" marker-end="url(#arr)" />
+<path d="M610 317 L642 317 L642 234 L671 234" fill="none" stroke="#087C7C" stroke-width="2" marker-end="url(#arr)" />
+<rect x="316" y="528" width="335" height="64" fill="#E5F4F1" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="483.5" y="554.47" fill="#24384B" font-family="Arial" font-size="23" font-weight="700" text-anchor="middle"><tspan x="483.5" dy="0">Z candidate mux</tspan><tspan x="483.5" dy="25.76">M CMP &gt; W CMP &gt; flags.Z</tspan></text>
+<rect x="316" y="407" width="335" height="93" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="483.5" y="433.47" fill="#24384B" font-family="Arial" font-size="23" font-weight="700" text-anchor="middle"><tspan x="483.5" dy="0">branch_target16</tspan><tspan x="483.5" dy="25.76">JUMP: ZExt(u8)</tspan><tspan x="483.5" dy="25.76">JZ: x_pc + 1 + SExt(s8)</tspan></text>
+<path d="M257 460 L316 460" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<rect x="738" y="440" width="362" height="79" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="919" y="467.36" fill="#24384B" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle"><tspan x="919" dy="0">Qualified EX decision</tspan><tspan x="919" dy="26.880000000000003">CW / valid / mode / fault</tspan></text>
+<path d="M651 451 L738 466" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<path d="M651 560 L710 560 L710 497 L738 497" fill="none" stroke="#087C7C" stroke-width="2" marker-end="url(#arr)" />
+<text x="1000" y="198.58" fill="#087C7C" font-family="Arial" font-size="22" font-weight="400" text-anchor="start"><tspan x="1000" dy="0">eq to M/W (Z)</tspan></text>
+<path d="M941 213 L1000 213" fill="none" stroke="#087C7C" stroke-width="2" marker-end="url(#arr)" />
+<text x="1002" y="397.47" fill="#24384B" font-family="Arial" font-size="23" font-weight="400" text-anchor="start"><tspan x="1002" dy="0">MEM: exec / EA16</tspan><tspan x="1002" dy="25.76">WB: result / C/V</tspan></text>
+<path d="M1115 349 L1115 377" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<path d="M610 196 L624 196 L624 260 L660 260 L660 654 L1210 654" fill="none" stroke="#087C7C" stroke-width="2" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<text x="52" y="631.36" fill="#087C7C" font-family="Arial" font-size="24" font-weight="700" text-anchor="start"><tspan x="52" dy="0">STR data = forwarded Rd16</tspan><tspan x="52" dy="26.880000000000003">preserved separately from address</tspan></text>
+<text x="52" y="684.69" fill="#BD4E26" font-family="Arial" font-size="21" font-weight="400" text-anchor="start"><tspan x="52" dy="0">Redirect carries target16 to PC. No instruction leaves the five-stage pipeline early.</tspan></text>
+</svg>

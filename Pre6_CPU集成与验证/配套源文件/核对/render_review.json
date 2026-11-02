@@ -1,220 +1,233 @@
 {
   "status": "pass",
+  "PPTX_sha256": "4052ea7d11b2c4180a9f5f2c5ccdcd19fda2350f3ba1c02c463eb97bae280ab8",
+  "Word_sha256": "71b0ad1c1ca31aaa1f7997269763118482d933e1f65b0ad4d04e97cef354174c",
   "PPTX_pages": [
     {
       "slide": 1,
-      "sha256": "51e8628b07c188585b2dcbeb8624bf76b74c6d7566c08ae2eb2344b07211e99c",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "3419724e1db5f6316d71e0c8f3817db48f7daeb8c7461b3dc5e0bb7b08eebc76",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 2,
-      "sha256": "f090d60e12afbdb6745f1ae4872082d30f83f8a357e7bef26767db2e67b0d934",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": false
+      "native_PNG_sha256": "a3f373fc108f9607cfd67f4a525224f2483896dde4cec833518d279790be152a",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 3,
-      "sha256": "af52d931a957952e5145639a7d09b406fc10746a25de2b968351479dd50544bb",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "d5f9730e9e245a757a6fcf29b160db8222fa319de6eaef5f173ec0cb7ba58fd7",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 4,
-      "sha256": "d1122d73d77867accb1f6c52445baf9712feb8637efb60344150e158a48eea8a",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "bca92c742635d027ad71807dc6888ab3cf86641bf0e899ffc143589321a8f975",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 5,
-      "sha256": "94cc1a478703d166f48050509692d0e728d70c70db18146adf9e877f03b085b9",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": false
+      "native_PNG_sha256": "7bcd0b897b95271be4cb758b4a614f40b2adb1e008f85c1533ee7ca307fc7799",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 6,
-      "sha256": "4c7113950a2f283ae19443d176f226a83175ae47b73a34bec1369324ea482d10",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "72b23c890c586503a364bc16b51deca22333f8eeea7630f210526e2a8d2b8a3b",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": false
     },
     {
       "slide": 7,
-      "sha256": "55df93179fd2e51af0ccb1027b9c08e0e1e49796562cbf55271960e21e3c52af",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": false
+      "native_PNG_sha256": "ee0b6156f2fc8c4151ff8e9925746294f543e5d53cb280ffd2e235b3fa090f44",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": false
     },
     {
       "slide": 8,
-      "sha256": "7011d7f3f032b06358bfe323289a6a8870ad04d28928fe68aaa2622411bd79b2",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "0c029372fbe1bcd37bc7db49ecb4e206ef0fa3794775665dcadf37b8a5e5c5f2",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 9,
-      "sha256": "180d5996a264e4842db9250477f7669c224e00424dbde3028a56872db7a391df",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": false
+      "native_PNG_sha256": "dc7959a4ec4f2c654cb0e0632621d5809d0ab06dc3bb5c0608f035412bc9f870",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 10,
-      "sha256": "563bf0e98df1d596c1d48f8d0e340e8c165a59d5bea690b9b4b4bf94faaea500",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": false
+      "native_PNG_sha256": "839a03cbbaa78ed689d73e2c16493d6b70c82bf46a449e75ba7d61b489559518",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 11,
-      "sha256": "58f102ae9f80e4b09c58a2366c111b3886ff02f2217d17e4741ee25a28e08c0a",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "8dd1009c80e62ac7a002d673c67ddf7be358a3494a3f6c0856de4bc082f68a32",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": false
     },
     {
       "slide": 12,
-      "sha256": "0221faae85a070382c2e896dd6a49b67c6ed85701c784f8fe9c0deac5f024c9a",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "cddeddb74cec40d14373e37b3fedf4b9926d452cc7d0ab5318cf20b32adf3c44",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 13,
-      "sha256": "f9381fe287eb4a8d69872d2ad3d2dcbb0e676454239eb64e3b00e87df129173d",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "77971d5b2fcf3a73bc4658cd9d68c73521a8a47e05289232509e552863cc4558",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 14,
-      "sha256": "ec86a0ed731d0c920c93fe44f415ec4e922351e4802272e748b411e7c6e8ee18",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "b17e76845e08eac3712b575cf193e425b0062f5a281545d102988183b22d68df",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 15,
-      "sha256": "6292d938f6c25c079324291f58278fb2e3a1202b761255cf781d5f9870f06dd7",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "e732ffcf4ae27b5958588f82c696e6e811703cb722769654418231853993db84",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 16,
-      "sha256": "2d5cbbf40d31e5c698669124bfdd95ce2b0a738dfe66c89492f011e7e753ed37",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": false
+      "native_PNG_sha256": "8c97f72b3ea65ecf55381647fcb7d4e8d078f30619a1cc296cd48a33de5307a1",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 17,
-      "sha256": "10cd0d3ef3a4e3b932396af0e991c9a864ac6223409e84f1f61f843b293dee46",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "79b4df50110e7f4419b2b89bd31b26980c97cbd928d1cf10ced61992ebec480a",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": false
     },
     {
       "slide": 18,
-      "sha256": "d5989b044a154f971b75fe504522de5cacd26a1ac0ccaf351cb3bc424e3444cf",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": false
+      "native_PNG_sha256": "749f38865120d7f07a00e7bb0041c94d469a0bc8dc09f706eb79b4684944e79c",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 19,
-      "sha256": "88323eccd9decb38f57291832ec9014a86503ff8babc3286dded91ba3ab9dc1e",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": false
+      "native_PNG_sha256": "cf269203bec9f69e82a037cc59c48e17deb0d7bd0e233639e1c490bb9db29afb",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     },
     {
       "slide": 20,
-      "sha256": "76cd5621a3ba574244a0436ead066622d12862273c2d4801b703a3fcbf33cb8f",
-      "visual_review": "pass",
-      "renderer": "Microsoft PowerPoint",
-      "pixel_identical_to_r03": true
+      "native_PNG_sha256": "c6ac6aafa5ffa16de98f5a02ad587e35321ecc0344994bf2832e5443f4f8e42e",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
+    },
+    {
+      "slide": 21,
+      "native_PNG_sha256": "1bb25a755468acd5cf3636aa4bfbc034b07ff3afa1cc20c5562235a1199cd161",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
+    },
+    {
+      "slide": 22,
+      "native_PNG_sha256": "c28652c12d1f61796d7077bf3b1a10bed1079184ca8b42e1c0c07ef002b6ca37",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
+    },
+    {
+      "slide": 23,
+      "native_PNG_sha256": "e1cac73bd6575437367a64835bf181779e68ea19682304c6d1ef9bef94c56463",
+      "review": "pass",
+      "unchanged_from_reviewed_r2g": true
     }
   ],
   "Word_pages": [
     {
       "page": 1,
-      "sha256": "863762c22af27fd0838417f22b977363895945a86c49366619117fd06deaefdf",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "0ba026d5f28364bb3b1bf8b139a149399e1640cc27638ad946a9d5fdc392ae24",
+      "review": "pass"
     },
     {
       "page": 2,
-      "sha256": "a0ce6c8233c6c3a46cd751aa7b9b62cfa19abf941f5acbd4f9a0d9693c5cfca5",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "b040f31f190b054a6946b4c04825ab192fab80e019168f7367f4d77c7667dde4",
+      "review": "pass"
     },
     {
       "page": 3,
-      "sha256": "8780d4a6bf11f5f6bb5f34351b12c26f11931315af580bc74f51deccaedde743",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "6b877065072c5c829e9fa76baf9d217ed48f5e2e1dac68416ccea32aa42f00be",
+      "review": "pass"
     },
     {
       "page": 4,
-      "sha256": "1777a268be0550160d2941a634a7b1926b9b7b082c95141877985c6eb2be38d6",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "e87329713205593b88c815fd87ec1c8803e27fdf15f70acfb419526f4820c20d",
+      "review": "pass"
     },
     {
       "page": 5,
-      "sha256": "fbf211ef2630cd41eb128c3aae96370d5f243f5793cadf334e17fb252b16cc49",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "c7d303a15101e225a872501c64e9bb80e2351f8790032b55828420e7a410f6b4",
+      "review": "pass"
     },
     {
       "page": 6,
-      "sha256": "0de468d23c48559751d660a0030e8e03b91427c800680a7708609f166381fb86",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "3b0566752d5699de0ea1af6a2b10d940f940924c43a34873108ab17d5b01af6b",
+      "review": "pass"
     },
     {
       "page": 7,
-      "sha256": "553ef8edb05c74040c584a126ffa43f4bc0c1c75b6d6492a619b95003c9086e3",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "894ec8cc961e9bfd5f3670a8d8643766c492ef2a951ce49b84f5f41d7eee1d56",
+      "review": "pass"
     },
     {
       "page": 8,
-      "sha256": "640bf7d0895fb4177b0a4916a88c1c7bb5031cb4fce69c90936b81216df07793",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "bb951ac73568319d23fbff9bb7fb5dd5dfffd6685bd078fbc84b1446d59b339d",
+      "review": "pass"
     },
     {
       "page": 9,
-      "sha256": "330987eb8b6240800cd9402f17d6df3d38983cf24c11cc4a3cc585e2a9d8221c",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "cbbaa128e2019ac2671f6ecf96c0b1848953204188439367e7e1193351d788c9",
+      "review": "pass"
     },
     {
       "page": 10,
-      "sha256": "b08d470678acb42e2ab6365dc6daa2ae4fed996b58b08b4e0900e2e25a95efec",
-      "visual_review": "pass",
-      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+      "native_PNG_sha256": "ecc0c535d5f2da35cf66d992dfc6c03b801d5e61a8565b2e6e42b87c39629163",
+      "review": "pass"
+    },
+    {
+      "page": 11,
+      "native_PNG_sha256": "8b129527114263711778a76cf45363fbfb87c47896d9c28b3d12ff82e8c31400",
+      "review": "pass"
+    },
+    {
+      "page": 12,
+      "native_PNG_sha256": "796e266703f867ec3775f2e3a298b65c3c683ee861e63c901de28747f94cc6a6",
+      "review": "pass"
+    },
+    {
+      "page": 13,
+      "native_PNG_sha256": "aff89cd9ac20ac01d8eb53fccd96b29420b1e94313e040f3738a079e5ebccb3f",
+      "review": "pass"
     }
   ],
-  "native_render_receipts": [
-    "native_powerpoint.txt",
-    "native_word.txt"
-  ],
-  "package_hard_findings": 0,
-  "geometry_warning_count": 11,
-  "warning_review": "11 estimates reviewed against native output: no glyph obstruction, clipping or table/footer overlap remains. Native Word fallback used because packaged LibreOffice is absent.",
   "independent_review": {
-    "spec": "closed: ADD zero-stall example and raw TSV excerpt added",
-    "standards": "closed: application ownership fixed; frozen Git blob guard added"
+    "spec": "all 23 pages reviewed; ALU muxes, Z selection, native waveform repaired and closed",
+    "standards": "Word pagination repaired; source/notes/script and all run manifests checked"
   },
-  "human_rehearsal": "not performed",
-  "CPU_or_hardware_rerun": false
+  "course_core_document_sha256": "e3819844c2b7a600e4d53ec1f673a7b09bb00a9b37a9d174b0e9ef8c3df2d6e6",
+  "core_document_equals_frozen_r4": true,
+  "relocated_project": {
+    "path": "D:\\OneDrive - University of Glasgow\\同步文件夹\\大三上\\Courses\\数电\\Pre6_CPU集成与验证\\Vivado\\工程\\project\\pre6_cpu.xpr",
+    "native_open_and_simulate": "PASS",
+    "program": "copy_checksum",
+    "C": 55,
+    "N": 35,
+    "S": 16,
+    "R": 0,
+    "stores": 8,
+    "XPR_relative_RTL_paths_resolve_in_course_folder": 15,
+    "log_sha256": "3cb8ddf56bd8eb1edf87d6368435dddfd6134c576c928a237582db31e0e7e402"
+  },
+  "course_PowerShell_entry_run": "pre6_xsim_b7atz2v5 / PASS / 55 cycles",
+  "human_rehearsal": "not performed; 840-second narration budget plus 60-second buffer",
+  "new_physical_board_execution": false
 }

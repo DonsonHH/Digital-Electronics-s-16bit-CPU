@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><title>Complete EES331 board integration</title><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs><rect width="1280" height="720" fill="white"/>
+<rect x="52" y="160" width="250" height="70" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="177" y="188.25" fill="#24384B" font-family="Arial" font-size="25" font-weight="700" text-anchor="middle"><tspan x="177" dy="0">M19 / 100 MHz</tspan><tspan x="177" dy="28.000000000000004">LVCMOS33 input</tspan></text>
+<rect x="360" y="160" width="164" height="70" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="442" y="190.03" fill="#24384B" font-family="Arial" font-size="27" font-weight="700" text-anchor="middle"><tspan x="442" dy="0">BUFG</tspan></text>
+<path d="M302 195 L360 195" fill="none" stroke="#2867A5" stroke-width="2" marker-end="url(#arr)" />
+<rect x="1012" y="160" width="216" height="70" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="1120" y="186.47" fill="#24384B" font-family="Arial" font-size="23" font-weight="700" text-anchor="middle"><tspan x="1120" dy="0">JTAG debug access</tspan></text>
+<rect x="38" y="309" width="956" height="331" fill="#FFFFFF" stroke="#BCCEDB" stroke-width="1.5"/>
+<text x="52" y="343.25" fill="#24384B" font-family="Arial" font-size="25" font-weight="700" text-anchor="start"><tspan x="52" dy="0">ees331_application</tspan></text>
+<rect x="52" y="402" width="450" height="108" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="277" y="429.36" fill="#24384B" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle"><tspan x="277" dy="0">Reset request synchronizer</tspan><tspan x="277" dy="26.880000000000003">3 stages / 21-bit stable release</tspan><tspan x="277" dy="26.880000000000003">registered core_reset</tspan></text>
+<rect x="620" y="364" width="350" height="77" fill="#E5F4F1" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="795" y="391.36" fill="#24384B" font-family="Arial" font-size="24" font-weight="700" text-anchor="middle"><tspan x="795" dy="0">cpu_system / default AC1</tspan><tspan x="795" dy="26.880000000000003">core + synchronous IM / DM</tspan></text>
+<rect x="620" y="491" width="350" height="70" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="795" y="516.58" fill="#24384B" font-family="Arial" font-size="22" font-weight="700" text-anchor="middle"><tspan x="795" dy="0">Counters / state packing</tspan><tspan x="795" dy="24.64">RF shadow / flags / stop / ID</tspan></text>
+<rect x="1012" y="355" width="216" height="166" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="1120" y="381.47" fill="#24384B" font-family="Arial" font-size="23" font-weight="700" text-anchor="middle"><tspan x="1120" dy="0">VIO</tspan><tspan x="1120" dy="25.76">in0: state256</tspan><tspan x="1120" dy="25.76">in1: counters160</tspan><tspan x="1120" dy="25.76">out0: reset request1</tspan></text>
+<rect x="52" y="554" width="250" height="65" fill="#EAF3F7" stroke="#BCCEDB" stroke-width="1.3"/>
+<text x="177" y="580.47" fill="#24384B" font-family="Arial" font-size="23" font-weight="700" text-anchor="middle"><tspan x="177" dy="0">S1 / L18</tspan><tspan x="177" dy="25.76">active-low request</tspan></text>
+<path d="M302 586 L340 586 L340 510" fill="none" stroke="#BD4E26" stroke-width="2" marker-end="url(#arr)" />
+<path d="M442 230 L442 274 L1120 274 L1120 355" fill="none" stroke="#2867A5" stroke-width="2" marker-end="url(#arr)" />
+<path d="M792 274 L792 364" fill="none" stroke="#2867A5" stroke-width="2" marker-end="url(#arr)" />
+<circle cx="792" cy="274" r="3" fill="#2867A5"/>
+<path d="M277 274 L277 402" fill="none" stroke="#2867A5" stroke-width="2" marker-end="url(#arr)" />
+<path d="M442 274 L277 274" fill="none" stroke="#2867A5" stroke-width="2"  />
+<circle cx="442" cy="274" r="3" fill="#2867A5"/>
+<path d="M502 449 L560 449 L560 419 L620 419" fill="none" stroke="#BD4E26" stroke-width="2" marker-end="url(#arr)" />
+<path d="M560 449 L560 526 L620 526" fill="none" stroke="#BD4E26" stroke-width="2" marker-end="url(#arr)" />
+<circle cx="560" cy="449" r="3" fill="#BD4E26"/>
+<text x="505" y="548.91" fill="#BD4E26" font-family="Arial" font-size="19" font-weight="400" text-anchor="start"><tspan x="505" dy="0">core_reset</tspan></text>
+<path d="M795 441 L795 491" fill="none" stroke="#087C7C" stroke-width="2" marker-end="url(#arr)" />
+<path d="M970 386 L1012 386" fill="none" stroke="#087C7C" stroke-width="2" marker-end="url(#arr)" />
+<path d="M970 517 L1012 517" fill="none" stroke="#087C7C" stroke-width="2" marker-end="url(#arr)" />
+<path d="M1228 195 L1250 195 L1250 387 L1228 387" fill="none" stroke="#24384B" stroke-width="2" marker-end="url(#arr)" />
+<path d="M1012 484 L1002 484 L1002 618 L475 618 L475 510" fill="none" stroke="#BD4E26" stroke-width="2" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<text x="589" y="603.58" fill="#BD4E26" font-family="Arial" font-size="22" font-weight="400" text-anchor="start"><tspan x="589" dy="0">debug reset request</tspan></text>
+<text x="52" y="677.25" fill="#24384B" font-family="Arial" font-size="25" font-weight="700" text-anchor="start"><tspan x="52" dy="0">LEDs: status / heartbeat. VIO reads stable results and counters.</tspan></text>
+</svg>

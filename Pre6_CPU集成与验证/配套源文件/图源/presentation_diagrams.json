@@ -1,0 +1,3854 @@
+{
+  "10": {
+    "width": 1280,
+    "height": 720,
+    "title": "Complete EES331 board integration",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 160,
+        "w": 250,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "M19 / 100 MHz\nLVCMOS33 input",
+        "x": 58,
+        "y": 166,
+        "w": 238,
+        "h": 58,
+        "size": 25,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 360,
+        "y": 160,
+        "w": 164,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "BUFG",
+        "x": 366,
+        "y": 166,
+        "w": 152,
+        "h": 58,
+        "size": 27,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            302,
+            195
+          ],
+          [
+            360,
+            195
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 1012,
+        "y": 160,
+        "w": 216,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "JTAG debug access",
+        "x": 1018,
+        "y": 166,
+        "w": 204,
+        "h": 58,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 38,
+        "y": 309,
+        "w": 956,
+        "h": 331,
+        "fill": "#FFFFFF",
+        "stroke": "#BCCEDB",
+        "width": 1.5
+      },
+      {
+        "kind": "text",
+        "text": "ees331_application",
+        "x": 52,
+        "y": 321,
+        "w": 500,
+        "h": 30,
+        "size": 25,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 402,
+        "w": 450,
+        "h": 108,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Reset request synchronizer\n3 stages / 21-bit stable release\nregistered core_reset",
+        "x": 58,
+        "y": 408,
+        "w": 438,
+        "h": 96,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 620,
+        "y": 364,
+        "w": 350,
+        "h": 77,
+        "fill": "#E5F4F1",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "cpu_system / default AC1\ncore + synchronous IM / DM",
+        "x": 626,
+        "y": 370,
+        "w": 338,
+        "h": 65,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 620,
+        "y": 491,
+        "w": 350,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Counters / state packing\nRF shadow / flags / stop / ID",
+        "x": 626,
+        "y": 497,
+        "w": 338,
+        "h": 58,
+        "size": 22,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 1012,
+        "y": 355,
+        "w": 216,
+        "h": 166,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "VIO\nin0: state256\nin1: counters160\nout0: reset request1",
+        "x": 1018,
+        "y": 361,
+        "w": 204,
+        "h": 154,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 554,
+        "w": 250,
+        "h": 65,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "S1 / L18\nactive-low request",
+        "x": 58,
+        "y": 560,
+        "w": 238,
+        "h": 53,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            302,
+            586
+          ],
+          [
+            340,
+            586
+          ],
+          [
+            340,
+            510
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            442,
+            230
+          ],
+          [
+            442,
+            274
+          ],
+          [
+            1120,
+            274
+          ],
+          [
+            1120,
+            355
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            792,
+            274
+          ],
+          [
+            792,
+            364
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "circle",
+        "x": 789,
+        "y": 271,
+        "w": 6,
+        "h": 6,
+        "fill": "#2867A5",
+        "stroke": "none",
+        "width": 0
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            277,
+            274
+          ],
+          [
+            277,
+            402
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            442,
+            274
+          ],
+          [
+            277,
+            274
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "circle",
+        "x": 439,
+        "y": 271,
+        "w": 6,
+        "h": 6,
+        "fill": "#2867A5",
+        "stroke": "none",
+        "width": 0
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            502,
+            449
+          ],
+          [
+            560,
+            449
+          ],
+          [
+            560,
+            419
+          ],
+          [
+            620,
+            419
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            560,
+            449
+          ],
+          [
+            560,
+            526
+          ],
+          [
+            620,
+            526
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "circle",
+        "x": 557,
+        "y": 446,
+        "w": 6,
+        "h": 6,
+        "fill": "#BD4E26",
+        "stroke": "none",
+        "width": 0
+      },
+      {
+        "kind": "text",
+        "text": "core_reset",
+        "x": 505,
+        "y": 532,
+        "w": 120,
+        "h": 28,
+        "size": 19,
+        "fill": "#BD4E26",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            795,
+            441
+          ],
+          [
+            795,
+            491
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            970,
+            386
+          ],
+          [
+            1012,
+            386
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            970,
+            517
+          ],
+          [
+            1012,
+            517
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1228,
+            195
+          ],
+          [
+            1250,
+            195
+          ],
+          [
+            1250,
+            387
+          ],
+          [
+            1228,
+            387
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1012,
+            484
+          ],
+          [
+            1002,
+            484
+          ],
+          [
+            1002,
+            618
+          ],
+          [
+            475,
+            618
+          ],
+          [
+            475,
+            510
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 2,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "text",
+        "text": "debug reset request",
+        "x": 589,
+        "y": 584,
+        "w": 390,
+        "h": 27,
+        "size": 22,
+        "fill": "#BD4E26",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "LEDs: status / heartbeat. VIO reads stable results and counters.",
+        "x": 52,
+        "y": 655,
+        "w": 1176,
+        "h": 30,
+        "size": 25,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "left"
+      }
+    ]
+  },
+  "05": {
+    "width": 1280,
+    "height": 720,
+    "title": "Complete CPU architecture",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 149,
+        "w": 276,
+        "h": 67,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Mode FSM\nRUN / drain / stopped",
+        "x": 58,
+        "y": 155,
+        "w": 264,
+        "h": 55,
+        "size": 25,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 351,
+        "y": 149,
+        "w": 606,
+        "h": 67,
+        "fill": "#E5F4F1",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Cross-stage hazard / event arbitration\nRAW readiness, age, redirect, halt, fault",
+        "x": 357,
+        "y": 155,
+        "w": 594,
+        "h": 55,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 980,
+        "y": 149,
+        "w": 248,
+        "h": 67,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "ID decode\nopcode / use / CW",
+        "x": 986,
+        "y": 155,
+        "w": 236,
+        "h": 55,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            328,
+            181
+          ],
+          [
+            351,
+            181
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            980,
+            181
+          ],
+          [
+            957,
+            181
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 282,
+        "w": 216,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "IFCU\nfetch / PC enable",
+        "x": 58,
+        "y": 288,
+        "w": 204,
+        "h": 52,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 399,
+        "w": 216,
+        "h": 88,
+        "fill": "#FFFFFF",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "pc16\nnext PC + PC state",
+        "x": 58,
+        "y": 405,
+        "w": 204,
+        "h": 76,
+        "size": 19,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            127,
+            245
+          ],
+          [
+            127,
+            282
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            160,
+            346
+          ],
+          [
+            160,
+            399
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 276,
+        "y": 270,
+        "w": 8,
+        "h": 238,
+        "fill": "#DBE9F5",
+        "stroke": "#BCCEDB",
+        "width": 0.7
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            268,
+            434
+          ],
+          [
+            292,
+            434
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 292,
+        "y": 282,
+        "w": 216,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "IDCU\nissue / hold / cancel",
+        "x": 298,
+        "y": 288,
+        "w": 204,
+        "h": 52,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 292,
+        "y": 399,
+        "w": 216,
+        "h": 88,
+        "fill": "#FFFFFF",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "regfile4x16\nimm_ext16",
+        "x": 298,
+        "y": 405,
+        "w": 204,
+        "h": 76,
+        "size": 19,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            367,
+            245
+          ],
+          [
+            367,
+            282
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            400,
+            346
+          ],
+          [
+            400,
+            399
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 516,
+        "y": 270,
+        "w": 8,
+        "h": 238,
+        "fill": "#DBE9F5",
+        "stroke": "#BCCEDB",
+        "width": 0.7
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            508,
+            434
+          ],
+          [
+            532,
+            434
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 532,
+        "y": 282,
+        "w": 216,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "EXCU\nALU / redirect / stop",
+        "x": 538,
+        "y": 288,
+        "w": 204,
+        "h": 52,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 532,
+        "y": 399,
+        "w": 216,
+        "h": 88,
+        "fill": "#FFFFFF",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "operand_forward\nalu16 / branch_target16\nZ candidate select",
+        "x": 538,
+        "y": 405,
+        "w": 204,
+        "h": 76,
+        "size": 19,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            607,
+            245
+          ],
+          [
+            607,
+            282
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            640,
+            346
+          ],
+          [
+            640,
+            399
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 756,
+        "y": 270,
+        "w": 8,
+        "h": 238,
+        "fill": "#DBE9F5",
+        "stroke": "#BCCEDB",
+        "width": 0.7
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            748,
+            434
+          ],
+          [
+            772,
+            434
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 772,
+        "y": 282,
+        "w": 216,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "MEMCU\naccess / range",
+        "x": 778,
+        "y": 288,
+        "w": 204,
+        "h": 52,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 772,
+        "y": 399,
+        "w": 216,
+        "h": 88,
+        "fill": "#FFFFFF",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "EA / store payload\nqualified memory bus",
+        "x": 778,
+        "y": 405,
+        "w": 204,
+        "h": 76,
+        "size": 19,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            847,
+            245
+          ],
+          [
+            847,
+            282
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            880,
+            346
+          ],
+          [
+            880,
+            399
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 996,
+        "y": 270,
+        "w": 8,
+        "h": 238,
+        "fill": "#DBE9F5",
+        "stroke": "#BCCEDB",
+        "width": 0.7
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            988,
+            434
+          ],
+          [
+            1012,
+            434
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 1012,
+        "y": 282,
+        "w": 216,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "WBCU\nRF / flags enables",
+        "x": 1018,
+        "y": 288,
+        "w": 204,
+        "h": 52,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 1012,
+        "y": 399,
+        "w": 216,
+        "h": 88,
+        "fill": "#FFFFFF",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "WB result select\nRF write / flags_reg",
+        "x": 1018,
+        "y": 405,
+        "w": 204,
+        "h": 76,
+        "size": 19,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1087,
+            245
+          ],
+          [
+            1087,
+            282
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1120,
+            346
+          ],
+          [
+            1120,
+            399
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            700,
+            216
+          ],
+          [
+            700,
+            245
+          ],
+          [
+            127,
+            245
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            700,
+            245
+          ],
+          [
+            1087,
+            245
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            980,
+            203
+          ],
+          [
+            962,
+            203
+          ],
+          [
+            962,
+            265
+          ],
+          [
+            400,
+            265
+          ],
+          [
+            400,
+            282
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            508,
+            316
+          ],
+          [
+            532,
+            316
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            748,
+            316
+          ],
+          [
+            772,
+            316
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            988,
+            316
+          ],
+          [
+            1012,
+            316
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "CW_X18",
+        "x": 660,
+        "y": 351,
+        "w": 80,
+        "h": 22,
+        "size": 17,
+        "fill": "#2867A5",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "CW_M7",
+        "x": 900,
+        "y": 351,
+        "w": 80,
+        "h": 22,
+        "size": 17,
+        "fill": "#2867A5",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "CW_W5",
+        "x": 1140,
+        "y": 351,
+        "w": 80,
+        "h": 22,
+        "size": 17,
+        "fill": "#2867A5",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 536,
+        "w": 300,
+        "h": 66,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Sync IM / 256 x 16\nregistered dout = D boundary",
+        "x": 58,
+        "y": 542,
+        "w": 288,
+        "h": 54,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 772,
+        "y": 536,
+        "w": 300,
+        "h": 66,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Sync DM / 256 x 16\nregistered dout = W load",
+        "x": 778,
+        "y": 542,
+        "w": 288,
+        "h": 54,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            160,
+            472
+          ],
+          [
+            160,
+            536
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            352,
+            568
+          ],
+          [
+            370,
+            568
+          ],
+          [
+            370,
+            472
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            880,
+            472
+          ],
+          [
+            880,
+            536
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1072,
+            570
+          ],
+          [
+            1120,
+            570
+          ],
+          [
+            1120,
+            472
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            640,
+            472
+          ],
+          [
+            640,
+            507
+          ],
+          [
+            1240,
+            507
+          ],
+          [
+            1240,
+            237
+          ],
+          [
+            920,
+            237
+          ],
+          [
+            920,
+            216
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "Feedback: src/dest + use\nvalid/fault + eq + EA range\nstop tags / drain state",
+        "x": 420,
+        "y": 536,
+        "w": 340,
+        "h": 81,
+        "size": 22,
+        "fill": "#087C7C",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1120,
+            399
+          ],
+          [
+            1120,
+            376
+          ],
+          [
+            400,
+            376
+          ],
+          [
+            400,
+            399
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "CU names denote logical responsibilities inside datapath_core.",
+        "x": 412,
+        "y": 625,
+        "w": 816,
+        "h": 35,
+        "size": 21,
+        "fill": "#087C7C",
+        "bold": true,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Four boundaries preserve each instruction: data + PC/valid/fault + remaining CW",
+        "x": 52,
+        "y": 659,
+        "w": 1176,
+        "h": 26,
+        "size": 20,
+        "fill": "#2867A5",
+        "bold": false,
+        "align": "left"
+      }
+    ]
+  },
+  "06": {
+    "width": 1280,
+    "height": 720,
+    "title": "Complete five-stage datapath",
+    "objects": [
+      {
+        "kind": "text",
+        "text": "IF",
+        "x": 52,
+        "y": 144,
+        "w": 216,
+        "h": 35,
+        "size": 27,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "ID",
+        "x": 292,
+        "y": 144,
+        "w": 216,
+        "h": 35,
+        "size": 27,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "EX",
+        "x": 532,
+        "y": 144,
+        "w": 216,
+        "h": 35,
+        "size": 27,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "MEM",
+        "x": 772,
+        "y": 144,
+        "w": 216,
+        "h": 35,
+        "size": 27,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "text",
+        "text": "WB",
+        "x": 1012,
+        "y": 144,
+        "w": 216,
+        "h": 35,
+        "size": 27,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 278,
+        "y": 247,
+        "w": 7,
+        "h": 337,
+        "fill": "#DBE9F5",
+        "stroke": "#BCCEDB",
+        "width": 0.6
+      },
+      {
+        "kind": "text",
+        "text": "IF/ID",
+        "x": 241,
+        "y": 588,
+        "w": 85,
+        "h": 25,
+        "size": 18,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 518,
+        "y": 247,
+        "w": 7,
+        "h": 337,
+        "fill": "#DBE9F5",
+        "stroke": "#BCCEDB",
+        "width": 0.6
+      },
+      {
+        "kind": "text",
+        "text": "ID/EX",
+        "x": 481,
+        "y": 588,
+        "w": 85,
+        "h": 25,
+        "size": 18,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 758,
+        "y": 247,
+        "w": 7,
+        "h": 337,
+        "fill": "#DBE9F5",
+        "stroke": "#BCCEDB",
+        "width": 0.6
+      },
+      {
+        "kind": "text",
+        "text": "EX/MEM",
+        "x": 721,
+        "y": 588,
+        "w": 85,
+        "h": 25,
+        "size": 18,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 998,
+        "y": 247,
+        "w": 7,
+        "h": 337,
+        "fill": "#DBE9F5",
+        "stroke": "#BCCEDB",
+        "width": 0.6
+      },
+      {
+        "kind": "text",
+        "text": "MEM/WB",
+        "x": 961,
+        "y": 588,
+        "w": 85,
+        "h": 25,
+        "size": 18,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 272,
+        "w": 216,
+        "h": 71,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "pc16 / next-PC mux\nrst > redir > hold > +1",
+        "x": 58,
+        "y": 278,
+        "w": 204,
+        "h": 59,
+        "size": 20,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 449,
+        "w": 216,
+        "h": 67,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Sync IM\naddr16 / en / dout16",
+        "x": 58,
+        "y": 455,
+        "w": 204,
+        "h": 55,
+        "size": 22,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 292,
+        "y": 272,
+        "w": 216,
+        "h": 71,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "regfile4x16\n2R / 1W + WB bypass",
+        "x": 298,
+        "y": 278,
+        "w": 204,
+        "h": 59,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 292,
+        "y": 449,
+        "w": 216,
+        "h": 67,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "imm_ext16\nzero / sign extend",
+        "x": 298,
+        "y": 455,
+        "w": 204,
+        "h": 55,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 532,
+        "y": 247,
+        "w": 216,
+        "h": 69,
+        "fill": "#E5F4F1",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "operand_forward\nRd + Rs channels",
+        "x": 538,
+        "y": 253,
+        "w": 204,
+        "h": 57,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 532,
+        "y": 351,
+        "w": 216,
+        "h": 69,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "alu16 + input mux\nPASS,+,-,AND,OR",
+        "x": 538,
+        "y": 357,
+        "w": 204,
+        "h": 57,
+        "size": 20,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 532,
+        "y": 482,
+        "w": 216,
+        "h": 69,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Target + Z select\nJUMP abs / JZ rel",
+        "x": 538,
+        "y": 488,
+        "w": 204,
+        "h": 57,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 772,
+        "y": 351,
+        "w": 216,
+        "h": 69,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "MEM eligibility\nEA16 / valid / fault",
+        "x": 778,
+        "y": 357,
+        "w": 204,
+        "h": 57,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 772,
+        "y": 482,
+        "w": 216,
+        "h": 69,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Sync DM\nread / write once",
+        "x": 778,
+        "y": 488,
+        "w": 204,
+        "h": 57,
+        "size": 22,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 1012,
+        "y": 351,
+        "w": 216,
+        "h": 69,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "WB result mux\nexec16 / load16",
+        "x": 1018,
+        "y": 357,
+        "w": 204,
+        "h": 57,
+        "size": 22,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 1012,
+        "y": 482,
+        "w": 216,
+        "h": 69,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "WB enables\nRF + flags_reg",
+        "x": 1018,
+        "y": 488,
+        "w": 204,
+        "h": 57,
+        "size": 22,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            160,
+            343
+          ],
+          [
+            160,
+            449
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            268,
+            482
+          ],
+          [
+            281,
+            482
+          ],
+          [
+            281,
+            306
+          ],
+          [
+            292,
+            306
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            508,
+            306
+          ],
+          [
+            532,
+            282
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            508,
+            482
+          ],
+          [
+            520,
+            482
+          ],
+          [
+            520,
+            397
+          ],
+          [
+            532,
+            397
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            640,
+            316
+          ],
+          [
+            640,
+            351
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            748,
+            385
+          ],
+          [
+            772,
+            385
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            880,
+            420
+          ],
+          [
+            880,
+            482
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            988,
+            385
+          ],
+          [
+            1012,
+            385
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            988,
+            516
+          ],
+          [
+            1000,
+            516
+          ],
+          [
+            1000,
+            401
+          ],
+          [
+            1012,
+            401
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1120,
+            420
+          ],
+          [
+            1120,
+            482
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            880,
+            351
+          ],
+          [
+            880,
+            210
+          ],
+          [
+            607,
+            210
+          ],
+          [
+            607,
+            247
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1120,
+            351
+          ],
+          [
+            1120,
+            192
+          ],
+          [
+            680,
+            192
+          ],
+          [
+            680,
+            247
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "M ready, not load",
+        "x": 766,
+        "y": 183,
+        "w": 230,
+        "h": 26,
+        "size": 19,
+        "fill": "#087C7C",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "W result",
+        "x": 1045,
+        "y": 168,
+        "w": 173,
+        "h": 25,
+        "size": 19,
+        "fill": "#087C7C",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1120,
+            551
+          ],
+          [
+            1120,
+            631
+          ],
+          [
+            287,
+            631
+          ],
+          [
+            287,
+            330
+          ],
+          [
+            292,
+            330
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "WB data / RF bypass",
+        "x": 52,
+        "y": 635,
+        "w": 450,
+        "h": 26,
+        "size": 20,
+        "fill": "#087C7C",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            734,
+            282
+          ],
+          [
+            754,
+            282
+          ],
+          [
+            754,
+            568
+          ],
+          [
+            959,
+            568
+          ],
+          [
+            959,
+            551
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "text",
+        "text": "STR data16",
+        "x": 815,
+        "y": 574,
+        "w": 159,
+        "h": 25,
+        "size": 19,
+        "fill": "#087C7C",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            730,
+            420
+          ],
+          [
+            748,
+            420
+          ],
+          [
+            748,
+            452
+          ],
+          [
+            764,
+            452
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "eq to M/W candidate",
+        "x": 530,
+        "y": 435,
+        "w": 210,
+        "h": 25,
+        "size": 18,
+        "fill": "#087C7C",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1110,
+            551
+          ],
+          [
+            1110,
+            644
+          ],
+          [
+            563,
+            644
+          ],
+          [
+            563,
+            551
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 1.8,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            868,
+            420
+          ],
+          [
+            768,
+            420
+          ],
+          [
+            768,
+            618
+          ],
+          [
+            601,
+            618
+          ],
+          [
+            601,
+            551
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 1.8,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            532,
+            518
+          ],
+          [
+            520,
+            518
+          ],
+          [
+            520,
+            227
+          ],
+          [
+            36,
+            227
+          ],
+          [
+            36,
+            305
+          ],
+          [
+            52,
+            305
+          ]
+        ],
+        "stroke": "#BD4E26",
+        "width": 2,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "text",
+        "text": "qualified redirect / target16",
+        "x": 52,
+        "y": 198,
+        "w": 412,
+        "h": 26,
+        "size": 20,
+        "fill": "#BD4E26",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "D: inst/PC/valid/fault    X: sources/imm/CW18    M: exec/store/CW7    W: result/CW5",
+        "x": 52,
+        "y": 663,
+        "w": 1176,
+        "h": 20,
+        "size": 16,
+        "fill": "#2867A5",
+        "bold": false,
+        "align": "left"
+      }
+    ]
+  },
+  "07": {
+    "width": 1280,
+    "height": 720,
+    "title": "Execute datapath detail",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 181,
+        "w": 205,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Saved Rd16\nID/EX source",
+        "x": 58,
+        "y": 187,
+        "w": 193,
+        "h": 52,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 285,
+        "w": 205,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Saved Rs16\nID/EX source",
+        "x": 58,
+        "y": 291,
+        "w": 193,
+        "h": 52,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 316,
+        "y": 181,
+        "w": 294,
+        "h": 64,
+        "fill": "#E5F4F1",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Rd forwarding\nM ready > W > saved",
+        "x": 322,
+        "y": 187,
+        "w": 282,
+        "h": 52,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 316,
+        "y": 285,
+        "w": 294,
+        "h": 64,
+        "fill": "#E5F4F1",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Rs forwarding\nM ready > W > saved",
+        "x": 322,
+        "y": 291,
+        "w": 282,
+        "h": 52,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            257,
+            213
+          ],
+          [
+            316,
+            213
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            257,
+            317
+          ],
+          [
+            316,
+            317
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "Producer gates: valid / reg_write / dest match / producer fault / load readiness",
+        "x": 52,
+        "y": 136,
+        "w": 1176,
+        "h": 30,
+        "size": 24,
+        "fill": "#087C7C",
+        "bold": true,
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 671,
+        "y": 274,
+        "w": 270,
+        "h": 95,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "ALU A/B input muxes\nA = 0 / Rd / Rs\nB = 0 / Rs / imm",
+        "x": 677,
+        "y": 280,
+        "w": 258,
+        "h": 83,
+        "size": 22,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 1002,
+        "y": 285,
+        "w": 226,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "alu16\nresult16 + C/V",
+        "x": 1008,
+        "y": 291,
+        "w": 214,
+        "h": 52,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            610,
+            317
+          ],
+          [
+            671,
+            317
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            941,
+            307
+          ],
+          [
+            1002,
+            307
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            941,
+            335
+          ],
+          [
+            1002,
+            335
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "A16",
+        "x": 948,
+        "y": 280,
+        "w": 48,
+        "h": 24,
+        "size": 17,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "B16",
+        "x": 948,
+        "y": 340,
+        "w": 48,
+        "h": 24,
+        "size": 17,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            610,
+            213
+          ],
+          [
+            638,
+            213
+          ],
+          [
+            638,
+            260
+          ],
+          [
+            806,
+            260
+          ],
+          [
+            806,
+            274
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "circle",
+        "x": 635,
+        "y": 210,
+        "w": 6,
+        "h": 6,
+        "fill": "#087C7C",
+        "stroke": "none",
+        "width": 0
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 421,
+        "w": 205,
+        "h": 73,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Immediate / x_pc\nCW_X function",
+        "x": 58,
+        "y": 427,
+        "w": 193,
+        "h": 61,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            257,
+            438
+          ],
+          [
+            642,
+            438
+          ],
+          [
+            642,
+            335
+          ],
+          [
+            671,
+            335
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 671,
+        "y": 181,
+        "w": 270,
+        "h": 64,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Equality comparator\nforwarded Rd == Rs",
+        "x": 677,
+        "y": 187,
+        "w": 258,
+        "h": 52,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            610,
+            213
+          ],
+          [
+            671,
+            213
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            610,
+            317
+          ],
+          [
+            642,
+            317
+          ],
+          [
+            642,
+            234
+          ],
+          [
+            671,
+            234
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 316,
+        "y": 528,
+        "w": 335,
+        "h": 64,
+        "fill": "#E5F4F1",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Z candidate mux\nM CMP > W CMP > flags.Z",
+        "x": 322,
+        "y": 534,
+        "w": 323,
+        "h": 52,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 316,
+        "y": 407,
+        "w": 335,
+        "h": 93,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "branch_target16\nJUMP: ZExt(u8)\nJZ: x_pc + 1 + SExt(s8)",
+        "x": 322,
+        "y": 413,
+        "w": 323,
+        "h": 81,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            257,
+            460
+          ],
+          [
+            316,
+            460
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 738,
+        "y": 440,
+        "w": 362,
+        "h": 79,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Qualified EX decision\nCW / valid / mode / fault",
+        "x": 744,
+        "y": 446,
+        "w": 350,
+        "h": 67,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            651,
+            451
+          ],
+          [
+            738,
+            466
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            651,
+            560
+          ],
+          [
+            710,
+            560
+          ],
+          [
+            710,
+            497
+          ],
+          [
+            738,
+            497
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "eq to M/W (Z)",
+        "x": 1000,
+        "y": 179,
+        "w": 228,
+        "h": 31,
+        "size": 22,
+        "fill": "#087C7C",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            941,
+            213
+          ],
+          [
+            1000,
+            213
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "MEM: exec / EA16\nWB: result / C/V",
+        "x": 1002,
+        "y": 377,
+        "w": 226,
+        "h": 67,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1115,
+            349
+          ],
+          [
+            1115,
+            377
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            610,
+            196
+          ],
+          [
+            624,
+            196
+          ],
+          [
+            624,
+            260
+          ],
+          [
+            660,
+            260
+          ],
+          [
+            660,
+            654
+          ],
+          [
+            1210,
+            654
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": true
+      },
+      {
+        "kind": "text",
+        "text": "STR data = forwarded Rd16\npreserved separately from address",
+        "x": 52,
+        "y": 610,
+        "w": 550,
+        "h": 64,
+        "size": 24,
+        "fill": "#087C7C",
+        "bold": true,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Redirect carries target16 to PC. No instruction leaves the five-stage pipeline early.",
+        "x": 52,
+        "y": 666,
+        "w": 1176,
+        "h": 25,
+        "size": 21,
+        "fill": "#BD4E26",
+        "bold": false,
+        "align": "left"
+      }
+    ]
+  },
+  "08": {
+    "width": 1280,
+    "height": 720,
+    "title": "Complete pipeline CU",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 149,
+        "w": 294,
+        "h": 72,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Global mode FSM\nFive operating modes",
+        "x": 58,
+        "y": 155,
+        "w": 282,
+        "h": 60,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 373,
+        "y": 149,
+        "w": 855,
+        "h": 72,
+        "fill": "#E5F4F1",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Cross-stage arbitration\nReset > MEM fault > EX stop > redirect > load-use",
+        "x": 379,
+        "y": 155,
+        "w": 843,
+        "h": 60,
+        "size": 25,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            346,
+            185
+          ],
+          [
+            373,
+            185
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 278,
+        "w": 312,
+        "h": 72,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "ID decoder\nopcode / sources / use",
+        "x": 58,
+        "y": 284,
+        "w": 300,
+        "h": 60,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 407,
+        "y": 278,
+        "w": 821,
+        "h": 72,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Hazard detection + forwarding\nX/M/W destinations, validity, faults and readiness",
+        "x": 413,
+        "y": 284,
+        "w": 809,
+        "h": 60,
+        "size": 24,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            364,
+            314
+          ],
+          [
+            407,
+            314
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "CW_X18 travels to X; remaining fields become CW_M7 and CW_W5",
+        "x": 52,
+        "y": 381,
+        "w": 1176,
+        "h": 35,
+        "size": 25,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1228,
+            314
+          ],
+          [
+            1242,
+            314
+          ],
+          [
+            1242,
+            185
+          ],
+          [
+            1228,
+            185
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1205,
+            221
+          ],
+          [
+            1257,
+            221
+          ],
+          [
+            1257,
+            425
+          ],
+          [
+            160,
+            425
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": false,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 447,
+        "w": 216,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "IF control\nPC / IM enable",
+        "x": 58,
+        "y": 453,
+        "w": 204,
+        "h": 58,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            160,
+            425
+          ],
+          [
+            160,
+            447
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 292,
+        "y": 447,
+        "w": 216,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "ID control\nhold / issue / valid",
+        "x": 298,
+        "y": 453,
+        "w": 204,
+        "h": 58,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            400,
+            425
+          ],
+          [
+            400,
+            447
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 532,
+        "y": 447,
+        "w": 216,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "EX control\nALU / Z / redirect",
+        "x": 538,
+        "y": 453,
+        "w": 204,
+        "h": 58,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            640,
+            425
+          ],
+          [
+            640,
+            447
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 772,
+        "y": 447,
+        "w": 216,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "MEM control\ndm_en / dm_we",
+        "x": 778,
+        "y": 453,
+        "w": 204,
+        "h": 58,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            880,
+            425
+          ],
+          [
+            880,
+            447
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 1012,
+        "y": 447,
+        "w": 216,
+        "h": 70,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "WB control\nrf_we / z_we / cv_we",
+        "x": 1018,
+        "y": 453,
+        "w": 204,
+        "h": 58,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            1120,
+            425
+          ],
+          [
+            1120,
+            447
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            508,
+            482
+          ],
+          [
+            532,
+            482
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            748,
+            482
+          ],
+          [
+            772,
+            482
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            988,
+            482
+          ],
+          [
+            1012,
+            482
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "Registered fields: CW_X18 / CW_M7 / CW_W5",
+        "x": 532,
+        "y": 525,
+        "w": 696,
+        "h": 25,
+        "size": 21,
+        "fill": "#2867A5",
+        "bold": true,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Actual action = intention qualified by valid, fault, mode and reset",
+        "x": 52,
+        "y": 561,
+        "w": 1176,
+        "h": 38,
+        "size": 26,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Advance: move token     Hold: keep front     Bubble: invalid X     Flush: cancel younger",
+        "x": 52,
+        "y": 610,
+        "w": 1176,
+        "h": 35,
+        "size": 23,
+        "fill": "#BD4E26",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "Local CU blocks denote responsibilities inside datapath_core.",
+        "x": 52,
+        "y": 655,
+        "w": 1176,
+        "h": 27,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      }
+    ]
+  },
+  "09": {
+    "width": 1280,
+    "height": 720,
+    "title": "Complete core system and observers",
+    "objects": [
+      {
+        "kind": "rect",
+        "x": 38,
+        "y": 224,
+        "w": 690,
+        "h": 402,
+        "fill": "#FFFFFF",
+        "stroke": "#BCCEDB",
+        "width": 1.5
+      },
+      {
+        "kind": "text",
+        "text": "cpu_system",
+        "x": 52,
+        "y": 235,
+        "w": 600,
+        "h": 34,
+        "size": 27,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 150,
+        "w": 660,
+        "h": 55,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "IM_INIT_FILE / DM_INIT_FILE: full 256-word images",
+        "x": 58,
+        "y": 156,
+        "w": 648,
+        "h": 43,
+        "size": 22,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 52,
+        "y": 324,
+        "w": 172,
+        "h": 119,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Sync IM\n256 x 16\nregistered D data",
+        "x": 58,
+        "y": 330,
+        "w": 160,
+        "h": 107,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 274,
+        "y": 324,
+        "w": 220,
+        "h": 119,
+        "fill": "#E5F4F1",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "datapath_core\nCU + DP\n12 execution ports",
+        "x": 280,
+        "y": 330,
+        "w": 208,
+        "h": 107,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "rect",
+        "x": 544,
+        "y": 324,
+        "w": 168,
+        "h": 119,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "Sync DM\n256 x 16\nregistered W load",
+        "x": 550,
+        "y": 330,
+        "w": 156,
+        "h": 107,
+        "size": 21,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            274,
+            351
+          ],
+          [
+            224,
+            351
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            224,
+            412
+          ],
+          [
+            274,
+            412
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            494,
+            351
+          ],
+          [
+            544,
+            351
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            544,
+            412
+          ],
+          [
+            494,
+            412
+          ]
+        ],
+        "stroke": "#24384B",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "request",
+        "x": 225,
+        "y": 322,
+        "w": 50,
+        "h": 24,
+        "size": 15,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "return",
+        "x": 225,
+        "y": 414,
+        "w": 49,
+        "h": 24,
+        "size": 15,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "request",
+        "x": 494,
+        "y": 322,
+        "w": 50,
+        "h": 24,
+        "size": 15,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "return",
+        "x": 494,
+        "y": 414,
+        "w": 49,
+        "h": 24,
+        "size": 15,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "text": "clk / synchronous rst",
+        "x": 52,
+        "y": 279,
+        "w": 660,
+        "h": 29,
+        "size": 23,
+        "fill": "#2867A5",
+        "bold": false,
+        "align": "left"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            384,
+            309
+          ],
+          [
+            384,
+            324
+          ]
+        ],
+        "stroke": "#2867A5",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "rect",
+        "x": 104,
+        "y": 493,
+        "w": 556,
+        "h": 78,
+        "fill": "#EAF3F7",
+        "stroke": "#BCCEDB",
+        "width": 1.3
+      },
+      {
+        "kind": "text",
+        "text": "RF writeback shadow / flags / stop state\nlast successful store / qualified MEM events",
+        "x": 110,
+        "y": 499,
+        "w": 544,
+        "h": 66,
+        "size": 22,
+        "fill": "#24384B",
+        "bold": true,
+        "align": "center"
+      },
+      {
+        "kind": "path",
+        "points": [
+          [
+            384,
+            443
+          ],
+          [
+            384,
+            493
+          ]
+        ],
+        "stroke": "#087C7C",
+        "width": 2,
+        "arrow": true,
+        "dashed": false
+      },
+      {
+        "kind": "text",
+        "text": "Init once. Core reset keeps committed DM.",
+        "x": 52,
+        "y": 588,
+        "w": 660,
+        "h": 31,
+        "size": 23,
+        "fill": "#24384B",
+        "bold": false,
+        "align": "left"
+      }
+    ]
+  }
+}
