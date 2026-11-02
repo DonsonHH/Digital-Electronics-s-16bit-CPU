@@ -126,7 +126,7 @@
 <text x="1045" y="107" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1045" dy="0">前递 / 反馈</tspan></text>
 <text x="1505" y="107" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1505" dy="0">取消 / 停止</tspan></text>
 <text x="1880" y="84" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1880" dy="0">●连接；无点交叉不连</tspan><tspan x="1880" dy="42">浅蓝带为现有流水边界</tspan></text>
-<text x="65" y="185" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="65" dy="0">datapath_core  ·  同一clk  ·  rst同步高有效</tspan></text>
+<text x="65" y="185" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="65" dy="0">datapath_core 执行核心（CU + DP） · 同一clk · rst同步高有效</tspan></text>
 <text x="85" y="248" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="85" dy="0">Pipeline CU  ·  当前控制意图 + 流水资格 + 跨级协调</tspan></text>
 <text x="104" y="314" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">全局运行模式FSM</tspan></text>
 <text x="104" y="354" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">RUN / DRAIN_HALT / DRAIN_FAULT</tspan><tspan x="104" dy="42">HALTED / FAULTED：停止标记到WB且排空</tspan></text>
@@ -139,10 +139,10 @@
 <text x="1410" y="853" font-size="36" font-weight="400" text-anchor="middle" fill="#24384B"><tspan x="1410" dy="0">EX/MEM</tspan></text>
 <text x="1855" y="853" font-size="36" font-weight="400" text-anchor="middle" fill="#24384B"><tspan x="1855" dy="0">MEM/WB</tspan></text>
 <text x="105" y="584" font-size="36" font-weight="400" text-anchor="start" fill="#536477"><tspan x="105" dy="0">PC_fetch / range</tspan><tspan x="105" dy="46">前端资格反馈</tspan></text>
-<text x="579" y="594" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="579" dy="0">译码 d_ctrl</tspan></text>
-<text x="1024" y="594" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1024" dy="0">CTRL_X</tspan></text>
-<text x="1469" y="594" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1469" dy="0">CTRL_M</tspan></text>
-<text x="1914" y="594" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1914" dy="0">CTRL_W</tspan></text>
+<text x="579" y="594" font-size="36" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="579" dy="0">IDCU 译码 d_ctrl</tspan></text>
+<text x="1024" y="594" font-size="36" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1024" dy="0">ID/EX.CW_X</tspan></text>
+<text x="1469" y="594" font-size="36" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1469" dy="0">EX/MEM.CW_M</tspan></text>
+<text x="1914" y="594" font-size="36" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1914" dy="0">MEM/WB.CW_W</tspan></text>
 <text x="104" y="709" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">IFCU 取指资格</tspan></text>
 <text x="104" y="749" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">fetch_accept/pc_hold</tspan><tspan x="104" dy="42">im_en</tspan></text>
 <text x="104" y="924" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="104" dy="0">IF  唯一PC</tspan></text>
@@ -174,7 +174,11 @@
 <text x="1214" y="1314" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1214" dy="0">外部同步DM · 256×16</tspan></text>
 <text x="1214" y="1354" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1214" dy="0">dm_addr16 / dm_din16 / dm_en / dm_we</tspan><tspan x="1214" dy="42">DM → dm_dout16 (= w_load_data)</tspan></text>
 <text x="2000" y="1300" font-size="36" font-weight="400" text-anchor="start" fill="#BD4E26"><tspan x="2000" dy="0">halted / fault</tspan><tspan x="2000" dy="46">由mode译出</tspan></text>
-<text x="90" y="1480" font-size="36" font-weight="400" text-anchor="start" fill="#536477"><tspan x="90" dy="0">IFCU至WBCU是core职责；u_*为RTL实例；浅蓝带是既有流水状态。IM/DM输出承担数据边界，不加IR/MDR。</tspan></text>
+<text x="90" y="1480" font-size="34" font-weight="400" text-anchor="start" fill="#536477"><tspan x="90" dy="0">局部CU为职责；CW_X/M/W为既有字段组；u_*为实例。浅蓝带同存数据/控制/标签，IM/DM承担数据边界，不加IR/MDR。</tspan></text>
+<path id="update_if_id" d="M520 510V535" fill="none" stroke="#BD4E26" stroke-width="4" marker-end="url(#a_kill)"/>
+<path id="update_id_ex" d="M965 510V535" fill="none" stroke="#BD4E26" stroke-width="4" marker-end="url(#a_kill)"/>
+<path id="update_ex_mem" d="M1410 510V535" fill="none" stroke="#BD4E26" stroke-width="4" marker-end="url(#a_kill)"/>
+<path id="update_mem_wb" d="M1855 510V535" fill="none" stroke="#BD4E26" stroke-width="4" marker-end="url(#a_kill)"/>
 <circle cx="1710" cy="510" r="7" fill="#BD4E26"/>
 <circle cx="490" cy="470" r="7" fill="#2867A5"/>
 <circle cx="100" cy="510" r="7" fill="#BD4E26"/>

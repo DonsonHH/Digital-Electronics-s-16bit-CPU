@@ -174,11 +174,11 @@
 <text x="914" y="634" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="914" dy="0">Z候选选择</tspan></text>
 <text x="914" y="674" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="914" dy="0">M&gt;W&gt;保存Z</tspan><tspan x="914" dy="42">仅合格CMP</tspan></text>
 <text x="1234" y="634" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1234" dy="0">分支判定</tspan></text>
-<text x="1234" y="674" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1234" dy="0">branch_req</tspan><tspan x="1234" dy="42">合格redirect1</tspan></text>
+<text x="1234" y="674" font-size="34" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1234" dy="0">branch_req→仲裁</tspan><tspan x="1234" dy="42">合格redirect1</tspan></text>
 <text x="65" y="308" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="65" dy="0">branch_target16 → PC选择输入</tspan></text>
 <text x="65" y="385" font-size="36" font-weight="400" text-anchor="start" fill="#BD4E26"><tspan x="65" dy="0">qualified_redirect1</tspan></text>
 <text x="65" y="445" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="65" dy="0">JUMP=ZExt(imm8)</tspan><tspan x="65" dy="46">JZ=x_pc+1+SExt(imm8)</tspan></text>
-<text x="910" y="803" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="910" dy="0">u_forward</tspan></text>
+<text x="910" y="803" font-size="34" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="910" dy="0">u_forward CU+DP</tspan></text>
 <text x="924" y="864" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="924" dy="0">Rd前递</tspan></text>
 <text x="924" y="904" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="924" dy="0">rd_fwd16</tspan></text>
 <text x="924" y="1104" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="924" dy="0">Rs前递</tspan></text>
@@ -194,7 +194,7 @@
 <text x="920" y="1245" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="920" dy="0">store_data16</tspan></text>
 <text x="925" y="1305" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="925" dy="0">x_imm_ext16 → B</tspan></text>
 <text x="1324" y="944" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1324" dy="0">u_alu</tspan></text>
-<text x="1324" y="984" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1324" dy="0">结果16</tspan><tspan x="1324" dy="42">eq独立</tspan><tspan x="1324" dy="42">C/V各1</tspan></text>
+<text x="1324" y="984" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1324" dy="0">结果16</tspan><tspan x="1324" dy="42">eq候选</tspan><tspan x="1324" dy="42">C/V候选</tspan></text>
 <text x="1584" y="944" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1584" dy="0">MEM访问资格</tspan></text>
 <text x="1584" y="984" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1584" dy="0">EA[15:8]=0</tspan><tspan x="1584" dy="42">有效且无故障</tspan></text>
 <text x="1584" y="1174" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1584" dy="0">外部同步DM</tspan></text>
@@ -215,14 +215,14 @@
 <text x="74" y="1474" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="74" dy="0">① IF/ID</tspan></text>
 <text x="74" y="1514" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="74" dy="0">pc16 / valid / fetch_fault</tspan><tspan x="74" dy="42">inst16=IM寄存输出</tspan></text>
 <text x="664" y="1474" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="664" dy="0">② ID/EX</tspan></text>
-<text x="664" y="1514" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="664" dy="0">pc,rd/rs,源值,imm16</tspan><tspan x="664" dy="42">valid/fault + CTRL_X</tspan></text>
+<text x="664" y="1514" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="664" dy="0">pc,rd/rs,源值,imm16</tspan><tspan x="664" dy="42">valid/fault/reason3 + CW_X</tspan></text>
 <text x="1249" y="1474" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1249" dy="0">③ EX/MEM</tspan></text>
-<text x="1249" y="1514" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1249" dy="0">exec/store16,pc/rd,eq/C/V</tspan><tspan x="1249" dy="42">valid/fault + CTRL_M</tspan></text>
+<text x="1249" y="1514" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1249" dy="0">exec/store16,pc/rd,eq/C/V</tspan><tspan x="1249" dy="42">valid/fault/reason3 + CW_M</tspan></text>
 <text x="1834" y="1474" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1834" dy="0">④ MEM/WB</tspan></text>
-<text x="1834" y="1514" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1834" dy="0">exec/load16,pc/rd,eq/C/V</tspan><tspan x="1834" dy="42">valid/fault/store + CTRL_W</tspan></text>
+<text x="1834" y="1514" font-size="34" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1834" dy="0">exec/DMdout16,pc/rd,eq/C/V</tspan><tspan x="1834" dy="42">valid/fault/store/reason3 + CW_W</tspan></text>
 <text x="60" y="1618" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="60" dy="0">① ADD→ADD相关</tspan></text>
 <text x="60" y="1664" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="60" dy="0">M→EX前递，0停顿；WB才写RF</tspan></text>
-<text x="850" y="1618" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="850" dy="0">② LDR→STR相关</tspan></text>
+<text x="850" y="1618" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="850" dy="0">② 默认AC1 LDR→STR</tspan></text>
 <text x="850" y="1664" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="850" dy="0">前端停1拍，再W→EX；MEM写DM</tspan></text>
 <text x="1640" y="1618" font-size="40" font-weight="700" text-anchor="start" fill="#24384B"><tspan x="1640" dy="0">③ CMP→JZ</tspan></text>
 <text x="1640" y="1664" font-size="36" font-weight="400" text-anchor="start" fill="#24384B"><tspan x="1640" dy="0">最新Z决定条件；EX取分支才清年轻槽</tspan></text>
