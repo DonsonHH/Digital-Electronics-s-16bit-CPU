@@ -32,7 +32,8 @@ set state_value [get_property INPUT_VALUE $state_probe]
 puts "HARDWARE_INITIAL_STATE=$state_value"
 # Guard wrong/stale images BEFORE writing the CPU reset control.
 set initial_number [expr 0x$state_value]
-if {[format %016x [expr $initial_number >> 192]] ne $env(CPU_HW_BUILD_ID)} {error "Programmed build identity differs"}
+set expected_build_id [expr 0x$env(CPU_HW_BUILD_ID)]
+if {($initial_number >> 192) != $expected_build_id} {error "Programmed build identity differs"}
 if {$env(CPU_HW_RUN)==1} {
  set_property OUTPUT_VALUE 1 $reset_probe
  commit_hw_vio $reset_probe
