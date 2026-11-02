@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+<title>AC1文件启动系统与停止观测</title>
+<desc>cpu_system连接同步IM和DM。读输出承担原流水边界；核心WB事件和停止标签只向观测逻辑输出，不反馈执行。</desc>
+<defs>
+<marker id="data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10Z" fill="#24384b"/></marker>
+<marker id="debug" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10Z" fill="#b05b27"/></marker>
+</defs>
+<style>text{font-family:"Microsoft YaHei",Arial,sans-serif;fill:#172d42;font-size:24px}.title{font-size:34px;font-weight:700}.head{font-size:28px;font-weight:700}.small{font-size:22px}.data{fill:none;stroke:#24384b;stroke-width:4;marker-end:url(#data)}.obs{fill:none;stroke:#b05b27;stroke-width:4;marker-end:url(#debug)}</style>
+<rect width="1400" height="900" fill="#fff"/>
+<text x="40" y="52" class="title">文件启动系统与停止观测</text>
+<rect x="25" y="85" width="1350" height="775" rx="16" fill="#f7f9fc" stroke="#8da4b7" stroke-width="3"/>
+<text x="50" y="125" class="head">cpu_system</text>
+<text x="350" y="125">clk 同域 · rst 同步高有效</text>
+<rect x="60" y="175" width="1280" height="75" rx="8" fill="#eaf0f7" stroke="#b5c5d4" stroke-width="2"/>
+<text x="85" y="205">IM_INIT_FILE / DM_INIT_FILE  →  配置时写入初值</text>
+<text x="85" y="235" class="small">完整 256 字镜像；核心 reset 不重载镜像，也不清除已提交 DM</text>
+<rect x="60" y="315" width="225" height="220" rx="10" fill="#e7eff8" stroke="#2867a5" stroke-width="3"/>
+<text x="88" y="356" class="head">同步 IM</text>
+<text x="88" y="396">256 × 16 ROM</text>
+<text x="88" y="443">一拍读</text>
+<text x="88" y="481">en=0 输出保持</text>
+<text x="88" y="517" class="small">dout 为 D 边界</text>
+<rect x="400" y="300" width="600" height="260" rx="10" fill="#fff" stroke="#24384b" stroke-width="3"/>
+<text x="425" y="341" class="head">datapath_core</text>
+<rect x="425" y="366" width="550" height="59" rx="6" fill="#dbe9f5"/>
+<text x="449" y="404">IF  →  ID  →  EX  →  MEM  →  WB</text>
+<text x="425" y="460">原前递、停顿、取消与排空逻辑</text>
+<text x="425" y="500">ISA v1.5 · 原架构写入边沿</text>
+<text x="425" y="539" class="small">reason_X / M / W 只随有效标签传播</text>
+<rect x="1115" y="315" width="225" height="220" rx="10" fill="#e7eff8" stroke="#2867a5" stroke-width="3"/>
+<text x="1142" y="356" class="head">同步 DM</text>
+<text x="1142" y="396">256 × 16 RAM</text>
+<text x="1142" y="443">一拍读 · 写一次</text>
+<text x="1142" y="481">写周期输出保持</text>
+<text x="1142" y="517" class="small">dout 为 W 边界</text>
+<path d="M400 370 H285" class="data"/><text x="298" y="348" class="small">addr / en</text>
+<path d="M285 472 H400" class="data"/><text x="300" y="505" class="small">dout16</text>
+<path d="M1000 370 H1115" class="data"/><text x="1009" y="340" class="small">EA / 写入</text>
+<path d="M1115 472 H1000" class="data"/><text x="1010" y="505" class="small">dout16</text>
+<text x="1085" y="584" text-anchor="middle" class="small">核心先检查完整 EA16，再索引 DM8</text>
+<path d="M700 560 V650" class="obs"/>
+<rect x="365" y="591" width="670" height="40" fill="#f7f9fc"/>
+<text x="700" y="620" text-anchor="middle">WB标签≠RF写入；fault标签≠合法完成</text>
+<rect x="190" y="650" width="1020" height="145" rx="10" fill="#fff4e9" stroke="#b05b27" stroke-width="3"/>
+<text x="215" y="689" class="head">只读观测与稳定现场（不参与执行）</text>
+<text x="215" y="729">stop_pc / reason / valid · last_completed_pc</text>
+<text x="215" y="769">RF 写回影子 · 最近成功 store · MEM 总线事件</text>
+<text x="700" y="835" text-anchor="middle" class="small">观测不反馈控制；停止现场保持至 reset；无额外 IR / MDR、FIFO 或执行级</text>
+</svg>

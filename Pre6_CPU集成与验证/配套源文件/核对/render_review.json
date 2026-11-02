@@ -1,0 +1,220 @@
+{
+  "status": "pass",
+  "PPTX_pages": [
+    {
+      "slide": 1,
+      "sha256": "51e8628b07c188585b2dcbeb8624bf76b74c6d7566c08ae2eb2344b07211e99c",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 2,
+      "sha256": "f090d60e12afbdb6745f1ae4872082d30f83f8a357e7bef26767db2e67b0d934",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": false
+    },
+    {
+      "slide": 3,
+      "sha256": "af52d931a957952e5145639a7d09b406fc10746a25de2b968351479dd50544bb",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 4,
+      "sha256": "d1122d73d77867accb1f6c52445baf9712feb8637efb60344150e158a48eea8a",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 5,
+      "sha256": "94cc1a478703d166f48050509692d0e728d70c70db18146adf9e877f03b085b9",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": false
+    },
+    {
+      "slide": 6,
+      "sha256": "4c7113950a2f283ae19443d176f226a83175ae47b73a34bec1369324ea482d10",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 7,
+      "sha256": "55df93179fd2e51af0ccb1027b9c08e0e1e49796562cbf55271960e21e3c52af",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": false
+    },
+    {
+      "slide": 8,
+      "sha256": "7011d7f3f032b06358bfe323289a6a8870ad04d28928fe68aaa2622411bd79b2",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 9,
+      "sha256": "180d5996a264e4842db9250477f7669c224e00424dbde3028a56872db7a391df",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": false
+    },
+    {
+      "slide": 10,
+      "sha256": "563bf0e98df1d596c1d48f8d0e340e8c165a59d5bea690b9b4b4bf94faaea500",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": false
+    },
+    {
+      "slide": 11,
+      "sha256": "58f102ae9f80e4b09c58a2366c111b3886ff02f2217d17e4741ee25a28e08c0a",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 12,
+      "sha256": "0221faae85a070382c2e896dd6a49b67c6ed85701c784f8fe9c0deac5f024c9a",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 13,
+      "sha256": "f9381fe287eb4a8d69872d2ad3d2dcbb0e676454239eb64e3b00e87df129173d",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 14,
+      "sha256": "ec86a0ed731d0c920c93fe44f415ec4e922351e4802272e748b411e7c6e8ee18",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 15,
+      "sha256": "6292d938f6c25c079324291f58278fb2e3a1202b761255cf781d5f9870f06dd7",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 16,
+      "sha256": "2d5cbbf40d31e5c698669124bfdd95ce2b0a738dfe66c89492f011e7e753ed37",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": false
+    },
+    {
+      "slide": 17,
+      "sha256": "10cd0d3ef3a4e3b932396af0e991c9a864ac6223409e84f1f61f843b293dee46",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    },
+    {
+      "slide": 18,
+      "sha256": "d5989b044a154f971b75fe504522de5cacd26a1ac0ccaf351cb3bc424e3444cf",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": false
+    },
+    {
+      "slide": 19,
+      "sha256": "88323eccd9decb38f57291832ec9014a86503ff8babc3286dded91ba3ab9dc1e",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": false
+    },
+    {
+      "slide": 20,
+      "sha256": "76cd5621a3ba574244a0436ead066622d12862273c2d4801b703a3fcbf33cb8f",
+      "visual_review": "pass",
+      "renderer": "Microsoft PowerPoint",
+      "pixel_identical_to_r03": true
+    }
+  ],
+  "Word_pages": [
+    {
+      "page": 1,
+      "sha256": "863762c22af27fd0838417f22b977363895945a86c49366619117fd06deaefdf",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 2,
+      "sha256": "a0ce6c8233c6c3a46cd751aa7b9b62cfa19abf941f5acbd4f9a0d9693c5cfca5",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 3,
+      "sha256": "8780d4a6bf11f5f6bb5f34351b12c26f11931315af580bc74f51deccaedde743",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 4,
+      "sha256": "1777a268be0550160d2941a634a7b1926b9b7b082c95141877985c6eb2be38d6",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 5,
+      "sha256": "fbf211ef2630cd41eb128c3aae96370d5f243f5793cadf334e17fb252b16cc49",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 6,
+      "sha256": "0de468d23c48559751d660a0030e8e03b91427c800680a7708609f166381fb86",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 7,
+      "sha256": "553ef8edb05c74040c584a126ffa43f4bc0c1c75b6d6492a619b95003c9086e3",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 8,
+      "sha256": "640bf7d0895fb4177b0a4916a88c1c7bb5031cb4fce69c90936b81216df07793",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 9,
+      "sha256": "330987eb8b6240800cd9402f17d6df3d38983cf24c11cc4a3cc585e2a9d8221c",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    },
+    {
+      "page": 10,
+      "sha256": "b08d470678acb42e2ab6365dc6daa2ae4fed996b58b08b4e0900e2e25a95efec",
+      "visual_review": "pass",
+      "renderer": "Microsoft Word PDF to pypdfium2 PNG"
+    }
+  ],
+  "native_render_receipts": [
+    "native_powerpoint.txt",
+    "native_word.txt"
+  ],
+  "package_hard_findings": 0,
+  "geometry_warning_count": 11,
+  "warning_review": "11 estimates reviewed against native output: no glyph obstruction, clipping or table/footer overlap remains. Native Word fallback used because packaged LibreOffice is absent.",
+  "independent_review": {
+    "spec": "closed: ADD zero-stall example and raw TSV excerpt added",
+    "standards": "closed: application ownership fixed; frozen Git blob guard added"
+  },
+  "human_rehearsal": "not performed",
+  "CPU_or_hardware_rerun": false
+}

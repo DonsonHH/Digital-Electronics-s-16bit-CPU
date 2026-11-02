@@ -1,0 +1,2591 @@
+[
+  {
+    "slide": 1,
+    "title": "Project Goal and Final Baseline",
+    "claim": "Identify the completed CPU and the frozen delivery baseline.",
+    "source_groups": [
+      "SPEC",
+      "BOARD"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "CPU": "v1.6",
+      "ISA": "v1.5",
+      "implementation": "AC1",
+      "baseline_commit": "9475f210c7e567cb41f3856ff3bcebc6611ac991"
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 2,
+    "title": "ISA Design",
+    "claim": "Explain how instruction semantics determine datapath resources and writes.",
+    "source_groups": [
+      "SPEC",
+      "ISA"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/isa_decode.v",
+        "sha256": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "field_bits": [
+        4,
+        2,
+        2,
+        8
+      ],
+      "ISA_semantics": [
+        [
+          "Opcode",
+          "指令",
+          "操作数来源与结果去向",
+          "标志"
+        ],
+        [
+          "0000 0",
+          "MOV Rd,Rs",
+          "R[d] ← R[s]",
+          "保持"
+        ],
+        [
+          "0001 1",
+          "MOV Rd,#u8",
+          "R[d] ← ZExt(imm8)",
+          "保持"
+        ],
+        [
+          "0010 2",
+          "AND Rd,Rs",
+          "R[d] ← R[d] AND R[s]",
+          "保持"
+        ],
+        [
+          "0011 3",
+          "OR Rd,Rs",
+          "R[d] ← R[d] OR R[s]",
+          "保持"
+        ],
+        [
+          "0100 4",
+          "ADD Rd,Rs",
+          "R[d] ← low16(R[d]+R[s])",
+          "更新C/V"
+        ],
+        [
+          "0101 5",
+          "ADD Rd,#u8",
+          "R[d] ← low16(R[d]+ZExt(imm8))",
+          "更新C/V"
+        ],
+        [
+          "0110 6",
+          "SUB Rd,Rs",
+          "R[d] ← low16(R[d]−R[s])",
+          "更新C/V"
+        ],
+        [
+          "0111 7",
+          "SUB Rd,#u8",
+          "R[d] ← low16(R[d]−ZExt(imm8))",
+          "更新C/V"
+        ],
+        [
+          "1000 8",
+          "LDR Rd,[Rs+s8]",
+          "EA=low16(R[s]+SExt(imm8))；R[d] ← DM[EA]",
+          "保持"
+        ],
+        [
+          "1001 9",
+          "STR Rd,[Rs+s8]",
+          "同上生成EA；DM[EA] ← R[d]",
+          "保持"
+        ],
+        [
+          "1010 A",
+          "CMP Rs1,Rs2",
+          "Rs1占Rd字段，Rs2占Rs字段；Z ← (R[d]==R[s])；不写RF",
+          "更新Z"
+        ],
+        [
+          "1011 B",
+          "Reserved",
+          "非法指令；不产生数据写入",
+          "保持"
+        ],
+        [
+          "1100 C",
+          "JUMP #u8",
+          "下一执行目标=ZExt(imm8)",
+          "保持"
+        ],
+        [
+          "1101 D",
+          "JZ #s8",
+          "Z=1时目标=low16(pc+1+SExt(imm8))",
+          "保持"
+        ],
+        [
+          "1110 E",
+          "HALT",
+          "取消年轻指令；老指令完成后停止",
+          "保持"
+        ],
+        [
+          "1111 F",
+          "Reserved",
+          "非法指令；不产生数据写入",
+          "保持"
+        ]
+      ]
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 3,
+    "title": "From ISA to a Verified CPU",
+    "claim": "Explain design dependencies and the actual iterative course workflow.",
+    "source_groups": [
+      "SPEC",
+      "FLOW"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "title": "设计依赖关系与课程开发流程",
+      "paragraphs": [
+        "设计依赖顺序为：明确任务和接口约束 → 确定ISA语义 → 列出指令微操作与副作用 → 分配资源和流水级 → 定义级间载荷 → 设计译码、局部控制与跨级协调 → RTL和分层验证 → 系统集成 → 综合、布局布线及性能比较 → 实物验收。后一级设计必须能解释前一级契约如何生效。",
+        "项目实际采用课程逐步集成的方法：Pre2先完成mux和加法器，Pre3补齐ISA及其他关键模块，Pre4连接数据通路，Pre5整理流水CU，随后完成文件启动系统、板级离线实现和隔离性能实验。本规范将成熟实现按整机依赖关系组织，不把实际开发时间线改写为一开始已完成全部设计。"
+      ],
+      "table": {
+        "id": "N_COURSE_FLOW",
+        "title": "课程任务与本规范的对应关系",
+        "widths": [
+          1.0,
+          2.4,
+          3.4
+        ],
+        "rows": [
+          [
+            "课程阶段",
+            "应说明的成果",
+            "主要阅读位置"
+          ],
+          [
+            "Pre2",
+            "mux、加法器及人工/EDA验证",
+            "第二章部件契约；第四章验证方法及历史原始记录"
+          ],
+          [
+            "Pre3",
+            "ISA、RF、ALU、PC、立即数扩展及验证",
+            "第一章指令契约；第二章资源和状态；第四章覆盖"
+          ],
+          [
+            "Pre4",
+            "数据通路、接口、典型指令、源码与波形",
+            "第二章五级路径和边界；第三章逐拍例；第四章连接与证据"
+          ],
+          [
+            "Pre5",
+            "CU结构、工作原理、状态图",
+            "第三章控制层次、CW、仲裁、FSM与并行实例"
+          ],
+          [
+            "Pre6",
+            "设计流程、整机集成、功能和性能",
+            "本节设计依赖；第四章系统层次、功能和性能结果"
+          ]
+        ]
+      }
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 4,
+    "title": "System Integration and Interfaces",
+    "claim": "Distinguish core ports, system memory, and physical board interfaces.",
+    "source_groups": [
+      "SPEC",
+      "RTL",
+      "SYSTEM"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/datapath_core.sv",
+        "sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999"
+      },
+      {
+        "relative": "CPU核心设计/系统/rtl/cpu_system.sv",
+        "sha256": "68160c3b9442539be0628640dd3b0fd2cc4b7470482d1b48addbf1370e50d366"
+      },
+      {
+        "relative": "CPU核心设计/板级/rtl/ees331_top.sv",
+        "sha256": "77091a8c075f4d62b438dd36bbf029762e76dd67815ae2c84f6aa93c9089c118"
+      },
+      {
+        "relative": "CPU核心设计/板级/rtl/ees331_application.sv",
+        "sha256": "dc20ed66de199aea1518bac7cacc31947894e7da26fa1a16b6786550710bc61c"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "original_execution_ports": [
+        [
+          "信号",
+          "方向",
+          "位宽",
+          "功能与时序"
+        ],
+        [
+          "clk",
+          "输入",
+          "1",
+          "唯一核心时钟 上升沿更新状态"
+        ],
+        [
+          "rst",
+          "输入",
+          "1",
+          "高有效同步复位 优先级最高"
+        ],
+        [
+          "im_addr",
+          "输出",
+          "16",
+          "取指字地址 来自PC_fetch"
+        ],
+        [
+          "im_en",
+          "输出",
+          "1",
+          "合格取指请求；stall/停止/取消时阻止错误取指"
+        ],
+        [
+          "im_dout",
+          "输入",
+          "16",
+          "同步IM输出；配合IF/ID的pc/valid供ID使用"
+        ],
+        [
+          "dm_addr",
+          "输出",
+          "16",
+          "MEM的完整16位EA；物理截位前检查范围"
+        ],
+        [
+          "dm_en",
+          "输出",
+          "1",
+          "合格MR或MW访问使能"
+        ],
+        [
+          "dm_we",
+          "输出",
+          "1",
+          "合格STR写使能；仅MEM有效访问时为1"
+        ],
+        [
+          "dm_din",
+          "输出",
+          "16",
+          "EX/MEM保存的已转发STR数据"
+        ],
+        [
+          "dm_dout",
+          "输入",
+          "16",
+          "同步DM读结果；供WB的load选择"
+        ],
+        [
+          "halted",
+          "输出",
+          "1",
+          "HALT完成排空后的停止状态 直到复位"
+        ],
+        [
+          "fault",
+          "输出",
+          "1",
+          "故障完成排空后的停止状态 直到复位"
+        ]
+      ],
+      "logical_memories": "256x16words each, synchronous",
+      "physical_board": "EES-331, M19clock,L18S1,8LED"
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 5,
+    "title": "Five-Stage Datapath",
+    "claim": "Trace values through resources and the existing four stage boundaries.",
+    "source_groups": [
+      "SPEC",
+      "RTL",
+      "DIAGRAMS"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/datapath_core.sv",
+        "sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999"
+      },
+      {
+        "relative": "CPU核心设计/架构图/01_CPU整体架构.svg",
+        "sha256": "6e6b8f5fdbb1331e348b02bde876d8b117eb5c7e6957eae42d44e6b49604cfcb"
+      },
+      {
+        "relative": "CPU核心设计/架构图/02_五级Datapath.svg",
+        "sha256": "2cd5a5555535372b462905d55e716832c17abfdc6fe7c40e8ceb3fe88b23d88b"
+      },
+      {
+        "relative": "CPU核心设计/架构图/03_文件启动系统与停止观测.svg",
+        "sha256": "7bd47ab97328df2d75aaa3a409889414d751b5f07a119104cb57cb63ac753fd0"
+      },
+      {
+        "relative": "CPU核心设计/架构图/04_EES331板级系统.svg",
+        "sha256": "6bdf74f50de0b8979944ff6583a2750d2556af4bc053af885d2aa937ce7c762d"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": [
+      [
+        "IF/ID",
+        "inst16由同步IM的dout保存",
+        "d_pc16、d_valid1、d_fetch_fault1",
+        "尚未译码，无CW_X",
+        "core标签18位 + 外部IM输出16位；不另加IR"
+      ],
+      [
+        "ID/EX",
+        "x_rd_value16、x_rs_value16、x_imm_ext16",
+        "x_pc16、x_rd2、x_rs2、x_valid1、x_fault1、x_reason3",
+        "CW_X 18位逻辑集合",
+        "core现有寄存字段91位；imm_signed已在ID消费，不继续保存"
+      ],
+      [
+        "EX/MEM",
+        "m_exec_value16、m_store_data16、m_cmp_z1、m_c1、m_v1",
+        "m_pc16、m_rd2、m_valid1、m_fault1、m_reason3",
+        "CW_M 7位逻辑集合",
+        "core现有字段65位；exec可作ALU结果或EA，store数据独立"
+      ],
+      [
+        "MEM/WB",
+        "w_exec_value16、w_cmp_z1、w_c1、w_v1；load16来自同步DM的dout",
+        "w_pc16、w_rd2、w_valid1、w_fault1、w_reason3、w_store1",
+        "CW_W 5位逻辑集合",
+        "core字段48位 + 外部DM输出16位；不另加MDR"
+      ]
+    ],
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 6,
+    "title": "How Pipeline Control Works",
+    "claim": "Relate global modes, cross-stage arbitration and local qualified actions.",
+    "source_groups": [
+      "SPEC",
+      "RTL",
+      "CW"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/datapath_core.sv",
+        "sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999"
+      },
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "ownership": [
+        [
+          "全局运行模式",
+          "core组合逻辑由当前mode及合格故障/HALT/drain_done求mode_next",
+          "Reset > MEM/EX fault > HALT；停止状态保持至Reset",
+          "core主时序块唯一更新mode；非IF到WB的串行FSM"
+        ],
+        [
+          "指令译码",
+          "u_decode产生源使用、ALU选择和RW/MR/MW/ZW/CVW等意图；u_ext在ID解释立即数",
+          "core用d_valid/d_fault及发射资格屏蔽无效控制",
+          "译码为组合逻辑；意图在进入ID/EX的边沿锁存"
+        ],
+        [
+          "IF请求与PC",
+          "EX目标、mode、load_use及事件共同提供取指资格",
+          "core产生qualified_redirect、fetch_accept、pc_hold及im_en",
+          "u_pc唯一保存PC；同步IM保存指令dout；core保存D标签"
+        ],
+        [
+          "ID保持与发射",
+          "ID实际源与EX load目的比较形成load_use",
+          "core统一计算d_valid_next/x_valid_next，非独立ID暂停FSM",
+          "主时序块更新D/X有效位；停顿时PC/IM/D标签共同保持、X注入bubble"
+        ],
+        [
+          "EX操作数前递",
+          "u_forward比较use/源号及M/W valid/fault/RW/readiness",
+          "最近M匹配优先；M load未就绪阻断旧W",
+          "u_forward内比较/sel/blocked属控制、16位选择属DP；core再选ALU输入"
+        ],
+        [
+          "Z与分支资格",
+          "core选择M CMP候选、W候选、已保存Z；u_target计算目标",
+          "EX产生branch_req，再经年龄与故障资格得到qualified_redirect",
+          "pc16采样重定向；目标计算不决定是否跳转，CMP候选不直接写Z"
+        ],
+        [
+          "MEM访问与故障",
+          "M控制、完整EA、valid/fault、rst和mode_active",
+          "m_address_in_range/m_access_fault；老MEM故障取消年轻EX/ID/IF",
+          "core驱动dm_en/dm_we；同步DM在MEM结束边沿读或写，STR只写一次"
+        ],
+        [
+          "WB架构写入",
+          "W控制、valid/fault、rst和mode_active；同步DM给出load数据",
+          "core形成wb_ok、rf_we、z_we、cv_we",
+          "u_rf与u_flags各自唯一更新架构状态；W级store/branch标签不产生RF写入"
+        ],
+        [
+          "流水数据与CW",
+          "各级数据和意图形成下一载荷",
+          "core唯一的占用仲裁计算valid_next及fault_next",
+          "core主时序块更新D/X/M/W载荷；有效性掩码保证同一条指令的数据与控制对齐"
+        ],
+        [
+          "原因与停止现场",
+          "ID/EX/MEM识别reason；WB停止token与pipeline_empty_next决定drain_done",
+          "诊断使用同一有效标签；取消的年轻指令不保留现场",
+          "core另一个时序块更新x/m/w_reason与stop/last_completed，非全部流水字段同一always"
+        ],
+        [
+          "系统观察状态",
+          "cpu_system采样合格RF/MEM写入事件",
+          "不参与任何执行选择或仲裁",
+          "system时序块保存RF影子和最后store；与架构RF不是两份执行资源"
+        ]
+      ],
+      "CW": {
+        "CW_X": {
+          "prefix": "x_",
+          "fields": {
+            "use_rd": 1,
+            "use_rs": 1,
+            "alu_a_sel": 2,
+            "alu_b_sel": 2,
+            "alu_op": 3,
+            "reg_write": 1,
+            "mem_read": 1,
+            "mem_write": 1,
+            "z_write": 1,
+            "cv_write": 1,
+            "wb_sel": 1,
+            "jump_abs": 1,
+            "jump_z": 1,
+            "halt": 1
+          },
+          "width": 18
+        },
+        "CW_M": {
+          "prefix": "m_",
+          "fields": {
+            "reg_write": 1,
+            "mem_read": 1,
+            "mem_write": 1,
+            "z_write": 1,
+            "cv_write": 1,
+            "wb_sel": 1,
+            "halt": 1
+          },
+          "width": 7
+        },
+        "CW_W": {
+          "prefix": "w_",
+          "fields": {
+            "reg_write": 1,
+            "z_write": 1,
+            "cv_write": 1,
+            "wb_sel": 1,
+            "halt": 1
+          },
+          "width": 5
+        }
+      }
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 7,
+    "title": "Data Dependencies and Interlock",
+    "claim": "Explain the exact load-use hold and store path using the eight-cycle trace.",
+    "source_groups": [
+      "SIM_LOAD",
+      "SIM_ADD",
+      "RTL"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/datapath_core.sv",
+        "sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999"
+      }
+    ],
+    "expected": {
+      "cycles": 8,
+      "stores": 1,
+      "stalls": 1,
+      "redirects": 0
+    },
+    "actual": {
+      "cycles": 8,
+      "stores": 1,
+      "stalls": 1,
+      "redirects": 0
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE",
+    "case": "DOC_LOAD_STR",
+    "initial_RF": [
+      0,
+      33,
+      0,
+      32
+    ],
+    "instructions": [
+      "00: LDR R0,[R3+0] (8300)",
+      "01: STR R0,[R1+0] (9100)",
+      "02: HALT (E000)"
+    ],
+    "actual_timing_rows": [
+      [
+        "C1",
+        "00",
+        "—",
+        "—",
+        "—",
+        "—",
+        "正常推进"
+      ],
+      [
+        "C2",
+        "01",
+        "00:LDR",
+        "—",
+        "—",
+        "—",
+        "正常推进"
+      ],
+      [
+        "C3",
+        "—",
+        "01:STR",
+        "00:LDR",
+        "—",
+        "—",
+        "保持IF/ID；X插bubble"
+      ],
+      [
+        "C4",
+        "02",
+        "01:STR",
+        "—",
+        "00:LDR",
+        "—",
+        "正常推进"
+      ],
+      [
+        "C5",
+        "03",
+        "02:HALT",
+        "01:STR",
+        "—",
+        "00:LDR",
+        "RF R0←0007"
+      ],
+      [
+        "C6",
+        "—",
+        "03:RES",
+        "02:HALT",
+        "01:STR",
+        "—",
+        "DM[0021]←0007"
+      ],
+      [
+        "C7",
+        "—",
+        "—",
+        "—",
+        "02:HALT",
+        "01:STR",
+        "正常推进"
+      ],
+      [
+        "C8",
+        "—",
+        "—",
+        "—",
+        "—",
+        "02:HALT",
+        "停止HALTED"
+      ]
+    ]
+  },
+  {
+    "slide": 8,
+    "title": "Branch Redirect and Safe Completion",
+    "claim": "Explain flag forwarding, wrong-path cancellation, and the WB halt edge.",
+    "source_groups": [
+      "SIM_BRANCH",
+      "SIM_STORE_HALT",
+      "RTL"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/datapath_core.sv",
+        "sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999"
+      }
+    ],
+    "expected": {
+      "cycles": 9,
+      "stores": 0,
+      "stalls": 0,
+      "redirects": 1
+    },
+    "actual": {
+      "cycles": 9,
+      "stores": 0,
+      "stalls": 0,
+      "redirects": 1
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE",
+    "case": "DOC_CMP_JZ",
+    "initial_RF": [
+      1,
+      1,
+      0,
+      32
+    ],
+    "instructions": [
+      "00: CMP R0,R1 (A100)",
+      "01: JZ #+1 (D001)",
+      "02: STR R0,[R3+0] (9300)",
+      "03: HALT (E000)"
+    ],
+    "actual_timing_rows": [
+      [
+        "C1",
+        "00",
+        "—",
+        "—",
+        "—",
+        "—",
+        "正常推进"
+      ],
+      [
+        "C2",
+        "01",
+        "00:CMP",
+        "—",
+        "—",
+        "—",
+        "正常推进"
+      ],
+      [
+        "C3",
+        "02",
+        "01:JZ",
+        "00:CMP",
+        "—",
+        "—",
+        "正常推进"
+      ],
+      [
+        "C4",
+        "—",
+        "02:STR",
+        "01:JZ",
+        "00:CMP",
+        "—",
+        "EX重定向；取消年轻槽"
+      ],
+      [
+        "C5",
+        "03",
+        "—",
+        "—",
+        "01:JZ",
+        "00:CMP",
+        "WB写Z"
+      ],
+      [
+        "C6",
+        "04",
+        "03:HALT",
+        "—",
+        "—",
+        "01:JZ",
+        "正常推进"
+      ],
+      [
+        "C7",
+        "—",
+        "04:RES",
+        "03:HALT",
+        "—",
+        "—",
+        "正常推进"
+      ],
+      [
+        "C8",
+        "—",
+        "—",
+        "—",
+        "03:HALT",
+        "—",
+        "正常推进"
+      ],
+      [
+        "C9",
+        "—",
+        "—",
+        "—",
+        "—",
+        "03:HALT",
+        "停止HALTED"
+      ]
+    ]
+  },
+  {
+    "slide": 9,
+    "title": "Functional Verification Strategy",
+    "claim": "Connect independent expectations, edge checks and real trace evidence.",
+    "source_groups": [
+      "SIM_LOAD",
+      "SIM_BRANCH",
+      "INDEPENDENT",
+      "HOST_CHECKS"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_result.json",
+        "sha256": "74d601bc4ee925b9ee62eebb738c2d46164febb4875ce5ecffde8e281a9ed45f"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_results.csv",
+        "sha256": "1ce5b8d38e8439320d4bd193eee643b8e5fdc15a3b949ae873d7394cbd57919a"
+      },
+      {
+        "relative": "CPU核心设计/验证/final_baseline_20261102_p824cngb/final_qa.json",
+        "sha256": "d31c5e1ef912babaa71e81ef89c046bd2a9791aee9e2bbb71604e01d3f595dc2"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "simulation_case": "DOC_LOAD_STR",
+      "actual": {
+        "case": "DOC_LOAD_STR",
+        "epoch": "0",
+        "cycles": "8",
+        "tokens": "3",
+        "stores": "1",
+        "stalls": "1",
+        "redirects": "0",
+        "reset_seen": "0"
+      },
+      "external_ISA_case_count": 48,
+      "reset_witnesses": 10
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 10,
+    "title": "EES-331 Board Results",
+    "claim": "Present decoded physical evidence with correct observation scope.",
+    "source_groups": [
+      "BOARD",
+      "BUTTON"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\button_snapshots.tsv",
+        "sha256": "d37722f6be0880fdf07e624a9597421eb105c3bbad7b8c129f4a070d553f70f0"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\button_session_long.log",
+        "sha256": "33f62b3288f12cbd9d0e3f99de26340789393f0b458b34e863cf33939caeb03c"
+      }
+    ],
+    "expected": "Two normal-stop snapshots perprogram; pressed S1 clears publicCPUstate andcounters, release restartschecksum",
+    "actual": {
+      "programs": [
+        {
+          "program": "all_ops",
+          "N": 16,
+          "S": 1,
+          "R": 2,
+          "C": 25,
+          "CPI": 1.562,
+          "rf_shadow": [
+            "0005",
+            "0005",
+            "0005",
+            "0020"
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": "0012",
+          "last_store_addr": "0020",
+          "last_store_data": "0005",
+          "stores": 1,
+          "record": "验证/cpu345_hardware_mhdc67ya"
+        },
+        {
+          "program": "baseline",
+          "N": 10,
+          "S": 1,
+          "R": 1,
+          "C": 17,
+          "CPI": 1.7,
+          "rf_shadow": [
+            "0008",
+            "0002",
+            "0008",
+            "0020"
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": "000A",
+          "last_store_addr": "0020",
+          "last_store_data": "0008",
+          "stores": 1,
+          "record": "验证/cpu345_hardware_nhbxiiwe"
+        },
+        {
+          "program": "loop",
+          "N": 18,
+          "S": 0,
+          "R": 4,
+          "C": 30,
+          "CPI": 1.667,
+          "rf_shadow": [
+            "0000",
+            "0000",
+            "0000",
+            "0000"
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": "0006",
+          "last_store_addr": "0000",
+          "last_store_data": "0000",
+          "stores": 0,
+          "record": "验证/cpu345_hardware_wgocvlq3"
+        },
+        {
+          "program": "memory_copy",
+          "N": 7,
+          "S": 2,
+          "R": 1,
+          "C": 15,
+          "CPI": 2.143,
+          "rf_shadow": [
+            "BEEF",
+            "BEEF",
+            "0000",
+            "0020"
+          ],
+          "flags": [
+            1,
+            0,
+            0
+          ],
+          "stop_pc": "0007",
+          "last_store_addr": "0021",
+          "last_store_data": "BEEF",
+          "stores": 1,
+          "record": "验证/cpu345_hardware_c2r8w4bv"
+        },
+        {
+          "program": "copy_checksum",
+          "N": 35,
+          "S": 16,
+          "R": 0,
+          "C": 55,
+          "CPI": 1.571,
+          "rf_shadow": [
+            "0000",
+            "1232",
+            "0000",
+            "0020"
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": "0022",
+          "last_store_addr": "0047",
+          "last_store_data": "0000",
+          "stores": 8,
+          "record": "验证/cpu345_hardware_apuwfhhk"
+        }
+      ],
+      "S1_frames": [
+        {
+          "label": "before",
+          "host_sample_time_ms": 1793606782574,
+          "decoded": {
+            "build_id": "22b2a23f057c652b",
+            "rf": [
+              0,
+              4658,
+              0,
+              32
+            ],
+            "flags": [
+              0,
+              0,
+              0
+            ],
+            "stop_pc": 34,
+            "stop_reason": 1,
+            "stop_valid": 1,
+            "stop_pc_valid": 1,
+            "halted": 1,
+            "fault": 0,
+            "last_completed_valid": 1,
+            "last_completed_pc": 34,
+            "last_store_valid": 1,
+            "last_store_addr": 71,
+            "last_store_data": 0,
+            "core_reset": 0,
+            "heartbeat": 0,
+            "reserved": 0,
+            "cycles": 55,
+            "completed": 35,
+            "stalls": 16,
+            "redirects": 0,
+            "stores": 8
+          }
+        },
+        {
+          "label": "pressed",
+          "host_sample_time_ms": 1793606917836,
+          "decoded": {
+            "build_id": "22b2a23f057c652b",
+            "rf": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "flags": [
+              0,
+              0,
+              0
+            ],
+            "stop_pc": 0,
+            "stop_reason": 0,
+            "stop_valid": 0,
+            "stop_pc_valid": 0,
+            "halted": 0,
+            "fault": 0,
+            "last_completed_valid": 0,
+            "last_completed_pc": 0,
+            "last_store_valid": 0,
+            "last_store_addr": 0,
+            "last_store_data": 0,
+            "core_reset": 1,
+            "heartbeat": 0,
+            "reserved": 0,
+            "cycles": 0,
+            "completed": 0,
+            "stalls": 0,
+            "redirects": 0,
+            "stores": 0
+          }
+        },
+        {
+          "label": "after_0",
+          "host_sample_time_ms": 1793607016330,
+          "decoded": {
+            "build_id": "22b2a23f057c652b",
+            "rf": [
+              0,
+              4658,
+              0,
+              32
+            ],
+            "flags": [
+              0,
+              0,
+              0
+            ],
+            "stop_pc": 34,
+            "stop_reason": 1,
+            "stop_valid": 1,
+            "stop_pc_valid": 1,
+            "halted": 1,
+            "fault": 0,
+            "last_completed_valid": 1,
+            "last_completed_pc": 34,
+            "last_store_valid": 1,
+            "last_store_addr": 71,
+            "last_store_data": 0,
+            "core_reset": 0,
+            "heartbeat": 1,
+            "reserved": 0,
+            "cycles": 55,
+            "completed": 35,
+            "stalls": 16,
+            "redirects": 0,
+            "stores": 8
+          }
+        },
+        {
+          "label": "after_1",
+          "host_sample_time_ms": 1793607016435,
+          "decoded": {
+            "build_id": "22b2a23f057c652b",
+            "rf": [
+              0,
+              4658,
+              0,
+              32
+            ],
+            "flags": [
+              0,
+              0,
+              0
+            ],
+            "stop_pc": 34,
+            "stop_reason": 1,
+            "stop_valid": 1,
+            "stop_pc_valid": 1,
+            "halted": 1,
+            "fault": 0,
+            "last_completed_valid": 1,
+            "last_completed_pc": 34,
+            "last_store_valid": 1,
+            "last_store_addr": 71,
+            "last_store_data": 0,
+            "core_reset": 0,
+            "heartbeat": 1,
+            "reserved": 0,
+            "cycles": 55,
+            "completed": 35,
+            "stalls": 16,
+            "redirects": 0,
+            "stores": 8
+          }
+        }
+      ]
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 11,
+    "title": "Explaining CPU Performance",
+    "claim": "Explain useful instruction work and the measured sources of extra cycles.",
+    "source_groups": [
+      "BOARD",
+      "PERFORMANCE",
+      "PPA"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\performance_ac1_9b449e40f5d44bd78936f207953b77d6\\result.json",
+        "sha256": "9fbef8fccd06c17e464371a73ebc00068b0f9d98e787d8e6d787a1652e08c84f"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/result.json",
+        "sha256": "0b98fb5e292e2fb29ebbe3db7114503d4f13fe34b0b74218bf8a3687c03f8be1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/timing.rpt",
+        "sha256": "2fd077a5897ea77c419922c73fdfb5b6639ccf64aa1fcfbd663c3506dcb70a21"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/utilization.rpt",
+        "sha256": "51454a24a8fabd6cd0b44180b3e546fa5731ec994eb16e103d24e03d8d6689e5"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/result.json",
+        "sha256": "7b88b99c936d4e4c91697abbfc6415e7178e3c1b9aa3699993e9f32a7091214e"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/reports/timing.rpt",
+        "sha256": "1218d30294544060d14fd61a1c99df40fa65e50c3d6fc46aea13d647b2733cb1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/reports/utilization.rpt",
+        "sha256": "b64a8a9043c14df305665fef18d891ee5dcbf5d730b0df5a1a948e0fc4c36a4b"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/result.json",
+        "sha256": "8ebdb4901fa9745a68aab7115aca918014502475c621b185960489449907b4a5"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/reports/timing.rpt",
+        "sha256": "dddcaf1b446609936e8b4b2f8b1130b2031418bc8500bc7afc01488cc835dae7"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/reports/utilization.rpt",
+        "sha256": "711dc1ace17aa211d5b5894f215f5db855d09838711f56888eed2ba935d7cbf1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/result.json",
+        "sha256": "93d17a48ce7103f7d16719adce89969f047efeed2bac8f3b5bc87578fca5d85c"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/timing.rpt",
+        "sha256": "0b3bd651dc581cd1a6a76c2741201dc62541407018ca403cf4cc6d5e0af60c14"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/utilization.rpt",
+        "sha256": "fa0b5ca8feea52a9c84a0a67d280c46cc5bb98730c11dca2785b5fd5f3a7c699"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/result.json",
+        "sha256": "09ffc7c088ba896bad98e7d9863e8ec3e6596e8da2f552853687b17242ed65eb"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/reports/timing.rpt",
+        "sha256": "2f14ddd0986389fd0fc46de9f52d4d751b8d73f70b59bc96b701c365b0340fbe"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/reports/utilization.rpt",
+        "sha256": "142afbaa4c602948993b516ce67c65646449747c227d6d1ba7344140a114feb6"
+      }
+    ],
+    "expected": "For these normal-HALT cases C=N+4+S+2R and CPI=C/N",
+    "actual": [
+      {
+        "program": "all_ops",
+        "N": 16,
+        "S": 1,
+        "R": 2,
+        "C": 25,
+        "CPI": 1.562
+      },
+      {
+        "program": "baseline",
+        "N": 10,
+        "S": 1,
+        "R": 1,
+        "C": 17,
+        "CPI": 1.7
+      },
+      {
+        "program": "loop",
+        "N": 18,
+        "S": 0,
+        "R": 4,
+        "C": 30,
+        "CPI": 1.667
+      },
+      {
+        "program": "memory_copy",
+        "N": 7,
+        "S": 2,
+        "R": 1,
+        "C": 15,
+        "CPI": 2.143
+      },
+      {
+        "program": "copy_checksum",
+        "N": 35,
+        "S": 16,
+        "R": 0,
+        "C": 55,
+        "CPI": 1.571
+      }
+    ],
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 12,
+    "title": "What We Delivered",
+    "claim": "Close against the four course requirements and the accepted baseline.",
+    "source_groups": [
+      "SPEC",
+      "BOARD",
+      "PERFORMANCE"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "accepted_scope": "AC1_FIVE_PROGRAMS_AND_S1_BOARD_PASS",
+      "requirement_to_pages": {
+        "ISA": [
+          2,
+          13
+        ],
+        "process": [
+          3
+        ],
+        "structure_interfaces": [
+          4,
+          5,
+          6,
+          14,
+          15
+        ],
+        "functional": [
+          7,
+          8,
+          9,
+          10,
+          17,
+          18
+        ],
+        "performance": [
+          11,
+          19,
+          20
+        ]
+      }
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 13,
+    "title": "ISA Encoding Reference",
+    "claim": "Provide the complete ISA v1.5 opcode map.",
+    "source_groups": [
+      "ISA"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/Vivado/rtl/isa_decode.v",
+        "sha256": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": [
+      [
+        "Opcode",
+        "指令",
+        "操作数来源与结果去向",
+        "标志"
+      ],
+      [
+        "0000 0",
+        "MOV Rd,Rs",
+        "R[d] ← R[s]",
+        "保持"
+      ],
+      [
+        "0001 1",
+        "MOV Rd,#u8",
+        "R[d] ← ZExt(imm8)",
+        "保持"
+      ],
+      [
+        "0010 2",
+        "AND Rd,Rs",
+        "R[d] ← R[d] AND R[s]",
+        "保持"
+      ],
+      [
+        "0011 3",
+        "OR Rd,Rs",
+        "R[d] ← R[d] OR R[s]",
+        "保持"
+      ],
+      [
+        "0100 4",
+        "ADD Rd,Rs",
+        "R[d] ← low16(R[d]+R[s])",
+        "更新C/V"
+      ],
+      [
+        "0101 5",
+        "ADD Rd,#u8",
+        "R[d] ← low16(R[d]+ZExt(imm8))",
+        "更新C/V"
+      ],
+      [
+        "0110 6",
+        "SUB Rd,Rs",
+        "R[d] ← low16(R[d]−R[s])",
+        "更新C/V"
+      ],
+      [
+        "0111 7",
+        "SUB Rd,#u8",
+        "R[d] ← low16(R[d]−ZExt(imm8))",
+        "更新C/V"
+      ],
+      [
+        "1000 8",
+        "LDR Rd,[Rs+s8]",
+        "EA=low16(R[s]+SExt(imm8))；R[d] ← DM[EA]",
+        "保持"
+      ],
+      [
+        "1001 9",
+        "STR Rd,[Rs+s8]",
+        "同上生成EA；DM[EA] ← R[d]",
+        "保持"
+      ],
+      [
+        "1010 A",
+        "CMP Rs1,Rs2",
+        "Rs1占Rd字段，Rs2占Rs字段；Z ← (R[d]==R[s])；不写RF",
+        "更新Z"
+      ],
+      [
+        "1011 B",
+        "Reserved",
+        "非法指令；不产生数据写入",
+        "保持"
+      ],
+      [
+        "1100 C",
+        "JUMP #u8",
+        "下一执行目标=ZExt(imm8)",
+        "保持"
+      ],
+      [
+        "1101 D",
+        "JZ #s8",
+        "Z=1时目标=low16(pc+1+SExt(imm8))",
+        "保持"
+      ],
+      [
+        "1110 E",
+        "HALT",
+        "取消年轻指令；老指令完成后停止",
+        "保持"
+      ],
+      [
+        "1111 F",
+        "Reserved",
+        "非法指令；不产生数据写入",
+        "保持"
+      ]
+    ],
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 14,
+    "title": "Interface Reference",
+    "claim": "Separate execution, observation and board interfaces.",
+    "source_groups": [
+      "SPEC",
+      "RTL",
+      "SYSTEM"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/datapath_core.sv",
+        "sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999"
+      },
+      {
+        "relative": "CPU核心设计/系统/rtl/cpu_system.sv",
+        "sha256": "68160c3b9442539be0628640dd3b0fd2cc4b7470482d1b48addbf1370e50d366"
+      },
+      {
+        "relative": "CPU核心设计/板级/rtl/ees331_top.sv",
+        "sha256": "77091a8c075f4d62b438dd36bbf029762e76dd67815ae2c84f6aa93c9089c118"
+      },
+      {
+        "relative": "CPU核心设计/板级/rtl/ees331_application.sv",
+        "sha256": "dc20ed66de199aea1518bac7cacc31947894e7da26fa1a16b6786550710bc61c"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": [
+      [
+        "信号",
+        "方向",
+        "位宽",
+        "功能与时序"
+      ],
+      [
+        "clk",
+        "输入",
+        "1",
+        "唯一核心时钟 上升沿更新状态"
+      ],
+      [
+        "rst",
+        "输入",
+        "1",
+        "高有效同步复位 优先级最高"
+      ],
+      [
+        "im_addr",
+        "输出",
+        "16",
+        "取指字地址 来自PC_fetch"
+      ],
+      [
+        "im_en",
+        "输出",
+        "1",
+        "合格取指请求；stall/停止/取消时阻止错误取指"
+      ],
+      [
+        "im_dout",
+        "输入",
+        "16",
+        "同步IM输出；配合IF/ID的pc/valid供ID使用"
+      ],
+      [
+        "dm_addr",
+        "输出",
+        "16",
+        "MEM的完整16位EA；物理截位前检查范围"
+      ],
+      [
+        "dm_en",
+        "输出",
+        "1",
+        "合格MR或MW访问使能"
+      ],
+      [
+        "dm_we",
+        "输出",
+        "1",
+        "合格STR写使能；仅MEM有效访问时为1"
+      ],
+      [
+        "dm_din",
+        "输出",
+        "16",
+        "EX/MEM保存的已转发STR数据"
+      ],
+      [
+        "dm_dout",
+        "输入",
+        "16",
+        "同步DM读结果；供WB的load选择"
+      ],
+      [
+        "halted",
+        "输出",
+        "1",
+        "HALT完成排空后的停止状态 直到复位"
+      ],
+      [
+        "fault",
+        "输出",
+        "1",
+        "故障完成排空后的停止状态 直到复位"
+      ]
+    ],
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 15,
+    "title": "Operating Modes and Event Priority",
+    "claim": "Explain the global state machine and event ordering.",
+    "source_groups": [
+      "SPEC",
+      "RTL",
+      "CW"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/datapath_core.sv",
+        "sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999"
+      },
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "CW": {
+        "CW_X": {
+          "prefix": "x_",
+          "fields": {
+            "use_rd": 1,
+            "use_rs": 1,
+            "alu_a_sel": 2,
+            "alu_b_sel": 2,
+            "alu_op": 3,
+            "reg_write": 1,
+            "mem_read": 1,
+            "mem_write": 1,
+            "z_write": 1,
+            "cv_write": 1,
+            "wb_sel": 1,
+            "jump_abs": 1,
+            "jump_z": 1,
+            "halt": 1
+          },
+          "width": 18
+        },
+        "CW_M": {
+          "prefix": "m_",
+          "fields": {
+            "reg_write": 1,
+            "mem_read": 1,
+            "mem_write": 1,
+            "z_write": 1,
+            "cv_write": 1,
+            "wb_sel": 1,
+            "halt": 1
+          },
+          "width": 7
+        },
+        "CW_W": {
+          "prefix": "w_",
+          "fields": {
+            "reg_write": 1,
+            "z_write": 1,
+            "cv_write": 1,
+            "wb_sel": 1,
+            "halt": 1
+          },
+          "width": 5
+        }
+      },
+      "priority_source": "RTL datapath_core mode_next/qualified events"
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 16,
+    "title": "Additional Hazard Cases",
+    "claim": "Support questions on source roles, newest producers and fault age.",
+    "source_groups": [
+      "SPEC",
+      "RTL",
+      "SIM_ADD",
+      "SIM_STORE_HALT",
+      "SIM_FAULT"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      },
+      {
+        "relative": "CPU核心设计/Vivado/rtl/datapath_core.sv",
+        "sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+        "sha256": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json",
+        "sha256": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": [
+      {
+        "case": "DOC_ADD_ADD",
+        "result": {
+          "case": "DOC_ADD_ADD",
+          "epoch": "0",
+          "cycles": "7",
+          "tokens": "3",
+          "stores": "0",
+          "stalls": "0",
+          "redirects": "0",
+          "reset_seen": "0"
+        }
+      },
+      {
+        "case": "DOC_LOAD_STR",
+        "result": {
+          "case": "DOC_LOAD_STR",
+          "epoch": "0",
+          "cycles": "8",
+          "tokens": "3",
+          "stores": "1",
+          "stalls": "1",
+          "redirects": "0",
+          "reset_seen": "0"
+        }
+      },
+      {
+        "case": "DOC_CMP_JZ",
+        "result": {
+          "case": "DOC_CMP_JZ",
+          "epoch": "0",
+          "cycles": "9",
+          "tokens": "3",
+          "stores": "0",
+          "stalls": "0",
+          "redirects": "1",
+          "reset_seen": "0"
+        }
+      },
+      {
+        "case": "DOC_STR_HALT",
+        "result": {
+          "case": "DOC_STR_HALT",
+          "epoch": "0",
+          "cycles": "6",
+          "tokens": "2",
+          "stores": "1",
+          "stalls": "0",
+          "redirects": "0",
+          "reset_seen": "0"
+        }
+      },
+      {
+        "case": "MEM_FAULT_OVER_BRANCH",
+        "result": {
+          "case": "MEM_FAULT_OVER_BRANCH",
+          "epoch": "0",
+          "cycles": "7",
+          "tokens": "3",
+          "stores": "0",
+          "stalls": "0",
+          "redirects": "0",
+          "reset_seen": "0"
+        }
+      }
+    ],
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 17,
+    "title": "Reference Model and Coverage",
+    "claim": "Explain why the automated checks are meaningful and bounded.",
+    "source_groups": [
+      "INDEPENDENT",
+      "HOST_CHECKS",
+      "SPEC"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_result.json",
+        "sha256": "74d601bc4ee925b9ee62eebb738c2d46164febb4875ce5ecffde8e281a9ed45f"
+      },
+      {
+        "relative": "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_results.csv",
+        "sha256": "1ce5b8d38e8439320d4bd193eee643b8e5fdc15a3b949ae873d7394cbd57919a"
+      },
+      {
+        "relative": "CPU核心设计/验证/final_baseline_20261102_p824cngb/final_qa.json",
+        "sha256": "d31c5e1ef912babaa71e81ef89c046bd2a9791aee9e2bbb71604e01d3f595dc2"
+      },
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      }
+    ],
+    "expected": "ISA v1.5 and frozen AC1 control/memory contract; exact values in evidence.json",
+    "actual": {
+      "external_ISA_cases": 48,
+      "reset_witnesses": 10,
+      "physical_programs": 5,
+      "archived_host_document_checks": 21
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 18,
+    "title": "Raw VIO and Physical Reset Evidence",
+    "claim": "Connect decoded values to the captured words and real button observations.",
+    "source_groups": [
+      "BOARD",
+      "BUTTON"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+        "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\button_snapshots.tsv",
+        "sha256": "d37722f6be0880fdf07e624a9597421eb105c3bbad7b8c129f4a070d553f70f0"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\button_session_long.log",
+        "sha256": "33f62b3288f12cbd9d0e3f99de26340789393f0b458b34e863cf33939caeb03c"
+      }
+    ],
+    "expected": "Two normal-stop snapshots perprogram; pressed S1 clears publicCPUstate andcounters, release restartschecksum",
+    "actual": {
+      "programs": [
+        {
+          "program": "all_ops",
+          "N": 16,
+          "S": 1,
+          "R": 2,
+          "C": 25,
+          "CPI": 1.562,
+          "rf_shadow": [
+            "0005",
+            "0005",
+            "0005",
+            "0020"
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": "0012",
+          "last_store_addr": "0020",
+          "last_store_data": "0005",
+          "stores": 1,
+          "record": "验证/cpu345_hardware_mhdc67ya"
+        },
+        {
+          "program": "baseline",
+          "N": 10,
+          "S": 1,
+          "R": 1,
+          "C": 17,
+          "CPI": 1.7,
+          "rf_shadow": [
+            "0008",
+            "0002",
+            "0008",
+            "0020"
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": "000A",
+          "last_store_addr": "0020",
+          "last_store_data": "0008",
+          "stores": 1,
+          "record": "验证/cpu345_hardware_nhbxiiwe"
+        },
+        {
+          "program": "loop",
+          "N": 18,
+          "S": 0,
+          "R": 4,
+          "C": 30,
+          "CPI": 1.667,
+          "rf_shadow": [
+            "0000",
+            "0000",
+            "0000",
+            "0000"
+          ],
+          "flags": [
+            1,
+            1,
+            0
+          ],
+          "stop_pc": "0006",
+          "last_store_addr": "0000",
+          "last_store_data": "0000",
+          "stores": 0,
+          "record": "验证/cpu345_hardware_wgocvlq3"
+        },
+        {
+          "program": "memory_copy",
+          "N": 7,
+          "S": 2,
+          "R": 1,
+          "C": 15,
+          "CPI": 2.143,
+          "rf_shadow": [
+            "BEEF",
+            "BEEF",
+            "0000",
+            "0020"
+          ],
+          "flags": [
+            1,
+            0,
+            0
+          ],
+          "stop_pc": "0007",
+          "last_store_addr": "0021",
+          "last_store_data": "BEEF",
+          "stores": 1,
+          "record": "验证/cpu345_hardware_c2r8w4bv"
+        },
+        {
+          "program": "copy_checksum",
+          "N": 35,
+          "S": 16,
+          "R": 0,
+          "C": 55,
+          "CPI": 1.571,
+          "rf_shadow": [
+            "0000",
+            "1232",
+            "0000",
+            "0020"
+          ],
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "stop_pc": "0022",
+          "last_store_addr": "0047",
+          "last_store_data": "0000",
+          "stores": 8,
+          "record": "验证/cpu345_hardware_apuwfhhk"
+        }
+      ],
+      "S1_frames": [
+        {
+          "label": "before",
+          "host_sample_time_ms": 1793606782574,
+          "decoded": {
+            "build_id": "22b2a23f057c652b",
+            "rf": [
+              0,
+              4658,
+              0,
+              32
+            ],
+            "flags": [
+              0,
+              0,
+              0
+            ],
+            "stop_pc": 34,
+            "stop_reason": 1,
+            "stop_valid": 1,
+            "stop_pc_valid": 1,
+            "halted": 1,
+            "fault": 0,
+            "last_completed_valid": 1,
+            "last_completed_pc": 34,
+            "last_store_valid": 1,
+            "last_store_addr": 71,
+            "last_store_data": 0,
+            "core_reset": 0,
+            "heartbeat": 0,
+            "reserved": 0,
+            "cycles": 55,
+            "completed": 35,
+            "stalls": 16,
+            "redirects": 0,
+            "stores": 8
+          }
+        },
+        {
+          "label": "pressed",
+          "host_sample_time_ms": 1793606917836,
+          "decoded": {
+            "build_id": "22b2a23f057c652b",
+            "rf": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "flags": [
+              0,
+              0,
+              0
+            ],
+            "stop_pc": 0,
+            "stop_reason": 0,
+            "stop_valid": 0,
+            "stop_pc_valid": 0,
+            "halted": 0,
+            "fault": 0,
+            "last_completed_valid": 0,
+            "last_completed_pc": 0,
+            "last_store_valid": 0,
+            "last_store_addr": 0,
+            "last_store_data": 0,
+            "core_reset": 1,
+            "heartbeat": 0,
+            "reserved": 0,
+            "cycles": 0,
+            "completed": 0,
+            "stalls": 0,
+            "redirects": 0,
+            "stores": 0
+          }
+        },
+        {
+          "label": "after_0",
+          "host_sample_time_ms": 1793607016330,
+          "decoded": {
+            "build_id": "22b2a23f057c652b",
+            "rf": [
+              0,
+              4658,
+              0,
+              32
+            ],
+            "flags": [
+              0,
+              0,
+              0
+            ],
+            "stop_pc": 34,
+            "stop_reason": 1,
+            "stop_valid": 1,
+            "stop_pc_valid": 1,
+            "halted": 1,
+            "fault": 0,
+            "last_completed_valid": 1,
+            "last_completed_pc": 34,
+            "last_store_valid": 1,
+            "last_store_addr": 71,
+            "last_store_data": 0,
+            "core_reset": 0,
+            "heartbeat": 1,
+            "reserved": 0,
+            "cycles": 55,
+            "completed": 35,
+            "stalls": 16,
+            "redirects": 0,
+            "stores": 8
+          }
+        },
+        {
+          "label": "after_1",
+          "host_sample_time_ms": 1793607016435,
+          "decoded": {
+            "build_id": "22b2a23f057c652b",
+            "rf": [
+              0,
+              4658,
+              0,
+              32
+            ],
+            "flags": [
+              0,
+              0,
+              0
+            ],
+            "stop_pc": 34,
+            "stop_reason": 1,
+            "stop_valid": 1,
+            "stop_pc_valid": 1,
+            "halted": 1,
+            "fault": 0,
+            "last_completed_valid": 1,
+            "last_completed_pc": 34,
+            "last_store_valid": 1,
+            "last_store_addr": 71,
+            "last_store_data": 0,
+            "core_reset": 0,
+            "heartbeat": 1,
+            "reserved": 0,
+            "cycles": 55,
+            "completed": 35,
+            "stalls": 16,
+            "redirects": 0,
+            "stores": 8
+          }
+        }
+      ]
+    },
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 19,
+    "title": "FPGA Resources and Routed Timing",
+    "claim": "Show the correct implementation scope for resource and timing values.",
+    "source_groups": [
+      "PPA",
+      "SPEC"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计\\验证\\performance_ac1_9b449e40f5d44bd78936f207953b77d6\\result.json",
+        "sha256": "9fbef8fccd06c17e464371a73ebc00068b0f9d98e787d8e6d787a1652e08c84f"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/result.json",
+        "sha256": "0b98fb5e292e2fb29ebbe3db7114503d4f13fe34b0b74218bf8a3687c03f8be1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/timing.rpt",
+        "sha256": "2fd077a5897ea77c419922c73fdfb5b6639ccf64aa1fcfbd663c3506dcb70a21"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/utilization.rpt",
+        "sha256": "51454a24a8fabd6cd0b44180b3e546fa5731ec994eb16e103d24e03d8d6689e5"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/result.json",
+        "sha256": "7b88b99c936d4e4c91697abbfc6415e7178e3c1b9aa3699993e9f32a7091214e"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/reports/timing.rpt",
+        "sha256": "1218d30294544060d14fd61a1c99df40fa65e50c3d6fc46aea13d647b2733cb1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/reports/utilization.rpt",
+        "sha256": "b64a8a9043c14df305665fef18d891ee5dcbf5d730b0df5a1a948e0fc4c36a4b"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/result.json",
+        "sha256": "8ebdb4901fa9745a68aab7115aca918014502475c621b185960489449907b4a5"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/reports/timing.rpt",
+        "sha256": "dddcaf1b446609936e8b4b2f8b1130b2031418bc8500bc7afc01488cc835dae7"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/reports/utilization.rpt",
+        "sha256": "711dc1ace17aa211d5b5894f215f5db855d09838711f56888eed2ba935d7cbf1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/result.json",
+        "sha256": "93d17a48ce7103f7d16719adce89969f047efeed2bac8f3b5bc87578fca5d85c"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/timing.rpt",
+        "sha256": "0b3bd651dc581cd1a6a76c2741201dc62541407018ca403cf4cc6d5e0af60c14"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/utilization.rpt",
+        "sha256": "fa0b5ca8feea52a9c84a0a67d280c46cc5bb98730c11dca2785b5fd5f3a7c699"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/result.json",
+        "sha256": "09ffc7c088ba896bad98e7d9863e8ec3e6596e8da2f552853687b17242ed65eb"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/reports/timing.rpt",
+        "sha256": "2f14ddd0986389fd0fc46de9f52d4d751b8d73f70b59bc96b701c365b0340fbe"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/reports/utilization.rpt",
+        "sha256": "142afbaa4c602948993b516ce67c65646449747c227d6d1ba7344140a114feb6"
+      },
+      {
+        "relative": "CPU核心设计/文档源/architecture.json",
+        "sha256": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17"
+      },
+      {
+        "relative": "CPU核心设计/文档源/content.json",
+        "sha256": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758"
+      },
+      {
+        "relative": "CPU核心设计/文档源/sections.json",
+        "sha256": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f"
+      }
+    ],
+    "expected": "Same selected program/device/clock/recipe per routed result; positive setup/hold",
+    "actual": [
+      {
+        "program": "all_ops",
+        "resources": {
+          "lut_total": 1118,
+          "lut_logic": 1094,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2826,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "timing": {
+          "wns_ns": 2.086,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4279.0,
+          "whs_ns": 0.071,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4263.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2878.0
+        }
+      },
+      {
+        "program": "baseline",
+        "resources": {
+          "lut_total": 1120,
+          "lut_logic": 1096,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2825,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "timing": {
+          "wns_ns": 1.838,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4277.0,
+          "whs_ns": 0.083,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4261.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2877.0
+        }
+      },
+      {
+        "program": "loop",
+        "resources": {
+          "lut_total": 1160,
+          "lut_logic": 1136,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2822,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "timing": {
+          "wns_ns": 2.101,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4271.0,
+          "whs_ns": 0.062,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4255.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2874.0
+        }
+      },
+      {
+        "program": "memory_copy",
+        "resources": {
+          "lut_total": 1119,
+          "lut_logic": 1095,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2823,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "timing": {
+          "wns_ns": 1.54,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4273.0,
+          "whs_ns": 0.086,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4257.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2875.0
+        }
+      },
+      {
+        "program": "copy_checksum",
+        "resources": {
+          "lut_total": 1082,
+          "lut_logic": 1058,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2824,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "timing": {
+          "wns_ns": 1.434,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4275.0,
+          "whs_ns": 0.073,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4259.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2876.0
+        }
+      }
+    ],
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  },
+  {
+    "slide": 20,
+    "title": "Isolated WB-to-MEM Optimization",
+    "claim": "Explain the optional candidate and its implementation tradeoff.",
+    "source_groups": [
+      "CANDIDATE",
+      "PPA"
+    ],
+    "sources": [
+      {
+        "relative": "CPU核心设计/实验/WB_MEM候选比较.json",
+        "sha256": "643d11ce1cace3e25190b8c5e002bcf838664f140a6edce13eec153bd824cc85"
+      },
+      {
+        "relative": "CPU核心设计\\验证\\performance_ac1_9b449e40f5d44bd78936f207953b77d6\\result.json",
+        "sha256": "9fbef8fccd06c17e464371a73ebc00068b0f9d98e787d8e6d787a1652e08c84f"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/result.json",
+        "sha256": "0b98fb5e292e2fb29ebbe3db7114503d4f13fe34b0b74218bf8a3687c03f8be1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/timing.rpt",
+        "sha256": "2fd077a5897ea77c419922c73fdfb5b6639ccf64aa1fcfbd663c3506dcb70a21"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/utilization.rpt",
+        "sha256": "51454a24a8fabd6cd0b44180b3e546fa5731ec994eb16e103d24e03d8d6689e5"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/result.json",
+        "sha256": "7b88b99c936d4e4c91697abbfc6415e7178e3c1b9aa3699993e9f32a7091214e"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/reports/timing.rpt",
+        "sha256": "1218d30294544060d14fd61a1c99df40fa65e50c3d6fc46aea13d647b2733cb1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_04quhh2d/reports/utilization.rpt",
+        "sha256": "b64a8a9043c14df305665fef18d891ee5dcbf5d730b0df5a1a948e0fc4c36a4b"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/result.json",
+        "sha256": "8ebdb4901fa9745a68aab7115aca918014502475c621b185960489449907b4a5"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/reports/timing.rpt",
+        "sha256": "dddcaf1b446609936e8b4b2f8b1130b2031418bc8500bc7afc01488cc835dae7"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_rj_gire5/reports/utilization.rpt",
+        "sha256": "711dc1ace17aa211d5b5894f215f5db855d09838711f56888eed2ba935d7cbf1"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/result.json",
+        "sha256": "93d17a48ce7103f7d16719adce89969f047efeed2bac8f3b5bc87578fca5d85c"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/timing.rpt",
+        "sha256": "0b3bd651dc581cd1a6a76c2741201dc62541407018ca403cf4cc6d5e0af60c14"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/utilization.rpt",
+        "sha256": "fa0b5ca8feea52a9c84a0a67d280c46cc5bb98730c11dca2785b5fd5f3a7c699"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/result.json",
+        "sha256": "09ffc7c088ba896bad98e7d9863e8ec3e6596e8da2f552853687b17242ed65eb"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/reports/timing.rpt",
+        "sha256": "2f14ddd0986389fd0fc46de9f52d4d751b8d73f70b59bc96b701c365b0340fbe"
+      },
+      {
+        "relative": "CPU核心设计/验证/cpu345_board_5prio5st/reports/utilization.rpt",
+        "sha256": "142afbaa4c602948993b516ce67c65646449747c227d6d1ba7344140a114feb6"
+      }
+    ],
+    "expected": "WBtoMEM candidate comparison is offline only;defaultAC1 physical scope retained",
+    "actual": [
+      {
+        "program": "memory_copy",
+        "baseline_cycles": 15,
+        "candidate_cycles": 14,
+        "baseline_stalls": 2,
+        "candidate_stalls": 1,
+        "saved_cycles": 1,
+        "calculated_time_saved_ns_at100MHz": 10,
+        "baseline_LUT": 1119,
+        "candidate_LUT": 1203,
+        "LUT_delta": 84,
+        "baseline_FF": 2823,
+        "candidate_FF": 2825,
+        "FF_delta": 2,
+        "baseline_WNS_ns": 1.54,
+        "candidate_WNS_ns": 1.493,
+        "WNS_delta_ns": -0.04699999999999993,
+        "baseline_WHS_ns": 0.086,
+        "candidate_WHS_ns": 0.085
+      },
+      {
+        "program": "copy_checksum",
+        "baseline_cycles": 55,
+        "candidate_cycles": 47,
+        "baseline_stalls": 16,
+        "candidate_stalls": 8,
+        "saved_cycles": 8,
+        "calculated_time_saved_ns_at100MHz": 80,
+        "baseline_LUT": 1082,
+        "candidate_LUT": 1168,
+        "LUT_delta": 86,
+        "baseline_FF": 2824,
+        "candidate_FF": 2826,
+        "FF_delta": 2,
+        "baseline_WNS_ns": 1.434,
+        "candidate_WNS_ns": 1.668,
+        "WNS_delta_ns": 0.23399999999999999,
+        "baseline_WHS_ns": 0.073,
+        "candidate_WHS_ns": 0.106
+      }
+    ],
+    "supports": "Finite physical5program/S1 scope for BOARD/BUTTON; simulation timing for SIM_*; routed estimates for PPA/CANDIDATE"
+  }
+]

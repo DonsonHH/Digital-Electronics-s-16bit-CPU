@@ -1,0 +1,1904 @@
+{
+  "baseline_commit": "9475f210c7e567cb41f3856ff3bcebc6611ac991",
+  "tag": "cpu-v1.6-ac1-ees331-verified",
+  "CPU": "v1.6",
+  "ISA": "v1.5",
+  "implementation": "AC1",
+  "production_RTL_sha256": {
+    "Vivado/rtl/addsub16_cla.v": "eaf1e0c0048e34a2f93feb1414f5dede55d49b140d40f3ef777cd88d1707d743",
+    "Vivado/rtl/alu16.v": "ac1e94a66ee28698f906da1927b50c96b80f3b04989b3c75b9cf6df5dde509e9",
+    "Vivado/rtl/branch_target16.v": "7c48a5e0e8af99cccf66c6111b78f99e0fc8f096802e2d1c122fb7a04cb2739e",
+    "Vivado/rtl/cla16.v": "8d3221021088d0362faf8cb4e39128d0bc2e8b6e145dfe30a5f11d1e44218d42",
+    "Vivado/rtl/cla4_pg.v": "31434ab4794c155a4ad2f439b85bfbc0cf6216e86e1921f771d7b168d4e0fab7",
+    "Vivado/rtl/datapath_core.sv": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999",
+    "Vivado/rtl/flags_reg.v": "fe0abc775c5a99ec4a77ad2bf45a750c1fe9d9cf0fd9bfe65ceab96d46eb50ac",
+    "Vivado/rtl/imm_ext16.v": "9d0c17270462f619dff7a9f19cb618b7a6f482d8d2ddce76d9bd77fbca139844",
+    "Vivado/rtl/isa_decode.v": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2",
+    "Vivado/rtl/operand_forward.v": "30513341d5b60a4393a1784dcc0cb756fd251206655a458f2e2c17e01d1faa65",
+    "Vivado/rtl/pc16.v": "969f0729a1f09740bc9627294ba7f0d8e39f3eaa9f0071504455b42b45405a38",
+    "Vivado/rtl/regfile4x16.v": "06a3cb9622b766909a141c6dce572ea8d41e62fd91c7a44214dfa284e45a1029",
+    "Vivado/rtl/sync_memories.v": "55b3b6fcac5c6fa556b769037282e58bae54bf9c46f7de622e22825ff7f170bf",
+    "系统/rtl/cpu_system.sv": "68160c3b9442539be0628640dd3b0fd2cc4b7470482d1b48addbf1370e50d366"
+  },
+  "programs": [
+    {
+      "program": "all_ops",
+      "N": 16,
+      "S": 1,
+      "R": 2,
+      "C": 25,
+      "CPI": 1.562,
+      "rf_shadow": [
+        "0005",
+        "0005",
+        "0005",
+        "0020"
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": "0012",
+      "last_store_addr": "0020",
+      "last_store_data": "0005",
+      "stores": 1,
+      "record": "验证/cpu345_hardware_mhdc67ya"
+    },
+    {
+      "program": "baseline",
+      "N": 10,
+      "S": 1,
+      "R": 1,
+      "C": 17,
+      "CPI": 1.7,
+      "rf_shadow": [
+        "0008",
+        "0002",
+        "0008",
+        "0020"
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": "000A",
+      "last_store_addr": "0020",
+      "last_store_data": "0008",
+      "stores": 1,
+      "record": "验证/cpu345_hardware_nhbxiiwe"
+    },
+    {
+      "program": "loop",
+      "N": 18,
+      "S": 0,
+      "R": 4,
+      "C": 30,
+      "CPI": 1.667,
+      "rf_shadow": [
+        "0000",
+        "0000",
+        "0000",
+        "0000"
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": "0006",
+      "last_store_addr": "0000",
+      "last_store_data": "0000",
+      "stores": 0,
+      "record": "验证/cpu345_hardware_wgocvlq3"
+    },
+    {
+      "program": "memory_copy",
+      "N": 7,
+      "S": 2,
+      "R": 1,
+      "C": 15,
+      "CPI": 2.143,
+      "rf_shadow": [
+        "BEEF",
+        "BEEF",
+        "0000",
+        "0020"
+      ],
+      "flags": [
+        1,
+        0,
+        0
+      ],
+      "stop_pc": "0007",
+      "last_store_addr": "0021",
+      "last_store_data": "BEEF",
+      "stores": 1,
+      "record": "验证/cpu345_hardware_c2r8w4bv"
+    },
+    {
+      "program": "copy_checksum",
+      "N": 35,
+      "S": 16,
+      "R": 0,
+      "C": 55,
+      "CPI": 1.571,
+      "rf_shadow": [
+        "0000",
+        "1232",
+        "0000",
+        "0020"
+      ],
+      "flags": [
+        0,
+        0,
+        0
+      ],
+      "stop_pc": "0022",
+      "last_store_addr": "0047",
+      "last_store_data": "0000",
+      "stores": 8,
+      "record": "验证/cpu345_hardware_apuwfhhk"
+    }
+  ],
+  "examples": [
+    {
+      "id": "EX_ADD_FORWARD",
+      "case": "DOC_ADD_ADD",
+      "title": "相邻ADD的M到EX前递",
+      "initial_rf": [
+        1,
+        2,
+        4,
+        0
+      ],
+      "initial_flags": [
+        0,
+        0,
+        0
+      ],
+      "instructions": [
+        "00: ADD R0,R1 (4100)",
+        "01: ADD R2,R0 (4800)",
+        "02: HALT (E000)"
+      ],
+      "rows": [
+        [
+          "C1",
+          "00",
+          "—",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C2",
+          "01",
+          "00:ADD",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C3",
+          "02",
+          "01:ADD",
+          "00:ADD",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C4",
+          "03",
+          "02:HALT",
+          "01:ADD",
+          "00:ADD",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C5",
+          "—",
+          "03:RES",
+          "02:HALT",
+          "01:ADD",
+          "00:ADD",
+          "RF R0←0003；WB写C/V"
+        ],
+        [
+          "C6",
+          "—",
+          "—",
+          "—",
+          "02:HALT",
+          "01:ADD",
+          "RF R2←0007；WB写C/V"
+        ],
+        [
+          "C7",
+          "—",
+          "—",
+          "—",
+          "—",
+          "02:HALT",
+          "停止HALTED"
+        ]
+      ],
+      "result": {
+        "case": "DOC_ADD_ADD",
+        "epoch": "0",
+        "cycles": "7",
+        "tokens": "3",
+        "stores": "0",
+        "stalls": "0",
+        "redirects": "0",
+        "reset_seen": "0"
+      },
+      "final_rf": [
+        3,
+        2,
+        7,
+        0
+      ],
+      "final_flags": [
+        0,
+        0,
+        0
+      ],
+      "stores": []
+    },
+    {
+      "id": "EX_LOAD_USE",
+      "case": "DOC_LOAD_STR",
+      "title": "默认AC1的load use保持与bubble",
+      "initial_rf": [
+        0,
+        33,
+        0,
+        32
+      ],
+      "initial_flags": [
+        0,
+        0,
+        0
+      ],
+      "instructions": [
+        "00: LDR R0,[R3+0] (8300)",
+        "01: STR R0,[R1+0] (9100)",
+        "02: HALT (E000)"
+      ],
+      "rows": [
+        [
+          "C1",
+          "00",
+          "—",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C2",
+          "01",
+          "00:LDR",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C3",
+          "—",
+          "01:STR",
+          "00:LDR",
+          "—",
+          "—",
+          "保持IF/ID；X插bubble"
+        ],
+        [
+          "C4",
+          "02",
+          "01:STR",
+          "—",
+          "00:LDR",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C5",
+          "03",
+          "02:HALT",
+          "01:STR",
+          "—",
+          "00:LDR",
+          "RF R0←0007"
+        ],
+        [
+          "C6",
+          "—",
+          "03:RES",
+          "02:HALT",
+          "01:STR",
+          "—",
+          "DM[0021]←0007"
+        ],
+        [
+          "C7",
+          "—",
+          "—",
+          "—",
+          "02:HALT",
+          "01:STR",
+          "正常推进"
+        ],
+        [
+          "C8",
+          "—",
+          "—",
+          "—",
+          "—",
+          "02:HALT",
+          "停止HALTED"
+        ]
+      ],
+      "result": {
+        "case": "DOC_LOAD_STR",
+        "epoch": "0",
+        "cycles": "8",
+        "tokens": "3",
+        "stores": "1",
+        "stalls": "1",
+        "redirects": "0",
+        "reset_seen": "0"
+      },
+      "final_rf": [
+        7,
+        33,
+        0,
+        32
+      ],
+      "final_flags": [
+        0,
+        0,
+        0
+      ],
+      "stores": [
+        {
+          "pc": 1,
+          "word": 37120,
+          "op": 9,
+          "d": 0,
+          "data": 7,
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "rw": 0,
+          "zw": 0,
+          "cvw": 0,
+          "halt": 0,
+          "store": 1,
+          "fault": 0,
+          "addr": 33,
+          "sequence": 1
+        }
+      ]
+    },
+    {
+      "id": "EX_CMP_JZ",
+      "case": "DOC_CMP_JZ",
+      "title": "CMP到JZ的Z前递与年轻取消",
+      "initial_rf": [
+        1,
+        1,
+        0,
+        32
+      ],
+      "initial_flags": [
+        0,
+        0,
+        0
+      ],
+      "instructions": [
+        "00: CMP R0,R1 (A100)",
+        "01: JZ #+1 (D001)",
+        "02: STR R0,[R3+0] (9300)",
+        "03: HALT (E000)"
+      ],
+      "rows": [
+        [
+          "C1",
+          "00",
+          "—",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C2",
+          "01",
+          "00:CMP",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C3",
+          "02",
+          "01:JZ",
+          "00:CMP",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C4",
+          "—",
+          "02:STR",
+          "01:JZ",
+          "00:CMP",
+          "—",
+          "EX重定向；取消年轻槽"
+        ],
+        [
+          "C5",
+          "03",
+          "—",
+          "—",
+          "01:JZ",
+          "00:CMP",
+          "WB写Z"
+        ],
+        [
+          "C6",
+          "04",
+          "03:HALT",
+          "—",
+          "—",
+          "01:JZ",
+          "正常推进"
+        ],
+        [
+          "C7",
+          "—",
+          "04:RES",
+          "03:HALT",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C8",
+          "—",
+          "—",
+          "—",
+          "03:HALT",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C9",
+          "—",
+          "—",
+          "—",
+          "—",
+          "03:HALT",
+          "停止HALTED"
+        ]
+      ],
+      "result": {
+        "case": "DOC_CMP_JZ",
+        "epoch": "0",
+        "cycles": "9",
+        "tokens": "3",
+        "stores": "0",
+        "stalls": "0",
+        "redirects": "1",
+        "reset_seen": "0"
+      },
+      "final_rf": [
+        1,
+        1,
+        0,
+        32
+      ],
+      "final_flags": [
+        1,
+        0,
+        0
+      ],
+      "stores": []
+    },
+    {
+      "id": "EX_STORE_HALT",
+      "case": "DOC_STR_HALT",
+      "title": "STR在MEM写入并在HALT前完成WB标签",
+      "initial_rf": [
+        48879,
+        33,
+        4660,
+        0
+      ],
+      "initial_flags": [
+        0,
+        0,
+        0
+      ],
+      "instructions": [
+        "00: STR R0,[R1+0] (9100)",
+        "01: HALT (E000)",
+        "02: STR R2,[R1+0] (9900)"
+      ],
+      "rows": [
+        [
+          "C1",
+          "00",
+          "—",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C2",
+          "01",
+          "00:STR",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C3",
+          "02",
+          "01:HALT",
+          "00:STR",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C4",
+          "—",
+          "02:STR",
+          "01:HALT",
+          "00:STR",
+          "—",
+          "DM[0021]←BEEF"
+        ],
+        [
+          "C5",
+          "—",
+          "—",
+          "—",
+          "01:HALT",
+          "00:STR",
+          "正常推进"
+        ],
+        [
+          "C6",
+          "—",
+          "—",
+          "—",
+          "—",
+          "01:HALT",
+          "停止HALTED"
+        ]
+      ],
+      "result": {
+        "case": "DOC_STR_HALT",
+        "epoch": "0",
+        "cycles": "6",
+        "tokens": "2",
+        "stores": "1",
+        "stalls": "0",
+        "redirects": "0",
+        "reset_seen": "0"
+      },
+      "final_rf": [
+        48879,
+        33,
+        4660,
+        0
+      ],
+      "final_flags": [
+        0,
+        0,
+        0
+      ],
+      "stores": [
+        {
+          "pc": 0,
+          "word": 37120,
+          "op": 9,
+          "d": 0,
+          "data": 48879,
+          "flags": [
+            0,
+            0,
+            0
+          ],
+          "rw": 0,
+          "zw": 0,
+          "cvw": 0,
+          "halt": 0,
+          "store": 1,
+          "fault": 0,
+          "addr": 33,
+          "sequence": 0
+        }
+      ]
+    },
+    {
+      "id": "EX_MEM_FAULT",
+      "case": "MEM_FAULT_OVER_BRANCH",
+      "title": "较老MEM故障胜过年轻EX分支",
+      "initial_rf": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "initial_flags": [
+        0,
+        0,
+        0
+      ],
+      "instructions": [
+        "00: MOV R1,#255 (14FF)",
+        "01: ADD R0,#1 (5001)",
+        "02: LDR R2,[R1+1] (8901)",
+        "03: JUMP #5 (C005)",
+        "04: STR R0,[R0+0] (9000)",
+        "05: HALT (E000)"
+      ],
+      "rows": [
+        [
+          "C1",
+          "00",
+          "—",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C2",
+          "01",
+          "00:MOV",
+          "—",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C3",
+          "02",
+          "01:ADD",
+          "00:MOV",
+          "—",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C4",
+          "03",
+          "02:LDR",
+          "01:ADD",
+          "00:MOV",
+          "—",
+          "正常推进"
+        ],
+        [
+          "C5",
+          "04",
+          "03:JUMP",
+          "02:LDR",
+          "01:ADD",
+          "00:MOV",
+          "RF R1←00FF"
+        ],
+        [
+          "C6",
+          "—",
+          "04:STR",
+          "03:JUMP",
+          "02:LDR",
+          "01:ADD",
+          "RF R0←0001；WB写C/V；M越界压制EX跳转；老WB保留"
+        ],
+        [
+          "C7",
+          "—",
+          "—",
+          "—",
+          "—",
+          "02:LDR",
+          "停止FAULTED"
+        ]
+      ],
+      "result": {
+        "case": "MEM_FAULT_OVER_BRANCH",
+        "epoch": "0",
+        "cycles": "7",
+        "tokens": "3",
+        "stores": "0",
+        "stalls": "0",
+        "redirects": "0",
+        "reset_seen": "0"
+      },
+      "final_rf": [
+        1,
+        255,
+        0,
+        0
+      ],
+      "final_flags": [
+        0,
+        0,
+        0
+      ],
+      "stores": []
+    }
+  ],
+  "button": [
+    {
+      "label": "before",
+      "host_sample_time_ms": 1793606782574,
+      "decoded": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          4658,
+          0,
+          32
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 34,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 34,
+        "last_store_valid": 1,
+        "last_store_addr": 71,
+        "last_store_data": 0,
+        "core_reset": 0,
+        "heartbeat": 0,
+        "reserved": 0,
+        "cycles": 55,
+        "completed": 35,
+        "stalls": 16,
+        "redirects": 0,
+        "stores": 8
+      }
+    },
+    {
+      "label": "pressed",
+      "host_sample_time_ms": 1793606917836,
+      "decoded": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 0,
+        "stop_reason": 0,
+        "stop_valid": 0,
+        "stop_pc_valid": 0,
+        "halted": 0,
+        "fault": 0,
+        "last_completed_valid": 0,
+        "last_completed_pc": 0,
+        "last_store_valid": 0,
+        "last_store_addr": 0,
+        "last_store_data": 0,
+        "core_reset": 1,
+        "heartbeat": 0,
+        "reserved": 0,
+        "cycles": 0,
+        "completed": 0,
+        "stalls": 0,
+        "redirects": 0,
+        "stores": 0
+      }
+    },
+    {
+      "label": "after_0",
+      "host_sample_time_ms": 1793607016330,
+      "decoded": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          4658,
+          0,
+          32
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 34,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 34,
+        "last_store_valid": 1,
+        "last_store_addr": 71,
+        "last_store_data": 0,
+        "core_reset": 0,
+        "heartbeat": 1,
+        "reserved": 0,
+        "cycles": 55,
+        "completed": 35,
+        "stalls": 16,
+        "redirects": 0,
+        "stores": 8
+      }
+    },
+    {
+      "label": "after_1",
+      "host_sample_time_ms": 1793607016435,
+      "decoded": {
+        "build_id": "22b2a23f057c652b",
+        "rf": [
+          0,
+          4658,
+          0,
+          32
+        ],
+        "flags": [
+          0,
+          0,
+          0
+        ],
+        "stop_pc": 34,
+        "stop_reason": 1,
+        "stop_valid": 1,
+        "stop_pc_valid": 1,
+        "halted": 1,
+        "fault": 0,
+        "last_completed_valid": 1,
+        "last_completed_pc": 34,
+        "last_store_valid": 1,
+        "last_store_addr": 71,
+        "last_store_data": 0,
+        "core_reset": 0,
+        "heartbeat": 1,
+        "reserved": 0,
+        "cycles": 55,
+        "completed": 35,
+        "stalls": 16,
+        "redirects": 0,
+        "stores": 8
+      }
+    }
+  ],
+  "routed": [
+    {
+      "program": "all_ops",
+      "attempt_relative": "验证/cpu345_board_dzb2hgao",
+      "receipt_sha256": "0b98fb5e292e2fb29ebbe3db7114503d4f13fe34b0b74218bf8a3687c03f8be1",
+      "cycles": 25,
+      "completed": 16,
+      "stalls": 1,
+      "redirects": 2,
+      "stores": 1,
+      "rf": [
+        5,
+        5,
+        5,
+        32
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": 18,
+      "CPI": 1.5625,
+      "calculated_cpu_time_ns": 250,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 2.086,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4279.0,
+          "whs_ns": 0.071,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4263.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2878.0
+        },
+        "resources": {
+          "lut_total": 1118,
+          "lut_logic": 1094,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2826,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          9.204,
+          8.887,
+          9.092,
+          9.148
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "1ac3bbf870b7449967835d70853904b8bf815d0d8be1ce8a010a727cfab4651e",
+          "reports/methodology.rpt": "d2ec03f55b842f8ac13440234f829350f5fc2f5650e28bd627b6c1d10b58d99b"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "5b9305e20eac5015",
+        "bitstream_sha256": "c0e75b605b4ae56c7a82836be9b64ee9a441da861d937b52b54b24ada609ebbc",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "c80a5c2c049db8c8c1fd822d00b2293e5720e569433920b733ffb5b2d6757d23",
+      "data_image_sha256": "af1846335f4af5a7e0e9a0c4543c94429971014cd644091fdca6beacd52a5423"
+    },
+    {
+      "program": "baseline",
+      "attempt_relative": "验证/cpu345_board_04quhh2d",
+      "receipt_sha256": "7b88b99c936d4e4c91697abbfc6415e7178e3c1b9aa3699993e9f32a7091214e",
+      "cycles": 17,
+      "completed": 10,
+      "stalls": 1,
+      "redirects": 1,
+      "stores": 1,
+      "rf": [
+        8,
+        2,
+        8,
+        32
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": 10,
+      "CPI": 1.7,
+      "calculated_cpu_time_ns": 170,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 1.838,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4277.0,
+          "whs_ns": 0.083,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4261.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2877.0
+        },
+        "resources": {
+          "lut_total": 1120,
+          "lut_logic": 1096,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2825,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          8.965,
+          9.142,
+          8.861,
+          9.256
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "eb409d1807c8f4ceb52a34752736d158ff76998101b7050b7f52a8e403781529",
+          "reports/methodology.rpt": "8e9df437128282277a39963be37fcee7a733c2ef3c99e7b96cf46b2cd73ab908"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "cf1cd751e48f903d",
+        "bitstream_sha256": "0a83412d49513979dd983b5381a926cdaada292f76fa3ccca3241494cca9cb90",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "38bf56a5500ad274a69c91192147478d9fa8331ad56d1b91c686409d71763c19",
+      "data_image_sha256": "af1846335f4af5a7e0e9a0c4543c94429971014cd644091fdca6beacd52a5423"
+    },
+    {
+      "program": "loop",
+      "attempt_relative": "验证/cpu345_board_rj_gire5",
+      "receipt_sha256": "8ebdb4901fa9745a68aab7115aca918014502475c621b185960489449907b4a5",
+      "cycles": 30,
+      "completed": 18,
+      "stalls": 0,
+      "redirects": 4,
+      "stores": 0,
+      "rf": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": [
+        1,
+        1,
+        0
+      ],
+      "stop_pc": 6,
+      "CPI": 1.6666666666666667,
+      "calculated_cpu_time_ns": 300,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 2.101,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4271.0,
+          "whs_ns": 0.062,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4255.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2874.0
+        },
+        "resources": {
+          "lut_total": 1160,
+          "lut_logic": 1136,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2822,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          9.341,
+          9.114,
+          8.909,
+          9.234
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "b3cbc60f8dab22d781b549c5fcc61ea78bbd6562a2cefb260c86d88c274bb3f9",
+          "reports/methodology.rpt": "17410da3236aa32f03cc4f1487d603df572e4512a96f1ec865fcec8073bd6345"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "eadc07c95f98b0c3",
+        "bitstream_sha256": "a0bd9182ef87bf32210f604a549f5a221cc1cd88a282c1180bd3b67cac692762",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "ec81320f9c6fdcd4c63f56ea33aa9cea3e023596e96c10ccc402a80abffe86ee",
+      "data_image_sha256": "af1846335f4af5a7e0e9a0c4543c94429971014cd644091fdca6beacd52a5423"
+    },
+    {
+      "program": "memory_copy",
+      "attempt_relative": "验证/cpu345_board_g7ir7i9g",
+      "receipt_sha256": "93d17a48ce7103f7d16719adce89969f047efeed2bac8f3b5bc87578fca5d85c",
+      "cycles": 15,
+      "completed": 7,
+      "stalls": 2,
+      "redirects": 1,
+      "stores": 1,
+      "rf": [
+        48879,
+        48879,
+        0,
+        32
+      ],
+      "flags": [
+        1,
+        0,
+        0
+      ],
+      "stop_pc": 7,
+      "CPI": 2.142857142857143,
+      "calculated_cpu_time_ns": 150,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 1.54,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4273.0,
+          "whs_ns": 0.086,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4257.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2875.0
+        },
+        "resources": {
+          "lut_total": 1119,
+          "lut_logic": 1095,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2823,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          8.976,
+          9.199,
+          9.072,
+          9.369
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "8e338575b4888a4523c19f143b4c73aaae2f14d0550fef377a8cbcee2e3e1cea",
+          "reports/methodology.rpt": "624fc8c1b02f77bd1560c19c0a64a380fab736a5daa7e0d178a98d2e44812d70"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "1e2d2af733a1194a",
+        "bitstream_sha256": "2b3e557f5c7ba57b5bb4810e1e8443877daf6110444f6d580473442cdab0d529",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "e397ed9d3d8242a9d8083783780e668a83c359f5f132fcce77df14b4222650eb",
+      "data_image_sha256": "ca36731723920c2fcb350723f21233b3701d872c7a289097cc3b6d0e263baeea"
+    },
+    {
+      "program": "copy_checksum",
+      "attempt_relative": "验证/cpu345_board_5prio5st",
+      "receipt_sha256": "09ffc7c088ba896bad98e7d9863e8ec3e6596e8da2f552853687b17242ed65eb",
+      "cycles": 55,
+      "completed": 35,
+      "stalls": 16,
+      "redirects": 0,
+      "stores": 8,
+      "rf": [
+        0,
+        4658,
+        0,
+        32
+      ],
+      "flags": [
+        0,
+        0,
+        0
+      ],
+      "stop_pc": 34,
+      "CPI": 1.5714285714285714,
+      "calculated_cpu_time_ns": 550,
+      "time_basis": "cycle calculation at routed100MHz, not a physical-board measurement",
+      "measured_board_time_ns": null,
+      "implementation": {
+        "scope": "routed implementation, physical EES-331 unverified",
+        "part": "xc7z020clg484-1",
+        "period_ns": 10,
+        "timing": {
+          "wns_ns": 1.434,
+          "tns_ns": 0.0,
+          "setup_failed": 0.0,
+          "setup_endpoints": 4275.0,
+          "whs_ns": 0.073,
+          "ths_ns": 0.0,
+          "hold_failed": 0.0,
+          "hold_endpoints": 4259.0,
+          "wpws_ns": 3.75,
+          "tpws_ns": 0.0,
+          "pulse_failed": 0.0,
+          "pulse_endpoints": 2876.0
+        },
+        "resources": {
+          "lut_total": 1082,
+          "lut_logic": 1058,
+          "lutram": 24,
+          "srl": 0,
+          "ff": 2824,
+          "bram36": 0,
+          "bram18": 2,
+          "dsp": 0,
+          "carry4": 80
+        },
+        "drc_warnings": {
+          "PDCN-1569": 3,
+          "RTSTAT-10": 1,
+          "ZPS7-1": 1
+        },
+        "warning_disposition": {
+          "PDCN-1569": "Vendor debug-hub unused LUT input terms; no CPU cell affected",
+          "RTSTAT-10": "Unused nets with no routable loads in generated debug hub",
+          "ZPS7-1": "PL/JTAG-only design; PS clock/DDR/MIO unused, boot/configuration remains a physical-board check"
+        },
+        "untimed_external_IO": "Only button to first synchronizer D and LEDs without a synchronous receiver; no core data-path timing exception",
+        "bus_skew_slacks_ns": [
+          9.238,
+          9.019,
+          9.181,
+          8.922
+        ],
+        "auxiliary_evidence_sha256": {
+          "reports/bus_skew.rpt": "57dbd29ed18b106fefd36064d519ac764955006c91a7f9bb5da9e3b0eb6c1eb4",
+          "reports/methodology.rpt": "958c8c6f1ca97e8404c80cca8308e60fc91b7ad04cdd2f94803cfcca966d4915"
+        },
+        "ordinary_warnings": {
+          "Timing 38-436": 2,
+          "Power 33-332": 1
+        },
+        "methodology_warnings": {
+          "LUTAR-1": 4,
+          "SYNTH-6": 2
+        },
+        "additional_warning_disposition": {
+          "LUTAR-1": "Only vendor debug-hub FIFO reset synchronizers, not the registered CPU reset",
+          "SYNTH-6": "IM/DM keep fixed one-cycle reads; no extra RAM output pipeline register is introduced",
+          "Synth 8-7071 / 8-7023": "Only intentionally unused application event/reset outputs, already included in VIO state as applicable",
+          "Vivado 12-7122": "Legacy fresh-run fallback to standard synthesis; new recipe disables automatic incremental mode",
+          "Timing 38-436": "All4 generated debug-hub bus-skew checks explicitly meet",
+          "Power 33-332": "Vectorless activity guesses with CPU held in VIO reset; no measured power conclusion",
+          "VRFC 10-3645": "Legacy selected bench omitted only LED output; current bench connects and checks it"
+        },
+        "build_id": "22b2a23f057c652b",
+        "bitstream_sha256": "770dec3c15b52e42d96517a5d63a48a478019b0ee3cd095900fa552c7bd7f873",
+        "ltx_sha256": "69746ecc6a6651e7d884609676172a7b41c5d5ac769f30d976ab9cb853361705",
+        "placed_and_routed": true,
+        "board_validated": false
+      },
+      "instruction_image_sha256": "36fe5e15d7e041a8418829140e97784c7dc971ba16bf73ed120c9cc75fb9440b",
+      "data_image_sha256": "197f1fe2407894679b9923c2a57e767eb7da5d09c232431ed09bdbf0a2d9889b"
+    }
+  ],
+  "candidate": [
+    {
+      "program": "all_ops",
+      "baseline_cycles": 25,
+      "candidate_cycles": 25,
+      "baseline_stalls": 1,
+      "candidate_stalls": 1,
+      "saved_cycles": 0,
+      "calculated_time_saved_ns_at100MHz": 0,
+      "baseline_LUT": 1118,
+      "candidate_LUT": 1116,
+      "LUT_delta": -2,
+      "baseline_FF": 2826,
+      "candidate_FF": 2828,
+      "FF_delta": 2,
+      "baseline_WNS_ns": 2.086,
+      "candidate_WNS_ns": 1.783,
+      "WNS_delta_ns": -0.30299999999999994,
+      "baseline_WHS_ns": 0.071,
+      "candidate_WHS_ns": 0.078
+    },
+    {
+      "program": "baseline",
+      "baseline_cycles": 17,
+      "candidate_cycles": 17,
+      "baseline_stalls": 1,
+      "candidate_stalls": 1,
+      "saved_cycles": 0,
+      "calculated_time_saved_ns_at100MHz": 0,
+      "baseline_LUT": 1120,
+      "candidate_LUT": 1205,
+      "LUT_delta": 85,
+      "baseline_FF": 2825,
+      "candidate_FF": 2827,
+      "FF_delta": 2,
+      "baseline_WNS_ns": 1.838,
+      "candidate_WNS_ns": 1.739,
+      "WNS_delta_ns": -0.09899999999999998,
+      "baseline_WHS_ns": 0.083,
+      "candidate_WHS_ns": 0.102
+    },
+    {
+      "program": "loop",
+      "baseline_cycles": 30,
+      "candidate_cycles": 30,
+      "baseline_stalls": 0,
+      "candidate_stalls": 0,
+      "saved_cycles": 0,
+      "calculated_time_saved_ns_at100MHz": 0,
+      "baseline_LUT": 1160,
+      "candidate_LUT": 1110,
+      "LUT_delta": -50,
+      "baseline_FF": 2822,
+      "candidate_FF": 2824,
+      "FF_delta": 2,
+      "baseline_WNS_ns": 2.101,
+      "candidate_WNS_ns": 1.535,
+      "WNS_delta_ns": -0.5660000000000001,
+      "baseline_WHS_ns": 0.062,
+      "candidate_WHS_ns": 0.097
+    },
+    {
+      "program": "memory_copy",
+      "baseline_cycles": 15,
+      "candidate_cycles": 14,
+      "baseline_stalls": 2,
+      "candidate_stalls": 1,
+      "saved_cycles": 1,
+      "calculated_time_saved_ns_at100MHz": 10,
+      "baseline_LUT": 1119,
+      "candidate_LUT": 1203,
+      "LUT_delta": 84,
+      "baseline_FF": 2823,
+      "candidate_FF": 2825,
+      "FF_delta": 2,
+      "baseline_WNS_ns": 1.54,
+      "candidate_WNS_ns": 1.493,
+      "WNS_delta_ns": -0.04699999999999993,
+      "baseline_WHS_ns": 0.086,
+      "candidate_WHS_ns": 0.085
+    },
+    {
+      "program": "copy_checksum",
+      "baseline_cycles": 55,
+      "candidate_cycles": 47,
+      "baseline_stalls": 16,
+      "candidate_stalls": 8,
+      "saved_cycles": 8,
+      "calculated_time_saved_ns_at100MHz": 80,
+      "baseline_LUT": 1082,
+      "candidate_LUT": 1168,
+      "LUT_delta": 86,
+      "baseline_FF": 2824,
+      "candidate_FF": 2826,
+      "FF_delta": 2,
+      "baseline_WNS_ns": 1.434,
+      "candidate_WNS_ns": 1.668,
+      "WNS_delta_ns": 0.23399999999999999,
+      "baseline_WHS_ns": 0.073,
+      "candidate_WHS_ns": 0.106
+    }
+  ],
+  "tables": {
+    "指令编码与完整语义": [
+      [
+        [
+          "Opcode",
+          "指令",
+          "操作数来源与结果去向",
+          "标志"
+        ],
+        [
+          "0000 0",
+          "MOV Rd,Rs",
+          "R[d] ← R[s]",
+          "保持"
+        ],
+        [
+          "0001 1",
+          "MOV Rd,#u8",
+          "R[d] ← ZExt(imm8)",
+          "保持"
+        ],
+        [
+          "0010 2",
+          "AND Rd,Rs",
+          "R[d] ← R[d] AND R[s]",
+          "保持"
+        ],
+        [
+          "0011 3",
+          "OR Rd,Rs",
+          "R[d] ← R[d] OR R[s]",
+          "保持"
+        ],
+        [
+          "0100 4",
+          "ADD Rd,Rs",
+          "R[d] ← low16(R[d]+R[s])",
+          "更新C/V"
+        ],
+        [
+          "0101 5",
+          "ADD Rd,#u8",
+          "R[d] ← low16(R[d]+ZExt(imm8))",
+          "更新C/V"
+        ],
+        [
+          "0110 6",
+          "SUB Rd,Rs",
+          "R[d] ← low16(R[d]−R[s])",
+          "更新C/V"
+        ],
+        [
+          "0111 7",
+          "SUB Rd,#u8",
+          "R[d] ← low16(R[d]−ZExt(imm8))",
+          "更新C/V"
+        ],
+        [
+          "1000 8",
+          "LDR Rd,[Rs+s8]",
+          "EA=low16(R[s]+SExt(imm8))；R[d] ← DM[EA]",
+          "保持"
+        ],
+        [
+          "1001 9",
+          "STR Rd,[Rs+s8]",
+          "同上生成EA；DM[EA] ← R[d]",
+          "保持"
+        ],
+        [
+          "1010 A",
+          "CMP Rs1,Rs2",
+          "Rs1占Rd字段，Rs2占Rs字段；Z ← (R[d]==R[s])；不写RF",
+          "更新Z"
+        ],
+        [
+          "1011 B",
+          "Reserved",
+          "非法指令；不产生数据写入",
+          "保持"
+        ],
+        [
+          "1100 C",
+          "JUMP #u8",
+          "下一执行目标=ZExt(imm8)",
+          "保持"
+        ],
+        [
+          "1101 D",
+          "JZ #s8",
+          "Z=1时目标=low16(pc+1+SExt(imm8))",
+          "保持"
+        ],
+        [
+          "1110 E",
+          "HALT",
+          "取消年轻指令；老指令完成后停止",
+          "保持"
+        ],
+        [
+          "1111 F",
+          "Reserved",
+          "非法指令；不产生数据写入",
+          "保持"
+        ]
+      ],
+      [
+        [
+          "指令",
+          "本版v1.5 Opcode",
+          "Pre4 v1.4 Opcode",
+          "迁移要求"
+        ],
+        [
+          "AND",
+          "2",
+          "8",
+          "两实际寄存器源，alu_op=3；只写RF"
+        ],
+        [
+          "OR",
+          "3",
+          "9",
+          "两实际寄存器源，alu_op=4；只写RF"
+        ],
+        [
+          "LDR",
+          "8",
+          "2",
+          "Rs加符号位移；MR/RW=1，wb_sel=1"
+        ],
+        [
+          "STR",
+          "9",
+          "3",
+          "独立基址与数据源；MW=1，RW=0"
+        ]
+      ]
+    ],
+    "外部接口": [
+      [
+        [
+          "信号",
+          "方向",
+          "位宽",
+          "功能与时序"
+        ],
+        [
+          "clk",
+          "输入",
+          "1",
+          "唯一核心时钟 上升沿更新状态"
+        ],
+        [
+          "rst",
+          "输入",
+          "1",
+          "高有效同步复位 优先级最高"
+        ],
+        [
+          "im_addr",
+          "输出",
+          "16",
+          "取指字地址 来自PC_fetch"
+        ],
+        [
+          "im_en",
+          "输出",
+          "1",
+          "合格取指请求；stall/停止/取消时阻止错误取指"
+        ],
+        [
+          "im_dout",
+          "输入",
+          "16",
+          "同步IM输出；配合IF/ID的pc/valid供ID使用"
+        ],
+        [
+          "dm_addr",
+          "输出",
+          "16",
+          "MEM的完整16位EA；物理截位前检查范围"
+        ],
+        [
+          "dm_en",
+          "输出",
+          "1",
+          "合格MR或MW访问使能"
+        ],
+        [
+          "dm_we",
+          "输出",
+          "1",
+          "合格STR写使能；仅MEM有效访问时为1"
+        ],
+        [
+          "dm_din",
+          "输出",
+          "16",
+          "EX/MEM保存的已转发STR数据"
+        ],
+        [
+          "dm_dout",
+          "输入",
+          "16",
+          "同步DM读结果；供WB的load选择"
+        ],
+        [
+          "halted",
+          "输出",
+          "1",
+          "HALT完成排空后的停止状态 直到复位"
+        ],
+        [
+          "fault",
+          "输出",
+          "1",
+          "故障完成排空后的停止状态 直到复位"
+        ]
+      ]
+    ]
+  },
+  "source_groups": {
+    "SPEC": [
+      "CPU核心设计/文档源/architecture.json",
+      "CPU核心设计/文档源/content.json",
+      "CPU核心设计/文档源/sections.json"
+    ],
+    "ISA": [
+      "CPU核心设计/Vivado/rtl/isa_decode.v",
+      "CPU核心设计/文档源/sections.json"
+    ],
+    "RTL": [
+      "CPU核心设计/Vivado/rtl/datapath_core.sv"
+    ],
+    "FLOW": [
+      "CPU核心设计/文档源/content.json"
+    ],
+    "SYSTEM": [
+      "CPU核心设计/系统/rtl/cpu_system.sv",
+      "CPU核心设计/板级/rtl/ees331_top.sv",
+      "CPU核心设计/板级/rtl/ees331_application.sv"
+    ],
+    "DIAGRAMS": [
+      "CPU核心设计/架构图/01_CPU整体架构.svg",
+      "CPU核心设计/架构图/02_五级Datapath.svg",
+      "CPU核心设计/架构图/03_文件启动系统与停止观测.svg",
+      "CPU核心设计/架构图/04_EES331板级系统.svg"
+    ],
+    "CW": [
+      "CPU核心设计/文档源/architecture.json"
+    ],
+    "INDEPENDENT": [
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_result.json",
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_results.csv"
+    ],
+    "BOARD": [
+      "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json"
+    ],
+    "BUTTON": [
+      "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json",
+      "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\button_snapshots.tsv",
+      "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\button_session_long.log"
+    ],
+    "PERFORMANCE": [
+      "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json"
+    ],
+    "PPA": [
+      "CPU核心设计\\验证\\performance_ac1_9b449e40f5d44bd78936f207953b77d6\\result.json",
+      "CPU核心设计/验证/cpu345_board_dzb2hgao/result.json",
+      "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/timing.rpt",
+      "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/utilization.rpt",
+      "CPU核心设计/验证/cpu345_board_04quhh2d/result.json",
+      "CPU核心设计/验证/cpu345_board_04quhh2d/reports/timing.rpt",
+      "CPU核心设计/验证/cpu345_board_04quhh2d/reports/utilization.rpt",
+      "CPU核心设计/验证/cpu345_board_rj_gire5/result.json",
+      "CPU核心设计/验证/cpu345_board_rj_gire5/reports/timing.rpt",
+      "CPU核心设计/验证/cpu345_board_rj_gire5/reports/utilization.rpt",
+      "CPU核心设计/验证/cpu345_board_g7ir7i9g/result.json",
+      "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/timing.rpt",
+      "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/utilization.rpt",
+      "CPU核心设计/验证/cpu345_board_5prio5st/result.json",
+      "CPU核心设计/验证/cpu345_board_5prio5st/reports/timing.rpt",
+      "CPU核心设计/验证/cpu345_board_5prio5st/reports/utilization.rpt"
+    ],
+    "CANDIDATE": [
+      "CPU核心设计/实验/WB_MEM候选比较.json"
+    ],
+    "HOST_CHECKS": [
+      "CPU核心设计/验证/final_baseline_20261102_p824cngb/final_qa.json"
+    ],
+    "SIM_LOAD": [
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json"
+    ],
+    "SIM_ADD": [
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json"
+    ],
+    "SIM_BRANCH": [
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json"
+    ],
+    "SIM_STORE_HALT": [
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json"
+    ],
+    "SIM_FAULT": [
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv",
+      "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json"
+    ]
+  },
+  "input_sha256": {
+    "CPU核心设计/文档源/architecture.json": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17",
+    "CPU核心设计/文档源/content.json": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758",
+    "CPU核心设计/文档源/sections.json": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f",
+    "CPU核心设计/Vivado/rtl/isa_decode.v": "a8efdeccedd1df86fbebd12db7adbd75fc20cef9dca1e947ab5596e4f28cb5a2",
+    "CPU核心设计/Vivado/rtl/datapath_core.sv": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999",
+    "CPU核心设计/系统/rtl/cpu_system.sv": "68160c3b9442539be0628640dd3b0fd2cc4b7470482d1b48addbf1370e50d366",
+    "CPU核心设计/板级/rtl/ees331_top.sv": "77091a8c075f4d62b438dd36bbf029762e76dd67815ae2c84f6aa93c9089c118",
+    "CPU核心设计/板级/rtl/ees331_application.sv": "dc20ed66de199aea1518bac7cacc31947894e7da26fa1a16b6786550710bc61c",
+    "CPU核心设计/架构图/01_CPU整体架构.svg": "6e6b8f5fdbb1331e348b02bde876d8b117eb5c7e6957eae42d44e6b49604cfcb",
+    "CPU核心设计/架构图/02_五级Datapath.svg": "2cd5a5555535372b462905d55e716832c17abfdc6fe7c40e8ceb3fe88b23d88b",
+    "CPU核心设计/架构图/03_文件启动系统与停止观测.svg": "7bd47ab97328df2d75aaa3a409889414d751b5f07a119104cb57cb63ac753fd0",
+    "CPU核心设计/架构图/04_EES331板级系统.svg": "6bdf74f50de0b8979944ff6583a2750d2556af4bc053af885d2aa937ce7c762d",
+    "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_result.json": "74d601bc4ee925b9ee62eebb738c2d46164febb4875ce5ecffde8e281a9ed45f",
+    "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_results.csv": "1ce5b8d38e8439320d4bd193eee643b8e5fdc15a3b949ae873d7394cbd57919a",
+    "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\result.json": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9",
+    "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\button_snapshots.tsv": "d37722f6be0880fdf07e624a9597421eb105c3bbad7b8c129f4a070d553f70f0",
+    "CPU核心设计\\验证\\hardware_ac1_20261102_3dw9zgb5\\button_session_long.log": "33f62b3288f12cbd9d0e3f99de26340789393f0b458b34e863cf33939caeb03c",
+    "CPU核心设计\\验证\\performance_ac1_9b449e40f5d44bd78936f207953b77d6\\result.json": "9fbef8fccd06c17e464371a73ebc00068b0f9d98e787d8e6d787a1652e08c84f",
+    "CPU核心设计/验证/cpu345_board_dzb2hgao/result.json": "0b98fb5e292e2fb29ebbe3db7114503d4f13fe34b0b74218bf8a3687c03f8be1",
+    "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/timing.rpt": "2fd077a5897ea77c419922c73fdfb5b6639ccf64aa1fcfbd663c3506dcb70a21",
+    "CPU核心设计/验证/cpu345_board_dzb2hgao/reports/utilization.rpt": "51454a24a8fabd6cd0b44180b3e546fa5731ec994eb16e103d24e03d8d6689e5",
+    "CPU核心设计/验证/cpu345_board_04quhh2d/result.json": "7b88b99c936d4e4c91697abbfc6415e7178e3c1b9aa3699993e9f32a7091214e",
+    "CPU核心设计/验证/cpu345_board_04quhh2d/reports/timing.rpt": "1218d30294544060d14fd61a1c99df40fa65e50c3d6fc46aea13d647b2733cb1",
+    "CPU核心设计/验证/cpu345_board_04quhh2d/reports/utilization.rpt": "b64a8a9043c14df305665fef18d891ee5dcbf5d730b0df5a1a948e0fc4c36a4b",
+    "CPU核心设计/验证/cpu345_board_rj_gire5/result.json": "8ebdb4901fa9745a68aab7115aca918014502475c621b185960489449907b4a5",
+    "CPU核心设计/验证/cpu345_board_rj_gire5/reports/timing.rpt": "dddcaf1b446609936e8b4b2f8b1130b2031418bc8500bc7afc01488cc835dae7",
+    "CPU核心设计/验证/cpu345_board_rj_gire5/reports/utilization.rpt": "711dc1ace17aa211d5b5894f215f5db855d09838711f56888eed2ba935d7cbf1",
+    "CPU核心设计/验证/cpu345_board_g7ir7i9g/result.json": "93d17a48ce7103f7d16719adce89969f047efeed2bac8f3b5bc87578fca5d85c",
+    "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/timing.rpt": "0b3bd651dc581cd1a6a76c2741201dc62541407018ca403cf4cc6d5e0af60c14",
+    "CPU核心设计/验证/cpu345_board_g7ir7i9g/reports/utilization.rpt": "fa0b5ca8feea52a9c84a0a67d280c46cc5bb98730c11dca2785b5fd5f3a7c699",
+    "CPU核心设计/验证/cpu345_board_5prio5st/result.json": "09ffc7c088ba896bad98e7d9863e8ec3e6596e8da2f552853687b17242ed65eb",
+    "CPU核心设计/验证/cpu345_board_5prio5st/reports/timing.rpt": "2f14ddd0986389fd0fc46de9f52d4d751b8d73f70b59bc96b701c365b0340fbe",
+    "CPU核心设计/验证/cpu345_board_5prio5st/reports/utilization.rpt": "142afbaa4c602948993b516ce67c65646449747c227d6d1ba7344140a114feb6",
+    "CPU核心设计/实验/WB_MEM候选比较.json": "643d11ce1cace3e25190b8c5e002bcf838664f140a6edce13eec153bd824cc85",
+    "CPU核心设计/验证/final_baseline_20261102_p824cngb/final_qa.json": "d31c5e1ef912babaa71e81ef89c046bd2a9791aee9e2bbb71604e01d3f595dc2",
+    "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\independent_cycles.csv": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7",
+    "CPU核心设计\\验证记录\\cpu_ac1_independent_lh6jb16m\\cases.json": "3061d201e9de898aeed48734dbf5c94c4730a40d698b695217af5e005b2c9148",
+    "CPU核心设计/验证/cpu345_hardware_mhdc67ya/result.json": "4a63abf61877aea1a71e7268ee8f685bcb559f1a9797dba26de8377367d95145",
+    "CPU核心设计/验证/cpu345_hardware_mhdc67ya/snapshots.tsv": "2cec64d5931aece53976f03a4e1964cfcffa2973246b36345892b7c88aa48d66",
+    "CPU核心设计/验证/cpu345_hardware_mhdc67ya/hardware.log": "3aa789a5faa05863eb6f46b6fed2ece617664df55461c5e913219ff4862f70a8",
+    "CPU核心设计/验证/cpu345_hardware_nhbxiiwe/result.json": "bfb30b1d9a93b876ba179840b27fcc732e54efd69c9dc39785b5d7e2a4513975",
+    "CPU核心设计/验证/cpu345_hardware_nhbxiiwe/snapshots.tsv": "a68b700e27d75ae7916f0782f543f5e12476393aa296efe5ae33da382780650d",
+    "CPU核心设计/验证/cpu345_hardware_nhbxiiwe/hardware.log": "43f966f0ab6a2b394e7df66539d2a680f2f17e6cc45d93a1a0987f6d253a31a1",
+    "CPU核心设计/验证/cpu345_hardware_wgocvlq3/result.json": "6fe89227cf16e7345a320120922d3d5c150aa70ccaf312520807e1bb50076dd3",
+    "CPU核心设计/验证/cpu345_hardware_wgocvlq3/snapshots.tsv": "851e6c0ea267dc2e65c90f9d19efc308385f372651c97cd8da507aebe00d446f",
+    "CPU核心设计/验证/cpu345_hardware_wgocvlq3/hardware.log": "6b88c16a0df4cd0ec7af0730c6b88f49431909e88c5ccf73ac5c9421884d506b",
+    "CPU核心设计/验证/cpu345_hardware_c2r8w4bv/result.json": "25f3a1d5f99daa640f0bf748578cc9c9d00ba331549f6d1081501b097b20d266",
+    "CPU核心设计/验证/cpu345_hardware_c2r8w4bv/snapshots.tsv": "fa62b582873718b5101164335f58e528ef10fa96eac5b7a8a1a35b60fdd7abcb",
+    "CPU核心设计/验证/cpu345_hardware_c2r8w4bv/hardware.log": "439b58b347c60618a6c460c06d46169ce5398edd5320505acf6e51f1322d5ab0",
+    "CPU核心设计/验证/cpu345_hardware_apuwfhhk/result.json": "43851b44ad01d02eaec1fa002c5dd547353ac4b22a2b3ff83f18989c579dfc3a",
+    "CPU核心设计/验证/cpu345_hardware_apuwfhhk/snapshots.tsv": "e73c743fb3937c9b285f3d841641226f0b35b4bbfc7d83ceb2b2c7583a012f34",
+    "CPU核心设计/验证/cpu345_hardware_apuwfhhk/hardware.log": "87e407464694d5d9f0c6ed9ca8df86c103efc131db49267c720dfd5e63b23e5a"
+  },
+  "board_evidence_status": "AC1_FIVE_PROGRAMS_AND_S1_BOARD_PASS",
+  "new_hardware_or_XSim_execution": false,
+  "raw_button": [
+    {
+      "label": "before",
+      "timestamp_ms": "1793606782574",
+      "state256_hex": "22b2a23f057c652b00000000000000000004780115c801100020000012320000",
+      "perf160_hex": "0000000800000000000000100000002300000037"
+    },
+    {
+      "label": "pressed",
+      "timestamp_ms": "1793606917836",
+      "state256_hex": "22b2a23f057c652b000000000000100000000000000000000000000000000000",
+      "perf160_hex": "0000000000000000000000000000000000000000"
+    },
+    {
+      "label": "after_0",
+      "timestamp_ms": "1793607016330",
+      "state256_hex": "22b2a23f057c652b00000000000020000004780115c801100020000012320000",
+      "perf160_hex": "0000000800000000000000100000002300000037"
+    },
+    {
+      "label": "after_1",
+      "timestamp_ms": "1793607016435",
+      "state256_hex": "22b2a23f057c652b00000000000020000004780115c801100020000012320000",
+      "perf160_hex": "0000000800000000000000100000002300000037"
+    }
+  ]
+}

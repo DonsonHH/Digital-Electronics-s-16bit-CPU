@@ -1,0 +1,124 @@
+{
+  "status": "pass",
+  "frozen_inputs": 52,
+  "slides": 20,
+  "main": 12,
+  "backup": 8,
+  "native_tables": 16,
+  "editable_charts": 1,
+  "chart_workbooks": 1,
+  "numeric_chart_points": 20,
+  "note_parts": 20,
+  "speech_note_word_alignment": "pass",
+  "source_refs": "pass",
+  "new_CPU_simulation": false,
+  "new_hardware_execution": false,
+  "timing_model": {
+    "words": 1199,
+    "speech_budget_seconds": 840,
+    "buffer_seconds": 60,
+    "human_rehearsal": "not performed",
+    "slides": [
+      {
+        "slide": 1,
+        "speaker": "A",
+        "budget_seconds": 20,
+        "words": 27,
+        "speech_seconds_at_105wpm": 15.4,
+        "pointer_pause_budget_at_105wpm": 4.6
+      },
+      {
+        "slide": 2,
+        "speaker": "A",
+        "budget_seconds": 65,
+        "words": 91,
+        "speech_seconds_at_105wpm": 52.0,
+        "pointer_pause_budget_at_105wpm": 13.0
+      },
+      {
+        "slide": 3,
+        "speaker": "A",
+        "budget_seconds": 70,
+        "words": 99,
+        "speech_seconds_at_105wpm": 56.6,
+        "pointer_pause_budget_at_105wpm": 13.4
+      },
+      {
+        "slide": 4,
+        "speaker": "B",
+        "budget_seconds": 80,
+        "words": 99,
+        "speech_seconds_at_105wpm": 56.6,
+        "pointer_pause_budget_at_105wpm": 23.4
+      },
+      {
+        "slide": 5,
+        "speaker": "B",
+        "budget_seconds": 85,
+        "words": 114,
+        "speech_seconds_at_105wpm": 65.1,
+        "pointer_pause_budget_at_105wpm": 19.9
+      },
+      {
+        "slide": 6,
+        "speaker": "C",
+        "budget_seconds": 75,
+        "words": 119,
+        "speech_seconds_at_105wpm": 68.0,
+        "pointer_pause_budget_at_105wpm": 7.0
+      },
+      {
+        "slide": 7,
+        "speaker": "C",
+        "budget_seconds": 105,
+        "words": 134,
+        "speech_seconds_at_105wpm": 76.6,
+        "pointer_pause_budget_at_105wpm": 28.4
+      },
+      {
+        "slide": 8,
+        "speaker": "D",
+        "budget_seconds": 55,
+        "words": 80,
+        "speech_seconds_at_105wpm": 45.7,
+        "pointer_pause_budget_at_105wpm": 9.3
+      },
+      {
+        "slide": 9,
+        "speaker": "D",
+        "budget_seconds": 55,
+        "words": 78,
+        "speech_seconds_at_105wpm": 44.6,
+        "pointer_pause_budget_at_105wpm": 10.4
+      },
+      {
+        "slide": 10,
+        "speaker": "D",
+        "budget_seconds": 60,
+        "words": 96,
+        "speech_seconds_at_105wpm": 54.9,
+        "pointer_pause_budget_at_105wpm": 5.1
+      },
+      {
+        "slide": 11,
+        "speaker": "E",
+        "budget_seconds": 145,
+        "words": 227,
+        "speech_seconds_at_105wpm": 129.7,
+        "pointer_pause_budget_at_105wpm": 15.3
+      },
+      {
+        "slide": 12,
+        "speaker": "E",
+        "budget_seconds": 25,
+        "words": 35,
+        "speech_seconds_at_105wpm": 20.0,
+        "pointer_pause_budget_at_105wpm": 5.0
+      }
+    ]
+  },
+  "deliverable_sha256": {
+    "Pre6_Group2_CPU_Integration_EN.pptx": "76963cf5afd8d4774a141205682cda1f0c7cdc9b2ccfff3361c6416409c2d782",
+    "Pre6_英文讲稿与答辩.docx": "2b462f40f833c539171663da9f5aa4f4598b20e4b07b5fb39b9e53b665d3e841"
+  }
+}

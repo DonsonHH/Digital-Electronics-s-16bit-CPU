@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+<title>EES331板级时钟复位与程序观测</title>
+<desc>实际ees331_top连接BUFG、VIO和application逻辑。CPU保持原五级，复位请求同步并寄存后进入CPU；VIO在CPU复位时继续工作。</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0L10,5L0,10Z" fill="#263f52"/></marker><marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0,0L10,5L0,10Z" fill="#276ba5"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0,0L10,5L0,10Z" fill="#b25b28"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:26px;fill:#193247}.h{font-size:31px;font-weight:bold}.small{font-size:22px}.clock{fill:none;stroke:#276ba5;stroke-width:4;marker-end:url(#c)}.data{fill:none;stroke:#263f52;stroke-width:4;marker-end:url(#a)}.reset{fill:none;stroke:#b25b28;stroke-width:4;marker-end:url(#r)}</style>
+<rect width="1400" height="800" fill="white"/>
+<text x="30" y="45" class="h">EES-331 板级时钟、复位与程序观测</text>
+<rect x="20" y="70" width="1360" height="695" rx="12" fill="#f8fafc" stroke="#a2b5c5" stroke-width="3"/>
+<text x="40" y="105" class="h">ees331_top</text>
+<rect x="50" y="130" width="300" height="90" rx="7" fill="#e8f0f8" stroke="#276ba5" stroke-width="2"/>
+<text x="75" y="165">M19 / 100 MHz 晶振</text><text x="75" y="201" class="small">LVCMOS33 · 单端输入</text>
+<rect x="430" y="130" width="200" height="90" rx="7" fill="#e8f0f8" stroke="#276ba5" stroke-width="2"/>
+<text x="485" y="185" class="h">BUFG</text>
+<path d="M350 175H430" class="clock"/><path d="M630 175H1010" class="clock"/>
+<path d="M800 175V360" class="clock"/><circle cx="800" cy="175" r="5" fill="#276ba5"/>
+<text x="820" y="225" class="small">clk = 100 MHz</text>
+<rect x="1010" y="120" width="330" height="185" rx="9" fill="#fff3e8" stroke="#b25b28" stroke-width="3"/>
+<text x="1035" y="156" class="h">JTAG / VIO 常开</text>
+<text x="1035" y="194">in0：状态256位</text><text x="1035" y="231">in1：计数160位</text>
+<text x="1035" y="278">out0：复位请求1位</text>
+<text x="300" y="270" class="small">初值1；准备好观测后由JTAG释放</text>
+<rect x="40" y="360" width="1320" height="380" rx="10" fill="#eef4f9" stroke="#7596af" stroke-width="2" stroke-dasharray="8 5"/>
+<path d="M1010 280H810C810 270 790 270 790 280H50V410H230V430" class="reset"/>
+<text x="60" y="394" class="h">ees331_application</text>
+<rect x="65" y="430" width="340" height="225" rx="8" fill="white" stroke="#b25b28" stroke-width="3"/>
+<text x="90" y="470" class="h">同步复位与释放去抖</text>
+<text x="90" y="510">3级请求同步</text><text x="90" y="548">21位稳定释放计数</text>
+<text x="90" y="586">有效 core_reset 寄存</text><text x="90" y="630" class="small">S1 / L18：低有效请求</text>
+<path d="M405 555H470" class="reset"/><text x="412" y="540" class="small">rst</text>
+<rect x="470" y="430" width="500" height="225" rx="8" fill="white" stroke="#263f52" stroke-width="3"/>
+<text x="495" y="469" class="h">cpu_system · 稳定AC1</text>
+<rect x="495" y="490" width="450" height="55" rx="6" fill="#dceaf5"/>
+<text x="518" y="527">IF → ID → EX → MEM → WB</text>
+<rect x="495" y="565" width="210" height="45" rx="5" fill="#f1f5f8"/><rect x="735" y="565" width="210" height="45" rx="5" fill="#f1f5f8"/>
+<text x="514" y="597">IM 256×16</text><text x="754" y="597">DM 256×16</text>
+<text x="495" y="638" class="small">配置时初始化；core reset保留DM</text>
+<rect x="1050" y="430" width="280" height="225" rx="8" fill="white" stroke="#263f52" stroke-width="3"/>
+<text x="1075" y="470" class="h">性能观察</text><text x="1075" y="511">周期 / N / stall</text>
+<text x="1075" y="551">redirect / store</text><text x="1075" y="597">各32位，停止保持</text><text x="1075" y="635" class="small">有效复位清计数</text>
+<path d="M970 565H1050" class="data"/><text x="979" y="550" class="small">事件</text>
+<path d="M750 430V335H790C790 325 810 325 810 335H1090V305" class="data"/>
+<text x="834" y="328" class="small">RF / flags / 停止现场 / 构建身份</text>
+<path d="M1220 430V305" class="data"/>
+<rect x="65" y="682" width="905" height="40" rx="5" fill="#fff" stroke="#b5c6d3"/>
+<text x="86" y="710" class="small">LED：状态 / 心跳（辅助）；程序结果与停止状态从VIO读取</text>
+<text x="1010" y="710" class="small">逻辑分区，不新增CPU流水级</text>
+<text x="40" y="791" class="small">产物：bitstream + LTX + routed checkpoint；板级实测需连接并确认实际EES-331目标</text>
+</svg>
