@@ -9,15 +9,19 @@ from source_validation import BASELINE,P,source_bytes,require
 B=Path(__file__).resolve().parent
 FIGURES={1:'架构图/01_CPU整体架构.png',2:'架构图/02_五级Datapath.png',11:'架构图/03_文件启动系统与停止观测.png',12:'架构图/04_EES331板级系统.png'}
 def canonical_refs(text):
+    text=re.sub(r'(图|表)\s*(\d+(?:\s*[、,，]\s*\d+)+)',lambda m:m[1]+re.sub(r'\s*[、,，]\s*','、'+m[1],m[2]),text)
     text=re.sub(r'(图|表)\s*(\d+)',lambda m:'[['+('F'if m[1]=='图'else'T')+m[2].zfill(2)+']]',text)
     text=re.sub(r'第?([1-4](?:\.\d+){1,3})\s*节',lambda m:'[[S:'+m[1]+']]',text)
     return text
 
 def migrate(output):
+    output=Path(output);assets=output/'assets'
+    require(not(output/'sections.json').exists(),'Migration destination already exists; do not overwrite edited canonical content')
+    require(not assets.exists()or not any(assets.iterdir()),'Migration assets already exist; refusing any overwrite')
     raw=source_bytes('CPU核心设计/16位流水线CPU核心设计文档_AC1候选版.docx');doc=Document(BytesIO(raw))
     styles={s.style_id:s.name for s in doc.styles}
     sections={};stack=[];counters=[0]*5;caption_counts={'F':0,'T':0};images=0
-    output=Path(output);output.mkdir(exist_ok=True);assets=output/'assets';assets.mkdir(exist_ok=True)
+    output.mkdir(exist_ok=True);assets.mkdir(exist_ok=True)
     def runs(node):
         nonlocal images
         items=[];pending=[]

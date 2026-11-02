@@ -1,0 +1,10 @@
+test_different_baseline_matrix_is_rejected (test_core_document_binding.DocumentBinding.test_different_baseline_matrix_is_rejected) ... ok
+test_different_wb_matrix_is_rejected (test_core_document_binding.DocumentBinding.test_different_wb_matrix_is_rejected) ... ok
+test_incomplete_lifecycle_rejected_despite_intended_fatal (test_wb_receipts.LifecycleTests.test_incomplete_lifecycle_rejected_despite_intended_fatal) ... ok
+test_integer_fatal_exit_zero_is_complete_but_not_positive (test_wb_receipts.LifecycleTests.test_integer_fatal_exit_zero_is_complete_but_not_positive) ... ok
+test_replaced_console_rejected (test_wb_receipts.LifecycleTests.test_replaced_console_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 12.611s
+
+OK

@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "contract": "unchanged-AC1-frozen48-csv-r1",
+  "source_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf",
+  "reference_record": "验证记录/cpu_ac1_independent_m7aa_q8u",
+  "reference_receipt_sha256": "0d78dc5d699d305f91e8572997cbfd55481642d8bc401f3f927935baba9b2919",
+  "files": {
+    "independent_results.csv": "1ce5b8d38e8439320d4bd193eee643b8e5fdc15a3b949ae873d7394cbd57919a",
+    "independent_cycles.csv": "4683e0ce90ed95c3dc37ca9cce152912a831664e72d8d2ab80a86386926f80a7"
+  },
+  "scope": "Digests are from the package manifest committed at0d888cc, not newly computed from the new trace. The reference and new run must bind the same13 production RTL and frozen48 inputs. New CSV bytes must match both digests before annotation."
+}

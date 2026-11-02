@@ -1,7 +1,7 @@
 """Append evidence-bound board/performance/experiment sections to the mature core Word."""
 from pathlib import Path
 from io import BytesIO
-import argparse,hashlib,json,subprocess
+import argparse,hashlib,json,subprocess,sys
 from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
@@ -11,6 +11,8 @@ from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
 from verify_board_results import verify_attempt,require
 from compare_wb_results import verify_validation
 B=Path(__file__).resolve().parent;P=B.parent;ROOT=P.parent
+sys.path.insert(0,str(P/'文档源'))
+from document_guard import ensure_legacy_output
 NAME='16位流水线CPU核心设计文档_AC1候选版.docx'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def read(p):return json.loads(Path(p).read_text(encoding='utf-8'))
@@ -136,6 +138,6 @@ def main():
  # Keep this supporting source within the existing references, after its
  # heading, rather than creating a second bibliography or audit document.
  anchor.paragraph_format.page_break_before=True
- doc.core_properties.version='AC1-board-experiments-r2';doc.save(a.output)
+ doc.core_properties.version='AC1-board-experiments-r2';ensure_legacy_output(a.output);doc.save(a.output)
  print('CORE_BOARD_DOCUMENT_UPDATED '+str(a.output))
 if __name__=='__main__':main()

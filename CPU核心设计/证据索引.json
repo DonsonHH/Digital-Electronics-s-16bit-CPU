@@ -1,12 +1,13 @@
 {
   "CPU_base": "v1.6",
-  "candidate": "AC1-board-experiments-r2",
+  "candidate": "AC1-architecture-r3",
   "ISA": "v1.5",
   "vtools": "1.6-vtools-r1",
   "functional_attempt": "3df8066a-3273-4d19-867a-a613f4d42481",
   "functional_record_relative": "验证记录/cpu_v16_3df8066a32734d19867aa613f4d42481",
   "timing_record_relative": "Vivado/时序记录/AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc",
   "independent_48_relative": "验证记录/independent_48_saved",
+  "legacy_top_level_evidence_role": "The functional/timing/independent pointers above retain historical core-only identities. Current r3 Word and fresh independent48 are identified by current_document and architecture_reorganization; stage3_to_5 retains original routed results.",
   "result_semantics": "Explicit input-bound fresh executions and separately preserved historical snapshots",
   "original_execution_absolute_paths_preserved_in_raw_records": true,
   "archive_root": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261014_会话清理_01a13444",
@@ -42,32 +43,35 @@
   "current_document": {
     "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
     "CPU": "v1.6",
-    "candidate": "AC1-board-experiments-r2",
+    "candidate": "AC1-architecture-r3",
     "ISA": "v1.5",
-    "revision_date": "2026-11-01",
-    "sha256": "ea7ab5dc4ffac6e6ffafb8288cfa253ef0defa74079e2c1deed82a9ccf89e302",
+    "revision_date": "2026-11-02",
+    "sha256": "7a837b00fda59b2cf88a67abe7a97de19086299543f138781e42e5ff6904a4ff",
     "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
-    "pdf_sha256": "da80c8ff865dbd451defed6fd2d59ff11d805895be1dc6fbdbeade891e3a1956",
-    "pages": 54,
-    "toc_entries": 68,
-    "tables": 39,
+    "pdf_sha256": "1dac390d76ec0742a744cce97f5dd580ff22b164c3544ba2066cef591f4c7bb8",
+    "pages": 61,
+    "toc_entries": 72,
+    "tables": 50,
     "figures": 12,
     "landscape_pages": [
-      9,
-      10
+      12,
+      13
     ],
     "sections_updated": [
-      "Preface and stale stage2 boundary wording",
-      "4.11 clarified as stage2 system evidence",
-      "4.12 EES-331 board implementation and five-program baseline",
-      "4.12 isolated forwarding and WB/MEM comparisons",
-      "4.13 board manual reference"
+      "Four chapters reorganized around ISA, datapath/state, pipeline control and system verification",
+      "Top-level contract, ownership and CW/data/action classification",
+      "Five cycle examples extracted from fresh source-bound independent48 CSV",
+      "Editable diagrams, unique state, dynamic cross-references and maintenance source"
     ],
     "production_RTL_changed": false,
     "ISA_changed": false,
     "default_execution_cycles_changed": false,
-    "new_routed_implementation": true,
-    "physical_board_validated": false
+    "new_routed_implementation": false,
+    "new_independent48_execution": true,
+    "physical_board_validated": false,
+    "physical_validation_status": "DEFERRED_BY_USER",
+    "source_entry": "文档源/README.md",
+    "QA": "验证/architecture_r3_20261102_1b40e4f7/final_qa.json"
   },
   "Pre5_control_evidence": {
     "relative_to_course_root": "Pre5_控制单元设计/Vivado",
@@ -185,58 +189,84 @@
       "RTL_extended": true,
       "ISA_or_execution_cycles_changed": false,
       "new_simulation_or_synthesis": true
+    },
+    {
+      "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
+      "CPU": "v1.6",
+      "candidate": "AC1-board-experiments-r2",
+      "ISA": "v1.5",
+      "revision_date": "2026-11-01",
+      "sha256": "ea7ab5dc4ffac6e6ffafb8288cfa253ef0defa74079e2c1deed82a9ccf89e302",
+      "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
+      "pdf_sha256": "da80c8ff865dbd451defed6fd2d59ff11d805895be1dc6fbdbeade891e3a1956",
+      "pages": 54,
+      "toc_entries": 68,
+      "tables": 39,
+      "figures": 12,
+      "landscape_pages": [
+        9,
+        10
+      ],
+      "sections_updated": [
+        "Preface and stale stage2 boundary wording",
+        "4.11 clarified as stage2 system evidence",
+        "4.12 EES-331 board implementation and five-program baseline",
+        "4.12 isolated forwarding and WB/MEM comparisons",
+        "4.13 board manual reference"
+      ],
+      "production_RTL_changed": false,
+      "ISA_changed": false,
+      "default_execution_cycles_changed": false,
+      "new_routed_implementation": true,
+      "physical_board_validated": false
     }
   ],
   "architecture_figures": {
-    "revision_date": "2026-10-31",
-    "baseline": "v1.6-timing-AC1",
+    "revision_date": "2026-11-02",
+    "baseline": "CPU v1.6 default AC1",
     "ISA": "v1.5",
-    "core_RTL_sha256": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
-    "block_signal_map": "Word 2.6.2 table14",
+    "core_RTL_sha256": "f33f9e0f22ae4a44fa42c1384ae8b4ff64eb107de125684b22f3d1fd830b1999",
+    "block_signal_map": "Word 3.1.2 table20; source architecture.json ownership",
     "source_format": "native editable SVG text and vector shapes",
     "png_pixels": {
       "01_CPU整体架构.png": [
-        3600,
-        2250
+        5333,
+        3333
       ],
       "02_五级Datapath.png": [
-        3600,
-        2520
+        5333,
+        3733
+      ],
+      "03_文件启动系统与停止观测.png": [
+        3111,
+        2000
+      ],
+      "04_EES331板级系统.png": [
+        2800,
+        1600
       ]
     },
     "files": {
-      "架构图/01_CPU整体架构.png": "28ec8e421a23a00edb4c408482de8ca1894fe48e24db1c4fdba2f2af20227356",
-      "架构图/01_CPU整体架构.svg": "5c8e6ed3db241ca0fa7e3da185f0914060c8fa1acadb3c226b5bb23790052646",
-      "架构图/02_五级Datapath.png": "14a3cd26569ccfc6ac50c0d178cc96762b7bcfc95df78f8e3aa88a9979e68d6d",
-      "架构图/02_五级Datapath.svg": "23ba609db79bcf6bf7e93df704f775d13efff0a3206ea60322de4cf15c2332a7"
+      "架构图/01_CPU整体架构.png": "ec9a19467b11af3fa27f40c281be06ebf3b61d8e310528af8273f468bad64c13",
+      "架构图/01_CPU整体架构.svg": "6e6b8f5fdbb1331e348b02bde876d8b117eb5c7e6957eae42d44e6b49604cfcb",
+      "架构图/02_五级Datapath.png": "46d82564513474c6dcd99e7a1e7f789e935172354875efc86cc1b75d5c2f79aa",
+      "架构图/02_五级Datapath.svg": "2cd5a5555535372b462905d55e716832c17abfdc6fe7c40e8ceb3fe88b23d88b",
+      "架构图/03_文件启动系统与停止观测.png": "2a87a35e2967ad9c6d298d787e4c46bbd7bb695f6d61e9120b0ed177c7f4fa1b",
+      "架构图/03_文件启动系统与停止观测.svg": "7bd47ab97328df2d75aaa3a409889414d751b5f07a119104cb57cb63ac753fd0",
+      "架构图/04_EES331板级系统.png": "3c5ea125d301417d02dfeae7c22d45f17e789835fd4c96d2ffe97d269adea448",
+      "架构图/04_EES331板级系统.svg": "6bdf74f50de0b8979944ff6583a2750d2556af4bc053af885d2aa937ce7c762d"
     },
     "implementation_changed": false,
-    "historical_evidence_rechecked_on": "2026-10-31",
-    "new_xsim_execution": false,
-    "trace_cases_checked": 11,
-    "raw_vcd_edges_reparsed": 4824,
-    "review_cases": [
-      "DOC_ADD_ADD",
-      "TRACE_LOAD_STR",
-      "T02",
-      "T07",
-      "LEGAL_STR_BEFORE_HALT",
-      "T16",
-      "T05",
-      "16 reset probes from 5 modes"
-    ],
-    "review_scope": "Source/diagram/document consistency and saved clock-edge evidence; no new simulation, synthesis, P&R or board claim",
-    "revision_label": "20261031-architecture-refinement",
-    "diagram_logic_review": "PASS for five requested refinements",
-    "diagram_visual_review": "PASS native-font boxes, lines, text overlaps and borders checked; independent review completed",
-    "Word_page_review": "5 changed pages visually reopened; 41 other page PNGs identical to the previously fully inspected render",
-    "current_execution_path_retained": true,
+    "new_independent48_execution": true,
+    "trace_cases_checked": 5,
+    "review_scope": "Four-chapter diagram/source/Word consistency and five fresh default-AC1 cycle examples; no new P&R or physical result",
+    "Word_page_review": "All 61 native Word PDF pages visually reviewed; landscapes12/13",
     "board_system_r2": {
       "svg": "架构图/04_EES331板级系统.svg",
       "png": "架构图/04_EES331板级系统.png",
       "svg_sha256": "6bdf74f50de0b8979944ff6583a2750d2556af4bc053af885d2aa937ce7c762d",
       "png_sha256": "3c5ea125d301417d02dfeae7c22d45f17e789835fd4c96d2ffe97d269adea448",
-      "word_figure": 12
+      "word_figure": 10
     }
   },
   "system_preparation": {
@@ -315,5 +345,87 @@
       "protocol_guard_cases": 12,
       "detected_mutants": 6
     }
+  },
+  "architecture_figures_revision_history": [
+    {
+      "revision_date": "2026-10-31",
+      "baseline": "v1.6-timing-AC1",
+      "ISA": "v1.5",
+      "core_RTL_sha256": "7ece1b41a7f7ed52a88eeb9643ac55f51afb2f7d188033278390c909f5d578e7",
+      "block_signal_map": "Word 2.6.2 table14",
+      "source_format": "native editable SVG text and vector shapes",
+      "png_pixels": {
+        "01_CPU整体架构.png": [
+          3600,
+          2250
+        ],
+        "02_五级Datapath.png": [
+          3600,
+          2520
+        ]
+      },
+      "files": {
+        "架构图/01_CPU整体架构.png": "28ec8e421a23a00edb4c408482de8ca1894fe48e24db1c4fdba2f2af20227356",
+        "架构图/01_CPU整体架构.svg": "5c8e6ed3db241ca0fa7e3da185f0914060c8fa1acadb3c226b5bb23790052646",
+        "架构图/02_五级Datapath.png": "14a3cd26569ccfc6ac50c0d178cc96762b7bcfc95df78f8e3aa88a9979e68d6d",
+        "架构图/02_五级Datapath.svg": "23ba609db79bcf6bf7e93df704f775d13efff0a3206ea60322de4cf15c2332a7"
+      },
+      "implementation_changed": false,
+      "historical_evidence_rechecked_on": "2026-10-31",
+      "new_xsim_execution": false,
+      "trace_cases_checked": 11,
+      "raw_vcd_edges_reparsed": 4824,
+      "review_cases": [
+        "DOC_ADD_ADD",
+        "TRACE_LOAD_STR",
+        "T02",
+        "T07",
+        "LEGAL_STR_BEFORE_HALT",
+        "T16",
+        "T05",
+        "16 reset probes from 5 modes"
+      ],
+      "review_scope": "Source/diagram/document consistency and saved clock-edge evidence; no new simulation, synthesis, P&R or board claim",
+      "revision_label": "20261031-architecture-refinement",
+      "diagram_logic_review": "PASS for five requested refinements",
+      "diagram_visual_review": "PASS native-font boxes, lines, text overlaps and borders checked; independent review completed",
+      "Word_page_review": "5 changed pages visually reopened; 41 other page PNGs identical to the previously fully inspected render",
+      "current_execution_path_retained": true,
+      "board_system_r2": {
+        "svg": "架构图/04_EES331板级系统.svg",
+        "png": "架构图/04_EES331板级系统.png",
+        "svg_sha256": "6bdf74f50de0b8979944ff6583a2750d2556af4bc053af885d2aa937ce7c762d",
+        "png_sha256": "3c5ea125d301417d02dfeae7c22d45f17e789835fd4c96d2ffe97d269adea448",
+        "word_figure": 12
+      }
+    }
+  ],
+  "architecture_reorganization": {
+    "status": "OFFLINE_ARCHITECTURE_DOCUMENT_RELEASE_PASS_PHYSICAL_DEFERRED",
+    "baseline_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf",
+    "source": "文档源/architecture.json",
+    "advice_sha256": "5194e376e0b0adaab1d4e929c4e18864bc32074cab6e84114a3f3c8191428346",
+    "review_relative": "验证/architecture_r3_20261102_1b40e4f7/final_qa.json",
+    "current_independent48_relative": "验证记录/cpu_ac1_independent_lh6jb16m",
+    "canonical_CSV_reference": "验证记录/cpu_ac1_independent_m7aa_q8u",
+    "CW_widths": [
+      18,
+      7,
+      5
+    ],
+    "declared_payload_bits": [
+      34,
+      91,
+      65,
+      64
+    ],
+    "payload_scope": "Logical declarations including external synchronous memory outputs; not mapped FF count",
+    "worked_examples": 5,
+    "python_checks": 24,
+    "new_nine_suite_execution": false,
+    "new_PnR_execution": false,
+    "production_RTL_changed": false,
+    "physical_board_validated": false,
+    "hardware_access_performed": false
   }
 }

@@ -2177,7 +2177,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "d_/x_/m_/w_分别绑定ID/EX/MEM/WB。d_ctrl及CTRL_X/M/W是[[T12]]、13、15中既有控制字段的图示集合，不是新增总线或寄存器；上层控制带与下层数据共用四个流水边界。[[F01]]的FB为反馈组，UPD为valid_next/取消/保持组。操作数前递由operand_forward完成，WB→ID旁路位于regfile4x16，Z来源选择、load-use检测、年龄仲裁和mode更新均位于core内部。M寄存m_fault用于前递，新m_access_fault只进入访问保护、故障载荷及年龄取消，不接回前递数据MUX。"
+              "text": "d_/x_/m_/w_分别绑定ID/EX/MEM/WB。d_ctrl及CW_X/M/W是[[T12]]、[[T13]]、[[T15]]中既有控制字段的图示集合，不是新增总线或寄存器；上层控制带与下层数据共用四个流水边界。[[F01]]的FB为反馈组，UPD为valid_next/取消/保持组。操作数前递由operand_forward完成，WB→ID旁路位于regfile4x16，Z来源选择、load-use检测、年龄仲裁和mode更新均位于core内部。M寄存m_fault用于前递，新m_access_fault只进入访问保护、故障载荷及年龄取消，不接回前递数据MUX。"
             }
           ]
         }

@@ -1,0 +1,15 @@
+{
+  "status": "STATIC_WORD_CHECKS_PASS_VISUAL_QA_SEPARATE",
+  "chapters": [
+    "设计目标与指令契约",
+    "数据通路与状态边界",
+    "流水控制与跨级协调",
+    "系统集成与验证结果"
+  ],
+  "tables": 50,
+  "figures": 12,
+  "reference_fields": 22,
+  "toc_entries": 72,
+  "section_count": 3,
+  "hardware_access_performed": false
+}

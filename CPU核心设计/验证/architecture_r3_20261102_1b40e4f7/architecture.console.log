@@ -1,0 +1,9 @@
+test_board_legacy_cli_refuses_architecture_destination (test_legacy_guard.LegacyDestinationTests.test_board_legacy_cli_refuses_architecture_destination) ... ok
+test_system_legacy_cli_refuses_architecture_destination (test_legacy_guard.LegacyDestinationTests.test_system_legacy_cli_refuses_architecture_destination) ... ok
+test_existing_import_destination_is_not_modified (test_source_integrity.SourceIntegrity.test_existing_import_destination_is_not_modified) ... ok
+test_same_length_cycle_edit_is_rejected (test_source_integrity.SourceIntegrity.test_same_length_cycle_edit_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1184.380s
+
+OK

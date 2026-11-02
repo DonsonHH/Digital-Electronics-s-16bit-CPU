@@ -1,0 +1,22 @@
+[
+  {
+    "suite": "architecture",
+    "exit": 0,
+    "console_sha256": "165e85498e65752a8ffd956e8d250bc131011e6dd3795488255126c6022cafc0"
+  },
+  {
+    "suite": "board_tools",
+    "exit": 0,
+    "console_sha256": "680ae3574e1d034f1983936915281a679d72cda2a9bb8a702515fc2f1b7ba727"
+  },
+  {
+    "suite": "system_tools",
+    "exit": 0,
+    "console_sha256": "296db99db9b1e398c632255ecef2d8e43327245f81a223d7ccfda4b884f9144d"
+  },
+  {
+    "suite": "experiment_tools",
+    "exit": 0,
+    "console_sha256": "0e04f5222962af67a00625fa9f204649ad81870e4ae913bddfa3e1efb213eb4b"
+  }
+]

@@ -1,0 +1,10 @@
+test_document_cli_rejects_incomplete_inventory_and_native_steps (test_system_package.SystemContract.test_document_cli_rejects_incomplete_inventory_and_native_steps) ... ok
+test_document_cli_rejects_stale_receipt_before_touching_word (test_system_package.SystemContract.test_document_cli_rejects_stale_receipt_before_touching_word) ... ok
+test_finish_marker_alone_cannot_publish_a_system_pass (test_system_package.SystemContract.test_finish_marker_alone_cannot_publish_a_system_pass) ... ok
+test_missing_and_malformed_boot_files_are_rejected (test_system_package.SystemContract.test_missing_and_malformed_boot_files_are_rejected) ... ok
+test_reset_epoch_cannot_be_removed_by_editing_the_manifest (test_system_package.SystemContract.test_reset_epoch_cannot_be_removed_by_editing_the_manifest) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.359s
+
+OK

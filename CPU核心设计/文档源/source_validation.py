@@ -1,6 +1,7 @@
 """Read-only RTL/fixture/trace gates for the architecture document. No hardware access."""
 from pathlib import Path
 import csv,hashlib,json,re,subprocess
+from io import StringIO
 
 P=Path(__file__).resolve().parents[1];ROOT=P.parent;V=P/'Vivado'
 BASELINE='0d888cc65a8b650575317be7fa5d5d4040266abf'
@@ -11,6 +12,27 @@ def require(value,message):
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def read(path):return json.loads(Path(path).read_text(encoding='utf-8-sig'))
 def source_bytes(relative):return subprocess.check_output(['git','show',BASELINE+':'+relative],cwd=ROOT)
+
+def check_canonical_outputs(run,rtl,new_receipt):
+    contract=read(Path(__file__).with_name('canonical_outputs.json'))
+    require(contract['source_commit']==BASELINE,'Canonical CSV baseline was not reviewed')
+    require(set(contract['files'])=={'independent_results.csv','independent_cycles.csv'},'Both canonical CSV contracts are mandatory')
+    manifest=json.loads(source_bytes('CPU核心设计/文件SHA256.json'))['files']
+    relative=contract['reference_record'];reference=P/relative
+    digest=manifest.get(relative+'/independent_result.json')
+    require(digest==contract['reference_receipt_sha256']==sha(reference/'independent_result.json'),'Canonical CSV reference receipt changed')
+    receipt=read(reference/'independent_result.json')
+    require(receipt['status']=='PASS' and receipt['new_xsim_execution'] and receipt['native_execution_complete'],'Canonical CSV reference is not a completed native run')
+    for name,value in rtl.items():require(receipt['input_sha256']['rtl/'+name]==value,'Canonical CSV reference uses different RTL')
+    consumed={}
+    for name,digest in contract['files'].items():
+        require(digest==manifest.get(relative+'/'+name)==sha(reference/name),'Canonical CSV digest differs from the pinned published manifest')
+        consumed[name]=(Path(run)/name).read_bytes()
+        require(hashlib.sha256(consumed[name]).hexdigest()==digest,'Independent canonical CSV output changed: '+name)
+    for name,digest in new_receipt['input_sha256'].items():
+        if name.startswith('programs/') or name in ['cases.json','case_config.svh','case_count.svh','tb_adversarial.sv']:
+            require(receipt['input_sha256'][name]==digest,'Canonical CSV reference uses different frozen input: '+name)
+    return contract,consumed
 
 def check_rtl_contract(plan):
     require(plan['baseline_commit']==BASELINE,'Architecture baseline must be explicitly reviewed before it changes')
@@ -67,10 +89,11 @@ def verify_independent(run):
     log=(run/'private.log').read_text(encoding='utf-8',errors='replace')
     marker='ADVERSARIAL_PASS cases=48 reset_witnesses=10 failures=0 oracle=external_python memory=independent_sync'
     require(log.splitlines().count(marker)==1 and '$finish called at time' in log and not re.search(r'(?m)^Fatal:|^ERROR:',log),'Independent terminal/negative markers failed')
-    with(run/'independent_results.csv').open(encoding='utf-8-sig',newline='')as f:rows=list(csv.DictReader(f))
+    contract,consumed=check_canonical_outputs(run,rtl,r)
+    rows=list(csv.DictReader(StringIO(consumed['independent_results.csv'].decode('utf-8-sig'))))
     expected_labels=read(V/'verification/test_manifest.json')['frozen_independent48']['labels']
     require(len(rows)==58 and len({(row['case'],row['epoch'])for row in rows})==58 and {row['case']for row in rows}==set(expected_labels),'Independent result coverage differs')
-    with(run/'independent_cycles.csv').open(encoding='utf-8-sig',newline='')as f:cycles=list(csv.DictReader(f))
+    cycles=list(csv.DictReader(StringIO(consumed['independent_cycles.csv'].decode('utf-8-sig'))))
     require(len(cycles)==952,'Independent cycle row count differs from the unchanged pipeline')
     canonical=(V/'verification/tb_adversarial.sv').read_text(encoding='utf-8')
     replacement='datapath_core dut(.clk(clk),.rst(rst),.im_addr(im_addr),.im_en(im_en),.im_dout(im_dout),.dm_addr(dm_addr),.dm_en(dm_en),.dm_we(dm_we),.dm_din(dm_din),.dm_dout(dm_dout),.halted(halted),.fault(fault));'

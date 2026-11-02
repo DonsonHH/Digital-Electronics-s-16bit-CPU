@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
@@ -17,6 +18,8 @@ from docx.shared import Inches, Pt, RGBColor
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = ROOT / 'CPU核心设计'
 NAME = '16位流水线CPU核心设计文档_AC1候选版.docx'
+sys.path.insert(0,str(PACKAGE/'文档源'))
+from document_guard import ensure_legacy_output
 
 
 def sha(path):
@@ -89,6 +92,7 @@ def main():
     parser.add_argument('--baseline', default='775350246d3806c9a09ac683edadf1a35e3e68bb')
     parser.add_argument('--system-receipt',type=Path,required=True)
     parser.add_argument('--tools-receipt',type=Path,required=True)
+    parser.add_argument('--output',type=Path,default=PACKAGE/NAME)
     args = parser.parse_args()
     system_path,system,tools_path,tools=bound_receipts(args.system_receipt,args.tools_receipt)
     raw = subprocess.check_output(['git', 'show', args.baseline + ':CPU核心设计/' + NAME], cwd=ROOT)
@@ -213,7 +217,7 @@ def main():
     anchor.paragraph_format.page_break_before=True
     doc.core_properties.version='AC1-system-prep-r1'
     doc.core_properties.comments='ISA v1.5 and execution cycle contract retained; observation-only system increment.'
-    target=PACKAGE/NAME;doc.save(target)
+    target=args.output;ensure_legacy_output(target);doc.save(target)
     print('CORE_WORD_UPDATED '+str(target))
 
 

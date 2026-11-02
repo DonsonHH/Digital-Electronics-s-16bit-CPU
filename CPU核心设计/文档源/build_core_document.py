@@ -12,9 +12,10 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
 from docx.enum.section import WD_SECTION_START,WD_ORIENT
 from source_validation import P,ROOT,BASELINE,read,require,sha,source_bytes,check_rtl_contract,extract_examples
+from document_content import body_content_digest
 
 B=Path(__file__).resolve().parent;NAME='16位流水线CPU核心设计文档_AC1候选版.docx'
-REF=re.compile(r'\[\[(F\d+|T\d+|S:[\d.]+)\]\]')
+REF=re.compile(r'\[\[([FT]\d+|N_[A-Z0-9_]+|S:[A-Z0-9_.]+)\]\]',re.I)
 
 class Compiler:
     def __init__(self,plan,legacy,content,examples):
@@ -23,6 +24,7 @@ class Compiler:
         section=deepcopy(self.doc.sections[0]._sectPr)
         for node in list(self.doc._element.body):self.doc._element.body.remove(node)
         self.doc._element.body.append(section)
+        if self.doc.settings.element.find(qn('w:doNotAutoCompressPictures'))is None:self.doc.settings.element.append(OxmlElement('w:doNotAutoCompressPictures'))
         self.counters=[0]*4;self.labels={};self.old_sections={};self.caption_counts={'F':0,'T':0};self.references=[];self.bookmark_id=1000;self.rendered_sections=set();self.section_numbers={};self.landscape=False
         self.portrait(self.doc.sections[0]);self.configure_numbering()
     def configure_numbering(self):
@@ -108,6 +110,7 @@ class Compiler:
                 cell.width=Inches(widths[j]);cell.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
                 shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'E7EFF8'if i==0 else'F5F7F9'if i%2==0 else'FFFFFF');cell._tc.get_or_add_tcPr().append(shade)
                 p=cell.paragraphs[0];self.add_text(p,str(value));p.paragraph_format.space_after=p.paragraph_format.space_before=Pt(3);p.paragraph_format.line_spacing=1.05
+                if i==0:p.paragraph_format.keep_with_next=True
                 if re.fullmatch(r'[\d.+/ %—:-]+',str(value)):p.alignment=WD_ALIGN_PARAGRAPH.CENTER
                 for run in p.runs:run.font.size=Pt(10);run.font.bold=i==0;run.font.color.rgb=RGBColor(0,0,0)
         self.doc.add_paragraph().paragraph_format.space_after=Pt(2)
@@ -164,7 +167,7 @@ class Compiler:
         for text in [
           '本规范从指令契约、数据与状态边界、流水控制和系统验证四个层次描述一颗16位顺序单发射五级CPU。datapath_core沿用历史名称，实际包含数据通路和硬连线流水控制。设计目标是让每条指令的数据、控制意图、有效标签及副作用形成可检查的完整链条。',
           '所有被接受且未取消的指令沿IF→ID→EX→MEM→WB传递。RF和flags在WB写入；STR在MEM写DM一次，并继续保留有效WB完成标签。Stall延长停留，bubble以valid=0表示，分支和故障按年龄取消年轻指令。五级并行工作，与全局五个运行模式不是同一概念。',
-          '默认生产实现固定为已验证AC1。one-hot前递和WB到MEM为两个隔离实验，后者使用自己的停顿契约；本架构整理不更改ISA、生产RTL或周期。RF影子、停止现场和VIO为观察逻辑，不参与执行。',
+          '默认生产实现固定为已验证AC1。one-hot前递和WB到MEM为两个隔离实验，后者使用自己的停顿契约；本架构整理不更改ISA、生产RTL或周期。RF影子、停止现场及VIO输入探针只做观测；VIO的独立复位输出则经板级同步链控制core_reset，须与被动观测区分。',
           '课程目标为EES-331、xc7z020clg484-1、M19/100MHz。离线功能与布局布线结果按证据范围列出；实板验收由用户延期，目标对应未确认的尝试不计CPU验证通过。',
           'RF为寄存器组，IM/DM为指令/数据存储，CU为控制职责，CW为随行操作意图。数据宽16位，指令定长16位，地址以16位字为单位；机器字与寄存器值默认十六进制。']:
             self.paragraph(text)
@@ -186,7 +189,7 @@ class Compiler:
             if i==0:self.doc.add_page_break()
         self.orientation(False)
         self.nodes(tail,3,3)
-        self.paragraph('两图描述默认AC1；图中的前递选择与MUX可由同一RTL模块实现。WB到MEM候选的差异单列于性能实验，不改变此处默认load-use规则。数据与控制共用既有四个逻辑边界，图上的分层不增加寄存器。')
+        self.paragraph('默认AC1的u_forward合并CU的相关比较/优先控制和DP的16位MUX。WB到MEM另列实验。图上分层不增寄存器，load16取同步DM的dout；完整字段见[[T15]]。')
     def system(self):
         self.new('SYSTEM');self.alias('2.10','SYSTEM');self.alias('4.11','SYSTEM')
         self.reuse('文件启动与结果观测',body_only=True)
@@ -241,11 +244,12 @@ class Compiler:
     def finish(self):
         for field,key in self.references:
             if key.startswith('S:'):
-                old=key[2:];require(old in self.old_sections,'Unresolved old section reference: '+old);target=self.old_sections[old];value=self.labels[target]
+                old=key[2:];target=self.old_sections.get(old,old);require(target in self.section_numbers,'Unresolved section reference: '+old);value=self.labels[target]
             else:target=key;require(target in self.labels,'Unresolved caption reference: '+target);value=self.labels[target]
             field.set(qn('w:instr'),'REF ARCH_'+target+(' \\w'if key.startswith('S:')else'')+' \\h');field.find('.//'+qn('w:t')).text=value
         require(self.caption_counts['F']==12 and self.caption_counts['T']>=39,'Mature figures or tables were lost')
         self.doc.core_properties.title='16位流水线CPU核心设计文档';self.doc.core_properties.version=self.plan['revision'];self.doc.core_properties.identifier='architecture-schema-1'
+        self.doc.core_properties.comments='Architecture-source edition; default AC1 ISA/pipeline unchanged; no physical board acceptance.'
         return self.doc
     def build(self):
         self.cover()
@@ -272,6 +276,10 @@ def main():
     image_paths={r['path']for section in legacy['sections'].values()for node in section['children']for r in node.get('runs',[])if r['kind']=='image'}
     image_paths.update('架构图/'+n+'.svg'for n in ['01_CPU整体架构','02_五级Datapath','03_文件启动系统与停止观测'])
     proof={'status':'AUTHORED_PENDING_NATIVE_WORD_AND_VISUAL_QA','revision':plan['revision'],'source_files':{p.name:sha(p)for p in[B/'architecture.json',B/'sections.json',B/'content.json',B/'build_core_document.py',B/'source_validation.py']},'figure_sources':{name:sha(P/name)for name in sorted(image_paths)},'production_rtl_sha256':rtl,'examples':examples,'section_numbers':compiler.section_numbers,'caption_labels':compiler.labels,'old_section_targets':compiler.old_sections,'word_sha256_before_native_update':sha(a.output),'new_native_execution_claim':'independent48 only; not a new9-suite/P&R/board run','hardware_access_performed':False}
+    proof['source_files']['canonical_outputs.json']=sha(B/'canonical_outputs.json')
+    proof['source_files']['document_content.py']=sha(B/'document_content.py')
+    proof['word_body_content_sha256']=body_content_digest(doc)
+    proof['csv_binding']='Byte equality to same13-RTL frozen48 output digests pinned in0d888cc package manifest'
     if a.proof_output:a.proof_output.write_text(json.dumps(proof,ensure_ascii=False,indent=2),encoding='utf-8')
     print('ARCHITECTURE_WORD_AUTHORED '+str(a.output))
 if __name__=='__main__':main()
