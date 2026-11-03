@@ -11,7 +11,11 @@ def validate(path,proof_path=None):
     plan=read(B/'architecture.json');check_rtl_contract(plan);board=verify_board_validation(plan);doc=Document(path)
     require(doc.core_properties.version==plan['revision'],'Word revision does not match architecture source')
     h1=[p.text for p in doc.paragraphs if p.style.name=='Heading 1']
-    require(h1==[chapter['title']for chapter in plan['chapters']],'The four top-level chapters differ')
+    require(h1==[chapter['title']for chapter in plan['chapters']+plan.get('appendices',[])],'The chapter and appendix hierarchy differs')
+    toc_headings=[p.text.split('\t')[0].replace(' ','')for p in doc.paragraphs if p.style.name.lower()=='toc 1']
+    if toc_headings:
+        expected=[str(i+1)for i in range(len(plan['chapters']))]+['附录'+chr(65+i)for i in range(len(plan.get('appendices',[])))]
+        require(toc_headings==expected,'Native Word chapter/appendix numbering differs')
     xml=etree.fromstring(zipfile.ZipFile(path).read('word/document.xml'));ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main','m':'http://schemas.openxmlformats.org/officeDocument/2006/math'}
     names=xml.xpath('//w:bookmarkStart/@w:name',namespaces=ns);require(len(names)==len(set(names)),'Duplicate Word bookmark names')
     required={'ARCH_DOC_ROOT','ARCH_OVERVIEW','ARCH_PAYLOAD','ARCH_CONTROL_LAYERS','ARCH_CW_CLASSIFICATION','ARCH_SYSTEM','ARCH_BOARD','ARCH_VERIFICATION','ARCH_PERFORMANCE','ARCH_EXPERIMENTS'}|{'ARCH_'+e['id']for e in plan['examples']}
@@ -19,7 +23,7 @@ def validate(path,proof_path=None):
     instructions=xml.xpath('//w:instrText/text()|//w:fldSimple/@w:instr',namespaces=ns)
     refs=re.findall(r'(?<![A-Z])REF\s+(\w+)',' '.join(instructions));require(set(refs)<=set(names),'Cross-reference target missing')
     table_fields=[s for s in instructions if re.search(r'\bSEQ\s+Table\b',s)];figure_fields=[s for s in instructions if re.search(r'\bSEQ\s+Figure\b',s)]
-    require(len(table_fields)==len(doc.tables)==50,'Mature/new tables lost or duplicated')
+    require(len(table_fields)==len(doc.tables)==51,'Mature/new tables lost or duplicated')
     require(len(figure_fields)==len(doc.inline_shapes)==12,'Mature figures lost or duplicated')
     text=''.join(xml.xpath('//w:t/text()',namespaces=ns))
     for bad in ['[[','ARCH_PENDING','错误!','未找到引用源','Error!','原if优先级和四态行为保持','RF影子、停止现场和VIO为观察逻辑，不参与执行']:

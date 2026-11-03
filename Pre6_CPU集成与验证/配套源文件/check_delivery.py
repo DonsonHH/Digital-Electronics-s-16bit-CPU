@@ -6,6 +6,7 @@ from datetime import datetime,timezone
 from PIL import Image
 from collect_v3 import actual_trace
 from attempt_history import review_attempt_history
+from baseline_evidence import source_bytes
 
 B=Path(__file__).resolve().parent;OUT=B.parent;ROOT=OUT.parent
 NS={'a':'http://schemas.openxmlformats.org/drawingml/2006/main',
@@ -17,8 +18,10 @@ NS={'a':'http://schemas.openxmlformats.org/drawingml/2006/main',
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
-def verify_hashes(root,items):
-    for relative,digest in items.items():assert sha(root/relative)==digest,relative
+def verify_hashes(root,items,frozen_document_baseline=None):
+    for relative,digest in items.items():
+        actual=hashlib.sha256(source_bytes(relative,frozen_document_baseline)).hexdigest()if frozen_document_baseline else sha(root/relative)
+        assert actual==digest,relative
 
 
 def validate_pass_attempt(path,record):
@@ -64,7 +67,7 @@ def main():
     e,c,m=map(load,[B/'evidence.json',B/'content.json',B/'source_map.json'])
     assert subprocess.check_output(['git','rev-parse',e['tag']+'^{}'],cwd=ROOT,text=True).strip()==e['baseline_commit']
     for relative,digest in e['input_sha256'].items():
-        assert sha(ROOT/relative)==digest,relative
+        assert hashlib.sha256(source_bytes(relative,e['baseline_commit'])).hexdigest()==digest,relative
         blob=subprocess.check_output(['git','show',e['baseline_commit']+':'+Path(relative).as_posix()],cwd=ROOT)
         assert hashlib.sha256(blob).hexdigest()==digest,relative
     verify_hashes(ROOT,e['additional_source_sha256'])
@@ -77,7 +80,7 @@ def main():
     assert all(r['C']==r['N']+4+r['S']+2*r['R']for r in e['programs'])
     for row in m:
         assert row['sources']
-        verify_hashes(ROOT,{r['relative']:r['sha256']for r in row['sources']})
+        verify_hashes(ROOT,{r['relative']:r['sha256']for r in row['sources']},frozen_document_baseline=e['baseline_commit'])
     assert all('REFERENCE'in m[i-1]['source_groups']for i in [17,18,19])
     with (ROOT/'CPU核心设计/验证/hardware_ac1_20261102_3dw9zgb5/button_snapshots.tsv').open(encoding='utf-8-sig',newline='')as f:
         assert list(csv.DictReader(f,fieldnames=['label','timestamp_ms','state256_hex','perf160_hex'],delimiter='\t'))==e['raw_button']

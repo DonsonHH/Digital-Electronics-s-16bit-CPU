@@ -1,13 +1,13 @@
 {
   "CPU_base": "v1.6",
-  "candidate": "AC1-architecture-r4",
+  "candidate": "AC1-architecture-r5",
   "ISA": "v1.5",
   "vtools": "1.6-vtools-r1",
   "functional_attempt": "3df8066a-3273-4d19-867a-a613f4d42481",
   "functional_record_relative": "验证记录/cpu_v16_3df8066a32734d19867aa613f4d42481",
   "timing_record_relative": "Vivado/时序记录/AC_decoupled_carry_synth_7dc8dbed3ed74afda0982a83cf74cccc",
   "independent_48_relative": "验证记录/independent_48_saved",
-  "legacy_top_level_evidence_role": "The functional/timing/independent pointers above retain historical core-only identities. Current r3 Word and fresh independent48 are identified by current_document and architecture_reorganization; stage3_to_5 retains original routed results.",
+  "legacy_top_level_evidence_role": "Historical core-only execution identities remain unchanged. current_document identifies the editorial r5; architecture_reorganization preserves r3 and formal_release preserves the r4 frozen release.",
   "result_semantics": "Explicit input-bound fresh executions and separately preserved historical snapshots",
   "original_execution_absolute_paths_preserved_in_raw_records": true,
   "archive_root": "C:\\Users\\Donson\\Documents\\ChatGPT_CPU_归档\\20261014_会话清理_01a13444",
@@ -43,24 +43,27 @@
   "current_document": {
     "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
     "CPU": "v1.6",
-    "candidate": "AC1-architecture-r4",
+    "candidate": "AC1-architecture-r5",
     "ISA": "v1.5",
-    "revision_date": "2026-11-02",
-    "sha256": "e3819844c2b7a600e4d53ec1f673a7b09bb00a9b37a9d174b0e9ef8c3df2d6e6",
+    "revision_date": "2026-11-03",
+    "sha256": "37301d17a9f061c40d159a8d323bbf046bf393fea00fe5a00d889b307f6fb639",
     "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
-    "pdf_sha256": "aa786bbcbec94df0435b24cd6bedcf2d8b23feae2770780e88762330122a83d9",
-    "pages": 62,
-    "toc_entries": 72,
-    "tables": 50,
+    "pdf_sha256": "f2daa71a72c67adce9cfd6f5796211699aa65629beffe36e429507750443a114",
+    "pages": 59,
+    "toc_entries": 76,
+    "tables": 51,
     "figures": 12,
     "landscape_pages": [
-      12,
-      13
+      11,
+      12
     ],
     "sections_updated": [
-      "3.7 implementedstop_pc/stop_reason diagnosis",
-      "4.2 RFwritebackshadow andstoppedS1scope",
-      "4.9 ISA v1.5 authority vsPre4history"
+      "Preface and glossary",
+      "Ch1 programmer contract and interfaces",
+      "Ch2 topology, parts, boundaries and state",
+      "Ch3 CW, forwarding/interlock, arbitration and drain",
+      "Ch4 implementation, consolidated evidence, performance",
+      "Appendices A-C history, reproduction, references"
     ],
     "production_RTL_changed": false,
     "ISA_changed": false,
@@ -70,8 +73,8 @@
     "physical_board_validated": true,
     "physical_validation_scope": "DefaultAC1 fiveprograms andphysicalS1 only",
     "source_entry": "文档源/README.md",
-    "QA": "验证/final_baseline_20261102_p824cngb/final_qa.json",
-    "revision_label": "r4-final"
+    "QA": "验证/document_editorial_r5_20261103/document-proof.json",
+    "revision_label": "r5-editorial"
   },
   "Pre5_control_evidence": {
     "relative_to_course_root": "Pre5_控制单元设计/Vivado",
@@ -286,6 +289,39 @@
       "physical_validation_scope": "DefaultAC1 fiveprograms andphysicalS1 only",
       "source_entry": "文档源/README.md",
       "QA": "验证/board_document_r4_20261102_len05xlq/final_qa.json"
+    },
+    {
+      "relative": "16位流水线CPU核心设计文档_AC1候选版.docx",
+      "CPU": "v1.6",
+      "candidate": "AC1-architecture-r4",
+      "ISA": "v1.5",
+      "revision_date": "2026-11-02",
+      "sha256": "e3819844c2b7a600e4d53ec1f673a7b09bb00a9b37a9d174b0e9ef8c3df2d6e6",
+      "pdf_relative_to_repository": "docs/16位流水线CPU核心设计文档_AC1候选版.pdf",
+      "pdf_sha256": "aa786bbcbec94df0435b24cd6bedcf2d8b23feae2770780e88762330122a83d9",
+      "pages": 62,
+      "toc_entries": 72,
+      "tables": 50,
+      "figures": 12,
+      "landscape_pages": [
+        12,
+        13
+      ],
+      "sections_updated": [
+        "3.7 implementedstop_pc/stop_reason diagnosis",
+        "4.2 RFwritebackshadow andstoppedS1scope",
+        "4.9 ISA v1.5 authority vsPre4history"
+      ],
+      "production_RTL_changed": false,
+      "ISA_changed": false,
+      "default_execution_cycles_changed": false,
+      "new_routed_implementation": false,
+      "new_independent48_execution": false,
+      "physical_board_validated": true,
+      "physical_validation_scope": "DefaultAC1 fiveprograms andphysicalS1 only",
+      "source_entry": "文档源/README.md",
+      "QA": "验证/final_baseline_20261102_p824cngb/final_qa.json",
+      "revision_label": "r4-final"
     }
   ],
   "architecture_figures": {
@@ -537,5 +573,12 @@
     "pre_merge_QA": "验证/final_baseline_20261102_p824cngb/final_qa.json",
     "hardware_evidence_preserved_with_original_execution_identity": true,
     "future_capture_provenance_enhancement": "host_sources snapshots/git/python/native Tcl+Vivado markers; offline-tested only in this finalization"
+  },
+  "editorial_r5": {
+    "proof": "验证/document_editorial_r5_20261103/document-proof.json",
+    "previous_document": "r4 preserved at cpu-v1.6-ac1-ees331-verified",
+    "Word_native_numbering_and_all_pages_reviewed": true,
+    "CPU_ISA_RTL_TB_XDC_changed": false,
+    "new_EDA_or_board_execution": false
   }
 }

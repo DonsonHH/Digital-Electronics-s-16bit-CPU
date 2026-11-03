@@ -26,6 +26,7 @@ class Compiler:
         self.doc._element.body.append(section)
         if self.doc.settings.element.find(qn('w:doNotAutoCompressPictures'))is None:self.doc.settings.element.append(OxmlElement('w:doNotAutoCompressPictures'))
         self.counters=[0]*4;self.labels={};self.old_sections={};self.caption_counts={'F':0,'T':0};self.references=[];self.bookmark_id=1000;self.rendered_sections=set();self.section_numbers={};self.landscape=False
+        self.appendix=False
         self.portrait(self.doc.sections[0]);self.configure_numbering()
     def configure_numbering(self):
         numbering=self.doc.part.numbering_part.element
@@ -37,11 +38,36 @@ class Compiler:
             for tag,value in [('start','1'),('numFmt','decimal'),('lvlText','.'.join('%'+str(n+1)for n in range(level+1))),('lvlJc','left')]:
                 item=OxmlElement('w:'+tag);item.set(qn('w:val'),value);lvl.append(item)
             abstract.append(lvl)
-        numbering.append(abstract);num=OxmlElement('w:num');num.set(qn('w:numId'),str(num_id));item=OxmlElement('w:abstractNumId');item.set(qn('w:val'),str(abstract_id));num.append(item);numbering.append(num);self.num_id=num_id
+        for tag,value in reversed([('nsid','A16C0001'),('multiLevelType','multilevel'),('tmpl','A16C1001')]):
+            item=OxmlElement('w:'+tag);item.set(qn('w:val'),value);abstract.insert(0,item)
+        first_num=numbering.find(qn('w:num'))
+        if first_num is None:numbering.append(abstract)
+        else:first_num.addprevious(abstract)
+        num=OxmlElement('w:num');num.set(qn('w:numId'),str(num_id));item=OxmlElement('w:abstractNumId');item.set(qn('w:val'),str(abstract_id));num.append(item)
+        cleanup=numbering.find(qn('w:numIdMacAtCleanup'))
+        if cleanup is None:numbering.append(num)
+        else:cleanup.addprevious(num)
+        self.num_id=num_id
+        appendix=deepcopy(abstract);appendix.set(qn('w:abstractNumId'),str(abstract_id+1))
+        appendix.find(qn('w:nsid')).set(qn('w:val'),'A16C0002')
+        appendix.find(qn('w:tmpl')).set(qn('w:val'),'A16C1002')
+        first=appendix.find(qn('w:lvl'))
+        first.find(qn('w:numFmt')).set(qn('w:val'),'upperLetter')
+        first.find(qn('w:lvlText')).set(qn('w:val'),'附录%1')
+        numbering.find(qn('w:num')).addprevious(appendix)
+        num=OxmlElement('w:num');num.set(qn('w:numId'),str(num_id+1));item=OxmlElement('w:abstractNumId');item.set(qn('w:val'),str(abstract_id+1));num.append(item)
+        if cleanup is None:numbering.append(num)
+        else:cleanup.addprevious(num)
+        self.appendix_num_id=num_id+1
         for level in range(1,5):
             style=self.doc.styles['Heading '+str(level)];style.font.color.rgb=RGBColor(0,0,0)
             style.paragraph_format.keep_with_next=True
             if level==4:style.font.size=Pt(11)
+        for style in self.doc.styles:
+            if style.name.lower().startswith('toc '):
+                style.font.size=Pt(10.5);style.font.color.rgb=RGBColor(0,0,0)
+                style.paragraph_format.space_before=Pt(0);style.paragraph_format.space_after=Pt(1)
+                style.paragraph_format.line_spacing=Pt(14.5)
     @staticmethod
     def portrait(section):
         section.orientation=WD_ORIENT.PORTRAIT;section.page_width=Inches(8.5);section.page_height=Inches(11)
@@ -64,10 +90,12 @@ class Compiler:
     def heading(self,text,level,key,old=None,page=False):
         self.counters[level-1]+=1
         for n in range(level,4):self.counters[n]=0
-        label='.'.join(map(str,self.counters[:level]));p=self.doc.add_heading(text,level)
+        parts=list(map(str,self.counters[:level]))
+        if self.appendix:parts[0]=chr(64+self.counters[0])
+        label='.'.join(parts);p=self.doc.add_heading(text,level)
         p.paragraph_format.page_break_before=page
         if self.landscape:p.paragraph_format.space_before=Pt(0);p.paragraph_format.space_after=Pt(6)
-        prop=p._p.get_or_add_pPr();num=prop.get_or_add_numPr();num.get_or_add_ilvl().val=level-1;num.get_or_add_numId().val=self.num_id
+        prop=p._p.get_or_add_pPr();num=prop.get_or_add_numPr();num.get_or_add_ilvl().val=level-1;num.get_or_add_numId().val=self.appendix_num_id if self.appendix else self.num_id
         self.bookmark(p,key);self.labels[key]=label;self.section_numbers[key]=label
         if old:self.old_sections[old]=key
         return p
@@ -110,9 +138,10 @@ class Compiler:
                 cell.width=Inches(widths[j]);cell.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
                 shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'E7EFF8'if i==0 else'F5F7F9'if i%2==0 else'FFFFFF');cell._tc.get_or_add_tcPr().append(shade)
                 p=cell.paragraphs[0];self.add_text(p,str(value));p.paragraph_format.space_after=p.paragraph_format.space_before=Pt(3);p.paragraph_format.line_spacing=1.05
-                if i==0:p.paragraph_format.keep_with_next=True
+                if i==0 or ((len(rows)<=6 or key.startswith('N_EX_')) and i<len(rows)-1):p.paragraph_format.keep_with_next=True
                 if re.fullmatch(r'[\d.+/ %—:-]+',str(value)):p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-                for run in p.runs:run.font.size=Pt(10);run.font.bold=i==0;run.font.color.rgb=RGBColor(0,0,0)
+                size=9 if key.startswith('N_EX_') and 1<=j<=5 else 10
+                for run in p.runs:run.font.size=Pt(size);run.font.bold=i==0;run.font.color.rgb=RGBColor(0,0,0)
         self.doc.add_paragraph().paragraph_format.space_after=Pt(2)
     def image(self,path,figure):
         p=self.doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.keep_with_next=True;p.paragraph_format.space_after=Pt(3)
@@ -120,7 +149,7 @@ class Compiler:
         width=9.0 if figure in ['F01','F02'] else 6.6
         p.add_run().add_picture(str(P/path),width=Inches(width))
     def nodes(self,nodes,base_level=2,target_level=2):
-        for node in nodes:
+        for index,node in enumerate(nodes):
             if 'section'in node:
                 child=self.legacy['sections'][node['section']];level=child['level']-base_level+target_level
                 self.reuse(node['section'],level=level);continue
@@ -132,6 +161,9 @@ class Compiler:
                         if r['kind']=='image':self.image(r['path'],r['figure'])
                     continue
                 p=self.doc.add_paragraph(style=node['style'])
+                if node['style']=='Code':
+                    following=nodes[index+1] if index+1<len(nodes) else {}
+                    p.paragraph_format.keep_with_next=following.get('style')=='Code'
                 for r in node['runs']:
                     if r['kind']=='text':self.add_text(p,r['text'])
                     elif r['kind']=='math':p._p.append(etree.fromstring(r['xml'].encode('utf-8')))
@@ -142,7 +174,7 @@ class Compiler:
                 title={'T14':'控制所有权与RTL对应','T15':'数据 CW与元数据的级间载荷','T35':'文件启动系统与已存工具验证'}.get(node['id'],node['title']);self.caption(node['id'],title)
             elif kind=='table':
                 if node['caption_id']=='T14':self.table([['职责/对象','信息或意图来源','仲裁与资格','实际驱动与边沿']]+self.plan['ownership'],[1.15,1.8,1.75,2.15],'T14')
-                elif node['caption_id']=='T15':self.table([['边界','数据','元数据与标签','CW','保存位置']]+self.plan['payload'],[.65,1.65,1.55,1.05,1.95],'T15')
+                elif node['caption_id']=='T15':self.table([['边界','数据','元数据与标签','CW','保存位置']]+self.plan['payload'],[.8,1.65,1.55,1.05,1.8],'T15')
                 else:self.table(node['rows'],node['widths'],node['caption_id'])
             else:raise ValueError('Unknown content node: '+kind)
     def reuse(self,source,level=2,title=None,key=None,body_only=False,filter_prefixes=()):
@@ -162,15 +194,23 @@ class Compiler:
             t=content['table'];self.table(t['rows'],t['widths'],t['id'],t['title'])
         for text in content.get('code',[]):self.paragraph(text,'Code')
     def cover(self):
+        self.doc.styles['Title'].font.color.rgb=RGBColor(0,0,0)
         self.doc.add_paragraph('16位流水线CPU核心设计文档','Title')
-        p=self.paragraph('默认AC1    CPU v1.6    ISA v1.5    架构版r4    2026年11月2日');self.bookmark(p,'DOC_ROOT')
+        p=self.paragraph('默认AC1    CPU v1.6    ISA v1.5    架构版r5    2026年11月3日');self.bookmark(p,'DOC_ROOT')
         for text in [
-          '本规范从指令契约、数据与状态边界、流水控制和系统验证四个层次描述一颗16位顺序单发射五级CPU。datapath_core沿用历史名称，实际包含数据通路和硬连线流水控制。设计目标是让每条指令的数据、控制意图、有效标签及副作用形成可检查的完整链条。',
-          '所有被接受且未取消的指令沿IF→ID→EX→MEM→WB传递。RF和flags在WB写入；STR在MEM写DM一次，并继续保留有效WB完成标签。Stall延长停留，bubble以valid=0表示，分支和故障按年龄取消年轻指令。五级并行工作，与全局五个运行模式不是同一概念。',
-          '默认生产实现固定为已验证AC1。one-hot前递和WB到MEM为两个隔离实验，后者使用自己的停顿契约；本架构整理不更改ISA、生产RTL或周期。RF影子、停止现场及VIO输入探针只做观测；VIO的独立复位输出则经板级同步链控制core_reset，须与被动观测区分。',
-          '课程目标为EES-331、xc7z020clg484-1、M19/100MHz。默认AC1五程序及真实S1复位已通过实板验证；周期数来自VIO，纳秒数仍按设计频率推算。此前目标未确认的尝试不计通过。',
-          'RF为寄存器组，IM/DM为指令/数据存储，CU为控制职责，CW为随行操作意图。数据宽16位，指令定长16位，地址以16位字为单位；机器字与寄存器值默认十六进制。']:
+          '本规范描述面向EES-331教学平台的16位哈佛结构处理器。CPU采用顺序单发射、硬连线控制和五级流水线，以明确的指令契约组织运算、存储和控制流，并使数据、操作意图与有效标签保持一致。',
+          '指令沿IF、ID、EX、MEM、WB推进。独立的同步IM和DM提供固定一拍读接口，级间载荷保存本条指令后续需要的信息。已就绪依赖通过前递解决，加载依赖通过互锁等待；跳转和故障按指令年龄取消年轻工作，停止标签随流水排空。',
+          '第一章定义指令与接口契约，第二章搭建数据通路和状态边界，第三章说明流水控制，第四章给出系统实现、功能证据和性能取舍。附录保存版本迁移、运行来源及复现入口。机器字、字地址和寄存器值默认用十六进制表示；程序周期及计数默认用十进制。']:
             self.paragraph(text)
+        self.table([
+          ['术语','本文含义'],
+          ['AC1','当前默认实现的版本标识，CPU v1.6、ISA v1.5'],
+          ['IF / ID / EX / MEM / WB','取指、译码读源、执行、访存、写回五个阶段'],
+          ['D / X / M / W','分别与ID、EX、MEM、WB绑定的载荷或信号前缀'],
+          ['RF / IM / DM','寄存器组、指令存储器、数据存储器'],
+          ['CU / DP / CW','控制职责、数据通路、随指令传递的操作意图字段集合'],
+          ['valid / bubble / stall / flush','有效标签、无效空槽、保持等待、取消年轻指令']
+        ],[2.0,4.8],'N_TERMS','术语与阅读约定')
         self.doc.add_paragraph('目录','FrontHeading').paragraph_format.page_break_before=True
         p=self.doc.add_paragraph();begin=OxmlElement('w:fldChar');begin.set(qn('w:fldCharType'),'begin');r=OxmlElement('w:r');r.append(begin);p._p.append(r)
         instr=OxmlElement('w:instrText');instr.set(qn('xml:space'),'preserve');instr.text=' TOC \\o "1-3" \\h \\z \\u ';r=OxmlElement('w:r');r.append(instr);p._p.append(r)
@@ -189,57 +229,73 @@ class Compiler:
             if i==0:self.doc.add_page_break()
         self.orientation(False)
         self.nodes(tail,3,3)
-        self.paragraph('默认AC1的u_forward合并CU的相关比较/优先控制和DP的16位MUX。WB到MEM另列实验。图上分层不增寄存器，load16取同步DM的dout；完整字段见[[T15]]。')
+    def stage_contract(self):
+        self.reuse('统一五级执行契约',title='架构状态与统一五级执行',key='STAGE_CONTRACT')
+        self.new('SINGLE_STATE',level=3)
+    def control(self):
+        self.heading('硬连线控制与随行操作意图',2,'CONTROL_LAYERS',old='2.6')
+        self.reuse('控制逻辑模型',level=3)
+        self.new('CW_CLASSIFICATION',level=3)
+        self.reuse('译码控制表',level=3,key='DECODE',title='ID译码与指令操作意图')
+        self.new('INTENT_ACTION',level=3)
+    def implementation(self):
+        self.reuse('源码边界与连接约定',title='RTL模块组织与连接',key='SOURCE')
+        self.reuse('内部功能与信号归属',level=3,title='逻辑职责与实际RTL映射')
+        self.reuse('目标数据通路的连接片段',level=3,key='CONNECTIONS',title='数据通路与控制连接')
     def system(self):
         self.new('SYSTEM');self.alias('2.10','SYSTEM');self.alias('4.11','SYSTEM')
-        self.reuse('文件启动与结果观测',body_only=True)
-        self.reuse('最小系统集成与阶段2验证',body_only=True)
+        self.reuse('文件初始化与系统连接',level=3)
+        self.reuse('稳定停止与公开结果接口',level=3)
     def board(self):
         self.new('BOARD');self.alias('4.12','BOARD')
         self.reuse('时钟复位与观测连接',level=3)
         self.reuse('完整实现与时序覆盖',level=3)
     def verification(self):
-        self.new('VERIFICATION')
-        self.table([['层次','权威证据','本轮状态与限度'],
-          ['源码与职责','14份默认RTL字节等于0d888cc；CW字段和时序块所有权核对','无RTL变更；控制集合不是新增总线或模块'],
-          ['当前独立ISA检查','r3实际XSim：48例、10复位见证、58结果、952逐拍行','保持原执行身份；五个正文例直接来自该CSV'],
-          ['原九套回归','0d888cc已存绑定源码的9套/19原生步骤','沿用原始执行身份，不声称本轮重跑九套'],
-          ['文件启动系统','已存11程序/12 epoch、同步RAM契约、网表和工程启动','与当前14份源码一致；原结果范围保持'],
-          ['板级实现与候选','AC1及两候选各五程序的已存完整布局布线','软件/硬件输入未改，不重新宣称执行P&R'],
-          ['实板','EES-331默认AC1五程序，每例两份VIO快照；真实S1清零并重启','有限功能与计数通过；频率和直接运行时间未独立测量']],[1.1,3.0,2.75],'N_EVIDENCE','分层验证与当前证据状态')
+        content=self.content['VERIFICATION']
+        self.heading(content['title'],2,'VERIFICATION')
+        for paragraph in content['paragraphs']:self.paragraph(paragraph)
         self.reuse('自检查测试方法',level=3)
-        self.reuse('既有实现与验证证据',level=3)
-        self.reuse('统一五级与冒险验证结果',level=3)
-        self.reuse('覆盖范围与集成验收',level=3)
-        self.reuse('CPU功能验证程序',level=3)
+        self.heading('单元与流水覆盖总览',3,'COVERAGE')
+        self.nodes(self.legacy['sections']['统一五级与冒险验证结果']['children'][:2])
+        self.reuse('单元输入与状态覆盖',body_only=True)
+        self.heading('流水时序与指令执行检查',3,'PIPELINE_VERIFICATION')
+        self.nodes(self.legacy['sections']['统一五级与冒险验证结果']['children'][2:])
+        self.reuse('核心既有验证记录',body_only=True)
+        self.reuse('流水相关与停止测试',level=4)
+        self.reuse('全部指令的执行覆盖',level=4)
+        self.reuse('CPU功能验证程序',level=3,title='文件启动整机验证')
+        self.reuse('实际结果与验收边界',body_only=True)
+        self.heading('EES331实板功能验证',3,'BOARD_VERIFICATION')
+        self.paragraph('五个默认AC1已布线镜像分别在EES-331运行。每个程序读取两份原始VIO快照，核对构建身份、稳定终态和计数；随后在checksum正常停止后实际操作S1，检查复位清零与松开后重启。')
+        t=self.content['VERIFICATION']['table'];self.table(t['rows'],t['widths'],t['id'],t['title'])
+        self.paragraph('RF观测值来自写回影子。板上稳定快照与仿真内部逐拍记录分别对应终态、计数和控制时序；原始VIO、S1及仿真记录的来源见附录。')
     def performance(self):
         self.new('PERFORMANCE');self.reuse('CPU性能验证',level=3)
         self.table([['对象','LUT / FF / BRAM18','时序与适用范围'],
           ['历史core-only AC1','287 / 260 / 0','历史OOC WNS +2.620ns；观测扩展前，不能当整机资源'],
           ['文件启动cpu_system','376 / 431 / 2','已存系统OOC WNS +1.363ns；含IM/DM和影子'],
           ['含VIO板级AC1','五程序LUT1082～1160；FF2822～2826；BRAM18均2','完整布线setup WNS +1.434～+2.101ns；不是实物时钟或时间测量']],[1.45,2.5,2.9],'N_RESOURCE_SCOPE','三种资源和时序统计边界')
+        self.paragraph('两项OOC均使用15个CARRY4。系统OOC的TNS为0.000ns、失败端点为0；完整板级的setup和hold分别按下表布线报告读取。')
         self.reuse('固定程序与性能基线',level=3)
     def experiments(self):
         self.new('EXPERIMENTS');self.reuse('前递MUX组合候选',level=3);self.reuse('WB到MEM存储数据候选',level=3)
     def reproduce(self):
         self.new('REPRODUCE');self.alias('4.9','DESIGN_FLOW');self.alias('4.10','REPRODUCE');self.alias('4.12.6','REPRODUCE')
-        self.reuse('实现验收条件',body_only=True,filter_prefixes=('观测扩展前AC1','历史AC1','课程EES-331'))
     def worked_examples(self):
-        self.heading('五个实例贯通数据 CW与当拍动作',2,'CLOCKED_EXAMPLES');self.alias('3.1','CLOCKED_EXAMPLES')
-        self.reuse('周期编号与PC更新',body_only=True)
-        self.paragraph('以下表格使用当前默认源码新生成的独立48例CSV。阶段列以有效标签和pc读取；IF列为实际im_en请求地址。写入值由TB逐边沿与独立ISA预期比较，控制意图解释据ISA和RTL，不冒充未记录的CW总线波形。列头表示结束边沿之前所在阶段，最后一列说明该边沿动作。')
+        self.heading('跨级协同的逐拍实例',2,'CLOCKED_EXAMPLES');self.alias('3.1','CLOCKED_EXAMPLES')
+        self.paragraph('以下五例依次展示前递、加载等待、比较分支、HALT排空和故障年龄仲裁。阶段列表示周期结束边沿前的有效指令，IF列为实际取指请求；最后一列给出该边沿动作。初值统一由测试台在首条取指前建立，记录来源见附录。')
         comments={
           'DOC_ADD_ADD':'C4第一条ADD在M、第二条ADD在X，最近M非load结果可直接前递；不等待RF在C5写入，也不增加停顿。最终R0=0003、R2=0007。',
-          'DOC_LOAD_STR':'C3仅保持IF/ID并给下一拍X插bubble，LDR继续进M；C5的STR从W取得load数据，C6写DM，C7仍保留STR的WB标签。默认AC1共8拍；候选的7拍属于独立新契约。',
+          'DOC_LOAD_STR':'C3保持IF/ID并给下一拍EX插入bubble，LDR继续进入MEM；C5的STR从W取得load数据，C6写DM，C7消费STR的有效WB标签，随后HALT于C8完成。因此相邻加载依赖只增加一拍等待。',
           'DOC_CMP_JZ':'JZ在X使用M中最近CMP的候选Z=1，无需等待架构Z写回。pc2的STR被取消，不得写DM；CMP仍在WB更新Z。目标pc3的HALT按完整路径停止。',
           'DOC_STR_HALT':'C4老STR写DM且年轻HALT在X接受停止，老指令不能被HALT取消；STR在C5继续有效WB但不再写DM，HALT在C6的WB结束边沿使核心停止。',
           'MEM_FAULT_OVER_BRANCH':'C6的M级LDR完整EA=0100，访问被禁止，年轻X级JUMP不获重定向；更老W级ADD仍写R0与C/V。故障标签继续W，在C7消费后FAULTED。故障不会回滚已经完成的更老写入。'}
         for example in self.examples['examples']:
             self.heading(example['title'],3,example['id'])
-            self.paragraph('初始RF：'+', '.join(f'R{i}={v:04X}'for i,v in enumerate(example['initial_rf']))+'；初始Z/C/V='+''.join(map(str,example['initial_flags']))+'。这是TB列明的用例初值，不是新增ISA指令。')
+            self.paragraph('初始RF：'+', '.join(f'R{i}={v:04X}'for i,v in enumerate(example['initial_rf']))+'；初始Z/C/V='+''.join(map(str,example['initial_flags']))+'。')
             if example['case']=='DOC_LOAD_STR':self.paragraph('DM[0020]=0007；STR的独立基址为R1=0021。')
             for text in example['instructions']:self.paragraph(text,'Code')
-            self.table([['周期','IF','ID','EX','MEM','WB','结束边沿与动作']]+example['rows'],[.45,.5,.72,.72,.72,.72,2.95],'N_'+example['id'],example['case']+'实际逐拍过程')
+            self.table([['周期','IF','ID','EX','MEM','WB','结束边沿与动作']]+example['rows'],[.45,.5,.72,.72,.72,.72,2.95],'N_'+example['id'],example['title']+'逐拍过程')
             self.paragraph(comments[example['case']])
     def finish(self):
         for field,key in self.references:
@@ -254,18 +310,23 @@ class Compiler:
     def build(self):
         self.cover()
         introductions={
-          'CH1':'先定义可观察的指令行为、接口和设计依赖。数据通路、译码、控制和TB都必须实现同一版本的ISA，不能混用早期Pre4映射。',
-          'CH2':'本章说明值从哪里来、何时就绪、存在哪里。控制职责用于说明连接，详细动作和仲裁在第三章展开。',
-          'CH3':'本章从控制模型与所有权，进入ID意图及CW传播，再说明前递、保持、取消和停止。全局模式只管理运行资格，不能把五状态当成五级执行序列。',
-          'CH4':'以完整系统层次组织实现、功能及性能证据。历史仿真、布局布线、本次有限实板验收与未完成的直接测量分别说明。'}
+          'CH1':'先从程序员视角规定资源、编码和状态变化，再说明核心接口及同步存储的边沿契约。后续数据通路、控制与验证均以本章为依据。',
+          'CH2':'本章沿数据的产生、保存和消费展开：先看五级拓扑与部件，再建立流水边界和状态更新规则，最后用典型指令追踪完整路径。',
+          'CH3':'先说明单条指令如何携带操作意图，再处理多条在途指令的数据依赖，随后说明跳转、故障和停止如何按年龄协调，并以逐拍实例贯通这些机制。',
+          'CH4':'从RTL连接进入片上系统和板级实现，再按单元、流水、系统与实板组织功能证据，最后说明性能基线与两个候选的工程取舍。'}
+        def emit(section):
+            kind=section['kind'];key=section['id']
+            if kind=='reuse':self.reuse(section['heading'],level=section.get('level',2),title=section.get('title'),key=key)
+            elif kind=='new':self.new(key)
+            elif kind=='examples':self.worked_examples()
+            else:getattr(self,kind)()
         for n,chapter in enumerate(self.plan['chapters'],1):
             self.heading(chapter['title'],1,chapter['id'],old=str(n),page=True);self.paragraph(introductions[chapter['id']])
-            for section in chapter['sections']:
-                kind=section['kind'];key=section['id']
-                if kind=='reuse':self.reuse(section['heading'],level=section.get('level',2),title=section.get('title'),key=key)
-                elif kind=='new':self.new(key)
-                elif kind=='examples':self.worked_examples()
-                else:getattr(self,kind)()
+            for section in chapter['sections']:emit(section)
+        self.appendix=True;self.counters=[0]*4
+        for appendix in self.plan.get('appendices',[]):
+            self.heading(appendix['title'],1,appendix['id'],page=True)
+            for section in appendix['sections']:emit(section)
         return self.finish()
 
 def main():

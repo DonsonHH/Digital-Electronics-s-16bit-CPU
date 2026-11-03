@@ -1,12 +1,12 @@
 {
   "schema": 1,
-  "revision": "AC1-architecture-r4",
+  "revision": "AC1-architecture-r5",
   "baseline_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf",
   "baseline_document": "CPU核心设计/16位流水线CPU核心设计文档_AC1候选版.docx",
   "default_implementation": "AC1",
   "CPU": "v1.6",
   "ISA": "v1.5",
-  "scope": "Architecture and finite EES-331 physical validation record. Default CPU RTL, ISA, pipeline cycles and isolated overlays remain unchanged. Document authoring reads archived board evidence without device access.",
+  "scope": "Editorial architecture edition. ISA v1.5, default AC1, all RTL, synchronous memory timing and recorded verification remain unchanged.",
   "decisions": [
     "Adopt the three control layers: global mode, cross-stage arbitration, and stage-local responsibilities.",
     "Keep datapath_core as its historical RTL name; describe it as the complete execution core containing both datapath and hardwired pipeline control.",
@@ -170,7 +170,7 @@
     {
       "id": "EX_LOAD_USE",
       "case": "DOC_LOAD_STR",
-      "title": "默认AC1的load use保持与bubble"
+      "title": "加载到存储的一拍互锁"
     },
     {
       "id": "EX_CMP_JZ",
@@ -180,7 +180,7 @@
     {
       "id": "EX_STORE_HALT",
       "case": "DOC_STR_HALT",
-      "title": "STR在MEM写入并在HALT前完成WB标签"
+      "title": "较老存储完成与HALT排空"
     },
     {
       "id": "EX_MEM_FAULT",
@@ -194,41 +194,34 @@
       "title": "设计目标与指令契约",
       "sections": [
         {
-          "id": "GOALS",
+          "id": "ARCH_SPEC",
           "kind": "reuse",
           "heading": "架构规格",
-          "title": "设计目标与实现边界"
+          "title": "架构规格与程序员可见状态"
         },
         {
-          "id": "FORMAT",
+          "id": "INSTRUCTION_FORMAT",
           "kind": "reuse",
-          "heading": "指令长度与字段划分"
+          "heading": "指令长度与字段划分",
+          "title": "指令格式与立即数扩展"
         },
         {
           "id": "ISA",
           "kind": "reuse",
-          "heading": "指令编码与完整语义"
-        },
-        {
-          "id": "IMMEDIATE",
-          "kind": "reuse",
-          "heading": "立即数与地址规则"
+          "heading": "指令编码与完整语义",
+          "title": "指令编码与架构语义"
         },
         {
           "id": "ENCODING",
           "kind": "reuse",
-          "heading": "编码示例"
+          "heading": "编码示例",
+          "title": "机器码编码示例"
         },
         {
           "id": "CORE_IF",
           "kind": "reuse",
           "heading": "外部接口",
-          "title": "核心执行接口"
-        },
-        {
-          "id": "MEMORY_EDGE",
-          "kind": "reuse",
-          "heading": "同步存储边沿契约"
+          "title": "核心接口与同步存储契约"
         },
         {
           "id": "DESIGN_FLOW",
@@ -248,22 +241,17 @@
           "id": "COMPONENTS",
           "kind": "reuse",
           "heading": "主要模块与接口",
-          "title": "关键部件如何组成执行核心"
-        },
-        {
-          "id": "SINGLE_STATE",
-          "kind": "new"
+          "title": "核心状态部件与组合运算单元"
         },
         {
           "id": "PAYLOAD",
           "kind": "reuse",
           "heading": "流水寄存器字段",
-          "title": "四个流水边界的分类载荷"
+          "title": "四个流水边界与随行载荷"
         },
         {
           "id": "STAGE_CONTRACT",
-          "kind": "reuse",
-          "heading": "统一五级执行契约"
+          "kind": "stage_contract"
         },
         {
           "id": "INSTRUCTION_DP",
@@ -279,56 +267,25 @@
       "sections": [
         {
           "id": "CONTROL_LAYERS",
-          "kind": "reuse",
-          "heading": "控制单元组成与接口",
-          "title": "控制模型与职责所有权"
-        },
-        {
-          "id": "CW_CLASSIFICATION",
-          "kind": "new"
-        },
-        {
-          "id": "DECODE",
-          "kind": "reuse",
-          "heading": "译码控制表",
-          "level": 3,
-          "title": "ID译码与指令操作意图"
-        },
-        {
-          "id": "INTENT_ACTION",
-          "kind": "new"
+          "kind": "control"
         },
         {
           "id": "INTERLOCK",
           "kind": "reuse",
           "heading": "Buffer与冒险处理体系",
-          "title": "前递与流水协调的组成"
-        },
-        {
-          "id": "LOAD_USE",
-          "kind": "reuse",
-          "heading": "数据相关与load use停顿"
-        },
-        {
-          "id": "HAZARD_MATRIX",
-          "kind": "reuse",
-          "heading": "冒险分类与解决矩阵"
+          "title": "数据冒险与前递互锁"
         },
         {
           "id": "ARBITRATION",
           "kind": "reuse",
-          "heading": "写入资格与事件优先级"
-        },
-        {
-          "id": "STOPS",
-          "kind": "reuse",
-          "heading": "HALT 故障与复位"
+          "heading": "写入资格与事件优先级",
+          "title": "控制事件仲裁与副作用保护"
         },
         {
           "id": "MODE_FSM",
           "kind": "reuse",
           "heading": "CU状态图与状态转移",
-          "title": "全局运行模式FSM"
+          "title": "全局模式与排空停止"
         },
         {
           "id": "CLOCKED_EXAMPLES",
@@ -341,23 +298,16 @@
       "title": "系统集成与验证结果",
       "sections": [
         {
+          "id": "SOURCE",
+          "kind": "implementation"
+        },
+        {
           "id": "SYSTEM",
           "kind": "system"
         },
         {
           "id": "BOARD",
           "kind": "board"
-        },
-        {
-          "id": "SOURCE",
-          "kind": "reuse",
-          "heading": "源码边界与连接约定"
-        },
-        {
-          "id": "CONNECTIONS",
-          "kind": "reuse",
-          "heading": "目标数据通路的连接片段",
-          "title": "数据通路与控制的RTL连接"
         },
         {
           "id": "VERIFICATION",
@@ -370,15 +320,6 @@
         {
           "id": "EXPERIMENTS",
           "kind": "experiments"
-        },
-        {
-          "id": "REPRODUCE",
-          "kind": "reproduce"
-        },
-        {
-          "id": "REFERENCES",
-          "kind": "reuse",
-          "heading": "参考资料"
         }
       ]
     }
@@ -388,10 +329,55 @@
     "sha256": "e3bde1a27158f56d5abf2a545f95edac8fafa3b4c6867c7fca46fbf68f3966a9"
   },
   "release": {
-    "identity": "CPU v1.6 / ISA v1.5 / default AC1 / EES-331 verified / document r4 final",
+    "identity": "CPU v1.6 / ISA v1.5 / default AC1 / EES-331 verified / document r5 editorial",
     "default_branch": "main",
     "tag": "cpu-v1.6-ac1-ees331-verified",
     "frozen_hardware_baseline_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf",
     "scope": "Five normal-HALT programs and S1 restart after stop; VIO RF writeback shadow, architectural flags, stop/last-store state and counters. Experiments and independent timing remain separate."
-  }
+  },
+  "appendices": [
+    {
+      "id": "APP_A",
+      "title": "版本演进与证据索引",
+      "sections": [
+        {
+          "id": "ISA_HISTORY",
+          "kind": "reuse",
+          "heading": "版本与编码追溯"
+        },
+        {
+          "id": "EVIDENCE_HISTORY",
+          "kind": "reuse",
+          "heading": "证据来源索引"
+        }
+      ]
+    },
+    {
+      "id": "APP_B",
+      "title": "复现与维护",
+      "sections": [
+        {
+          "id": "REPRODUCE",
+          "kind": "reproduce"
+        },
+        {
+          "id": "ACCEPTANCE_SCOPE",
+          "kind": "reuse",
+          "heading": "验收边界与后续修改"
+        }
+      ]
+    },
+    {
+      "id": "APP_C",
+      "title": "参考资料",
+      "sections": [
+        {
+          "id": "REFERENCES",
+          "kind": "reuse",
+          "heading": "参考资料",
+          "title": "课程与工程参考"
+        }
+      ]
+    }
+  ]
 }

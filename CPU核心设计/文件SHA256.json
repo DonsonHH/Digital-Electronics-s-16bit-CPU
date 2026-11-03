@@ -1,19 +1,19 @@
 {
-  "scope": "Formal CPU v1.6 ISA v1.5 defaultAC1 EES331 verified baseline; documentr4final; frozen main/tag entry; historical execution evidence unchanged; futurehostprovenance offline-tested only",
+  "scope": "CPU v1.6 / ISA v1.5 default AC1 unchanged; core document r5 editorial edition on main; frozen r4 tag and historical raw execution evidence preserved.",
   "base_commit": "775350246d3806c9a09ac683edadf1a35e3e68bb",
   "excluded": [
     "文件SHA256.json",
     "ignored tools.local.json",
     "unconfirmed-target local attempt retained in recoverable external archive; not published"
   ],
-  "verified_at_utc": "2026-11-02T12:40:54.978986+00:00",
+  "verified_at_utc": "2026-11-03T05:28:43.586347+00:00",
   "historical_missing_entries_preserved": {
     "验证记录/AC1已验收负向原始证据.zip": "aace42d51e5b1b31670ca98014f15466a98e48ce910f6cc5cd5342c56afa5175"
   },
   "files": {
-    "16位流水线CPU核心设计文档_AC1候选版.docx": "e3819844c2b7a600e4d53ec1f673a7b09bb00a9b37a9d174b0e9ef8c3df2d6e6",
+    "16位流水线CPU核心设计文档_AC1候选版.docx": "37301d17a9f061c40d159a8d323bbf046bf393fea00fe5a00d889b307f6fb639",
     "CPU流水线冒险与Buffer_Interlock完整设计方案.docx": "b7575986b67393812042b6c7204cae025e636d5b77fe98a4256dd476ea2bf19e",
-    "README.md": "b69d199845ee78d41ef9abe55a695315a5b8f8c0f42419996f9705480c37c577",
+    "README.md": "f2c031795ab9df4866a7db03e36f59d36fee7bf658ca0123f2005bf9295aa0af",
     "Vivado/build_hazard_matrix.py": "da66cd06c7ad90e52ad8f1a00cc94965774b80b61abdc09ae6d81ca5a54dfc9a",
     "Vivado/constraints/core_ooc.xdc": "12009f946992f4d6cb89ed6e47e49d2cdf7c5619bc8e1fdb44fedae6c13ee7a0",
     "Vivado/create_project.ps1": "e71e1534c2762daa27a12b33756873597c186287e2e8a0791fda3e91aec73d19",
@@ -6058,8 +6058,8 @@
     "审查/验证工具_r1/负向/cpu_v16_unknowns_y8qspdzw/stopped_valid_z/xsim.jou": "5c5be75548df92db4349e2f5d473a8a28774bcb714ab3c2a24f1366702035fb3",
     "审查/验证工具_r1/负向/cpu_v16_unknowns_y8qspdzw/stopped_valid_z/xvlog.log": "dede81f1cd4714b78d359cc1cc8d7b8ae68e903fa9fc8bdee0e49104593a9e40",
     "审查/验证工具_r1/负向/cpu_v16_unknowns_y8qspdzw/stopped_valid_z/xvlog.pb": "5580593f4a40e0a0515266242a2ef3ec127e74f7f1913e69c737a6075d693428",
-    "文档源/README.md": "8685455bd1a933d44cd36546501b60fb51011617bf50c23c257fc2f47915c94c",
-    "文档源/architecture.json": "bec0305ae82166f306991f863e40a0611ff24d84cc5c563e08725e6d0e0bac17",
+    "文档源/README.md": "2be983c6a30fe0034be17c74d4360832ee26819217bcf5f9075775a11aa6d22e",
+    "文档源/architecture.json": "70336e2000d6dced1a82c76dae8f85f943dffd03f93ca407d5e73811bd06512e",
     "文档源/assets/F03.png": "020cf79e6d7b4f1be564117f2cd43d4829f7f9460113eb182924c2fd82883745",
     "文档源/assets/F04.png": "9466f2ac62ec4e222bf11058c968d5969023053d4c5f566ba4f6c6cafbb0e4c2",
     "文档源/assets/F05.png": "ee6ac52239b302e9a8e395cf0a52e7068ae8c010dd998f5ef9897d305c5d5a96",
@@ -6068,18 +6068,18 @@
     "文档源/assets/F08.png": "c4aeb387c4b4d857df7d2626fdc3075ca8cbd70ea22d0f285aededbc3e83d071",
     "文档源/assets/F09.png": "85240db4bd5ef49c0521c16824bb0adb0cae6f95e305ab15d3e110d2520f6551",
     "文档源/assets/F10.png": "e8ae1cd83848ca1aa564b11834c6168c764cde86a0229b3fa595a8b46518db59",
-    "文档源/build_core_document.py": "dd2193674fc571f9184459557efaea709e4a67aaa3c471278d9425908eaeeca4",
+    "文档源/build_core_document.py": "bb8bc34c92dcd3cbbfe2c90a853d678107080802b62eeaeb5521e461c0407310",
     "文档源/canonical_outputs.json": "9b802e6f1a41fce7baef22ea855db4d5773f7d1c49918adda161b9a61ce00bc9",
-    "文档源/content.json": "f2701f363cc23eb51bc2efd38bae8e4c4ffb4cbb294faeb1e30266b46c01e758",
+    "文档源/content.json": "cf32782d9b7dc243144b34c9427dc43b2829267348651ce6d84e13038a715425",
     "文档源/document_content.py": "0fd73f6cb16f239d3af0778fb3d6da7fa3b69553b6b741b301bc5b5cb7db017f",
     "文档源/document_guard.py": "c70ba41e0854462fb60f7e521ab450e9710f9c686e9e58ec4c61a9a8fe39fdae",
     "文档源/import_baseline.py": "e49e03e2885e3fa6627021d3983d5b2f071ff4f19845a744830e8b1f7c662bdd",
-    "文档源/sections.json": "c4828473242d0afba0f839fe50b984ada5f82924556cb268bdc71216c502de2f",
+    "文档源/sections.json": "89b8c019b968dbf3c54f77e57b3cc716f449ee2e42f057d1c4f6fb5e7702e3c9",
     "文档源/source_validation.py": "b6c175f853e899992c97e4e18465597faea34d18ff98fa464794e32c0bc947c1",
     "文档源/tests/test_board_evidence.py": "5804a1e3c9d6f07a0e98f4e42090c56d809821dc476e16057a96f403973cda60",
     "文档源/tests/test_legacy_guard.py": "755c3c4a7b8b93bc69b43ae62b0c0a8fcf7fbd669dfc6a248296b4f2029fdcbf",
     "文档源/tests/test_source_integrity.py": "de973dda290d255a15a9f7846a0f31e949c92bd778c6d1710ca5a780977545b6",
-    "文档源/validate_document.py": "26f8d077f3470086d3b0557a27004c57368bd66af089019a80da95c7ebdafd0c",
+    "文档源/validate_document.py": "c8ea56cb72e624bf0a48666e8335f3132ac854afcb6ac29592e16eaa87ff6fc3",
     "最近运行.json": "234f0551b4e6670e358c207ee5836dcd53a7150b2a1a05d50478e6f066e146c7",
     "板级/README.md": "29612015f66d395eaeb56593c46854823113361e093d8438455da6550b43a996",
     "板级/benchmark_programs.py": "8496cc70eba802af023bc4092dbfe57565945368f04319854cbb310e418adf63",
@@ -6203,7 +6203,7 @@
     "系统/tb/tb_memory_files.sv": "02a75434a92b02dec260c50092d61c54c94e9ba16a3921fa3864bf636e21ebc7",
     "系统/tests/test_system_package.py": "afc43351295e0a3c3458d5a961ca6700fe8b895c0b8e961e265cc4cf77677bb5",
     "系统/接口与停止现场契约.md": "26a3572dd553a188070590d6e0a42cac387e1ba6741c423ad785f844d41a929b",
-    "证据索引.json": "75fbe98afc5e14a7323edbfaaf25af5050dca571fbd254e76fe916e34cd51ec1",
+    "证据索引.json": "77e65e41086d21e7ad7b4bf4d8bafca11a8402a03564ac0ad62d4adb5693b159",
     "说明/Hazard_Matrix_2376.csv": "1db79bd06913cbc93f016c4e39d53cea3104d735b61a5e7c1d44f8aa20ca3d72",
     "说明/上轮文档Review_历史原件.md": "edc1ad7bf6afb8c2b3f57d321280bdd1b04a77a6e2626d03b7d4e0fdadc85d51",
     "说明/上轮文档差异_历史原件.md": "39dd93ff3e029bbbe10cf8518a0b01ee4154a9586f61235c6e0640e7833fc597",
@@ -52692,7 +52692,8 @@
     "验证记录/工具生命周期_job1_20261014/original_historical_recheck.json": "d6f380d8db1c9398dfc61bdf087b2e751e93c850b19d64cf36770ec338a31b4f",
     "验证记录/工具生命周期_job1_20261014/result_summary.json": "5005274fc3623609a870171ad8cd754fc2d62bfb45b022a720d6d4a7632acb47",
     "验证记录/工具生命周期_job1_20261014/synthesis_recheck.json": "b7c5fcc8aa3498bfdb893dafed49df63df81b5447b3948849be1c67783658603",
-    "验证记录/工具生命周期_job1_20261014/unknown_controls_recheck.json": "ee61152db866ba2f3bf9026c946963cea7c9bb75b7e186a9b808d4798ff742e7"
+    "验证记录/工具生命周期_job1_20261014/unknown_controls_recheck.json": "ee61152db866ba2f3bf9026c946963cea7c9bb75b7e186a9b808d4798ff742e7",
+    "验证/document_editorial_r5_20261103/document-proof.json": "5bc5089bbd55f9e8a396c7430335bf110345ae507615d576d0270e82f3ed25b8"
   },
   "architecture_baseline_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf"
 }

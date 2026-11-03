@@ -2,9 +2,9 @@
 
 本仓库集中保存本项目目前留存的全部成果：正式规格、Pre1–Pre6汇报与讲稿、RTL、Testbench、Vivado工程与脚本、程序镜像、原始验证与综合记录、可编辑图形，以及早期交付和修订归档。用于后续检查与优化架构。
 
-正式规范为 **AC1架构版r4**，CPU v1.6、**ISA v1.5**，课程目标EES-331（xc7z020clg484-1）。默认生产RTL与两个实验候选保持提交0d888cc的原字节；本版补入默认AC1五程序和真实S1复位的实板结果。主机采集脚本的64位身份比较及两份快照检查已修复；此前目标未确认的尝试不计通过。
+正式规范为 **AC1架构版r5语言整理版**，CPU v1.6、**ISA v1.5**，课程目标EES-331（xc7z020clg484-1）。本版按指令契约、数据通路、流水控制和系统验证重新梳理论述；默认生产RTL、两个实验候选、流水时序及已有验收结果保持不变。
 
-正式入口为 `main`，冻结标签为 [cpu-v1.6-ac1-ees331-verified](https://github.com/DonsonHH/Digital-Electronics-s-16bit-CPU/tree/cpu-v1.6-ac1-ees331-verified)。版本身份为 **CPU v1.6 / ISA v1.5 / 默认AC1 / EES-331已验收 / 文档r4定稿**。Word沿用原文件名，正式版本由此入口和标签确定。
+当前文档入口为 `main`。冻结标签 [cpu-v1.6-ac1-ees331-verified](https://github.com/DonsonHH/Digital-Electronics-s-16bit-CPU/tree/cpu-v1.6-ac1-ees331-verified) 保留 **CPU v1.6 / ISA v1.5 / 默认AC1 / EES-331已验收 / 文档r4**。r5是该基线的文字与结构整理，Word沿用原文件名。
 
 实板验收范围为五个正常HALT程序及停止后的S1复位重启；VIO读取RF写回影子、架构标志、停止现场、最后store和计数。逐拍轨迹来自仿真CSV，板上采样为稳定终态和计数。
 

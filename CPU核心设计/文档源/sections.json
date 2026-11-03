@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "source_commit": "0d888cc65a8b650575317be7fa5d5d4040266abf",
-  "maintenance": "Section keys and caption IDs are stable anchors. Edit titles/paragraphs/rows here; chapter order is architecture.json. No paragraph offsets are used.",
+  "maintenance": "Editorial r5: stable section keys and caption anchors are preserved; historical material lives in appendices.",
   "sections": {
     "指令集": {
       "title": "指令集",
@@ -70,10 +70,6 @@
               "Z为等值比较结果；C为算术进位或无借位；V为有符号溢出"
             ],
             [
-              "执行组织",
-              "IF ID EX MEM WB；顺序单发射 单时钟域"
-            ],
-            [
               "地址单位",
               "一个地址对应一个16位字；顺序PC加1"
             ],
@@ -87,7 +83,7 @@
             ],
             [
               "复位",
-              "高有效同步复位；PC RF Z/C/V 流水valid 停止状态清0"
+              "高有效同步复位；PC、RF及Z/C/V清0；DM内容保留"
             ]
           ]
         },
@@ -97,7 +93,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "程序可观察的行为由寄存器、标志、控制流和DM内容决定。PC_fetch是前端将要取指的地址，不等于最后执行或完成指令的地址；每条流水指令携带自己的pc标签，分支与错误定位使用该标签。"
+              "text": "程序通过R0至R3、PC、Z/C/V和DM内容观察执行结果。四个通用寄存器均可读写；PC按字寻址，顺序执行时加1。Z保存最近一次CMP的等值结果，C/V保存最近一次ADD或SUB的算术状态。"
             }
           ]
         },
@@ -107,7 +103,17 @@
           "runs": [
             {
               "kind": "text",
-              "text": "DM不随核心复位逐字清空，初值由初始化镜像或程序确定。核心没有缓存、动态调度、ROB、中断返回或软件可恢复异常；停止保护仍须确保错误路径不写入状态。"
+              "text": "IM与DM各有256个16位字，合法字地址为0000至00FF。地址运算先保留低16位，再检查是否落在这个范围；例如0020加−1得到001F，FFFF加1回绕0000，而0100和FFFF作为最终访问地址均越界。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "同步复位使PC、RF和Z/C/V回到0，并重新开始执行。DM保留复位前已完成的写入；其启动初值由初始化镜像给出。故障采用停止保护，软件恢复执行需要复位。"
             }
           ]
         }
@@ -181,7 +187,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "寄存器形式的imm8、立即数形式中未使用的Rs，以及分支/HALT未使用的寄存器字段，在程序镜像中置0；硬件忽略未使用字段。编码工具须检查字段范围，负位移先编码为8位补码。bubble用valid=0表示，不能用MOV R0,#0代替，因为该指令会改写R0。"
+              "text": "程序镜像将未使用字段置0，硬件执行时忽略这些字段。寄存器形式的imm8、立即数形式中未使用的Rs，以及分支和HALT未使用的寄存器字段，都采用这一约定。编码工具检查字段范围，并将负位移编码为8位补码。"
             }
           ]
         },
@@ -191,7 +197,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "编码表中的x须按字段解释：imm8中的x表示由程序填写的有效数据位；未使用Rs或分支/HALT寄存器字段中的x表示该字段不影响执行。横线也表示未使用位。它们都不是要求写入HDL未知值X；程序生成器统一把未使用字段置0，硬件则接受这些字段的其他确定二进制取值。"
+              "text": "编码表中，imm8内的x表示由程序填写的数据位；未使用字段中的x或横线表示该字段不影响执行。镜像中仍写入确定的二进制值，未使用位按上述规则置0。"
             }
           ]
         },
@@ -261,7 +267,37 @@
           "runs": [
             {
               "kind": "text",
-              "text": "保留编码B/F无数据操作数，产生非法指令标记。该4+2+2+8格式采用当前小组ISA；课程资料中的5位Opcode扩展示例是另一种格式，不与本表拼接。"
+              "text": "保留编码B/F无数据操作数，执行时产生非法指令故障。立即数字段的解释取决于Opcode：MOV、ADD、SUB立即数和JUMP采用无符号u8；LDR、STR和JZ采用有符号s8。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Code",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "ZExt(imm8) = {8'h00, imm8}"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Code",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "SExt(imm8) = {{8{imm8[7]}}, imm8}"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "u8取值为0至255，s8取值为−128至127。以FF为例，零扩展得到00FF，符号扩展得到FFFF。JZ的相对位移以本条指令的pc+1为基准。"
             }
           ]
         }
@@ -390,7 +426,7 @@
             [
               "1110 E",
               "HALT",
-              "取消年轻指令；老指令完成后停止",
+              "先前指令完成后停止执行；后续指令不产生架构副作用",
               "保持"
             ],
             [
@@ -407,7 +443,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "ADD/SUB不更新Z，因此JZ始终使用最近一次有效CMP的结果。SUB立即数为无符号8位常数，与ADD立即数一致。ISA目前没有ADDC、SUBB、JC或JO；保存的C/V可供测试或调试观察，尚无软件读取指令。"
+              "text": "ADD/SUB只更新C/V，因此JZ判断最近一次CMP留下的Z。加法C表示无符号进位；减法C=1表示无借位。V表示16位补码运算超出−32768至32767。C/V目前通过调试接口观察，现行ISA没有读取它们的指令。"
             }
           ]
         },
@@ -417,74 +453,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "七组分类按控制副作用组织：Group 1为0至3，写RF但保持Z/C/V；Group 2为4至7，写RF与C/V但保持Z；Group 3为8/9，仅LDR写RF，STR写DM，二者均保持标志；Group 4为A，仅写Z；Group 5为C/D，控制PC而不写RF/DM/标志；Group 6为E，发出停止请求；Group 7为B/F，产生非法指令标记而不产生数据写入。分组用于解释控制，不替代逐条指令译码。各组写入信号是意图，仍须按valid、故障、取消与复位资格在规定流水级生效。"
-            }
-          ]
-        },
-        {
-          "kind": "caption",
-          "id": "T05",
-          "title": "当前ISA与Pre4已验证映射的对应关系"
-        },
-        {
-          "kind": "table",
-          "caption_id": "T05",
-          "widths": [
-            0.981,
-            1.331,
-            1.331,
-            3.362
-          ],
-          "rows": [
-            [
-              "指令",
-              "本版v1.5 Opcode",
-              "Pre4 v1.4 Opcode",
-              "迁移要求"
-            ],
-            [
-              "AND",
-              "2",
-              "8",
-              "两实际寄存器源，alu_op=3；只写RF"
-            ],
-            [
-              "OR",
-              "3",
-              "9",
-              "两实际寄存器源，alu_op=4；只写RF"
-            ],
-            [
-              "LDR",
-              "8",
-              "2",
-              "Rs加符号位移；MR/RW=1，wb_sel=1"
-            ],
-            [
-              "STR",
-              "9",
-              "3",
-              "独立基址与数据源；MW=1，RW=0"
-            ]
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "其余12个Opcode的含义不变，包括B/F保留编码。新旧机器字不能混用：v1.4的3300是STR，本版则是OR；v1.4的2B00是LDR，本版则是AND。迁移时重编译指令镜像，并检查译码、参考模型和逐拍观测属于同一版本。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "MOV及普通ALU指令在WB写RF；LDR在MEM读DM、在WB写RF；成功STR在MEM写DM一次，随后有效标签经过WB但不再写入；CMP在WB写Z。故障STR不写DM，仍保留有效故障标记到WB。JUMP/JZ在EX重定向；HALT在EX确认停止请求，在WB消费停止标记后完成停止。"
+              "text": "为了将架构副作用映射到译码控制，将Opcode分为七组：0至3写RF；4至7写RF和C/V；8/9分别完成加载与存储；A只更新Z；C/D改变控制流；E停止执行；B/F产生非法指令故障。各组均按[[T04]]规定保持其余状态。"
             }
           ]
         }
@@ -705,17 +674,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "机器字按字段计算并独立校核。确认的编码表右侧有八项示例与字段不符：MOV/AND/OR/ADD/SUB的R0,R1形式以及CMP R0,R1都须令Rs=01，分别为0100/2100/3100/4100/6100/A100；LDR R0,[R1+2]为8102，STR R0,[R1+2]为9102。这些修正不改变其Opcode或汇编语义。原表的8802/9802实际选择Rd=R2、Rs=R0，不能解释成R0与R1。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "JZ −2的DFFE不是功能错误：其未使用Rd/Rs均为11，按本规格仍忽略这些字段，offset=FE。程序生成器采用未使用字段为0的规范形式D0FE。最终PPT第5页STR R1,[R2+4]的3604属于旧映射，本版应为9604。保存的原PPT、源码和波形保留历史身份，后续程序镜像仅使用本版统一编码。"
+              "text": "机器字由Opcode、Rd、Rs和imm8分别移位后按位或得到。例如MOV R0,R1中Rs=01，因此机器字为0100；STR R1,[R2+4]为9604。负位移−2编码为FE，JZ的规范机器字为D0FE。"
             }
           ]
         }
@@ -800,7 +759,7 @@
         {
           "kind": "caption",
           "id": "F01",
-          "title": "整体控制与数据通路架构。随行控制先输入各级控制逻辑，再与运行模式、有效资格及跨级仲裁共同产生使能。浅蓝边界同时关联数据、标签与控制；IFCU至WBCU为现有职责划分，对应见[[T14]]。"
+          "title": "整体控制与数据通路架构。上层控制职责协调下层五级数据路径，浅蓝边界关联同一条指令的数据、标签与控制。"
         }
       ]
     },
@@ -831,7 +790,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "[[F01]]展示控制意图经各级逻辑形成合格使能的过程；[[F02]]按实际连线追踪数据。相邻ADD→ADD相关由M非load结果前递到EX，最终仍在WB写RF；LDR→STR相关保持前端一拍，再从W前递，STR由Rd提供写数据、Rs加立即数形成地址；CMP→JZ由最近合格比较候选提供Z，Z只参与分支条件，取分支才取消年轻槽，u_target独立计算目标。rd_fwd/rs_fwd的默认源是ID/EX保存值；WB数据与RF写地址/使能分别返回，RF内部完成同址读旁路。"
+              "text": "EX先从前递网络取得Rd和Rs的当前值，再由A/B选择器组成ALU输入。算术结果和访存地址共用exec_value；STR同时将Rd的数据单独保存为store_data，因此基址与写入数据可以独立选择。"
             }
           ]
         },
@@ -841,7 +800,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "ALU结果与有效地址共用exec_value，因为一条指令不会同时需要二者；STR独立保存已前递Rd为store_data，Rs用于基址。IM寄存输出就是D级指令数据，DM寄存输出就是W级加载数据；不再串接IR/MDR。load_use只保持PC/ID并向EX插入bubble，后端继续。分支在EX重定向但自身继续到WB；STR在MEM仅写一次，WB有效而不写入。HALT/fault标记排空至WB，Reset取消在途载荷并禁止当拍写入。"
+              "text": "WB选择exec_value或同步DM返回值写入RF。比较结果沿CMP的标签传递，供后续JZ选择最新Z；分支目标则由本条指令的pc和立即数独立计算。前递优先级与推进控制见[[S:INTERLOCK]]。"
             }
           ]
         }
@@ -858,7 +817,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "方向以CPU核心为参考。clk/rst是控制输入；各存储接口在同一时钟域工作，不含ready或可变等待协议。"
+              "text": "接口方向以CPU核心为参考。clk提供统一上升沿，rst为高有效同步复位。IM和DM均在该时钟域内工作，读延迟固定为一拍。正常取指和访存按下述边沿契约交换地址、数据和标签。"
             }
           ]
         },
@@ -963,25 +922,18 @@
           "runs": [
             {
               "kind": "text",
-              "text": "[[T07]]列出原12项执行接口，合计87位；本版追加的只读观测接口另见[[S:2.10]]及系统集成表，不计入此87位。逻辑端口不等于FPGA外部引脚；cpu_system把执行接口接至片上IM/DM，无需无协议转换职责的Adapter。"
+              "text": "[[T07]]列出12项执行接口，合计87位。cpu_system将这些端口直接接到片上同步IM/DM；观测端口见[[S:SYSTEM]]。核心逻辑端口与板级引脚分属两个边界，板级连接见[[S:BOARD]]。"
             }
           ]
         },
         {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "正常取指接受条件为未复位、处于RUN、没有load use保持且没有本拍更高优先级的取消事件。im_en还须满足im_addr在物理范围内。取址越界时禁止实际IM访问，同时把该pc与fetch_fault=1送入有效IF/ID槽；译码器仍可组合译码所保持的IM输出，但故障资格阻止其作为有效指令执行。该错误可被更老分支取消，否则传到EX确认停止。"
-            }
-          ]
+          "section": "同步存储边沿契约"
         }
       ]
     },
     "同步存储边沿契约": {
       "title": "同步存储边沿契约",
-      "level": 2,
+      "level": 3,
       "old_number": "2.3",
       "children": [
         {
@@ -1031,7 +983,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "IM在en=0时保持已返回指令，使load use停顿中的ID载荷稳定。同步存储的输出寄存器可以承担相应逻辑流水边界；同一边界不要无意再串接同沿IR/MDR而增加一拍。实际IP的读延迟、输出寄存器、en保持行为和写模式须与该契约对应。"
+              "text": "同步IM/DM将读地址在上升沿采样，返回数据与同一条指令的标签进入下一阶段。返回端保持及流水边界的具体对应关系见[[S:PAYLOAD]]；访问资格和越界处理见[[S:ARBITRATION]]。"
             }
           ]
         },
@@ -1141,9 +1093,12 @@
           "runs": [
             {
               "kind": "text",
-              "text": "当前AC1包含原carry/overflow接口、flags_reg及流水控制，复用ISA v1.5译码、镜像和TB。加减核心的物理映射与冻结CLA不同，但算术、标志和流水契约不变。表中的hazard_control和pipe_regs是datapath_core.sv内的逻辑职责，未新增同名模块；实体仍按原命名端口及位宽连接。"
+              "text": "[[T09]]按逻辑职责列出数据通路部件。各部件先规定输入、输出和状态更新规则，再由级间载荷将它们连接；实际RTL文件及内部逻辑的对应关系统一列在[[S:SOURCE]]。"
             }
           ]
+        },
+        {
+          "section": "PC与目标计算"
         },
         {
           "section": "寄存器组与立即数扩展"
@@ -1170,7 +1125,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "RF写端在上升沿更新；rst清空四个寄存器，否则we选择唯一写地址，其他寄存器保持。两读端为组合读，读地址分别接Rd和Rs；we有效且未复位时，同地址读端旁路当前WB的wdata，保证ID捕获本拍写回值。该旁路不依赖仿真进程先后，也不采用R0常量零特例。"
+              "text": "RF有两个组合读端和一个同步写端，ID通过Rd、Rs同时取得两路源值，WB在上升沿更新选定寄存器。如果本拍WB与ID访问同一地址，读旁路直接返回当前写回数据，保证ID在该边沿捕获最新值；同步复位则将四个寄存器清0。R0与其他寄存器使用相同规则。"
             }
           ]
         },
@@ -1180,7 +1135,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "use_rd/use_rs只描述实际源读取。MOV立即数不读旧Rd，LDR只读Rs，STR同时读Rd数据和Rs基址。ID仍可让两个读口输出值，但未使用源不能触发相关停顿。"
+              "text": "use_rd/use_rs标明一条指令实际需要哪些源值：MOV立即数只写Rd，LDR只读Rs，STR同时读Rd数据与Rs基址。这些掩码供第三章的相关检测使用。"
             }
           ]
         },
@@ -1190,7 +1145,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "扩展器无状态。sign_mode=0时高8位为0，sign_mode=1时复制imm8[7]。扩展结果与本条译码控制一起进入ID/EX，之后不使用当前ID指令的模式控制较老EX载荷。"
+              "text": "立即数扩展器为组合逻辑，按本条指令的sign_mode形成16位值。ID将扩展结果与操作意图一起送入ID/EX，EX使用保存值，从而保持立即数与指令标签一致。"
             }
           ]
         }
@@ -1290,7 +1245,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "ALU内部op不是CPU Opcode。0=PASS_B，1=ADD，2=SUB，3=AND，4=OR；5至7返回result=0、illegal=1、carry=0、overflow=0。eq始终等于a==b，独立于op；只有CMP的ZW允许其最终更新Z。"
+              "text": "ALU使用独立的3位内部op选择功能：0为PASS_B，1为ADD，2为SUB，3为AND，4为OR。eq始终比较a与b；CMP使用这条独立比较路径。保留op 5至7输出result=0、illegal=1、carry=0和overflow=0。CPU的4位Opcode通过译码映射到这些内部功能。"
             }
           ]
         },
@@ -1300,7 +1255,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "ADD/SUB仍共用addsub16_cla接口，sub=0执行加法，sub=1以a加b逐位取反再加1实现减法。AC1在无符号17位表达式中保留第16位进位，低16位为结果；saved C不作为输入，未新增算术周期。"
+              "text": "ADD与SUB共用17位组合加减表达式。sub=0计算a+b，sub=1计算a+(~b)+1；第16位保留carry，低16位保留result。该运算只使用本条a、b和sub，保存的C不参与输入。"
             }
           ]
         },
@@ -1340,7 +1295,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "AC1运算层级为datapath_core/u_alu → alu16/u_addsub → addsub16_cla内17位表达式；该路径不实例化cla16或cla4_pg。以下P/G与K公式仅说明冻结v1.6两层CLA及保留的独立CLA单元：cla16包含四个cla4_pg及组间超前网络，p=a XOR b、g=a AND b、c0=cin。"
+              "text": "当前AC1将上述表达式交给综合器映射到FPGA专用进位链。加减接口沿用addsub16_cla名称；其具体例化关系和映射边界见[[S:SOURCE]]。下面保留课程两级CLA的原理与独立单元定义，用于对应早期人工设计和单元验证。"
             }
           ]
         },
@@ -1350,7 +1305,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "历史CLA说明采用XOR传播；课件也用p=a OR b，配合g=a AND b可得到等价进位函数，但不能将OR传播量代入sum=p XOR c。以下CLA4公式保留供独立单元核对，不是AC1的综合算术实现。"
+              "text": "课程基础理论与独立验证单元采用四个CLA4组成CLA16。令p=a XOR b、g=a AND b、c0=cin；组内先并行形成传播P和生成G，再由组间超前网络计算四组入口进位。以下sum公式使用XOR传播量。"
             }
           ]
         },
@@ -1490,7 +1445,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "上列组P/G不依赖cin、K1至K4采用组间超前，这是冻结v1.6及独立cla16单元的结构要求。AC1加减路径由17位表达式推断CARRY4，旧模块名不能证明内部仍是CLA；速度与资源依据相同条件的实际OOC报告，不能只凭CARRY4数量判断。"
+              "text": "组P/G由a、b独立形成，K1至K4通过组间超前逻辑求得，这些关系定义了保留CLA单元的结构。课件中的OR传播量也能与g形成等价进位函数；求和公式sum=p XOR c则需要使用上述XOR传播量。最终AC1的资源和速度由第四章的实际实现报告评价。"
             }
           ]
         }
@@ -2030,7 +1985,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "CU采用硬连线控制，由当前指令和流水状态共同决定本拍动作。正常RUN中，五级可同时处理不同指令；ALU为组合逻辑，IM/DM读延迟固定。[[F03]]用次态逻辑F、控制状态Q和输出逻辑G描述现有实现。"
+              "text": "控制单元把一条指令的语义分解为可随流水推进的操作意图。ID生成这些意图，后续各级结合本条有效资格和当前事件产生选择信号与写使能。[[F03]]用次态逻辑F、控制状态Q和输出逻辑G说明这条控制链。"
             }
           ]
         },
@@ -2058,7 +2013,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "F根据当前状态与输入计算下一控制状态，Q在时钟上升沿锁存，G在当前周期产生控制输出。I包括d_inst、取指故障、ALU非法标记、保存的Z与M/W比较候选、PC_fetch、MEM有效地址和rst；这些是逻辑输入集合，不是新增外部端口。"
+              "text": "周期内，F根据当前Q与输入I计算下一状态，G计算本拍动作；结束上升沿再由Q锁存。输入I包括指令、运算和地址检查结果、当前Z及较新的比较候选、复位和各级反馈。"
             }
           ]
         },
@@ -2068,7 +2023,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "Q包含mode、各级valid/fault、X/M/W随行控制和寄存器标签；操作数、立即数、地址和结果数值由数据通路保存。G产生操作数及前递选择、PC/IM控制、DM访问资格、RF与标志写入资格，以及halted/fault。F和G可共享组合判定，逻辑划分不要求复制硬件。"
+              "text": "Q包含运行模式、各级有效和故障标签、随行控制及寄存器索引；数据载荷由相应流水边界保存。正常RUN中，五级并行处理不同指令，F和G共同协调各级推进。完整RTL职责映射见[[S:SOURCE]]。"
             }
           ]
         },
@@ -2177,7 +2132,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "d_/x_/m_/w_分别绑定ID/EX/MEM/WB。d_ctrl及CW_X/M/W是[[T12]]、[[T13]]、[[T15]]中既有控制字段的图示集合，不是新增总线或寄存器；上层控制带与下层数据共用四个流水边界。[[F01]]的FB为反馈组，UPD为valid_next/取消/保持组。操作数前递由operand_forward完成，WB→ID旁路位于regfile4x16，Z来源选择、load-use检测、年龄仲裁和mode更新均位于core内部。M寄存m_fault用于前递，新m_access_fault只进入访问保护、故障载荷及年龄取消，不接回前递数据MUX。"
+              "text": "d_/x_/m_/w_分别绑定ID/EX/MEM/WB。图中的CW_X/M/W汇总现有随行字段；IFCU至WBCU表示各级控制职责。完整实现位置集中见[[S:SOURCE]]。[[F01]]中的FB为反馈组，UPD为保持、取消及valid_next更新组。"
             }
           ]
         }
@@ -2194,7 +2149,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "周期内先译码与判断资格，在结束上升沿更新相应流水载荷及架构状态。D级译码只形成意图；RW/ZW/CVW在有效、无故障的W槽才获准写RF或标志，MR/MW在完整地址合法的M槽才获准访问DM。mode的RUN/DRAIN允许合格老指令继续，最终停止态关闭新访问与写入。具体使能表达式与年龄优先级见[[S:3.5]]。"
+              "text": "控制组合逻辑在周期内判断资格，流水寄存器在结束上升沿保存结果。RUN及两种DRAIN模式允许合格老指令推进；最终停止模式关闭新访问和写入。意图的传播见[[S:CW_CLASSIFICATION]]，事件覆盖规则见[[S:ARBITRATION]]。"
             }
           ]
         },
@@ -2204,7 +2159,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "PC由唯一的pc16状态寄存器保存。JUMP目标为ZExt(imm8)，JZ目标为low16(x_pc+1+SExt(imm8))，二者在EX由branch_target16生成；WB不再增加PC。完整CU的输出还依赖当前输入，不能由halted/fault的状态型输出推断整个CU都是纯Moore逻辑。"
+              "text": "PC按IF接受、EX重定向或前端保持更新，WB写入不再增加PC。halted/fault由全局mode决定；操作数选择和访存使能还依赖当前输入，因此整个CU由状态逻辑和组合判定共同实现。"
             }
           ]
         }
@@ -2221,7 +2176,17 @@
           "runs": [
             {
               "kind": "text",
-              "text": "数据、控制、pc和valid属于同一条指令。下面列的是逻辑字段；同步RAM输出承担相应数据边界，不增加IR/MDR。本版X/M/W各增加3位reason诊断字段，随同一有效标签推进；它不反馈控制，也不改变原指令行为。"
+              "text": "同步存储器在上升沿采样读地址，未接受新的读请求时保持返回数据。在本设计中，IM的寄存输出直接提供ID指令，DM的寄存输出直接提供WB加载数据；核心在同一边沿登记相应pc、目的寄存器和控制标签，使返回数据与标签对齐。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "因此，IF/ID和MEM/WB的数据部分已由存储器返回端承担；在外侧再串接同沿IR或MDR会多出一拍。Load-use保持期间，IM必须令en=0以保存当前ID指令，同时保持它的pc和valid。[[T15]]据此列出四个逻辑边界的完整载荷。"
             }
           ]
         },
@@ -2272,7 +2237,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "imm_signed在ID消费后无需继续保存；rs和实际源掩码保留至EX完成转发，之后删除。STR的store_data只保留到MEM；新增w_store类型与pc/valid保留至WB，RW/ZW/CVW均为0。HALT及已确认的故障必须保留有效停止标记到WB；没有RF/标志写入不等于该槽可以提前丢弃。无效数据载荷可不复位，valid与架构状态必须复位。kill可用清valid实现，不强制每级另设killed寄存器。"
+              "text": "字段在最后一次使用后即可结束传递：imm_signed在ID完成扩展后消耗，源索引和use掩码保留到EX，store_data保留到MEM。pc、valid、fault和3位reason继续标识在途指令，reason仅供诊断；w_store记录STR的完成类型。有效位决定载荷是否可被消费，取消通过清valid实现。复位必须清valid和架构状态，未使用的数据位可以保留原值。"
             }
           ]
         }
@@ -2289,7 +2254,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "IF统一取指并登记标签。所有接受且未取消的指令按ID EX MEM WB传递；无副作用的有效阶段与valid=0的bubble不同。停顿延长驻留时间，flush取消年轻载荷，reset取消全部在途载荷；五级组织不等于每条指令固定五拍。"
+              "text": "每条被接受且未取消的指令都按IF→ID→EX→MEM→WB推进。阶段内完成组合计算，结束上升沿登记下一阶段载荷或更新架构状态。一个阶段没有写入动作时，指令仍可有效传递；停顿会延长驻留时间，bubble则以valid=0占据空槽。"
             }
           ]
         },
@@ -2401,7 +2366,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "STR的副作用边沿保持MEM，WB只消费完成标签；同拍的另一个M指令可以合法访存，不能因为W是STR就全局禁止DM。复位不回滚已完成的DM写入，本设计无ROB或异常返回。"
+              "text": "RF和Z/C/V在WB结束边沿更新；DM的STR写入在MEM结束边沿发生。STR到WB时仅消费完成标签，该拍DM仍可服务另一条MEM指令。分支在EX改变后续取指路径，自身继续到WB。停止与故障的排空规则见[[S:MODE_FSM]]。"
             }
           ]
         }
@@ -2412,6 +2377,16 @@
       "level": 2,
       "old_number": "2.9",
       "children": [
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "多条在途指令共享架构寄存器，但结果在不同阶段就绪。已就绪结果通过前递或RF旁路供给消费者；尚未就绪的加载结果通过前端互锁等待一拍。[[F04]]与[[T17]]概括这套协作关系。"
+            }
+          ]
+        },
         {
           "kind": "paragraph",
           "style": "Normal",
@@ -2488,6 +2463,15 @@
               "停止token+valid_next；按年龄仲裁，rst最高"
             ]
           ]
+        },
+        {
+          "section": "前递与标志选择"
+        },
+        {
+          "section": "数据相关与load use停顿"
+        },
+        {
+          "section": "冒险分类与解决矩阵"
         }
       ]
     },
@@ -2795,7 +2779,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "以9900为例，STR R2,[R1+0]将R2数据写入R1指定的DM地址。基址与数据各自转发，不能只转发地址而留下旧store_data。load数据在MEM结束后就绪，因此紧邻消费者须按下文停1拍。"
+              "text": "以9900（STR R2,[R1+0]）为例，Rd提供R2的写入数据，Rs提供R1基址，两者分别前递。LDR的返回值到MEM结束后才就绪，因此相邻消费者需要第三章规定的一拍互锁。"
             }
           ]
         }
@@ -2891,7 +2875,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "JZ无需等待CMP写回，但只从有效、无故障、未取消且ZW=1的生产者取Z。M优先W再架构Z。若M是ADD而W是CMP，仍须取W的Z。候选0也必须覆盖旧1。条件不满足时不冲刷，继续顺序取指。"
+              "text": "相邻CMP与JZ通过候选Z连接，因此JZ可在CMP写回前判断条件。条件不成立时保持顺序取指；候选优先级和取消规则见[[S:INTERLOCK]]及[[S:ARBITRATION]]。"
             }
           ]
         },
@@ -2909,7 +2893,7 @@
     },
     "数据相关与load use停顿": {
       "title": "数据相关与load use停顿",
-      "level": 2,
+      "level": 3,
       "old_number": "3.3",
       "children": [
         {
@@ -2918,7 +2902,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "每个实际源优先取最近的M级RF生产者，再取W级写回值，最后取ID/EX保存值。只有M级非load结果已就绪；M级load的exec_value是地址，禁止把它当数据转发，也禁止越过未就绪的最近load使用更老同名值。"
+              "text": "LDR在EX只形成地址，DM数据在MEM结束边沿才返回。相邻消费者若立即进入EX，就拿不到该值。因此，即使M目的寄存器匹配，也不能转发其地址，或越过这个较新load去取W中的旧同名值；相关检测需提前在X级load与D级真实源之间完成。"
             }
           ]
         },
@@ -2948,7 +2932,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "条件满足且没有更高优先级事件时，PC和IF/ID保持，im_en=0，ID/EX插入bubble；当前EX的load继续推进，老MEM/WB照常完成。R0参加相关比较。"
+              "text": "当load_use成立且没有更高优先级事件时，PC和IF/ID保持，im_en=0，下一拍EX插入bubble。load与更老的MEM/WB继续推进，消费者延后一拍进入EX，届时从W取得返回数据。"
             }
           ]
         },
@@ -3023,7 +3007,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "LDR到CMP、STR基址或STR数据的紧邻相关同样停1拍。LDR后紧邻MOV同目的立即数不读取旧目的，无相关停顿。WB到ID同址旁路同时保留，处理ID采样与WB写回在同拍的情形。"
+              "text": "相邻LDR→CMP、LDR→STR基址和LDR→STR数据均按此规则停一拍。MOV立即数只写目的而不读取旧值，目的同名不会造成停顿。实际停顿事件的资格与较老故障仲裁见[[S:ARBITRATION]]。"
             }
           ]
         }
@@ -3031,7 +3015,7 @@
     },
     "冒险分类与解决矩阵": {
       "title": "冒险分类与解决矩阵",
-      "level": 2,
+      "level": 3,
       "old_number": "3.4",
       "children": [
         {
@@ -3040,7 +3024,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "下表完整列出当前ISA的实际冲突类别，精确展开的2,376个RAW实例位于CPU核心设计/说明/Hazard_Matrix_2376.csv。每例包含生产者/消费者、源角色、寄存器、g间距、检测级、就绪级、选择机制、停顿数、周期模板、预期及实际结果。g表示中间独立指令数。"
+              "text": "[[T22]]按真实源角色归纳冲突。g表示生产者与消费者之间的独立指令数；正常推进下，非load生产者在g=0时走M前递，g=1走W前递，g=2通过WB到ID旁路保存。遇到额外停顿时，选择以当拍实际所在级和就绪状态为准。完整用例索引见附录。"
             }
           ]
         },
@@ -3059,89 +3043,89 @@
           ],
           "rows": [
             [
-              "类别",
+              "指令关系或事件",
               "解决机制",
-              "停顿或验证实例"
+              "额外停顿或处理"
             ],
             [
-              "ALU/MOV到ALU、MOV寄存器或CMP",
-              "M非load优先；中隔1条用W，中隔2条WB到ID",
-              "0；RAW_P0至7_C0/2/3/4/5/6/7/a_R*_S*_G*"
+              "ALU/MOV→ALU、MOV寄存器、CMP",
+              "真实Rd/Rs各自选择最近的已就绪结果",
+              "0拍；相邻M前递，隔一条W前递"
             ],
             [
-              "ALU/MOV到LDR/STR基址",
-              "Rs前递后接ALU a，符号位移接b",
-              "0；RAW_P0至7_C8/9_R*_S1_G*"
+              "ALU/MOV→LDR/STR基址",
+              "前递Rs后与符号位移求和",
+              "0拍"
             ],
             [
-              "ALU/MOV到STR数据",
-              "Rd前递独立保存store_data",
-              "0；RAW_P0至7_C9_R*_S0_G*"
+              "ALU/MOV→STR数据",
+              "前递Rd并单独保存store_data",
+              "0拍"
             ],
             [
-              "LDR到MOV reg/ALU/CMP",
-              "相邻load-use；用W load数据，禁止M地址",
-              "相邻1，其余0；RAW_P8_C0/2/3/4/5/6/7/a"
+              "LDR→MOV寄存器、ALU、CMP",
+              "D检测真实源，等待load返回后从W前递",
+              "相邻1拍，其余正常距离0拍"
             ],
             [
-              "LDR到LDR/STR基址",
-              "同一load-use规则应用真实Rs",
-              "相邻1，其余0；RAW_P8_C8/9_S1"
+              "LDR→LDR/STR基址",
+              "相同互锁应用于Rs",
+              "相邻1拍"
             ],
             [
-              "LDR到STR数据",
-              "真实Rd参与检测，W前递到store_data",
-              "相邻1，其余0；RAW_P8_C9_S0"
+              "LDR→STR数据",
+              "相同互锁应用于Rd",
+              "相邻1拍"
             ],
             [
-              "Rd与Rs相同",
-              "两路独立选择同一最新值；R0亦同",
-              "0或1；RAW_*_S2覆盖648例"
-            ],
-            [
-              "多生产者同名",
-              "M匹配先于W；M load未就绪阻止穿越旧W",
-              "NEWEST与NEW_LOAD_AFTER_TWO_WRITERS"
+              "Rd=Rs、R0或多个生产者同名",
+              "两路独立判断，最近生产者优先；未就绪M load阻断旧W",
+              "按生产者就绪决定0或1拍"
             ],
             [
               "WB与ID同址",
-              "RF内显式旁路，ID捕获本拍wb_data",
-              "0；全部G2例"
+              "RF内部显式旁路",
+              "0拍"
             ],
             [
-              "假相关",
-              "只比较use掩码允许的源",
-              "0；FALSE_MOV 64例、FALSE_LDR_DEST 4例"
+              "只写不读的假相关",
+              "只比较use_rd/use_rs允许的源",
+              "0拍"
             ],
             [
-              "CMP到JZ",
-              "M ZW优先W再saved；0覆盖旧1",
-              "0数据停顿；FLAG 84例与原连续CMP"
+              "CMP→JZ及连续CMP",
+              "M候选Z>W候选Z>架构Z；新0覆盖旧1",
+              "0数据停顿"
             ],
             [
-              "taken / not-taken",
-              "taken清D和IF，自身M/W有效；not-taken继续",
-              "taken 2槽；FLUSH_CLASS_0至f"
+              "JUMP或JZ成立",
+              "EX重定向并取消ID/IF年轻槽",
+              "2个取指槽开销；不成立继续"
             ],
             [
-              "MEM fault与EX事件",
-              "老MEM故障优先于redirect/HALT/load-use",
-              "T16、MEM_FAULT_OVER_REDIRECT、MEM_FAULT_WITH_LOAD_USE"
+              "MEM故障与年轻EX事件",
+              "按年龄取消年轻动作并保留老WB",
+              "事件仲裁，见[[S:ARBITRATION]]"
             ],
             [
-              "HALT / EX fault",
-              "老M/W推进，年轻取消，WB消费停止token",
-              "T07、STR_THEN_HALT、LEGAL_STR_BEFORE_EX_FAULT"
+              "HALT或EX故障",
+              "老M/W继续，停止标记排空",
+              "停止完成条件见[[S:MODE_FSM]]"
             ],
             [
-              "同步存储/结构",
-              "Harvard分离；DM每拍一个M请求；RF 2读1写",
-              "0结构停顿；MEM_BACK_TO_BACK、TRACE_LOAD_STR"
+              "STR→同地址LDR、连续访存",
+              "按MEM顺序访问，后读见前写的新值",
+              "0结构停顿"
             ],
             [
-              "WAW / WAR / C/V读取",
-              "固定WB顺序、老EX消费先于年轻WB；无C/V读指令",
-              "架构排除，无额外scoreboard"
+              "IF/MEM并发、RF读写",
+              "IM/DM分离；RF两个读端、一个写端",
+              "资源容量满足单发射"
+            ],
+            [
+              "WAW、WAR",
+              "固定顺序WB；老指令EX取源早于年轻WB",
+              "当前结构排除，无需额外scoreboard"
             ]
           ]
         },
@@ -3151,7 +3135,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "以下间距速查限于正常推进且无额外停顿或取消改变时间关系：0至7生产者在EX末就绪，g=0用M、g=1用W、g=2经WB→ID保存值；LDR在MEM末就绪，g=0停1拍后用W，g=1/2不增加停顿。实际按消费者到EX时最近合格生产者所在级、就绪与valid选值；C/V无读取RAW，WAW/WAR仍由顺序阶段排除。"
+              "text": "顺序单发射与固定阶段保证写回顺序。WAW不会重排两次写入，WAR不会让年轻写入抢在老指令取源之前；当前机制主要解决RAW和控制流变化。"
             }
           ]
         },
@@ -3161,7 +3145,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "合法branch_req与load_use不会同拍成立：它们都要求同一X载荷，但C/D和8的译码互斥；这一点由译码合约和运行断言检查。真正的交叉事件是老MEM fault与年轻X load导致的load_use、branch或HALT；老故障优先。原始load_use计数可为1，但故障同拍取消年轻X，不能把它描述成正常完成的一拍等待。"
+              "text": "同一X载荷不可能同时是分支和LDR，因此合法branch_req与load_use不会同时成立。需要仲裁的是较老MEM故障与年轻EX分支、HALT或load-use；此时老故障优先，原始相关条件即使为1，也不计为已执行的正常等待。"
             }
           ]
         }
@@ -3178,7 +3162,106 @@
           "runs": [
             {
               "kind": "text",
-              "text": "以下表达式对应当前RTL。w_fault是WB载荷自身故障，m_fault是MEM载荷自身故障；取消通过清valid实现，不另设killed寄存器。mode_active允许RUN和两种DRAIN状态的老流水继续完成，不允许最终停止状态产生写入。"
+              "text": "跳转、停止、故障和停顿都可能要求改变流水线推进。仲裁首先比较指令年龄：较老指令的事件先确定年轻指令是否仍有执行资格；同步复位则覆盖全部在途状态。[[T23]]列出统一顺序。"
+            }
+          ]
+        },
+        {
+          "kind": "caption",
+          "id": "T23",
+          "title": "流水事件的年龄与优先级"
+        },
+        {
+          "kind": "table",
+          "caption_id": "T23",
+          "widths": [
+            0.631,
+            1.401,
+            3.012,
+            1.961
+          ],
+          "rows": [
+            [
+              "优先级",
+              "事件",
+              "前端与年轻指令",
+              "较老级"
+            ],
+            [
+              "1",
+              "同步复位",
+              "PC/valid/停止状态清0",
+              "RF和Z/C/V清0 复位边沿禁止DM写"
+            ],
+            [
+              "2",
+              "MEM自身故障",
+              "停取指 取消当前EX及更年轻动作",
+              "故障MEM不访问 老WB仍完成"
+            ],
+            [
+              "3",
+              "EX故障或HALT",
+              "停取指 取消两个年轻槽",
+              "老MEM/WB继续 完成后停止"
+            ],
+            [
+              "4",
+              "EX合格重定向",
+              "PC取目标 清年轻槽并取消错误路径IF",
+              "老MEM/WB完成"
+            ],
+            [
+              "5",
+              "load use",
+              "PC/IF/ID保持 ID/EX插bubble",
+              "load及老MEM/WB推进"
+            ],
+            [
+              "6",
+              "正常推进",
+              "逐拍接收载荷",
+              "逐拍完成"
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "分支在EX确认后改变PC并清除年轻ID/IF标签，较老M/W照常完成。保留Opcode或取指越界先作为标签进入流水线，只有仍有效并到达EX时才确认故障，因此它们可以被更老分支取消。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "取指地址越界时关闭物理im_en，同时登记该pc与fetch_fault。DM在截取8位物理地址前检查完整16位EA，只有有效访存才执行范围检查；普通ALU结果超过00FF不产生访存故障。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "MEM确认故障后，禁止故障自身访问并取消年轻EX及前端；更老WB仍可完成。EX故障或HALT只取消年轻槽，老MEM的合法STR仍可写入。故障和HALT如何保留停止标签并结束排空，见[[S:MODE_FSM]]。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "物理写入使能由随行意图与本级资格相与。mode_active覆盖RUN与两种DRAIN，保证排空期间老指令继续；无效、故障或已取消标签不能产生RF、DM、标志写入或新的控制事件。"
             }
           ]
         },
@@ -3268,7 +3351,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "停止前端不能屏蔽较老WB。wb_ok表示WB槽资格；STR的DM副作用发生于MEM，但指令完成统一在WB消费有效标签。当前版本在非复位的合格WB每拍至多数一条完成，包含STR、分支、CMP与HALT；故障token不计合法完成，不再把MEM store额外加到WB计数。"
+              "text": "WB的合法完成标签与实际RF写入分别判断：STR、分支、CMP和HALT都可以合法完成，而未必写RF。STR已在MEM写入DM，到WB仅计一次完成；故障token不计入合法完成数。"
             }
           ]
         },
@@ -3278,67 +3361,8 @@
           "runs": [
             {
               "kind": "text",
-              "text": "MEM错误仍只针对有效访存指令，自身故障或EA越界触发m_access_fault/m_fault_event；普通ALU值超出DM容量不报访存错。AC1把u_forward.m_fault从m_fault OR m_access_fault改接寄存m_fault：合法M非Load RF生产者不访问DM，M Load仍not-ready并阻断旧W。新MEM fault仍禁止DM、取消年轻X/D/IF并保留老WB，故不消费年轻组合结果；redirect优先级不变。"
+              "text": "AC1的MEM到EX前递控制只使用已寄存m_fault，地址越界组合判定m_access_fault独立用于DM保护和年龄取消。这使16位地址检查不再串入EX前递MUX与ALU的组合路径。该划分仍保证正确取数：可在M前递的非load RF生产者不访问DM；STR不写RF；LDR本就未就绪并阻断旧W。一旦新MEM故障成立，年轻EX结果被取消，老WB继续完成。"
             }
-          ]
-        },
-        {
-          "kind": "caption",
-          "id": "T23",
-          "title": "流水事件的年龄与优先级"
-        },
-        {
-          "kind": "table",
-          "caption_id": "T23",
-          "widths": [
-            0.631,
-            1.401,
-            3.012,
-            1.961
-          ],
-          "rows": [
-            [
-              "优先级",
-              "事件",
-              "前端与年轻指令",
-              "较老级"
-            ],
-            [
-              "1",
-              "同步复位",
-              "PC/valid/停止状态清0",
-              "RF和Z/C/V清0 复位边沿禁止DM写"
-            ],
-            [
-              "2",
-              "MEM自身故障",
-              "停取指 取消当前EX及更年轻动作",
-              "故障MEM不访问 老WB仍完成"
-            ],
-            [
-              "3",
-              "EX故障或HALT",
-              "停取指 取消两个年轻槽",
-              "老MEM/WB继续 完成后停止"
-            ],
-            [
-              "4",
-              "EX合格重定向",
-              "PC取目标 清年轻槽并取消错误路径IF",
-              "老MEM/WB完成"
-            ],
-            [
-              "5",
-              "load use",
-              "PC/IF/ID保持 ID/EX插bubble",
-              "load及老MEM/WB推进"
-            ],
-            [
-              "6",
-              "正常推进",
-              "逐拍接收载荷",
-              "逐拍完成"
-            ]
           ]
         },
         {
@@ -3347,7 +3371,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "保留Opcode在ID标记故障，EX确认；它可能被更老分支取消，不能一译码就不可逆停机。MEM越界比EX分支更老，故障优先于该分支redirect。valid=0时禁止RF/DM/标志写入、redirect、HALT和故障激活。"
+              "text": "同步复位在上升沿清PC、RF、Z/C/V、流水valid与停止状态，并禁止当拍DM写入。此前完成的DM写入保留；每级复位都先于保持和推进，外部按键的同步与释放处理由板级实现。"
             }
           ]
         }
@@ -3417,7 +3441,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "模式FSM只展开控制状态Q中的mode字段。其五个合法编码为RUN=000、DRAIN_HALT=001、DRAIN_FAULT=010、HALTED=011、FAULTED=100。正常推进、load-use保持和分支取消均可发生在RUN内；它们不构成全局串行的取指至写回状态循环。"
+              "text": "HALT或故障确认后，CPU需要停止接收年轻指令，并让老指令和停止标签完成余下阶段。全局模式以RUN、DRAIN_HALT、DRAIN_FAULT、HALTED、FAULTED管理这一过程；编码分别为000、001、010、011、100。正常推进、互锁和分支都在RUN内进行。"
             }
           ]
         },
@@ -3579,7 +3603,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "HALT/故障被接受时，E/H事件只启动排空，halted/fault仍为0。有效停止标记到WB且D=1的结束边沿，才分别进入HALTED或FAULTED。停止态在rst=0时保持，只有同步复位返回RUN；当前接口没有start/resume。若把当前输出重复写在状态转移边上，DRAIN到停止态的边仍标0,0，边沿后才变为1,0或0,1。"
+              "text": "E/H事件启动排空时，halted/fault仍为0。停止标签依次经过后续阶段，在WB被消费且下一状态流水线为空的上升沿，CPU进入HALTED或FAULTED。停止模式保持到同步复位，接口通过复位重新启动。"
             }
           ]
         },
@@ -3589,7 +3613,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "T07的实际记录：C4末接受EX中的HALT并取消年轻STR；C5末较老LDR仍可写R1=1234；C6末在WB消费HALT后才halted=1。T16中较老LDR的EA=0100，C4即阻断DM访问并取消年轻HALT，C5末消费故障标记后fault=1。两例独立起算周期；较老WB可写回指的是MEM故障检测当拍，T05另提供该同拍见证。"
+              "text": "例如，HALT前的LDR仍应写回，HALT后的STR则已被取消。故障场景同样保留较老的合格操作；[[S:CLOCKED_EXAMPLES]]给出这两类情况的逐拍实例，定向测试证据集中列于第四章。"
             }
           ]
         },
@@ -3599,7 +3623,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "本基线的故障均在EX或MEM当拍确认，没有延迟错误响应。较老MEM故障与EX的HALT同拍时，RUN直接进入DRAIN_FAULT，HALT被取消；一旦HALT被接受并进入DRAIN_HALT，就不会再出现新的较老故障，因此不设置DRAIN_HALT到DRAIN_FAULT的转移。若后续引入可变延迟或延迟错误响应，必须先修订存储接口、年龄仲裁和状态图。"
+              "text": "固定一拍存储使EX/MEM故障在当前周期内确认。较老MEM故障与年轻EX HALT同拍时直接选择DRAIN_FAULT；HALT一旦被接受，较老指令已通过相应检查，因此DRAIN_HALT内不会再出现新的较老故障。此时状态图无需DRAIN_HALT到DRAIN_FAULT的转移。可变延迟或延迟错误响应需要另行修订存储及仲裁契约。"
             }
           ]
         },
@@ -3609,7 +3633,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "mode为3位状态量；逻辑状态编码在RTL中统一声明。stop_pending等于当前处于任一DRAIN状态。以下是组合判定关系，valid_next来自本拍按复位、取消、保持和推进规则计算的下一状态。停止请求被接受时取指已关闭，未被接受的IF响应已作废。"
+              "text": "排空判定使用下一状态有效位：stop_pending表示当前处于任一DRAIN，w_stop_token表示WB保留HALT或故障标签。停止请求已关闭前端取指，后端继续按正常边沿消费在途载荷。"
             }
           ]
         },
@@ -3659,7 +3683,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "WB停止标记在本边沿消费，w_valid_next清0；若其余valid_next也为0，同一边沿将mode更新为HALTED或FAULTED，无需额外等待一拍。同步复位优先于此判定。没有有效WB停止标记时，即使当前没有RF/DM写入，也不得自行进入最终停止状态。"
+              "text": "停止标签在本边沿消费，w_valid_next清0；其余valid_next也为0时，同一边沿更新最终停止模式。这样既让停止标签经过WB，又无需多等一拍。没有停止标签时，单纯“没有写入”不能触发停止。"
             }
           ]
         },
@@ -3669,7 +3693,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "非法mode的RTL默认分支进入FAULTED，不得自行回到RUN重新取指；mode_active同时阻断非法状态下的访问及写入。原九套回归检查可达状态、停止边沿和复位。本版系统另以受控仿真注入非法二进制mode，检查原因6及无指令PC的现场；不表示一般硬件容错。状态寄存器用非阻塞赋值，next-state及输出组合逻辑完整覆盖。"
+              "text": "非法二进制mode由默认分支转入FAULTED，mode_active关闭其访问及写入。原因编码和受控故障注入证据见[[T34]]及第四章；所有状态寄存器均在上升沿更新。"
             }
           ]
         }
@@ -3742,7 +3766,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "当前开发入口为Git工作副本CPU核心设计。Vivado/rtl保留13个核心源码文件，Vivado/tb保留9个TB入口和2份共享.svh；系统/rtl另有cpu_system.sv。core仍集成原流水控制、前递、保护和停止，追加公开观测；sync_memories提供文件初始化同步存储。Pre5原包仍是观测扩展前快照，不再声称其13份RTL与当前文件逐字节相同。"
+              "text": "执行核心由datapath_core集成数据路径与硬连线控制，系统层由cpu_system连接同步IM/DM，板级由ees331_top连接时钟、复位、应用逻辑和VIO。[[T25]]将本规范的逻辑职责映射到源码，随后片段展示关键连接。"
             }
           ]
         },
@@ -3752,37 +3776,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "AC1相对冻结v1.6的原组合优化及72d99981、eae32d52等记录保留为历史。阶段0至2仅在datapath_core追加观测输出、X/M/W原因字段和停止锁存，在sync_memories追加INIT_FILE及映射属性；其余11个核心RTL与基线7753502相同。原9套TB不改；独立48例的私有运行副本仅把原.*连接替换为12个执行端口的显式连接，断言与冻结镜像不变，并分别记录包内与执行后TB指纹。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "当前维护入口为Vivado/verify.py与系统/run_system.py，使用统一工具配置；每次执行保留新的attempt、源码镜像和原始日志。新失败不替换成旧PASS。verify_results.py的历史再校验不代表新运行XSim；当前回归、系统仿真、综合和工程启动各有实际执行记录。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Code",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "python -B -X utf8 .\\CPU核心设计\\Vivado\\verify.py --suite all"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Code",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "python -B -X utf8 .\\CPU核心设计\\系统\\run_system.py --test all"
+              "text": "Vivado/rtl保留13份核心RTL，系统/rtl另有一份cpu_system.sv。表中的hazard_control、pipe_regs和IFCU至WBCU属于core内部职责；操作数前递是operand_forward实体，WB到ID旁路位于regfile4x16。CW_X/M/W对应现有标量字段集合。"
             }
           ]
         },
@@ -3863,7 +3857,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "下面源代码片段摘自现有RF和PC，说明时序写入、读旁路和PC优先级。它们是单元代码，外围连接须满足第三部分的控制资格。"
+              "text": "RF与PC片段说明具体的同步写入、组合读旁路和PC优先级。外围使能按第三章资格形成，状态由唯一时序块驱动。"
             }
           ]
         },
@@ -4040,7 +4034,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "下列连接用于对照第二章接口，完整顶层见AC1 datapath_core.sv。片段省略载荷和仲裁；alu16接口不变，内部u_addsub为17位求和实现。原flags_reg与写资格沿用，全部有限回归已绑定AC1源码。"
+              "text": "下面片段把前递值接入ALU、将STR数据独立保存、选择WB数据，并连接唯一RF和标志寄存器。当前AC1的算术层级为datapath_core/u_alu→alu16/u_addsub→addsub16_cla的17位表达式；保留cla16/cla4_pg供独立单元验证。"
             }
           ]
         },
@@ -4327,7 +4321,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "TB在边沿前采样使能，NBA更新后检查状态。关键控制用$isunknown检查X/Z；停止与复位的禁止使能必须确定为0，无效或未消费的数据载荷不强制已知。tb_units.sv用独立精确整数arithmetic_oracle计算低16位、无借位C和补码范围V，比较result/C/V/illegal/eq，使用!==使未知输出失败。下面是内部ALU检查节选："
+              "text": "验证先建立独立预期，再比较架构事件与逐拍推进。ISA参考模型按指令语义计算RF、DM和标志；TB在边沿前采样使能，在非阻塞赋值更新后检查状态。关键控制使用$isunknown和!==捕获X/Z，无效且未消费的数据允许保持旧值。以下为单元ALU检查节选。"
             }
           ]
         },
@@ -4467,7 +4461,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "#1是测试等待，不是硬件传播延迟。算术检查同时包含C/V预期：ADD用至少17位精确和判断C；SUB直接用无符号a≥b判断无借位。V的参考计算先按16位补码解释a/b，再符号扩展到32位整数，计算精确结果并判断是否超出−32768至32767；不能直接把原无符号输入零扩展后用于V判断。先用第二部分手算向量检查参考模型，再做批量回归。"
+              "text": "算术参考模型先计算精确整数结果，再截取低16位。ADD用扩宽和判断C；SUB直接比较无符号a≥b判断无借位。V先将输入解释为16位补码，再扩展到32位整数计算，判断结果是否超出−32768至32767。[[T11]]的手算边界向量用于交叉检查该模型；#1仅为仿真检查等待。"
             }
           ]
         },
@@ -4477,7 +4471,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "保留的CLA4单元仍检查sum/cout、P/G数值及cin独立性；独立cla16检查组间超前K1至K4和无组合环。这些结构检查不等于AC1运算路径检查。AC1 addsub/alu按精确整数参考检查result、无借位C、V与eq，并按新源码指纹引用本次单元结果。"
+              "text": "CLA4另检查P/G及其对cin的独立性，CLA16另检查组间超前K1至K4。AC1运行路径则检查result、无借位C、V和eq。单元检查、逐拍断言与架构结果比较共同组成验证链，各自的覆盖范围如下。"
             }
           ]
         }
@@ -4515,7 +4509,7 @@
         {
           "kind": "caption",
           "id": "F09",
-          "title": "冻结v1.6历史基准load-use VCD窗口，保留原来源身份。AC1对应逐拍CSV与冻结记录一致，可用于理解不变的周期契约；此图不是AC1新生成波形，也不是传播延迟测量。d_inst为ID机器字，EX按x_pc/x_valid定位。"
+          "title": "冻结v1.6基准load-use波形。AC1对应逐拍CSV与该周期契约一致；指令按各级pc/valid定位。"
         },
         {
           "kind": "caption",
@@ -4576,7 +4570,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "AC1在2026年10月14日用XSim2025.2实际完成九套回归。合约检查65,536字和14项ALU边界；主回归128程序、16次复位、3,380次有效完成及14种合法Opcode；stress为4,696例、33,134次完成；audit为12定向加4重启，均零失败。基准仍17周期、10动态指令、1次load-use、1次取分支。"
+              "text": "VCD记录各级pc/valid、转发选择、地址和store数据、WB资格以及候选和保存的Z/C/V。[[F09]]选取baseline加载相关窗口，[[T26]]将波形位置与边沿动作对应；其他案例结合各自CSV和日志定位。"
             }
           ]
         },
@@ -4586,37 +4580,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "AC1单位记录：独立CLA4=512、独立CLA16=564,300、当前addsub=564,300、当前ALU=2,257,200，译码65,536、扩展512、flags512、RF262,161、PC65,539、目标3,584。CLA单元PASS不表示其参与AC1 CPU路径。9份结果/逐拍CSV与冻结v1.6的r1运行75620c56逐字节一致；仍非完整算术或CPU状态穷举。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "迁移前的独立检查发现旧译码器有16,384字与新ISA不相容，差异位于2/3/8/9。该诊断和原Pre4源码、日志作为历史记录保留；当前新译码器已通过另一次完整二进制指令字检查。合约TB另有14项ALU定向边界及非法选择检查通过，仍不代表完整ALU输入穷举。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "完整VCD继续保留各级pc/valid、操作数与转发选择、exec_value、store_data、dm_en/we/dout、WB地址/数据/资格、候选与保存的Z/C/V，以及stall/redirect/kill。[[F09]]只选取基准中的load相关窗口；故障及其他指令按case_timings.csv定位到完整波形，并配合对应日志核验。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "集成波形分别标出“输入已确定”“组合结果产生”“边沿锁存”“架构写入”，不要把总线有值当作有效指令完成。CU检查增加mode、branch_req与qualified_redirect、HALT/fault请求和drain_done，确认请求因年龄冲突被拒绝时没有副作用。波形截图须注明对应源码、TB和程序镜像，配合零失败日志。"
+              "text": "读图时依次确认输入稳定、组合结果、边沿锁存和架构写入，并用pc/valid绑定同一条指令。CU逐拍检查同时观察请求与合格事件，确认因年龄被拒绝的请求没有副作用。"
             }
           ]
         }
@@ -4695,8 +4659,8 @@
             ],
             [
               "原单元",
-              "独立CLA16及AC1 addsub各564,300，ALU2,257,200",
-              "PASS；限定输入范围"
+              "CLA4 512；CLA16与addsub各564,300；ALU 2,257,200；扩展512；flags512；RF262,161；PC65,539；目标3,584",
+              "PASS；CLA为独立单元；各输入空间见[[T28]]"
             ],
             [
               "原压力",
@@ -4741,7 +4705,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "主TB对D/X、X/M、M/W的有效位和pc推进、stall时PC/D/IM保持、X bubble及无效槽副作用逐边沿检查；统一WB完成模型独立于MEM架构写事件，防止成功STR丢失或重复统计。压力循环另逐边沿检查M/W标签与完成总数。相同生产者有多个候选时，未就绪load不得穿越取老同名值。"
+              "text": "主TB逐边沿检查有效位和pc推进、停顿时PC/D/IM保持、EX bubble及无效槽副作用。WB完成检查与MEM写事件分开，防止STR重复计数或提前丢失完成标签；多生产者情况下另检查未就绪load对旧同名值的阻断。"
             }
           ]
         },
@@ -4759,7 +4723,7 @@
         {
           "kind": "caption",
           "id": "F10",
-          "title": "冻结v1.6历史load→STR波形。AC1对应CSV保持相同：C3保持、C4 bubble、C5从W前递；STR之后保留有效WB。原图身份保留，不冒充本次文档同步的新仿真。"
+          "title": "冻结v1.6的load到STR波形。C3保持、C4插bubble、C5从W前递，STR继续保留有效WB标签。"
         },
         {
           "kind": "paragraph",
@@ -4768,16 +4732,6 @@
             {
               "kind": "text",
               "text": "样例机器字8300 9100 A000 D001 F000 E000；R1=0021，R3=0020，DM[0020]=0007。C3的load_use禁止取指并保持ID；C5的STR从WB load取得0007，C6在MEM写DM[0021]，C7仍有有效STR WB且无写入。JZ取消年轻F000，C12 HALT WB结束后停止。横轴为用例相对ns，Ck结束边沿在5+10×(k−1)ns；不要把同列D机器字和X pc当作同一条指令。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "冻结v1.6初次记录6a4df640保留原身份。AC1原记录72d99981与核心包内job1记录eae32d52各自绑定13RTL、TB、脚本、镜像及19步执行；后者9份CSV与前者逐字节一致。两次均实际通过2,550冒险案例和131,072前递控制组合，后者仅使用4个数据哨兵，非全16位数据穷举。独立48例含952逐拍行、四个文档例及10复位见证，核心包内记录为验证记录/cpu_ac1_independent_dpgqkqum。完整UUID及路径见证据索引.json；功能PASS不代替板级时序。"
             }
           ]
         }
@@ -4876,7 +4830,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "课堂要求全量的对象按精确输入空间执行，不能把单op的2^32、通用cin测试的2^33和全部ALU选择的2^35混称同一种全量。长回归按连续区间计数，记录失败反例和最终完成数，关闭逐向量波形/CSV；没有完成日志不写全量通过。"
+              "text": "[[T28]]列出精确输入空间，[[T27]]列出已有运行完成数。CLA4、译码器、立即数扩展和flags在列明空间内完成全量检查；16位加减与完整ALU仍是有限输入集合。单op的2^32、带cin/sub的2^33和全ALU的2^35分开记录，长回归只有取得最终完成日志后才可标为穷举通过。"
             }
           ]
         }
@@ -4893,7 +4847,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "下表每例独立复位，IM从0000装入机器字，IM/DM各256字。初始RF由TB在第一条取指前预置；这不是ISA增加16位立即数指令。未列寄存器、Z/C/V及DM默认0。下列定向用例已在本版RTL回归中执行；表中保留其验收预期，实际结果见对应CASE_PASS和时序见证。"
+              "text": "[[T29]]的定向测试覆盖标志保持、连续CMP、访存依赖及停止交叉事件。各例从独立复位开始，TB在第一条取指前设置列明RF初值；未列RF、Z/C/V和DM为0，连续机器字从IM地址0000装入。表中预期与已有CASE_PASS及逐拍见证对应。"
             }
           ]
         },
@@ -4974,7 +4928,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "集成测试同时检查最终状态和逐拍动作。T01检查CMP后ADD保持Z；T05检查年轻MEM故障同拍老WB仍更新；T08检查前端stall同拍老WB仍完成。本次主回归检查必需时序见证是否实际出现，缺少见证即失败；文档级顺序指令模型仍只用于核对机器字与架构预期，不代替这些RTL记录。"
+              "text": "定向检查同时核对最终状态和必要时序见证：T01检查算术后Z保持，T05检查MEM故障同拍老WB完成，T08检查前端停顿同拍老WB完成。缺少要求的时序见证即失败。"
             }
           ]
         },
@@ -5011,7 +4965,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "以下用例验证MOV寄存器形式、SUB寄存器形式、AND和OR，并检查正确路径上的保留编码以及JZ负位移。每个子例独立复位，沿用前述256字IM/DM和RF预置规则；未列状态为0。正常程序未使用的IM字填B000。表中列出验收预期，本次对应CASE_PASS与时序检查均已完成；后续修改仍须复跑。"
+              "text": "[[T30]]补齐MOV寄存器、SUB寄存器、AND、OR、保留编码故障和负位移分支。每个子例独立复位，沿用上述初值规则；正常程序未使用的IM字填B000，稀疏镜像按表中地址装入。"
             }
           ]
         },
@@ -5107,7 +5061,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "T18a/T18b按列明的字地址装入稀疏IM镜像，不把机器字依次放在0000起的连续地址；两例均从正常同步复位状态开始。T18b已通过年轻0100取指故障取消及不得进入有效EX的见证检查。其余连续序列按前述从0000装入。本次结论来自迁移后的真实RTL复跑；顺序指令模型只校对编码与架构预期，不代替硬件时序检查。"
+              "text": "T18a/T18b使用稀疏IM地址。T18b的关键见证是年轻0100取指故障被更老分支取消，未进入有效EX；目标HALT正常完成。其余连续序列按0000起装入。"
             }
           ]
         },
@@ -5117,7 +5071,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "下表把14种合法Opcode映射到CPU级执行用例。它检查每种编码是否实际执行、使用正确的数据源并写入正确目标；单元ALU运算覆盖和65,536字译码覆盖不能代替这张表。基本用例通过后，再系统改变Rd/Rs索引、立即数边界、RAW距离及初始标志，执行指令级差分回归。"
+              "text": "[[T31]]把14种合法Opcode映射到实际CPU执行用例，检查从译码、数据源选择到规定副作用的完整路径；批量回归再改变寄存器索引、立即数边界、RAW距离与初始标志。"
             }
           ]
         },
@@ -5350,7 +5304,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "最终应为R0=0008、R1=0002、R2=0008、R3=0020、DM[0020]=0008、Z=1、C=1、V=0、fault=0。11个静态机器字中有10条有效动态指令。程序同时验证STR后同地址LDR读取新值，不能只检查RF结果而遗漏DM副作用。"
+              "text": "baseline的实际终态与预期一致：R0=0008、R1=0002、R2=0008、R3=0020、DM[0020]=0008、Z/C/V=1/1/0、fault=0。C=1来自SUB的3−1无借位，之后各指令保持C/V；CMP更新Z。11个静态机器字中有10条动态完成指令。"
             }
           ]
         },
@@ -5377,7 +5331,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "功能通过后，在相同程序、初值、存储配置和工具约束下测量性能。C从第一个有效IF周期开始，计至HALT的WB停止标记消费边沿，包含填充、停顿和冲刷，排除复位准备；N统计有效动态指令，包含STR、CMP、分支和HALT，不包括bubble或错误路径。同拍可观察老WB完成与年轻STR在MEM写入，但STR的统一完成计数在后一拍WB。原架构副作用模型仍检查WB后MEM的年龄次序；新增WB完成模型单独检查每条标签，禁止重复计数。"
+              "text": "C从第一个有效IF周期开始，计至HALT停止标签被WB消费的边沿，包含流水填充、停顿和冲刷，排除复位准备。N统计合法完成的动态指令，包含STR、CMP、分支与HALT，排除bubble、错误路径和故障token。STR的MEM写入与下一拍WB完成分别观察，N只计后者一次。"
             }
           ]
         },
@@ -5427,7 +5381,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "阶段2文件启动baseline再次得到17周期、10个有效动态指令、1次load-use和1次taken分支；all_ops得到25周期、16条动态指令、1次停顿和2次重定向，综合网表回放相同。基准计数含填充、排空、有效STR与HALT，排除复位准备；不把OOC估算直接换算为已实现时钟。"
+              "text": "对本节五个正常HALT程序，周期分解为C=N+4+S+2R：4为固定流水开销，S为已执行的数据停顿，R为EX合格重定向次数。该关系对应本设计的固定一拍存储和无额外等待条件。故障或复位程序按实际逐拍记录计数。"
             }
           ]
         },
@@ -5574,7 +5528,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "阶段2以cpu_system为共同仿真和综合顶层；本版板级工程以ees331_top连接该系统。默认all_ops镜像覆盖14个合法Opcode，错误路径的store和非法指令必须取消。系统TB仅通过文件启动，不层次写入IM。"
+              "text": "cpu_system把核心与256字同步IM/DM封装为共同仿真和综合顶层。IM_INIT_FILE和DM_INIT_FILE分别指定启动镜像，配置或仿真启动时加载；同步复位保留DM。all_ops镜像覆盖14种合法Opcode，系统TB通过相同文件启动路径运行。"
             }
           ]
         },
@@ -5600,7 +5554,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "INIT_FILE只接受预先准备的256行四位十六进制文件。runner在启动工具前检查文件清单、哈希、字数与格式；更换镜像后重新生成独立工程和新attempt，不能沿用旧成功。系统同步高有效rst不是板上异步按键的直接接法，本版已在板级实现请求同步和释放去抖，见[[S:4.12]]。"
+              "text": "镜像采用256行四位十六进制格式。运行入口在启动工具前检查字数、格式及输入指纹，更换镜像则建立新的独立执行记录。完整地址由核心检查后再接物理8位索引；板级复位连接见[[S:BOARD]]。具体命令和记录位置见附录。"
             }
           ]
         }
@@ -5617,7 +5571,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "新增107位core观测输出不属于执行接口的87位；它们均无控制反馈。系统另暴露RF影子、MEM事件和最后store。载荷仅在各自valid或写使能有效时解释，不能把bubble中的旧数据当成事件。"
+              "text": "core另提供107位只读观测输出，系统据合格写事件维护RF写回影子和最后store。影子用于查看写回结果，不参与执行取数、前递或控制；信号仅在valid或相应写使能有效时解释。"
             }
           ]
         },
@@ -5722,7 +5676,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "reason按X→M→W随有效标签传递；MEM访存故障按年龄覆盖年轻EX事件。正常或指令故障停止在原drain_done边沿锁存w_pc，不使用PC_fetch；取消的年轻标签没有现场。reset清RF/flags、影子、流水有效位及现场，不清DM。原因5/6只做受控仿真注入验证，不代表一般硬件容错。"
+              "text": "3位reason随X→M→W标签传递。正常或指令故障停止时锁存w_pc，非法模式则标记无有效指令PC。现场保持到复位；被取消的标签不产生停止现场。原因5/6的证据来自受控仿真注入，详见验证范围。"
             }
           ]
         }
@@ -5752,7 +5706,7 @@
             ],
             [
               "独立用例与回归",
-              "冻结48例、10个reset见证、58行结果；九套回归19个native步骤；五类mutant匹配预期失败；另有X/Z、证据和生命周期检查"
+              "复用[[T27]]的有限回归，五类错误注入均触发预期检查；X/Z及结果记录检查单独保存"
             ],
             [
               "同步存储",
@@ -5772,7 +5726,7 @@
             ],
             [
               "系统OOC",
-              "Vivado 2025.2；xc7z020clg484-1；10 ns；376 LUT、431 FF、2 RAMB18、15 CARRY4；WNS=+1.363 ns、TNS=0.000、0失败端点"
+              "Vivado 2025.2；xc7z020clg484-1；10ns；系统OOC资源及时序见[[N_RESOURCE_SCOPE]]"
             ]
           ]
         },
@@ -5782,27 +5736,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "本轮完整工具复跑：验证/tools_50040838e0ec474680085bb91e8fb001。系统仿真、综合、网表及工程检查：验证/cpu_system_n0r4buws。各attempt保存输入镜像、指纹、实际日志和CSV；失败尝试保留FAIL，不被后续成功覆盖。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "阶段2系统OOC含双存储、观测状态和结果影子，不能与旧core-only资源直接混比；其记录未包含完整IO约束或布局布线。本版新增的板级布线和实际setup/hold检查另见[[S:4.12]]。ZPS7-1对应的PL/JTAG配置和五程序启动已实板确认；Flash/SD上电启动未测；没有全状态形式证明、全算术穷举、可变延迟存储或硬件单步的通过结论。"
-            }
-          ]
-        },
-        {
-          "kind": "paragraph",
-          "style": "Normal",
-          "runs": [
-            {
-              "kind": "text",
-              "text": "工具优先级为显式CLI、tools.local.json、CPU_VIVADO_BIN/CPU_PYTHON、PATH；共享示例为tools.example.json，个人路径不提交。仓库外当前目录也可用脚本绝对路径启动。系统工程以create_project.tcl生成至新目录；已有工程拒绝覆盖，镜像变化后重建。"
+              "text": "系统仿真通过文件启动验证正常和故障程序、复位及稳定停止。all_ops的综合网表回放保持同拍行为。系统OOC包含双存储和结果影子，其资源边界与完整板级实现分开记录，见[[S:PERFORMANCE]]。"
             }
           ]
         }
@@ -5844,7 +5778,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "ees331_top以BUFG分发M19的100MHz晶振，VIO与CPU应用逻辑共享时钟。S1为L18低有效输入；相关PL Bank为3.3V，LED为高电平点亮。板级仅有时钟、按键和8个LED逻辑IO。"
+              "text": "ees331_top的外部逻辑IO为时钟、S1和八个LED，相关PL Bank使用3.3V。LED为高电平点亮；VIO通过JTAG读取内部状态，在CPU停止时保持工作。VIO的独立复位输出与S1共同形成复位请求。"
             }
           ]
         },
@@ -5870,7 +5804,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "复位请求先经三级同步，再寄存为有效core_reset；请求传递之前的合法写入可以完成，不能视作回滚。有效复位禁止当拍架构写入并清CPU和计数，DM保留。请求撤销后保持2^21个稳定周期（约20.97ms），再启动CPU；CPU执行时间不包含该等待。避免异步复位FF直接驱动RAM使能，原REQP-1840风险已在RTL中消除。"
+              "text": "为将异步请求转换为核心同步复位，板级先使用三级同步器，再寄存core_reset。请求传递之前已完成的合法写入保留；有效复位清CPU、观察状态和计数，DM内容保持。请求撤销后需稳定2^21周期，按100MHz约为20.97ms，随后释放复位启动CPU。该等待不计入程序执行周期；RAM使能由同步逻辑驱动。"
             }
           ]
         }
@@ -5887,7 +5821,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "每次新建工程并显式保留programs路径；仿真与综合使用同一默认dut_im.mem/dut_dm.mem。工具版本必须确为2025.2，布局布线策略、逻辑RAM和VIO配置固定。检查setup、hold、pulse、四项厂商debug bus-skew、内部约束覆盖及十个实际IO；只有按钮到首级同步D和无同步接收器的LED使用用户false-path。"
+              "text": "五个程序采用一致的Vivado 2025.2、器件、RAM、VIO和布局布线配置。完整实现检查setup、hold、脉宽、厂商调试总线偏斜、内部路径覆盖及十个外部IO；用户false-path只用于异步按钮到首级同步D，以及无同步接收器的LED输出。"
             }
           ]
         },
@@ -5897,7 +5831,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "保留并按范围处理PDCN-1569和LUTAR-1（厂商debug hub）、RTSTAT-10（无负载）、ZPS7-1（仅PL/JTAG，本版已确认该配置和CPU启动）及SYNTH-6（IM/DM固定一拍读，不另加输出流水级）。未降级DRC；新代码或影响CPU的异常范围不能自动接受。无矢量功耗估算未作为测量结果。"
+              "text": "DRC按报告对象解释：PDCN-1569/LUTAR-1属于厂商debug hub，RTSTAT-10表示无负载，ZPS7-1对应PL/JTAG启动，SYNTH-6对应固定一拍IM/DM且未增加输出流水级。相关告警保持原等级，CPU受影响路径仍须单独检查。功能和实际板级结果见[[S:VERIFICATION]]，资源及时序数值见[[S:PERFORMANCE]]。"
             }
           ]
         }
@@ -5991,7 +5925,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "复制校验程序包含35条动态指令：8次load/store复制，再读回8个目的字并累加。初值FFFF、0001、8000、7FFF、1234、A5A5、5A5A、0000，最终R1=1232，R0/R2=0，R3=32；最后store地址71、数据0且valid=1。AC1实际为55周期、16停顿，避免仅用最后一个复制字证明整段程序。"
+              "text": "复制校验程序包含35条动态指令：8次load/store复制，再读回8个目的字并累加。初值FFFF、0001、8000、7FFF、1234、A5A5、5A5A、0000，最终R1=1232，R0/R2=0000，R3=0020；最后store地址0047、数据0且valid=1。AC1实际为55周期、16停顿，避免仅用最后一个复制字证明整段程序。"
             }
           ]
         },
@@ -6018,7 +5952,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "forward_onehot只替换operand_forward的数据MUX表达式；原if控制判定及sel/blocked语义保持，M匹配load仍阻断旧W值，R0参与普通相关比较。原九套、独立48例及错误注入通过，五个程序完整公开逐拍轨迹一致。掩码OR不保证选中Z载荷的四态数据等价，本轮功能结论限于已执行的输入与轨迹。"
+              "text": "动机是改善前递MUX的组合实现。forward_onehot将数据选择改为掩码OR，保持相关比较、sel和blocked的优先级，M load仍阻断旧W。已有九套、独立48例、错误注入及五程序公开逐拍轨迹检查通过；四态Z数据的完整等价性超出这组有限检查。"
             }
           ]
         },
@@ -6081,7 +6015,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "该候选在4个负载中增加LUT，在4个负载中降低setup裕量；固定100MHz下没有周期收益。本轮保持稳定AC1，不把改写MUX本身当作优化成功。"
+              "text": "该候选在四个工作负载增加LUT，在四个工作负载降低setup裕量，100MHz下周期不变。因此组合表达式改写未形成稳定收益，默认实现保留AC1。"
             }
           ]
         }
@@ -6098,7 +6032,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "wb_mem在EX不消费尚未就绪的STR数据，只把必要资格与占位载荷传至MEM。优先复用m_rd表示STR数据源，增加一位m_store_pending；MEM检查当前WB是否为同名、有效、无故障、可写的load生产者，再选择已就绪wb_data。地址仍在EX使用可用Rs计算，基址相关保留一拍停顿。"
+              "text": "相邻LDR→STR只有写入数据相关时，STR真正消费数据是在MEM。wb_mem因此将这项消费延后：EX保留占位数据和m_store_pending，复用m_rd记录源索引；MEM再检查WB中同名、有效、无故障、可写的load，选择已就绪wb_data。若基址Rs也相关，EX仍需要一拍停顿。"
             }
           ]
         },
@@ -6244,7 +6178,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "WB到MEM在访存数据相关负载上减少执行周期，但额外资格检查、pending寄存器和数据选择也有实现代价。当前保持为独立实验候选，默认AC1源码不替换；板上结果尚未确认。实测频率或存储时延改变时，不能直接照搬本轮固定100MHz的时间差。"
+              "text": "WB到MEM可减少存储数据相关负载的周期，但增加资格检查、pending状态和数据选择。copy_checksum少8拍并增加86 LUT、2 FF，memory_copy少1拍并增加84 LUT、2 FF；完整代价见[[T39]]。由于尚无候选实板验收，保留为隔离实验，默认AC1不变。时间差按固定100MHz换算。"
             }
           ]
         }
@@ -6374,7 +6308,7 @@
           "runs": [
             {
               "kind": "text",
-              "text": "当前ISA以第一章ISA v1.5编码与语义表为准。Pre4资料用于追溯字段划分、控制副作用及开发过程；其中v1.4的Opcode和未同步更新的机器字示例，按第一章迁移表解释。"
+              "text": "第一章为当前ISA的唯一指令契约。Pre4资料用于追溯字段与开发过程，旧Opcode和机器字示例的对应关系见[[S:ISA_HISTORY]]。"
             }
           ]
         },
@@ -6385,6 +6319,298 @@
             {
               "kind": "text",
               "text": "板级器件、PL Bank电平、时钟、按键及LED引脚依据EES331 User Manual v1.0 1220的PDF第5、7、29至30页；实现工具和约束以Vivado2025.2原始报告为准。EES-331使用CLG484封装，本版不采用PYNQ-Z2的CLG400封装或125MHz时钟配置。"
+            }
+          ]
+        }
+      ]
+    },
+    "PC与目标计算": {
+      "title": "PC与分支目标计算",
+      "level": 3,
+      "old_number": "EDITORIAL.PC",
+      "children": [
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "PC保存唯一的前端取指地址。正常取指时加1；接到合格重定向时装入目标；保持时继续提供原地址。每条指令另携带自己的pc标签，因此分支计算使用本条地址，而非已经超前的取指PC。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "JUMP目标为ZExt(imm8)；JZ目标为low16(pc+1+SExt(imm8))。branch_target16组合计算目标，pc16在上升沿按复位、重定向、保持、顺序加1的优先级更新。"
+            }
+          ]
+        }
+      ]
+    },
+    "前递与标志选择": {
+      "title": "已就绪操作数与标志的前递",
+      "level": 3,
+      "old_number": "EDITORIAL.FORWARD",
+      "children": [
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "相邻指令常在生产者尚未写回时使用其结果。EX因此先比较源索引，再从最近的有效生产者取数：M级非load结果优先，其次W级wb_data，最后使用ID/EX保存值。Rd和Rs两路独立判断，R0与其他寄存器相同。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "当WB写入与ID读源同拍发生时，RF内的显式旁路让ID直接取得wb_data。生产者与消费者之间隔两条正常指令时，该路径把最新值捕获进ID/EX。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "JZ使用独立的Z选择网络：M级有效CMP候选优先于W级CMP候选，其次为架构Z。较新的0也覆盖较旧的1；中间的ADD或其他不写Z的指令不会挡住较老CMP。C/V没有软件读取者，因此当前ISA不产生C/V读后写依赖。"
+            }
+          ]
+        }
+      ]
+    },
+    "版本与编码追溯": {
+      "title": "历史编码迁移与示例勘误",
+      "level": 2,
+      "old_number": "EDITORIAL.HISTORY",
+      "children": [
+        {
+          "kind": "caption",
+          "id": "T05",
+          "title": "当前ISA与Pre4已验证映射的对应关系"
+        },
+        {
+          "kind": "table",
+          "caption_id": "T05",
+          "widths": [
+            0.981,
+            1.331,
+            1.331,
+            3.362
+          ],
+          "rows": [
+            [
+              "指令",
+              "本版v1.5 Opcode",
+              "Pre4 v1.4 Opcode",
+              "迁移要求"
+            ],
+            [
+              "AND",
+              "2",
+              "8",
+              "两实际寄存器源，alu_op=3；只写RF"
+            ],
+            [
+              "OR",
+              "3",
+              "9",
+              "两实际寄存器源，alu_op=4；只写RF"
+            ],
+            [
+              "LDR",
+              "8",
+              "2",
+              "Rs加符号位移；MR/RW=1，wb_sel=1"
+            ],
+            [
+              "STR",
+              "9",
+              "3",
+              "独立基址与数据源；MW=1，RW=0"
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "其余12个Opcode的含义不变，包括B/F保留编码。新旧机器字不能混用：v1.4的3300是STR，本版则是OR；v1.4的2B00是LDR，本版则是AND。迁移时重编译指令镜像，并检查译码、参考模型和逐拍观测属于同一版本。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "机器字按字段计算并独立校核。确认的编码表右侧有八项示例与字段不符：MOV/AND/OR/ADD/SUB的R0,R1形式以及CMP R0,R1都须令Rs=01，分别为0100/2100/3100/4100/6100/A100；LDR R0,[R1+2]为8102，STR R0,[R1+2]为9102。这些修正不改变其Opcode或汇编语义。原表的8802/9802实际选择Rd=R2、Rs=R0，不能解释成R0与R1。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "JZ −2的DFFE不是功能错误：其未使用Rd/Rs均为11，按本规格仍忽略这些字段，offset=FE。程序生成器采用未使用字段为0的规范形式D0FE。最终PPT第5页STR R1,[R2+4]的3604属于旧映射，本版应为9604。保存的原PPT、源码和波形保留历史身份，后续程序镜像仅使用本版统一编码。"
+            }
+          ]
+        }
+      ]
+    },
+    "证据来源索引": {
+      "title": "运行身份与历史证据",
+      "level": 2,
+      "old_number": "EDITORIAL.EVIDENCE",
+      "children": [
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "以下索引用于查找原始运行身份。核心既有记录、Pre5快照、当前架构图例和板级记录分别保存；重复执行相同测试的结果不叠加为新的覆盖数量。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "2026年10月14日的AC1核心九套回归保留原运行日志；2026年10月17日的Pre5九套回归绑定19次原生调用，attempt为440e0d7a-1244-4333-a4f8-5adf612f9833。Pre5是观测扩展前快照，当前维护入口为CPU核心设计。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "2026年10月29日曾重新解析两份历史VCD的4,824个上升沿，并核对11份控制CSV/JSON。这是已存证据复核。当前第三章例子采用r3实际独立48例记录，结果为48案例、10个复位重启见证、58行结果和952行逐拍记录；不是本次编辑新增的仿真。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "九套回归的AC1原记录72d99981及核心包job1记录eae32d52分别绑定13份RTL、TB、脚本和镜像。九份CSV保持原比较关系。完整记录标识以证据索引.json为准；本规范引用的具体指纹在文档源与证据索引中维护。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "阶段1至2完整工具记录：验证/tools_50040838e0ec474680085bb91e8fb001；系统仿真、综合、网表及工程启动：验证/cpu_system_n0r4buws。第三章CSV来源由文档构建证据绑定到验证记录/cpu_ac1_independent_lh6jb16m。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "实板验收记录：验证/hardware_ac1_20261102_3dw9zgb5/result.json。2026年11月2日确认EES-331实物与单板JTAG目标后，使用已布线的默认AC1镜像完成五程序及S1核对。目标未确认的早期尝试保留原状态，不计为通过。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "完整RAW矩阵位于说明/Hazard_Matrix_2376.csv，包含生产者、消费者、源角色、间距、机制、预期及实际结果。测试标识RAW_P*、NEWEST、NEW_LOAD_AFTER_TWO_WRITERS、FALSE_*、FLAG、FLUSH_CLASS_*及MEM_FAULT_*用于对应第三章机制。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "迁移前旧译码器与新ISA有16,384个二进制指令字不相容，涉及2/3/8/9。该诊断及Pre4原始源码、PPT和日志保持历史身份；当前译码、镜像和参考模型统一使用第一章v1.5。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "观测扩展前core-only、文件启动系统、完整板级为不同统计对象。冻结v1.6曾记录WNS=-1.580ns；AC1历史core-only改善为+2.620ns，当前板级结果见[[S:PERFORMANCE]]。旧CLG400器件截图与CLG484课程板封装不同，历史记录保留其原器件。"
+            }
+          ]
+        }
+      ]
+    },
+    "验收边界与后续修改": {
+      "title": "验证范围与后续修改条件",
+      "level": 2,
+      "old_number": "EDITORIAL.LIMITS",
+      "children": [
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "已有证据覆盖列明的有限输入、程序、逐拍行为、完整板级实现，以及默认AC1五程序和停止后S1复位。完整算术穷举、全状态形式证明、可变延迟存储、硬件单步、Flash/SD独立上电启动、直接运行时间和独立频率或功耗测量仍未完成。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "源码或镜像变化后，应复跑受影响测试并绑定新指纹。系统仿真PASS只表示该入口的有限检查完成；布局布线、时序关闭和实板验收分别以各自报告判断。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "性能候选继续隔离，不替换默认AC1。硬件采集需确认实物板型及完整JTAG目标，核对构建身份后再比较两次停止快照；配置下载与CPU复位分别控制。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "style": "Normal",
+          "runs": [
+            {
+              "kind": "text",
+              "text": "后续修改同步存储延迟或故障响应时，应先重审级间载荷、前递就绪、年龄仲裁与停止状态图。单周期路径仍按实际setup/hold约束检查，不能用false-path或multicycle掩盖功能路径违例。"
             }
           ]
         }

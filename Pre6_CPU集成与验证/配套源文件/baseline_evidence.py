@@ -6,10 +6,18 @@ sys.path.insert(0,str(P/'文档源'))
 from source_validation import read,check_rtl_contract,extract_examples,verify_board_validation
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def write(p,v):Path(p).write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+FROZEN_BASELINE='9475f210c7e567cb41f3856ff3bcebc6611ac991'
+FROZEN_DOCUMENT_SOURCES={f'CPU核心设计/文档源/{name}.json'for name in ['architecture','content','sections']}
+def source_bytes(relative,baseline=FROZEN_BASELINE):
+ """Pre6 cites r4 authoring sources; later editorial editions may coexist on main."""
+ relative=Path(relative).as_posix()
+ if relative in FROZEN_DOCUMENT_SOURCES:
+  return subprocess.check_output(['git','show',f'{baseline}:{relative}'],cwd=ROOT)
+ return (ROOT/relative).read_bytes()
 def collect_frozen():
- baseline='9475f210c7e567cb41f3856ff3bcebc6611ac991'
+ baseline=FROZEN_BASELINE
  assert subprocess.check_output(['git','rev-parse','cpu-v1.6-ac1-ees331-verified^{}'],cwd=ROOT,text=True).strip()==baseline
- arch=read(P/'文档源/architecture.json');rtl=check_rtl_contract(arch);board=verify_board_validation(arch)
+ arch=json.loads(source_bytes('CPU核心设计/文档源/architecture.json'));rtl=check_rtl_contract(arch);board=verify_board_validation(arch)
  trace_dir=P/'验证记录/cpu_ac1_independent_lh6jb16m';examples=extract_examples(arch,trace_dir)
  primary=P/'验证/hardware_ac1_20261102_3dw9zgb5/result.json';hardware=read(primary)
  perf=read(P/'实验/性能基线.json');matrix=P/perf['matrix_relative'];assert sha(matrix)==perf['matrix_sha256'];routed=read(matrix)
@@ -22,14 +30,14 @@ def collect_frozen():
  for code,case in [('SIM_LOAD','DOC_LOAD_STR'),('SIM_ADD','DOC_ADD_ADD'),('SIM_BRANCH','DOC_CMP_JZ'),('SIM_STORE_HALT','DOC_STR_HALT'),('SIM_FAULT','MEM_FAULT_OVER_BRANCH')]:source[code]=[str((trace_dir/'independent_cycles.csv').relative_to(ROOT)),str((trace_dir/'cases.json').relative_to(ROOT))]
  for row in routed['rows']:
   source['PPA'].extend('CPU核心设计/'+row['attempt_relative']+'/'+name for name in ['result.json','reports/timing.rpt','reports/utilization.rpt'])
- inputs={name:sha(ROOT/name)for paths in source.values()for name in paths}
+ inputs={name:hashlib.sha256(source_bytes(name)).hexdigest()for paths in source.values()for name in paths}
  for record in hardware['program_records'].values():
   for name in ['result.json','snapshots.tsv','hardware.log']:inputs['CPU核心设计/'+record+'/'+name]=sha(P/record/name)
  for name,digest in inputs.items():
   git_name=Path(name).as_posix()
   frozen=subprocess.check_output(['git','show',f'{baseline}:{git_name}'],cwd=ROOT)
   assert hashlib.sha256(frozen).hexdigest()==digest,f'Frozen baseline input changed: {name}'
- docs=read(P/'文档源/sections.json')['sections'];tables={}
+ docs=json.loads(source_bytes('CPU核心设计/文档源/sections.json'))['sections'];tables={}
  for k in ['指令编码与完整语义','外部接口']:
   tables[k]=[node['rows']for node in docs[k]['children']if node.get('kind')=='table']
  data={'baseline_commit':baseline,'tag':'cpu-v1.6-ac1-ees331-verified','CPU':'v1.6','ISA':'v1.5','implementation':'AC1','production_RTL_sha256':rtl,'programs':programs,'examples':examples['examples'],'button':hardware['button_samples'],'routed':routed['rows'],'candidate':read(P/'实验/WB_MEM候选比较.json')['rows'],'tables':tables,'source_groups':source,'input_sha256':inputs,'board_evidence_status':board['status'],'new_hardware_or_XSim_execution':False}
