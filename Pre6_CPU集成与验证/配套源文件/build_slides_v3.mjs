@@ -23,7 +23,7 @@ function table(s,rows,x,y,w,widths,rh=52,size=25){
  const t=s.tables.add({rows:rows.length,columns:rows[0].length,left:x,top:y,width:w,height:rows.length*rh,columnWidths:widths,values:rows.map(r=>r.map(String))});t.borders.assign({fill:C.grid,width:.8,style:'solid'});
  rows.forEach((r,i)=>{t.rows[i].height=rh;r.forEach((_,j)=>{const z=t.getCell(i,j);z.fill=i===0?C.navy:i%2?C.white:C.pale;z.text.style={typeface:'Arial',fontSize:size,bold:i===0,color:i===0?C.white:C.ink,alignment:j===0?'left':'center',verticalAlignment:'middle',insets:5,autoFit:'none'};});});return t;
 }
-async function picture(s,name,x,y,w,h,alt){const bytes=new Uint8Array(await fs.readFile(path.join(ROOT,'配套源文件/图源/r3',name)));s.images.add({blob:bytes,contentType:'image/png',alt,fit:'contain',position:{left:x,top:y,width:w,height:h}});}
+async function picture(s,name,x,y,w,h,alt,rotation=0){const bytes=new Uint8Array(await fs.readFile(path.join(ROOT,'配套源文件/图源/r3',name)));const img=s.images.add({blob:bytes,contentType:'image/png',alt,fit:'contain',position:{left:x,top:y,width:w,height:h}});img.rotation=rotation;}
 function make(ref){
  const i=CONTENT.main.findIndex(x=>x.reference_page===ref);physical=i+1;const cfg=CONTENT.main[i],s=P.slides.add();s.background.fill=C.white;
  const chapter=cfg.code?cfg.code.split('.')[0]+' '+cfg.chapter:cfg.chapter;
@@ -56,7 +56,7 @@ function checkStrip(s,t){rect(s,52,143,1176,45,C.mint,C.mint);text(s,t,64,150,11
  const s=make(2);await picture(s,'ISA_官网编码表.png',30,141,1220,526,'Verified ISA v1.5 encoding table from lab.donson.top/isa');
 }
 {
- const s=make(3);table(s,[['Form','True register sources','Architectural update'],['MOV register / immediate','Rs / none','Rd'],['AND / OR','Rd and Rs','Rd; flags hold'],['ADD / SUB','Rd and Rs, or Rd with u8','Rd and C/V'],['LDR / STR','Rs base / Rs base + Rd data','Rd from DM / store to DM'],['CMP','Rd and Rs','Z'],['JUMP / JZ / HALT','JZ reads Z','PC redirect or stop']],52,156,1176,[355,440,381],60,25);
+ const s=make(3);table(s,[['Form','True register sources','Architectural update'],['MOV register / immediate','Rs / none','Rd'],['AND / OR','Rd and Rs','Rd; flags hold'],['ADD / SUB','Rd and Rs, or Rd with u8','Rd and C/V'],['LDR / STR','Rs base / Rs base + Rd data','Rd from DM / store to DM'],['CMP','Rd and Rs (Rs1 and Rs2)','Z'],['JUMP / JZ / HALT','JZ reads Z','PC redirect or stop']],52,156,1176,[355,440,381],60,25);
  text(s,'u8 constants and JUMP / s8 memory and JZ offsets',52,605,1176,36,27,C.teal,true);
  text(s,'C = unsigned carry / no borrow. V = signed overflow.',52,651,1176,29,24,C.ink);
 }
@@ -142,10 +142,10 @@ function checkStrip(s,t){rect(s,52,143,1176,45,C.mint,C.mint);text(s,t,64,150,11
 {
  const s=make(18);text(s,'EES-331 / decoded archived VIO results',52,146,1176,36,27,C.teal,true);
  table(s,[['Program','C','N','S','R'],...E.programs.map(r=>[r.program,r.C,r.N,r.S,r.R])],52,202,627,[299,82,82,82,82],39,23);
- await picture(s,'EES331_平台图_手册.png',711,190,292,232,'EES-331 platform photo from the user manual; test evidence is the archived VIO data');
+ await picture(s,'EES331_平台图_手册.png',711,190,292,232,'EES-331 manual photo, rotated 180 degrees for upright lettering; archived VIO provides test evidence',180);
  text(s,'Platform photo:\nEES-331 manual',1012,227,216,66,22,C.muted);
  text(s,'S1 restart:\n55 -> 0 -> 55',1012,337,216,80,27,C.teal,true);
- table(s,[['Checksum item','Model expected','VIO observed','Result'],['RF / ZCV','0000,1232,0000,0020 / 000','Same values','PASS'],['Stop','HALT at PC0022','halted=1; fault=0; PC0022','PASS'],['Counters','N35 + 4 + S16 = C55','N35 / S16 / R0 / C55','PASS'],['S1 hold / release','Clear, then restart','R1:1232 -> 0000 -> 1232','PASS']],52,453,1176,[220,420,420,116],39,21);
+ table(s,[['Checksum item','Model expected','VIO observed','Result'],['RF / ZCV','0000,1232,0000,0020 / 000','Same values','PASS'],['Stop','HALT at PC0022','halted=1; fault=0; PC0022','PASS'],['Counters','35 + 4 + 16 + 2×0 = 55','N35 / S16 / R0 / C55','PASS'],['S1 hold / release','Clear, then restart','R1:1232 -> 0000 -> 1232','PASS']],52,453,1176,[220,420,420,116],39,21);
  text(s,'VIO RF uses a writeback shadow. S1 was tested after HALT; internal cycle checks use XSim.',52,659,1176,22,18,C.muted);
 }
 {

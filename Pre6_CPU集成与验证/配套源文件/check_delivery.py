@@ -28,7 +28,7 @@ def main():
         blob=subprocess.check_output(['git','show',e['baseline_commit']+':'+Path(relative).as_posix()],cwd=ROOT)
         assert hashlib.sha256(blob).hexdigest()==digest,relative
     verify_hashes(ROOT,e['additional_source_sha256'])
-    assert len(c['main'])==len(m)==24 and c['backup']==[]
+    assert len(c['main'])==len(m)==24 and c['backup']==[] and c['revision']=='Pre6-r4'
     assert sum(r['seconds']for r in c['main'])==840 and c['buffer_seconds']==60
     assert c['main'][1]['title']=='Contents'
     assert [r['code']for r in c['main'][2:]]==['1.1','1.2','2.1','3.1','3.1.1','3.1.2','3.2','3.2.1','3.3','3.3.1','3.3.2','3.3.3','3.3.4','3.3.5','4.1','4.2','4.3','5.1','5.2','5.3','5.4','6.1']
@@ -58,6 +58,18 @@ def main():
             xml=ET.fromstring(z.read(name));tables+=len(xml.findall('.//a:tbl',NS))
             visible=' '.join(t.text or''for t in xml.findall('.//a:t',NS))
             assert c['main'][i-1]['title']in visible and xml.get('show','1')!='0'
+            if i==4:assert 'Rd and Rs (Rs1 and Rs2)'in visible
+            if i==19:
+                assert '35 + 4 + 16 + 2×0 = 55'in visible
+                photos=xml.findall('.//p:pic',NS)
+                assert len(photos)==1
+                rid=photos[0].find('.//a:blip',NS).get('{http://schemas.openxmlformats.org/officeDocument/2006/relationships}embed')
+                relationships=ET.fromstring(z.read('ppt/slides/_rels/slide19.xml.rels'))
+                target=next(row.get('Target')for row in relationships if row.get('Id')==rid)
+                part=target.lstrip('/')if target.startswith('/')else posixpath.normpath(posixpath.join('ppt/slides',target))
+                assert hashlib.sha256(z.read(part)).hexdigest()==sha(B/'图源/r3/EES331_平台图_手册.png')
+                transform=photos[0].find('p:spPr/a:xfrm',NS)
+                assert int(transform.get('rot','0'))==180*60000 and all(transform.get(k,'0')in ['0','false']for k in ['flipH','flipV'])
             assert not re.search(r'[\u4e00-\u9fff]',visible),name
             if xml.findall('.//c:chart',NS):chart_owners.append(i)
             note=ET.fromstring(z.read(f'ppt/notesSlides/notesSlide{i}.xml'))
@@ -97,11 +109,14 @@ def main():
         assert all(row['speech']in paragraphs for row in c['main'])
         assert all(answer in paragraphs for _,answer in c['questions'])
         assert any('Run Synthesis应完成且无错误'in p for p in paragraphs)
+        assert any('stall=observe_stall'in p and 'frontend_kill'in p for p in paragraphs)
+        for who,cfg in c['team'].items():
+            assert any(cfg['prepare']in p for p in paragraphs)and any(cfg['check']in p for p in paragraphs),who
     timing=[]
     for i,r in enumerate(c['main'],1):
         words=len(re.findall(r"[A-Za-z0-9]+(?:['.-][A-Za-z0-9]+)*",r['speech']))
         timing.append(dict(slide=i,speaker=r['speaker'],budget_seconds=r['seconds'],words=words,speech_seconds_at_105wpm=round(words/105*60,1)))
-    assert sum(r['words']for r in timing)==c['spoken_words']==1273
+    assert sum(r['words']for r in timing)==c['spoken_words'] and 1200<=c['spoken_words']<=1350
     package=OUT/'Vivado';inventory=load(package/'source_manifest.json')
     verify_hashes(package,inventory['sha256'])
     for name,source in inventory['source_mapping'].items():assert sha(package/name)==sha(ROOT/source),name
@@ -141,9 +156,9 @@ def main():
         for p in OUT.rglob('*'):
             if p.is_file()and '__pycache__'not in p.parts and not p.name.startswith('~$')and p.name!='delivery_check.json':
                 assert sha(p)==sha(course/p.relative_to(ROOT)),str(p.relative_to(ROOT));course_count+=1
-    report=dict(status='PASS',revision='Pre6-r3',frozen_inputs=len(e['input_sha256']),slides=24,notes=24,native_tables=18,editable_charts=2,chart_workbooks=2,chart_numeric_points=chart_points,embedded_images=9,
+    report=dict(status='PASS',revision=c['revision'],frozen_inputs=len(e['input_sha256']),slides=24,notes=24,native_tables=18,editable_charts=2,chart_workbooks=2,chart_numeric_points=chart_points,embedded_images=9,
                 production_RTL_unchanged=len(inventory['source_mapping']),port_mappings=34,source_refs='PASS',speech_note_word_alignment='PASS',native_project_runs=runs,core_replay_suites=core['suites'],GUI_CPU_repeat_and_post_synthesis='PASS',GUI_board_bitstream='GENERATED_NOT_PROGRAMMED',new_physical_board_execution=False,
-                timing_model=dict(words=1273,speech_budget_seconds=840,buffer_seconds=60,human_rehearsal='not performed',slides=timing),course_files_compared=course_count,deliverable_sha256=review['deliverable_sha256'])
+                timing_model=dict(words=c['spoken_words'],speech_budget_seconds=840,buffer_seconds=60,human_rehearsal='not performed',slides=timing),team=c['team'],course_files_compared=course_count,deliverable_sha256=review['deliverable_sha256'])
     (B/'核对/delivery_check.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({k:report[k]for k in ['status','revision','slides','native_tables','editable_charts','chart_numeric_points','course_files_compared']},ensure_ascii=False))
 

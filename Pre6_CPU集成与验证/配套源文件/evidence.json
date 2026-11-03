@@ -4378,8 +4378,9 @@
       "scope": "native behavioral XSim"
     }
   },
-  "new_XSim_execution": true,
+  "new_XSim_execution": false,
   "new_physical_board_execution": false,
+  "collection_scope": "Read-only recheck of retained R3 native XSim evidence; this collection launches no EDA or hardware flow.",
   "baseline_assembly": [
     {
       "pc": "00",

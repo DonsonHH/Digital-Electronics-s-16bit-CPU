@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "revision": "Pre6-r3",
+  "revision": "Pre6-r4",
   "frozen_inputs": 53,
   "slides": 24,
   "notes": 24,
@@ -83,7 +83,7 @@
   "GUI_board_bitstream": "GENERATED_NOT_PROGRAMMED",
   "new_physical_board_execution": false,
   "timing_model": {
-    "words": 1273,
+    "words": 1257,
     "speech_budget_seconds": 840,
     "buffer_seconds": 60,
     "human_rehearsal": "not performed",
@@ -106,15 +106,15 @@
         "slide": 3,
         "speaker": "A",
         "budget_seconds": 50,
-        "words": 58,
-        "speech_seconds_at_105wpm": 33.1
+        "words": 41,
+        "speech_seconds_at_105wpm": 23.4
       },
       {
         "slide": 4,
         "speaker": "A",
         "budget_seconds": 40,
-        "words": 59,
-        "speech_seconds_at_105wpm": 33.7
+        "words": 61,
+        "speech_seconds_at_105wpm": 34.9
       },
       {
         "slide": 5,
@@ -197,8 +197,8 @@
         "slide": 16,
         "speaker": "D",
         "budget_seconds": 40,
-        "words": 64,
-        "speech_seconds_at_105wpm": 36.6
+        "words": 63,
+        "speech_seconds_at_105wpm": 36.0
       },
       {
         "slide": 17,
@@ -211,15 +211,15 @@
         "slide": 18,
         "speaker": "D",
         "budget_seconds": 40,
-        "words": 58,
-        "speech_seconds_at_105wpm": 33.1
+        "words": 59,
+        "speech_seconds_at_105wpm": 33.7
       },
       {
         "slide": 19,
         "speaker": "D",
         "budget_seconds": 35,
-        "words": 63,
-        "speech_seconds_at_105wpm": 36.0
+        "words": 66,
+        "speech_seconds_at_105wpm": 37.7
       },
       {
         "slide": 20,
@@ -246,8 +246,8 @@
         "slide": 23,
         "speaker": "E",
         "budget_seconds": 30,
-        "words": 56,
-        "speech_seconds_at_105wpm": 32.0
+        "words": 52,
+        "speech_seconds_at_105wpm": 29.7
       },
       {
         "slide": 24,
@@ -258,9 +258,36 @@
       }
     ]
   },
+  "team": {
+    "A": {
+      "topic": "ISA与设计流程",
+      "prepare": "核对字段、真实源、立即数与Z/C/V；练习从约束讲到设计顺序。",
+      "check": "与B核对字段到数据通路的映射；与D核对baseline的标志来源。"
+    },
+    "B": {
+      "topic": "完整架构与系统接口",
+      "prepare": "沿总图讲五级数据流、同步IM/DM边界、STR两条路径和板级接口。",
+      "check": "与C逐线核对前递与控制资格；向D交接系统与VIO观测范围。"
+    },
+    "C": {
+      "topic": "控制协作与数据相关",
+      "prepare": "掌握CW、valid资格、五模式、前递优先级；逐拍讲通LDR→STR。",
+      "check": "与B核对控制/数据连接；与D核对hold、flush和停止事件的衔接。"
+    },
+    "D": {
+      "topic": "控制流与功能证据",
+      "prepare": "串讲分支、故障、源码→预期→仿真→实板；练习C5→C6指图与C/V解释。",
+      "check": "与A核对CMP/标志；与E核对五程序计数及实板与仿真的证据范围。"
+    },
+    "E": {
+      "topic": "性能与工程权衡",
+      "prepare": "独立复算N/S/R、周期与CPI；解释布线数据及55→47的收益与成本。",
+      "check": "与D核对所有性能原始数；汇总全组计时，检查候选与默认AC1的身份。"
+    }
+  },
   "course_files_compared": 677,
   "deliverable_sha256": {
-    "Pre6_Group2_CPU_Integration_EN.pptx": "6bf4f49b08759e5f339cd16183b4e883f8883cc7fac34fd4d31a4e407e7555bf",
-    "Pre6_英文讲稿与答辩.docx": "41bb85318a14c6561d48484ce5987d8bb3603a7fa04f6ef752254d4ffd411a67"
+    "Pre6_Group2_CPU_Integration_EN.pptx": "57f9106fb7ced05b725ac0280669f62cb5a430fd578aa58e5f59e668193fdc5f",
+    "Pre6_英文讲稿与答辩.docx": "2657a79adff3f79de6596ba2b23640d1b99ef6ad2ff52b069cf7650bc2333a7e"
   }
 }

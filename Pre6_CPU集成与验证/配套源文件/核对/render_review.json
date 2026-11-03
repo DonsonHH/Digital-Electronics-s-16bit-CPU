@@ -1,23 +1,34 @@
 {
-  "revision": "Pre6-r3",
-  "reviewed_at_utc": "2026-11-02T22:00:18.814616+00:00",
+  "revision": "Pre6-r4",
+  "reviewed_at_utc": "2026-11-03T02:56:26.040409+00:00",
   "PPT_native_pages_reviewed": 24,
   "Word_native_pages_reviewed": 13,
   "native_tools": [
-    "PowerPoint private edit/save/reopen and slide PNG/PDF export",
+    "PowerPoint private edit/save/reopen and full slide export",
     "Word pagination and PDF export"
   ],
-  "visual_fixes": [
-    "Baseline table and reproduction command no longer overlap",
-    "Trade-off table separated from release caption",
-    "Removed blank page between C and D by heading-based page breaks"
+  "changed_visible_PPT_pages_from_R3": [
+    4,
+    19
   ],
-  "PPT_native_r3c_images_equal_reviewed_r3b": true,
+  "preserved_structure": "24 pages and chapter order; 840 second talk plus 60 second transition budget",
+  "closed_findings": [
+    "CMP operand labels mapped to the existing Rd/Rs fields",
+    "Baseline carry provenance and flag preservation explained",
+    "Fault case follows the same LDR from C5 EX to C6 MEM; older WB retained",
+    "stall is qualified observe_stall, not unconditional raw load_use",
+    "Opcode, stop-token, code-reference and trade-off speech polished",
+    "Candidate removes stalls while the dependency remains",
+    "Checksum cycle equation explicitly includes zero redirects",
+    "Manual photo rotated 180 degrees without mirroring or modifying image bytes",
+    "Five-person preparation and cross-check table on Word page 1"
+  ],
+  "review_scope": "Content, source/trace correspondence, source hashes and rendering; existing R3 EDA and archived physical board evidence retained, no new EDA/hardware execution.",
   "PPT_page_image_sha256": {
     "slide-01.png": "f17900d2238f439fdda95a2dd2c3eaad748c32f501bf84a30bf69887670a2b0d",
     "slide-02.png": "6cde6ebd8510380622d69fbb5ff6c0fb5d1528fb28e1c79ec6f1c0ca7ef620ee",
     "slide-03.png": "157323234f35cb6e1ed3a9af5abb272c1ccc0a848f416fb44dd972ce66798e07",
-    "slide-04.png": "9d39794a2fb7914f2b227c7635d04c8c314a95b7118abdc96345c4b1c5be879c",
+    "slide-04.png": "7242f113d04d191542a1fbfedfefbbf0536d72d3bcbc9e3a6f312d46f7a96ca4",
     "slide-05.png": "6b5812916c1d3ab19e00f4c8b0c78486372d4138b1f24de8d607ccb9fa3eb219",
     "slide-06.png": "ac5f98004046a4fe66fb359b0c2a9a597104940ed14170ccfa2d8cff82491263",
     "slide-07.png": "1b69900ca4ba9e414aca037ed3750f7cda5dfe87f86dd34133813d3e35cadca8",
@@ -32,7 +43,7 @@
     "slide-16.png": "4bc3e5a1652775bba29b8d4036c3d9cc9d906c5b819e7d213e49d88f1d86567b",
     "slide-17.png": "966c56809139cc4ee3635d16dbc370131c9c10371987ad01a11504e1a0bc5db7",
     "slide-18.png": "76f0b9fe3b80e8c265bb846b2367b8c9374586a0e8aecbee187347655cfd6b36",
-    "slide-19.png": "834d56f21792c9ceccfdcb5a6f5c16f022409bb4a58952475e27060cf375fbb3",
+    "slide-19.png": "44bf06c99ed0d0b0dfdde4c4311b7d8acb17b6b048961875c51fa12d4eee4091",
     "slide-20.png": "08df271bb2310293c1e39146d88876775987417b14346630a7a930a0822ce843",
     "slide-21.png": "c024f80acd8bb2248c8cf3b8b98fa8f557cd1064dc66b8070ff9e6fbcb325307",
     "slide-22.png": "df8518df5b35a2a478215462c4802b72aea7a8fa2084d54b3f1a601a0e215c25",
@@ -40,24 +51,27 @@
     "slide-24.png": "18b080d76a1dd4c82237b95e0cd8ac21283c6d2141d760eab6ff4daba0c4882c"
   },
   "Word_page_image_sha256": {
-    "page-01.png": "3cdea13bdb9e25492cac46fc20ad2b9a6682bb480988b6abe6f5aa5bf362aa7a",
-    "page-02.png": "615ba32e55ce174b404f608ee53e24995d40c9c5a02a0a1d3b5bd9a6f33fa639",
+    "page-01.png": "27b1c20b272a969e7f4ff87c09bd804a37b3143c50dc5084938dca2d06128307",
+    "page-02.png": "ba3bc49793dff47c499318472e59cbdccde720ca4d7ccdb15b27b1ae4e19899d",
     "page-03.png": "1c37833b5937645c5f49c6b07463995d288c6cbca68678a6f02f768028d13d76",
     "page-04.png": "5ffe32d6ec8a43d1f4909a8482ba2270ed30405d696b179bb15f3068aa480a72",
-    "page-05.png": "b4514f276884b8263bc1990ba071825832acfa6fbd27d99b456e45f30d31bc65",
+    "page-05.png": "1cd800480239ee695aaaec40b5a2af88188dee5cccf3d7ae28198f37cfc9164b",
     "page-06.png": "54a1e58c4cacd79e0b6e64bacc4776fe6f663725fab49237c9a8ee1bcf088d67",
-    "page-07.png": "5836f580986336259b01f3f8b4e99e9040a49e2417e3284e8161d2ca04c7ba5a",
-    "page-08.png": "b9359f3e8af4b7e6e53657e61263e8d314b4bda5c8b90f11463bb3a773eaa6ed",
+    "page-07.png": "5cf53d98933758dc9018228b2ed07b834380f75592106fd9b5f7201ffd6d2b1e",
+    "page-08.png": "1330fb22149e56e0608f2f42944bfca742f183388e29dcd125c72e96afae5cbe",
     "page-09.png": "86a7ab3ce25270ae699ae5e96aaf7e0aa35c248d9fb6655c5ec14322c0ac341f",
-    "page-10.png": "b7f874fd1a607749d1611762d960b03c14a6cfcce1ec9108a17bf383413d1b34",
+    "page-10.png": "16379b81b7f8555c9f2579c58cc7de93829bc36aef4c9cdfe29818bd9ef4f38c",
     "page-11.png": "8b2e7252069be1ed4887ce258cca6b8a0084d820a02a8505187d34fd0922be39",
     "page-12.png": "a3d6321366bc59ce5eaa44d0493f955b13d5d952c03acbf7ec795dcade755767",
-    "page-13.png": "1c7b83ae80d41bed892b8cb3f1e5945bba9f82dc6ea520b9198b48d3c2eaf609"
+    "page-13.png": "70283aa180b688d85baf6c32d284c4b45cbbb551b738ec4d704a5dd901325209"
   },
   "deliverable_sha256": {
-    "Pre6_Group2_CPU_Integration_EN.pptx": "6bf4f49b08759e5f339cd16183b4e883f8883cc7fac34fd4d31a4e407e7555bf",
-    "Pre6_英文讲稿与答辩.docx": "41bb85318a14c6561d48484ce5987d8bb3603a7fa04f6ef752254d4ffd411a67"
+    "Pre6_Group2_CPU_Integration_EN.pptx": "57f9106fb7ced05b725ac0280669f62cb5a430fd578aa58e5f59e668193fdc5f",
+    "Pre6_英文讲稿与答辩.docx": "2657a79adff3f79de6596ba2b23640d1b99ef6ad2ff52b069cf7650bc2333a7e"
   },
-  "rehearsal": "word-rate and per-slide pause budget only; no human rehearsal performed",
-  "known_presentation_choice": "Original Chinese architecture/DP diagrams kept per request; English speech and native slide text, editable SVG originals included."
+  "human_rehearsal": "not performed; per-speaker word and pointer budget checked",
+  "independent_reviews": {
+    "spec": "1 qualification finding fixed; no remaining required changes",
+    "standards": "0 hard findings; 1 sentence suggestion applied"
+  }
 }
