@@ -45,7 +45,7 @@
 
 五程序周期为25/17/30/15/55。`full`还检查真实OOC综合与综合网表功能；每次在独立英文工作目录运行，原始输入和保留输出写入`Vivado/验证记录`并逐项绑定哈希。完整九套回归和独立/负向检查继续使用相邻[CPU核心设计](../CPU核心设计/README.md)入口。
 
-R3工程修复时已重跑五程序、CPU综合前后检查、板级完整构建，并完成原生Vivado GUI模式下重置后的重复仿真/综合及板级实现。该GUI构建setup/hold裕量1.530/0.073ns，bitstream已生成。R4文字修订保留该实现并复核原始证据，未另行执行EDA或连接板卡。保存的工具原始记录见[运行核对索引](配套源文件/核对/运行核对.json)。
+R3工程修复时已重跑五程序、CPU综合前后检查、板级完整构建，并完成原生Vivado GUI模式下重置后的重复仿真/综合及板级实现。该GUI构建setup/hold裕量1.530/0.073ns，bitstream已生成。R5完整复核保留上述验收，并针对记录入口修复另行复跑baseline行为仿真：17周期、10条完成指令、1次保持、1次重定向、1次store。R5未重新综合或上板。保存的工具原始记录见[运行核对索引](配套源文件/核对/运行核对.json)。
 
 ## 技术和证据口径
 
@@ -53,20 +53,22 @@ R3工程修复时已重跑五程序、CPU综合前后检查、板级完整构建
 
 - 第6–11页复用核心规范的中文原图；第3页采用Lab网站ISA原SVG。SVG、PNG及[来源记录](配套源文件/图源/r3/图源来源.json)随源包保存。
 - 第14–16页来自真实独立仿真记录。故障例C6中老ADD同拍完成WB、M级LDR越界、年轻JUMP取消，C7进入FAULTED。
-- 第18页波形来自本轮baseline实际XSim CSV/VCD逐边沿核对。C9同时发生前端hold和老store；波形不是Vivado界面截图。
+- 第18页波形来自R5复跑baseline的实际XSim CSV/VCD逐边沿核对，采样行为与R3一致。C9同时发生前端hold和老store；波形不是Vivado界面截图。
 - 讲稿已说明CMP的Rs1/Rs2对应Rd/Rs字段，以及baseline的C=1来自03行SUB无借位并保持。`stall=observe_stall`是经过RUN、reset和frontend_kill资格限定的load_use；本例C9两者一致。
 - 第19页为**Decoded archived VIO snapshots**。RF为写回影子；实板S1结论限于HALT后的复位重启。平台照片注明手册来源，测试依据为归档VIO。模型代码、镜像、预期值及实际结果均有来源绑定。
 - 第20–21页的周期来自已归档实板计数。`C=N+4+S+2R`适用于这五个正常HALT程序，N含HALT；时间换算采用100MHz设计时钟。
-- 第22页资源与时序来自原验收版本的五份完整board top布线报告，含存储器、VIO及观测逻辑；与本轮新GUI构建分别记载。第23页两项候选保持离线实验身份。
+- 第22页资源与时序来自原验收版本的五份完整board top布线报告，含存储器、VIO及观测逻辑；与R3的GUI构建分别记载。第23页两项候选保持离线实验身份。
 
 逐页的“结论→来源→预期→实际→可支持范围”见[来源索引](配套源文件/source_map.json)，同一来源及SHA256保留在PPT备注中。
 
 ## 当前制作入口
 
-1. [collect_v3.py](配套源文件/collect_v3.py)：冻结输入、新XSim、ISA预期及图源核对；生成统一内容和证据索引。
+1. [collect_v3.py](配套源文件/collect_v3.py)：核对冻结输入、归档XSim结果、ISA预期及图源；生成统一内容和证据索引。
 2. [narrative_v3.py](配套源文件/narrative_v3.py)：24页英文正文、中文指图提示、章节和时间预算。
 3. [build_slides_v3.mjs](配套源文件/build_slides_v3.mjs)和[build_script_word_v3.py](配套源文件/build_script_word_v3.py)：生成PPT和Word；表格、性能图保持原生可编辑，完整中文连接图保留SVG源。
 4. [check_delivery.py](配套源文件/check_delivery.py)：检查最终文件、页码/备注/讲稿、媒体、图表工作簿、来源、工程输入和原始运行证据。
 5. [sync_course.py](配套源文件/sync_course.py)：带备份和逐文件哈希核对的课程目录同步。
+
+制作与交付检查在Git工作副本中运行；D盘的EDA复跑使用上面的`run_tests.ps1`。运行入口在预检查及启动Vivado之前即写入RUNNING记录；交付检查固定核验8份R3验收记录，并单独验证后来新增的尝试。同一程序、工程种类、验证模式及GUI/批处理方式的最新失败或未完成记录会阻止PASS，恢复后的历史失败仍保留；缺少结果文件的尝试目录也会报错。检查开始时将`delivery_check.json`置为RUNNING，失败时置为FAIL，避免误读旧成功记录。记录策略及受控Python进程测试为[test_attempt_history.py](配套源文件/test_attempt_history.py)，不代表新CPU仿真。
 
 旧版制作脚本保留其版本名，仅供历史追溯，当前材料采用上述v3入口。主要交付仅PPT和讲稿；渲染及运行记录放在配套源中。CPU核心规范继续由相邻`CPU核心设计`维护。

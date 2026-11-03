@@ -1,29 +1,45 @@
 {
-  "revision": "Pre6-r4",
-  "reviewed_at_utc": "2026-11-03T02:56:26.040409+00:00",
+  "revision": "Pre6-r5",
+  "reviewed_at_utc": "2026-11-03T03:53:24.414996+00:00",
   "PPT_native_pages_reviewed": 24,
   "Word_native_pages_reviewed": 13,
   "native_tools": [
-    "PowerPoint private edit/save/reopen and full slide export",
-    "Word pagination and PDF export"
+    "PowerPoint private edit/save/reopen and all-page export",
+    "Word pagination and all-page PDF export"
   ],
-  "changed_visible_PPT_pages_from_R3": [
-    4,
-    19
+  "changed_visible_PPT_pages_from_R4": [
+    8
   ],
-  "preserved_structure": "24 pages and chapter order; 840 second talk plus 60 second transition budget",
-  "closed_findings": [
-    "CMP operand labels mapped to the existing Rd/Rs fields",
-    "Baseline carry provenance and flag preservation explained",
-    "Fault case follows the same LDR from C5 EX to C6 MEM; older WB retained",
-    "stall is qualified observe_stall, not unconditional raw load_use",
-    "Opcode, stop-token, code-reference and trade-off speech polished",
-    "Candidate removes stalls while the dependency remains",
-    "Checksum cycle equation explicitly includes zero redirects",
-    "Manual photo rotated 180 degrees without mirroring or modifying image bytes",
-    "Five-person preparation and cross-check table on Word page 1"
+  "changed_visible_Word_pages_from_R4": [
+    7
   ],
-  "review_scope": "Content, source/trace correspondence, source hashes and rendering; existing R3 EDA and archived physical board evidence retained, no new EDA/hardware execution.",
+  "technical_review": "All 24 pages, script, Q&A, core specification, ISA/decode/RTL, synchronous memories, forwarding/interlock/flush/stop, original cycle CSV, ten VIO terminal snapshots and S1, five original routed reports and candidate comparison checked.",
+  "repairs": [
+    "Clarified original R3 evidence and the targeted R5 baseline rerun; removed stale new-run wording",
+    "Restored EX/MEM/WB headers in the focus crop; canonical full SVG unchanged",
+    "Pinned eight original acceptance receipts, reviewed additional attempts separately",
+    "Latest failed/incomplete attempt cannot reuse old PASS; recovery retains history",
+    "Runner persists RUNNING before preflight/native launch and final status atomically",
+    "Delivery checker invalidates prior PASS on start/failure"
+  ],
+  "policy_validation": {
+    "tests": 15,
+    "raw_log": "attempt_policy_tests.txt",
+    "sha256": "d9895fef463657cceebe5d3f479a363fbecc90f7b319c135c5ea759169638c79",
+    "scope": "Record policy and a controlled Python worker, not CPU or AMD-tool test cases"
+  },
+  "targeted_native_rerun": {
+    "record": "Vivado/验证记录/pre6_r3_dqexz1yf/result.json",
+    "actual": {
+      "C": 17,
+      "N": 10,
+      "S": 1,
+      "R": 1,
+      "stores": 1
+    },
+    "scope": "New baseline behavioral XSim run only; no new synthesis or hardware programming"
+  },
+  "frozen_CPU_ISA_Pre4": "unchanged",
   "PPT_page_image_sha256": {
     "slide-01.png": "f17900d2238f439fdda95a2dd2c3eaad748c32f501bf84a30bf69887670a2b0d",
     "slide-02.png": "6cde6ebd8510380622d69fbb5ff6c0fb5d1528fb28e1c79ec6f1c0ca7ef620ee",
@@ -32,7 +48,7 @@
     "slide-05.png": "6b5812916c1d3ab19e00f4c8b0c78486372d4138b1f24de8d607ccb9fa3eb219",
     "slide-06.png": "ac5f98004046a4fe66fb359b0c2a9a597104940ed14170ccfa2d8cff82491263",
     "slide-07.png": "1b69900ca4ba9e414aca037ed3750f7cda5dfe87f86dd34133813d3e35cadca8",
-    "slide-08.png": "299846a23bf48c76c94e31da487fe3e22bc6096e6e749b23440c26baa6654adc",
+    "slide-08.png": "3d8340083e5f21bf27c4c49491e34b0b4ab307ee2490b8ea5281dbd26fbee55b",
     "slide-09.png": "5df4ee874d233fca456c381fce092456c5bb9075e3b95eabec2dd8844500011f",
     "slide-10.png": "74530fadb6c79f116dc3a1923e2b7fafa484c5727ea2562f9384d6b5e1d7b55d",
     "slide-11.png": "28f5c6fdd47005ac68545ba94de5b231eedf01ba3bdf3fe915ab9ebb350b2185",
@@ -57,7 +73,7 @@
     "page-04.png": "5ffe32d6ec8a43d1f4909a8482ba2270ed30405d696b179bb15f3068aa480a72",
     "page-05.png": "1cd800480239ee695aaaec40b5a2af88188dee5cccf3d7ae28198f37cfc9164b",
     "page-06.png": "54a1e58c4cacd79e0b6e64bacc4776fe6f663725fab49237c9a8ee1bcf088d67",
-    "page-07.png": "5cf53d98933758dc9018228b2ed07b834380f75592106fd9b5f7201ffd6d2b1e",
+    "page-07.png": "ff72a2166239e4a9c04b699f243505b7a73348c1cc6c517f5433d5fef1278098",
     "page-08.png": "1330fb22149e56e0608f2f42944bfca742f183388e29dcd125c72e96afae5cbe",
     "page-09.png": "86a7ab3ce25270ae699ae5e96aaf7e0aa35c248d9fb6655c5ec14322c0ac341f",
     "page-10.png": "16379b81b7f8555c9f2579c58cc7de93829bc36aef4c9cdfe29818bd9ef4f38c",
@@ -66,12 +82,12 @@
     "page-13.png": "70283aa180b688d85baf6c32d284c4b45cbbb551b738ec4d704a5dd901325209"
   },
   "deliverable_sha256": {
-    "Pre6_Group2_CPU_Integration_EN.pptx": "57f9106fb7ced05b725ac0280669f62cb5a430fd578aa58e5f59e668193fdc5f",
-    "Pre6_英文讲稿与答辩.docx": "2657a79adff3f79de6596ba2b23640d1b99ef6ad2ff52b069cf7650bc2333a7e"
+    "Pre6_Group2_CPU_Integration_EN.pptx": "a0bddd7d58fdf3d2794670743a1a5573f5340a97102e95cc69e10595e35d209a",
+    "Pre6_英文讲稿与答辩.docx": "337af328623de5b388384672737aa40088288f41d0f1580e2252dbe2a963c4d9"
   },
-  "human_rehearsal": "not performed; per-speaker word and pointer budget checked",
-  "independent_reviews": {
-    "spec": "1 qualification finding fixed; no remaining required changes",
-    "standards": "0 hard findings; 1 sentence suggestion applied"
-  }
+  "human_rehearsal": "not performed; word-rate and 840+60 second budget checked",
+  "remaining_evidence_limits": [
+    "No new physical frequency or wall-time measurements",
+    "Physical evidence remains the original five-program terminal/S1 acceptance; new R5 execution is simulation"
+  ]
 }

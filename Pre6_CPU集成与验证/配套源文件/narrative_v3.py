@@ -63,6 +63,7 @@ for old,cfg0 in enumerate(PREVIOUS,1):
 SLIDES[4]['cue']='按约束—决策—结果讲两三个关键取舍，底部指设计先后顺序，末句交接B。'
 SLIDES[3]['cue']='CMP的Rs1/Rs2是操作数叫法，分别占Rd[11:10]与Rs[9:8]两个字段，并非新增字段。ADD/SUB写C/V，CMP只写Z；其余指令保持标志。'
 SLIDES[15]['cue']='CaseA按C4 store→C5 STR WB→C6 HALT。CaseB先指C5 EX的LDR:EA=0100，再向下一行左移至C6 MEM的同一条LDR。DM合法字地址0000–00FF，0100越界；同拍取消EX年轻JUMP、保留更老ADD的WB，C7故障标记到WB并FAULTED。'
+SLIDES[16]['cue']='分层说明保留的R3原生运行、独立仿真及归档实板证据。R5另复跑baseline行为仿真，验证记录入口修复；21项工具/文档检查不是21项实板功能测试。'
 SLIDES[17]['cue']='指左侧05–07及C9同时stall/store，再指08 JZ及C12 redirect。03 SUB执行3−1=2，无借位令C=1、V=0；之后仅CMP写Z=1，所以终态Z/C/V=1/1/0。stall=observe_stall，是经RUN、reset、frontend_kill资格限定的load_use；本例C9两者均为1。它不代表停止后的PC保持。'
 SLIDES[18]['cue']='先讲checksum预期与VIO实测对账，再指S1重启；raw state256/perf160仅在备注。平台图若使用手册图片，明确它是平台示意而非本次测试照片。'
 SLIDES[22]['cue']='checksum 55→47为减少14.5%周期、同频1.17倍；不是14.5%速度提升。+86 LUT为含VIO整机增量，不能叫核心逻辑增加7.8%。'

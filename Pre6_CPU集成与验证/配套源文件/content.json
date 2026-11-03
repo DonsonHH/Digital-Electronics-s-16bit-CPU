@@ -1,5 +1,5 @@
 {
-  "revision": "Pre6-r4",
+  "revision": "Pre6-r5",
   "main": [
     {
       "title": "CPU Integration and Verification",
@@ -304,7 +304,7 @@
       "section": "Functional Verification",
       "goal": "Connect ISA expectations, per-edge assertions and integrated verification layers.",
       "speech": "The ISA model supplies expected register, flag, store, and stopping behavior. Directed vectors check boundary values. Testbenches compare each qualified event and the final state. Module, independent, and integration suites exercise complementary layers. The next two pages follow actual programs through those checks, linking expected results to simulation and board observations.",
-      "cue": "分层展示已有回归与本次新运行；21项主机/文档检查不是实板功能测试。",
+      "cue": "分层说明保留的R3原生运行、独立仿真及归档实板证据。R5另复跑baseline行为仿真，验证记录入口修复；21项工具/文档检查不是21项实板功能测试。",
       "refs": [
         "INDEPENDENT",
         "LIVE",

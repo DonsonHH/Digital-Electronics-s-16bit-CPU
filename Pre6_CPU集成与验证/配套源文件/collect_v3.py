@@ -74,8 +74,8 @@ def main():
                     'rows':t['rows'],'VCD_CSV_agreement':True,'scope':'native behavioral XSim'}
         paths += [p,native,*t['source_files'],p.parent/'inputs/data/dut_im.mem',p.parent/'inputs/data/dut_dm.mem',p.parent/'inputs/tb/selected_expected.svh']
     e['fresh_programs']=live;e.pop('new_hardware_or_XSim_execution',None)
-    e['new_XSim_execution']=False;e['new_physical_board_execution']=False
-    e['collection_scope']='Read-only recheck of retained R3 native XSim evidence; this collection launches no EDA or hardware flow.'
+    e.pop('new_XSim_execution',None);e['collector_launches_XSim']=False;e['new_physical_board_execution']=False
+    e['collection_scope']='Read-only collection of retained native records, dated by each source result.json; this collector launches no EDA or hardware flow.'
     e['source_groups']['LIVE']=[p.relative_to(REPO).as_posix()for p in paths]
     baseline=records['baseline'][0].parent
     words=[int(x,16)for x in (baseline/'inputs/data/dut_im.mem').read_text().splitlines()]
@@ -98,7 +98,7 @@ def main():
     e['additional_source_sha256']=extra
     write(B/'evidence.json',e)
     count=lambda t:len(re.findall(r"[A-Za-z0-9]+(?:['.-][A-Za-z0-9]+)*",t))
-    content=dict(revision='Pre6-r4',main=SLIDES,backup=[],questions=QUESTIONS,team=TEAM,main_seconds=840,buffer_seconds=60,spoken_words=sum(count(s['speech'])for s in SLIDES))
+    content=dict(revision='Pre6-r5',main=SLIDES,backup=[],questions=QUESTIONS,team=TEAM,main_seconds=840,buffer_seconds=60,spoken_words=sum(count(s['speech'])for s in SLIDES))
     write(B/'content.json',content)
     hashes={**e['input_sha256'],**extra};index=[]
     for page,s in enumerate(SLIDES,1):

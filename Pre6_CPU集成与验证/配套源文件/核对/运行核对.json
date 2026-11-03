@@ -200,5 +200,55 @@
     "核对/运行证据/core_replay/mutations/cpu_v16_mutant_hjj54851/disable_interlock/tb/tb_units.sv": "151b88ec81ae04a3788f129ffc02cbcd0332b1568e4727977fb57ddbbed58d4f",
     "核对/运行证据/ees331_gui/reports/gui_drc.rpt": "8c57105c99e99c83910ac829a83ea4ba9bc246c73bf778b1af901cbb08b0207e",
     "核对/运行证据/ees331_gui/reports/gui_routed_timing.rpt": "484fd3154198fd310491c32b3598aed83afb2961f8b88e6d20b3b09d75cb7fd0"
+  },
+  "project_acceptance": {
+    "source_commit": "fc484412c89aae9d5992c459392128c7a51afc3e",
+    "records": [
+      {
+        "relative": "验证记录/pre6_r3_ae5439l8/result.json",
+        "sha256": "40e7c339bec2da362f77d3adde7085494de699fa87702018f52d5b37d75ecc11"
+      },
+      {
+        "relative": "验证记录/pre6_r3_bgc3_6p4/result.json",
+        "sha256": "7123d4ad1aef11d389271cb72978c4b2084ba8206ba950c531f33457ef6c0ad5"
+      },
+      {
+        "relative": "验证记录/pre6_r3_hcftu_1p/result.json",
+        "sha256": "98408e8926fcc708bc83c434d83c0138eefe8321d51da11d0582cb55329aa5f0"
+      },
+      {
+        "relative": "验证记录/pre6_r3_m_tt7uhb/result.json",
+        "sha256": "383565d31905aa11f394e75cef01475769fb184a42752c71ee16f7870ab1b3bf"
+      },
+      {
+        "relative": "验证记录/pre6_r3_p07vjhoz/result.json",
+        "sha256": "a95c6c0c4885b79894e0f81f45ec5e0c3da37bab6d7304e519e0fda8c1a31ff0"
+      },
+      {
+        "relative": "验证记录/pre6_r3_qrtvlzu9/result.json",
+        "sha256": "7f5a859cd82b4dcf5e76f869a4cd7c76e70fab9f16610d6646fd5043e1aef7b5"
+      },
+      {
+        "relative": "验证记录/pre6_r3_ugqu56d4/result.json",
+        "sha256": "d1085f743d38ca3cf9c8c1f4691ebd518873f8ca0e2f8399b95521aad0733d81"
+      },
+      {
+        "relative": "验证记录/pre6_r3_v2odi31f/result.json",
+        "sha256": "60454aa34a3dc3d8e5d5f56d7ef0d393cb3d84eb34d375607ce16b33b2d691b9"
+      }
+    ]
+  },
+  "R5_targeted_execution": {
+    "result": "Vivado/验证记录/pre6_r3_dqexz1yf/result.json",
+    "sha256": "d1334fcba50f5d42d49c7b84c8d34853831080c980bcd4050158cd4804a7e4c6",
+    "purpose": "Real baseline behavioral rerun after attempt-lifecycle repair; this is the ninth retained native attempt.",
+    "actual": {
+      "C": 17,
+      "N": 10,
+      "S": 1,
+      "R": 1,
+      "stores": 1
+    },
+    "physical_board_execution": false
   }
 }

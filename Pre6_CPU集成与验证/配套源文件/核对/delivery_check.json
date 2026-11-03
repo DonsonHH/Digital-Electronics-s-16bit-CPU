@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "revision": "Pre6-r4",
+  "revision": "Pre6-r5",
   "frozen_inputs": 53,
   "slides": 24,
   "notes": 24,
@@ -15,6 +15,7 @@
   "speech_note_word_alignment": "PASS",
   "native_project_runs": [
     {
+      "relative": "验证记录/pre6_r3_ae5439l8/result.json",
       "program": "copy_checksum",
       "kind": "cpu",
       "mode": "behavioral",
@@ -22,6 +23,7 @@
       "status": "PASS"
     },
     {
+      "relative": "验证记录/pre6_r3_bgc3_6p4/result.json",
       "program": "loop",
       "kind": "cpu",
       "mode": "behavioral",
@@ -29,6 +31,7 @@
       "status": "PASS"
     },
     {
+      "relative": "验证记录/pre6_r3_dqexz1yf/result.json",
       "program": "baseline",
       "kind": "cpu",
       "mode": "behavioral",
@@ -36,6 +39,15 @@
       "status": "PASS"
     },
     {
+      "relative": "验证记录/pre6_r3_hcftu_1p/result.json",
+      "program": "baseline",
+      "kind": "cpu",
+      "mode": "behavioral",
+      "gui_mode": false,
+      "status": "PASS"
+    },
+    {
+      "relative": "验证记录/pre6_r3_m_tt7uhb/result.json",
       "program": "memory_copy",
       "kind": "cpu",
       "mode": "behavioral",
@@ -43,6 +55,7 @@
       "status": "PASS"
     },
     {
+      "relative": "验证记录/pre6_r3_p07vjhoz/result.json",
       "program": "copy_checksum",
       "kind": "cpu",
       "mode": "full",
@@ -50,6 +63,7 @@
       "status": "PASS"
     },
     {
+      "relative": "验证记录/pre6_r3_qrtvlzu9/result.json",
       "program": "copy_checksum",
       "kind": "cpu",
       "mode": "full",
@@ -57,6 +71,7 @@
       "status": "PASS"
     },
     {
+      "relative": "验证记录/pre6_r3_ugqu56d4/result.json",
       "program": "all_ops",
       "kind": "cpu",
       "mode": "behavioral",
@@ -64,6 +79,7 @@
       "status": "PASS"
     },
     {
+      "relative": "验证记录/pre6_r3_v2odi31f/result.json",
       "program": "copy_checksum",
       "kind": "board",
       "mode": "full",
@@ -71,6 +87,87 @@
       "status": "PASS"
     }
   ],
+  "attempt_history": {
+    "status": "PASS",
+    "published_acceptance_records": 8,
+    "additional_records": 1,
+    "validated_passes": [
+      {
+        "relative": "验证记录/pre6_r3_ae5439l8/result.json",
+        "program": "copy_checksum",
+        "kind": "cpu",
+        "mode": "behavioral",
+        "gui_mode": false,
+        "status": "PASS"
+      },
+      {
+        "relative": "验证记录/pre6_r3_bgc3_6p4/result.json",
+        "program": "loop",
+        "kind": "cpu",
+        "mode": "behavioral",
+        "gui_mode": false,
+        "status": "PASS"
+      },
+      {
+        "relative": "验证记录/pre6_r3_dqexz1yf/result.json",
+        "program": "baseline",
+        "kind": "cpu",
+        "mode": "behavioral",
+        "gui_mode": false,
+        "status": "PASS"
+      },
+      {
+        "relative": "验证记录/pre6_r3_hcftu_1p/result.json",
+        "program": "baseline",
+        "kind": "cpu",
+        "mode": "behavioral",
+        "gui_mode": false,
+        "status": "PASS"
+      },
+      {
+        "relative": "验证记录/pre6_r3_m_tt7uhb/result.json",
+        "program": "memory_copy",
+        "kind": "cpu",
+        "mode": "behavioral",
+        "gui_mode": false,
+        "status": "PASS"
+      },
+      {
+        "relative": "验证记录/pre6_r3_p07vjhoz/result.json",
+        "program": "copy_checksum",
+        "kind": "cpu",
+        "mode": "full",
+        "gui_mode": false,
+        "status": "PASS"
+      },
+      {
+        "relative": "验证记录/pre6_r3_qrtvlzu9/result.json",
+        "program": "copy_checksum",
+        "kind": "cpu",
+        "mode": "full",
+        "gui_mode": true,
+        "status": "PASS"
+      },
+      {
+        "relative": "验证记录/pre6_r3_ugqu56d4/result.json",
+        "program": "all_ops",
+        "kind": "cpu",
+        "mode": "behavioral",
+        "gui_mode": false,
+        "status": "PASS"
+      },
+      {
+        "relative": "验证记录/pre6_r3_v2odi31f/result.json",
+        "program": "copy_checksum",
+        "kind": "board",
+        "mode": "full",
+        "gui_mode": false,
+        "status": "PASS"
+      }
+    ],
+    "historical_nonpass_records": [],
+    "latest_nonpass": []
+  },
   "core_replay_suites": [
     "regression",
     "independent",
@@ -285,9 +382,9 @@
       "check": "与D核对所有性能原始数；汇总全组计时，检查候选与默认AC1的身份。"
     }
   },
-  "course_files_compared": 677,
+  "course_files_compared": 721,
   "deliverable_sha256": {
-    "Pre6_Group2_CPU_Integration_EN.pptx": "57f9106fb7ced05b725ac0280669f62cb5a430fd578aa58e5f59e668193fdc5f",
-    "Pre6_英文讲稿与答辩.docx": "2657a79adff3f79de6596ba2b23640d1b99ef6ad2ff52b069cf7650bc2333a7e"
+    "Pre6_Group2_CPU_Integration_EN.pptx": "a0bddd7d58fdf3d2794670743a1a5573f5340a97102e95cc69e10595e35d209a",
+    "Pre6_英文讲稿与答辩.docx": "337af328623de5b388384672737aa40088288f41d0f1580e2252dbe2a963c4d9"
   }
 }

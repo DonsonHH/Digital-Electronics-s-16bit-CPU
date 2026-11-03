@@ -2,8 +2,10 @@
 from pathlib import Path
 import argparse,csv,hashlib,io,json,posixpath,re,subprocess,zipfile
 import xml.etree.ElementTree as ET
+from datetime import datetime,timezone
 from PIL import Image
 from collect_v3 import actual_trace
+from attempt_history import review_attempt_history
 
 B=Path(__file__).resolve().parent;OUT=B.parent;ROOT=OUT.parent
 NS={'a':'http://schemas.openxmlformats.org/drawingml/2006/main',
@@ -19,8 +21,46 @@ def verify_hashes(root,items):
     for relative,digest in items.items():assert sha(root/relative)==digest,relative
 
 
+def validate_pass_attempt(path,record):
+    assert record['kind']in ['cpu','board']and record['mode']in ['create','behavioral','synthesis','full']
+    assert record['archived_input_sha256']and record['output_sha256']
+    assert record['physical_board_execution']is False
+    log=(path.parent/'outputs/vivado.log').read_text(encoding='utf-8',errors='replace')
+    assert f"PRE6_R3_FLOW_COMPLETE kind={record['kind']} mode={record['mode']}"in log
+    assert not re.search(r'(?m)^ERROR:|^CRITICAL WARNING:|^Fatal:',log)
+    if record['mode']=='create':return
+    assert '$finish called at time'in log
+    keys=['CYCLES','N','STALLS','REDIRECTS','STORES'];expected=record['expected']
+    label='PRE6_CPU_PASS'if record['kind']=='cpu'else'PRE6_BOARD_SIM_PASS'
+    values=' '.join(f'{k}={expected[v]}'for k,v in zip(['cycles','completed','stalls','redirects','stores'],keys))
+    marker=f"{label} program={record['program']} {values}"
+    epochs=2 if record['kind']=='cpu'and record['mode']in ['synthesis','full']else 1
+    assert len(re.findall('^'+re.escape(marker)+'$',log,re.M))==epochs
+    assert record['native_checked_epochs']==epochs
+    if record['kind']=='cpu':
+        trace=actual_trace(path.parent)
+        assert len(trace['rows'])==expected['CYCLES']and trace['rf']==expected['rf']and trace['flags']==expected['flags']
+        if record['mode']in ['synthesis','full']:assert record['synthesis']==record['post_synthesis_functional']=='PASS'
+    elif record['mode']=='full':
+        assert record['implementation']=='PASS'and record['bitstream']=='GENERATED_NOT_PROGRAMMED'
+        assert any(name.endswith('.bit')for name in record['output_sha256'])
+
+
+def write_failure(path,error):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(json.dumps(dict(status='FAIL',checked_utc=datetime.now(timezone.utc).isoformat(),
+                    error=repr(error),scope='Current delivery check failed; any earlier PASS is superseded.'),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+
+def start_report(path):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(json.dumps(dict(status='RUNNING',checked_utc=datetime.now(timezone.utc).isoformat(),
+                    scope='Current check has not completed; earlier PASS is superseded.'),indent=2)+'\n',encoding='utf-8')
+
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--with-course',action='store_true');args=parser.parse_args()
+    start_report(B/'核对/delivery_check.json')
     e,c,m=map(load,[B/'evidence.json',B/'content.json',B/'source_map.json'])
     assert subprocess.check_output(['git','rev-parse',e['tag']+'^{}'],cwd=ROOT,text=True).strip()==e['baseline_commit']
     for relative,digest in e['input_sha256'].items():
@@ -28,7 +68,7 @@ def main():
         blob=subprocess.check_output(['git','show',e['baseline_commit']+':'+Path(relative).as_posix()],cwd=ROOT)
         assert hashlib.sha256(blob).hexdigest()==digest,relative
     verify_hashes(ROOT,e['additional_source_sha256'])
-    assert len(c['main'])==len(m)==24 and c['backup']==[] and c['revision']=='Pre6-r4'
+    assert len(c['main'])==len(m)==24 and c['backup']==[] and c['revision']=='Pre6-r5'
     assert sum(r['seconds']for r in c['main'])==840 and c['buffer_seconds']==60
     assert c['main'][1]['title']=='Contents'
     assert [r['code']for r in c['main'][2:]]==['1.1','1.2','2.1','3.1','3.1.1','3.1.2','3.2','3.2.1','3.3','3.3.1','3.3.2','3.3.3','3.3.4','3.3.5','4.1','4.2','4.3','5.1','5.2','5.3','5.4','6.1']
@@ -121,22 +161,21 @@ def main():
     verify_hashes(package,inventory['sha256'])
     for name,source in inventory['source_mapping'].items():assert sha(package/name)==sha(ROOT/source),name
     ports=load(package/'rtl/pre6_cpu_top.port-map.json');assert len(ports['ports'])==len(ports['mappings'])==34
-    runs=[]
-    for p in sorted((package/'验证记录').glob('*/result.json')):
-        r=load(p);assert r['status']=='PASS'and r['physical_board_execution']is False
-        verify_hashes(p.parent,r['archived_input_sha256']);verify_hashes(p.parent,r['output_sha256'])
-        log=(p.parent/'outputs/vivado.log').read_text(encoding='utf-8',errors='replace')
-        assert 'PRE6_R3_FLOW_COMPLETE'in log and '$finish called at time'in log
-        assert not re.search(r'(?m)^ERROR:|^CRITICAL WARNING:|^Fatal:',log)
-        if r['kind']=='cpu':
-            actual=actual_trace(p.parent);assert len(actual['rows'])==r['expected']['CYCLES']and actual['rf']==r['expected']['rf']and actual['flags']==r['expected']['flags']
-            prefix='PRE6_CPU_PASS program='+r['program']+' cycles='
-            assert log.count(prefix)==r['native_checked_epochs']
-            if r['mode']=='full':assert r['synthesis']==r['post_synthesis_functional']=='PASS'
-        else:assert r['bitstream']=='GENERATED_NOT_PROGRAMMED'
-        runs.append({k:r[k]for k in ['program','kind','mode','gui_mode','status']})
-    assert len(runs)==8 and {r['program']for r in runs if r['mode']=='behavioral'}=={r[0]for r in expected}
     raw=load(B/'核对/运行核对.json');verify_hashes(B,raw['sha256'])
+    acceptance=raw['project_acceptance']
+    for row in acceptance['records']:
+        relative=(package/row['relative']).relative_to(ROOT).as_posix()
+        blob=subprocess.check_output(['git','show',acceptance['source_commit']+':'+relative],cwd=ROOT)
+        assert hashlib.sha256(blob).hexdigest()==row['sha256'],relative
+    history=review_attempt_history(package,acceptance['records'],validate_pass_attempt)
+    if history['status']!='PASS':raise RuntimeError('Latest attempt has no PASS: '+json.dumps(history['latest_nonpass'],ensure_ascii=False))
+    targeted=raw['R5_targeted_execution'];targeted_path=OUT/targeted['result']
+    assert sha(targeted_path)==targeted['sha256']
+    targeted_result=load(targeted_path)
+    assert targeted_result['status']=='PASS'and targeted_result['actual']==targeted['actual']
+    runs=history['validated_passes']
+    assert history['published_acceptance_records']==8
+    assert {r['program']for r in runs if r['kind']=='cpu'and r['mode']=='behavioral'}>={r[0]for r in expected}
     core=load(B/'核对/运行证据/core_replay/result.json')
     assert core['status']=='PASS'and len(core['steps'])==6 and all(r['exit']==0 for r in core['steps'])
     verify_hashes(ROOT/'CPU核心设计/Vivado',core['source_sha256'])
@@ -157,10 +196,14 @@ def main():
             if p.is_file()and '__pycache__'not in p.parts and not p.name.startswith('~$')and p.name!='delivery_check.json':
                 assert sha(p)==sha(course/p.relative_to(ROOT)),str(p.relative_to(ROOT));course_count+=1
     report=dict(status='PASS',revision=c['revision'],frozen_inputs=len(e['input_sha256']),slides=24,notes=24,native_tables=18,editable_charts=2,chart_workbooks=2,chart_numeric_points=chart_points,embedded_images=9,
-                production_RTL_unchanged=len(inventory['source_mapping']),port_mappings=34,source_refs='PASS',speech_note_word_alignment='PASS',native_project_runs=runs,core_replay_suites=core['suites'],GUI_CPU_repeat_and_post_synthesis='PASS',GUI_board_bitstream='GENERATED_NOT_PROGRAMMED',new_physical_board_execution=False,
+                production_RTL_unchanged=len(inventory['source_mapping']),port_mappings=34,source_refs='PASS',speech_note_word_alignment='PASS',native_project_runs=runs,attempt_history=history,core_replay_suites=core['suites'],GUI_CPU_repeat_and_post_synthesis='PASS',GUI_board_bitstream='GENERATED_NOT_PROGRAMMED',new_physical_board_execution=False,
                 timing_model=dict(words=c['spoken_words'],speech_budget_seconds=840,buffer_seconds=60,human_rehearsal='not performed',slides=timing),team=c['team'],course_files_compared=course_count,deliverable_sha256=review['deliverable_sha256'])
     (B/'核对/delivery_check.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({k:report[k]for k in ['status','revision','slides','native_tables','editable_charts','chart_numeric_points','course_files_compared']},ensure_ascii=False))
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    try:main()
+    except Exception as error:
+        write_failure(B/'核对/delivery_check.json',error)
+        raise

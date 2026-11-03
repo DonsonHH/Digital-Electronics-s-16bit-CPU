@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import uuid
 
 ROOT=Path(__file__).resolve().parent
 
@@ -48,23 +49,35 @@ def prepare(work,program):
     return manifest['programs'][program]
 
 
+def write_record(dest,receipt):
+    temporary=dest/('result.'+uuid.uuid4().hex+'.tmp')
+    temporary.write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    temporary.replace(dest/'result.json')
+
+
 def run(program,kind,mode,bins,gui=False):
     work=Path(tempfile.mkdtemp(prefix='pre6_r3_'))
-    expected=prepare(work,program)
-    before={p.relative_to(work).as_posix():sha(p)for p in work.rglob('*')if p.is_file()}
+    before={}
     receipt={'status':'RUNNING','program':program,'kind':kind,'mode':mode,'gui_mode':gui,'work_directory':str(work),
              'started_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'input_sha256':before,
-             'expected':expected,'new_XSim_execution':mode!='create','physical_board_execution':False}
-    command=work/'run.cmd'
-    command.write_text('@echo off\ncall "'+str(bins/'vivado.bat')+'" -mode '+('gui'if gui else'batch')+' -source project_flow.tcl -log vivado.log -nojournal -tclargs '+kind+' '+mode+'\nexit /b %errorlevel%\n',encoding='ascii')
+             'new_XSim_execution':False,'physical_board_execution':False}
     dest=ROOT/'验证记录'/work.name
+    dest.mkdir(parents=True,exist_ok=False)
+    write_record(dest,receipt) # Visible before preflight or any native process.
     p=None
     try:
+        expected=prepare(work,program)
+        before={f.relative_to(work).as_posix():sha(f)for f in work.rglob('*')if f.is_file()}
+        receipt.update(expected=expected,input_sha256=before)
+        write_record(dest,receipt)
+        command=work/'run.cmd'
+        command.write_text('@echo off\ncall "'+str(bins/'vivado.bat')+'" -mode '+('gui'if gui else'batch')+' -source project_flow.tcl -log vivado.log -nojournal -tclargs '+kind+' '+mode+'\nexit /b %errorlevel%\n',encoding='ascii')
         print('R3_NATIVE_START '+str(work)+' '+kind+' '+program+' '+mode,flush=True)
         with (work/'console.log').open('wb')as output:
             p=subprocess.Popen([sys.executable,str(work/'tools/desktop_launch.py'),r'C:\Windows\System32\cmd.exe','/d','/c',str(command)],
                                cwd=work,env={**os.environ,'PYTHONUTF8':'1','PYTHONDONTWRITEBYTECODE':'1'},stdout=output,stderr=subprocess.STDOUT)
-            receipt['launcher_pid']=p.pid;receipt['exit_code']=p.wait(timeout=1800)
+            receipt['launcher_pid']=p.pid;write_record(dest,receipt)
+            receipt['exit_code']=p.wait(timeout=1800)
         # GUI mode sends the Tcl/simulation transcript to the native log, not stdout.
         native_log=work/'vivado.log'
         if not native_log.is_file():raise RuntimeError('Native Vivado log missing')
@@ -82,6 +95,7 @@ def run(program,kind,mode,bins,gui=False):
             if found!=[row]*count or '$finish called at time'not in log:raise RuntimeError('Missing exact behavioral/netlist result')
             receipt['actual']=dict(zip(['C','N','S','R','stores'],map(int,row)))
             receipt['native_checked_epochs']=count
+            receipt['new_XSim_execution']=True
         if mode in ['synthesis','full']:
             synth=(work/'project/pre6_cpu.runs/synth_1/runme.log').read_text(encoding='utf-8',errors='replace')
             if 'synth_design completed successfully'not in synth:raise RuntimeError('Synthesis not truly complete')
@@ -98,7 +112,6 @@ def run(program,kind,mode,bins,gui=False):
     finally:
         if p is not None and p.poll()is None:p.kill();p.wait()
         receipt['ended_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat()
-        dest.mkdir(parents=True,exist_ok=False)
         # Preserve inputs and useful evidence, not project caches or mutable run state.
         for name in before:copy_bytes(work/name,dest/'inputs'/name)
         evidence=[]
@@ -108,7 +121,7 @@ def run(program,kind,mode,bins,gui=False):
                 rel=f.relative_to(work).as_posix();copy_bytes(f,dest/'outputs'/rel);evidence.append('outputs/'+rel)
         receipt['archived_input_sha256']={'inputs/'+name:digest for name,digest in before.items()}
         receipt['output_sha256']={name:sha(dest/name)for name in evidence}
-        (dest/'result.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        write_record(dest,receipt)
         print('R3_RECORD='+str(dest),flush=True)
     print('R3_PROJECT_PASS '+kind+' '+program+' '+mode,flush=True)
     return work
